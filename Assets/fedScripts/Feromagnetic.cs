@@ -54,7 +54,7 @@ public class Feromagnetic : MonoBehaviour
             float xDirection = -relativeDirection.x;
             float zDirection = -relativeDirection.z;
 
-            if (interpolates)
+            if (interpolates && !lerping)
             {
                 rb.interpolation = RigidbodyInterpolation.Interpolate;
             }
@@ -168,7 +168,7 @@ public class Feromagnetic : MonoBehaviour
 
 
             Debug.Log("Attached!!");
-
+            rb.interpolation = RigidbodyInterpolation.None;
             //Attach the object to the player
             if (cubeAttractedTo.tag == "Player")
             {
@@ -206,12 +206,12 @@ public class Feromagnetic : MonoBehaviour
             {
                 endPosition = transform.parent.InverseTransformPoint(cubeAttractedTo.transform.position + cubeAttractedTo.transform.right * cubeSize * Mathf.Sign(xDirection));
             }
-
+            rb.interpolation = RigidbodyInterpolation.None;
         }
 
         if (lerping && time <= 1)
         {
-
+            
             transform.localPosition = Vector3.Lerp(startPosition, endPosition, time);
             transform.localRotation = Quaternion.Slerp(startRotation, endRotation, time);
             time += deltaLerp;
@@ -221,7 +221,7 @@ public class Feromagnetic : MonoBehaviour
         else if (time > 1)
         {
             gameObject.layer = 3;
-            rb.interpolation = RigidbodyInterpolation.None;
+            
             this.GetComponent<Feromagnetic>().enabled = false;
         }
     }
