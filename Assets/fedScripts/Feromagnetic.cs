@@ -14,9 +14,11 @@ public class Feromagnetic : MonoBehaviour
     [SerializeField] float minimalDistance = 0.5f;
     [SerializeField] float minimalAngle = 0.5f;
     [SerializeField] bool useLerp;
+    [SerializeField] bool interpolates;
+    [SerializeField] float deltaLerp = 0.2f;
+    
 
-
-    bool atracted = false;
+   
     Collider cubeAttractedTo;
     LayerMask mask;
     float cubeSize = 0.4f;
@@ -25,7 +27,6 @@ public class Feromagnetic : MonoBehaviour
     Vector3 startPosition;
     Quaternion endRotation;
     Quaternion startRotation;
-    float deltaLerp = 0.20f;
     float time = 0;
     void Start()
     {
@@ -36,6 +37,7 @@ public class Feromagnetic : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        // Set the position of the block and look for all magnetic blocs in range
         centerOfMassPosition = transform.position;
         Collider[] magnetic = Physics.OverlapSphere(centerOfMassPosition, radius, mask);
 
@@ -52,6 +54,11 @@ public class Feromagnetic : MonoBehaviour
             float xDirection = -relativeDirection.x;
             float zDirection = -relativeDirection.z;
 
+            if (interpolates)
+            {
+                rb.interpolation = RigidbodyInterpolation.Interpolate;
+            }
+            
             //if not stable we keep applying force
            
             if (useLerp)
@@ -60,43 +67,9 @@ public class Feromagnetic : MonoBehaviour
             }
             else
             {
-                if (direction.magnitude > minimalDistance || (rotation > minimalAngle && 90 - rotation > minimalAngle) || (Mathf.Abs(xDirection) > minimalAlignment && Mathf.Abs(zDirection) > minimalAlignment))
-                {
-                    rb.AddForce(CoulombLaw(direction, charge, charge));
-                }
-                else 
-                {
-
-                    //Set speed to zero and change layer to magnetic.
-                    //We also set the object rigidbody to kinematic mode.
-                    atracted = false;
-                    rb.velocity = Vector3.zero;
-                    rb.angularVelocity = Vector3.zero;
-                    rb.isKinematic = true;
-                    gameObject.layer = 3;
-
-                    Debug.Log("Attached!!");
-
-                    //Attach the object to the player
-                    if (cubeAttractedTo.tag == "Player")
-                    {
-                        this.transform.parent = cubeAttractedTo.transform;
-                    }
-                    else
-                    {
-                        this.transform.parent = cubeAttractedTo.transform.parent;
-                    }
-
-                    //Put the block in the correct position
-                    allignBlock(xDirection, zDirection);
-                    this.GetComponent<Feromagnetic>().enabled = false;
-                    
-
-                }
-
-                
+                autoMagnets(direction, rotation, xDirection, zDirection);
             }
-            
+               
 
         }
 
@@ -115,7 +88,7 @@ public class Feromagnetic : MonoBehaviour
                         cubeAttractedTo = col;
                     }
                 }
-                atracted = true;
+                
 
             }
         }
@@ -136,6 +109,45 @@ public class Feromagnetic : MonoBehaviour
 
             }
         }
+
+        void autoMagnets(Vector3 direction, float rotation, float xDirection, float zDirection)
+        {
+            if (direction.magnitude <= minimalDistance && (rotation <= minimalAngle || 90 - rotation <= minimalAngle) && (Mathf.Abs(xDirection) <= minimalAlignment || Mathf.Abs(zDirection) <= minimalAlignment))
+            {
+
+                //Set speed to zero and change layer to magnetic.
+                //We also set the object rigidbody to kinematic mode.
+                
+                //rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                rb.isKinematic = true;
+                gameObject.layer = 3;
+
+                Debug.Log("Attached!!");
+
+                //Attach the object to the player
+                if (cubeAttractedTo.tag == "Player")
+                {
+                    this.transform.parent = cubeAttractedTo.transform;
+                }
+                else
+                {
+                    this.transform.parent = cubeAttractedTo.transform.parent;
+                }
+
+                //Put the block in the correct position
+                allignBlock(xDirection, zDirection);
+                rb.interpolation = RigidbodyInterpolation.None;
+                this.GetComponent<Feromagnetic>().enabled = false;
+
+
+            }
+            else
+            {
+                rb.AddForce(CoulombLaw(direction, charge, charge));
+            }
+
+        }
     }
 
     private void lerpingMagents(Vector3 direction, float rotation, float xDirection, float zDirection)
@@ -149,7 +161,7 @@ public class Feromagnetic : MonoBehaviour
 
             //Set speed to zero and change layer to magnetic.
             //We also set the object rigidbody to kinematic mode.
-            atracted = false;
+            
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
@@ -209,6 +221,7 @@ public class Feromagnetic : MonoBehaviour
         else if (time > 1)
         {
             gameObject.layer = 3;
+            rb.interpolation = RigidbodyInterpolation.None;
             this.GetComponent<Feromagnetic>().enabled = false;
         }
     }
