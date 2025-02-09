@@ -99,13 +99,13 @@ public class Feromagnetic : MonoBehaviour
             if (Mathf.Abs(xDirection) < minimalAlignment)
             {
 
-                transform.position = cubeAttractedTo.transform.parent.position + cubeAttractedTo.transform.forward * cubeSize * Mathf.Sign(zDirection);
+                transform.position = cubeAttractedTo.transform.parent.position + cubeAttractedTo.transform.parent.forward * cubeSize * Mathf.Sign(zDirection);
                 transform.rotation = cubeAttractedTo.transform.parent.rotation;
 
             }
             else
             {
-                transform.position = cubeAttractedTo.transform.parent.position + cubeAttractedTo.transform.right * cubeSize* Mathf.Sign(xDirection);
+                transform.position = cubeAttractedTo.transform.parent.position + cubeAttractedTo.transform.parent.right * cubeSize* Mathf.Sign(xDirection);
                 transform.rotation = cubeAttractedTo.transform.parent.rotation;
 
             }
@@ -184,7 +184,7 @@ public class Feromagnetic : MonoBehaviour
             startPosition = transform.localPosition;
             startRotation = transform.localRotation;
 
-            float rotationSign = Mathf.Sign((transform.rotation.eulerAngles.y - cubeAttractedTo.transform.eulerAngles.y) % 90);
+            float rotationSign = Mathf.Sign((transform.rotation.eulerAngles.y - cubeAttractedTo.transform.parent.eulerAngles.y) % 90);
             if (rotation > 45)
             {
                 endRotation = Quaternion.Euler(new Vector3(0, (90 - rotation) * rotationSign, 0) + startRotation.eulerAngles);
@@ -213,6 +213,7 @@ public class Feromagnetic : MonoBehaviour
             transform.localPosition = Vector3.Lerp(startPosition, endPosition, time);
             transform.localRotation = Quaternion.Slerp(startRotation, endRotation, time);
             time += deltaLerp;
+          
 
 
         }
