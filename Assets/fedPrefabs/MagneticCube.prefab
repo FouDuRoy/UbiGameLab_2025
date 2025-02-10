@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9004300913510534856
 Transform:
   m_ObjectHideFlags: 0
@@ -147,11 +147,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passiveRadius: 1
-  activeRadius: 10
-  charge: 20
-  minimalAlignment: 0.1
-  minimalDistance: 0.6
-  minimalAngle: 5
+  activeRadius: 2
+  charge: 10
+  minimalAlignment: 0.05
+  minimalDistance: 0.45
+  minimalAngle: 3
   useLerp: 1
   interpolates: 1
   deltaLerp: 0.2

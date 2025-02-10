@@ -1,5 +1,5 @@
 {
-    "name": "playerInputs",
+    "name": "fedInputs",
     "maps": [
         {
             "name": "Mouvement",
@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ThrowCubes",
+                    "type": "Button",
+                    "id": "4db83855-e97a-4b1f-9ec6-2d91433e956d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -112,6 +121,17 @@
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "2453c895-c7c8-406c-ab3b-8179cd276ed2",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowCubes",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
