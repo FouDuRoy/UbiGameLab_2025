@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerTestState : PlayerBaseState
@@ -8,7 +9,7 @@ public class PlayerTestState : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.inputReader.ActionEvent += OnAction;
+        stateMachine.inputReader.ThrowCubeEvent += OnThrow;
     }
     public override void Tick(float deltaTime)
     {
@@ -22,16 +23,23 @@ public class PlayerTestState : PlayerBaseState
 
         if (stateMachine.inputReader.MovementValue == Vector2.zero) { return; }
 
-        stateMachine.transform.rotation = Quaternion.LookRotation(movement);
+        Vector3 rotation = new Vector3();
+        rotation.x = 0;
+        rotation.y = stateMachine.inputReader.rotationValue;
+        rotation.z = 0;
+        stateMachine.transform.rotation = Quaternion.LookRotation(rotation);
+        
+        //stateMachine.transform.Rotate(Vector3.up, rotation * deltaTime);
+
 
     }
     public override void Exit()
     {
-        stateMachine.inputReader.ActionEvent -= OnAction;
+        stateMachine.inputReader.ThrowCubeEvent -= OnThrow;
     }
 
     
-    private void OnAction()
+    private void OnThrow()
     {
         stateMachine.SwitchState(new PlayerTestState(stateMachine));
     }
