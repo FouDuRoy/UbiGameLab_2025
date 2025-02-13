@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -29,6 +31,7 @@ public class Feromagnetic : MonoBehaviour
     Quaternion endRotation;
     Quaternion startRotation;
     List<Quaternion> quaternions;
+    List<Vector3> faces;
     float time = 0;
 
     void Start()
@@ -36,7 +39,10 @@ public class Feromagnetic : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mask = LayerMask.GetMask("magnetic");
         cubeSize = transform.localScale.x;
-        quaternions = createList();
+        quaternions = createListAngles();
+        Vector3[] face ={ new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0) , new Vector3(0, cubeSize, 0),
+            new Vector3(0, -cubeSize, 0), new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize) };
+        faces = face.ToList();
     }
 
     // Update is called once per frame
@@ -224,11 +230,10 @@ public class Feromagnetic : MonoBehaviour
     }
     private Vector3 FaceVector(Vector3 relativeDirection)
     {
-        Vector3[] list = { new Vector3(cubeSize,0,0), new Vector3(-cubeSize, 0, 0) , new Vector3(0,cubeSize, 0),
-            new Vector3(0, -cubeSize, 0), new Vector3(0,0, cubeSize),new Vector3(0,0, -cubeSize) };
-        Vector3 direction = list[0];
+       
+        Vector3 direction = faces[0];
 
-        foreach(Vector3 dir in list)
+        foreach(Vector3 dir in faces)
         {
             if ((direction - relativeDirection).magnitude > (dir - relativeDirection).magnitude)
             {
@@ -239,9 +244,7 @@ public class Feromagnetic : MonoBehaviour
     }
     private Quaternion RotationChoice(Quaternion blocRotation)
     {
-       // Quaternion[] list = { Quaternion.identity, Quaternion.Euler(90, 0, 0), Quaternion.Euler(180, 0, 0)
-               // , Quaternion.Euler(270, 0, 0), Quaternion.Euler(360, 0, 0), Quaternion.Euler(0,90, 0),Quaternion.Euler(0,180, 0)
-               // ,Quaternion.Euler(0,270, 0),Quaternion.Euler(0,360, 0) };
+       
 
         Quaternion direction = quaternions[0];
         
@@ -264,7 +267,7 @@ public class Feromagnetic : MonoBehaviour
 
         return newLocalPoint;
     }
-    public List<Quaternion> createList()
+    public List<Quaternion> createListAngles()
     {
         List<Quaternion> list = new List<Quaternion> ();
         for (int i = 0; i <= 4; i++)
