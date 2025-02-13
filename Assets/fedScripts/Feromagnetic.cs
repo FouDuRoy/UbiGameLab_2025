@@ -5,21 +5,20 @@ using UnityEngine.UIElements;
 
 public class Feromagnetic : MonoBehaviour
 {
-    Vector3 centerOfMassPosition;
-    Rigidbody rb;
-
+    
     [SerializeField] float passiveRadius = 5.0f;
     [SerializeField] float activeRadius = 5f;
     [SerializeField] float charge = 5.0f;
-    [SerializeField] float minimalAlignment = 0.1f;
-    [SerializeField] float minimalDistance = 0.5f;
-    [SerializeField] float minimalAngle = 0.5f;
+    [SerializeField] float distanceLerp = 0.5f;
+    [SerializeField] float autoMagError = 0.5f;
     [SerializeField] bool useLerp;
     [SerializeField] bool interpolates;
     [SerializeField] float deltaLerp = 0.2f;
-    
 
+    Vector3 centerOfMassPosition;
+    Rigidbody rb;
     Collider cubeAttractedTo;
+    Transform cubeAttractedToTransform;
     LayerMask mask;
     float cubeSize = 0.4f;
     bool lerping = false;
@@ -33,6 +32,7 @@ public class Feromagnetic : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         mask = LayerMask.GetMask("magnetic");
+        cubeSize = transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -48,12 +48,12 @@ public class Feromagnetic : MonoBehaviour
         //Calculate mouvement of atracted bloc
         if (magnetic.Length > 0)
         {
-
-            Vector3 direction = cubeAttractedTo.transform.parent.position - centerOfMassPosition;
-            Vector3 relativeDirection = cubeAttractedTo.transform.parent.InverseTransformDirection(direction);
-            float rotation = Mathf.Abs((transform.rotation.eulerAngles.y - cubeAttractedTo.transform.parent.eulerAngles.y) % 90);
-            float xDirection = -relativeDirection.x;
-            float zDirection = -relativeDirection.z;
+            cubeAttractedToTransform = cubeAttractedTo.transform.parent;
+            
+            Vector3 direction = cubeAttractedToTransform.position - centerOfMassPosition;
+            Vector3 relativeDirection = -cubeAttractedToTransform.InverseTransformDirection(direction);
+            Vector3 closestFace = FaceVector(relativeDirection);
+        
 
             if (interpolates && !lerping)
             {
@@ -64,11 +64,11 @@ public class Feromagnetic : MonoBehaviour
            
             if (useLerp)
             {
-                lerpingMagents(direction, rotation, xDirection, zDirection);
+                lerpingMagents(direction,relativeDirection, closestFace);
             }
             else
             {
-                autoMagnets(direction, rotation, xDirection, zDirection);
+                autoMagnets(direction, relativeDirection, closestFace);
             }
                
 
@@ -94,44 +94,34 @@ public class Feromagnetic : MonoBehaviour
             }
         }
 
-        void allignBlock(float xDirection, float zDirection)
+        void allignBlock(Vector3 closestFace)
         {
-            if (Mathf.Abs(xDirection) < minimalAlignment)
-            {
+            
+            transform.localPosition = ConvertPointIgnoringScale(closestFace, cubeAttractedToTransform, this.transform.parent);
+            transform.rotation = cubeAttractedToTransform.rotation;
 
-                transform.position = cubeAttractedTo.transform.parent.position + cubeAttractedTo.transform.parent.forward * cubeSize * Mathf.Sign(zDirection);
-                transform.rotation = cubeAttractedTo.transform.parent.rotation;
-
-            }
-            else
-            {
-                transform.position = cubeAttractedTo.transform.parent.position + cubeAttractedTo.transform.parent.right * cubeSize* Mathf.Sign(xDirection);
-                transform.rotation = cubeAttractedTo.transform.parent.rotation;
-
-            }
         }
 
-        void autoMagnets(Vector3 direction, float rotation, float xDirection, float zDirection)
+        void autoMagnets(Vector3 direction,Vector3 relativeDirection, Vector3 closestFace)
         {
-            if (direction.magnitude <= minimalDistance && (rotation <= minimalAngle || 90 - rotation <= minimalAngle) && (Mathf.Abs(xDirection) <= minimalAlignment || Mathf.Abs(zDirection) <= minimalAlignment))
+            if ((relativeDirection-closestFace).magnitude <= autoMagError)
             {
 
                 //Set speed to zero and change layer to magnetic.
                 //We also set the object rigidbody to kinematic mode.
                 
-                //rb.velocity = Vector3.zero;
+                
                 rb.angularVelocity = Vector3.zero;
                 rb.isKinematic = true;
-                //gameObject.layer = 3;
+                
 
                 Debug.Log("Attached!!");
 
-               
-                this.transform.parent = cubeAttractedTo.transform.parent.parent;
+                this.transform.parent = cubeAttractedToTransform.parent;
               
-
                 //Put the block in the correct position
-                allignBlock(xDirection, zDirection);
+                allignBlock(closestFace);
+
                 rb.interpolation = RigidbodyInterpolation.None;
                 GameObject magneticField = new GameObject();
                 magneticField.name = "magField";
@@ -155,9 +145,9 @@ public class Feromagnetic : MonoBehaviour
         }
     }
 
-    private void lerpingMagents(Vector3 direction, float rotation, float xDirection, float zDirection)
+    private void lerpingMagents(Vector3 direction, Vector3 relativeDirection, Vector3 closestFace)
     {
-        if (direction.magnitude > minimalDistance)
+        if (direction.magnitude > distanceLerp)
         {
             rb.AddForce(CoulombLaw(direction, charge, charge));
         }
@@ -172,39 +162,17 @@ public class Feromagnetic : MonoBehaviour
             rb.isKinematic = true;
 
 
-            Debug.Log("Attached!!");
+            
             rb.interpolation = RigidbodyInterpolation.None;
-            //Attach the object to the player
-            this.transform.parent = cubeAttractedTo.transform.parent.parent;
 
-            //Put the block in the correct position
-            // allignBlock(xDirection, zDirection);
-            //this.GetComponent<Feromagnetic>().enabled = false;
+            //Attach the object to the player
+            this.transform.parent = cubeAttractedToTransform.parent;
+
             lerping = true;
             startPosition = transform.localPosition;
             startRotation = transform.localRotation;
-
-            float rotationSign = Mathf.Sign((transform.rotation.eulerAngles.y - cubeAttractedTo.transform.parent.eulerAngles.y) % 90);
-            if (rotation > 45)
-            {
-                endRotation = Quaternion.Euler(new Vector3(0, (90 - rotation) * rotationSign, 0) + startRotation.eulerAngles);
-            }
-            else
-            {
-                endRotation = Quaternion.Euler(new Vector3(0, -rotation * rotationSign, 0) + startRotation.eulerAngles);
-            }
-
-            if (Mathf.Abs(xDirection) < Mathf.Abs(zDirection))
-            {
-
-                endPosition = transform.parent.InverseTransformPoint(cubeAttractedTo.transform.parent.position + cubeAttractedTo.transform.parent.forward * cubeSize * Mathf.Sign(zDirection));
-
-            }
-            else
-            {
-                endPosition = transform.parent.InverseTransformPoint(cubeAttractedTo.transform.parent.position + cubeAttractedTo.transform.parent.right * cubeSize * Mathf.Sign(xDirection));
-            }
-            rb.interpolation = RigidbodyInterpolation.None;
+            endPosition = ConvertPointIgnoringScale(closestFace, cubeAttractedToTransform, this.transform.parent);
+            endRotation = RotationChoice(this.transform.localRotation);
         }
 
         if (lerping && time <= 1)
@@ -219,7 +187,9 @@ public class Feromagnetic : MonoBehaviour
         }
         else if (time > 1)
         {
-           // gameObject.layer = 3;
+            transform.localPosition = endPosition;
+            transform.localRotation = endRotation;
+
             GameObject magneticField = new GameObject();
             magneticField.name = "magField";
             magneticField.transform.parent = this.transform;
@@ -248,5 +218,46 @@ public class Feromagnetic : MonoBehaviour
         }
         
 
+    }
+    private Vector3 FaceVector(Vector3 relativeDirection)
+    {
+        Vector3[] list = { new Vector3(cubeSize,0,0), new Vector3(-cubeSize, 0, 0) , new Vector3(0,cubeSize, 0),
+            new Vector3(0, -cubeSize, 0), new Vector3(0,0, cubeSize),new Vector3(0,0, -cubeSize) };
+        Vector3 direction = list[0];
+
+        foreach(Vector3 dir in list)
+        {
+            if ((direction - relativeDirection).magnitude > (dir - relativeDirection).magnitude)
+            {
+                direction = dir;
+            }
+        }
+        return direction;
+    }
+    private Quaternion RotationChoice(Quaternion blocRotation)
+    {
+        Quaternion[] list = { Quaternion.identity, Quaternion.Euler(90, 0, 0), Quaternion.Euler(180, 0, 0)
+                , Quaternion.Euler(270, 0, 0), Quaternion.Euler(360, 0, 0), Quaternion.Euler(0,90, 0),Quaternion.Euler(0,180, 0)
+                ,Quaternion.Euler(0,270, 0),Quaternion.Euler(0,360, 0) };
+        Quaternion direction = list[0];
+        
+        foreach (Quaternion dir in list)
+        {
+            if (Quaternion.Angle(blocRotation, direction) > Quaternion.Angle(blocRotation, dir))
+            {
+                direction = dir;
+            }
+        }
+        return direction;
+    }
+    Vector3 ConvertPointIgnoringScale(Vector3 point, Transform fromLocal, Transform toLocal)
+    {
+        // Convert point from local to world space (ignoring scale)
+        Vector3 worldPoint = fromLocal.position + fromLocal.rotation * point;
+
+        // Convert from world space to new local space (ignoring scale)
+        Vector3 newLocalPoint = Quaternion.Inverse(toLocal.rotation) * (worldPoint - toLocal.position);
+
+        return newLocalPoint;
     }
 }

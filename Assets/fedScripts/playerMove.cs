@@ -14,6 +14,7 @@ public class PlayerMouvement : MonoBehaviour
     InputAction moveAction;
     InputAction rotateAction;
     InputAction throwCubes;
+    InputAction rotateActionZ;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class PlayerMouvement : MonoBehaviour
         moveAction = playerInput.actions.FindAction("Move");
         rotateAction = playerInput.actions.FindAction("Rotate");
         throwCubes = playerInput.actions.FindAction("ThrowCubes");
+        rotateActionZ = playerInput.actions.FindAction("RotateZ");
 
     }
 
@@ -29,9 +31,12 @@ public class PlayerMouvement : MonoBehaviour
     {
         Vector2 direction = moveAction.ReadValue<Vector2>();
         float rotation = rotateAction.ReadValue<float>();
-
+        float rotationZ = rotateActionZ.ReadValue<float>();
         transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
-        transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime);
+        transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime,Space.World);
+       
+        transform.Rotate(Vector3.right, rotationZ * speedRotation * Time.deltaTime, Space.World);
+       
 
         if (throwCubes.ReadValue<float>()==1)
         {
