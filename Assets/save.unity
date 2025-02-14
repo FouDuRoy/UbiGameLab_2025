@@ -183,8 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  charge: 5
 --- !u!65 &62837129
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -283,11 +281,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  passiveRadius: 5
+  activeRadius: 5
   charge: 10
-  minimalAlignment: 0.2
-  minimalDistance: 0.5
-  minimalAngle: 5
+  distanceLerp: 0.5
+  autoMagError: 0.5
   useLerp: 1
   interpolates: 0
   deltaLerp: 0.2
@@ -446,8 +444,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  charge: 5
 --- !u!65 &496267148
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -546,11 +542,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  passiveRadius: 5
+  activeRadius: 5
   charge: 10
-  minimalAlignment: 0.2
-  minimalDistance: 0.5
-  minimalAngle: 5
+  distanceLerp: 0.5
+  autoMagError: 0.5
   useLerp: 1
   interpolates: 0
   deltaLerp: 0.2
@@ -615,8 +611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  charge: 5
 --- !u!65 &564668778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -715,11 +709,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  passiveRadius: 5
+  activeRadius: 5
   charge: 10
-  minimalAlignment: 0.2
-  minimalDistance: 0.5
-  minimalAngle: 5
+  distanceLerp: 0.5
+  autoMagError: 0.5
   useLerp: 1
   interpolates: 0
   deltaLerp: 0.2
@@ -784,8 +778,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  charge: 5
 --- !u!65 &670083231
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -884,11 +876,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  passiveRadius: 5
+  activeRadius: 5
   charge: 10
-  minimalAlignment: 0.2
-  minimalDistance: 0.5
-  minimalAngle: 5
+  distanceLerp: 0.5
+  autoMagError: 0.5
   useLerp: 1
   interpolates: 0
   deltaLerp: 0.2
@@ -953,8 +945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  charge: 5
 --- !u!65 &795572634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1053,11 +1043,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  passiveRadius: 5
+  activeRadius: 5
   charge: 10
-  minimalAlignment: 0.2
-  minimalDistance: 0.5
-  minimalAngle: 5
+  distanceLerp: 0.5
+  autoMagError: 0.5
   useLerp: 1
   interpolates: 0
   deltaLerp: 0.2
@@ -1122,8 +1112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  charge: 5
 --- !u!65 &1107411488
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1222,11 +1210,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  passiveRadius: 5
+  activeRadius: 5
   charge: 10
-  minimalAlignment: 0.2
-  minimalDistance: 0.5
-  minimalAngle: 5
+  distanceLerp: 0.5
+  autoMagError: 0.5
   useLerp: 1
   interpolates: 0
   deltaLerp: 0.2
@@ -1530,8 +1518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  charge: 5
 --- !u!65 &1394854455
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1630,11 +1616,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  passiveRadius: 5
+  activeRadius: 5
   charge: 10
-  minimalAlignment: 0.2
-  minimalDistance: 0.5
-  minimalAngle: 5
+  distanceLerp: 0.5
+  autoMagError: 0.5
   useLerp: 1
   interpolates: 0
   deltaLerp: 0.2
@@ -1780,6 +1766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   speedRotation: 100
+  playerCharge: 1000
 --- !u!43 &1694656762
 Mesh:
   m_ObjectHideFlags: 0
@@ -8273,8 +8260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  charge: 5
 --- !u!65 &1836388353
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8373,11 +8358,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  passiveRadius: 5
+  activeRadius: 5
   charge: 10
-  minimalAlignment: 0.2
-  minimalDistance: 0.5
-  minimalAngle: 5
+  distanceLerp: 0.5
+  autoMagError: 0.5
   useLerp: 1
   interpolates: 0
   deltaLerp: 0.2
@@ -8442,8 +8427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  charge: 5
 --- !u!65 &1877040810
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8542,11 +8525,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  passiveRadius: 5
+  activeRadius: 5
   charge: 10
-  minimalAlignment: 0.2
-  minimalDistance: 0.5
-  minimalAngle: 5
+  distanceLerp: 0.5
+  autoMagError: 0.5
   useLerp: 1
   interpolates: 0
   deltaLerp: 0.2
