@@ -18,13 +18,14 @@ public class Feromagnetic : MonoBehaviour
     [SerializeField] bool useLerp;
     [SerializeField] bool interpolates;
     [SerializeField] float deltaLerp = 0.2f;
+    [SerializeField] float spacingBetweenCubes = 0.1f;
 
     Vector3 centerOfMassPosition;
     Rigidbody rb;
     Collider cubeAttractedTo;
     Transform cubeAttractedToTransform;
     LayerMask mask;
-    float cubeSize = 0.4f;
+    float cubeSize = 0.5f;
     bool lerping = false;
     Vector3 endPosition;
     Vector3 startPosition;
@@ -38,7 +39,7 @@ public class Feromagnetic : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         mask = LayerMask.GetMask("magnetic");
-        cubeSize = transform.localScale.x;
+        cubeSize = transform.localScale.x+spacingBetweenCubes;
         quaternions = createListAngles();
         Vector3[] face ={ new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0) , new Vector3(0, cubeSize, 0),
             new Vector3(0, -cubeSize, 0), new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize) };
@@ -118,32 +119,17 @@ public class Feromagnetic : MonoBehaviour
 
                 //Set speed to zero and change layer to magnetic.
                 //We also set the object rigidbody to kinematic mode.
-                
-                
+
+
                 rb.angularVelocity = Vector3.zero;
                 rb.isKinematic = true;
-                
 
-               
 
                 this.transform.parent = cubeAttractedToTransform.parent;
-              
+
                 //Put the block in the correct position
                 allignBlock(closestFace);
-
-                rb.interpolation = RigidbodyInterpolation.None;
-                GameObject magneticField = new GameObject();
-                magneticField.name = "magField";
-                magneticField.transform.localScale = Vector3.one;
-                magneticField.transform.parent = this.transform;
-
-                magneticField.AddComponent<SphereCollider>();
-                magneticField.GetComponent<SphereCollider>().radius = activeRadius;
-                magneticField.GetComponent<SphereCollider>().transform.position = this.transform.position;
-                magneticField.GetComponent<SphereCollider>().isTrigger = true;
-                magneticField.layer = 3;
-                this.GetComponent<Feromagnetic>().enabled = false;
-
+                AttachCube();
 
             }
             else
@@ -152,6 +138,32 @@ public class Feromagnetic : MonoBehaviour
             }
 
         }
+    }
+
+    private void AttachCube()
+    {
+        
+        rb.interpolation = RigidbodyInterpolation.None;
+
+        //Attach magnetic field
+        if (lerping)
+        {
+            lerping = false;
+            time = 0;
+        }
+        
+        GameObject magneticField = new GameObject();
+        magneticField.name = "magField";
+        magneticField.transform.localScale = Vector3.one;
+        magneticField.transform.parent = this.transform;
+        magneticField.AddComponent<SphereCollider>();
+        magneticField.GetComponent<SphereCollider>().radius = activeRadius;
+        magneticField.GetComponent<SphereCollider>().transform.position = this.transform.position;
+        magneticField.GetComponent<SphereCollider>().isTrigger = true;
+        magneticField.layer = 3;
+
+        this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
+        this.GetComponent<Feromagnetic>().enabled = false;
     }
 
     private void lerpingMagents(Vector3 direction, Vector3 relativeDirection, Vector3 closestFace)
@@ -175,8 +187,8 @@ public class Feromagnetic : MonoBehaviour
             rb.interpolation = RigidbodyInterpolation.None;
 
             //Attach the object to the player
+            
             this.transform.parent = cubeAttractedToTransform.parent;
-
             lerping = true;
             startPosition = transform.localPosition;
             startRotation = transform.localRotation;
@@ -198,18 +210,7 @@ public class Feromagnetic : MonoBehaviour
         {
             transform.localPosition = endPosition;
             transform.localRotation = endRotation;
-
-            GameObject magneticField = new GameObject();
-            magneticField.name = "magField";
-            magneticField.transform.parent = this.transform;
-            magneticField.transform.localScale = Vector3.one;
-            magneticField.AddComponent<SphereCollider>();
-            
-            magneticField.GetComponent<SphereCollider>().radius = activeRadius;
-            magneticField.GetComponent<SphereCollider>().transform.position = this.transform.position;
-            magneticField.GetComponent<SphereCollider>().isTrigger = true;
-            magneticField.layer = 3;
-            this.GetComponent<Feromagnetic>().enabled = false;
+            AttachCube();
         }
     }
 

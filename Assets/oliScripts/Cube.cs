@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    public GameObject owner;
+    [SerializeField] float minimalSpeed = 0.5f;
+    public string owner;
     private Rigidbody rb;
-    private bool activeMagnetism = false;
+    //private bool activeMagnetism = true;
 
     void Start()
     {
@@ -15,11 +16,15 @@ public class Cube : MonoBehaviour
 
     void Update()
     {
+        
         float speed = rb.velocity.magnitude;
-        if(speed < 0.5f && !activeMagnetism)
+        if(speed < minimalSpeed && owner == "Neutral")
         {
-            activeMagnetism = true;
             this.GetComponent<Feromagnetic>().enabled = true;
         }
+    }
+    public void setOwner(string owner)
+    {
+        this.owner = owner;
     }
 }

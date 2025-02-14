@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -15,6 +16,7 @@ public class PlayerMouvement : MonoBehaviour
     InputAction rotateAction;
     InputAction throwCubes;
     InputAction rotateActionZ;
+   
 
     void Start()
     {
@@ -42,21 +44,42 @@ public class PlayerMouvement : MonoBehaviour
         {
             foreach (Transform child in this.transform)
             {
-                if (child.tag != "Player")
+                if (child.GetComponent<Cube>() != null)
                 {
-                    child.GetComponentInChildren<Rigidbody>().isKinematic = false;
-                    child.GetComponentInChildren<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-                    child.gameObject.layer = 0;
-                    child.parent = this.transform.parent;
-                    GameObject.Destroy(child.GetChild(0).gameObject);
                     
-                    child.GetComponentInChildren<Rigidbody>().AddExplosionForce(10000, this.transform.position, playerCharge);
+                    if (child.GetComponent<Cube>().owner.Equals(this.gameObject.name))
+                    {
+                       
+                            child.GetComponentInChildren<Rigidbody>().isKinematic = false;
+                            child.GetComponentInChildren<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+                            child.gameObject.layer = 0;
+                            child.parent = this.transform.parent;
+                      
+                            GameObject.Destroy(child.GetChild(0).gameObject);
+                            child.GetComponentInChildren<Rigidbody>().AddExplosionForce(10000, this.transform.position, playerCharge);
+                        //Remove owner of cube
+                        //Debug.Log("yeah");
+                        StartCoroutine(blockNeutral(child.gameObject));
+                            
+                            
+                        
+                    }
                 }
+                
+                 
+                
 
             }
 
         }
 
+    }
+
+    IEnumerator blockNeutral(GameObject block)
+    {
+        
+        yield return new WaitForSeconds(1);
+        block.GetComponent<Cube>().setOwner("Neutral");
     }
 }
 
