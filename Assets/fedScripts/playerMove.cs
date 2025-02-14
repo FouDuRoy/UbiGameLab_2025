@@ -51,7 +51,6 @@ public class PlayerMouvement : MonoBehaviour
                     GameObject.Destroy(child.GetChild(0).gameObject);
                     
                     child.GetComponentInChildren<Rigidbody>().AddExplosionForce(10000, this.transform.position, playerCharge);
-
                 }
 
             }
