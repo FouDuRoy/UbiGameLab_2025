@@ -61,7 +61,7 @@ public class Feromagnetic : MonoBehaviour
             cubeAttractedToTransform = cubeAttractedTo.transform.parent;
             Vector3 direction = cubeAttractedToTransform.position - centerOfMassPosition;
             Vector3 relativeDirection = -cubeAttractedToTransform.InverseTransformDirection(direction);
-            Vector3 closestFace = FaceVector(relativeDirection);
+            Vector3 closestFace = CalculateClosestFace(relativeDirection);
         
 
             if (interpolates && !lerping)
@@ -124,7 +124,7 @@ public class Feromagnetic : MonoBehaviour
                 rb.isKinematic = true;
                 
 
-                Debug.Log("Attached!!");
+               
 
                 this.transform.parent = cubeAttractedToTransform.parent;
               
@@ -228,7 +228,7 @@ public class Feromagnetic : MonoBehaviour
         
 
     }
-    private Vector3 FaceVector(Vector3 relativeDirection)
+    private Vector3 CalculateClosestFace(Vector3 relativeDirection)
     {
        
         Vector3 direction = faces[0];

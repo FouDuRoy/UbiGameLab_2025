@@ -35,7 +35,7 @@ public class PlayerMouvement : MonoBehaviour
         transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
         transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime,Space.World);
        
-        transform.Rotate(Vector3.right, rotationZ * speedRotation * Time.deltaTime, Space.World);
+        transform.Rotate(this.transform.up, rotationZ * speedRotation * Time.deltaTime, Space.World);
        
 
         if (throwCubes.ReadValue<float>()==1)
