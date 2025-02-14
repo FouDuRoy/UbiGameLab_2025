@@ -15,12 +15,19 @@ public class TriggerCube : MonoBehaviour
     {
         if(cubeComponent != null)
             if(other.GetComponent<Cube>() != null)
-                if (cubeComponent.owner != null && other.GetComponent<Cube>().owner != null && cubeComponent.owner != other.GetComponent<Cube>().owner)
+                if(other.GetComponent<Cube>().owner != "Neutral" &&  other.GetComponent<Cube>().owner != "" && 
+                    cubeComponent.owner != "Neutral" && cubeComponent.owner != "")
                 {
-                    Destroy(other.gameObject);
-                    Destroy(this);
-
+                    if (cubeComponent.owner != other.GetComponent<Cube>().owner)
+                    {
+                        Debug.Log("Hit confirmed");
+                        //Debug.Log(cubeComponent.owner);
+                        //Debug.Log(other.GetComponent<Cube>().owner);
+                        //Destroy(other.gameObject);
+                        //Destroy(this);
+                    }
                 }
+
     }
 }
 
