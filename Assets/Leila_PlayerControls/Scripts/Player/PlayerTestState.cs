@@ -21,8 +21,21 @@ public class PlayerTestState : PlayerBaseState
 
         stateMachine.Controller.Move(movement * deltaTime * stateMachine.MovementSpeed);
 
+
         if (stateMachine.inputReader.MovementValue == Vector2.zero) { return; }
 
+        // fed deplacement x et y
+        //Vector2 direction = moveAction.ReadValue<Vector2>();
+        //transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
+        //fed rotation x et y
+
+        //float rotation = rotateAction.ReadValue<float>();
+
+        float rotation = stateMachine.inputReader.rotationValue;
+
+        stateMachine.transform.Rotate(Vector3.up, rotation * Time.deltaTime, Space.World);
+
+        /*
         Vector3 rotation = new Vector3();
         rotation.x = 0;
         rotation.y = stateMachine.inputReader.rotationValue;
@@ -30,6 +43,7 @@ public class PlayerTestState : PlayerBaseState
         stateMachine.transform.rotation = Quaternion.LookRotation(rotation);
         
         //stateMachine.transform.Rotate(Vector3.up, rotation * deltaTime);
+        */
 
 
     }
