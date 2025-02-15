@@ -56,10 +56,9 @@ public class PlayerMouvement : MonoBehaviour
                     if (child.GetComponent<Cube>().owner.Equals(this.gameObject.name))
                     {
 
-                        //child.gameObject.layer = 4;
+                        child.gameObject.layer = 0;
                         child.parent = this.transform.parent;
-
-                        GameObject.Destroy(child.GetChild(0).gameObject);
+                        GameObject.Destroy(child.GetComponent<SphereCollider>());
                         child.AddComponent<Rigidbody>();
                         Rigidbody rb = child.GetComponent<Rigidbody>();
                         rb.mass = 10f;
