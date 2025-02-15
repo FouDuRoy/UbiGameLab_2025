@@ -37,9 +37,11 @@ public class Feromagnetic : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+       
         mask = LayerMask.GetMask("magnetic");
-        cubeSize = transform.localScale.x+spacingBetweenCubes;
+
+        // We assume all cubes have same scale
+        cubeSize = 1f + spacingBetweenCubes;
         quaternions = createListAngles();
         Vector3[] face ={ new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0) , new Vector3(0, cubeSize, 0),
             new Vector3(0, -cubeSize, 0), new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize) };
@@ -59,12 +61,12 @@ public class Feromagnetic : MonoBehaviour
         //Calculate mouvement of atracted bloc
         if (magnetic.Length > 0)
         {
-            cubeAttractedToTransform = cubeAttractedTo.transform.parent;
+            
+            cubeAttractedToTransform = cubeAttractedTo.transform;
             Vector3 direction = cubeAttractedToTransform.position - centerOfMassPosition;
-            Vector3 relativePosition = ConvertPointIgnoringScale(this.transform.position, cubeAttractedToTransform);
+            Vector3 relativePosition = cubeAttractedTo.transform.InverseTransformPoint(transform.position);
             Vector3 closestFace = CalculateClosestFace(relativePosition);
             
-
             if (interpolates && !lerping)
             {
                 rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -89,10 +91,10 @@ public class Feromagnetic : MonoBehaviour
             if (magnetic.Length > 0)
             {
                 cubeAttractedTo = magnetic[0];
-                float shortDistance = (cubeAttractedTo.transform.parent.position - centerOfMassPosition).magnitude;
+                float shortDistance = (cubeAttractedTo.transform.position - centerOfMassPosition).magnitude;
                 foreach (Collider col in magnetic)
                 {
-                    float distance = (col.transform.parent.position - centerOfMassPosition).magnitude;
+                    float distance = (col.transform.position - centerOfMassPosition).magnitude;
                     if (distance < shortDistance)
                     {
                         shortDistance = distance;
@@ -107,7 +109,7 @@ public class Feromagnetic : MonoBehaviour
         void allignBlock(Vector3 closestFace)
         {
 
-            transform.localPosition = ConvertPointIgnoringScale(closestFace, cubeAttractedToTransform, this.transform.parent);
+            transform.localPosition = this.transform.parent.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(closestFace));
             transform.rotation = cubeAttractedToTransform.rotation;
 
         }
@@ -126,7 +128,15 @@ public class Feromagnetic : MonoBehaviour
                 rb.isKinematic = true;
 
 
-                this.transform.parent = cubeAttractedToTransform.parent;
+                if (cubeAttractedToTransform.tag == "Player")
+                {
+                    this.transform.parent = cubeAttractedToTransform;
+                }
+                else
+                {
+
+                    this.transform.parent = cubeAttractedToTransform.parent;
+                }
 
                 //Put the block in the correct position
                 allignBlock(closestFace);
@@ -152,19 +162,16 @@ public class Feromagnetic : MonoBehaviour
             lerping = false;
             time = 0;
         }
-        
-        GameObject magneticField = new GameObject();
-        magneticField.name = "magField";
-        magneticField.transform.localScale = Vector3.one;
-        magneticField.transform.parent = this.transform;
-        magneticField.AddComponent<SphereCollider>();
-        magneticField.GetComponent<SphereCollider>().radius = activeRadius;
-        magneticField.GetComponent<SphereCollider>().transform.position = this.transform.position;
-        magneticField.GetComponent<SphereCollider>().isTrigger = true;
-        magneticField.layer = 3;
+
+        this.gameObject.AddComponent<SphereCollider>();
+        gameObject.GetComponent<SphereCollider>().transform.position = this.transform.position;
+        gameObject.GetComponent<SphereCollider>().radius = activeRadius;
+        gameObject.GetComponent<SphereCollider>().isTrigger = true;
+        gameObject.layer = 3;
 
         GameObject.Destroy(this.GetComponent<Rigidbody>());
         this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
+        transform.parent.GetComponent<PlayerObjects>().cubes.Add(gameObject);
         this.GetComponent<Feromagnetic>().enabled = false;
     }
 
@@ -189,12 +196,20 @@ public class Feromagnetic : MonoBehaviour
             rb.interpolation = RigidbodyInterpolation.None;
 
             //Attach the object to the player
-            
-            this.transform.parent = cubeAttractedToTransform.parent;
+            if(cubeAttractedToTransform.tag == "Player")
+            {
+                this.transform.parent = cubeAttractedToTransform;
+            }
+            else
+            {
+                
+                this.transform.parent = cubeAttractedToTransform.parent;
+            }
+           
             lerping = true;
             startPosition = transform.localPosition;
             startRotation = transform.localRotation;
-            endPosition = ConvertPointIgnoringScale(closestFace, cubeAttractedToTransform, this.transform.parent);
+            endPosition = this.transform.parent.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(closestFace));
             endRotation = RotationChoice(this.transform.localRotation);
         }
 
@@ -211,8 +226,8 @@ public class Feromagnetic : MonoBehaviour
         }
         else if (time > 1)
         {
-            //transform.localPosition = endPosition;
-            //transform.localRotation = endRotation;
+           // transform.localPosition = endPosition;
+           // transform.localRotation = endRotation;
             AttachCube();
         }
     }
@@ -245,7 +260,7 @@ public class Feromagnetic : MonoBehaviour
             }
         }
         return direction;
-    }
+    }  
     private Quaternion RotationChoice(Quaternion blocRotation)
     {
        

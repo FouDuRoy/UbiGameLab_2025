@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Switch;
 
 public class PlayerMouvement : MonoBehaviour
@@ -19,7 +20,7 @@ public class PlayerMouvement : MonoBehaviour
     InputAction throwCubes;
     InputAction rotateActionZ;
     Rigidbody rb;
-
+    
 
     void Start()
     {
@@ -29,6 +30,9 @@ public class PlayerMouvement : MonoBehaviour
         throwCubes = playerInput.actions.FindAction("ThrowCubes");
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
         rb = GetComponent<Rigidbody>();
+        
+        
+       
     }
 
     // Update is called once per frame
@@ -48,41 +52,39 @@ public class PlayerMouvement : MonoBehaviour
 
         if (throwCubes.ReadValue<float>() == 1)
         {
-            foreach (Transform child in this.transform)
+
+            List<GameObject> cubes = GetComponent<PlayerObjects>().cubes;
+            
+            foreach (GameObject cube in cubes)
             {
-                if (child.GetComponent<Cube>() != null)
-                {
+                cube.gameObject.layer = 0;
+                cube.transform.parent = this.transform.parent;
+                GameObject.Destroy(cube.GetComponent<SphereCollider>());
 
-                    if (child.GetComponent<Cube>().owner.Equals(this.gameObject.name))
-                    {
+                //Add rigidBody
+                cube.AddComponent<Rigidbody>();
+                Rigidbody rb = cube.GetComponent<Rigidbody>();
+                Rigidbody rb2 = GetComponent<PlayerObjects>().cubeRb;
+                rb.mass = rb2.mass;
+                rb.drag = rb2.drag;
+                rb.angularDrag = rb2.angularDrag;
+                rb.collisionDetectionMode = rb2.collisionDetectionMode;
+                rb.useGravity = rb2.useGravity;
+                rb.constraints = rb2.constraints;
+            
 
-                        //child.gameObject.layer = 4;
-                        child.parent = this.transform.parent;
+               
+                cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+                cube.GetComponent<Rigidbody>().AddExplosionForce(10000, this.transform.position, playerCharge);
 
-                        GameObject.Destroy(child.GetChild(0).gameObject);
-                        child.AddComponent<Rigidbody>();
-                        Rigidbody rb = child.GetComponent<Rigidbody>();
-                        rb.mass = 10f;
-                        rb.drag = 0.5f;
-                        rb.angularDrag = 0.5f;
-                        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-                        rb.useGravity = false;
-                        child.GetComponentInChildren<Rigidbody>().isKinematic = false;
-                        child.GetComponentInChildren<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-                        child.GetComponentInChildren<Rigidbody>().AddExplosionForce(10000, this.transform.position, playerCharge);
-                        //Remove owner of cube
-                        //Debug.Log("yeah");
-                        StartCoroutine(blockNeutral(child.gameObject));
-
-
-
-                    }
-                }
-
-
-
-
+                //Remove owner of cube
+                StartCoroutine(blockNeutral(cube));
             }
+            cubes.Clear();
+
+
+
+            
 
         }
 
@@ -98,19 +100,6 @@ public class PlayerMouvement : MonoBehaviour
         }
        
     }
-    void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag=="Scene") {
-            foreach (ContactPoint contact in collision.contacts)
-            {
-                // The contact.normal is the normal of the surface we collided with
-                Vector3 collisionNormal = contact.normal.normalized;
-                this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                //this.transform.position += collisionNormal* collisionDistance;
-            }
-        }
-      
 
-    }
 }
 
