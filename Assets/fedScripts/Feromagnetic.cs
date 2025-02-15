@@ -37,8 +37,9 @@ public class Feromagnetic : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+       
         mask = LayerMask.GetMask("magnetic");
+
         // We assume all cubes have same scale
         cubeSize = 1f + spacingBetweenCubes;
         quaternions = createListAngles();
@@ -170,6 +171,7 @@ public class Feromagnetic : MonoBehaviour
 
         GameObject.Destroy(this.GetComponent<Rigidbody>());
         this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
+        transform.parent.GetComponent<PlayerObjects>().cubes.Add(gameObject);
         this.GetComponent<Feromagnetic>().enabled = false;
     }
 
