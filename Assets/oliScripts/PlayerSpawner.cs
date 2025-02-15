@@ -8,13 +8,6 @@ public class PlayerSpawner : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
-        if (playerCount >= spawnPoints.Length)
-        {
-            Debug.LogWarning("Plus de spawn points disponibles !");
-            return;
-        }
-        else
-        {
             playerInput.gameObject.name = "Joueur " + playerInput.playerIndex;
             // Assigner une position et une rotation au joueur
             playerInput.gameObject.transform.position = spawnPoints[playerCount].position;
@@ -23,7 +16,7 @@ public class PlayerSpawner : MonoBehaviour
             Debug.Log($"Joueur {playerCount + 1} spawn à {spawnPoints[playerCount].position}");
 
             playerCount++; // Augmenter le compteur de joueurs
-        }
-
+        if(playerCount == 2)
+            this.GetComponent<PlayerInputManager>().enabled = false;
     }
 }
