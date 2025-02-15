@@ -52,7 +52,7 @@ public class Feromagnetic : MonoBehaviour
         // Set the position of the block and look for all magnetic blocs in range
         centerOfMassPosition = transform.position;
         Collider[] magnetic = Physics.OverlapSphere(centerOfMassPosition, passiveRadius, mask);
-
+        rb = this.GetComponent<Rigidbody>();
         //Check for closest magnetic cube
         CheckClosestMagnet(magnetic);
         
@@ -106,7 +106,7 @@ public class Feromagnetic : MonoBehaviour
 
         void allignBlock(Vector3 closestFace)
         {
-            
+
             transform.localPosition = ConvertPointIgnoringScale(closestFace, cubeAttractedToTransform, this.transform.parent);
             transform.rotation = cubeAttractedToTransform.rotation;
 
@@ -162,6 +162,7 @@ public class Feromagnetic : MonoBehaviour
         magneticField.GetComponent<SphereCollider>().isTrigger = true;
         magneticField.layer = 3;
 
+        GameObject.Destroy(this.GetComponent<Rigidbody>());
         this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
         this.GetComponent<Feromagnetic>().enabled = false;
     }
@@ -198,6 +199,7 @@ public class Feromagnetic : MonoBehaviour
 
         if (lerping && time <= 1)
         {
+
             
             transform.localPosition = Vector3.Lerp(startPosition, endPosition, time);
             transform.localRotation = Quaternion.Slerp(startRotation, endRotation, time);
@@ -208,8 +210,8 @@ public class Feromagnetic : MonoBehaviour
         }
         else if (time > 1)
         {
-            transform.localPosition = endPosition;
-            transform.localRotation = endRotation;
+            //transform.localPosition = endPosition;
+            //transform.localRotation = endRotation;
             AttachCube();
         }
     }

@@ -11,20 +11,27 @@ public class Cube : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+       
     }
 
     void Update()
     {
         
-        float speed = rb.velocity.magnitude;
-        if(speed < minimalSpeed && owner == "Neutral")
+        
+        if( owner == "Neutral")
         {
-            this.GetComponent<Feromagnetic>().enabled = true;
+            float speed = this.GetComponent<Rigidbody>().velocity.magnitude;
+           
+            if (speed < minimalSpeed)
+            {
+                this.GetComponent<Feromagnetic>().enabled = true;
+            }
+            
         }
     }
     public void setOwner(string owner)
     {
         this.owner = owner;
     }
+  
 }

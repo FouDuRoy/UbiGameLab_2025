@@ -11,23 +11,31 @@ public class TriggerCube : MonoBehaviour
         cubeComponent = GetComponent<Cube>(); // Cache component for performance
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
+
     {
-        if(cubeComponent != null)
-            if(other.GetComponent<Cube>() != null)
-                if(other.GetComponent<Cube>().owner != "Neutral" &&  other.GetComponent<Cube>().owner != "" && 
-                    cubeComponent.owner != "Neutral" && cubeComponent.owner != "")
+        Collider other = collision.collider;
+    
+        if (cubeComponent != null)
+        {
+            if (other.GetComponent<Cube>() != null)
+            {
+            
+                if (other.GetComponent<Cube>().owner != "Neutral" && other.GetComponent<Cube>().owner != "" &&
+                   cubeComponent.owner != "Neutral" && cubeComponent.owner != "")
                 {
+                    
                     if (cubeComponent.owner != other.GetComponent<Cube>().owner)
                     {
-                        Debug.Log("Hit confirmed");
-                        //Debug.Log(cubeComponent.owner);
-                        //Debug.Log(other.GetComponent<Cube>().owner);
-                        //Destroy(other.gameObject);
-                        //Destroy(this);
+                  
+                        Destroy(other.gameObject);
+                        Destroy(this.gameObject);
                     }
                 }
+            }
+           
 
+        }
     }
 }
 

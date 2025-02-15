@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,6 +9,7 @@ using UnityEngine.InputSystem.Switch;
 
 public class PlayerMouvement : MonoBehaviour
 {
+    private const float collisionDistance = 0.1f;
     [SerializeField] float speed = 1f;
     [SerializeField] float speedRotation = 1f;
     [SerializeField] float playerCharge = 1000f;
@@ -16,7 +18,8 @@ public class PlayerMouvement : MonoBehaviour
     InputAction rotateAction;
     InputAction throwCubes;
     InputAction rotateActionZ;
-   
+
+
 
     void Start()
     {
@@ -35,39 +38,46 @@ public class PlayerMouvement : MonoBehaviour
         float rotation = rotateAction.ReadValue<float>();
         float rotationZ = rotateActionZ.ReadValue<float>();
         transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
-        transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime,Space.World);
-       
+        transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime, Space.World);
+        // rb.MovePosition(rb.position+ new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime);
         transform.Rotate(this.transform.up, rotationZ * speedRotation * Time.deltaTime, Space.World);
-       
 
-        if (throwCubes.ReadValue<float>()==1)
+
+        if (throwCubes.ReadValue<float>() == 1)
         {
             foreach (Transform child in this.transform)
             {
                 if (child.GetComponent<Cube>() != null)
                 {
-                    
+
                     if (child.GetComponent<Cube>().owner.Equals(this.gameObject.name))
                     {
-                       
-                            child.GetComponentInChildren<Rigidbody>().isKinematic = false;
-                            child.GetComponentInChildren<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-                            child.gameObject.layer = 0;
-                            child.parent = this.transform.parent;
-                      
-                            GameObject.Destroy(child.GetChild(0).gameObject);
-                            child.GetComponentInChildren<Rigidbody>().AddExplosionForce(10000, this.transform.position, playerCharge);
+
+                        //child.gameObject.layer = 4;
+                        child.parent = this.transform.parent;
+
+                        GameObject.Destroy(child.GetChild(0).gameObject);
+                        child.AddComponent<Rigidbody>();
+                        Rigidbody rb = child.GetComponent<Rigidbody>();
+                        rb.mass = 10f;
+                        rb.drag = 0.5f;
+                        rb.angularDrag = 0.5f;
+                        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+                        rb.useGravity = false;
+                        child.GetComponentInChildren<Rigidbody>().isKinematic = false;
+                        child.GetComponentInChildren<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+                        child.GetComponentInChildren<Rigidbody>().AddExplosionForce(10000, this.transform.position, playerCharge);
                         //Remove owner of cube
                         //Debug.Log("yeah");
                         StartCoroutine(blockNeutral(child.gameObject));
-                            
-                            
-                        
+
+
+
                     }
                 }
-                
-                 
-                
+
+
+
 
             }
 
@@ -77,9 +87,27 @@ public class PlayerMouvement : MonoBehaviour
 
     IEnumerator blockNeutral(GameObject block)
     {
-        
-        yield return new WaitForSeconds(1);
-        block.GetComponent<Cube>().setOwner("Neutral");
+
+        yield return new WaitForSeconds(3f);
+        if(block !=null)
+        {
+            block.GetComponent<Cube>().setOwner("Neutral");
+        }
+       
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag=="Scene") {
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                // The contact.normal is the normal of the surface we collided with
+                Vector3 collisionNormal = contact.normal.normalized;
+                this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                //this.transform.position += collisionNormal* collisionDistance;
+            }
+        }
+      
+
     }
 }
 
