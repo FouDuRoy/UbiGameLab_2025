@@ -18,7 +18,7 @@ public class PlayerMouvement : MonoBehaviour
     InputAction rotateAction;
     InputAction throwCubes;
     InputAction rotateActionZ;
-
+    Rigidbody rb;
 
 
     void Start()
@@ -28,7 +28,7 @@ public class PlayerMouvement : MonoBehaviour
         rotateAction = playerInput.actions.FindAction("Rotate");
         throwCubes = playerInput.actions.FindAction("ThrowCubes");
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -39,8 +39,11 @@ public class PlayerMouvement : MonoBehaviour
         float rotationZ = rotateActionZ.ReadValue<float>();
         transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
         transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime, Space.World);
-        // rb.MovePosition(rb.position+ new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime);
-        transform.Rotate(this.transform.up, rotationZ * speedRotation * Time.deltaTime, Space.World);
+        //rb.MovePosition(rb.position+ new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime);
+        //Quaternion rotationQ = Quaternion.Euler(Vector3.up * rotation * speedRotation * Time.deltaTime
+           // + rb.rotation.ToEuler());
+       // rb.MoveRotation(rotationQ);
+        //rb.MoveRotation(Quaternion.this.transform.up, rotationZ * speedRotation * Time.deltaTime, Space.World);
 
 
         if (throwCubes.ReadValue<float>() == 1)

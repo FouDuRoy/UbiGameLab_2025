@@ -61,9 +61,9 @@ public class Feromagnetic : MonoBehaviour
         {
             cubeAttractedToTransform = cubeAttractedTo.transform.parent;
             Vector3 direction = cubeAttractedToTransform.position - centerOfMassPosition;
-            Vector3 relativeDirection = -cubeAttractedToTransform.InverseTransformDirection(direction);
-            Vector3 closestFace = CalculateClosestFace(relativeDirection);
-        
+            Vector3 relativePosition = ConvertPointIgnoringScale(this.transform.position, cubeAttractedToTransform);
+            Vector3 closestFace = CalculateClosestFace(relativePosition);
+            
 
             if (interpolates && !lerping)
             {
@@ -74,11 +74,11 @@ public class Feromagnetic : MonoBehaviour
            
             if (useLerp)
             {
-                lerpingMagents(direction,relativeDirection, closestFace);
+                lerpingMagents(direction,relativePosition, closestFace);
             }
             else
             {
-                autoMagnets(direction, relativeDirection, closestFace);
+                autoMagnets(direction, relativePosition, closestFace);
             }
                
 
@@ -114,6 +114,7 @@ public class Feromagnetic : MonoBehaviour
 
         void autoMagnets(Vector3 direction,Vector3 relativeDirection, Vector3 closestFace)
         {
+    
             if ((relativeDirection-closestFace).magnitude <= autoMagError)
             {
 
@@ -264,9 +265,18 @@ public class Feromagnetic : MonoBehaviour
     {
         // Convert point from local to world space (ignoring scale)
         Vector3 worldPoint = fromLocal.position + fromLocal.rotation * point;
+        
 
         // Convert from world space to new local space (ignoring scale)
         Vector3 newLocalPoint = Quaternion.Inverse(toLocal.rotation) * (worldPoint - toLocal.position);
+
+        return newLocalPoint;
+    }
+    Vector3 ConvertPointIgnoringScale(Vector3 point, Transform toLocal)
+    {
+    
+        // Convert from world space to new local space (ignoring scale)
+        Vector3 newLocalPoint = Quaternion.Inverse(toLocal.rotation) * (point - toLocal.position);
 
         return newLocalPoint;
     }
