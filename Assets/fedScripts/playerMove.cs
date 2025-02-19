@@ -14,6 +14,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float speed = 1f;
     [SerializeField] float speedRotation = 1f;
     [SerializeField] float playerCharge = 1000f;
+    [SerializeField] float maxSpeed;
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction rotateAction;
@@ -30,23 +31,37 @@ public class PlayerMouvement : MonoBehaviour
         throwCubes = playerInput.actions.FindAction("ThrowCubes");
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
         rb = GetComponent<Rigidbody>();
-        
-        
-       
+        rb.solverIterations = 40;
+        rb.solverVelocityIterations = 20;
+
+
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector2 direction = moveAction.ReadValue<Vector2>();
         float rotation = rotateAction.ReadValue<float>();
         float rotationZ = rotateActionZ.ReadValue<float>();
-        transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
-        transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime, Space.World);
+        Vector3 LocalForceDirection = new Vector3(direction.x, 0, direction.y).normalized;
+        Vector3 Rotation = rb.rotation.eulerAngles;
+
+
+
+        //transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
+        //transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime, Space.World);
+        // rb.AddTorque(Vector3.up*rotation * speedRotation);
+       // rb.MoveRotation(Quaternion.Euler(rotation * (Rotation + new Vector3(0, speedRotation, 0))));
         //rb.MovePosition(rb.position+ new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime);
+       // ApplyEvenForce(LocalForceDirection);
+        rb.AddForceAtPosition(LocalForceDirection * (speed), this.transform.InverseTransformPoint(CalculateCenterMass()), ForceMode.Force);
+        //if (rb.velocity.magnitude > maxSpeed)
+        //{
+        // rb.velocity = rb.velocity.normalized * maxSpeed;
+        //}
         //Quaternion rotationQ = Quaternion.Euler(Vector3.up * rotation * speedRotation * Time.deltaTime
-           // + rb.rotation.ToEuler());
-       // rb.MoveRotation(rotationQ);
+        // + rb.rotation.ToEuler());
+        // rb.MoveRotation(rotationQ);
         //rb.MoveRotation(Quaternion.this.transform.up, rotationZ * speedRotation * Time.deltaTime, Space.World);
 
 
@@ -101,5 +116,66 @@ public class PlayerMouvement : MonoBehaviour
        
     }
 
+    public void ApplyEvenForce(Vector3 LocalForceDirection)
+    {
+        Vector3 center = Vector3.zero;
+        float massSum = 0;
+        foreach(Rigidbody rb in this.GetComponentsInChildren<Rigidbody>())
+        {
+            if(rb.mass > 0)
+            {
+                massSum += rb.mass;
+            }
+        }
+        foreach (Rigidbody rb in this.GetComponentsInChildren<Rigidbody>())
+        {
+            if(rb.mass > 0)
+            {
+                Debug.Log(rb.transform.localPosition.magnitude);
+                rb.AddForce(LocalForceDirection * (speed * rb.mass / (massSum+(rb.transform.localPosition.magnitude)*0.01f)), ForceMode.Force);
+            }
+        }
+            
+    }
+    public void CalculateCenterMassForce()
+    {
+        Vector3 center = Vector3.zero;
+        float massSum = 0;
+        foreach (Rigidbody rb in this.GetComponentsInChildren<Rigidbody>())
+        {
+            if (rb.mass > 0)
+            {
+                center += rb.centerOfMass;
+                massSum += rb.mass;
+            }
+        }
+        center = center / massSum;
+        Vector3 closest = this.transform.position;
+        foreach(Rigidbody rb in this.GetComponentsInChildren<Rigidbody>())
+        {
+
+        }
+       
+
+    }
+    public Vector3 CalculateCenterMass()
+    {
+        Vector3 center = Vector3.zero;
+        float massSum = 0;
+        foreach (Rigidbody rb in this.GetComponentsInChildren<Rigidbody>())
+        {
+            if (rb.mass > 0)
+            {
+                center += rb.centerOfMass;
+                massSum += rb.mass;
+                rb.solverIterations = 40;
+                rb.solverVelocityIterations = 20;
+            }
+        }
+        center = center / massSum;
+        return center;
+
+
+    }
 }
 
