@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,9 @@ using UnityEngine.UIElements;
 
 public class Feromagnetic : MonoBehaviour
 {
-    
+    private const double toleranceDirection = 0.1;
+
+    // Fero
     [SerializeField] float passiveRadius = 5.0f;
     [SerializeField] float activeRadius = 5f;
     [SerializeField] float charge = 5.0f;
@@ -19,6 +22,14 @@ public class Feromagnetic : MonoBehaviour
     [SerializeField] bool interpolates;
     [SerializeField] float deltaLerp = 0.2f;
     [SerializeField] float spacingBetweenCubes = 0.1f;
+
+    //Joint settings
+    [SerializeField] float mainLinearDrive = 1000f;
+    [SerializeField] float mainLinearDamp = 50f;
+    [SerializeField] float secondaryLinearDrive = 5000f;
+    [SerializeField] float secondaryLinearDamp = 100f;
+    [SerializeField] float angularDrive = 5000f;
+    [SerializeField] float angularDamp = 100f;
 
     Vector3 centerOfMassPosition;
     Rigidbody rb;
@@ -153,26 +164,122 @@ public class Feromagnetic : MonoBehaviour
 
     private void AttachCube()
     {
-        
-        rb.interpolation = RigidbodyInterpolation.None;
 
-        //Attach magnetic field
+
+
+
         if (lerping)
         {
             lerping = false;
             time = 0;
+            rb.isKinematic = false;
         }
 
+        //Attach magnetic field
         this.gameObject.AddComponent<SphereCollider>();
         gameObject.GetComponent<SphereCollider>().transform.position = this.transform.position;
         gameObject.GetComponent<SphereCollider>().radius = activeRadius;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
         gameObject.layer = 3;
 
-        GameObject.Destroy(this.GetComponent<Rigidbody>());
+        //Set rigidBody constraints
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.solverIterations = 40;
+        rb.solverVelocityIterations = 20;
+        rb.constraints = RigidbodyConstraints.None;
+
+        // Attach joint
+        attachJoint();
+
         this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
         transform.parent.GetComponent<PlayerObjects>().cubes.Add(gameObject);
         this.GetComponent<Feromagnetic>().enabled = false;
+    }
+
+    private void attachJoint()
+    {
+        Vector3[] Directions = { new Vector3(1, 0, 0), new Vector3(-1, 0, 0), new Vector3(0, 0, 1), new Vector3(0, 0, -1) };
+        foreach(Vector3 direction in Directions)
+        {
+
+            //Debug.Log("Position"+transform.position);
+            // Debug.Log(direction);
+           
+            Debug.DrawRay(transform.position, direction * 20f, Color.red, 2f);
+            int layerMask = LayerMask.GetMask("magnetic");
+            RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, 20f, layerMask, QueryTriggerInteraction.Ignore);
+            
+            foreach(RaycastHit hit in hits)
+            {
+                Debug.Log(hit.collider.gameObject.name); 
+            }
+           
+        }
+        this.AddComponent<ConfigurableJoint>();
+        ConfigurableJoint joint = this.GetComponent<ConfigurableJoint>();
+
+        JointDrive xDrive = joint.xDrive;
+        xDrive.positionSpring = mainLinearDrive;
+        xDrive.positionDamper = mainLinearDamp;
+        joint.xDrive = xDrive;
+
+        JointDrive yDrive = joint.yDrive;
+        yDrive.positionSpring = secondaryLinearDrive;
+        yDrive.positionDamper = secondaryLinearDamp;
+        joint.yDrive = yDrive;
+
+        JointDrive zDrive = joint.zDrive;
+        zDrive.positionSpring = secondaryLinearDrive;
+        zDrive.positionDamper = secondaryLinearDamp;
+        joint.zDrive = zDrive;
+
+        JointDrive angularXDrive = joint.angularXDrive;
+        angularXDrive.positionSpring = mainLinearDrive;
+        angularXDrive.positionDamper = mainLinearDamp;
+        joint.angularXDrive = angularXDrive;
+
+        JointDrive angularYZDrive = joint.angularYZDrive;
+        angularYZDrive.positionSpring = mainLinearDrive;
+        angularYZDrive.positionDamper = mainLinearDamp;
+        joint.angularYZDrive = angularYZDrive;
+
+        // Determine main axis and secondary axis
+        Vector3 positionOfCubeAttractedToRelative = transform.InverseTransformPoint(cubeAttractedToTransform.position).normalized;
+        Vector3 posRel = transform.InverseTransformPoint(cubeAttractedToTransform.position);
+        joint.axis = positionOfCubeAttractedToRelative;
+        joint.enableCollision = true;
+        joint.connectedBody = cubeAttractedTo.GetComponent<Rigidbody>();
+        //joint.anchor = positionOfCubeAttractedToRelative/2+positionOfCubeAttractedToRelative*spacingBetweenCubes;
+        joint.anchor = posRel;
+        //test(joint, positionOfCubeAttractedToRelative);
+    }
+
+    private void test(ConfigurableJoint joint, Vector3 positionOfCubeAttractedToRelative)
+    {
+        if (Mathf.Abs(Vector3.Dot(positionOfCubeAttractedToRelative, Vector3.up)) - 1 < toleranceDirection)
+        {
+            float sign = Mathf.Sign(Vector3.Dot(positionOfCubeAttractedToRelative, Vector3.up));
+            joint.axis = Vector3.up;
+            joint.secondaryAxis = Vector3.right;
+            joint.anchor = transform.InverseTransformPoint(transform.parent.TransformPoint(transform.localPosition)) -
+                Vector3.up * sign;
+        }
+        else if (Mathf.Abs(Vector3.Dot(positionOfCubeAttractedToRelative, Vector3.right)) - 1 < toleranceDirection)
+        {
+            float sign = Mathf.Sign(Vector3.Dot(positionOfCubeAttractedToRelative, Vector3.right));
+            joint.axis = Vector3.right;
+            joint.secondaryAxis = Vector3.up;
+            joint.anchor = transform.InverseTransformPoint(transform.parent.TransformPoint(transform.localPosition)) -
+              Vector3.right * sign;
+        }
+        else
+        {
+            float sign = Mathf.Sign(Vector3.Dot(positionOfCubeAttractedToRelative, Vector3.forward));
+            joint.axis = Vector3.forward;
+            joint.secondaryAxis = Vector3.up;
+            joint.anchor = transform.InverseTransformPoint(transform.parent.TransformPoint(transform.localPosition)) -
+              Vector3.forward * sign;
+        }
     }
 
     private void lerpingMagents(Vector3 direction, Vector3 relativeDirection, Vector3 closestFace)
@@ -196,20 +303,20 @@ public class Feromagnetic : MonoBehaviour
             rb.interpolation = RigidbodyInterpolation.None;
 
             //Attach the object to the player
-            if(cubeAttractedToTransform.tag == "Player")
-            {
+           // if(cubeAttractedToTransform.tag == "Player")
+           // {
                 this.transform.parent = cubeAttractedToTransform;
-            }
-            else
-            {
+           // }
+           /// else
+           // {
                 
-                this.transform.parent = cubeAttractedToTransform.parent;
-            }
+             //   this.transform.parent = cubeAttractedToTransform.parent;
+           // }
            
             lerping = true;
             startPosition = transform.localPosition;
             startRotation = transform.localRotation;
-            endPosition = this.transform.parent.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(closestFace));
+            endPosition = closestFace; 
             endRotation = RotationChoice(this.transform.localRotation);
         }
 
@@ -226,8 +333,12 @@ public class Feromagnetic : MonoBehaviour
         }
         else if (time > 1)
         {
-           // transform.localPosition = endPosition;
-           // transform.localRotation = endRotation;
+            transform.localPosition = endPosition;
+            transform.localRotation = endRotation;
+            if (cubeAttractedToTransform.tag != "Player")
+                 {
+                this.transform.parent = cubeAttractedToTransform.parent;
+             }
             AttachCube();
         }
     }

@@ -51,14 +51,16 @@ public class PlayerMouvement : MonoBehaviour
         //transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
         //transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime, Space.World);
         // rb.AddTorque(Vector3.up*rotation * speedRotation);
-       // rb.MoveRotation(Quaternion.Euler(rotation * (Rotation + new Vector3(0, speedRotation, 0))));
+        // rb.MoveRotation(Quaternion.Euler(rotation * (Rotation + new Vector3(0, speedRotation, 0))));
         //rb.MovePosition(rb.position+ new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime);
-       // ApplyEvenForce(LocalForceDirection);
-        rb.AddForceAtPosition(LocalForceDirection * (speed), this.transform.InverseTransformPoint(CalculateCenterMass()), ForceMode.Force);
+        //rb.AddForce(LocalForceDirection * (speed));
+        //Debug.Log(LocalForceDirection);
+        //rb.AddForceAtPosition(LocalForceDirection * (speed), this.transform.InverseTransformPoint(CalculateCenterMass()), ForceMode.Force);
         //if (rb.velocity.magnitude > maxSpeed)
         //{
         // rb.velocity = rb.velocity.normalized * maxSpeed;
         //}
+        ApplyEvenForce(LocalForceDirection );
         //Quaternion rotationQ = Quaternion.Euler(Vector3.up * rotation * speedRotation * Time.deltaTime
         // + rb.rotation.ToEuler());
         // rb.MoveRotation(rotationQ);
@@ -131,7 +133,7 @@ public class PlayerMouvement : MonoBehaviour
         {
             if(rb.mass > 0)
             {
-                Debug.Log(rb.transform.localPosition.magnitude);
+               // Debug.Log(rb.transform.localPosition.magnitude);
                 rb.AddForce(LocalForceDirection * (speed * rb.mass / (massSum+(rb.transform.localPosition.magnitude)*0.01f)), ForceMode.Force);
             }
         }
