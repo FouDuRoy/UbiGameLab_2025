@@ -18,9 +18,10 @@ public class TriggerCube : MonoBehaviour
     
         if (cubeComponent != null)
         {
+            PlayerInfo playerInfo = collision.gameObject.GetComponent<PlayerInfo>();
+
             if (other.GetComponent<Cube>() != null)
             {
-            
                 if (other.GetComponent<Cube>().owner != "Neutral" && other.GetComponent<Cube>().owner != "" &&
                    cubeComponent.owner != "Neutral" && cubeComponent.owner != "")
                 {
@@ -32,12 +33,10 @@ public class TriggerCube : MonoBehaviour
 
                 }
             }
-            else if (other.gameObject.name.Contains("Joueur") && other.gameObject.name != cubeComponent.owner
+            else if (other.gameObject.name.Contains("Player") && other.gameObject.name != cubeComponent.owner
                 && cubeComponent.owner != "" && cubeComponent.owner != "Neutral")
             {
-                Debug.Log(other.gameObject.name);
-                Debug.Log(cubeComponent.owner);
-                Debug.Log("Game Over");
+                playerInfo.TakeDamage(cubeComponent.owner); // Send enemy's name
             }
            
 

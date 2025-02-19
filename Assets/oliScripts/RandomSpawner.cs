@@ -4,13 +4,23 @@ using System.Collections.Generic;
 
 public class RandomSpawner : MonoBehaviour
 {
-    public GameObject objectToSpawn;
-    public Transform[] spawnPoints;
+    public GameObject objectToSpawn; // Object to spawn
+    public Transform[] spawnPoints; // Spawn point objects
+    private Vector3[] initialPositions; // Store the original positions
     public int numberOfSpawns = 5;
     public float spawnInterval = 15f;
+    public float checkRadius = 0.5f; // Adjust the radius to fit your prefab size
+    public LayerMask spawnLayerMask; // Assign a specific layer for spawned objects
 
     void Start()
     {
+        // Store the initial positions of all spawn points
+        initialPositions = new Vector3[spawnPoints.Length];
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            initialPositions[i] = spawnPoints[i].position;
+        }
+
         StartCoroutine(SpawnLoop());
     }
 
@@ -32,19 +42,32 @@ public class RandomSpawner : MonoBehaviour
         }
 
         List<int> availableIndexes = new List<int>();
-        for (int i = 0; i < spawnPoints.Length; i++)
+        for (int i = 0; i < initialPositions.Length; i++)
         {
             availableIndexes.Add(i);
         }
 
-        for (int i = 0; i < numberOfSpawns; i++)
+        int spawned = 0;
+        while (spawned < numberOfSpawns && availableIndexes.Count > 0)
         {
             int randomIndex = Random.Range(0, availableIndexes.Count);
             int spawnIndex = availableIndexes[randomIndex];
 
-            Instantiate(objectToSpawn, spawnPoints[spawnIndex].position, Quaternion.identity);
+            // Check if something is already at the spawn position
+            if (!IsPositionOccupied(initialPositions[spawnIndex]))
+            {
+                Instantiate(objectToSpawn, initialPositions[spawnIndex], Quaternion.identity);
+                spawned++; // Only increase if an object was successfully spawned
+            }
 
             availableIndexes.RemoveAt(randomIndex);
         }
+    }
+
+    bool IsPositionOccupied(Vector3 position)
+    {
+        // Check if any colliders are in the area (adjust checkRadius if needed)
+        Collider[] colliders = Physics.OverlapSphere(position, checkRadius, spawnLayerMask);
+        return colliders.Length > 0; // If there are colliders, the spot is occupied
     }
 }
