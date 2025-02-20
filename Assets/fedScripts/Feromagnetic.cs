@@ -43,8 +43,10 @@ public class Feromagnetic : MonoBehaviour
     Quaternion endRotation;
     Quaternion startRotation;
     List<Quaternion> quaternions;
-    List<Vector3> faces;
     float time = 0;
+    bool jointConstraint = true;
+    bool jointConstraintAt = false;
+    bool attached = false;
 
     void Start()
     {
@@ -54,47 +56,78 @@ public class Feromagnetic : MonoBehaviour
         // We assume all cubes have same scale
         cubeSize = 1f + spacingBetweenCubes;
         quaternions = createListAngles();
-        Vector3[] face ={ new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0) , new Vector3(0, cubeSize, 0),
-            new Vector3(0, -cubeSize, 0), new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize) };
-        faces = face.ToList();
+    
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         // Set the position of the block and look for all magnetic blocs in range
-        centerOfMassPosition = transform.position;
-        Collider[] magnetic = Physics.OverlapSphere(centerOfMassPosition, passiveRadius, mask);
-        rb = this.GetComponent<Rigidbody>();
-        //Check for closest magnetic cube
-        CheckClosestMagnet(magnetic);
-        
-        //Calculate mouvement of atracted bloc
-        if (magnetic.Length > 0)
-        {
-            
-            cubeAttractedToTransform = cubeAttractedTo.transform;
-            Vector3 direction = cubeAttractedToTransform.position - centerOfMassPosition;
-            Vector3 relativePosition = cubeAttractedTo.transform.InverseTransformPoint(transform.position);
-            Vector3 closestFace = CalculateClosestFace(relativePosition);
-            
-            if (interpolates && !lerping)
-            {
-                rb.interpolation = RigidbodyInterpolation.Interpolate;
-            }
-            
-            //if not stable we keep applying force
-           
-            if (useLerp)
-            {
-                lerpingMagents(direction,relativePosition, closestFace);
-            }
-            else
-            {
-                autoMagnets(direction, relativePosition, closestFace);
-            }
-               
 
+
+        if (lerping)
+        {
+            if (lerping && time <= 1)
+            {
+
+
+                transform.localPosition = Vector3.Lerp(startPosition, endPosition, time);
+                transform.localRotation = Quaternion.Slerp(startRotation, endRotation, time);
+                // rb.MovePosition(Vector3.Lerp(rb.position, cubeAttractedToTransform.TransformPoint(endPosition), time)); 
+                time += deltaLerp;
+
+
+
+            }
+            else if (time > 1)
+            {
+                transform.localPosition = endPosition;
+                transform.localRotation = endRotation;
+                if (cubeAttractedToTransform.tag != "Player")
+                {
+                    this.transform.parent = cubeAttractedToTransform.parent;
+                }
+                AttachCubeC();
+            }
+        }else if (jointConstraintAt)
+        {
+            if (cubeAttractedToTransform.tag != "Player")
+            {
+                this.transform.parent = cubeAttractedToTransform.parent;
+            }
+            AttachCubeC();
+        }
+        else
+        {
+            centerOfMassPosition = transform.position;
+            Collider[] magnetic = Physics.OverlapSphere(centerOfMassPosition, passiveRadius, mask);
+            rb = this.GetComponent<Rigidbody>();
+            //Check for closest magnetic cube
+            CheckClosestMagnet(magnetic);
+            if (magnetic.Length > 0)
+            {
+
+                cubeAttractedToTransform = cubeAttractedTo.transform;
+                Vector3 direction = cubeAttractedToTransform.position - centerOfMassPosition;
+                Vector3 relativePosition = cubeAttractedTo.transform.InverseTransformPoint(transform.position);
+                Vector3 closestFace = CalculateClosestFace(relativePosition, cubeAttractedTo.gameObject);
+
+                if (interpolates)
+                {
+                    rb.interpolation = RigidbodyInterpolation.Interpolate;
+                }
+
+                //if not stable we keep applying force
+
+                if (useLerp)
+                {
+                    lerpingMagents(direction, relativePosition, closestFace);
+                }
+                else
+                {
+                    autoMagnets(direction, relativePosition, closestFace);
+                }
+            }
         }
 
         void CheckClosestMagnet(Collider[] magnetic)
@@ -112,17 +145,19 @@ public class Feromagnetic : MonoBehaviour
                         cubeAttractedTo = col;
                     }
                 }
-                
-
             }
         }
 
         void allignBlock(Vector3 closestFace)
         {
 
-            transform.localPosition = this.transform.parent.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(closestFace));
+            transform.localPosition = closestFace;
             transform.rotation = cubeAttractedToTransform.rotation;
 
+            if (cubeAttractedToTransform.tag != "Player")
+            {
+                this.transform.parent = cubeAttractedToTransform.parent;
+            }
         }
 
         void autoMagnets(Vector3 direction,Vector3 relativeDirection, Vector3 closestFace)
@@ -134,24 +169,15 @@ public class Feromagnetic : MonoBehaviour
                 //Set speed to zero and change layer to magnetic.
                 //We also set the object rigidbody to kinematic mode.
 
-
                 rb.angularVelocity = Vector3.zero;
-                rb.isKinematic = true;
-
-
-                if (cubeAttractedToTransform.tag == "Player")
-                {
-                    this.transform.parent = cubeAttractedToTransform;
-                }
-                else
-                {
-
-                    this.transform.parent = cubeAttractedToTransform.parent;
-                }
+                
+                this.transform.parent = cubeAttractedToTransform;
 
                 //Put the block in the correct position
+                endPosition = closestFace;
+                cubeAttractedTo.GetComponent<Faces>().faces.Remove(closestFace);
                 allignBlock(closestFace);
-                AttachCube();
+                AttachCubeC();
 
             }
             else
@@ -165,9 +191,6 @@ public class Feromagnetic : MonoBehaviour
     private void AttachCube()
     {
 
-
-
-
         if (lerping)
         {
             lerping = false;
@@ -180,7 +203,7 @@ public class Feromagnetic : MonoBehaviour
         gameObject.GetComponent<SphereCollider>().transform.position = this.transform.position;
         gameObject.GetComponent<SphereCollider>().radius = activeRadius;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
-        gameObject.layer = 3;
+
 
         //Set rigidBody constraints
         rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -193,7 +216,40 @@ public class Feromagnetic : MonoBehaviour
 
         this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
         transform.parent.GetComponent<PlayerObjects>().cubes.Add(gameObject);
+        Invoke("setLayer", 0.01f);
+        cubeAttractedTo.gameObject.layer = 3;
         this.GetComponent<Feromagnetic>().enabled = false;
+    }
+    private void AttachCubeC()
+    {
+
+        //Attach magnetic field
+        this.gameObject.AddComponent<SphereCollider>();
+        gameObject.GetComponent<SphereCollider>().transform.position = this.transform.position;
+        gameObject.GetComponent<SphereCollider>().radius = activeRadius;
+        gameObject.GetComponent<SphereCollider>().isTrigger = true;
+
+
+        //Set rigidBody constraints
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.solverIterations = 40;
+        rb.solverVelocityIterations = 20;
+        rb.constraints = RigidbodyConstraints.None;
+
+        // Attach joint
+        attachJointC();
+
+        this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
+        transform.parent.GetComponent<PlayerObjects>().cubes.Add(gameObject);
+        Invoke("setLayer", 0.01f);
+        cubeAttractedTo.gameObject.layer = 3;
+        this.GetComponent<Feromagnetic>().enabled = false;
+    }
+
+
+    private void setLayer()
+    {
+        gameObject.layer = 3;
     }
 
     private void attachJoint()
@@ -202,8 +258,7 @@ public class Feromagnetic : MonoBehaviour
         foreach(Vector3 direction in Directions)
         {
 
-            //Debug.Log("Position"+transform.position);
-            // Debug.Log(direction);
+       
            
             Debug.DrawRay(transform.position, direction * 20f, Color.red, 2f);
             int layerMask = LayerMask.GetMask("magnetic");
@@ -215,6 +270,7 @@ public class Feromagnetic : MonoBehaviour
             }
            
         }
+
         this.AddComponent<ConfigurableJoint>();
         ConfigurableJoint joint = this.GetComponent<ConfigurableJoint>();
 
@@ -251,6 +307,55 @@ public class Feromagnetic : MonoBehaviour
         joint.connectedBody = cubeAttractedTo.GetComponent<Rigidbody>();
         //joint.anchor = positionOfCubeAttractedToRelative/2+positionOfCubeAttractedToRelative*spacingBetweenCubes;
         joint.anchor = posRel;
+        //test(joint, positionOfCubeAttractedToRelative);
+    }
+    private void attachJointC()
+    {
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.solverIterations = 40;
+        rb.solverVelocityIterations = 20;
+        rb.constraints = RigidbodyConstraints.None;
+
+        this.AddComponent<ConfigurableJoint>();
+        ConfigurableJoint joint = this.GetComponent<ConfigurableJoint>();
+
+        JointDrive xDrive = joint.xDrive;
+        xDrive.positionSpring = mainLinearDrive;
+        xDrive.positionDamper = mainLinearDamp;
+        joint.xDrive = xDrive;
+
+        JointDrive yDrive = joint.yDrive;
+        yDrive.positionSpring = secondaryLinearDrive;
+        yDrive.positionDamper = secondaryLinearDamp;
+        joint.yDrive = yDrive;
+
+        JointDrive zDrive = joint.zDrive;
+        zDrive.positionSpring = secondaryLinearDrive;
+        zDrive.positionDamper = secondaryLinearDamp;
+        joint.zDrive = zDrive;
+
+        JointDrive angularXDrive = joint.angularXDrive;
+        angularXDrive.positionSpring = mainLinearDrive;
+        angularXDrive.positionDamper = mainLinearDamp;
+        joint.angularXDrive = angularXDrive;
+
+        JointDrive angularYZDrive = joint.angularYZDrive;
+        angularYZDrive.positionSpring = mainLinearDrive;
+        angularYZDrive.positionDamper = mainLinearDamp;
+        joint.angularYZDrive = angularYZDrive;
+
+        // Determine main axis and secondary axis
+        Vector3 positionOfCubeAttractedToRelative = transform.InverseTransformPoint(cubeAttractedToTransform.position).normalized;
+        Vector3 posRel = transform.InverseTransformPoint(cubeAttractedToTransform.position);
+        //joint.axis = positionOfCubeAttractedToRelative;
+        joint.enableCollision = true;
+        joint.connectedBody = cubeAttractedTo.GetComponent<Rigidbody>();
+        //joint.anchor = positionOfCubeAttractedToRelative/2+positionOfCubeAttractedToRelative*spacingBetweenCubes;
+        joint.anchor = Vector3.zero;
+        joint.autoConfigureConnectedAnchor = false;
+        joint.connectedAnchor = endPosition;
+   
+  
         //test(joint, positionOfCubeAttractedToRelative);
     }
 
@@ -296,51 +401,24 @@ public class Feromagnetic : MonoBehaviour
             
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
 
+           // rb.interpolation = RigidbodyInterpolation.None;
 
-            
-            rb.interpolation = RigidbodyInterpolation.None;
-
-            //Attach the object to the player
-           // if(cubeAttractedToTransform.tag == "Player")
-           // {
-                this.transform.parent = cubeAttractedToTransform;
-           // }
-           /// else
-           // {
-                
-             //   this.transform.parent = cubeAttractedToTransform.parent;
-           // }
-           
+            this.transform.parent = cubeAttractedToTransform;
+     
+            //Start moving towards final position
             lerping = true;
+            jointConstraintAt = true;
+            cubeAttractedTo.gameObject.layer = 0;
             startPosition = transform.localPosition;
             startRotation = transform.localRotation;
             endPosition = closestFace; 
             endRotation = RotationChoice(this.transform.localRotation);
+            cubeAttractedTo.GetComponent<Faces>().faces.Remove(closestFace);
+              
         }
 
-        if (lerping && time <= 1)
-        {
-
-            
-            transform.localPosition = Vector3.Lerp(startPosition, endPosition, time);
-            transform.localRotation = Quaternion.Slerp(startRotation, endRotation, time);
-            time += deltaLerp;
-          
-
-
-        }
-        else if (time > 1)
-        {
-            transform.localPosition = endPosition;
-            transform.localRotation = endRotation;
-            if (cubeAttractedToTransform.tag != "Player")
-                 {
-                this.transform.parent = cubeAttractedToTransform.parent;
-             }
-            AttachCube();
-        }
+     
     }
 
     private static Vector3 CoulombLaw(Vector3 distance, float charge1, float charge2)
@@ -358,11 +436,10 @@ public class Feromagnetic : MonoBehaviour
         
 
     }
-    private Vector3 CalculateClosestFace(Vector3 relativeDirection)
+    private Vector3 CalculateClosestFace(Vector3 relativeDirection,GameObject cubeAtractedTo)
     {
-       
+        List<Vector3> faces = cubeAtractedTo.GetComponent<Faces>().faces;
         Vector3 direction = faces[0];
-
         foreach(Vector3 dir in faces)
         {
             if ((direction - relativeDirection).magnitude > (dir - relativeDirection).magnitude)

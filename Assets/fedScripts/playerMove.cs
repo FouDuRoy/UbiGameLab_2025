@@ -55,7 +55,7 @@ public class PlayerMouvement : MonoBehaviour
         //rb.MovePosition(rb.position+ new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime);
         //rb.AddForce(LocalForceDirection * (speed));
         //Debug.Log(LocalForceDirection);
-        //rb.AddForceAtPosition(LocalForceDirection * (speed), this.transform.InverseTransformPoint(CalculateCenterMass()), ForceMode.Force);
+       // rb.AddForceAtPosition(LocalForceDirection * (speed), this.transform.InverseTransformPoint(CalculateCenterMass()), ForceMode.Force);
         //if (rb.velocity.magnitude > maxSpeed)
         //{
         // rb.velocity = rb.velocity.normalized * maxSpeed;
@@ -134,7 +134,7 @@ public class PlayerMouvement : MonoBehaviour
             if(rb.mass > 0)
             {
                // Debug.Log(rb.transform.localPosition.magnitude);
-                rb.AddForce(LocalForceDirection * (speed * rb.mass / (massSum+(rb.transform.localPosition.magnitude)*0.01f)), ForceMode.Force);
+                rb.AddForce(LocalForceDirection * (speed * rb.mass / (massSum+(rb.transform.localPosition.magnitude)*1f)), ForceMode.Force);
             }
         }
             
