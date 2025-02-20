@@ -12,8 +12,7 @@ public class Faces : MonoBehaviour
     void Start()
     {
         float cubeSize = 1f + spacingBetweenCubes;
-        Vector3[] face ={ new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0) , new Vector3(0, cubeSize, 0),
-            new Vector3(0, -cubeSize, 0), new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize) };
+        Vector3[] face ={ new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0) , new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize) };
         faces = face.ToList();
     }
 
@@ -21,5 +20,18 @@ public class Faces : MonoBehaviour
     void Update()
     {
         
+    }
+    public void removeClosestFace(Vector3 face)
+    {
+        Vector3 closest = faces[0];
+        foreach(Vector3 v in faces)
+        {
+            float distance = Vector3.Distance(v, face);
+            if (distance< Vector3.Distance(face, closest))
+            {
+                closest = v;
+            }
+        }
+        faces.Remove(closest);
     }
 }

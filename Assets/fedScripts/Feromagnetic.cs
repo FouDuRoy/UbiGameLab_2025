@@ -216,7 +216,7 @@ public class Feromagnetic : MonoBehaviour
 
         this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
         transform.parent.GetComponent<PlayerObjects>().cubes.Add(gameObject);
-        Invoke("setLayer", 0.01f);
+        Invoke("setLayer", 0.2f);
         cubeAttractedTo.gameObject.layer = 3;
         this.GetComponent<Feromagnetic>().enabled = false;
     }
@@ -241,7 +241,7 @@ public class Feromagnetic : MonoBehaviour
 
         this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
         transform.parent.GetComponent<PlayerObjects>().cubes.Add(gameObject);
-        Invoke("setLayer", 0.01f);
+        Invoke("setLayer", 0.2f);
         cubeAttractedTo.gameObject.layer = 3;
         this.GetComponent<Feromagnetic>().enabled = false;
     }
@@ -415,7 +415,14 @@ public class Feromagnetic : MonoBehaviour
             endPosition = closestFace; 
             endRotation = RotationChoice(this.transform.localRotation);
             cubeAttractedTo.GetComponent<Faces>().faces.Remove(closestFace);
-              
+
+            Matrix4x4 projectionM = Matrix4x4.TRS(cubeAttractedTo.transform.TransformPoint( endPosition),
+            cubeAttractedTo.transform.rotation*endRotation, transform.lossyScale);
+            Vector4 cubeAtractedPosition=new Vector4(cubeAttractedTo.transform.position.x, cubeAttractedTo.transform.position.y, cubeAttractedTo.transform.position.z, 1);
+            Vector4 faceToRemove4 = projectionM.inverse * cubeAtractedPosition;
+            Vector3 faceToRemove  = new Vector3(faceToRemove4.x,faceToRemove4.y, faceToRemove4.z);
+            Debug.Log(faceToRemove.ToString());
+            this.GetComponent<Faces>().removeClosestFace(faceToRemove);
         }
 
      
