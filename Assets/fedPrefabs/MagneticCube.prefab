@@ -16,8 +16,7 @@ GameObject:
   - component: {fileID: 6205908960855129542}
   - component: {fileID: -4726244708395997180}
   - component: {fileID: 6950955270905734173}
-  - component: {fileID: 1889051185266696773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MagneticCube
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -118,9 +117,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5694876674060920943}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 5
-  m_AngularDrag: 1
+  m_Mass: 10
+  m_Drag: 0.5
+  m_AngularDrag: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -134,9 +133,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 84
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &6205908960855129542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,18 +151,12 @@ MonoBehaviour:
   passiveRadius: 1
   activeRadius: 2
   charge: 10
-  distanceLerp: 0.5
-  autoMagError: 0.5
+  distanceLerp: 0.45
+  autoMagError: 0.03
   useLerp: 1
   interpolates: 1
   deltaLerp: 0.2
   spacingBetweenCubes: 0.2
-  mainLinearDrive: 5000
-  mainLinearDamp: 10
-  secondaryLinearDrive: 5000
-  secondaryLinearDamp: 10
-  angularDrive: 5000
-  angularDamp: 10
 --- !u!114 &-4726244708395997180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,9 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  spacingBetweenCubes: 0.2
   owner: 
-  faces: []
 --- !u!114 &6950955270905734173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,17 +181,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1095d4e3a74d47e4b9c0de096fc5d84f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1889051185266696773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5694876674060920943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e8900a4f6f70b4bb70416c74ef83e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
