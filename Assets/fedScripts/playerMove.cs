@@ -55,12 +55,13 @@ public class PlayerMouvement : MonoBehaviour
         //rb.MovePosition(rb.position+ new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime);
         //rb.AddForce(LocalForceDirection * (speed));
         //Debug.Log(LocalForceDirection);
-       // rb.AddForceAtPosition(LocalForceDirection * (speed), this.transform.InverseTransformPoint(CalculateCenterMass()), ForceMode.Force);
+       
         //if (rb.velocity.magnitude > maxSpeed)
         //{
         // rb.velocity = rb.velocity.normalized * maxSpeed;
         //}
-        ApplyEvenForce(LocalForceDirection );
+        //ApplyEvenForce(LocalForceDirection );
+        rb.AddForceAtPosition(LocalForceDirection * (speed), this.transform.InverseTransformPoint(CalculateCenterMass()), ForceMode.Force);
         //Quaternion rotationQ = Quaternion.Euler(Vector3.up * rotation * speedRotation * Time.deltaTime
         // + rb.rotation.ToEuler());
         // rb.MoveRotation(rotationQ);

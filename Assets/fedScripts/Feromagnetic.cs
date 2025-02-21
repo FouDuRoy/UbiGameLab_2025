@@ -87,6 +87,7 @@ public class Feromagnetic : MonoBehaviour
                 {
                     this.transform.parent = cubeAttractedToTransform.parent;
                 }
+                rb.interpolation = RigidbodyInterpolation.Interpolate;
                 AttachCubeC();
             }
         }else if (jointConstraintAt)
@@ -235,6 +236,7 @@ public class Feromagnetic : MonoBehaviour
         rb.solverIterations = 40;
         rb.solverVelocityIterations = 20;
         rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezePositionY; 
 
         // Attach joint
         attachJointC();
@@ -402,7 +404,7 @@ public class Feromagnetic : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
-           // rb.interpolation = RigidbodyInterpolation.None;
+            rb.interpolation = RigidbodyInterpolation.None;
 
             this.transform.parent = cubeAttractedToTransform;
      
