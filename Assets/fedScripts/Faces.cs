@@ -17,10 +17,7 @@ public class Faces : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     public Vector3 removeClosestFace(Vector3 face)
     {
         Vector3 closest = faces[0];

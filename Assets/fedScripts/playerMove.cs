@@ -17,6 +17,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float speedRotation = 1f;
     [SerializeField] float playerCharge = 1000f;
     [SerializeField] float maxSpeed;
+    [SerializeField] bool yLock = true;
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction rotateAction;
@@ -38,6 +39,14 @@ public class PlayerMouvement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!yLock)
+        {
+            rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        }
+        else
+        {
+            rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+        }
         Vector2 direction = moveAction.ReadValue<Vector2>();
         float rotation = rotateAction.ReadValue<float>();
         Vector3 LocalForceDirection = new Vector3(direction.x, 0, direction.y).normalized;
@@ -170,7 +179,8 @@ public class PlayerMouvement : MonoBehaviour
         
 
         Vector3 pivotPoint = rb.position;
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, (speedRotation*rotation)/8f, 0));
+        if(yLock)
+            rb.MoveRotation(rb.rotation * Quaternion.Euler(0, (speedRotation*rotation)/8f, 0));
         foreach (GameObject obj in transform.GetComponent<PlayerObjects>().cubes)
         {
             Rigidbody rbb = obj.GetComponent<Rigidbody>();
