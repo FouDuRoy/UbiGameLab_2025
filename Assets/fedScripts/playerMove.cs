@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Switch;
+using UnityEngine.ProBuilder;
+using UnityEngine.UIElements;
 
 public class PlayerMouvement : MonoBehaviour
 {
@@ -42,12 +44,21 @@ public class PlayerMouvement : MonoBehaviour
 
         //Move and rotation
         CalculateCenterMassForce(LocalForceDirection);
+        if (rotation == 0)
+        {
+            foreach (GameObject obj in transform.GetComponent<PlayerObjects>().cubes)
+            {
+               // Rigidbody rbb = obj.GetComponent<Rigidbody>();
+               // rbb.AddTorque(-rbb.angularVelocity * 5000f,ForceMode.Acceleration);
+
+            }
+        }
         addTorque(rotation);
-        rb.AddForce(LocalForceDirection *speed, ForceMode.Force);
 
         //ThrowCube
         //ThrowCubes();
     }
+   
 
     private void ThrowCubes()
     {
@@ -125,14 +136,11 @@ public class PlayerMouvement : MonoBehaviour
     {
         Vector3 centerMass = CalculateCenterMass();
 
-        float proportionalForce = (rb.mass) * speed;
-        rb.AddForceAtPosition(LocalForceDirection * proportionalForce, centerMass, ForceMode.Force);
-
         foreach (GameObject obj in transform.GetComponent<PlayerObjects>().cubes)
         {
-            Rigidbody rb = obj.GetComponent<Rigidbody>();
-            proportionalForce = (rb.mass) * speed;
-            rb.AddForceAtPosition(LocalForceDirection* proportionalForce, centerMass, ForceMode.Force); 
+            Rigidbody rbb = obj.GetComponent<Rigidbody>();
+            float proportionalForce = (rbb.mass) * speed;
+            rbb.AddForceAtPosition(LocalForceDirection* proportionalForce, centerMass, ForceMode.Force); 
         }
 
     }
@@ -140,17 +148,16 @@ public class PlayerMouvement : MonoBehaviour
     {
         Vector3 center = Vector3.zero;
         totalMass = 0;
-        totalMass += this.rb.mass;
-        center += transform.position * this.rb.mass;
+
 
         foreach (GameObject obj in transform.GetComponent<PlayerObjects>().cubes)
         {
-            Rigidbody rb = obj.GetComponent<Rigidbody>();
+            Rigidbody rbb = obj.GetComponent<Rigidbody>();
 
-            if (rb.mass > 0)
+            if (rbb.mass > 0)
             {
-                center += rb.worldCenterOfMass*rb.mass;
-                totalMass += rb.mass;
+                center += rbb.worldCenterOfMass*rbb.mass;
+                totalMass += rbb.mass;
             }
         }
         
@@ -161,17 +168,16 @@ public class PlayerMouvement : MonoBehaviour
     public void addTorque(float rotation)
     {
         
-         rb.MoveRotation(rb.rotation*Quaternion.Euler(0, rotation*speedRotation/4, 0));
 
         Vector3 pivotPoint = rb.position;
-
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, (speedRotation*rotation)/8f, 0));
         foreach (GameObject obj in transform.GetComponent<PlayerObjects>().cubes)
         {
-           Rigidbody wow = obj.GetComponent<Rigidbody>();
-            
-              Vector3 radiusVector = wow.position-pivotPoint;
+            Rigidbody rbb = obj.GetComponent<Rigidbody>();
+
+              Vector3 radiusVector = rbb.position-pivotPoint;
               Vector3 rot = Vector3.Cross(radiusVector, Vector3.up).normalized;
-              wow.AddForce(-rot * rotation * speedRotation);
+              rbb.AddForce(-rot * rotation * speedRotation);
            
         }
     }

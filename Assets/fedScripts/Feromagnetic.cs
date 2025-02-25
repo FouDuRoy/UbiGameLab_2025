@@ -208,7 +208,6 @@ public class Feromagnetic : MonoBehaviour
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.solverIterations = 100;
         rb.solverVelocityIterations = 100;
-        //rb.constraints = RigidbodyConstraints.None;
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         // Attach joint
@@ -353,9 +352,6 @@ public class Feromagnetic : MonoBehaviour
                     correction.x= 0;
                 }
                 joint.connectedAnchor = correction;
-                //hit.transform.GetComponent<Faces>().removeClosestFace(correction);
-               // this.GetComponent<Faces>().removeClosestFace(-correction);
-            
                 i++;
             }
            
@@ -414,14 +410,6 @@ public class Feromagnetic : MonoBehaviour
                     this.transform.GetComponent<Faces>().removeClosestFace(closest) ;
                 }
             }
-                    //enlever les faces
-                   // cubeAttractedTo.GetComponent<Faces>().faces.Remove(closestFace);
-
- 
-
-            //Remove face
-            //this.GetComponent<Faces>().removeClosestFace(faceToRemove);
-
         }
 
      
