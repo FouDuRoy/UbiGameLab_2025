@@ -21,7 +21,7 @@ public class Faces : MonoBehaviour
     {
         
     }
-    public void removeClosestFace(Vector3 face)
+    public Vector3 removeClosestFace(Vector3 face)
     {
         Vector3 closest = faces[0];
         foreach(Vector3 v in faces)
@@ -33,5 +33,6 @@ public class Faces : MonoBehaviour
             }
         }
         faces.Remove(closest);
+        return closest;
     }
 }
