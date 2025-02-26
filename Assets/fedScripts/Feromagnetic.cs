@@ -543,7 +543,6 @@ public class Feromagnetic : MonoBehaviour
                 Vector3 positionCheck = myKey + endPosition + dir;
                 if (v.Key == positionCheck)
                 {
-                    Debug.Log("remove" + (v.Value.transform.InverseTransformPoint(worldEndPosition)));
                     v.Value.GetComponent<Faces>().removeClosestFace((v.Value.transform.InverseTransformPoint(worldEndPosition))); 
                     Vector3 closest = v.Value.transform.position;
                     Vector4 closestHomo = new Vector4(closest.x, closest.y, closest.z, 1);
