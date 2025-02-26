@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 public class Feromagnetic : MonoBehaviour
 {
-    private const float timeBeforeActiveMagnet = 1f;
+    private const float timeBeforeActiveMagnet = 0.01f;
 
 
     // Fero
