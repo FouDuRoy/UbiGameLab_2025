@@ -541,7 +541,6 @@ public class Feromagnetic : MonoBehaviour
             {
 
                 Vector3 positionCheck = myKey + endPosition + dir;
-                Debug.Log("name:" + this.name + "wow:" + positionCheck);
                 if (v.Key == positionCheck)
                 {
                     Debug.Log("remove" + (v.Value.transform.InverseTransformPoint(worldEndPosition)));
@@ -551,7 +550,6 @@ public class Feromagnetic : MonoBehaviour
                     closestHomo = projectionM.inverse * closestHomo;
                     closest = new Vector3(closestHomo.x, closestHomo.y, closestHomo.z);
                     this.transform.GetComponent<Faces>().removeClosestFace(closest);
-                    Debug.Log("remove2" + (closest));
                 }
             }
         }
