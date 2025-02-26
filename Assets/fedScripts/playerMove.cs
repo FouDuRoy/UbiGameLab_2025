@@ -24,6 +24,8 @@ public class PlayerMouvement : MonoBehaviour
     InputAction throwCubes;
     InputAction rotateActionZ;
     [SerializeField] Rigidbody rb;
+    [SerializeField] float rotParam;
+    [SerializeField] float fParam;
     float totalMass;
     
 
@@ -176,18 +178,18 @@ public class PlayerMouvement : MonoBehaviour
     }
     public void addTorque(float rotation)
     {
-        
 
         Vector3 pivotPoint = rb.position;
         if(yLock)
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(0, (speedRotation*rotation)/8f, 0));
+            rb.MoveRotation(rb.rotation * Quaternion.Euler(0, (speedRotation* rotation) / rotParam, 0));
         foreach (GameObject obj in transform.GetComponent<PlayerObjects>().cubes)
         {
             Rigidbody rbb = obj.GetComponent<Rigidbody>();
+             //pivotPoint = rb.position;
 
-              Vector3 radiusVector = rbb.position-pivotPoint;
-              Vector3 rot = Vector3.Cross(radiusVector, Vector3.up).normalized;
-              rbb.AddForce(-rot * rotation * speedRotation);
+            Vector3 radiusVector = rbb.position-pivotPoint;
+              Vector3 rot = Vector3.Cross(radiusVector, Vector3.up);
+              rbb.AddForce(-rot * rotation * speedRotation*fParam);
            
         }
     }

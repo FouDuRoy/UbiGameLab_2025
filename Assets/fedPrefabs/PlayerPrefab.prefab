@@ -95,10 +95,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  speedRotation: 50
+  speedRotation: 20
   playerCharge: 1
   maxSpeed: 0
+  yLock: 1
   rb: {fileID: 1167824399820069016}
+  rotParam: 4
+  fParam: 1
 --- !u!1001 &7246531957243001758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6464162126690629507, guid: d46a7baae2036d84aa35db15ed163ab3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.019
+      value: -5.735
       objectReference: {fileID: 0}
     - target: {fileID: 6464162126690629507, guid: d46a7baae2036d84aa35db15ed163ab3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -161,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6464162126690629507, guid: d46a7baae2036d84aa35db15ed163ab3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.007
+      value: 0.332
       objectReference: {fileID: 0}
     - target: {fileID: 6464162126690629507, guid: d46a7baae2036d84aa35db15ed163ab3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -209,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8404887272317723398, guid: d46a7baae2036d84aa35db15ed163ab3, type: 3}
       propertyPath: m_Mass
-      value: 3
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8404887272317723398, guid: d46a7baae2036d84aa35db15ed163ab3, type: 3}
       propertyPath: m_UseGravity
