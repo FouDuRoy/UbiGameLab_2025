@@ -20,16 +20,18 @@ public class Faces : MonoBehaviour
 
     public Vector3 removeClosestFace(Vector3 face)
     {
-        Vector3 closest = faces[0];
-        foreach(Vector3 v in faces)
-        {
-            float distance = Vector3.Distance(v, face);
-            if (distance< Vector3.Distance(face, closest))
+        Vector3 closest = Vector3.zero; 
+       for (int i = 0; i < faces.Count; i++) 
+        
+       {
+            float distance = Vector3.Distance(faces[i], face);
+            if (distance< 0.01f)
             {
-                closest = v;
+                faces.Remove(faces[i]);
+                return closest;
+                
             }
         }
-        faces.Remove(closest);
-        return closest;
+        return Vector3.zero;
     }
 }

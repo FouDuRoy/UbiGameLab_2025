@@ -7,11 +7,12 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
+using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UIElements;
 
 public class Feromagnetic : MonoBehaviour
 {
-    private const float timeBeforeActiveMagnet = 0f;
+    private const float timeBeforeActiveMagnet = 1f;
 
 
     // Fero
@@ -72,7 +73,7 @@ public class Feromagnetic : MonoBehaviour
         // Set the position of the block and look for all magnetic blocs in range
         if (lerping)
         {
-            if (lerping && (errorP> error || errorR> error) && t<1)
+            if (lerping && (errorP > error || errorR > error) && t < 1)
             {
                 //Once its locked 
                 timer += Time.fixedDeltaTime;
@@ -85,7 +86,7 @@ public class Feromagnetic : MonoBehaviour
                 Vector3 newPosition = Vector3.Lerp(absoluteStartP, absoluteEndPosition, t);
                 Quaternion newRotation = Quaternion.Slerp(absoluteRoatationStart, absoluteEndRotation, t);
                 Vector3 velocity = (newPosition - rb.position) / Time.fixedDeltaTime;
-                
+
                 //update velocity and rotation
                 rb.velocity = velocity;
                 rb.MoveRotation(newRotation);
@@ -93,17 +94,17 @@ public class Feromagnetic : MonoBehaviour
                 errorP = Vector3.Distance(absoluteEndPosition, rb.position);
                 errorR = (absoluteEndRotation.eulerAngles - rb.rotation.eulerAngles).magnitude;
             }
-            else if (errorP<= error && errorR<= error || t>=1)
+            else if (errorP <= error && errorR <= error || t >= 1)
             {
-             //Set location and velocity
-             rb.velocity = Vector3.zero;
-             transform.localPosition = endPosition;
-             transform.localRotation = Quaternion.identity;
+                //Set location and velocity
+                rb.velocity = Vector3.zero;
+                transform.localPosition = endPosition;
+                transform.localRotation = Quaternion.identity;
 
-            //Set parent
-             this.transform.parent = cubeAttractedToTransform.parent;
-           
-             AttachCubeC();
+                //Set parent
+                this.transform.parent = cubeAttractedToTransform.parent;
+
+                AttachCubeC();
             }
         }
         else
@@ -113,7 +114,7 @@ public class Feromagnetic : MonoBehaviour
             List<Collider> magneticC = magnetic.ToList<Collider>();
             rb = this.GetComponent<Rigidbody>();
 
-            foreach(Collider mag in magneticC)
+            foreach (Collider mag in magneticC)
             {
                 if (mag.GetComponent<Faces>().faces.Count == 0)
                 {
@@ -140,8 +141,8 @@ public class Feromagnetic : MonoBehaviour
             {
                 cubeAttractedTo = magnetic[0];
                 closestFace = CalculateClosestFace(relativePosition, cubeAttractedTo.gameObject);
-                
-                float shortDistance = (cubeAttractedTo.transform.TransformPoint( CalculateClosestFace(relativePosition, cubeAttractedTo.gameObject))-transform.position).magnitude;
+
+                float shortDistance = (cubeAttractedTo.transform.TransformPoint(CalculateClosestFace(relativePosition, cubeAttractedTo.gameObject)) - transform.position).magnitude;
                 foreach (Collider col in magnetic)
                 {
                     float distance = (col.transform.TransformPoint(CalculateClosestFace(relativePosition, col.gameObject)) - transform.position).magnitude;
@@ -152,9 +153,9 @@ public class Feromagnetic : MonoBehaviour
                         cubeAttractedTo = col;
                     }
                 }
-          
+
             }
-            
+
         }
     }
     private void AttachCubeC()
@@ -173,26 +174,28 @@ public class Feromagnetic : MonoBehaviour
         // Attach joint
         rb.mass = 1;
         cubeAttractedTo.gameObject.layer = 3;
-        attachJointC();
-       // attachJ();
+        // attachJointC();
+        attachJ();
+
         this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
         transform.parent.GetComponent<PlayerObjects>().cubes.Add(gameObject);
-        Vector3 beforeCorrection = transform.parent.GetComponent<PlayerObjects>()
-            .cubeRb.transform.InverseTransformPoint(this.transform.position);
-        Vector3 corrected = Correct2(beforeCorrection);
-       //transform.parent.GetComponent<PlayerObjects>().cubesHash.Add(corrected, gameObject);
+
+        var myKey = transform.parent.GetComponent<PlayerObjects>().cubesHash.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
+        Vector3 positionP = endPosition + myKey;
+        transform.parent.GetComponent<PlayerObjects>().cubesHash.Add(positionP, gameObject);
         Invoke("setLayer", timeBeforeActiveMagnet);
         this.GetComponent<Feromagnetic>().enabled = false;
-        
+
     }
 
 
     private void setLayer()
     {
+        RemoveFaces();
         gameObject.layer = 3;
     }
 
-  
+
     private void attachJointC()
     {
         Vector3[] Directions = { new Vector3(1, 0, 0), new Vector3(-1, 0, 0), new Vector3(0, 0, 1), new Vector3(0, 0, -1) };
@@ -204,11 +207,11 @@ public class Feromagnetic : MonoBehaviour
             RaycastHit[] hits = Physics.RaycastAll(cubeAttractedTo.transform.TransformPoint(endPosition), cubeAttractedTo.transform.TransformDirection(direction), 0.5f, layerMask, QueryTriggerInteraction.Ignore);
             foreach (RaycastHit hit in hits)
             {
-               
+
                 this.AddComponent<ConfigurableJoint>();
                 ConfigurableJoint[] joints = this.GetComponents<ConfigurableJoint>();
                 ConfigurableJoint joint = joints[i];
-               
+
                 JointDrive xDrive = joint.xDrive;
                 xDrive.positionSpring = mainLinearDrive;
                 xDrive.positionDamper = mainLinearDamp;
@@ -290,9 +293,9 @@ public class Feromagnetic : MonoBehaviour
                 float yPos = positionBeforeCorrection.y;
                 float zPos = positionBeforeCorrection.z;
                 Vector3 correction = Vector3.zero;
-                if(Mathf.Abs(xPos)> Mathf.Abs(yPos) && Mathf.Abs(xPos) > Mathf.Abs(zPos))
+                if (Mathf.Abs(xPos) > Mathf.Abs(yPos) && Mathf.Abs(xPos) > Mathf.Abs(zPos))
                 {
-                    correction.x= 1.2f*Mathf.Sign(xPos);
+                    correction.x = 1.2f * Mathf.Sign(xPos);
                     correction.y = 0;
                     correction.z = 0;
                 }
@@ -300,13 +303,13 @@ public class Feromagnetic : MonoBehaviour
                 {
                     correction.y = 1.2f * Mathf.Sign(yPos);
                     correction.x = 0;
-                    correction.z= 0;
+                    correction.z = 0;
                 }
                 else
                 {
-                    correction.z=1.2f*Mathf.Sign(zPos);
+                    correction.z = 1.2f * Mathf.Sign(zPos);
                     correction.y = 0;
-                    correction.x= 0;
+                    correction.x = 0;
                 }
                 joint.connectedAnchor = correction;
                 if (freeSprings)
@@ -318,12 +321,12 @@ public class Feromagnetic : MonoBehaviour
                     joint.yMotion = ConfigurableJointMotion.Free;
                     joint.zMotion = ConfigurableJointMotion.Free;
                     joint.projectionMode = JointProjectionMode.None;
-                  
+
                 }
                 i++;
             }
-           
-        }        
+
+        }
     }
 
     private void attachJ()
@@ -332,118 +335,121 @@ public class Feromagnetic : MonoBehaviour
         Transform mainCube = cubeAttractedTo.transform.parent.GetComponent<PlayerObjects>().cubeRb.transform;
         Dictionary<Vector3, GameObject> cubesHash = cubeAttractedTo.transform.parent.GetComponent<PlayerObjects>().cubesHash;
         Vector3[] Directions = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f), new Vector3(0, 0, -1.2f) };
+        int i = 0;
+        var myKey = cubesHash.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
         foreach (Vector3 direction in Directions)
         {
-            
-           
-            Vector3 positionCheck = Correct2(mainCube.InverseTransformPoint(this.transform.position))+direction;
+
+
+            Vector3 positionCheck = myKey + endPosition + direction;
             foreach (var v in cubesHash)
             {
-                Debug.Log("key:"+v.Key);
-                Debug.Log("Value:" + positionCheck);
-                Debug.Log(positionCheck == v.Key);
+                if (v.Key == positionCheck)
+                {
+                    GameObject toConnectTo = v.Value;
+                    this.AddComponent<ConfigurableJoint>();
+                    ConfigurableJoint[] joints = this.GetComponents<ConfigurableJoint>();
+                    ConfigurableJoint joint = joints[i];
+
+                    JointDrive xDrive = joint.xDrive;
+                    xDrive.positionSpring = mainLinearDrive;
+                    xDrive.positionDamper = mainLinearDamp;
+                    joint.xDrive = xDrive;
+
+                    JointDrive yDrive = joint.yDrive;
+                    yDrive.positionSpring = secondaryLinearDrive;
+                    yDrive.positionDamper = secondaryLinearDamp;
+                    joint.yDrive = yDrive;
+
+                    JointDrive zDrive = joint.zDrive;
+                    zDrive.positionSpring = secondaryLinearDrive;
+                    zDrive.positionDamper = secondaryLinearDamp;
+                    joint.zDrive = zDrive;
+
+                    JointDrive angularXDrive = joint.angularXDrive;
+                    angularXDrive.positionSpring = mainLinearDrive;
+                    angularXDrive.positionDamper = mainLinearDamp;
+                    joint.angularXDrive = angularXDrive;
+
+                    JointDrive angularYZDrive = joint.angularYZDrive;
+                    angularYZDrive.positionSpring = mainLinearDrive;
+                    angularYZDrive.positionDamper = mainLinearDamp;
+                    joint.angularYZDrive = angularYZDrive;
+
+                    joint.projectionMode = JointProjectionMode.PositionAndRotation;
+                    joint.projectionAngle = 0;
+                    joint.projectionDistance = 0f;
+
+                    joint.angularYMotion = ConfigurableJointMotion.Limited;
+                    joint.angularXMotion = ConfigurableJointMotion.Locked;
+                    joint.angularZMotion = ConfigurableJointMotion.Locked;
+
+                    SoftJointLimit limitAy = new SoftJointLimit();
+                    limitAy.limit = AngleLimit;// angleLimit
+                    joint.angularYLimit = limitAy;
+
+                    Vector3 positionCenter = transform.parent.GetComponent<PlayerObjects>().player.transform.InverseTransformPoint(transform.position);
+                    float xPosition = Mathf.Abs(positionCenter.x);
+                    float yPosition = Mathf.Abs(positionCenter.y);
+                    float zPosition = Mathf.Abs(positionCenter.z);
+
+                    if (xPosition > yPosition && xPosition > zPosition)
+                    {
+                        joint.yMotion = ConfigurableJointMotion.Locked;
+                        joint.xMotion = ConfigurableJointMotion.Limited;
+                        joint.zMotion = ConfigurableJointMotion.Locked;
+                    }
+                    else if (yPosition > xPosition && yPosition > zPosition)
+                    {
+                        joint.yMotion = ConfigurableJointMotion.Limited;
+                        joint.xMotion = ConfigurableJointMotion.Locked;
+                        joint.zMotion = ConfigurableJointMotion.Locked;
+                    }
+                    else if (zPosition > yPosition && zPosition > xPosition)
+                    {
+                        joint.yMotion = ConfigurableJointMotion.Locked;
+                        joint.xMotion = ConfigurableJointMotion.Locked;
+                        joint.zMotion = ConfigurableJointMotion.Limited;
+                    }
+                    else
+                    {
+                        joint.yMotion = ConfigurableJointMotion.Locked;
+                        joint.xMotion = ConfigurableJointMotion.Locked;
+                        joint.zMotion = ConfigurableJointMotion.Locked;
+                    }
+
+                    SoftJointLimit limitX = new SoftJointLimit();
+                    limitX.limit = xLimit;
+                    joint.linearLimit = limitX;
+
+                    joint.enableCollision = true;
+                    joint.connectedBody = toConnectTo.GetComponent<Rigidbody>();
+                    joint.anchor = Vector3.zero;
+                    joint.autoConfigureConnectedAnchor = false;
+
+                    Vector3 positionBeforeCorrection = toConnectTo.transform.InverseTransformPoint(cubeAttractedTo.transform.TransformPoint(endPosition));
+                    Vector3 correction = Correct(positionBeforeCorrection);
+                    joint.connectedAnchor = correction;
+                    if (freeSprings)
+                    {
+                        joint.angularYMotion = ConfigurableJointMotion.Free;
+                        joint.angularXMotion = ConfigurableJointMotion.Free;
+                        joint.angularZMotion = ConfigurableJointMotion.Free;
+                        joint.xMotion = ConfigurableJointMotion.Free;
+                        joint.yMotion = ConfigurableJointMotion.Free;
+                        joint.zMotion = ConfigurableJointMotion.Free;
+                        joint.projectionMode = JointProjectionMode.None;
+
+                    }
+                    i++;
+                }
+
 
             }
-            if (cubesHash.ContainsKey(positionCheck))
-            {
-            }
-       
-        }
-        this.AddComponent<ConfigurableJoint>();
-        ConfigurableJoint joint = this.GetComponent<ConfigurableJoint>();
-
-        JointDrive xDrive = joint.xDrive;
-        xDrive.positionSpring = mainLinearDrive;
-        xDrive.positionDamper = mainLinearDamp;
-        joint.xDrive = xDrive;
-
-        JointDrive yDrive = joint.yDrive;
-        yDrive.positionSpring = secondaryLinearDrive;
-        yDrive.positionDamper = secondaryLinearDamp;
-        joint.yDrive = yDrive;
-
-        JointDrive zDrive = joint.zDrive;
-        zDrive.positionSpring = secondaryLinearDrive;
-        zDrive.positionDamper = secondaryLinearDamp;
-        joint.zDrive = zDrive;
-
-        JointDrive angularXDrive = joint.angularXDrive;
-        angularXDrive.positionSpring = mainLinearDrive;
-        angularXDrive.positionDamper = mainLinearDamp;
-        joint.angularXDrive = angularXDrive;
-
-        JointDrive angularYZDrive = joint.angularYZDrive;
-        angularYZDrive.positionSpring = mainLinearDrive;
-        angularYZDrive.positionDamper = mainLinearDamp;
-        joint.angularYZDrive = angularYZDrive;
-
-        joint.projectionMode = JointProjectionMode.PositionAndRotation;
-        joint.projectionAngle = 0;
-        joint.projectionDistance = 0f;
-
-        joint.angularYMotion = ConfigurableJointMotion.Limited;
-        joint.angularXMotion = ConfigurableJointMotion.Locked;
-        joint.angularZMotion = ConfigurableJointMotion.Locked;
-
-        SoftJointLimit limitAy = new SoftJointLimit();
-        limitAy.limit = AngleLimit;// angleLimit
-        joint.angularYLimit = limitAy;
-
-        Vector3 positionCenter = transform.parent.GetComponent<PlayerObjects>().player.transform.InverseTransformPoint(transform.position);
-        float xPosition = Mathf.Abs(positionCenter.x);
-        float yPosition = Mathf.Abs(positionCenter.y);
-        float zPosition = Mathf.Abs(positionCenter.z);
-
-        if (xPosition > yPosition && xPosition > zPosition)
-        {
-            joint.yMotion = ConfigurableJointMotion.Locked;
-            joint.xMotion = ConfigurableJointMotion.Limited;
-            joint.zMotion = ConfigurableJointMotion.Locked;
-        }
-        else if (yPosition > xPosition && yPosition > zPosition)
-        {
-            joint.yMotion = ConfigurableJointMotion.Limited;
-            joint.xMotion = ConfigurableJointMotion.Locked;
-            joint.zMotion = ConfigurableJointMotion.Locked;
-        }
-        else if (zPosition > yPosition && zPosition > xPosition)
-        {
-            joint.yMotion = ConfigurableJointMotion.Locked;
-            joint.xMotion = ConfigurableJointMotion.Locked;
-            joint.zMotion = ConfigurableJointMotion.Limited;
-        }
-        else
-        {
-            joint.yMotion = ConfigurableJointMotion.Locked;
-            joint.xMotion = ConfigurableJointMotion.Locked;
-            joint.zMotion = ConfigurableJointMotion.Locked;
-        }
-
-        SoftJointLimit limitX = new SoftJointLimit();
-        limitX.limit = xLimit;
-        joint.linearLimit = limitX;
-
-        joint.enableCollision = true;
-        joint.connectedBody = cubeAttractedTo.transform.gameObject.GetComponent<Rigidbody>();
-        joint.anchor = Vector3.zero;
-        joint.autoConfigureConnectedAnchor = false;
-
-        Vector3 positionBeforeCorrection = endPosition;
-        Vector3 correction = Correct(positionBeforeCorrection);
-        joint.connectedAnchor = correction;
-        if (freeSprings)
-        {
-            joint.angularYMotion = ConfigurableJointMotion.Free;
-            joint.angularXMotion = ConfigurableJointMotion.Free;
-            joint.angularZMotion = ConfigurableJointMotion.Free;
-            joint.xMotion = ConfigurableJointMotion.Free;
-            joint.yMotion = ConfigurableJointMotion.Free;
-            joint.zMotion = ConfigurableJointMotion.Free;
-            joint.projectionMode = JointProjectionMode.None;
 
         }
 
-       
+
     }
     public Vector3 Correct(Vector3 positionBeforeCorrection)
     {
@@ -475,10 +481,9 @@ public class Feromagnetic : MonoBehaviour
     public Vector3 Correct2(Vector3 positionBeforeCorrection)
     {
 
-        positionBeforeCorrection = positionBeforeCorrection * 5f;
-        positionBeforeCorrection.x = Mathf.Round(positionBeforeCorrection.x)/5f;
-        positionBeforeCorrection.y = Mathf.Round(positionBeforeCorrection.y) / 5f;
-        positionBeforeCorrection.z = Mathf.Round(positionBeforeCorrection.z) / 5f;
+        positionBeforeCorrection.x = Mathf.Round(positionBeforeCorrection.x / 1.2f) * 1.2f;
+        positionBeforeCorrection.y = Mathf.Round(positionBeforeCorrection.y / 1.2f) * 1.2f;
+        positionBeforeCorrection.z = Mathf.Round(positionBeforeCorrection.z / 1.2f) * 1.2f;
 
 
         return positionBeforeCorrection;
@@ -500,49 +505,63 @@ public class Feromagnetic : MonoBehaviour
 
             //Set parent to attracted cube
             this.transform.parent = cubeAttractedToTransform;
-     
+
             //Start moving towards final position
             lerping = true;
             startPosition = transform.localPosition;
             startRotation = transform.localRotation;
-            endPosition = closestFace; 
+            endPosition = closestFace;
             endRotation = RotationChoice(this.transform.localRotation);
             worldEndPosition = cubeAttractedTo.transform.TransformPoint(endPosition);
 
-            Vector3[] Directions = { new Vector3(1, 0, 0), new Vector3(-1, 0, 0), new Vector3(0, 0, 1), new Vector3(0, 0, -1) };
-            int i = 0;
+
             //Predict position and rotation to find face to remove
-            Matrix4x4 projectionM = Matrix4x4.TRS(cubeAttractedTo.transform.TransformPoint(endPosition),
-            cubeAttractedTo.transform.rotation, transform.lossyScale);
-            Vector4 cubeAtractedPosition = new Vector4(cubeAttractedTo.transform.position.x, cubeAttractedTo.transform.position.y, cubeAttractedTo.transform.position.z, 1);
-            Vector4 faceToRemove4 = projectionM.inverse * cubeAtractedPosition;
-            Vector3 faceToRemove = new Vector3(faceToRemove4.x, faceToRemove4.y, faceToRemove4.z);
+            RemoveFaces();
+        }
 
-            foreach (Vector3 dir in Directions)
+
+    }
+
+    private void RemoveFaces()
+    {
+        Matrix4x4 projectionM = Matrix4x4.TRS(cubeAttractedTo.transform.TransformPoint(endPosition),
+                    cubeAttractedTo.transform.rotation, transform.lossyScale);
+        Vector4 cubeAtractedPosition = new Vector4(cubeAttractedTo.transform.position.x, cubeAttractedTo.transform.position.y, cubeAttractedTo.transform.position.z, 1);
+        Vector4 faceToRemove4 = projectionM.inverse * cubeAtractedPosition;
+        Vector3 faceToRemove = new Vector3(faceToRemove4.x, faceToRemove4.y, faceToRemove4.z);
+
+        Transform mainCube = cubeAttractedTo.transform.parent.GetComponent<PlayerObjects>().cubeRb.transform;
+        Dictionary<Vector3, GameObject> cubesHash = cubeAttractedTo.transform.parent.GetComponent<PlayerObjects>().cubesHash;
+        Vector3[] Directions = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f), new Vector3(0, 0, -1.2f) };
+        var myKey = cubesHash.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
+        foreach (Vector3 dir in Directions)
+        {
+
+            foreach (var v in cubesHash)
             {
-                int layerMask = LayerMask.GetMask("magnetic");
-                RaycastHit[] hits = Physics.RaycastAll(cubeAttractedTo.transform.TransformPoint(endPosition), cubeAttractedTo.transform.TransformDirection(dir), 0.5f, layerMask, QueryTriggerInteraction.Ignore);
 
-                foreach (RaycastHit hit in hits)
+                Vector3 positionCheck = myKey + endPosition + dir;
+                Debug.Log("name:" + this.name + "wow:" + positionCheck);
+                if (v.Key == positionCheck)
                 {
-                  
-                    hit.transform.GetComponent<Faces>().removeClosestFace(hit.transform.InverseTransformPoint(worldEndPosition));
-                    Vector3 closest = hit.transform.position;
+                    Debug.Log("remove" + (v.Value.transform.InverseTransformPoint(worldEndPosition)));
+                    v.Value.GetComponent<Faces>().removeClosestFace((v.Value.transform.InverseTransformPoint(worldEndPosition))); 
+                    Vector3 closest = v.Value.transform.position;
                     Vector4 closestHomo = new Vector4(closest.x, closest.y, closest.z, 1);
                     closestHomo = projectionM.inverse * closestHomo;
                     closest = new Vector3(closestHomo.x, closestHomo.y, closestHomo.z);
-                    this.transform.GetComponent<Faces>().removeClosestFace(closest) ;
+                    this.transform.GetComponent<Faces>().removeClosestFace(closest);
+                    Debug.Log("remove2" + (closest));
                 }
             }
         }
-
-     
     }
+
     private static Vector3 CoulombLaw(Vector3 distance, float charge1, float charge2)
     {
 
         float normSqauredInverse = 1.0f / Mathf.Pow(distance.magnitude, 2);
-        if (normSqauredInverse<30)
+        if (normSqauredInverse < 30)
         {
             return charge1 * charge2 * normSqauredInverse * distance.normalized;
         }
@@ -550,13 +569,13 @@ public class Feromagnetic : MonoBehaviour
         {
             return charge1 * charge2 * 30 * distance.normalized;
         }
-        
+
 
     }
-    private Vector3 CalculateClosestFace(Vector3 relativeDirection,GameObject cubeAtractedTo)
+    private Vector3 CalculateClosestFace(Vector3 relativeDirection, GameObject cubeAtractedTo)
     {
         List<Vector3> faces = cubeAtractedTo.GetComponent<Faces>().faces;
-        if(faces.Count != 0)
+        if (faces.Count != 0)
         {
             Vector3 direction = faces.First<Vector3>();
 
@@ -570,13 +589,13 @@ public class Feromagnetic : MonoBehaviour
             return direction;
         }
         return Vector3.zero;
-    }  
+    }
     private Quaternion RotationChoice(Quaternion blocRotation)
     {
-       
+
 
         Quaternion direction = quaternions[0];
-        
+
         foreach (Quaternion dir in quaternions)
         {
             if (Quaternion.Angle(blocRotation, direction) > Quaternion.Angle(blocRotation, dir))
@@ -588,7 +607,7 @@ public class Feromagnetic : MonoBehaviour
     }
     public List<Quaternion> createListAngles()
     {
-        List<Quaternion> list = new List<Quaternion> ();
+        List<Quaternion> list = new List<Quaternion>();
         for (int i = 0; i <= 4; i++)
         {
             for (int j = 0; j <= 4; j++)
