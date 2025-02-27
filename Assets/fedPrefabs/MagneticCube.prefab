@@ -14,9 +14,11 @@ GameObject:
   - component: {fileID: 6691133210658326815}
   - component: {fileID: 5355365516190511092}
   - component: {fileID: 6205908960855129542}
-  m_Layer: 0
+  - component: {fileID: -4726244708395997180}
+  - component: {fileID: 6950955270905734173}
+  m_Layer: 6
   m_Name: MagneticCube
-  m_TagString: Untagged
+  m_TagString: magnetic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,8 +118,8 @@ Rigidbody:
   m_GameObject: {fileID: 5694876674060920943}
   serializedVersion: 4
   m_Mass: 10
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.5
+  m_AngularDrag: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -146,11 +148,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 100
-  charge: 30
-  minimalAlignment: 0.1
-  minimalDistance: 0.5
-  minimalAngle: 5
+  passiveRadius: 1
+  activeRadius: 2
+  charge: 10
+  distanceLerp: 0.45
+  autoMagError: 0.03
   useLerp: 1
   interpolates: 1
   deltaLerp: 0.2
+  spacingBetweenCubes: 0.2
+--- !u!114 &-4726244708395997180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694876674060920943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938de9ffb991a1d47943c62d0f4c9700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimalSpeed: 0.5
+  owner: 
+--- !u!114 &6950955270905734173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694876674060920943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1095d4e3a74d47e4b9c0de096fc5d84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
