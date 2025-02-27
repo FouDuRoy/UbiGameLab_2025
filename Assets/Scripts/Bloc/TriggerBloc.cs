@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerCube : MonoBehaviour
+public class TriggerBloc : MonoBehaviour
 {
-    private Cube cubeComponent;
+    private Bloc cubeComponent;
 
     void Start()
     {
-        cubeComponent = GetComponent<Cube>(); // Cache component for performance
+        cubeComponent = GetComponent<Bloc>(); // Cache component for performance
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -20,12 +20,12 @@ public class TriggerCube : MonoBehaviour
         {
             PlayerInfo playerInfo = collision.gameObject.GetComponent<PlayerInfo>();
 
-            if (other.GetComponent<Cube>() != null)
+            if (other.GetComponent<Bloc>() != null)
             {
-                if (other.GetComponent<Cube>().owner != "Neutral" && other.GetComponent<Cube>().owner != "" &&
+                if (other.GetComponent<Bloc>().owner != "Neutral" && other.GetComponent<Bloc>().owner != "" &&
                    cubeComponent.owner != "Neutral" && cubeComponent.owner != "")
                 {
-                    if (cubeComponent.owner != other.GetComponent<Cube>().owner)
+                    if (cubeComponent.owner != other.GetComponent<Bloc>().owner)
                     {
                         Destroy(other.gameObject);
                         Destroy(this.gameObject);

@@ -96,7 +96,7 @@ public class PlayerMouvement : MonoBehaviour
         yield return new WaitForSeconds(3f);
         if(block !=null)
         {
-            block.GetComponent<Cube>().setOwner("Neutral");
+            block.GetComponent<Bloc>().setOwner("Neutral");
         }
        
     }

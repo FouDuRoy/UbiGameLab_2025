@@ -170,7 +170,7 @@ public class Feromagnetic : MonoBehaviour
         gameObject.layer = 3;
 
         GameObject.Destroy(this.GetComponent<Rigidbody>());
-        this.GetComponent<Cube>().setOwner(this.transform.parent.gameObject.name);
+        this.GetComponent<Bloc>().setOwner(this.transform.parent.gameObject.name);
         transform.parent.GetComponent<PlayerObjects>().cubes.Add(gameObject);
         this.GetComponent<Feromagnetic>().enabled = false;
     }

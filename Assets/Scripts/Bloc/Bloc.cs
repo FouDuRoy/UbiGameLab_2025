@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube : MonoBehaviour
+public class Bloc : MonoBehaviour
 {
     [SerializeField] float minimalSpeed = 0.5f;
     public string owner;
