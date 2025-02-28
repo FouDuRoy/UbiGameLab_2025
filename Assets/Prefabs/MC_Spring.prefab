@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 9185811416192097535}
   - component: {fileID: 4167153713182681057}
   m_Layer: 6
-  m_Name: MagneticCube (11)
+  m_Name: MC_Spring
   m_TagString: magnetic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,9 +118,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6515478394461614388}
   serializedVersion: 4
-  m_Mass: 10
-  m_Drag: 1
-  m_AngularDrag: 1
+  m_Mass: 0.1
+  m_Drag: 5
+  m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -136,7 +136,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 84
-  m_CollisionDetection: 3
+  m_CollisionDetection: 0
 --- !u!114 &2341062450622316672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,15 +149,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xLimit: 0
+  AngleLimit: 3
   passiveRadius: 1
   activeRadius: 2
   charge: 10
-  distanceLerp: 0.45
-  autoMagError: 0.03
-  useLerp: 1
+  error: 0.55
   interpolates: 1
   deltaLerp: 0.2
   spacingBetweenCubes: 0.1
+  moveTime: 0.1
+  freeSprings: 0
+  useSprings: 1
+  mainLinearDrive: 1000
+  mainLinearDamp: 50
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 10
+  angularDrive: 5000
+  angularDamp: 10
 --- !u!114 &6873425469701635572
 MonoBehaviour:
   m_ObjectHideFlags: 0

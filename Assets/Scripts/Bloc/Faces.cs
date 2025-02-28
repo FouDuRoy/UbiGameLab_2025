@@ -27,6 +27,7 @@ public class Faces : MonoBehaviour
             float distance = Vector3.Distance(faces[i], face);
             if (distance< 0.01f)
             {
+                closest = faces[i];
                 faces.Remove(faces[i]);
                 return closest;
                 

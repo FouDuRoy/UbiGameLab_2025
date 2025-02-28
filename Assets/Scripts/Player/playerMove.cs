@@ -52,7 +52,8 @@ public class PlayerMouvement : MonoBehaviour
         }
         else if (springMode)
         {
-            CalculateCenterMassForce(new Vector3(direction.x,0, direction.y));
+            // CalculateCenterMassForce(new Vector3(direction.x,0, direction.y));
+            rb.AddForceAtPosition(new Vector3(direction.x, 0, direction.y) * speed, CalculateCenterMass());
             addTorque(rotation);
         }
         else

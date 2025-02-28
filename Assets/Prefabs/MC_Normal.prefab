@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6950955270905734173}
   - component: {fileID: -2015588491079092952}
   m_Layer: 6
-  m_Name: MagneticCube
+  m_Name: MC_Normal
   m_TagString: magnetic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 84
-  m_CollisionDetection: 3
+  m_CollisionDetection: 0
 --- !u!114 &6205908960855129542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,23 +149,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xLimit: 0
-  AngleLimit: 0
-  passiveRadius: 1
+  passiveRadius: 2
   activeRadius: 2
-  charge: 10
-  error: 0.05
+  charge: 1
+  error: 0.1
   interpolates: 1
   deltaLerp: 0.2
   spacingBetweenCubes: 0.2
   moveTime: 0.1
+  maxForceAttraction: 30
+  springType: 0
+  lerpingType: 0
   freeSprings: 0
-  mainLinearDrive: 1000
-  mainLinearDamp: 50
+  useSprings: 0
+  xLimit: 0
+  AngleLimit: 3
+  mainLinearDrive: 5e+12
+  mainLinearDamp: 10000
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
-  angularDrive: 5000
-  angularDamp: 100
+  secondaryLinearDamp: 10
+  angularDrive: 5e+12
+  angularDamp: 100000000
 --- !u!114 &-4726244708395997180
 MonoBehaviour:
   m_ObjectHideFlags: 0
