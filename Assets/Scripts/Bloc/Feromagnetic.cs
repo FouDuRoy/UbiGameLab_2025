@@ -31,8 +31,6 @@ public class Feromagnetic : MonoBehaviour
     //Joint settings
     [SerializeField] SpringType springType;
     [SerializeField] LerpingType lerpingType;
-    [SerializeField] bool freeSprings = false;
-    [SerializeField] bool useSprings = false;
     [SerializeField] float xLimit = 0f;
     [SerializeField] float AngleLimit = 0f;
     [SerializeField] float mainLinearDrive = 1000f;
