@@ -118,7 +118,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5694876674060920943}
   serializedVersion: 4
-  m_Mass: 0.1
+  m_Mass: 0.001
   m_Drag: 5
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -151,25 +151,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passiveRadius: 2
   activeRadius: 2
-  charge: 1
-  error: 0.1
+  charge: 0.25
+  error: 0.05
   interpolates: 1
-  deltaLerp: 0.2
+  timeLerpingTransform: 0.1
   spacingBetweenCubes: 0.2
-  moveTime: 0.1
+  moveTime: 0.15
   maxForceAttraction: 30
+  lerpingDistance: 1
   springType: 0
-  lerpingType: 0
+  lerpingType: 1
   freeSprings: 0
   useSprings: 0
   xLimit: 0
   AngleLimit: 3
-  mainLinearDrive: 5e+12
-  mainLinearDamp: 10000
-  secondaryLinearDrive: 5000
-  secondaryLinearDamp: 10
-  angularDrive: 5e+12
-  angularDamp: 100000000
+  mainLinearDrive: 10000
+  mainLinearDamp: 100
+  secondaryLinearDrive: 10000
+  secondaryLinearDamp: 100
+  angularDrive: 10000
+  angularDamp: 100
 --- !u!114 &-4726244708395997180
 MonoBehaviour:
   m_ObjectHideFlags: 0

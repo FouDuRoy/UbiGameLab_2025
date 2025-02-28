@@ -15,8 +15,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float speedRotation = 1f;
     [SerializeField] float playerCharge = 1000f;
     [SerializeField] float rotParam;
-    [SerializeField] bool rgBodyMouvement;
-    [SerializeField] bool springMode;
+    [SerializeField] MouvementType moveType;
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction rotateAction;
@@ -24,6 +23,7 @@ public class PlayerMouvement : MonoBehaviour
     InputAction rotateActionZ;
     Rigidbody rb;
     float totalMass;
+    
 
 
     void Start()
@@ -34,29 +34,30 @@ public class PlayerMouvement : MonoBehaviour
         throwCubes = playerInput.actions.FindAction("ThrowCubes");
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
         rb = this.GetComponent<PlayerObjects>().cubeRb;
-        
-        
-       
+        if (moveType == MouvementType.rigidBody)
+        {
+            rb.centerOfMass = Vector3.zero;
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 direction = moveAction.ReadValue<Vector2>();
+        Vector2 direction2 = moveAction.ReadValue<Vector2>();
+        Vector3 direction = new Vector3(direction2.x, 0, direction2.y);
         float rotation = rotateAction.ReadValue<float>();
         float rotationZ = rotateActionZ.ReadValue<float>();
-        
-        if (rgBodyMouvement)
+    
+        if (moveType == MouvementType.rigidBody)
         {
             RigidBodyMouvement(direction, rotation);
         }
-        else if (springMode)
+        else if (moveType == MouvementType.spring)
         {
-            // CalculateCenterMassForce(new Vector3(direction.x,0, direction.y));
-            rb.AddForceAtPosition(new Vector3(direction.x, 0, direction.y) * speed, CalculateCenterMass());
-            addTorque(rotation);
+            rb.AddForceAtPosition(direction * speed, CalculateCenterMass());
+            rb.AddTorque(Vector3.up * rotation * speedRotation,ForceMode.Force);
         }
-        else
+        else if (moveType == MouvementType.transform)
         {
             TranslateMouvement(direction, rotation);
         }
@@ -66,14 +67,14 @@ public class PlayerMouvement : MonoBehaviour
 
     }
 
-    private void TranslateMouvement(Vector2 direction, float rotation)
+    private void TranslateMouvement(Vector3 direction, float rotation)
     {
-        transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
-        transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime, Space.World);
+        transform.position += direction * speed * Time.fixedDeltaTime;
+        transform.Rotate(Vector3.up, rotation * speedRotation * Time.fixedDeltaTime, Space.World);
     }
-    private void RigidBodyMouvement(Vector2 direction, float rotation) {
-        rb.AddForce(new Vector3(direction.x, 0, direction.y) * speed);
-        addTorqueSingle(rotation);
+    private void RigidBodyMouvement(Vector3 direction, float rotation) {
+        rb.AddForce(direction * speed);
+        rb.AddTorque(Vector3.up * rotation * speedRotation);
     }
 
     private void ThrowCubes()
@@ -141,6 +142,19 @@ public class PlayerMouvement : MonoBehaviour
         return center;
 
     }
+    public Vector3 geometricCenter()
+    {
+        Vector3 center = Vector3.zero;
+        foreach (GameObject obj in transform.GetComponent<PlayerObjects>().cubes)
+        {
+            center += obj.transform.position;
+        }
+        center = center / transform.GetComponent<PlayerObjects>().cubes.Count;
+        center = rb.transform.InverseTransformPoint(center);
+       // Debug.Log(center);
+        return center;
+       
+    }
     public void CalculateCenterMassForce(Vector3 LocalForceDirection)
     {
         Vector3 centerMass = CalculateCenterMass();
@@ -169,21 +183,7 @@ public class PlayerMouvement : MonoBehaviour
     }
     public void addTorqueSingle(float rotation)
     {
-        
-        Vector3 pivotPoint = rb.position;
         rb.AddTorque(Vector3.up * rotation * speedRotation);
-      foreach (Transform child in gameObject.GetComponentsInChildren<Transform>())
-        {
-            if(transform.root != child)
-            {
-                Vector3 radiusVector = child.position - pivotPoint;
-                Vector3 rot = Vector3.Cross(radiusVector, Vector3.up);
-                rb.AddForceAtPosition(-rot * rotation * speedRotation, child.transform.position);
-            }
-            
-        }
-      
-
     }
 
 }
