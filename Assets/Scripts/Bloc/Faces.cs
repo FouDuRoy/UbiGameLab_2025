@@ -11,9 +11,7 @@ public class Faces : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float cubeSize = 1f + spacingBetweenCubes;
-        Vector3[] face ={ new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0) , new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize) };
-        faces = face.ToList();
+        resetFaces();
     }
 
     // Update is called once per frame
@@ -34,5 +32,10 @@ public class Faces : MonoBehaviour
             }
         }
         return Vector3.zero;
+    }
+    public void resetFaces(){
+         float cubeSize = 1f + spacingBetweenCubes;
+        Vector3[] face ={ new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0) , new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize) };
+        faces = face.ToList();
     }
 }

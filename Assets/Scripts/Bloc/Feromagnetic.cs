@@ -82,7 +82,6 @@ public class Feromagnetic : MonoBehaviour
             Transform mainBodyCube = parentObject.GetComponent<PlayerObjects>().cubeRb.transform;
             Vector3 positionFromMainBody = myKey+closestFace;
             inHash = HashContainsKey(parentObject.GetComponent<PlayerObjects>().cubesHash, positionFromMainBody);
-            
         }
          if (inHash)
         {
@@ -282,6 +281,9 @@ private void TransformLerping()
         Vector3 positionRelativeToMainCube = endPosition + myKey;
         transform.root.GetComponent<PlayerObjects>().cubesHash.Add(positionRelativeToMainCube, gameObject);
         Invoke("setLayer", timeBeforeActiveMagnet);
+
+        //reset
+       
         this.GetComponent<Feromagnetic>().enabled = false;
 
     }
@@ -290,7 +292,15 @@ private void TransformLerping()
     private void setLayer()
     {
         RemoveFacesClean();
+         lerping = false;
+        this.cubeRB = null;
+        this.endPosition = Vector3.zero;
+        this.cubeAttractedTo = null;
+        this.cubeAttractedToTransform = null;
+        this.timer = 0;
+        this.t = 0;
         gameObject.layer = 3;
+         storedFaces = new Dictionary<GameObject, List<Vector3>>();
     }
 
 

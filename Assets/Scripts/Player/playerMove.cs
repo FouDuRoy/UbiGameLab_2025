@@ -1,12 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Callbacks;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Switch;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerMouvement : MonoBehaviour
 {
@@ -43,14 +50,15 @@ public class PlayerMouvement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 direction2 = moveAction.ReadValue<Vector2>();
-        Vector3 direction = new Vector3(direction2.x, 0, direction2.y);
+        Vector3 direction2 = moveAction.ReadValue<Vector3>();
+        Vector3 direction = new Vector3(direction2.x,0,direction2.y);
         float rotation = rotateAction.ReadValue<float>();
         float rotationZ = rotateActionZ.ReadValue<float>();
     
         if (moveType == MouvementType.rigidBody)
         {
-            RigidBodyMouvement(direction, rotation);
+            //RigidBodyMouvement(direction, rotation);
+            rotateAndDirection(direction);
         }
         else if (moveType == MouvementType.spring)
         {
@@ -82,8 +90,11 @@ public class PlayerMouvement : MonoBehaviour
         if (throwCubes.ReadValue<float>() == 1)
         {
             List<GameObject> cubes = GetComponent<PlayerObjects>().cubes;
+            Dictionary<Vector3,GameObject> cubeGrid = GetComponent<PlayerObjects>().cubesHash;
             foreach (GameObject cube in cubes)
             {
+                cube.GetComponent<Faces>().resetFaces();
+                if(cube != this.rb.gameObject){
                 cube.gameObject.layer = 0;
                 cube.transform.parent = this.transform.parent;
                 GameObject.Destroy(cube.GetComponent<SphereCollider>());
@@ -91,7 +102,7 @@ public class PlayerMouvement : MonoBehaviour
                 //Add rigidBody
                 cube.AddComponent<Rigidbody>();
                 Rigidbody rb = cube.GetComponent<Rigidbody>();
-                Rigidbody rb2 = GetComponent<PlayerObjects>().cubeRb;
+                Rigidbody rb2 = GetComponent<PlayerObjects>().passiveCube.GetComponent<Rigidbody>();
                 rb.mass = rb2.mass;
                 rb.drag = rb2.drag;
                 rb.angularDrag = rb2.angularDrag;
@@ -102,12 +113,18 @@ public class PlayerMouvement : MonoBehaviour
 
 
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-                cube.GetComponent<Rigidbody>().AddExplosionForce(10000, this.transform.position, playerCharge);
+                cube.GetComponent<Rigidbody>().AddExplosionForce(30, this.rb.position, playerCharge);
 
                 //Remove owner of cube
                 StartCoroutine(blockNeutral(cube));
+                }
+                
             }
             cubes.Clear();
+            cubes.Add(this.rb.gameObject);
+            cubeGrid.Clear();
+            cubeGrid.Add(Vector3.zero,this.rb.gameObject);
+
         }
     }
 
@@ -184,6 +201,17 @@ public class PlayerMouvement : MonoBehaviour
     public void addTorqueSingle(float rotation)
     {
         rb.AddTorque(Vector3.up * rotation * speedRotation);
+    }
+    public void rotateAndDirection(Vector3 direction){
+        rb.AddForce(rb.transform.forward*direction.magnitude*speed);
+        Quaternion initialRotation = rb.rotation;
+        float angle = Vector3.SignedAngle(rb.transform.forward,direction.normalized,Vector3.up);
+        Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*speedRotation;
+        Debug.Log(direction);
+       // rb.MoveRotation(finalRotation);
+        rb.angularVelocity =angularVelocity;
+      //  rb.AddTorque(angularVelocity);
+
     }
 
 }

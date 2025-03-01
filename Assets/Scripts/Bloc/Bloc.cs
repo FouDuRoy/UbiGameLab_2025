@@ -6,7 +6,7 @@ public class Bloc : MonoBehaviour
 {
     [SerializeField] float minimalSpeed = 0.5f;
     public string owner;
-    private Rigidbody rb;
+    public Rigidbody rb;
     //private bool activeMagnetism = true;
 
     void Start()

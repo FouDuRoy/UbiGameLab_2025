@@ -10,6 +10,8 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] public Dictionary<Vector3, GameObject> cubesHash = new Dictionary<Vector3, GameObject>();
     [SerializeField] public GameObject player;
     [SerializeField] public Rigidbody cubeRb;
+
+    [SerializeField] public GameObject passiveCube;
     void Start()
     {
 

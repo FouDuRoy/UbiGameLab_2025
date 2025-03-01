@@ -1,5 +1,5 @@
 {
-    "name": "fedInputs",
+    "name": "playerInputs",
     "maps": [
         {
             "name": "Mouvement",
@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "55973047-0a7e-419d-aee5-48d41513e38d",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -44,9 +44,9 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "3D Vector",
                     "id": "412a402d-b1db-4967-a58c-28f7982e1fc8",
-                    "path": "2DVector",
+                    "path": "3DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -55,7 +55,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "Up",
                     "id": "4d4317c2-e622-4b95-98bb-aa3c8b6b9046",
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
@@ -66,7 +66,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
+                    "name": "Down",
                     "id": "baf2ac0d-4a36-447b-8144-89f904a6a30a",
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
@@ -77,7 +77,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
+                    "name": "Left",
                     "id": "61741e7c-a65c-4b6e-b529-48802e4e5935",
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
@@ -88,12 +88,34 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
+                    "name": "Right",
                     "id": "23662a3d-f48d-4dd4-b388-a2efd7b165b3",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad;Player1;Player2",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Forward",
+                    "id": "de20553c-32e5-4070-a5e2-7f16485a85b8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Backward",
+                    "id": "ff236802-25cd-45c3-bb4a-892b4fb6544b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -165,7 +187,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
+                    "name": "Negative",
                     "id": "bc36490f-6371-4803-8950-671be39f0faf",
                     "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
@@ -176,7 +198,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
+                    "name": "Positive",
                     "id": "4c54036c-9d6d-4a4e-a14d-df45acf021cd",
                     "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
