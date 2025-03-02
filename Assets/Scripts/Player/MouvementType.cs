@@ -2,5 +2,5 @@
 
 public enum MouvementType
 {
-	rigidBody,transform,spring
+	rigidBody,transform,spring,move3d
 }
