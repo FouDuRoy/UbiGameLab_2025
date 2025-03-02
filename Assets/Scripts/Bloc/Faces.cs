@@ -35,7 +35,8 @@ public class Faces : MonoBehaviour
     }
     public void resetFaces(){
          float cubeSize = 1f + spacingBetweenCubes;
-        Vector3[] face ={ new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0) , new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize) };
+        Vector3[] face ={ new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0) , 
+        new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize), new Vector3(0, cubeSize, 0), new Vector3(0, -cubeSize, 0)};
         faces = face.ToList();
     }
 }

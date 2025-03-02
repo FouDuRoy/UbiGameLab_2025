@@ -57,6 +57,9 @@ public class Feromagnetic : MonoBehaviour
     Quaternion startRotation;
     List<Quaternion> quaternions;
 
+    Vector3[] directionsList = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f)
+    , new Vector3(0, 0, -1.2f),new Vector3(0,1.2f,0),new Vector3(0,-1.2f,0) };
+
     float cubeSize = 0.5f;
     float errorP = 1;
     float errorR = 1;
@@ -259,8 +262,8 @@ private void TransformLerping()
         //Set rigidBody constraints
         cubeRB.mass = 1;
         cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
-        cubeRB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-
+       // cubeRB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        
         if (springType==SpringType.Free || springType == SpringType.Limited)
         {
             attachJ();
@@ -311,10 +314,9 @@ private void TransformLerping()
 
         Transform mainCube = cubeAttractedToTransform.parent.GetComponent<PlayerObjects>().cubeRb.transform;
         Dictionary<Vector3, GameObject> cubeGrid = cubeAttractedToTransform.parent.GetComponent<PlayerObjects>().cubesHash;
-        Vector3[] Directions = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f), new Vector3(0, 0, -1.2f) };
         int i = 0;
         var attractedCubePositionRelativeToMainBody = cubeGrid.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
-        foreach (Vector3 direction in Directions)
+        foreach (Vector3 direction in directionsList)
         {
             //Supposing all same orientation
             Vector3 cubePositionRelativeToMainCube = attractedCubePositionRelativeToMainBody + endPosition;
@@ -442,10 +444,9 @@ private void TransformLerping()
 
         Transform mainCube = cubeAttractedToTransform.parent.GetComponent<PlayerObjects>().cubeRb.transform;
         Dictionary<Vector3, GameObject> cubeGrid = cubeAttractedToTransform.parent.GetComponent<PlayerObjects>().cubesHash;
-        Vector3[] Directions = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f), new Vector3(0, 0, -1.2f) };
         int i = 0;
         var attractedCubePositionRelativeToMainBody = cubeGrid.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
-        foreach (Vector3 direction in Directions)
+        foreach (Vector3 direction in directionsList)
         {
             //Supposing all same orientation
             Vector3 cubePositionRelativeToMainCube = attractedCubePositionRelativeToMainBody + endPosition;
@@ -662,10 +663,9 @@ private void TransformLerping()
         //Look if the face is there are other cubes adjacent to our cube
         Transform mainCube = transform.root.GetComponent<PlayerObjects>().cubeRb.transform;
         Dictionary<Vector3, GameObject> cubeGrid = transform.root.GetComponent<PlayerObjects>().cubesHash;
-        Vector3[] Directions = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f), new Vector3(0, 0, -1.2f) };
         Vector3 attractedCubePositionRelativeToMainBody = cubeGrid.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
         List<Vector3> myCubeFaceList = new List<Vector3>();
-        foreach (Vector3 dir in Directions)
+        foreach (Vector3 dir in directionsList)
         {
             foreach (var v in cubeGrid)
             {
@@ -704,10 +704,9 @@ private void TransformLerping()
         //Look if the face is there are other cubes adjacent to our cube
         Transform mainCube = transform.root.GetComponent<PlayerObjects>().cubeRb.transform;
         Dictionary<Vector3, GameObject> cubeGrid = transform.root.GetComponent<PlayerObjects>().cubesHash;
-        Vector3[] Directions = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f), new Vector3(0, 0, -1.2f) };
         Vector3 attractedCubePositionRelativeToMainBody = cubeGrid.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
         
-        foreach (Vector3 dir in Directions)
+        foreach (Vector3 dir in directionsList)
         {
             foreach (var v in cubeGrid)
             {

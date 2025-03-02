@@ -22,6 +22,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float speedRotation = 1f;
     [SerializeField] float playerCharge = 1000f;
     [SerializeField] float rotParam;
+    [SerializeField] float rotationDamping =10f;
     [SerializeField] MouvementType moveType;
     PlayerInput playerInput;
     InputAction moveAction;
@@ -52,6 +53,7 @@ public class PlayerMouvement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+       // planeOrientation.transform.rotation = Quaternion.Euler(0,rb.rotation.eulerAngles.y,0);
         Vector3 direction2 = moveAction.ReadValue<Vector3>();
         Vector3 direction = new Vector3(direction2.x,0,direction2.y);
         float rotationY = rotateAction.ReadValue<float>();
@@ -72,9 +74,14 @@ public class PlayerMouvement : MonoBehaviour
         {
             TranslateMouvement(direction, rotationY);
         }else if(moveType == MouvementType.move3d){
+            rb.AddForce(direction * speed);
             rotateAndDirection(direction);
             rotateXandZ(rotationX,rotationZ);
             
+        }else if (moveType == MouvementType.move3dSpring){
+            rb.AddForceAtPosition(direction * speed,CalculateCenterMass());
+            rotateAndDirection(direction);
+            rotateXandZ(rotationX,rotationZ);
         }
 
         ThrowCubes();
@@ -209,20 +216,28 @@ public class PlayerMouvement : MonoBehaviour
         rb.AddTorque(Vector3.up * rotation * speedRotation);
     }
     public void rotateAndDirection(Vector3 direction){
-        rb.AddForce(direction * speed);
+        
         Quaternion initialRotation = rb.rotation;
-        float angle = Vector3.SignedAngle(rb.transform.forward,direction.normalized,Vector3.up);
+        Vector3 planeProjection = Vector3.ProjectOnPlane(rb.transform.forward,Vector3.up);
+       // float angle = Vector3.SignedAngle(planeOrientation.transform.forward,direction.normalized,Vector3.up);
+        float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*speedRotation;
        // rb.MoveRotation(finalRotation);
-       // rb.angularVelocity =angularVelocity;
-        rb.AddTorque(angularVelocity);
-        rb.AddTorque(-rb.angularVelocity*10f);
+        //rb.angularVelocity =angularVelocity;
+      // rb.AddTorque(angularVelocity);
+       //rb.AddTorque(-rb.angularVelocity*10f);
+       rb.AddTorque(angularVelocity);
+       rb.AddTorque(-rb.angularVelocity*rotationDamping);
     }
     public void rotateXandZ(float xValue, float zValue){
-        Vector3 xVector = new Vector3(xValue*speedRotation,0,0);
-        Vector3 zVector = new Vector3(0,0,zValue*speedRotation);
-        rb.AddTorque(xVector);
-        rb.AddTorque(zVector);
+        if(Mathf.Abs(xValue)>=Mathf.Abs(zValue)){
+           rb.AddRelativeTorque(Vector3.right*xValue*speedRotation);
+          // rb.angularVelocity+=Vector3.right*xValue*speedRotation;
+        }else{
+          rb.AddRelativeTorque(Vector3.forward*zValue*speedRotation);
+          //rb.angularVelocity+=Vector3.forward*zValue*speedRotation;
+        }
+      
     }
 
 }
