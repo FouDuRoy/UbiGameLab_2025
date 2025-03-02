@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 
@@ -23,5 +24,28 @@ public class PlayerObjects : MonoBehaviour
     void Update()
     {
      
+    }
+    public bool removeCube(GameObject cube){
+        cube.transform.parent = transform.parent;
+        cube.GetComponent<Faces>().resetFaces();
+        cubes.Remove(cube);
+        cube.layer=0;
+        foreach(var v in cubesHash){
+            if(v.Value == cube){
+                return cubesHash.Remove(v.Key);
+            }
+        }
+    return false;        
+    }
+    public void addRigidBody(GameObject cube){
+                cube.AddComponent<Rigidbody>();
+                Rigidbody rb = cube.GetComponent<Rigidbody>();
+                Rigidbody rb2 = passiveCube.GetComponent<Rigidbody>();
+                rb.mass = rb2.mass;
+                rb.drag = rb2.drag;
+                rb.angularDrag = rb2.angularDrag;
+                rb.collisionDetectionMode = rb2.collisionDetectionMode;
+                rb.useGravity = rb2.useGravity;
+                rb.constraints = rb2.constraints;
     }
 }

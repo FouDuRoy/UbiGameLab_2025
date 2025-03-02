@@ -114,16 +114,7 @@ public class PlayerMouvement : MonoBehaviour
                 GameObject.Destroy(cube.GetComponent<SphereCollider>());
 
                 //Add rigidBody
-                cube.AddComponent<Rigidbody>();
-                Rigidbody rb = cube.GetComponent<Rigidbody>();
-                Rigidbody rb2 = GetComponent<PlayerObjects>().passiveCube.GetComponent<Rigidbody>();
-                rb.mass = rb2.mass;
-                rb.drag = rb2.drag;
-                rb.angularDrag = rb2.angularDrag;
-                rb.collisionDetectionMode = rb2.collisionDetectionMode;
-                rb.useGravity = rb2.useGravity;
-                rb.constraints = rb2.constraints;
-
+                GetComponent<PlayerObjects>().addRigidBody(cube);
 
 
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
@@ -219,23 +210,16 @@ public class PlayerMouvement : MonoBehaviour
         
         Quaternion initialRotation = rb.rotation;
         Vector3 planeProjection = Vector3.ProjectOnPlane(rb.transform.forward,Vector3.up);
-       // float angle = Vector3.SignedAngle(planeOrientation.transform.forward,direction.normalized,Vector3.up);
         float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*speedRotation;
-       // rb.MoveRotation(finalRotation);
-        //rb.angularVelocity =angularVelocity;
-      // rb.AddTorque(angularVelocity);
-       //rb.AddTorque(-rb.angularVelocity*10f);
        rb.AddTorque(angularVelocity);
        rb.AddTorque(-rb.angularVelocity*rotationDamping);
     }
     public void rotateXandZ(float xValue, float zValue){
         if(Mathf.Abs(xValue)>=Mathf.Abs(zValue)){
            rb.AddRelativeTorque(Vector3.right*xValue*speedRotation);
-          // rb.angularVelocity+=Vector3.right*xValue*speedRotation;
         }else{
           rb.AddRelativeTorque(Vector3.forward*zValue*speedRotation);
-          //rb.angularVelocity+=Vector3.forward*zValue*speedRotation;
         }
       
     }
