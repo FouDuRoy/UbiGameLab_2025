@@ -22,6 +22,9 @@ public class BlocEjection : MonoBehaviour
         
         GameObject hitter= collision.collider.gameObject;
         GameObject hitted = collision.GetContact(0).thisCollider.gameObject;
+        foreach(ContactPoint p in collision.contacts){
+            Debug.Log(p.thisCollider.gameObject);
+        }
         if(hitted.transform.parent==transform){
             Vector3 relativeVelocity = collision.relativeVelocity;
             if(relativeVelocity.magnitude> velocityTreshold){

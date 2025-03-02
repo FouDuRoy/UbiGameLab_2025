@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Switch;
+using Matrix4x4 = UnityEngine.Matrix4x4;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -18,12 +19,14 @@ using Vector3 = UnityEngine.Vector3;
 public class PlayerMouvement : MonoBehaviour
 {
     private const float collisionDistance = 0.1f;
+    [SerializeField] float explosionForce = 30;
     [SerializeField] float speed = 1f;
     [SerializeField] float speedRotation = 1f;
     [SerializeField] float playerCharge = 1000f;
     [SerializeField] float rotParam;
     [SerializeField] float rotationDamping =10f;
     [SerializeField] MouvementType moveType;
+    [SerializeField] GameObject reff;
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction rotateAction;
@@ -44,9 +47,10 @@ public class PlayerMouvement : MonoBehaviour
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
         rotateActionX = playerInput.actions.FindAction("RotateX");
         rb = this.GetComponent<PlayerObjects>().cubeRb;
-        if (moveType == MouvementType.rigidBody)
+        if (moveType == MouvementType.rigidBody || moveType == MouvementType.move3d)
         {
             rb.centerOfMass = Vector3.zero;
+            rb.inertiaTensor= new Vector3(1,1,1);
         }
     }
 
@@ -118,7 +122,7 @@ public class PlayerMouvement : MonoBehaviour
 
 
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-                cube.GetComponent<Rigidbody>().AddExplosionForce(30, this.rb.position, playerCharge);
+                cube.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, this.rb.position, playerCharge);
 
                 //Remove owner of cube
                 StartCoroutine(blockNeutral(cube));
@@ -208,18 +212,19 @@ public class PlayerMouvement : MonoBehaviour
     }
     public void rotateAndDirection(Vector3 direction){
         
-        Quaternion initialRotation = rb.rotation;
-        Vector3 planeProjection = Vector3.ProjectOnPlane(rb.transform.forward,Vector3.up);
+       Vector3 planeProjection = reff.transform.forward;
         float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*speedRotation;
        rb.AddTorque(angularVelocity);
        rb.AddTorque(-rb.angularVelocity*rotationDamping);
+       reff.GetComponent<Rigidbody>().AddTorque(angularVelocity);
+       reff.GetComponent<Rigidbody>().AddTorque(-reff.GetComponent<Rigidbody>().angularVelocity*rotationDamping);
     }
     public void rotateXandZ(float xValue, float zValue){
         if(Mathf.Abs(xValue)>=Mathf.Abs(zValue)){
-           rb.AddRelativeTorque(Vector3.right*xValue*speedRotation);
+           rb.AddTorque(Vector3.right*xValue*speedRotation);
         }else{
-          rb.AddRelativeTorque(Vector3.forward*zValue*speedRotation);
+          rb.AddTorque(Vector3.forward*zValue*speedRotation);
         }
       
     }
