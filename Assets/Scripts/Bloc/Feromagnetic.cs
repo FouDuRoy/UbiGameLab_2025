@@ -74,6 +74,10 @@ public class Feromagnetic : MonoBehaviour
         quaternions = createListAngles();
     }
 
+    public float getPassiveRadius() {
+        return passiveRadius;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
