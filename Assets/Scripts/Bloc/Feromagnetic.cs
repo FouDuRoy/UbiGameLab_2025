@@ -31,8 +31,6 @@ public class Feromagnetic : MonoBehaviour
     //Joint settings
     [SerializeField] SpringType springType;
     [SerializeField] LerpingType lerpingType;
-    [SerializeField] bool freeSprings = false;
-    [SerializeField] bool useSprings = false;
     [SerializeField] float xLimit = 0f;
     [SerializeField] float AngleLimit = 0f;
     [SerializeField] float mainLinearDrive = 1000f;
@@ -59,6 +57,9 @@ public class Feromagnetic : MonoBehaviour
     Quaternion startRotation;
     List<Quaternion> quaternions;
 
+    Vector3[] directionsList = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f)
+    , new Vector3(0, 0, -1.2f),new Vector3(0,1.2f,0),new Vector3(0,-1.2f,0) };
+
     float cubeSize = 0.5f;
     float errorP = 1;
     float errorR = 1;
@@ -73,6 +74,10 @@ public class Feromagnetic : MonoBehaviour
         quaternions = createListAngles();
     }
 
+    public float getPassiveRadius() {
+        return passiveRadius;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -84,7 +89,6 @@ public class Feromagnetic : MonoBehaviour
             Transform mainBodyCube = parentObject.GetComponent<PlayerObjects>().cubeRb.transform;
             Vector3 positionFromMainBody = myKey+closestFace;
             inHash = HashContainsKey(parentObject.GetComponent<PlayerObjects>().cubesHash, positionFromMainBody);
-            
         }
          if (inHash)
         {
@@ -262,8 +266,8 @@ private void TransformLerping()
         //Set rigidBody constraints
         cubeRB.mass = 1;
         cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
-        cubeRB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-
+       // cubeRB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        
         if (springType==SpringType.Free || springType == SpringType.Limited)
         {
             attachJ();
@@ -284,6 +288,9 @@ private void TransformLerping()
         Vector3 positionRelativeToMainCube = endPosition + myKey;
         transform.root.GetComponent<PlayerObjects>().cubesHash.Add(positionRelativeToMainCube, gameObject);
         Invoke("setLayer", timeBeforeActiveMagnet);
+
+        //reset
+       
         this.GetComponent<Feromagnetic>().enabled = false;
 
     }
@@ -292,7 +299,15 @@ private void TransformLerping()
     private void setLayer()
     {
         RemoveFacesClean();
+         lerping = false;
+        this.cubeRB = null;
+        this.endPosition = Vector3.zero;
+        this.cubeAttractedTo = null;
+        this.cubeAttractedToTransform = null;
+        this.timer = 0;
+        this.t = 0;
         gameObject.layer = 3;
+         storedFaces = new Dictionary<GameObject, List<Vector3>>();
     }
 
 
@@ -303,10 +318,9 @@ private void TransformLerping()
 
         Transform mainCube = cubeAttractedToTransform.parent.GetComponent<PlayerObjects>().cubeRb.transform;
         Dictionary<Vector3, GameObject> cubeGrid = cubeAttractedToTransform.parent.GetComponent<PlayerObjects>().cubesHash;
-        Vector3[] Directions = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f), new Vector3(0, 0, -1.2f) };
         int i = 0;
         var attractedCubePositionRelativeToMainBody = cubeGrid.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
-        foreach (Vector3 direction in Directions)
+        foreach (Vector3 direction in directionsList)
         {
             //Supposing all same orientation
             Vector3 cubePositionRelativeToMainCube = attractedCubePositionRelativeToMainBody + endPosition;
@@ -434,10 +448,9 @@ private void TransformLerping()
 
         Transform mainCube = cubeAttractedToTransform.parent.GetComponent<PlayerObjects>().cubeRb.transform;
         Dictionary<Vector3, GameObject> cubeGrid = cubeAttractedToTransform.parent.GetComponent<PlayerObjects>().cubesHash;
-        Vector3[] Directions = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f), new Vector3(0, 0, -1.2f) };
         int i = 0;
         var attractedCubePositionRelativeToMainBody = cubeGrid.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
-        foreach (Vector3 direction in Directions)
+        foreach (Vector3 direction in directionsList)
         {
             //Supposing all same orientation
             Vector3 cubePositionRelativeToMainCube = attractedCubePositionRelativeToMainBody + endPosition;
@@ -654,10 +667,9 @@ private void TransformLerping()
         //Look if the face is there are other cubes adjacent to our cube
         Transform mainCube = transform.root.GetComponent<PlayerObjects>().cubeRb.transform;
         Dictionary<Vector3, GameObject> cubeGrid = transform.root.GetComponent<PlayerObjects>().cubesHash;
-        Vector3[] Directions = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f), new Vector3(0, 0, -1.2f) };
         Vector3 attractedCubePositionRelativeToMainBody = cubeGrid.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
         List<Vector3> myCubeFaceList = new List<Vector3>();
-        foreach (Vector3 dir in Directions)
+        foreach (Vector3 dir in directionsList)
         {
             foreach (var v in cubeGrid)
             {
@@ -696,10 +708,9 @@ private void TransformLerping()
         //Look if the face is there are other cubes adjacent to our cube
         Transform mainCube = transform.root.GetComponent<PlayerObjects>().cubeRb.transform;
         Dictionary<Vector3, GameObject> cubeGrid = transform.root.GetComponent<PlayerObjects>().cubesHash;
-        Vector3[] Directions = { new Vector3(1.2f, 0, 0), new Vector3(-1.2f, 0, 0), new Vector3(0, 0, 1.2f), new Vector3(0, 0, -1.2f) };
         Vector3 attractedCubePositionRelativeToMainBody = cubeGrid.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
         
-        foreach (Vector3 dir in Directions)
+        foreach (Vector3 dir in directionsList)
         {
             foreach (var v in cubeGrid)
             {

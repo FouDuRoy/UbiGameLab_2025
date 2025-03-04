@@ -1,5 +1,5 @@
 {
-    "name": "fedInputs",
+    "name": "playerInputs",
     "maps": [
         {
             "name": "Mouvement",
@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "55973047-0a7e-419d-aee5-48d41513e38d",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -33,10 +33,19 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RotateZ",
+                    "name": "RotateX",
                     "type": "Value",
                     "id": "18adef12-b7fb-46e3-bc60-35eecac0681f",
                     "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RotateZ",
+                    "type": "Value",
+                    "id": "59d8f26f-f657-4194-b91f-725d1e769c39",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -44,9 +53,9 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "3D Vector",
                     "id": "412a402d-b1db-4967-a58c-28f7982e1fc8",
-                    "path": "2DVector",
+                    "path": "3DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -55,7 +64,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "Up",
                     "id": "4d4317c2-e622-4b95-98bb-aa3c8b6b9046",
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
@@ -66,7 +75,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
+                    "name": "Down",
                     "id": "baf2ac0d-4a36-447b-8144-89f904a6a30a",
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
@@ -77,7 +86,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
+                    "name": "Left",
                     "id": "61741e7c-a65c-4b6e-b529-48802e4e5935",
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
@@ -88,12 +97,34 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
+                    "name": "Right",
                     "id": "23662a3d-f48d-4dd4-b388-a2efd7b165b3",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad;Player1;Player2",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Forward",
+                    "id": "de20553c-32e5-4070-a5e2-7f16485a85b8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Backward",
+                    "id": "ff236802-25cd-45c3-bb4a-892b4fb6544b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -165,7 +196,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
+                    "name": "Negative",
                     "id": "bc36490f-6371-4803-8950-671be39f0faf",
                     "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
@@ -176,7 +207,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
+                    "name": "Positive",
                     "id": "4c54036c-9d6d-4a4e-a14d-df45acf021cd",
                     "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
@@ -248,14 +279,47 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RotateZ",
+                    "action": "RotateX",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "negative",
                     "id": "1016f087-dccf-4df5-bbd3-de4e41f0579c",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateX",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9ab0c361-d55f-4607-bd4e-99e560991626",
+                    "path": "<Gamepad>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateX",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "0de036b0-d15e-42f5-a208-258d3e93f361",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateZ",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "53965a0b-0921-40d5-a550-dc059f49de3b",
+                    "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -265,8 +329,8 @@
                 },
                 {
                     "name": "positive",
-                    "id": "9ab0c361-d55f-4607-bd4e-99e560991626",
-                    "path": "<Gamepad>/rightTrigger",
+                    "id": "89b900eb-e8f2-4e3e-b2e1-6ecee60629c0",
+                    "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

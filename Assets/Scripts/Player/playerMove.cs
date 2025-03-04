@@ -1,29 +1,41 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Callbacks;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Switch;
+using Matrix4x4 = UnityEngine.Matrix4x4;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerMouvement : MonoBehaviour
 {
     private const float collisionDistance = 0.1f;
+    [SerializeField] float explosionForce = 30;
     [SerializeField] float speed = 1f;
     [SerializeField] float speedRotation = 1f;
     [SerializeField] float playerCharge = 1000f;
     [SerializeField] float rotParam;
-    [SerializeField] bool rgBodyMouvement;
-    [SerializeField] bool springMode;
+    [SerializeField] float rotationDamping =10f;
+    [SerializeField] MouvementType moveType;
+    [SerializeField] GameObject reff;
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction rotateAction;
     InputAction throwCubes;
     InputAction rotateActionZ;
+    InputAction rotateActionX;
     Rigidbody rb;
     float totalMass;
+    
 
 
     void Start()
@@ -33,32 +45,47 @@ public class PlayerMouvement : MonoBehaviour
         rotateAction = playerInput.actions.FindAction("Rotate");
         throwCubes = playerInput.actions.FindAction("ThrowCubes");
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
+        rotateActionX = playerInput.actions.FindAction("RotateX");
         rb = this.GetComponent<PlayerObjects>().cubeRb;
-        
-        
-       
+        if (moveType == MouvementType.rigidBody || moveType == MouvementType.move3d)
+        {
+            rb.centerOfMass = Vector3.zero;
+            rb.inertiaTensor= new Vector3(1,1,1);
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 direction = moveAction.ReadValue<Vector2>();
-        float rotation = rotateAction.ReadValue<float>();
+       // planeOrientation.transform.rotation = Quaternion.Euler(0,rb.rotation.eulerAngles.y,0);
+        Vector3 direction2 = moveAction.ReadValue<Vector3>();
+        Vector3 direction = new Vector3(direction2.x,0,direction2.y);
+        float rotationY = rotateAction.ReadValue<float>();
         float rotationZ = rotateActionZ.ReadValue<float>();
-        
-        if (rgBodyMouvement)
+        float rotationX = rotateActionX.ReadValue<float>();
+    
+        if (moveType == MouvementType.rigidBody)
         {
-            RigidBodyMouvement(direction, rotation);
+            RigidBodyMouvement(direction, rotationY,rotationX);
+            
         }
-        else if (springMode)
+        else if (moveType == MouvementType.spring)
         {
-            // CalculateCenterMassForce(new Vector3(direction.x,0, direction.y));
-            rb.AddForceAtPosition(new Vector3(direction.x, 0, direction.y) * speed, CalculateCenterMass());
-            addTorque(rotation);
+            rb.AddForceAtPosition(direction * speed, CalculateCenterMass());
+            rb.AddTorque(Vector3.up * rotationY * speedRotation,ForceMode.Force);
         }
-        else
+        else if (moveType == MouvementType.transform)
         {
-            TranslateMouvement(direction, rotation);
+            TranslateMouvement(direction, rotationY);
+        }else if(moveType == MouvementType.move3d){
+            rb.AddForce(direction * speed);
+            rotateAndDirection(direction);
+            rotateXandZ(rotationX,rotationZ);
+            
+        }else if (moveType == MouvementType.move3dSpring){
+            rb.AddForceAtPosition(direction * speed,CalculateCenterMass());
+            rotateAndDirection(direction);
+            rotateXandZ(rotationX,rotationZ);
         }
 
         ThrowCubes();
@@ -66,14 +93,14 @@ public class PlayerMouvement : MonoBehaviour
 
     }
 
-    private void TranslateMouvement(Vector2 direction, float rotation)
+    private void TranslateMouvement(Vector3 direction, float rotation)
     {
-        transform.position += new Vector3(direction.x, 0, direction.y) * speed * Time.deltaTime;
-        transform.Rotate(Vector3.up, rotation * speedRotation * Time.deltaTime, Space.World);
+        transform.position += direction * speed * Time.fixedDeltaTime;
+        transform.Rotate(Vector3.up, rotation * speedRotation * Time.fixedDeltaTime, Space.World);
     }
-    private void RigidBodyMouvement(Vector2 direction, float rotation) {
-        rb.AddForce(new Vector3(direction.x, 0, direction.y) * speed);
-        addTorqueSingle(rotation);
+    private void RigidBodyMouvement(Vector3 direction, float rotation,float rotationX) {
+        rb.AddForce(direction * speed);
+        rb.AddTorque(Vector3.up * rotation * speedRotation);
     }
 
     private void ThrowCubes()
@@ -81,32 +108,32 @@ public class PlayerMouvement : MonoBehaviour
         if (throwCubes.ReadValue<float>() == 1)
         {
             List<GameObject> cubes = GetComponent<PlayerObjects>().cubes;
+            Dictionary<Vector3,GameObject> cubeGrid = GetComponent<PlayerObjects>().cubesHash;
             foreach (GameObject cube in cubes)
             {
+                cube.GetComponent<Faces>().resetFaces();
+                if(cube != this.rb.gameObject){
                 cube.gameObject.layer = 0;
                 cube.transform.parent = this.transform.parent;
                 GameObject.Destroy(cube.GetComponent<SphereCollider>());
 
                 //Add rigidBody
-                cube.AddComponent<Rigidbody>();
-                Rigidbody rb = cube.GetComponent<Rigidbody>();
-                Rigidbody rb2 = GetComponent<PlayerObjects>().cubeRb;
-                rb.mass = rb2.mass;
-                rb.drag = rb2.drag;
-                rb.angularDrag = rb2.angularDrag;
-                rb.collisionDetectionMode = rb2.collisionDetectionMode;
-                rb.useGravity = rb2.useGravity;
-                rb.constraints = rb2.constraints;
-
+                GetComponent<PlayerObjects>().addRigidBody(cube);
 
 
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-                cube.GetComponent<Rigidbody>().AddExplosionForce(10000, this.transform.position, playerCharge);
+                cube.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, this.rb.position, playerCharge);
 
                 //Remove owner of cube
                 StartCoroutine(blockNeutral(cube));
+                }
+                
             }
             cubes.Clear();
+            cubes.Add(this.rb.gameObject);
+            cubeGrid.Clear();
+            cubeGrid.Add(Vector3.zero,this.rb.gameObject);
+
         }
     }
 
@@ -141,6 +168,18 @@ public class PlayerMouvement : MonoBehaviour
         return center;
 
     }
+    public Vector3 geometricCenter()
+    {
+        Vector3 center = Vector3.zero;
+        foreach (GameObject obj in transform.GetComponent<PlayerObjects>().cubes)
+        {
+            center += obj.transform.position;
+        }
+        center = center / transform.GetComponent<PlayerObjects>().cubes.Count;
+        center = rb.transform.InverseTransformPoint(center);
+        return center;
+       
+    }
     public void CalculateCenterMassForce(Vector3 LocalForceDirection)
     {
         Vector3 centerMass = CalculateCenterMass();
@@ -169,21 +208,25 @@ public class PlayerMouvement : MonoBehaviour
     }
     public void addTorqueSingle(float rotation)
     {
-        
-        Vector3 pivotPoint = rb.position;
         rb.AddTorque(Vector3.up * rotation * speedRotation);
-      foreach (Transform child in gameObject.GetComponentsInChildren<Transform>())
-        {
-            if(transform.root != child)
-            {
-                Vector3 radiusVector = child.position - pivotPoint;
-                Vector3 rot = Vector3.Cross(radiusVector, Vector3.up);
-                rb.AddForceAtPosition(-rot * rotation * speedRotation, child.transform.position);
-            }
-            
+    }
+    public void rotateAndDirection(Vector3 direction){
+        
+       Vector3 planeProjection = reff.transform.forward;
+       float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
+       Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*speedRotation;
+       rb.AddTorque(angularVelocity);
+       rb.AddTorque(-rb.angularVelocity*rotationDamping);
+       reff.GetComponent<Rigidbody>().AddTorque(angularVelocity);
+       reff.GetComponent<Rigidbody>().AddTorque(-reff.GetComponent<Rigidbody>().angularVelocity*rotationDamping);
+    }
+    public void rotateXandZ(float xValue, float zValue){
+        if(Mathf.Abs(xValue)>=Mathf.Abs(zValue)){
+           rb.AddRelativeTorque(Vector3.right*xValue*speedRotation);
+        }else{
+          rb.AddRelativeTorque(Vector3.forward*zValue*speedRotation);
         }
       
-
     }
 
 }
