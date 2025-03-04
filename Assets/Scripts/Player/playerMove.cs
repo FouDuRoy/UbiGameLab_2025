@@ -66,7 +66,7 @@ public class PlayerMouvement : MonoBehaviour
     
         if (moveType == MouvementType.rigidBody)
         {
-            RigidBodyMouvement(direction, rotationY);
+            RigidBodyMouvement(direction, rotationY,rotationX);
             
         }
         else if (moveType == MouvementType.spring)
@@ -98,7 +98,7 @@ public class PlayerMouvement : MonoBehaviour
         transform.position += direction * speed * Time.fixedDeltaTime;
         transform.Rotate(Vector3.up, rotation * speedRotation * Time.fixedDeltaTime, Space.World);
     }
-    private void RigidBodyMouvement(Vector3 direction, float rotation) {
+    private void RigidBodyMouvement(Vector3 direction, float rotation,float rotationX) {
         rb.AddForce(direction * speed);
         rb.AddTorque(Vector3.up * rotation * speedRotation);
     }
@@ -213,8 +213,8 @@ public class PlayerMouvement : MonoBehaviour
     public void rotateAndDirection(Vector3 direction){
         
        Vector3 planeProjection = reff.transform.forward;
-        float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
-        Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*speedRotation;
+       float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
+       Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*speedRotation;
        rb.AddTorque(angularVelocity);
        rb.AddTorque(-rb.angularVelocity*rotationDamping);
        reff.GetComponent<Rigidbody>().AddTorque(angularVelocity);
@@ -222,9 +222,9 @@ public class PlayerMouvement : MonoBehaviour
     }
     public void rotateXandZ(float xValue, float zValue){
         if(Mathf.Abs(xValue)>=Mathf.Abs(zValue)){
-           rb.AddTorque(Vector3.right*xValue*speedRotation);
+           rb.AddRelativeTorque(Vector3.right*xValue*speedRotation);
         }else{
-          rb.AddTorque(Vector3.forward*zValue*speedRotation);
+          rb.AddRelativeTorque(Vector3.forward*zValue*speedRotation);
         }
       
     }
