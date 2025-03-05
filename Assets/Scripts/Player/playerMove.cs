@@ -8,9 +8,11 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Switch;
+using static UnityEngine.Rendering.DebugUI;
 using Matrix4x4 = UnityEngine.Matrix4x4;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
@@ -79,10 +81,13 @@ public class PlayerMouvement : MonoBehaviour
             TranslateMouvement(direction, rotationY);
         }else if(moveType == MouvementType.move3d){
             rb.AddForce(direction * speed);
-            rotateAndDirection(direction);
-            rotateXandZ(rotationX,rotationZ);
-            
-        }else if (moveType == MouvementType.move3dSpring){
+           // rotateAndDirection(direction);
+            //rotateXandZ(rotationX,rotationZ);
+            rotateAndDirection2(direction, rotationX,rotationZ);
+
+
+        }
+        else if (moveType == MouvementType.move3dSpring){
             rb.AddForceAtPosition(direction * speed,CalculateCenterMass());
             rotateAndDirection(direction);
             rotateXandZ(rotationX,rotationZ);
@@ -215,18 +220,55 @@ public class PlayerMouvement : MonoBehaviour
        Vector3 planeProjection = reff.transform.forward;
        float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
        Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*speedRotation;
-       rb.AddTorque(angularVelocity);
-       rb.AddTorque(-rb.angularVelocity*rotationDamping);
-       reff.GetComponent<Rigidbody>().AddTorque(angularVelocity);
-       reff.GetComponent<Rigidbody>().AddTorque(-reff.GetComponent<Rigidbody>().angularVelocity*rotationDamping);
+        if (direction != Vector3.zero) {
+            rb.AddTorque(angularVelocity);
+            rb.AddTorque(-rb.angularVelocity * rotationDamping);
+            reff.GetComponent<Rigidbody>().AddTorque(angularVelocity);
+            reff.GetComponent<Rigidbody>().AddTorque(-reff.GetComponent<Rigidbody>().angularVelocity * rotationDamping);
+        }
+
+
+    }
+    public void rotateAndDirection2(Vector3 direction,float rotationX,float rotationZ)
+    {
+
+        Vector3 planeProjection = reff.transform.forward;
+         float angle = Vector3.SignedAngle(planeProjection, direction.normalized, Vector3.up);
+         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * speedRotation;
+        Quaternion quat1 = Quaternion.AngleAxis((angle * Mathf.Deg2Rad) * direction.magnitude * speedRotation, Vector3.up);
+        if (Mathf.Abs(rotationX) >= Mathf.Abs(rotationZ))
+        {
+            Quaternion quat2 = Quaternion.AngleAxis(rotationX * speedRotation, rb.transform.right);
+            //Quaternion quat3 = quat1 * rb.rotation * quat2;
+        
+            Quaternion quat3 = quat1 * quat2;
+            rb.angularVelocity = QuaternionToAngularVelocity(quat3);
+        }
+        else
+        {
+            Quaternion quat2 = Quaternion.AngleAxis(rotationZ * speedRotation, rb.transform.forward);
+            //Quaternion quat3 = quat1 * rb.rotation * quat2;
+            Quaternion quat3 = quat1 * quat2;
+            rb.angularVelocity = QuaternionToAngularVelocity(quat3);
+        }
+        //reff.GetComponent<Rigidbody>().MoveRotation(quat1 * reff.GetComponent<Rigidbody>().rotation);
+        reff.GetComponent<Rigidbody>().angularVelocity = QuaternionToAngularVelocity(quat1);
     }
     public void rotateXandZ(float xValue, float zValue){
         if(Mathf.Abs(xValue)>=Mathf.Abs(zValue)){
-           rb.AddRelativeTorque(Vector3.right*xValue*speedRotation);
+          rb.AddRelativeTorque(Vector3.right*xValue*10000);
         }else{
-          rb.AddRelativeTorque(Vector3.forward*zValue*speedRotation);
+          rb.AddRelativeTorque(Vector3.forward*zValue*speedRotation* 10000);
         }
       
+    }
+    public Vector3 QuaternionToAngularVelocity(Quaternion rotation)
+    {
+        // Extract the axis and angle from the quaternion
+        rotation.ToAngleAxis(out float angle, out Vector3 axis);
+
+        // Convert the angle to radians and scale by the rotation speed
+        return axis * (angle * Mathf.Deg2Rad / Time.fixedDeltaTime);
     }
 
 }
