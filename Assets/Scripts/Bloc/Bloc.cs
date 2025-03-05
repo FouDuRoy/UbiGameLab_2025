@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bloc : MonoBehaviour
 {
     [SerializeField] float minimalSpeed = 0.5f;
+    public float weight;
     public string owner;
     public Rigidbody rb;
     //private bool activeMagnetism = true;

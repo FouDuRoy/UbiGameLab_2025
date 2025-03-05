@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: -4726244708395997180}
   - component: {fileID: 6950955270905734173}
   - component: {fileID: -2015588491079092952}
-  - component: {fileID: 2835152163746457574}
   m_Layer: 0
   m_Name: MC_Normal
   m_TagString: magnetic
@@ -133,7 +132,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
@@ -211,15 +210,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faces: []
   spacingBetweenCubes: 0.2
---- !u!114 &2835152163746457574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5694876674060920943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e20ad43e2faec14fba9ae97d339eec1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
