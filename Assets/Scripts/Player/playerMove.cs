@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Security.Cryptography;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Callbacks;
@@ -12,6 +13,7 @@ using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Switch;
+using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 using Matrix4x4 = UnityEngine.Matrix4x4;
 using Quaternion = UnityEngine.Quaternion;
@@ -35,8 +37,16 @@ public class PlayerMouvement : MonoBehaviour
     InputAction throwCubes;
     InputAction rotateActionZ;
     InputAction rotateActionX;
+    InputAction shoulderB;
+    InputAction rRotate;
     Rigidbody rb;
     float totalMass;
+    bool rotX = false;
+    bool rotY = false;
+    bool rotZ = false;
+    bool adjust = false;
+    bool holding = false;
+    float sign = 0;
     
 
 
@@ -48,6 +58,8 @@ public class PlayerMouvement : MonoBehaviour
         throwCubes = playerInput.actions.FindAction("ThrowCubes");
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
         rotateActionX = playerInput.actions.FindAction("RotateX");
+        shoulderB = playerInput.actions.FindAction("R90");
+        rRotate = playerInput.actions.FindAction("RotateR");
         rb = this.GetComponent<PlayerObjects>().cubeRb;
         if (moveType == MouvementType.rigidBody || moveType == MouvementType.move3d)
         {
@@ -59,7 +71,6 @@ public class PlayerMouvement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       // planeOrientation.transform.rotation = Quaternion.Euler(0,rb.rotation.eulerAngles.y,0);
         Vector3 direction2 = moveAction.ReadValue<Vector3>();
         Vector3 direction = new Vector3(direction2.x,0,direction2.y);
         float rotationY = rotateAction.ReadValue<float>();
@@ -81,8 +92,6 @@ public class PlayerMouvement : MonoBehaviour
             TranslateMouvement(direction, rotationY);
         }else if(moveType == MouvementType.move3d){
             rb.AddForce(direction * speed);
-           // rotateAndDirection(direction);
-            //rotateXandZ(rotationX,rotationZ);
             rotateAndDirection2(direction, rotationX,rotationZ);
 
 
@@ -105,7 +114,16 @@ public class PlayerMouvement : MonoBehaviour
     }
     private void RigidBodyMouvement(Vector3 direction, float rotation,float rotationX) {
         rb.AddForce(direction * speed);
+       
         rb.AddTorque(Vector3.up * rotation * speedRotation);
+        if (shoulderB.triggered)
+        {
+            rb.MoveRotation(rb.rotation * Quaternion.Euler(90, 0, 0));
+                
+        }
+
+
+
     }
 
     private void ThrowCubes()
@@ -233,25 +251,170 @@ public class PlayerMouvement : MonoBehaviour
     {
 
         Vector3 planeProjection = reff.transform.forward;
-         float angle = Vector3.SignedAngle(planeProjection, direction.normalized, Vector3.up);
-         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * speedRotation;
+        float angle = Vector3.SignedAngle(planeProjection, direction.normalized, Vector3.up);
         Quaternion quat1 = Quaternion.AngleAxis((angle * Mathf.Deg2Rad) * direction.magnitude * speedRotation, Vector3.up);
-        if (Mathf.Abs(rotationX) >= Mathf.Abs(rotationZ))
-        {
-            Quaternion quat2 = Quaternion.AngleAxis(rotationX * speedRotation, rb.transform.right);
-            //Quaternion quat3 = quat1 * rb.rotation * quat2;
+
+        Vector3 rotate2 = rRotate.ReadValue<Vector3>();
+        Vector3 rotateR = new Vector3(rotate2.y, 0, -rotate2.x);
+        Vector3 rotateRLocal = rb.transform.InverseTransformDirection(rotateR.normalized);
+        Vector3 clampRLocal = Vector3.zero;
+
+        Vector3 xProjection = Vector3.ProjectOnPlane(rb.transform.right, Vector3.up);
+        Vector3 yProjection = Vector3.ProjectOnPlane(rb.transform.up, Vector3.up);
+        Vector3 zProjection = Vector3.ProjectOnPlane(rb.transform.forward, Vector3.up);
         
-            Quaternion quat3 = quat1 * quat2;
-            rb.angularVelocity = QuaternionToAngularVelocity(quat3);
-        }
-        else
+
+        if (rotate2.sqrMagnitude > 0.2 && !holding)
         {
-            Quaternion quat2 = Quaternion.AngleAxis(rotationZ * speedRotation, rb.transform.forward);
-            //Quaternion quat3 = quat1 * rb.rotation * quat2;
-            Quaternion quat3 = quat1 * quat2;
-            rb.angularVelocity = QuaternionToAngularVelocity(quat3);
+            if (Mathf.Abs(rotateRLocal.x) > Mathf.Abs(rotateRLocal.y) && Mathf.Abs(rotateRLocal.x) > Mathf.Abs(rotateRLocal.z))
+            {
+                if (rotX)
+                {
+                    clampRLocal = rb.transform.right * Mathf.Sign(rotateRLocal.x);
+                    sign = Mathf.Sign(rotateRLocal.x);
+                    holding = true;
+                }
+                else if(rotY)
+                {
+                    clampRLocal = rb.transform.up * Mathf.Sign(rotateRLocal.y);
+                    adjust = true;
+                }
+                else if(rotZ)
+                {
+                    clampRLocal = rb.transform.forward * Mathf.Sign(rotateRLocal.z);
+                    adjust = true;
+                }
+                else
+                {
+                    clampRLocal = rb.transform.right * Mathf.Sign(rotateRLocal.x);
+                    rotX = true;
+                }
+            }
+            else if (Mathf.Abs(rotateRLocal.y) > Mathf.Abs(rotateRLocal.x) && Mathf.Abs(rotateRLocal.y) > Mathf.Abs(rotateRLocal.z))
+            {
+                if (rotY)
+                {
+                    clampRLocal = rb.transform.up * Mathf.Sign(rotateRLocal.y);
+                    sign = Mathf.Sign(rotateRLocal.y);
+                    holding = true;
+                }
+                else if (rotX)
+                {
+                    
+                    clampRLocal = rb.transform.right * Mathf.Sign(rotateRLocal.x);
+                    adjust = true;
+                }
+                else if (rotZ)
+                {
+                    clampRLocal = rb.transform.forward * Mathf.Sign(rotateRLocal.z);
+                    adjust = true;
+                }
+                else
+                {
+                    clampRLocal = rb.transform.up * Mathf.Sign(rotateRLocal.y);
+                    rotY = true;
+                }
+            }
+            else
+            {
+                if (rotZ)
+                {
+                    clampRLocal = rb.transform.forward * Mathf.Sign(rotateRLocal.z);
+                    sign = Mathf.Sign(rotateRLocal.z);
+                    holding = true;
+                }
+                else if (rotY)
+                {
+                    clampRLocal = rb.transform.up * Mathf.Sign(rotateRLocal.y);
+                    adjust = true;
+                }
+                else if (rotX)
+                {
+                    clampRLocal = rb.transform.right * Mathf.Sign(rotateRLocal.x);
+                    adjust = true;
+                }
+                else
+                {
+                    clampRLocal = rb.transform.forward * Mathf.Sign(rotateRLocal.z);
+                    rotZ = true;
+                }
+            }
+           
         }
-        //reff.GetComponent<Rigidbody>().MoveRotation(quat1 * reff.GetComponent<Rigidbody>().rotation);
+        else if(rotate2.sqrMagnitude == 0)
+        {
+            holding = false;
+            sign = 0;
+        }
+        if (holding )
+        {
+            if (rotX)
+            {
+                clampRLocal = rb.transform.right * sign;
+            }
+            if (rotY)
+            {
+                clampRLocal = rb.transform.up * sign;
+            }
+            if (rotZ)
+            {
+                clampRLocal = rb.transform.forward * sign;
+            }
+        }
+        Quaternion quat3;
+
+        Quaternion quat2 = Quaternion.AngleAxis( rotate2.magnitude * speedRotation, clampRLocal);
+        quat3 = quat1 * quat2;
+        rb.angularVelocity = QuaternionToAngularVelocity(quat3);
+      
+        if (adjust && (xProjection.magnitude <0.1 || zProjection.magnitude < 0.1) && rotY)
+        {
+            rotX = false;
+            rotZ = false;
+            rotY = false;
+            if (zProjection.magnitude < 0.1)
+            {
+                rb.rotation = Quaternion.LookRotation(rb.transform.right, Vector3.up * Mathf.Sign(rb.transform.forward.y));
+            }
+            else
+            {
+                rb.rotation = Quaternion.LookRotation(rb.transform.forward, Vector3.up * Mathf.Sign(rb.transform.right.y));
+            }
+            adjust = false;
+        }
+        if (adjust && (yProjection.magnitude < 0.1 || zProjection.magnitude < 0.1) && rotX)
+        {
+            rotX = false;
+            rotZ = false;
+            rotY = false;
+            if (yProjection.magnitude < 0.1)
+            {
+                rb.rotation = Quaternion.LookRotation(rb.transform.forward,Vector3.up * Mathf.Sign(rb.transform.up.y));
+            }
+            else
+            {
+                Debug.Log("wow"); 
+                rb.rotation = Quaternion.LookRotation(rb.transform.up, Vector3.up * Mathf.Sign(rb.transform.forward.y));
+            }
+            adjust = false;
+        }
+        if (adjust && (xProjection.magnitude < 0.1 || yProjection.magnitude < 0.1) && rotZ)
+        {
+            rotX = false;
+            rotZ = false;
+            rotY = false;
+            if (xProjection.magnitude < 0.1)
+            {
+                rb.rotation = Quaternion.LookRotation(rb.transform.up, Vector3.up * Mathf.Sign(rb.transform.right.y));
+            }
+            else
+            {
+                rb.rotation = Quaternion.LookRotation(rb.transform.right, Vector3.up * Mathf.Sign(rb.transform.up.y));
+            }
+
+            adjust = false;
+        }
+        
         reff.GetComponent<Rigidbody>().angularVelocity = QuaternionToAngularVelocity(quat1);
     }
     public void rotateXandZ(float xValue, float zValue){
