@@ -15,9 +15,7 @@ public class Bloc : MonoBehaviour
     }
 
     void Update()
-    {
-        
-        
+    {   
         if( owner == "Neutral")
         {
             float speed = this.GetComponent<Rigidbody>().velocity.magnitude;
