@@ -53,15 +53,15 @@ public class ExplosiveBloc : MonoBehaviour
 
     private void HandleExplosionEffect(Bloc block)
     {
-        if (block is WoodBloc)
-        {
+        //if (block is WoodBloc)
+        //{
             Debug.Log("Boom");
             Destroy(block.gameObject);
-        }
-        else
-        {
+        //}
+        //else
+        //{
             //Displacement calling
-        }
+        //}
     }
 
     private void ApplyRepulsionEffect(Collider col, float distance, List<Rigidbody> repulsedBodies)

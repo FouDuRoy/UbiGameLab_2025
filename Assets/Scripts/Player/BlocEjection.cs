@@ -5,36 +5,45 @@ using UnityEngine;
 public class BlocEjection : MonoBehaviour
 {
     [SerializeField] float velocityTreshold = 10f;
+    private GridSystem gridSystem;
+    private PlayerObjects playerObjects;
+
+    private void Start()
+    {
+        gridSystem = gameObject.GetComponent<GridSystem>();
+        playerObjects = FindObjectOfType<PlayerObjects>();
+    }
 
     void OnCollisionEnter(Collision collision)
     {
-        
-        GameObject hitter= collision.collider.gameObject;
+        GameObject hitter = collision.collider.gameObject;
         GameObject hitted = collision.GetContact(0).thisCollider.gameObject;
-        foreach(ContactPoint p in collision.contacts){
-            Debug.Log(p.thisCollider.gameObject);
-        }
-        if(hitted.transform.parent==transform){
+
+        if (hitted.transform.parent == transform)
+        {
             Vector3 relativeVelocity = collision.relativeVelocity;
-            if(relativeVelocity.magnitude> velocityTreshold){
-                hitted.transform.root.GetComponent<PlayerObjects>().addRigidBody(hitted);
-                hitted.transform.root.GetComponent<PlayerObjects>().removeCube(hitted);
+            if (relativeVelocity.magnitude > velocityTreshold)
+            {
+                playerObjects.addRigidBody(hitted);
+                playerObjects.removeCube(hitted);
+
                 hitted.GetComponent<Rigidbody>().velocity = relativeVelocity;
                 hitter.GetComponent<Rigidbody>().velocity = -relativeVelocity;
+
+                // Gestion de la grille après détachement
+                gridSystem.DetachBlock(hitted);
+
                 StartCoroutine(blockNeutral(hitted));
-         }
+            }
         }
-        
-        
     }
+
     IEnumerator blockNeutral(GameObject block)
     {
-
         yield return new WaitForSeconds(3f);
-        if(block !=null)
+        if (block != null)
         {
             block.GetComponent<Bloc>().setOwner("Neutral");
         }
-       
     }
 }

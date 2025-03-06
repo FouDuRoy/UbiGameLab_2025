@@ -1,88 +1,112 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class GridSystem : MonoBehaviour
 {
     private Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
     public GameObject kernel; // Le noyau du système, point (0,0,0)
 
-    public void AttachBlock(GameObject block)
+    private void Start()
     {
-        Vector3Int gridPos = GetGridPosition(block.transform.position);
-        if (!grid.ContainsKey(gridPos))
-        {
-            grid[gridPos] = block;
-            block.GetComponent<Bloc>().SetGridPosition(gridPos); // Stocker la position relative dans le bloc
-        }
+        grid.Add(new Vector3Int(0, 0, 0), kernel);
     }
 
-    public void DetachBlock(GameObject block)
+    public void AttachBlock(GameObject blocToAttach, GameObject attachedBloc, Vector3 closestFace)
     {
-        Vector3Int gridPos = block.GetComponent<Bloc>().GetGridPosition();
-        if (grid.ContainsKey(gridPos))
+        Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt(closestFace.x), Mathf.RoundToInt(closestFace.y), Mathf.RoundToInt(closestFace.z));
+        if (attachedBloc.name == "MainBody")
         {
-            grid.Remove(gridPos);
+            grid.Add(fixedVector, blocToAttach);
+            Debug.Log(fixedVector.ToString());
         }
-
-        // Vérifier les blocs déconnectés du noyau après détachement
-        List<GameObject> detachedBlocks = GetDisconnectedBlocks();
-        foreach (GameObject detachedBlock in detachedBlocks)
+        else if (grid.ContainsValue(attachedBloc))
         {
-            DetachBlock(detachedBlock); // Détacher récursivement
-            detachedBlock.GetComponent<Rigidbody>().isKinematic = false; // Permet la physique
+            Vector3Int newGridPos = grid.FirstOrDefault(x => x.Value == attachedBloc).Key + fixedVector;
+            grid.Add(newGridPos, blocToAttach);
+            Debug.Log(newGridPos.ToString());
         }
     }
-
-    private List<GameObject> GetDisconnectedBlocks()
+    public void DetachBlock(GameObject bloc)
     {
-        List<GameObject> disconnectedBlocks = new List<GameObject>();
+        Vector3Int detachedGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
+        grid.Remove(detachedGridPos);
+        CheckAndDetachDisconnectedBlocks();
+    }
+
+    public void CheckAndDetachDisconnectedBlocks()
+    {
+        HashSet<Vector3Int> safeBlocks = new HashSet<Vector3Int>();
         HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
-        Queue<Vector3Int> toCheck = new Queue<Vector3Int>();
+        List<GameObject> detachedBlocks = new List<GameObject>();
 
-        // Ajouter la position du noyau (0,0,0) dans la liste de vérification
-        Vector3Int kernelPos = Vector3Int.zero;
-        if (grid.ContainsKey(kernelPos))
+        foreach (var kvp in grid)
         {
-            toCheck.Enqueue(kernelPos);
+            if (!visited.Contains(kvp.Key))
+            {
+                List<Vector3Int> currentBranch = new List<Vector3Int>();
+                if (IsBranchConnectedToKernel(kvp.Key, visited, currentBranch))
+                {
+                    safeBlocks.UnionWith(currentBranch);
+                }
+                else
+                {
+                    foreach (Vector3Int pos in currentBranch)
+                    {
+                        detachedBlocks.Add(grid[pos]);
+                    }
+                }
+            }
         }
 
-        // Parcours en largeur pour marquer tous les blocs connectés
+        foreach (GameObject bloc in detachedBlocks)
+        {
+            Vector3Int detachedGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
+            Debug.Log(bloc.name + " " + detachedBlocks);
+            grid.Remove(bloc.GetComponent<Bloc>().GetGridPosition());
+            bloc.transform.parent = null;
+            bloc.GetComponent<Rigidbody>().isKinematic = false;
+        }
+    }
+
+    private bool IsBranchConnectedToKernel(Vector3Int start, HashSet<Vector3Int> visited, List<Vector3Int> currentBranch)
+    {
+        if (!grid.ContainsKey(start) || visited.Contains(start)) return false;
+
+        Queue<Vector3Int> toCheck = new Queue<Vector3Int>();
+        HashSet<Vector3Int> localVisited = new HashSet<Vector3Int>();
+        toCheck.Enqueue(start);
+        bool isConnectedToKernel = false;
+
         while (toCheck.Count > 0)
         {
-            Vector3Int currentPos = toCheck.Dequeue();
-            visited.Add(currentPos);
+            Vector3Int current = toCheck.Dequeue();
+            if (visited.Contains(current)) continue;
 
-            // Vérifier les voisins adjacents
-            foreach (Vector3Int neighbor in GetNeighbors(currentPos))
+            visited.Add(current);
+            currentBranch.Add(current);
+            localVisited.Add(current);
+
+            if (current == Vector3Int.zero) // Si on trouve le noyau
             {
-                if (grid.ContainsKey(neighbor) && !visited.Contains(neighbor))
+                isConnectedToKernel = true;
+            }
+
+            foreach (Vector3Int neighbor in GetNeighbors(current))
+            {
+                if (grid.ContainsKey(neighbor) && !localVisited.Contains(neighbor))
                 {
                     toCheck.Enqueue(neighbor);
                 }
             }
         }
 
-        // Identifier les blocs non connectés
-        foreach (var kvp in grid)
-        {
-            if (!visited.Contains(kvp.Key))
-            {
-                disconnectedBlocks.Add(kvp.Value);
-            }
-        }
-
-        return disconnectedBlocks;
+        return isConnectedToKernel;
     }
 
-    private Vector3Int GetGridPosition(Vector3 position)
-    {
-        return new Vector3Int(
-            Mathf.RoundToInt(position.x),
-            Mathf.RoundToInt(position.y),
-            Mathf.RoundToInt(position.z)
-        );
-    }
 
     private List<Vector3Int> GetNeighbors(Vector3Int position)
     {

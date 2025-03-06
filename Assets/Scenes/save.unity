@@ -183,6 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5
+  charge: 5
 --- !u!65 &62837129
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -284,11 +286,23 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
-  distanceLerp: 0.5
-  autoMagError: 0.5
-  useLerp: 1
+  error: 0.05
   interpolates: 0
-  deltaLerp: 0.2
+  timeLerpingTransform: 0.2
+  spacingBetweenCubes: 0.1
+  moveTime: 0.1
+  maxForceAttraction: 30
+  lerpingDistance: 0
+  springType: 0
+  lerpingType: 0
+  xLimit: 0
+  AngleLimit: 0
+  mainLinearDrive: 1000
+  mainLinearDamp: 50
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 5000
+  angularDamp: 100
 --- !u!1 &198063486
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,6 +313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 198063488}
   - component: {fileID: 198063487}
+  - component: {fileID: 198063489}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -383,6 +398,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &198063489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198063486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &496267145
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5
+  charge: 5
 --- !u!65 &496267148
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -545,11 +585,23 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
-  distanceLerp: 0.5
-  autoMagError: 0.5
-  useLerp: 1
+  error: 0.05
   interpolates: 0
-  deltaLerp: 0.2
+  timeLerpingTransform: 0.2
+  spacingBetweenCubes: 0.1
+  moveTime: 0.1
+  maxForceAttraction: 30
+  lerpingDistance: 0
+  springType: 0
+  lerpingType: 0
+  xLimit: 0
+  AngleLimit: 0
+  mainLinearDrive: 1000
+  mainLinearDamp: 50
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 5000
+  angularDamp: 100
 --- !u!1 &564668775
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5
+  charge: 5
 --- !u!65 &564668778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -712,11 +766,23 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
-  distanceLerp: 0.5
-  autoMagError: 0.5
-  useLerp: 1
+  error: 0.05
   interpolates: 0
-  deltaLerp: 0.2
+  timeLerpingTransform: 0.2
+  spacingBetweenCubes: 0.1
+  moveTime: 0.1
+  maxForceAttraction: 30
+  lerpingDistance: 0
+  springType: 0
+  lerpingType: 0
+  xLimit: 0
+  AngleLimit: 0
+  mainLinearDrive: 1000
+  mainLinearDamp: 50
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 5000
+  angularDamp: 100
 --- !u!1 &670083228
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5
+  charge: 5
 --- !u!65 &670083231
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -879,11 +947,23 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
-  distanceLerp: 0.5
-  autoMagError: 0.5
-  useLerp: 1
+  error: 0.05
   interpolates: 0
-  deltaLerp: 0.2
+  timeLerpingTransform: 0.2
+  spacingBetweenCubes: 0.1
+  moveTime: 0.1
+  maxForceAttraction: 30
+  lerpingDistance: 0
+  springType: 0
+  lerpingType: 0
+  xLimit: 0
+  AngleLimit: 0
+  mainLinearDrive: 1000
+  mainLinearDamp: 50
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 5000
+  angularDamp: 100
 --- !u!1 &795572631
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +1025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5
+  charge: 5
 --- !u!65 &795572634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1046,11 +1128,23 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
-  distanceLerp: 0.5
-  autoMagError: 0.5
-  useLerp: 1
+  error: 0.05
   interpolates: 0
-  deltaLerp: 0.2
+  timeLerpingTransform: 0.2
+  spacingBetweenCubes: 0.1
+  moveTime: 0.1
+  maxForceAttraction: 30
+  lerpingDistance: 0
+  springType: 0
+  lerpingType: 0
+  xLimit: 0
+  AngleLimit: 0
+  mainLinearDrive: 1000
+  mainLinearDamp: 50
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 5000
+  angularDamp: 100
 --- !u!1 &1107411485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,6 +1206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5
+  charge: 5
 --- !u!65 &1107411488
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1213,11 +1309,23 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
-  distanceLerp: 0.5
-  autoMagError: 0.5
-  useLerp: 1
+  error: 0.05
   interpolates: 0
-  deltaLerp: 0.2
+  timeLerpingTransform: 0.2
+  spacingBetweenCubes: 0.1
+  moveTime: 0.1
+  maxForceAttraction: 30
+  lerpingDistance: 0
+  springType: 0
+  lerpingType: 0
+  xLimit: 0
+  AngleLimit: 0
+  mainLinearDrive: 1000
+  mainLinearDamp: 50
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 5000
+  angularDamp: 100
 --- !u!1 &1244539408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,7 +1520,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d7c34ad0b48c70a4796de02c0753cf61, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1518,6 +1626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5
+  charge: 5
 --- !u!65 &1394854455
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1619,11 +1729,23 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
-  distanceLerp: 0.5
-  autoMagError: 0.5
-  useLerp: 1
+  error: 0.05
   interpolates: 0
-  deltaLerp: 0.2
+  timeLerpingTransform: 0.2
+  spacingBetweenCubes: 0.1
+  moveTime: 0.1
+  maxForceAttraction: 30
+  lerpingDistance: 0
+  springType: 0
+  lerpingType: 0
+  xLimit: 0
+  AngleLimit: 0
+  mainLinearDrive: 1000
+  mainLinearDamp: 50
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 5000
+  angularDamp: 100
 --- !u!850595691 &1617775795
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1764,9 +1886,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionForce: 30
   speed: 2
   speedRotation: 100
   playerCharge: 1000
+  rotParam: 0
+  rotationDamping: 10
+  moveType: 0
+  reff: {fileID: 0}
 --- !u!43 &1694656762
 Mesh:
   m_ObjectHideFlags: 0
@@ -2003,7 +2130,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: acfe90a9c0954474e87da334890db675, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8260,6 +8387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5
+  charge: 5
 --- !u!65 &1836388353
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8361,11 +8490,23 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
-  distanceLerp: 0.5
-  autoMagError: 0.5
-  useLerp: 1
+  error: 0.05
   interpolates: 0
-  deltaLerp: 0.2
+  timeLerpingTransform: 0.2
+  spacingBetweenCubes: 0.1
+  moveTime: 0.1
+  maxForceAttraction: 30
+  lerpingDistance: 0
+  springType: 0
+  lerpingType: 0
+  xLimit: 0
+  AngleLimit: 0
+  mainLinearDrive: 1000
+  mainLinearDamp: 50
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 5000
+  angularDamp: 100
 --- !u!1 &1877040807
 GameObject:
   m_ObjectHideFlags: 0
@@ -8427,6 +8568,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ad8960215223848a9b1dc30e567027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5
+  charge: 5
 --- !u!65 &1877040810
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8528,11 +8671,23 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
-  distanceLerp: 0.5
-  autoMagError: 0.5
-  useLerp: 1
+  error: 0.05
   interpolates: 0
-  deltaLerp: 0.2
+  timeLerpingTransform: 0.2
+  spacingBetweenCubes: 0.1
+  moveTime: 0.1
+  maxForceAttraction: 30
+  lerpingDistance: 0
+  springType: 0
+  lerpingType: 0
+  xLimit: 0
+  AngleLimit: 0
+  mainLinearDrive: 1000
+  mainLinearDamp: 50
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 5000
+  angularDamp: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
