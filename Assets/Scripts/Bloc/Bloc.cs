@@ -10,9 +10,16 @@ public class Bloc : MonoBehaviour
     public Rigidbody rb;
     //private bool activeMagnetism = true;
 
-    void Start()
+    private Vector3Int gridPosition;
+
+    public void SetGridPosition(Vector3Int pos)
     {
-       
+        gridPosition = pos;
+    }
+
+    public Vector3Int GetGridPosition()
+    {
+        return gridPosition;
     }
 
     void Update()

@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c1d937d346da6c2499ca13528ee776c0, type: 2}
+  - {fileID: 2100000, guid: 2b541e51462af5340851341358ad793e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
+  weight: 0
   owner: 
   rb: {fileID: 0}
 --- !u!114 &6950955270905734173
@@ -223,9 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ea55e9940ca642bf8d17224f3f85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimalSpeed: 0.5
-  owner: 
-  rb: {fileID: 0}
   resistance: 10
   explosionRange: 5
   repulsionRange: 8

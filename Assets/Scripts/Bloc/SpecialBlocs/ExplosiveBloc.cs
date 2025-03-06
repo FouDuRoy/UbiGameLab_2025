@@ -55,6 +55,7 @@ public class ExplosiveBloc : MonoBehaviour
     {
         if (block is WoodBloc)
         {
+            Debug.Log("Boom");
             Destroy(block.gameObject);
         }
         else
@@ -73,5 +74,14 @@ public class ExplosiveBloc : MonoBehaviour
             rb.AddForce(direction * force, ForceMode.Impulse);
             repulsedBodies.Add(rb);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1, 0, 0, 0.3f); // Rouge transparent
+        Gizmos.DrawSphere(transform.position, explosionRange);
+
+        Gizmos.color = new Color(0, 0, 1, 0.3f); // Bleu transparent
+        Gizmos.DrawSphere(transform.position, repulsionRange);
     }
 }
