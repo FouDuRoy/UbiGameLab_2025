@@ -372,46 +372,30 @@ public class PlayerMouvement : MonoBehaviour
             rotX = false;
             rotZ = false;
             rotY = false;
-            if (zProjection.magnitude < 0.1)
-            {
-                rb.rotation = Quaternion.LookRotation(rb.transform.right, Vector3.up * Mathf.Sign(rb.transform.forward.y));
-            }
-            else
-            {
-                rb.rotation = Quaternion.LookRotation(rb.transform.forward, Vector3.up * Mathf.Sign(rb.transform.right.y));
-            }
+            Debug.Log(rb.transform.localRotation.eulerAngles);
+            rb.transform.localRotation = Quaternion.Euler(ClosestTo90(rb.transform.localRotation.eulerAngles.x)
+                , rb.transform.localRotation.eulerAngles.y, ClosestTo90(rb.transform.localRotation.eulerAngles.z));
             adjust = false;
         }
-        if (adjust && (yProjection.magnitude < 0.1 || zProjection.magnitude < 0.1) && rotX)
+        if (adjust && (yProjection.magnitude < 0.1) && rotX)
         {
             rotX = false;
             rotZ = false;
             rotY = false;
-            if (yProjection.magnitude < 0.1)
-            {
-                rb.rotation = Quaternion.LookRotation(rb.transform.forward,Vector3.up * Mathf.Sign(rb.transform.up.y));
-            }
-            else
-            {
-                Debug.Log("wow"); 
-                rb.rotation = Quaternion.LookRotation(rb.transform.up, Vector3.up * Mathf.Sign(rb.transform.forward.y));
-            }
-            adjust = false;
-        }
-        if (adjust && (xProjection.magnitude < 0.1 || yProjection.magnitude < 0.1) && rotZ)
-        {
-            rotX = false;
-            rotZ = false;
-            rotY = false;
-            if (xProjection.magnitude < 0.1)
-            {
-                rb.rotation = Quaternion.LookRotation(rb.transform.up, Vector3.up * Mathf.Sign(rb.transform.right.y));
-            }
-            else
-            {
-                rb.rotation = Quaternion.LookRotation(rb.transform.right, Vector3.up * Mathf.Sign(rb.transform.up.y));
-            }
 
+            rb.transform.localRotation = Quaternion.Euler(ClosestTo90(rb.transform.localRotation.eulerAngles.x)
+              , rb.transform.localRotation.eulerAngles.y, ClosestTo90(rb.transform.localRotation.eulerAngles.z));
+            Debug.Log(rb.transform.localRotation.eulerAngles);
+            adjust = false;
+        }
+        if (adjust && ( yProjection.magnitude < 0.1) && rotZ)
+        {
+            rotX = false;
+            rotZ = false;
+            rotY = false;
+            rb.transform.localRotation = Quaternion.Euler(ClosestTo90(rb.transform.localRotation.eulerAngles.x)
+              , rb.transform.localRotation.eulerAngles.y, ClosestTo90(rb.transform.localRotation.eulerAngles.z));
+            Debug.Log(rb.transform.localRotation.eulerAngles);
             adjust = false;
         }
         
@@ -432,6 +416,19 @@ public class PlayerMouvement : MonoBehaviour
 
         // Convert the angle to radians and scale by the rotation speed
         return axis * (angle * Mathf.Deg2Rad / Time.fixedDeltaTime);
+    }
+
+    public float ClosestTo90(float angle)
+    {
+        float reste = angle % 90;
+        if (reste > 45)
+        {
+            return angle + (90 - reste);
+        }
+        else
+        {
+            return angle - reste;
+        }
     }
 
 }
