@@ -7,7 +7,7 @@ using UnityEngine.ProBuilder;
 
 public class GridSystem : MonoBehaviour
 {
-    private Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
+    protected Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
     public GameObject kernel; // Le noyau du système, point (0,0,0)
 
     private void Start()
@@ -22,21 +22,31 @@ public class GridSystem : MonoBehaviour
         if (attachedBloc.name == "MainBody")
         {
             grid.Add(fixedVector, blocToAttach);
-            Debug.Log(fixedVector.ToString());
         }
         else if (grid.ContainsValue(attachedBloc))
         {
             Vector3Int newGridPos = grid.FirstOrDefault(x => x.Value == attachedBloc).Key + fixedVector;
             grid.Add(newGridPos, blocToAttach);
-            Debug.Log(newGridPos.ToString());
         }
         
     }
     public void DetachBlock(GameObject bloc)
     {
         Vector3Int detachedGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
-        grid.Remove(detachedGridPos);
-        CheckAndDetachDisconnectedBlocks();
+        if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
+        {
+            grid.Remove(detachedGridPos);
+            Debug.Log("Bloc détaché " + ":" + bloc.name);
+            foreach (var gridBloc in grid)
+            {
+                if (!IsBlockConnected(gridBloc.Value))
+                {
+                    grid.Remove(detachedGridPos);
+                    Debug.Log(gridBloc.Value.name);
+                }
+            }
+        }
+
     }
 
     public void CheckAndDetachDisconnectedBlocks()
@@ -110,7 +120,7 @@ public class GridSystem : MonoBehaviour
     }
 
 
-    private List<Vector3Int> GetNeighbors(Vector3Int position)
+    protected List<Vector3Int> GetNeighbors(Vector3Int position)
     {
         List<Vector3Int> neighbors = new List<Vector3Int>
         {
@@ -122,5 +132,30 @@ public class GridSystem : MonoBehaviour
             position + new Vector3Int(0, 0, -1)
         };
         return neighbors;
+    }
+
+    protected bool IsBlockConnected(GameObject bloc)
+    {
+        if (!grid.ContainsValue(bloc)) return false;
+        Vector3Int blocGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
+        HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
+        Queue<Vector3Int> toVisit = new Queue<Vector3Int>();
+        toVisit.Enqueue(blocGridPos);
+
+        while (toVisit.Count > 0)
+        {
+            Vector3Int current = toVisit.Dequeue();
+            if (current == Vector3Int.zero) return true; // Le noyau est atteint
+            visited.Add(current);
+
+            foreach (Vector3Int neighbor in GetNeighbors(current))
+            {
+                if (grid.ContainsKey(neighbor) && !visited.Contains(neighbor))
+                {
+                    toVisit.Enqueue(neighbor);
+                }
+            }
+        }
+        return false; // Aucun chemin trouvé vers le noyau
     }
 }
