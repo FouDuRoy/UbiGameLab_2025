@@ -17,6 +17,7 @@ public class GridSystem : MonoBehaviour
 
     public void AttachBlock(GameObject blocToAttach, GameObject attachedBloc, Vector3 closestFace)
     {
+        
         Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt(closestFace.x), Mathf.RoundToInt(closestFace.y), Mathf.RoundToInt(closestFace.z));
         if (attachedBloc.name == "MainBody")
         {
@@ -29,6 +30,7 @@ public class GridSystem : MonoBehaviour
             grid.Add(newGridPos, blocToAttach);
             Debug.Log(newGridPos.ToString());
         }
+        
     }
     public void DetachBlock(GameObject bloc)
     {

@@ -281,7 +281,7 @@ private void TransformLerping()
 
         this.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
         transform.root.GetComponent<PlayerObjects>().cubes.Add(gameObject);
-        transform.root.GetComponent<PlayerObjects>().gridSystem.AttachBlock(gameObject,cubeAttractedTo.gameObject,closestFace);
+        //transform.root.GetComponent<PlayerObjects>().gridSystem.AttachBlock(gameObject,cubeAttractedTo.gameObject,closestFace);
         var myKey = transform.root.GetComponent<PlayerObjects>().cubesHash.FirstOrDefault(x => x.Value == cubeAttractedTo.gameObject).Key;
         //We suppose same orientation of all cubes
         Vector3 positionRelativeToMainCube = endPosition + myKey;
