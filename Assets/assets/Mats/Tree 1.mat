@@ -26,11 +26,12 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 6
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -48,26 +49,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _EmissiveMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -76,27 +57,11 @@ Material:
         m_Texture: {fileID: 2800000, guid: b3727d7f61c78b34fb8e05fcf1361906, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MatCap_Tex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _Normal_Tex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -118,45 +83,31 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _BumpScale: 1
     - _CastShadows: 1
     - _Cull: 2
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
     - _MatCap_Lerp: 0
-    - _Metallic: 0
-    - _Mode: 0
-    - _Move_Gradient_Line: 9.7
+    - _Move_Gradient_Line: 0.63
     - _Move_Shadow_Line: 1
     - _Normal_Intensity: 1
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Shadow_Opacity_Intensity: 0.447
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
+    - _Smoothness: 0
     - _SrcBlend: 1
     - _Surface: 0
-    - _UVSec: 0
     - _Use_Gradient_Tex_Map_Instead: 0
-    - _Use_Local_Space: 0
+    - _Use_Local_Space: 1
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 0}
     - _Gradient_Bot_Color: {r: 0.427451, g: 0.33333334, b: 0.27058825, a: 1}
-    - _Gradient_Smooth_Step: {r: 0.42, g: 0.76, b: 0, a: 0}
-    - _Gradient_Top_Color: {r: 0.65882355, g: 0.6058975, b: 0.25882354, a: 1}
+    - _Gradient_Smooth_Step: {r: 0.42, g: 0.44, b: 0, a: 0}
+    - _Gradient_Top_Color: {r: 0.65882355, g: 0.45994768, b: 0.25882354, a: 1}
     - _Shadow_Color: {r: 0.58431375, g: 0.40726885, b: 0.16862743, a: 1}
     - _SmoothStepShadows: {r: 0.5, g: 0.35, b: 0, a: 0}
     - _Tint: {r: 1, g: 1, b: 1, a: 0}
