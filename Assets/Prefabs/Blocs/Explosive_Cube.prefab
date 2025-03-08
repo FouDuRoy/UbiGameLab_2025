@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 2525441135307876409}
   m_Layer: 0
   m_Name: Explosive_Cube
-  m_TagString: magnetic
+  m_TagString: explosive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resistance: 10
-  explosionRange: 5
-  repulsionRange: 8
-  repulsionForce: 50
+  explosionRange: 3
+  repulsionRange: 5
+  repulsionForce: 0.1
   repulsionDistanceFactor: 1.2

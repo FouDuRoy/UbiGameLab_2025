@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ExplosiveBloc : MonoBehaviour
 {
@@ -26,9 +28,9 @@ public class ExplosiveBloc : MonoBehaviour
         if (hasExploded) return;
         hasExploded = true;
 
-        Collider[] affectedObjects = Physics.OverlapSphere(transform.position, repulsionRange);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, repulsionRange);
+        BoxCollider[] affectedObjects = colliders.OfType<BoxCollider>().ToArray();
         List<Rigidbody> repulsedBodies = new List<Rigidbody>();
-
         foreach (Collider col in affectedObjects)
         {
             Bloc bloc = col.GetComponent<Bloc>();
@@ -38,10 +40,10 @@ public class ExplosiveBloc : MonoBehaviour
 
                 if (distance <= explosionRange)
                 {
-                    HandleExplosionEffect(bloc);
+                    HandleExplosionEffect(col.gameObject);
                 }
 
-                if (distance <= repulsionRange)
+                else if (distance <= repulsionRange)
                 {
                     ApplyRepulsionEffect(col, distance, repulsedBodies);
                 }
@@ -51,17 +53,29 @@ public class ExplosiveBloc : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void HandleExplosionEffect(Bloc block)
+    private void HandleExplosionEffect(GameObject bloc)
     {
-        //if (block is WoodBloc)
-        //{
+        if (bloc.CompareTag("wood"))
+        {
             Debug.Log("Boom");
-            Destroy(block.gameObject);
-        //}
-        //else
-        //{
-            //Displacement calling
-        //}
+            Destroy(bloc);
+        }
+        else
+        {
+            PlayerObjects player = bloc.GetComponentInParent<PlayerObjects>();
+            if(player != null)
+            {
+                player.addRigidBody(bloc);
+                player.removeCube(bloc);
+            }
+            Rigidbody targetRb = bloc.GetComponent<Rigidbody>();
+            Vector3 forceDirection = (targetRb.transform.position - transform.position).normalized;
+
+            // Appliquer la force dans la direction inverse
+            targetRb.AddForce(forceDirection * repulsionForce, ForceMode.Impulse);
+
+            StartCoroutine(blockNeutral(bloc));
+        }
     }
 
     private void ApplyRepulsionEffect(Collider col, float distance, List<Rigidbody> repulsedBodies)
@@ -74,6 +88,15 @@ public class ExplosiveBloc : MonoBehaviour
             rb.AddForce(direction * force, ForceMode.Impulse);
             repulsedBodies.Add(rb);
         }
+    }
+
+    IEnumerator blockNeutral(GameObject block)
+    {
+        if (block != null)
+        {
+            block.GetComponent<Bloc>().setOwner("Neutral");
+        }
+        yield return null;
     }
 
     private void OnDrawGizmos()

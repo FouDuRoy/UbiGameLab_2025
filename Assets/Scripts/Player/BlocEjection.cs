@@ -16,24 +16,24 @@ public class BlocEjection : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        GameObject hitter = collision.collider.gameObject;
-        GameObject hitted = collision.GetContact(0).thisCollider.gameObject;
-
-        if (hitted.transform.parent == transform)
+        if (collision.gameObject.tag != "explosive")
         {
-            Vector3 relativeVelocity = collision.relativeVelocity;
-            if (relativeVelocity.magnitude > velocityTreshold)
+            GameObject hitter = collision.collider.gameObject;
+            GameObject hitted = collision.GetContact(0).thisCollider.gameObject;
+
+            if (hitted.transform.parent == transform)
             {
-                playerObjects.addRigidBody(hitted);
-                playerObjects.removeCube(hitted);
+                Vector3 relativeVelocity = collision.relativeVelocity;
+                if (relativeVelocity.magnitude > velocityTreshold)
+                {
+                    playerObjects.addRigidBody(hitted);
+                    playerObjects.removeCube(hitted);
 
-                hitted.GetComponent<Rigidbody>().velocity = relativeVelocity;
-                hitter.GetComponent<Rigidbody>().velocity = -relativeVelocity;
+                    hitted.GetComponent<Rigidbody>().velocity = relativeVelocity;
+                    hitter.GetComponent<Rigidbody>().velocity = -relativeVelocity;
 
-                // Gestion de la grille après détachement
-                gridSystem.DetachBlock(hitted);
-
-                StartCoroutine(blockNeutral(hitted));
+                    StartCoroutine(blockNeutral(hitted));
+                }
             }
         }
     }
