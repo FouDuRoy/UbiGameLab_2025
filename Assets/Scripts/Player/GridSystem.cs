@@ -8,11 +8,24 @@ using UnityEngine.ProBuilder;
 public class GridSystem : MonoBehaviour
 {
     protected Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
-    public GameObject kernel; // Le noyau du système, point (0,0,0)
+    public GameObject kernel; // Le noyau du systï¿½me, point (0,0,0)
+
+    public float cubeSize = 1.2f;
+   [SerializeField] bool checkGrid = false;
 
     private void Start()
     {
         grid.Add(new Vector3Int(0, 0, 0), kernel);
+    }
+
+    void Update()
+    {
+        if(checkGrid){
+            foreach (var v in grid){
+                Debug.Log(v.Key);
+            }
+            checkGrid = false;
+        }
     }
 
     public void AttachBlock(GameObject blocToAttach, GameObject attachedBloc, Vector3 closestFace)
@@ -36,7 +49,7 @@ public class GridSystem : MonoBehaviour
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
         {
             grid.Remove(detachedGridPos);
-            Debug.Log("Bloc détaché " + ":" + bloc.name);
+            Debug.Log("Bloc dï¿½tachï¿½ " + ":" + bloc.name);
             foreach (var gridBloc in grid)
             {
                 if (!IsBlockConnected(gridBloc.Value))
@@ -156,6 +169,27 @@ public class GridSystem : MonoBehaviour
                 }
             }
         }
-        return false; // Aucun chemin trouvé vers le noyau
+        return false; // Aucun chemin trouvï¿½ vers le noyau
+    }
+
+    public Vector3 getPositionOfObject(GameObject cube){
+         Vector3Int blocGridPos = grid.FirstOrDefault(x => x.Value == cube).Key;
+         return new Vector3(blocGridPos.x*cubeSize,blocGridPos.y*cubeSize,blocGridPos.z*cubeSize);
+
+    }
+      public bool containsKey(Vector3 position){
+        Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x/cubeSize),Mathf.RoundToInt(position.y/cubeSize),Mathf.RoundToInt(position.z/cubeSize));
+        return grid.ContainsKey(key);
+
+    }
+    public GameObject getObjectAtPosition(Vector3 position){
+        Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x/cubeSize),Mathf.RoundToInt(position.y/cubeSize),Mathf.RoundToInt(position.z/cubeSize));
+        return grid[key];
+
+    }
+
+    public void clearGrid(){
+        grid.Clear();
+        grid.Add(new Vector3Int(0,0,0),kernel);
     }
 }

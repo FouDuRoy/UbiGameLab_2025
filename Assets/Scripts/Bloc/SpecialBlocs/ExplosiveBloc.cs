@@ -12,7 +12,7 @@ public class ExplosiveBloc : MonoBehaviour
     public float repulsionDistanceFactor = 1.2f;
 
     private bool hasExploded = false;
-
+    [SerializeField] bool explode  = false;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > resistance)
@@ -21,6 +21,12 @@ public class ExplosiveBloc : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if(explode){
+            Explode();
+        }
+    }
     public void Explode()
     {
         if (hasExploded) return;
@@ -35,15 +41,16 @@ public class ExplosiveBloc : MonoBehaviour
             if (bloc)
             {
                 float distance = Vector3.Distance(transform.position, col.transform.position);
+                Vector3 dist = col.transform.position-transform.position;
 
                 if (distance <= explosionRange)
                 {
-                    HandleExplosionEffect(bloc);
+                   // HandleExplosionEffect(bloc);
                 }
 
                 if (distance <= repulsionRange)
                 {
-                    ApplyRepulsionEffect(col, distance, repulsedBodies);
+                    ApplyRepulsionEffect(col, dist);
                 }
             }
         }
@@ -64,16 +71,17 @@ public class ExplosiveBloc : MonoBehaviour
         //}
     }
 
-    private void ApplyRepulsionEffect(Collider col, float distance, List<Rigidbody> repulsedBodies)
+    private void ApplyRepulsionEffect(Collider col, Vector3 distance)
     {
-        Rigidbody rb = col.attachedRigidbody;
-        if (rb != null && !repulsedBodies.Contains(rb))
-        {
-            Vector3 direction = (col.transform.position - transform.position).normalized;
-            float force = repulsionForce / (distance * repulsionDistanceFactor);
-            rb.AddForce(direction * force, ForceMode.Impulse);
-            repulsedBodies.Add(rb);
-        }
+      PlayerObjects obj = col.transform.root.GetComponent<PlayerObjects>();
+      Rigidbody colRigidBody = col.GetComponent<Rigidbody>();
+      if(obj!=null && colRigidBody==null){
+        Rigidbody mainBody = obj.cubeRb;
+        mainBody.AddForceAtPosition(distance*repulsionForce,col.transform.position);
+      }else if(colRigidBody!=null){
+        colRigidBody.AddForce(distance*repulsionForce);
+      }
+
     }
 
     private void OnDrawGizmos()

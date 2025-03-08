@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7850894500233854463}
   - component: {fileID: 4658591005558201665}
   - component: {fileID: 6980508144528851275}
-  - component: {fileID: 307147412523419690}
   m_Layer: 0
   m_Name: NewPlayer
   m_TagString: Untagged
@@ -31,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 136.01028, y: -128.88037, z: 17.41033}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7847107767003649144}
@@ -54,6 +53,7 @@ MonoBehaviour:
   player: {fileID: 3131990571156717056}
   cubeRb: {fileID: 3070630633163488715}
   passiveCube: {fileID: 5694876674060920943, guid: 50ccf99298a1cff4f923b13da4a2a01b, type: 3}
+  gridSystem: {fileID: 0}
 --- !u!114 &7850894500233854463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
   playerCharge: 10
   rotParam: 4
   rotationDamping: 10
-  moveType: 3
+  moveType: 0
   reff: {fileID: 9194480641466295131}
 --- !u!114 &4658591005558201665
 MonoBehaviour:
@@ -120,19 +120,6 @@ MonoBehaviour:
   m_DefaultActionMap: Mouvement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &307147412523419690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134994841213693252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cd95b2b2b493274faea4d774e20a3e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 10
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,10 +135,9 @@ GameObject:
   - component: {fileID: 3070630633163488715}
   - component: {fileID: 578525885588968045}
   - component: {fileID: 4536375940292766682}
-  - component: {fileID: 1875241096477481649}
-  - component: {fileID: 2555962729401144349}
+  - component: {fileID: 1357268866952744722}
   m_Layer: 3
-  m_Name: MainBody
+  m_Name: MainBody2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,10 +251,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 0
   m_ImplicitTensor: 0
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &578525885588968045
 MonoBehaviour:
@@ -305,7 +291,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1875241096477481649
+--- !u!114 &1357268866952744722
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -314,23 +300,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3131990571156717056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cd95b2b2b493274faea4d774e20a3e1, type: 3}
+  m_Script: {fileID: 11500000, guid: aef11832dba477a45bb1904bfde007a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 10
---- !u!114 &2555962729401144349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3131990571156717056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cd95b2b2b493274faea4d774e20a3e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 10
+  kernel: {fileID: 3131990571156717056}
+  cubeSize: 1.2
+  checkGrid: 0
 --- !u!1 &9194480641466295131
 GameObject:
   m_ObjectHideFlags: 0

@@ -113,7 +113,7 @@ public class PlayerMouvement : MonoBehaviour
         if (throwCubes.ReadValue<float>() == 1)
         {
             List<GameObject> cubes = GetComponent<PlayerObjects>().cubes;
-            Dictionary<Vector3,GameObject> cubeGrid = GetComponent<PlayerObjects>().cubesHash;
+            GridSystem cubeGrid = rb.transform.GetComponent<GridSystem>();
             foreach (GameObject cube in cubes)
             {
                 cube.GetComponent<Faces>().resetFaces();
@@ -128,7 +128,7 @@ public class PlayerMouvement : MonoBehaviour
 
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
                 cube.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, this.rb.position, playerCharge);
-
+                cube.GetComponent<Bloc>().owner += " projectile"; 
                 //Remove owner of cube
                 StartCoroutine(blockNeutral(cube));
                 }
@@ -136,9 +136,7 @@ public class PlayerMouvement : MonoBehaviour
             }
             cubes.Clear();
             cubes.Add(this.rb.gameObject);
-            cubeGrid.Clear();
-            cubeGrid.Add(Vector3.zero,this.rb.gameObject);
-
+            cubeGrid.clearGrid();
         }
     }
 
