@@ -36,6 +36,7 @@ public class BlocEjection : MonoBehaviour
                 if (relativeVelocity.magnitude > velocityTreshold)
                 {
                     Debug.Log(relativeVelocity.magnitude);
+
                     hitted.transform.root.GetComponent<PlayerObjects>().addRigidBody(hitted);
                     hitted.transform.root.GetComponent<PlayerObjects>().removeCube(hitted);
 
