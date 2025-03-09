@@ -287,7 +287,7 @@ private void TransformLerping()
 
         this.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
         transform.root.GetComponent<PlayerObjects>().cubes.Add(gameObject);
-        transform.root.GetComponent<PlayerObjects>().gridSystem.AttachBlock(gameObject,cubeAttractedTo.gameObject,closestFace);
+        transform.root.GetComponent<PlayerObjects>().cubeRb.gameObject.GetComponent<GridSystem>().AttachBlock(gameObject,cubeAttractedTo.gameObject,closestFace);
         //We suppose same orientation of all cubes
         Invoke("setLayer", timeBeforeActiveMagnet);
 
@@ -300,7 +300,7 @@ private void TransformLerping()
 
     private void setLayer()
     {
-        RemoveFacesClean();
+       // RemoveFacesClean();
          lerping = false;
         this.cubeRB = null;
         this.endPosition = Vector3.zero;

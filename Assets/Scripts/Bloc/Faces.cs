@@ -39,4 +39,9 @@ public class Faces : MonoBehaviour
         new Vector3(0, 0, cubeSize),new Vector3(0, 0, -cubeSize), new Vector3(0, cubeSize, 0), new Vector3(0, -cubeSize, 0)};
         faces = face.ToList();
     }
+    public void addFace(Vector3 face){
+       if(!faces.Contains(face)){
+            faces.Add(face);
+       }
+    }
 }
