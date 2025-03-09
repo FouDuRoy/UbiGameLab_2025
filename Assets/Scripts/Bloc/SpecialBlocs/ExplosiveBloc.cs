@@ -97,7 +97,7 @@ public class ExplosiveBloc : MonoBehaviour
       }
 
     }
-
+    //TODO TOFIX
     IEnumerator blockNeutral(GameObject block)
     {
         if (block != null)

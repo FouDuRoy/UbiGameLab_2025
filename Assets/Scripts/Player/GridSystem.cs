@@ -44,7 +44,6 @@ public class GridSystem : MonoBehaviour
             Vector3Int newGridPos = grid.FirstOrDefault(x => x.Value == attachedBloc).Key + fixedVector;
             grid.Add(newGridPos, blocToAttach);
         }
-        
     }
     public void DetachBlock(GameObject bloc)
     {
