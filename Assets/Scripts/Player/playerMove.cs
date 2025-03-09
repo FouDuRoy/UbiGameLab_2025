@@ -22,8 +22,8 @@ public class PlayerMouvement : MonoBehaviour
 {
     private const float collisionDistance = 0.1f;
     [SerializeField] float explosionForce = 30;
-    [SerializeField] float speed = 1f;
-    [SerializeField] float speedRotation = 1f;
+    [SerializeField] float mouvementSpeed = 1f;
+    [SerializeField] float pivotSpeed = 1f;
     [SerializeField] float playerCharge = 1000f;
     [SerializeField] float rotParam;
     [SerializeField] float rotationDamping =10f;
@@ -73,22 +73,20 @@ public class PlayerMouvement : MonoBehaviour
         }
         else if (moveType == MouvementType.spring)
         {
-            rb.AddForceAtPosition(direction * speed, CalculateCenterMass());
-            rb.AddTorque(Vector3.up * rotationY * speedRotation,ForceMode.Force);
+            rb.AddForceAtPosition(direction * mouvementSpeed, CalculateCenterMass());
+            rb.AddTorque(Vector3.up * rotationY * pivotSpeed,ForceMode.Force);
         }
         else if (moveType == MouvementType.transform)
         {
             TranslateMouvement(direction, rotationY);
         }else if(moveType == MouvementType.move3d){
-            rb.AddForce(direction * speed);
-           // rotateAndDirection(direction);
-            //rotateXandZ(rotationX,rotationZ);
-            rotateAndDirection2(direction, rotationX,rotationZ);
+            rb.AddForce(rb.transform.forward * mouvementSpeed*direction.magnitude);
+            rotateAndDirection(direction);
 
 
         }
         else if (moveType == MouvementType.move3dSpring){
-            rb.AddForceAtPosition(direction * speed,CalculateCenterMass());
+            rb.AddForceAtPosition(direction * mouvementSpeed,CalculateCenterMass());
             rotateAndDirection(direction);
             rotateXandZ(rotationX,rotationZ);
         }
@@ -100,12 +98,12 @@ public class PlayerMouvement : MonoBehaviour
 
     private void TranslateMouvement(Vector3 direction, float rotation)
     {
-        transform.position += direction * speed * Time.fixedDeltaTime;
-        transform.Rotate(Vector3.up, rotation * speedRotation * Time.fixedDeltaTime, Space.World);
+        transform.position += direction * mouvementSpeed * Time.fixedDeltaTime;
+        transform.Rotate(Vector3.up, rotation * pivotSpeed * Time.fixedDeltaTime, Space.World);
     }
     private void RigidBodyMouvement(Vector3 direction, float rotation,float rotationX) {
-        rb.AddForce(direction * speed);
-        rb.AddTorque(Vector3.up * rotation * speedRotation);
+        rb.AddForce(direction * mouvementSpeed);
+        rb.AddTorque(Vector3.up * rotation * pivotSpeed);
     }
 
     private void ThrowCubes()
@@ -128,7 +126,7 @@ public class PlayerMouvement : MonoBehaviour
 
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
                 cube.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, this.rb.position, playerCharge);
-                cube.GetComponent<Bloc>().owner += " projectile"; 
+                cube.GetComponent<Bloc>().owner = " projectile"; 
                 //Remove owner of cube
                 StartCoroutine(blockNeutral(cube));
                 }
@@ -190,7 +188,7 @@ public class PlayerMouvement : MonoBehaviour
         foreach (GameObject obj in transform.GetComponent<PlayerObjects>().cubes)
         {
             Rigidbody rbb = obj.GetComponent<Rigidbody>();
-            float proportionalForce = (rbb.mass) * speed;
+            float proportionalForce = (rbb.mass) * mouvementSpeed;
             rbb.AddForceAtPosition(LocalForceDirection * proportionalForce, centerMass, ForceMode.Force);
         }
 
@@ -199,30 +197,28 @@ public class PlayerMouvement : MonoBehaviour
     {
 
         Vector3 pivotPoint = rb.position;
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, (speedRotation * rotation) / rotParam, 0));
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, (pivotSpeed * rotation) / rotParam, 0));
         foreach (GameObject obj in transform.GetComponent<PlayerObjects>().cubes)
         {
             Rigidbody rbb = obj.GetComponent<Rigidbody>();
             Vector3 radiusVector = rbb.position - pivotPoint;
             Vector3 rot = Vector3.Cross(radiusVector, Vector3.up);
-            rbb.AddForce(-rot * rotation * speedRotation );
+            rbb.AddForce(-rot * rotation * pivotSpeed );
 
         }
     }
     public void addTorqueSingle(float rotation)
     {
-        rb.AddTorque(Vector3.up * rotation * speedRotation);
+        rb.AddTorque(Vector3.up * rotation * pivotSpeed);
     }
     public void rotateAndDirection(Vector3 direction){
         
-       Vector3 planeProjection = reff.transform.forward;
+       Vector3 planeProjection = rb.transform.forward;
        float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
-       Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*speedRotation;
+       Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*pivotSpeed;
         if (direction != Vector3.zero) {
             rb.AddTorque(angularVelocity);
             rb.AddTorque(-rb.angularVelocity * rotationDamping);
-            reff.GetComponent<Rigidbody>().AddTorque(angularVelocity);
-            reff.GetComponent<Rigidbody>().AddTorque(-reff.GetComponent<Rigidbody>().angularVelocity * rotationDamping);
         }
 
 
@@ -232,11 +228,11 @@ public class PlayerMouvement : MonoBehaviour
 
         Vector3 planeProjection = reff.transform.forward;
          float angle = Vector3.SignedAngle(planeProjection, direction.normalized, Vector3.up);
-         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * speedRotation;
-        Quaternion quat1 = Quaternion.AngleAxis((angle * Mathf.Deg2Rad) * direction.magnitude * speedRotation, Vector3.up);
+         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed;
+        Quaternion quat1 = Quaternion.AngleAxis((angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed, Vector3.up);
         if (Mathf.Abs(rotationX) >= Mathf.Abs(rotationZ))
         {
-            Quaternion quat2 = Quaternion.AngleAxis(rotationX * speedRotation, rb.transform.right);
+            Quaternion quat2 = Quaternion.AngleAxis(rotationX * pivotSpeed, rb.transform.right);
             //Quaternion quat3 = quat1 * rb.rotation * quat2;
         
             Quaternion quat3 = quat1 * quat2;
@@ -244,7 +240,7 @@ public class PlayerMouvement : MonoBehaviour
         }
         else
         {
-            Quaternion quat2 = Quaternion.AngleAxis(rotationZ * speedRotation, rb.transform.forward);
+            Quaternion quat2 = Quaternion.AngleAxis(rotationZ * pivotSpeed, rb.transform.forward);
             //Quaternion quat3 = quat1 * rb.rotation * quat2;
             Quaternion quat3 = quat1 * quat2;
             rb.angularVelocity = QuaternionToAngularVelocity(quat3);
@@ -256,7 +252,7 @@ public class PlayerMouvement : MonoBehaviour
         if(Mathf.Abs(xValue)>=Mathf.Abs(zValue)){
           rb.AddRelativeTorque(Vector3.right*xValue*10000);
         }else{
-          rb.AddRelativeTorque(Vector3.forward*zValue*speedRotation* 10000);
+          rb.AddRelativeTorque(Vector3.forward*zValue*pivotSpeed* 10000);
         }
       
     }

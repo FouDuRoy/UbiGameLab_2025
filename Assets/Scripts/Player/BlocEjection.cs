@@ -5,8 +5,10 @@ using UnityEngine;
 public class BlocEjection : MonoBehaviour
 {
     [SerializeField] float velocityTreshold = 10f;
+    [SerializeField] float energyLoss = 0.8f;
     private GridSystem gridSystem;
     private PlayerObjects playerObjects;
+
 
     private void Start()
     {
@@ -29,18 +31,18 @@ public class BlocEjection : MonoBehaviour
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
              
-            if (ownerHitter != ownerHitted && ownerHitter.Contains("Player") && ownerHitted.Contains("Player"))
+            if (ownerHitter != ownerHitted && ownerHitter.Contains("Player") && ownerHitted.Contains("Player") && !ownerHitter.Contains("projectile"))
             {
                 Vector3 relativeVelocity = collision.relativeVelocity;
-                 Debug.Log("hitted:"+relativeVelocity);
                 if (relativeVelocity.magnitude > velocityTreshold)
                 {
-                    Debug.Log(relativeVelocity.magnitude);
+                    // Calculate normal average
+                  
+
                     hitted.transform.root.GetComponent<PlayerObjects>().addRigidBody(hitted);
                     hitted.transform.root.GetComponent<PlayerObjects>().removeCube(hitted);
-
-                    hitted.GetComponent<Rigidbody>().velocity = relativeVelocity*3;
-                    hitted.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+                    Vector3 ejectionVeolcity = relativeVelocity*energyLoss;
+                    hitted.GetComponent<Rigidbody>().velocity = ejectionVeolcity;
                     StartCoroutine(blockNeutral(hitted));
                 }
             }
@@ -54,19 +56,19 @@ public class BlocEjection : MonoBehaviour
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
              
-            if (ownerHitter != ownerHitted && ownerHitter.Contains("projectile") && ownerHitted.Contains("Player"))
+            if (ownerHitter != ownerHitted  && ownerHitted.Contains("Player"))
             {
                 Vector3 relativeVelocity = collision.relativeVelocity;
-                 Debug.Log("hitted:"+relativeVelocity);
                 if (relativeVelocity.magnitude > velocityTreshold)
                 {
-                    Debug.Log(relativeVelocity.magnitude);
+                    
+                   
+                    Vector3 ejectionVeolcity =relativeVelocity*energyLoss;
                     hitted.transform.root.GetComponent<PlayerObjects>().addRigidBody(hitted);
                     hitted.transform.root.GetComponent<PlayerObjects>().removeCube(hitted);
-
-                    hitted.GetComponent<Rigidbody>().velocity = relativeVelocity;
-                    hitted.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-                    hitter.GetComponent<Rigidbody>().velocity = -relativeVelocity;
+                    hitted.GetComponent<Bloc>().owner = "projectile";
+                    hitted.GetComponent<Rigidbody>().velocity = ejectionVeolcity;
+                    hitter.GetComponent<Rigidbody>().velocity = -ejectionVeolcity;
                     StartCoroutine(blockNeutral(hitted));
                 }
             }

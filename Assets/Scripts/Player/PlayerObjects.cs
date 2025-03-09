@@ -25,7 +25,7 @@ public class PlayerObjects : MonoBehaviour
         cube.GetComponent<Faces>().resetFaces();
         cubes.Remove(cube);
         cube.layer = 0;
-
+        Destroy(cube.GetComponent<SphereCollider>());
         gridSystem.DetachBlock(cube); // Supprime de la grille
 
         foreach (var v in cubesHash)

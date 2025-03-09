@@ -15,7 +15,9 @@ public class GridSystem : MonoBehaviour
 
     private void Start()
     {
+        kernel = transform.parent.GetComponent<PlayerObjects>().cubeRb.gameObject;
         grid.Add(new Vector3Int(0, 0, 0), kernel);
+         Debug.Log(kernel.gameObject);
     }
 
     void Update()
@@ -34,6 +36,7 @@ public class GridSystem : MonoBehaviour
         Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt(closestFace.x), Mathf.RoundToInt(closestFace.y), Mathf.RoundToInt(closestFace.z));
         if (attachedBloc.name == "MainBody")
         {
+           
             grid.Add(fixedVector, blocToAttach);
         }
         else if (grid.ContainsValue(attachedBloc))
