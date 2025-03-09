@@ -79,13 +79,13 @@ public class GridSystem : MonoBehaviour
                     keys.Add(gridBloc.Key);
                     gridBloc.Value.GetComponent<Bloc>().owner = "projectile";
                     StartCoroutine(blockNeutral(gridBloc.Value));
-                    neighbors = GetNeighbors(detachedGridPos);
+                    neighbors = GetNeighbors(gridBloc.Key);
                     playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
                     //Ajouter les faces aux voisins
 
                     foreach (Vector3Int voisin in neighbors){
                           if(grid.ContainsKey(voisin)){
-                            Vector3 faceToAdd = (detachedGridPos-voisin);
+                            Vector3 faceToAdd = (gridBloc.Key - voisin);
                             faceToAdd = faceToAdd*cubeSize;
                             grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
                         }
@@ -99,7 +99,65 @@ public class GridSystem : MonoBehaviour
         }
 
     }
+    public void DetachBlocSingle(GameObject bloc)
+    {
+        Vector3Int detachedGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
+        if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
+        {
+            playerObj.removeCube(grid[detachedGridPos]);
+            grid.Remove(detachedGridPos);
+            playerObj.weight -= bloc.GetComponent<Bloc>().weight;
+            List<Vector3Int> neighbors = GetNeighbors(detachedGridPos);
+            //Ajouter les faces aux voisins
 
+            foreach (Vector3Int voisin in neighbors)
+            {
+
+                if (grid.ContainsKey(voisin))
+                {
+                    Vector3 faceToAdd = (detachedGridPos - voisin);
+                    faceToAdd = faceToAdd * cubeSize;
+                    grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
+                }
+
+            }
+        }
+    }
+    public void detachDisconnectedBlocks()
+    {
+        List<Vector3Int> keys = new List<Vector3Int>();
+        List<Vector3Int> neighbors = new List<Vector3Int>();
+        foreach (var gridBloc in grid)
+        {
+            if (!IsBlockConnected(gridBloc.Value))
+            {
+                neighbors = GetNeighbors(gridBloc.Key);
+                playerObj.addRigidBody(gridBloc.Value);
+                playerObj.removeCube(gridBloc.Value);
+                keys.Add(gridBloc.Key);
+                gridBloc.Value.GetComponent<Bloc>().owner = "projectile";
+                StartCoroutine(blockNeutral(gridBloc.Value));
+                neighbors = GetNeighbors(gridBloc.Key);
+                playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
+                //Ajouter les faces aux voisins
+
+                foreach (Vector3Int voisin in neighbors)
+                {
+                    if (grid.ContainsKey(voisin))
+                    {
+                        Vector3 faceToAdd = (gridBloc.Key - voisin);
+                        faceToAdd = faceToAdd * cubeSize;
+                        grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
+                    }
+                }
+            }
+
+        }
+        foreach (Vector3Int key in keys)
+        {
+            grid.Remove(key);
+        }
+    }
     public void CheckAndDetachDisconnectedBlocks()
     {
         HashSet<Vector3Int> safeBlocks = new HashSet<Vector3Int>();
