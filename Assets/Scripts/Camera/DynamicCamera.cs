@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+<<<<<<< HEAD
+=======
+using UnityEngine.ProBuilder;
+
+>>>>>>> Dev_Bloc_Integration
 public class DynamicCamera : MonoBehaviour
 {
     [SerializeField] private GameObject Player1;
