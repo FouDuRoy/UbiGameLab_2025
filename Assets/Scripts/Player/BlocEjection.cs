@@ -62,7 +62,6 @@ public class BlocEjection : MonoBehaviour
                 if (relativeVelocity.magnitude > velocityTreshold)
                 {
 
-                    Debug.Log(hitted.gameObject);
                     Vector3 ejectionVeolcity =relativeVelocity*energyLoss;
                     hitted.transform.root.GetComponent<PlayerObjects>().addRigidBody(hitted);
                     gridSystem.DetachBlock(hitted);
