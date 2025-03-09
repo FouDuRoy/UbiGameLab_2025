@@ -62,7 +62,6 @@ public class PlayerMouvement : MonoBehaviour
     void FixedUpdate()
     {
         weight = this.GetComponent<PlayerObjects>().weight;
-        Debug.Log(weight);
 
         Vector3 direction2 = moveAction.ReadValue<Vector3>();
         Vector3 direction = new Vector3(direction2.x,0,direction2.y);
@@ -130,7 +129,7 @@ public class PlayerMouvement : MonoBehaviour
 
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
                 cube.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, this.rb.position, playerCharge);
-                cube.GetComponent<Bloc>().owner = "projectile"; 
+                cube.GetComponent<Bloc>().owner += "projectile"; 
                 //Remove owner of cube
                 StartCoroutine(blockNeutral(cube));
                 }
