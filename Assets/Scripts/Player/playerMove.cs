@@ -37,6 +37,7 @@ public class PlayerMouvement : MonoBehaviour
     InputAction rotateActionX;
     Rigidbody rb;
     float totalMass;
+    float weight;
     
 
 
@@ -54,12 +55,15 @@ public class PlayerMouvement : MonoBehaviour
             rb.centerOfMass = Vector3.zero;
             rb.inertiaTensor= new Vector3(1,1,1);
         }
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-       // planeOrientation.transform.rotation = Quaternion.Euler(0,rb.rotation.eulerAngles.y,0);
+        weight = this.GetComponent<PlayerObjects>().weight;
+        Debug.Log(weight);
+
         Vector3 direction2 = moveAction.ReadValue<Vector3>();
         Vector3 direction = new Vector3(direction2.x,0,direction2.y);
         float rotationY = rotateAction.ReadValue<float>();
@@ -80,7 +84,7 @@ public class PlayerMouvement : MonoBehaviour
         {
             TranslateMouvement(direction, rotationY);
         }else if(moveType == MouvementType.move3d){
-            rb.AddForce(direction * mouvementSpeed);
+            rb.AddForce(direction * mouvementSpeed / weight);
             rotateAndDirection(direction);
 
 
@@ -102,8 +106,8 @@ public class PlayerMouvement : MonoBehaviour
         transform.Rotate(Vector3.up, rotation * pivotSpeed * Time.fixedDeltaTime, Space.World);
     }
     private void RigidBodyMouvement(Vector3 direction, float rotation,float rotationX) {
-        rb.AddForce(direction * mouvementSpeed);
-        rb.AddTorque(Vector3.up * rotation * pivotSpeed);
+        rb.AddForce(direction * mouvementSpeed/ weight);
+        rb.AddTorque(Vector3.up * rotation * pivotSpeed/ weight);
     }
 
     private void ThrowCubes()
@@ -215,7 +219,7 @@ public class PlayerMouvement : MonoBehaviour
         
        Vector3 planeProjection = rb.transform.forward;
        float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
-       Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*pivotSpeed;
+       Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*pivotSpeed/ weight;
         if (direction != Vector3.zero) {
             rb.AddTorque(angularVelocity);
             rb.AddTorque(-rb.angularVelocity * rotationDamping);

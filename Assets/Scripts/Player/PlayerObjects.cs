@@ -11,12 +11,13 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] public Rigidbody cubeRb;
     [SerializeField] public GameObject passiveCube;
     public GridSystem gridSystem;
+    public float weight=1;
 
     void Start()
     {
         gridSystem = FindObjectOfType<GridSystem>();
-        cubesHash.Add(Vector3.zero, cubeRb.gameObject);
         cubes.Add(player);
+        weight = 1;
     }
 
     public bool removeCube(GameObject cube)
@@ -26,7 +27,6 @@ public class PlayerObjects : MonoBehaviour
         cubes.Remove(cube);
         cube.layer = 0;
         Destroy(cube.GetComponent<SphereCollider>());
-       // gridSystem.DetachBlock(cube); // Supprime de la grille
 
         foreach (var v in cubesHash)
         {

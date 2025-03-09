@@ -18,8 +18,8 @@ public class GridSystem : MonoBehaviour
     {
         kernel = transform.parent.GetComponent<PlayerObjects>().cubeRb.gameObject;
         grid.Add(new Vector3Int(0, 0, 0), kernel);
-         Debug.Log(kernel.gameObject);
          playerObj = this.transform.parent.GetComponent<PlayerObjects>();
+        Debug.Log(playerObj.weight);
     }
 
     void Update()
@@ -38,12 +38,14 @@ public class GridSystem : MonoBehaviour
         Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt(closestFace.x), Mathf.RoundToInt(closestFace.y), Mathf.RoundToInt(closestFace.z));
         if (attachedBloc.name == "MainBody")
         {
-           
             grid.Add(fixedVector, blocToAttach);
+            Debug.Log("wow");
+            playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
         }
         else if (grid.ContainsValue(attachedBloc))
         {
             Vector3Int newGridPos = grid.FirstOrDefault(x => x.Value == attachedBloc).Key + fixedVector;
+            playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
             grid.Add(newGridPos, blocToAttach);
         }
     }
@@ -54,7 +56,7 @@ public class GridSystem : MonoBehaviour
         {
             playerObj.removeCube(grid[detachedGridPos]);
             grid.Remove(detachedGridPos);
-
+            playerObj.weight -= bloc.GetComponent<Bloc>().weight;
             List<Vector3Int> neighbors = GetNeighbors(detachedGridPos);
             //Ajouter les faces aux voisins
 
@@ -67,7 +69,6 @@ public class GridSystem : MonoBehaviour
                 }
 
             }
-            Debug.Log("Bloc d�tach� " + ":" + bloc.name);
             List<Vector3Int> keys = new List<Vector3Int>();
             foreach (var gridBloc in grid)
             {
@@ -76,13 +77,13 @@ public class GridSystem : MonoBehaviour
                     playerObj.addRigidBody(gridBloc.Value);
                     playerObj.removeCube(gridBloc.Value);
                     keys.Add(gridBloc.Key);
+                    gridBloc.Value.GetComponent<Bloc>().owner = "projectile";
                     StartCoroutine(blockNeutral(gridBloc.Value));
-                    Debug.Log(gridBloc.Value.name);
                     neighbors = GetNeighbors(detachedGridPos);
-                
+                    playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
                     //Ajouter les faces aux voisins
 
-                    foreach(Vector3Int voisin in neighbors){
+                    foreach (Vector3Int voisin in neighbors){
                           if(grid.ContainsKey(voisin)){
                             Vector3 faceToAdd = (detachedGridPos-voisin);
                             faceToAdd = faceToAdd*cubeSize;
@@ -228,6 +229,7 @@ public class GridSystem : MonoBehaviour
     public void clearGrid(){
         grid.Clear();
         grid.Add(new Vector3Int(0,0,0),kernel);
+        playerObj.weight = 1;
     }
       IEnumerator blockNeutral(GameObject block)
     {
