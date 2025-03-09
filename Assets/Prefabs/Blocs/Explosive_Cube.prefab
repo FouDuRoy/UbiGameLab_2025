@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6950955270905734173}
   - component: {fileID: -2015588491079092952}
   - component: {fileID: 2525441135307876409}
+  - component: {fileID: 1143426935521263120}
   m_Layer: 0
   m_Name: Explosive_Cube
   m_TagString: explosive
@@ -121,8 +122,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5694876674060920943}
   serializedVersion: 4
-  m_Mass: 0.1
-  m_Drag: 5
+  m_Mass: 2
+  m_Drag: 0.1
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -152,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.3
-  activeRadius: 1
+  passiveRadius: 0.75
+  activeRadius: 2.5
   charge: 0.25
   error: 0.05
   interpolates: 1
@@ -226,12 +227,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ea55e9940ca642bf8d17224f3f85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resistance: 2
-  explosionRange: 2
-  repulsionRange: 3
+  resistance: 1
+  explosionRange: 5
+  repulsionRange: 7
   repulsionForce: 0.1
   repulsionDistanceFactor: 1.2
   explode: 0
+--- !u!114 &1143426935521263120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694876674060920943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b1f66b6b11f704684b152fe1a07198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1045223509533804679
 PrefabInstance:
   m_ObjectHideFlags: 0
