@@ -40,7 +40,7 @@ public class BlocEjection : MonoBehaviour
                   
 
                     hitted.transform.root.GetComponent<PlayerObjects>().addRigidBody(hitted);
-                    hitted.transform.root.GetComponent<PlayerObjects>().removeCube(hitted);
+                    gridSystem.DetachBlock(hitted);
                     Vector3 ejectionVeolcity = relativeVelocity*energyLoss;
                     hitted.GetComponent<Rigidbody>().velocity = ejectionVeolcity;
                     StartCoroutine(blockNeutral(hitted));
@@ -56,7 +56,7 @@ public class BlocEjection : MonoBehaviour
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
              
-            if (ownerHitter != ownerHitted  && ownerHitted.Contains("Player"))
+            if (ownerHitter != ownerHitted  && ownerHitted.Contains("Player") && ownerHitter.Contains("projectile"))
             {
                 Vector3 relativeVelocity = collision.relativeVelocity;
                 if (relativeVelocity.magnitude > velocityTreshold)
@@ -65,7 +65,7 @@ public class BlocEjection : MonoBehaviour
                    
                     Vector3 ejectionVeolcity =relativeVelocity*energyLoss;
                     hitted.transform.root.GetComponent<PlayerObjects>().addRigidBody(hitted);
-                    hitted.transform.root.GetComponent<PlayerObjects>().removeCube(hitted);
+                    gridSystem.DetachBlock(hitted);
                     hitted.GetComponent<Bloc>().owner = "projectile";
                     hitted.GetComponent<Rigidbody>().velocity = ejectionVeolcity;
                     hitter.GetComponent<Rigidbody>().velocity = -ejectionVeolcity;

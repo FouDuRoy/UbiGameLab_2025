@@ -126,7 +126,7 @@ public class PlayerMouvement : MonoBehaviour
 
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
                 cube.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, this.rb.position, playerCharge);
-                cube.GetComponent<Bloc>().owner = " projectile"; 
+                cube.GetComponent<Bloc>().owner = "projectile"; 
                 //Remove owner of cube
                 StartCoroutine(blockNeutral(cube));
                 }

@@ -9,6 +9,7 @@ public class GridSystem : MonoBehaviour
 {
     protected Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
     public GameObject kernel; // Le noyau du syst�me, point (0,0,0)
+    public PlayerObjects playerObj;
 
     public float cubeSize = 1.2f;
    [SerializeField] bool checkGrid = false;
@@ -18,6 +19,7 @@ public class GridSystem : MonoBehaviour
         kernel = transform.parent.GetComponent<PlayerObjects>().cubeRb.gameObject;
         grid.Add(new Vector3Int(0, 0, 0), kernel);
          Debug.Log(kernel.gameObject);
+         playerObj = this.transform.parent.GetComponent<PlayerObjects>();
     }
 
     void Update()
@@ -50,15 +52,48 @@ public class GridSystem : MonoBehaviour
         Vector3Int detachedGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
         {
+            playerObj.removeCube(grid[detachedGridPos]);
             grid.Remove(detachedGridPos);
+
+            List<Vector3Int> neighbors = GetNeighbors(detachedGridPos);
+            //Ajouter les faces aux voisins
+
+            foreach(Vector3Int voisin in neighbors){
+
+                if(grid.ContainsKey(voisin)){
+                    Vector3 faceToAdd = (detachedGridPos-voisin);
+                    faceToAdd = faceToAdd*cubeSize;
+                    grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
+                }
+
+            }
             Debug.Log("Bloc d�tach� " + ":" + bloc.name);
+            List<Vector3Int> keys = new List<Vector3Int>();
             foreach (var gridBloc in grid)
             {
                 if (!IsBlockConnected(gridBloc.Value))
                 {
-                    grid.Remove(detachedGridPos);
+                    playerObj.addRigidBody(gridBloc.Value);
+                    playerObj.removeCube(gridBloc.Value);
+                    keys.Add(gridBloc.Key);
+                    StartCoroutine(blockNeutral(gridBloc.Value));
                     Debug.Log(gridBloc.Value.name);
+                    neighbors = GetNeighbors(detachedGridPos);
+                
+                    //Ajouter les faces aux voisins
+
+                    foreach(Vector3Int voisin in neighbors){
+                          if(grid.ContainsKey(voisin)){
+                            Vector3 faceToAdd = (detachedGridPos-voisin);
+                            faceToAdd = faceToAdd*cubeSize;
+                            grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
+                        }
+                     }
                 }
+                
+            }
+            foreach(Vector3Int key in keys){
+                grid.Remove(key);
             }
         }
 
@@ -193,5 +228,13 @@ public class GridSystem : MonoBehaviour
     public void clearGrid(){
         grid.Clear();
         grid.Add(new Vector3Int(0,0,0),kernel);
+    }
+      IEnumerator blockNeutral(GameObject block)
+    {
+        yield return new WaitForSeconds(3f);
+        if (block != null)
+        {
+            block.GetComponent<Bloc>().setOwner("Neutral");
+        }
     }
 }
