@@ -13,8 +13,17 @@ public class ExplosiveBloc : MonoBehaviour
     public float repulsionForce = 50f;
     public float repulsionDistanceFactor = 1.2f;
 
+    [Header("Gizmos Settings")]
+    public float gizmoDuration = 3f; // Temps d'affichage des sphères visuelles
+    private float explosionTime = -1f;
+    public Material explosionMaterial;
+    public Material repulsionMaterial;
     private bool hasExploded = false;
-    [SerializeField] bool explode  = false;
+    [SerializeField] bool explode = false;
+
+    private GameObject explosionSphere;
+    private GameObject repulsionSphere;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > resistance)
@@ -25,31 +34,36 @@ public class ExplosiveBloc : MonoBehaviour
 
     void Update()
     {
-        if(explode){
+        if (explode)
+        {
             Explode();
         }
     }
+
     public void Explode()
     {
         if (hasExploded) return;
         hasExploded = true;
+        explosionTime = Time.time;
         HandleParticles();
+        ShowExplosionSpheres();
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, repulsionRange);
         BoxCollider[] affectedObjects = colliders.OfType<BoxCollider>().ToArray();
         List<Rigidbody> repulsedBodies = new List<Rigidbody>();
+
         foreach (Collider col in affectedObjects)
         {
             Bloc bloc = col.GetComponent<Bloc>();
             if (bloc)
             {
                 float distance = Vector3.Distance(transform.position, col.transform.position);
-                Vector3 dist = col.transform.position-transform.position;
+                Vector3 dist = col.transform.position - transform.position;
 
                 if (distance <= explosionRange)
                 {
                     HandleExplosionEffect(col.gameObject);
                 }
-
                 else if (distance <= repulsionRange)
                 {
                     ApplyRepulsionEffect(col, dist);
@@ -57,19 +71,48 @@ public class ExplosiveBloc : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        BoxCollider boxCollider = GetComponent<BoxCollider>();
+        if (boxCollider != null)
+        {
+            boxCollider.enabled = false;
+        }
+
+        Destroy(gameObject, gizmoDuration);
     }
+
+    private void ShowExplosionSpheres()
+    {
+        // Créer une sphère rouge pour l'explosion
+        explosionSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        explosionSphere.transform.position = transform.position;
+        explosionSphere.transform.localScale = Vector3.one * explosionRange * 2;
+        explosionSphere.GetComponent<Renderer>().material = explosionMaterial;
+        Destroy(explosionSphere, gizmoDuration);
+
+        // Créer une sphère bleue pour la répulsion
+        repulsionSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        repulsionSphere.transform.position = transform.position;
+        repulsionSphere.transform.localScale = Vector3.one * repulsionRange * 2;
+        repulsionSphere.GetComponent<Renderer>().material = repulsionMaterial;
+        Destroy(repulsionSphere, gizmoDuration);
+    }
+
     private void HandleParticles()
     {
         ParticleSystem particles = GetComponentInChildren<ParticleSystem>(true);
         if (particles != null)
         {
-            Debug.Log(particles);
             particles.gameObject.SetActive(true);
             particles.Play();
             Debug.Log("Boom");
         }
     }
+
     private void HandleExplosionEffect(GameObject bloc)
     {
         if (bloc.CompareTag("wood"))
@@ -80,34 +123,33 @@ public class ExplosiveBloc : MonoBehaviour
         else
         {
             PlayerObjects player = bloc.GetComponentInParent<PlayerObjects>();
-            if(player != null)
+            if (player != null)
             {
                 player.addRigidBody(bloc);
                 player.removeCube(bloc);
             }
             Rigidbody targetRb = bloc.GetComponent<Rigidbody>();
             Vector3 forceDirection = (targetRb.transform.position - transform.position).normalized;
-
-            // Appliquer la force dans la direction inverse
             targetRb.AddForce(forceDirection * repulsionForce, ForceMode.Impulse);
-
             StartCoroutine(blockNeutral(bloc));
         }
     }
 
     private void ApplyRepulsionEffect(Collider col, Vector3 distance)
     {
-      PlayerObjects obj = col.transform.root.GetComponent<PlayerObjects>();
-      Rigidbody colRigidBody = col.GetComponent<Rigidbody>();
-      if(obj!=null && colRigidBody==null){
-        Rigidbody mainBody = obj.cubeRb;
-        mainBody.AddForceAtPosition(distance*repulsionForce,col.transform.position);
-      }else if(colRigidBody!=null){
-        colRigidBody.AddForce(distance*repulsionForce);
-      }
-
+        PlayerObjects obj = col.transform.root.GetComponent<PlayerObjects>();
+        Rigidbody colRigidBody = col.GetComponent<Rigidbody>();
+        if (obj != null && colRigidBody == null)
+        {
+            Rigidbody mainBody = obj.cubeRb;
+            mainBody.AddForceAtPosition(distance * repulsionForce, col.transform.position);
+        }
+        else if (colRigidBody != null)
+        {
+            colRigidBody.AddForce(distance * repulsionForce);
+        }
     }
-    //TODO TOFIX
+
     IEnumerator blockNeutral(GameObject block)
     {
         if (block != null)
@@ -115,14 +157,5 @@ public class ExplosiveBloc : MonoBehaviour
             block.GetComponent<Bloc>().setOwner("Neutral");
         }
         yield return null;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = new Color(1, 0, 0, 0.3f); // Rouge transparent
-        Gizmos.DrawSphere(transform.position, explosionRange);
-
-        Gizmos.color = new Color(0, 0, 1, 0.3f); // Bleu transparent
-        Gizmos.DrawSphere(transform.position, repulsionRange);
     }
 }
