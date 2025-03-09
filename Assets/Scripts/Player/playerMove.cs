@@ -80,7 +80,7 @@ public class PlayerMouvement : MonoBehaviour
         {
             TranslateMouvement(direction, rotationY);
         }else if(moveType == MouvementType.move3d){
-            rb.AddForce(rb.transform.forward * mouvementSpeed*direction.magnitude);
+            rb.AddForce(direction * mouvementSpeed);
             rotateAndDirection(direction);
 
 
