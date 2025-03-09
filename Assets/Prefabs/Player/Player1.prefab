@@ -67,13 +67,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionForce: 30
-  mouvementSpeed: 1000
+  mouvementSpeed: 1200
   pivotSpeed: 100
   playerCharge: 10
   rotParam: 4
   rotationDamping: 10
   moveType: 3
-  reff: {fileID: 0}
+  coneProjection: 0
 --- !u!114 &4658591005558201665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,19 +337,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000000027939677
+      value: -0.000000031664968
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00000016391277
+      objectReference: {fileID: 0}
     - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000000027939677
+      value: -0.000000031664968
       objectReference: {fileID: 0}
     - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00000016391277
       objectReference: {fileID: 0}
     - target: {fileID: 3285066005692098029, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.x

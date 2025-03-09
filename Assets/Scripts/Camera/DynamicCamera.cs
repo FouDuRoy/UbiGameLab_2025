@@ -37,6 +37,11 @@ public class DynamicCamera : MonoBehaviour
 
         //Récupère l'angle de la caméra par rapport à son pivot
         angleCam =new Vector2(cam.transform.localPosition.z, cam.transform.localPosition.y).normalized;
+
+        if (isOrthographic)
+        {
+            cam.orthographicSize=maxDistance;
+        }
     }
 
     void Update()
