@@ -8,6 +8,7 @@ public class Bloc : MonoBehaviour
     public float weight;
     public string owner;
     public Rigidbody rb;
+    //private bool activeMagnetism = true;
 
     private Vector3Int gridPosition;
 

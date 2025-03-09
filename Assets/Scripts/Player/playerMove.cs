@@ -28,7 +28,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float rotParam;
     [SerializeField] float rotationDamping =10f;
     [SerializeField] MouvementType moveType;
-    [SerializeField] bool coneProjection;
+    [SerializeField] GameObject reff;
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction rotateAction;
@@ -38,7 +38,6 @@ public class PlayerMouvement : MonoBehaviour
     Rigidbody rb;
     float totalMass;
     float weight;
-    private GameObject reff;
     
 
 
@@ -94,14 +93,8 @@ public class PlayerMouvement : MonoBehaviour
             rotateAndDirection(direction);
             rotateXandZ(rotationX,rotationZ);
         }
-        if (coneProjection)
-        {
-            ThrowCubesCone();
-        }
-        else
-        {
-            ThrowCubes();
-        }
+
+        ThrowCubes();
 
 
     }
@@ -147,41 +140,7 @@ public class PlayerMouvement : MonoBehaviour
             cubeGrid.clearGrid();
         }
     }
-    private void ThrowCubesCone()
-    {
-        if (throwCubes.ReadValue<float>() == 1)
-        {
-            GameObject[] cubes = GetComponent<PlayerObjects>().cubes.ToArray();
-            GridSystem cubeGrid = rb.transform.GetComponent<GridSystem>();
-            foreach (GameObject cube in cubes)
-            {
-                Vector3 positionCube = cubeGrid.getPositionOfObject(cube);
-                if (positionCube.z > 0)
-                {
-                    cube.GetComponent<Faces>().resetFaces();
-                    if (cube != this.rb.gameObject)
-                    {
-                        cube.gameObject.layer = 0;
-                        cube.transform.parent = this.transform.parent;
-                        cubeGrid.DetachBlocSingle(cube); 
 
-                        //Add rigidBody
-                        GetComponent<PlayerObjects>().addRigidBody(cube);
-
-
-                        cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-                        cube.GetComponent<Rigidbody>().AddForce((rb.transform.forward + rb.transform.right * positionCube.x * 0.1f)*explosionForce);
-                        cube.GetComponent<Bloc>().owner += "projectile";
-                        //Remove owner of cube
-                        StartCoroutine(blockNeutral(cube));
-                    }
-                }
-                
-
-            }
-            cubeGrid.detachDisconnectedBlocks();
-        }
-    }
     IEnumerator blockNeutral(GameObject block)
     {
 
