@@ -12,6 +12,9 @@ public class ExplosiveBloc : MonoBehaviour
     public float repulsionRange = 8f;
     public float repulsionForce = 50f;
     public float repulsionDistanceFactor = 1.2f;
+    public float timeBeforeExplosionEnabled = 1f;
+    private float gameStartTime;
+    private bool canExplode = false;
 
     [Header("Gizmos Settings")]
     public float gizmoDuration = 3f; // Temps d'affichage des sphères visuelles
@@ -20,12 +23,25 @@ public class ExplosiveBloc : MonoBehaviour
     public Material repulsionMaterial;
     private bool hasExploded = false;
     [SerializeField] bool explode = false;
-
     private GameObject explosionSphere;
     private GameObject repulsionSphere;
 
+
+    private void Start()
+    {
+        gameStartTime = Time.time;
+        StartCoroutine(EnableExplosionAfterDelay(timeBeforeExplosionEnabled));
+    }
+
+    private IEnumerator EnableExplosionAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canExplode = true;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        if (!canExplode) return;
         if (collision.relativeVelocity.magnitude > resistance)
         {
             Explode();
@@ -34,7 +50,7 @@ public class ExplosiveBloc : MonoBehaviour
 
     void Update()
     {
-        if (explode)
+        if (explode && canExplode)
         {
             Explode();
         }
