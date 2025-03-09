@@ -300,7 +300,7 @@ private void TransformLerping()
 
     private void setLayer()
     {
-        RemoveFacesClean();
+       // RemoveFacesClean();
          lerping = false;
         this.cubeRB = null;
         this.endPosition = Vector3.zero;
