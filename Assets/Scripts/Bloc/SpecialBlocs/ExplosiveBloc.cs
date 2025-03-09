@@ -33,7 +33,7 @@ public class ExplosiveBloc : MonoBehaviour
     {
         if (hasExploded) return;
         hasExploded = true;
-
+        HandleParticles();
         Collider[] colliders = Physics.OverlapSphere(transform.position, repulsionRange);
         BoxCollider[] affectedObjects = colliders.OfType<BoxCollider>().ToArray();
         List<Rigidbody> repulsedBodies = new List<Rigidbody>();
@@ -59,7 +59,17 @@ public class ExplosiveBloc : MonoBehaviour
 
         Destroy(gameObject);
     }
-
+    private void HandleParticles()
+    {
+        ParticleSystem particles = GetComponentInChildren<ParticleSystem>(true);
+        if (particles != null)
+        {
+            Debug.Log(particles);
+            particles.gameObject.SetActive(true);
+            particles.Play();
+            Debug.Log("Boom");
+        }
+    }
     private void HandleExplosionEffect(GameObject bloc)
     {
         if (bloc.CompareTag("wood"))

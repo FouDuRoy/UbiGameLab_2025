@@ -207,7 +207,7 @@ public class GridSystem : MonoBehaviour
                 }
             }
         }
-        return false; // Aucun chemin trouv� vers le noyau
+        return false; // Aucun chemin trouvé vers le noyau
     }
 
     public Vector3 getPositionOfObject(GameObject cube){
