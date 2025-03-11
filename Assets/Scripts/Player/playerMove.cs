@@ -29,16 +29,20 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float rotationDamping =10f;
     [SerializeField] MouvementType moveType;
     [SerializeField] bool coneProjection;
+
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction rotateAction;
     InputAction throwCubes;
     InputAction rotateActionZ;
     InputAction rotateActionX;
+
     Rigidbody rb;
     float totalMass;
     float weight;
+    Transform golem;
     private GameObject reff;
+    bool rotatingRight = false;
     
 
 
@@ -56,6 +60,7 @@ public class PlayerMouvement : MonoBehaviour
             rb.centerOfMass = Vector3.zero;
             rb.inertiaTensor= new Vector3(1,1,1);
         }
+        golem = rb.transform.Find("GolemBuilt");
         
     }
 
@@ -84,9 +89,33 @@ public class PlayerMouvement : MonoBehaviour
         {
             TranslateMouvement(direction, rotationY);
         }else if(moveType == MouvementType.move3d){
+            //Left joystick
             rb.AddForce(direction * mouvementSpeed / weight);
-            rotateAndDirection(direction);
 
+            if (!rotatingRight)
+            {
+                rotateAndDirection(direction);
+            }
+
+            //Right joystick
+            if (Mathf.Abs(rotationY) > 0)
+            {
+                rotatingRight = true;
+                Quaternion rot = Quaternion.AngleAxis(rotationY * 1, Vector3.up);
+                //rb.MoveRotation(rb.rotation * rot);
+                rb.AddTorque(Vector3.up * rotationY * pivotSpeed, ForceMode.Force);
+                rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
+                
+            }
+            else
+            {
+                if (rotatingRight)
+                {
+                    rb.angularVelocity = Vector3.zero;
+                    rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(false);
+                    rotatingRight = false;
+                }
+            }
 
         }
         else if (moveType == MouvementType.move3dSpring){
@@ -96,6 +125,7 @@ public class PlayerMouvement : MonoBehaviour
         }
         if (coneProjection)
         {
+            Debug.Log("wow");
             ThrowCubesCone();
         }
         else
@@ -151,6 +181,7 @@ public class PlayerMouvement : MonoBehaviour
     {
         if (throwCubes.ReadValue<float>() == 1)
         {
+            Debug.Log("wow");
             GameObject[] cubes = GetComponent<PlayerObjects>().cubes.ToArray();
             GridSystem cubeGrid = rb.transform.GetComponent<GridSystem>();
             foreach (GameObject cube in cubes)
@@ -257,15 +288,13 @@ public class PlayerMouvement : MonoBehaviour
     }
     public void rotateAndDirection(Vector3 direction){
         
-       Vector3 planeProjection = rb.transform.forward;
+       Vector3 planeProjection = rb.transform.Find("GolemBuilt").transform.forward;
        float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
        Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*pivotSpeed/ weight;
         if (direction != Vector3.zero) {
             rb.AddTorque(angularVelocity);
             rb.AddTorque(-rb.angularVelocity * rotationDamping);
         }
-
-
     }
     public void rotateAndDirection2(Vector3 direction,float rotationX,float rotationZ)
     {
