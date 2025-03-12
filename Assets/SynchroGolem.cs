@@ -7,11 +7,11 @@ public class SynchroGolem : MonoBehaviour
 {
     // Start is called before the first frame update
     Quaternion initialRotation;
+    Quaternion rot = Quaternion.identity;
     public bool lockRotation = false;
     Transform physicBody;
     void Start()
     {
-        physicBody = transform.parent.GetComponent<PlayerObjects>().cubeRb.transform; 
     }
 
     // Update is called once per frame
@@ -19,7 +19,11 @@ public class SynchroGolem : MonoBehaviour
     {
         if (lockRotation)
         {
-            transform.rotation = initialRotation;
+            transform.rotation = initialRotation*rot;
+        }
+        else
+        {
+            rot = Quaternion.identity;
         }
     }
 
@@ -30,5 +34,9 @@ public class SynchroGolem : MonoBehaviour
             initialRotation = transform.rotation;
         }
         this.lockRotation = lockRotation;
+    }
+    public void setRotationAdd(Quaternion rot)
+    {
+      this.rot = rot;
     }
 }
