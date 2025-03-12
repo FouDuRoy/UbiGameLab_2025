@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Switch;
 using static UnityEngine.Rendering.DebugUI;
+using static UnityEngine.Rendering.DebugUI.Table;
 using Matrix4x4 = UnityEngine.Matrix4x4;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
@@ -24,6 +25,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float explosionForce = 30;
     [SerializeField] float mouvementSpeed = 1f;
     [SerializeField] float pivotSpeed = 1f;
+    [SerializeField] float rotationSpeed = 1f;
     [SerializeField] float playerCharge = 1000f;
     [SerializeField] float rotParam;
     [SerializeField] float rotationDamping =10f;
@@ -40,7 +42,7 @@ public class PlayerMouvement : MonoBehaviour
     Rigidbody rb;
     float totalMass;
     float weight;
-    Transform golem;
+    Rigidbody golem;
     private GameObject reff;
     bool rotatingRight = false;
     
@@ -60,7 +62,7 @@ public class PlayerMouvement : MonoBehaviour
             rb.centerOfMass = Vector3.zero;
             rb.inertiaTensor= new Vector3(1,1,1);
         }
-        golem = rb.transform.Find("GolemBuilt");
+        golem = transform.Find("GolemBuilt").GetComponent<Rigidbody>();
         
     }
 
@@ -77,13 +79,30 @@ public class PlayerMouvement : MonoBehaviour
     
         if (moveType == MouvementType.rigidBody)
         {
-            RigidBodyMouvement(direction, rotationY,rotationX);
+            RigidBodyMouvement(direction, rotationY);
             
         }
         else if (moveType == MouvementType.spring)
         {
             rb.AddForceAtPosition(direction * mouvementSpeed, CalculateCenterMass());
-            rb.AddTorque(Vector3.up * rotationY * pivotSpeed,ForceMode.Force);
+            rotateAndDirection(direction);
+            if (Mathf.Abs(rotationY) > 0)
+            {
+                rotatingRight = true;
+                Quaternion rot = Quaternion.AngleAxis(rotationY * 1, Vector3.up);
+                rb.AddTorque(Vector3.up * rotationY * rotationSpeed, ForceMode.Force);
+                rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
+
+            }
+            else
+            {
+                if (rotatingRight)
+                {
+                    rb.angularVelocity = Vector3.zero;
+                    rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(false);
+                    rotatingRight = false;
+                }
+            }
         }
         else if (moveType == MouvementType.transform)
         {
@@ -91,21 +110,21 @@ public class PlayerMouvement : MonoBehaviour
         }else if(moveType == MouvementType.move3d){
             //Left joystick
             rb.AddForce(direction * mouvementSpeed / weight);
-
-            if (!rotatingRight)
-            {
-                rotateAndDirection(direction);
-            }
+            //rb.AddForceAtPosition(direction * mouvementSpeed, CalculateCenterMass());
+            //if (!rotatingRight)
+                rotateAndDirection2(direction);
+            
 
             //Right joystick
             if (Mathf.Abs(rotationY) > 0)
             {
                 rotatingRight = true;
-                Quaternion rot = Quaternion.AngleAxis(rotationY * 1, Vector3.up);
-                //rb.MoveRotation(rb.rotation * rot);
-                rb.AddTorque(Vector3.up * rotationY * pivotSpeed, ForceMode.Force);
-                rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
                 
+                rb.AddTorque(Vector3.up * rotationY * rotationSpeed, ForceMode.Force);
+                rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
+              
+
+
             }
             else
             {
@@ -120,12 +139,92 @@ public class PlayerMouvement : MonoBehaviour
         }
         else if (moveType == MouvementType.move3dSpring){
             rb.AddForceAtPosition(direction * mouvementSpeed,CalculateCenterMass());
+            rotateAndDirection2(direction);
+            if (Mathf.Abs(rotationY) > 0)
+            {
+                rotatingRight = true;
+                rb.AddTorque(Vector3.up * rotationY * rotationSpeed, ForceMode.Force);
+                rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
+            }
+            else
+            {
+                if (rotatingRight)
+                {
+                    rb.angularVelocity = Vector3.zero;
+                    rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(false);
+                    rotatingRight = false;
+                }
+            }
+        }
+        else if(moveType == MouvementType.move3d_RbGolem)
+        {
+            golem.AddForce(direction * mouvementSpeed / weight);
+            //rb.AddForceAtPosition(direction * mouvementSpeed, CalculateCenterMass());
             rotateAndDirection(direction);
-            rotateXandZ(rotationX,rotationZ);
+
+
+            //Right joystick
+            if (Mathf.Abs(rotationY) > 0)
+            {
+                rotatingRight = true;
+                rb.GetComponent<HingeJoint>().useLimits = false;
+                rb.AddTorque(Vector3.up * rotationY * rotationSpeed, ForceMode.Force);
+
+            }
+            else
+            {
+                if (rotatingRight)
+                {
+                    rb.angularVelocity = Vector3.zero;
+                    rotatingRight = false;
+
+                    HingeJoint joint = rb.GetComponent<HingeJoint>();
+                    Rigidbody anchor = joint.connectedBody;
+                    DestroyImmediate(rb.GetComponent<HingeJoint>());
+
+                    rb.AddComponent<HingeJoint>();
+                    HingeJoint newJoint = rb.GetComponent<HingeJoint>();
+                    newJoint.axis = Vector3.up;
+                    newJoint.connectedBody = anchor;
+                    newJoint.anchor = Vector3.zero;
+                    newJoint.useLimits = true;
+                    newJoint.extendedLimits = true;
+                    newJoint.useAcceleration = true;
+                    newJoint.autoConfigureConnectedAnchor = false;
+                }
+            }
+        }else if (moveType == MouvementType.Move3dBothJoystick)
+        {
+            //Left joystick
+            rb.AddForce(direction * mouvementSpeed / weight);
+            //rb.AddForceAtPosition(direction * mouvementSpeed, CalculateCenterMass());
+            //if (!rotatingRight)
+            rotateAndDirection3(direction);
+
+
+            //Right joystick
+            if (Mathf.Abs(rotationY) > 0)
+            {
+                rotatingRight = true;
+
+                rb.AddTorque(Vector3.up * rotationY * rotationSpeed, ForceMode.Force);
+                rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
+
+
+
+            }
+            else
+            {
+                if (rotatingRight)
+                {
+                    rb.angularVelocity = Vector3.zero;
+                    rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(false);
+                    rotatingRight = false;
+                }
+            }
         }
         if (coneProjection)
         {
-            Debug.Log("wow");
             ThrowCubesCone();
         }
         else
@@ -141,9 +240,28 @@ public class PlayerMouvement : MonoBehaviour
         transform.position += direction * mouvementSpeed * Time.fixedDeltaTime;
         transform.Rotate(Vector3.up, rotation * pivotSpeed * Time.fixedDeltaTime, Space.World);
     }
-    private void RigidBodyMouvement(Vector3 direction, float rotation,float rotationX) {
+    private void RigidBodyMouvement(Vector3 direction, float rotationY) {
         rb.AddForce(direction * mouvementSpeed/ weight);
-        rb.AddTorque(Vector3.up * rotation * pivotSpeed/ weight);
+
+       
+
+        if (Mathf.Abs(rotationY) > 0)
+        {
+            rotatingRight = true;
+            rb.AddTorque(Vector3.up * rotationY * rotationSpeed, ForceMode.Force);
+            rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
+
+        }
+        else
+        {
+            if (rotatingRight)
+            {
+                rb.GetComponent<HingeJoint>().useLimits = true;
+                rb.angularVelocity = Vector3.zero;
+                rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(false);
+                rotatingRight = false;
+            }
+        }
     }
 
     private void ThrowCubes()
@@ -288,40 +406,97 @@ public class PlayerMouvement : MonoBehaviour
     }
     public void rotateAndDirection(Vector3 direction){
         
-       Vector3 planeProjection = rb.transform.Find("GolemBuilt").transform.forward;
+       Vector3 planeProjection = golem.transform.forward;
        float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
-       Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad)* direction.magnitude*pivotSpeed/ weight;
-        if (direction != Vector3.zero) {
-            rb.AddTorque(angularVelocity);
-            rb.AddTorque(-rb.angularVelocity * rotationDamping);
-        }
-    }
-    public void rotateAndDirection2(Vector3 direction,float rotationX,float rotationZ)
-    {
+        Debug.Log(angle);
+       Vector3 angularVelocity = Vector3.up * (angle*Mathf.Deg2Rad )* direction.magnitude*pivotSpeed/ weight;
+        if (direction != Vector3.zero && Mathf.Abs(angle)>1) {
+          
+                golem.AddTorque(angularVelocity,ForceMode.Acceleration);
+                golem.AddTorque(-rb.angularVelocity * rotationDamping,ForceMode.Acceleration);
 
-        Vector3 planeProjection = reff.transform.forward;
-         float angle = Vector3.SignedAngle(planeProjection, direction.normalized, Vector3.up);
-         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed;
-        Quaternion quat1 = Quaternion.AngleAxis((angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed, Vector3.up);
-        if (Mathf.Abs(rotationX) >= Mathf.Abs(rotationZ))
-        {
-            Quaternion quat2 = Quaternion.AngleAxis(rotationX * pivotSpeed, rb.transform.right);
-            //Quaternion quat3 = quat1 * rb.rotation * quat2;
-        
-            Quaternion quat3 = quat1 * quat2;
-            rb.angularVelocity = QuaternionToAngularVelocity(quat3);
         }
-        else
+        else if(Mathf.Abs(angle) <1)
         {
-            Quaternion quat2 = Quaternion.AngleAxis(rotationZ * pivotSpeed, rb.transform.forward);
-            //Quaternion quat3 = quat1 * rb.rotation * quat2;
-            Quaternion quat3 = quat1 * quat2;
-            rb.angularVelocity = QuaternionToAngularVelocity(quat3);
+            
+            golem.angularVelocity = Vector3.zero;
+
         }
-        //reff.GetComponent<Rigidbody>().MoveRotation(quat1 * reff.GetComponent<Rigidbody>().rotation);
-        reff.GetComponent<Rigidbody>().angularVelocity = QuaternionToAngularVelocity(quat1);
     }
-    public void rotateXandZ(float xValue, float zValue){
+    public void rotateAndDirection2(Vector3 direction)
+    {
+        Vector3 planeProjection = rb.transform.Find("GolemBuilt").forward;
+        float angle = Vector3.SignedAngle(planeProjection, direction.normalized, Vector3.up);
+        Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weight;
+
+        if (direction != Vector3.zero)
+        {
+            if(Mathf.Abs(angle) > 1)
+            {
+                if (!rotatingRight)
+                {
+                    rb.AddTorque(angularVelocity, ForceMode.Acceleration);
+                    rb.AddTorque(-rb.angularVelocity * rotationDamping, ForceMode.Acceleration);
+                }
+                else
+                {
+                    Quaternion rot = Quaternion.AngleAxis(angularVelocity.y*0.01f, Vector3.up);
+                    rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setRotationAdd(rot);
+                }
+            }
+            else
+            {
+                if (!rotatingRight)
+                {
+                    rb.angularVelocity = Vector3.zero;
+                }
+                else
+                {
+                    rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setRotationAdd(Quaternion.identity);
+                }
+                    
+
+            }
+        }
+    }
+    public void rotateAndDirection3(Vector3 direction)
+    {
+        Vector3 planeProjection = rb.transform.Find("GolemBuilt").forward;
+        float angle = Vector3.SignedAngle(planeProjection, direction.normalized, Vector3.up);
+        Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weight;
+
+        if (direction != Vector3.zero)
+        {
+            if (Mathf.Abs(angle) > 1)
+            {
+                if (!rotatingRight)
+                {
+                    rb.AddTorque(angularVelocity, ForceMode.Acceleration);
+                    rb.AddTorque(-rb.angularVelocity * rotationDamping, ForceMode.Acceleration);
+                }
+                else
+                {
+                    rb.AddTorque(angularVelocity, ForceMode.Acceleration);
+                    rb.AddTorque(-rb.angularVelocity * rotationDamping, ForceMode.Acceleration);
+                    Quaternion rot = Quaternion.AngleAxis(angularVelocity.y * 0.01f, Vector3.up);
+                    rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setRotationAdd(rot);
+                }
+            }
+            else
+            {
+                if (!rotatingRight)
+                {
+                    rb.angularVelocity = Vector3.zero;
+                }
+                else
+                {
+                    rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setRotationAdd(Quaternion.identity);
+                }
+            }
+        }
+
+    }
+        public void rotateXandZ(float xValue, float zValue){
         if(Mathf.Abs(xValue)>=Mathf.Abs(zValue)){
           rb.AddRelativeTorque(Vector3.right*xValue*10000);
         }else{
