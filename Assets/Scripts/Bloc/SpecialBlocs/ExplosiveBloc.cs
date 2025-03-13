@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class ExplosiveBloc : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class ExplosiveBloc : MonoBehaviour
     public float repulsionDistanceFactor = 1.2f;
 
     private bool hasExploded = false;
-    [SerializeField] bool explode  = false;
+    [SerializeField] bool explode = false;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > resistance)
@@ -25,7 +24,8 @@ public class ExplosiveBloc : MonoBehaviour
 
     void Update()
     {
-        if(explode){
+        if (explode)
+        {
             Explode();
         }
     }
@@ -43,7 +43,7 @@ public class ExplosiveBloc : MonoBehaviour
             if (bloc)
             {
                 float distance = Vector3.Distance(transform.position, col.transform.position);
-                Vector3 dist = col.transform.position-transform.position;
+                Vector3 dist = col.transform.position - transform.position;
 
                 if (distance <= explosionRange)
                 {
@@ -70,7 +70,7 @@ public class ExplosiveBloc : MonoBehaviour
         else
         {
             PlayerObjects player = bloc.GetComponentInParent<PlayerObjects>();
-            if(player != null)
+            if (player != null)
             {
                 player.addRigidBody(bloc);
                 player.removeCube(bloc);
@@ -87,14 +87,17 @@ public class ExplosiveBloc : MonoBehaviour
 
     private void ApplyRepulsionEffect(Collider col, Vector3 distance)
     {
-      PlayerObjects obj = col.transform.root.GetComponent<PlayerObjects>();
-      Rigidbody colRigidBody = col.GetComponent<Rigidbody>();
-      if(obj!=null && colRigidBody==null){
-        Rigidbody mainBody = obj.cubeRb;
-        mainBody.AddForceAtPosition(distance*repulsionForce,col.transform.position);
-      }else if(colRigidBody!=null){
-        colRigidBody.AddForce(distance*repulsionForce);
-      }
+        PlayerObjects obj = col.transform.root.GetComponent<PlayerObjects>();
+        Rigidbody colRigidBody = col.GetComponent<Rigidbody>();
+        if (obj != null && colRigidBody == null)
+        {
+            Rigidbody mainBody = obj.cubeRb;
+            mainBody.AddForceAtPosition(distance * repulsionForce, col.transform.position);
+        }
+        else if (colRigidBody != null)
+        {
+            colRigidBody.AddForce(distance * repulsionForce);
+        }
 
     }
     //TODO TOFIX

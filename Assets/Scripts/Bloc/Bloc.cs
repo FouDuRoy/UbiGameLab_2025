@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bloc : MonoBehaviour
@@ -23,21 +21,21 @@ public class Bloc : MonoBehaviour
     }
 
     void Update()
-    {   
-        if( owner == "Neutral")
+    {
+        if (owner == "Neutral")
         {
             float speed = this.GetComponent<Rigidbody>().velocity.magnitude;
-           
+
             if (speed < minimalSpeed)
             {
                 this.GetComponent<Feromagnetic>().enabled = true;
             }
-            
+
         }
     }
     public void setOwner(string owner)
     {
         this.owner = owner;
     }
-  
+
 }

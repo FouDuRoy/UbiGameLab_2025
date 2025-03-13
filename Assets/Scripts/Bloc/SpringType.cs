@@ -1,7 +1,5 @@
-﻿using System;
-
-public enum LerpingType
+﻿public enum LerpingType
 {
-	velocityLerping,
-	transformLerping
+    velocityLerping,
+    transformLerping
 }

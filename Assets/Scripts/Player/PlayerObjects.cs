@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class PlayerObjects : MonoBehaviour
@@ -26,7 +24,7 @@ public class PlayerObjects : MonoBehaviour
         cubes.Remove(cube);
         cube.layer = 0;
         Destroy(cube.GetComponent<SphereCollider>());
-       // gridSystem.DetachBlock(cube); // Supprime de la grille
+        // gridSystem.DetachBlock(cube); // Supprime de la grille
 
         foreach (var v in cubesHash)
         {

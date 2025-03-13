@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.ProBuilder;
 
 public class DynamicCamera : MonoBehaviour
 {
@@ -27,7 +23,7 @@ public class DynamicCamera : MonoBehaviour
     private Vector2 angleCam;
     private Vector2 camLocalPos;
     private float camOrthoSize;
-    private float distanceBetweenPlayers=0;
+    private float distanceBetweenPlayers = 0;
 
     private Camera cam;
 
@@ -36,7 +32,7 @@ public class DynamicCamera : MonoBehaviour
         cam = GetComponentInChildren<Camera>();
 
         //Récupère l'angle de la caméra par rapport à son pivot
-        angleCam =new Vector2(cam.transform.localPosition.z, cam.transform.localPosition.y).normalized;
+        angleCam = new Vector2(cam.transform.localPosition.z, cam.transform.localPosition.y).normalized;
     }
 
     void Update()
@@ -44,10 +40,10 @@ public class DynamicCamera : MonoBehaviour
         // POSTION DE L'OBJET DYNAMIC CAMERA
 
         //Récupère la position des joueurs sur un plan XZ pour que l'objet caméra reste fixe sur l'axe Y
-        playerOnePlanePos = new Vector3 (Player1.transform.position.x, 0, Player1.transform.position.z);
-        playerTwoPlanePos = new Vector3 (Player2.transform.position.x, 0, Player2.transform.position.z);
+        playerOnePlanePos = new Vector3(Player1.transform.position.x, 0, Player1.transform.position.z);
+        playerTwoPlanePos = new Vector3(Player2.transform.position.x, 0, Player2.transform.position.z);
 
-        transform.position= Vector3.SmoothDamp(transform.position, (playerOnePlanePos + playerTwoPlanePos) / 2, ref currentHorizontalVelocity, horizontalInterpTime, maxSpeed);
+        transform.position = Vector3.SmoothDamp(transform.position, (playerOnePlanePos + playerTwoPlanePos) / 2, ref currentHorizontalVelocity, horizontalInterpTime, maxSpeed);
 
         // DISTANCE DE LA CAMERA PAR RAPPORT AU PIVOT DE L'OBJET DYNAMIC CAMERA
 
@@ -60,8 +56,8 @@ public class DynamicCamera : MonoBehaviour
         }
         else
         {
-            camOrthoSize= Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor, minDistance, maxDistance);
-            cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, camOrthoSize, ref currentOrthoSizeVelocity, distanceInterpTime,maxSpeed);
+            camOrthoSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor, minDistance, maxDistance);
+            cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, camOrthoSize, ref currentOrthoSizeVelocity, distanceInterpTime, maxSpeed);
             print(camOrthoSize);
         }
     }

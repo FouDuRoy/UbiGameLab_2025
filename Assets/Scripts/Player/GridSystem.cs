@@ -1,9 +1,7 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.ProBuilder;
 
 public class GridSystem : MonoBehaviour
 {
@@ -12,20 +10,22 @@ public class GridSystem : MonoBehaviour
     public PlayerObjects playerObj;
 
     public float cubeSize = 1.2f;
-   [SerializeField] bool checkGrid = false;
+    [SerializeField] bool checkGrid = false;
 
     private void Start()
     {
         kernel = transform.parent.GetComponent<PlayerObjects>().cubeRb.gameObject;
         grid.Add(new Vector3Int(0, 0, 0), kernel);
-         Debug.Log(kernel.gameObject);
-         playerObj = this.transform.parent.GetComponent<PlayerObjects>();
+        Debug.Log(kernel.gameObject);
+        playerObj = this.transform.parent.GetComponent<PlayerObjects>();
     }
 
     void Update()
     {
-        if(checkGrid){
-            foreach (var v in grid){
+        if (checkGrid)
+        {
+            foreach (var v in grid)
+            {
                 Debug.Log(v.Key);
             }
             checkGrid = false;
@@ -34,17 +34,15 @@ public class GridSystem : MonoBehaviour
 
     public void AttachBlock(GameObject blocToAttach, GameObject attachedBloc, Vector3 closestFace)
     {
-        
-        Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt(closestFace.x), Mathf.RoundToInt(closestFace.y), Mathf.RoundToInt(closestFace.z));
-        if (attachedBloc.name == "MainBody")
+
+        Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt( (closestFace.x/ cubeSize))
+            , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
+       
+        if (grid.ContainsValue(attachedBloc))
         {
-           
+            Debug.Log(closestFace);
+            Debug.Log(fixedVector);
             grid.Add(fixedVector, blocToAttach);
-        }
-        else if (grid.ContainsValue(attachedBloc))
-        {
-            Vector3Int newGridPos = grid.FirstOrDefault(x => x.Value == attachedBloc).Key + fixedVector;
-            grid.Add(newGridPos, blocToAttach);
         }
     }
     public void DetachBlock(GameObject bloc)
@@ -58,11 +56,13 @@ public class GridSystem : MonoBehaviour
             List<Vector3Int> neighbors = GetNeighbors(detachedGridPos);
             //Ajouter les faces aux voisins
 
-            foreach(Vector3Int voisin in neighbors){
+            foreach (Vector3Int voisin in neighbors)
+            {
 
-                if(grid.ContainsKey(voisin)){
-                    Vector3 faceToAdd = (detachedGridPos-voisin);
-                    faceToAdd = faceToAdd*cubeSize;
+                if (grid.ContainsKey(voisin))
+                {
+                    Vector3 faceToAdd = (detachedGridPos - voisin);
+                    faceToAdd = faceToAdd * cubeSize;
                     grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
                 }
 
@@ -79,20 +79,23 @@ public class GridSystem : MonoBehaviour
                     StartCoroutine(blockNeutral(gridBloc.Value));
                     Debug.Log(gridBloc.Value.name);
                     neighbors = GetNeighbors(detachedGridPos);
-                
+
                     //Ajouter les faces aux voisins
 
-                    foreach(Vector3Int voisin in neighbors){
-                          if(grid.ContainsKey(voisin)){
-                            Vector3 faceToAdd = (detachedGridPos-voisin);
-                            faceToAdd = faceToAdd*cubeSize;
+                    foreach (Vector3Int voisin in neighbors)
+                    {
+                        if (grid.ContainsKey(voisin))
+                        {
+                            Vector3 faceToAdd = (detachedGridPos - voisin);
+                            faceToAdd = faceToAdd * cubeSize;
                             grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
                         }
-                     }
+                    }
                 }
-                
+
             }
-            foreach(Vector3Int key in keys){
+            foreach (Vector3Int key in keys)
+            {
                 grid.Remove(key);
             }
         }
@@ -209,27 +212,31 @@ public class GridSystem : MonoBehaviour
         return false; // Aucun chemin trouv� vers le noyau
     }
 
-    public Vector3 getPositionOfObject(GameObject cube){
-         Vector3Int blocGridPos = grid.FirstOrDefault(x => x.Value == cube).Key;
-         return new Vector3(blocGridPos.x*cubeSize,blocGridPos.y*cubeSize,blocGridPos.z*cubeSize);
+    public Vector3 getPositionOfObject(GameObject cube)
+    {
+        Vector3Int blocGridPos = grid.FirstOrDefault(x => x.Value == cube).Key;
+        return new Vector3(blocGridPos.x * cubeSize, blocGridPos.y * cubeSize, blocGridPos.z * cubeSize);
 
     }
-      public bool containsKey(Vector3 position){
-        Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x/cubeSize),Mathf.RoundToInt(position.y/cubeSize),Mathf.RoundToInt(position.z/cubeSize));
+    public bool containsKey(Vector3 position)
+    {
+        Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x / cubeSize), Mathf.RoundToInt(position.y / cubeSize), Mathf.RoundToInt(position.z / cubeSize));
         return grid.ContainsKey(key);
 
     }
-    public GameObject getObjectAtPosition(Vector3 position){
-        Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x/cubeSize),Mathf.RoundToInt(position.y/cubeSize),Mathf.RoundToInt(position.z/cubeSize));
+    public GameObject getObjectAtPosition(Vector3 position)
+    {
+        Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x / cubeSize), Mathf.RoundToInt(position.y / cubeSize), Mathf.RoundToInt(position.z / cubeSize));
         return grid[key];
 
     }
 
-    public void clearGrid(){
+    public void clearGrid()
+    {
         grid.Clear();
-        grid.Add(new Vector3Int(0,0,0),kernel);
+        grid.Add(new Vector3Int(0, 0, 0), kernel);
     }
-      IEnumerator blockNeutral(GameObject block)
+    IEnumerator blockNeutral(GameObject block)
     {
         yield return new WaitForSeconds(3f);
         if (block != null)

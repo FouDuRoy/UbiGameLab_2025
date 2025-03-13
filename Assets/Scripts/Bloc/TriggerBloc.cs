@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TriggerBloc : MonoBehaviour
@@ -15,7 +13,7 @@ public class TriggerBloc : MonoBehaviour
 
     {
         Collider other = collision.collider;
-        
+
         if (cubeComponent != null)
         {
             PlayerInfo playerInfo = collision.gameObject.transform.root.GetComponent<PlayerInfo>();
@@ -27,18 +25,20 @@ public class TriggerBloc : MonoBehaviour
                 {
                     if (cubeComponent.owner != other.GetComponent<Bloc>().owner)
                     {
-                        
 
-                        if(other.transform.root.name.Contains("Player")){
+
+                        if (other.transform.root.name.Contains("Player"))
+                        {
                             other.transform.root.GetComponent<PlayerObjects>().cubes.Remove(gameObject);
                         }
-                        if(transform.root.name.Contains("Player")){
-                           transform.root.GetComponent<PlayerObjects>().cubes.Remove(gameObject);
+                        if (transform.root.name.Contains("Player"))
+                        {
+                            transform.root.GetComponent<PlayerObjects>().cubes.Remove(gameObject);
                         }
-                    
+
                         Destroy(other.gameObject);
                         Destroy(this.gameObject);
-                        
+
                     }
 
                 }
@@ -46,10 +46,10 @@ public class TriggerBloc : MonoBehaviour
             else if (other.transform.root.name.Contains("Player") && other.gameObject.name != cubeComponent.owner
                 && cubeComponent.owner != "" && cubeComponent.owner != "Neutral")
             {
-                
+
                 playerInfo.TakeDamage(cubeComponent.owner); // Send enemy's name
             }
-           
+
 
         }
     }
