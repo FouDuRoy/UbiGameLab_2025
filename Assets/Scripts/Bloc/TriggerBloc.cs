@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Federico Barallobres
 public class TriggerBloc : MonoBehaviour
 {
     private Bloc cubeComponent;

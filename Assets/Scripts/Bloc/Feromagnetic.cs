@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UIElements;
-
+//Federico Barallobres
 public class Feromagnetic : MonoBehaviour
 {
     private const float timeBeforeActiveMagnet = 0.01f;

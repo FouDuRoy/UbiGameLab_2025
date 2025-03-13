@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Federico Barallobres
 public class Bloc : MonoBehaviour
 {
     [SerializeField] float minimalSpeed = 0.5f;
