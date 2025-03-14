@@ -58,18 +58,9 @@ public class GridSystem : MonoBehaviour
             grid.Remove(detachedGridPos);
             playerObj.weight -= bloc.GetComponent<Bloc>().weight;
             List<Vector3Int> neighbors = GetNeighbors(detachedGridPos);
-            //Ajouter les faces aux voisins
 
-            foreach (Vector3Int voisin in neighbors)
-            {
-
-                if (grid.ContainsKey(voisin))
-                {
-                    Vector3 faceToAdd = (detachedGridPos - voisin);
-                    faceToAdd = faceToAdd * cubeSize;
-                }
-
-            }
+         
+            
             List<Vector3Int> keys = new List<Vector3Int>();
             foreach (var gridBloc in grid)
             {
@@ -104,19 +95,7 @@ public class GridSystem : MonoBehaviour
             grid.Remove(detachedGridPos);
             playerObj.weight -= bloc.GetComponent<Bloc>().weight;
             List<Vector3Int> neighbors = GetNeighbors(detachedGridPos);
-            //Ajouter les faces aux voisins
 
-            foreach (Vector3Int voisin in neighbors)
-            {
-
-                if (grid.ContainsKey(voisin))
-                {
-                    Vector3 faceToAdd = (detachedGridPos - voisin);
-                    faceToAdd = faceToAdd * cubeSize;
-                    grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
-                }
-
-            }
         }
     }
     public void detachDisconnectedBlocks()
@@ -135,17 +114,7 @@ public class GridSystem : MonoBehaviour
                 StartCoroutine(blockNeutral(gridBloc.Value));
                 neighbors = GetNeighbors(gridBloc.Key);
                 playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
-                //Ajouter les faces aux voisins
-
-                foreach (Vector3Int voisin in neighbors)
-                {
-                    if (grid.ContainsKey(voisin))
-                    {
-                        Vector3 faceToAdd = (gridBloc.Key - voisin);
-                        faceToAdd = faceToAdd * cubeSize;
-                        grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
-                    }
-                }
+              
             }
 
         }
