@@ -102,7 +102,7 @@ public class PlayerMouvement : MonoBehaviour
         if (throwCubes.ReadValue<float>() == 1)
         {
             List<GameObject> cubes = GetComponent<PlayerObjects>().cubes;
-            GridSystem cubeGrid = rb.transform.GetComponent<GridSystem>();
+            GridSystem cubeGrid = transform.GetComponent<GridSystem>();
             foreach (GameObject cube in cubes)
             {
                 cube.GetComponent<Faces>().resetFaces();

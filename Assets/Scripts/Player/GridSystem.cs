@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GridSystem : MonoBehaviour
 {
-    protected Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
+    protected Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int,  GameObject>();
     public GameObject kernel; // Le noyau du syst�me, point (0,0,0)
     public PlayerObjects playerObj;
-
+    public Quaternion kernelRotI;
     public float cubeSize = 1.2f;
     [SerializeField] bool checkGrid = false;
 
     private void Start()
     {
-        kernel = transform.parent.GetComponent<PlayerObjects>().cubeRb.gameObject;
+        kernel = transform.GetComponent<PlayerObjects>().cubeRb.gameObject;
         grid.Add(new Vector3Int(0, 0, 0), kernel);
-        Debug.Log(kernel.gameObject);
-        playerObj = this.transform.parent.GetComponent<PlayerObjects>();
+        playerObj = transform.GetComponent<PlayerObjects>();
+        kernelRotI = kernel.transform.rotation;
     }
 
     void Update()
@@ -37,11 +38,8 @@ public class GridSystem : MonoBehaviour
 
         Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt( (closestFace.x/ cubeSize))
             , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
-       
         if (grid.ContainsValue(attachedBloc))
         {
-            Debug.Log(closestFace);
-            Debug.Log(fixedVector);
             grid.Add(fixedVector, blocToAttach);
         }
     }
@@ -67,7 +65,6 @@ public class GridSystem : MonoBehaviour
                 }
 
             }
-            Debug.Log("Bloc d�tach� " + ":" + bloc.name);
             List<Vector3Int> keys = new List<Vector3Int>();
             foreach (var gridBloc in grid)
             {
@@ -231,10 +228,104 @@ public class GridSystem : MonoBehaviour
 
     }
 
+    public Vector3 tranformToVector3(Vector3Int position)
+    {
+        return new Vector3(position.x * cubeSize, position.y * cubeSize, position.z * cubeSize);
+    }
+
     public void clearGrid()
     {
         grid.Clear();
         grid.Add(new Vector3Int(0, 0, 0), kernel);
+    }
+
+    public List<Vector3>  getAvailableNeighbours(GameObject cube)
+    {
+        Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
+        if(positionCube == null)
+        {
+            return null;
+        }
+        else
+        {
+            List<Vector3> availableSpaces = new List<Vector3>();
+            List<Vector3Int> positions = GetNeighbors(positionCube);
+
+            foreach (Vector3Int position in positions)
+            {
+                
+                if (!grid.ContainsKey(position))
+                {
+                    availableSpaces.Add(tranformToVector3(position));
+                }
+            }
+
+            return availableSpaces;
+        }
+    }
+
+    public Vector3 ClosestNeighbourPosition(GameObject cube,Vector3 position)
+    {
+        Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
+        Vector3 relativePositionToKernel = kernel.transform.InverseTransformPoint(position);
+       
+        if (positionCube == null)
+        {
+            return Vector3.zero;
+        }
+        else
+        {
+            List<Vector3> cubeNeighbours = getAvailableNeighbours(cube);
+            Vector3 closest = Vector3.zero;
+            if(cubeNeighbours.Count > 0)
+            {
+                
+                
+                Vector3 direction = cubeNeighbours.First()+(kernel.transform.InverseTransformPoint(cube.transform.position)- tranformToVector3(positionCube));
+                Vector3 faceRelativeToAtCube = Quaternion.Inverse(cube.transform.rotation) * direction;
+                float distance = (cube.transform.TransformPoint(faceRelativeToAtCube)-position).sqrMagnitude;
+                closest = cube.transform.TransformPoint(faceRelativeToAtCube);
+                
+                foreach (Vector3 neighbour in cubeNeighbours)
+                {
+                    
+                    Vector3 direction2 = neighbour - tranformToVector3(positionCube);
+                    Vector3 faceRelativeToAtCube2 = Quaternion.Inverse(cube.transform.rotation) * direction2;
+                    float compare = (cube.transform.TransformPoint(faceRelativeToAtCube2) - position).sqrMagnitude;
+
+                    if (distance > compare)
+                    {
+                        closest = cube.transform.TransformPoint(faceRelativeToAtCube2);
+                        distance = compare;
+
+                    }
+                }
+            }
+            return closest;
+        }
+    }
+    public List<Vector3> getOccupiedNeighbours(GameObject cube)
+    {
+        Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
+        if (positionCube == null)
+        {
+            return null;
+        }
+        else
+        {
+            List<Vector3> occupiedSpaces = new List<Vector3>();
+            List<Vector3Int> positions = GetNeighbors(positionCube);
+
+            foreach (Vector3Int position in positions)
+            {
+                if (grid.ContainsKey(position))
+                {
+                    occupiedSpaces.Add(tranformToVector3(position));
+                }
+            }
+
+            return occupiedSpaces;
+        }
     }
     IEnumerator blockNeutral(GameObject block)
     {

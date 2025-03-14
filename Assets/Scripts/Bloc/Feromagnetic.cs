@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Feromagnetic : MonoBehaviour
 {
-        private const float timeBeforeActiveMagnet = 0.01f;
+        private const float timeBeforeActiveMagnet = 0;
 
         private const float maxSpeed = 5f;
 
@@ -62,6 +62,7 @@ public class Feromagnetic : MonoBehaviour
         LayerMask mask;
 
         Transform playerAtractedTo;
+        Transform playerMainCube;
 
         bool lerping = false;
 
@@ -69,9 +70,9 @@ public class Feromagnetic : MonoBehaviour
 
         Vector3 startPositionRelativeToAttractedCube;
 
-        Vector3 closestFace;
+        Vector3 closestFaceRelativeToWorld;
 
-        Vector3 relativePositionToAttractedCube;
+        Vector3 relativePositionToMainCube;
 
         Dictionary<GameObject, List<Vector3>> storedFaces = new Dictionary<GameObject, List<Vector3>>();
 
@@ -104,7 +105,12 @@ public class Feromagnetic : MonoBehaviour
         directionsList = new Vector3[] { new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0), new Vector3(0, 0, cubeSize)
     ,   new Vector3(0, 0, -cubeSize),new Vector3(0,cubeSize,0),new Vector3(0,-cubeSize,0) };
     }
-        public float getPassiveRadius()
+
+     void OnEnable()
+    {
+        ResetObject();
+    }
+    public float getPassiveRadius()
     {
         return passiveRadius;
     }
@@ -114,10 +120,10 @@ public class Feromagnetic : MonoBehaviour
     {
         // On regarde en premier si la position vers laquelle on se dirige est disponible
 
-        if (LookPositionGridAvailable() && lerping)
+        if (!LookPositionGridAvailable() && lerping)
         {
             ResetObject();
-        }
+        } 
 
         // Set the position of the block and look for all magnetic blocs in range
         if (!lerping)
@@ -130,7 +136,8 @@ public class Feromagnetic : MonoBehaviour
             // Enleve les cubes avec aucune face disponible. 
             foreach (Collider mag in magneticColliderList)
             {
-                if (mag.GetComponent<Faces>().faces.Count == 0)
+                GridSystem grid =  mag.transform.root.GetComponent<GridSystem>();
+                if (grid == null || grid.getAvailableNeighbours(mag.gameObject).Count==0)
                 {
                     magnetic.Remove(mag);
                 }
@@ -142,11 +149,9 @@ public class Feromagnetic : MonoBehaviour
             //If there is a magnet in range execute attraction algo
             if (magnetic.Count > 0)
             {
-
-                playerAtractedTo = cubeAttractedToTransform.root;
                 Vector3 direction = cubeAttractedToTransform.position - transform.position;
-                relativePositionToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(transform.position);
-                lerpingMagents(direction, relativePositionToAttractedCube, closestFace);
+                relativePositionToMainCube = playerMainCube.InverseTransformPoint(transform.position);
+                lerpingMagents(direction, relativePositionToMainCube, closestFaceRelativeToWorld);
             }
         }
         else
@@ -167,45 +172,57 @@ public class Feromagnetic : MonoBehaviour
         if (magnetic.Count > 0)
         {
             cubeAttractedToTransform = magnetic[0].transform;
-            closestFace = CalculateClosestFace(cubeAttractedToTransform.transform.InverseTransformPoint(transform.position), cubeAttractedToTransform.gameObject);
-            float shortDistance = (cubeAttractedToTransform.position - transform.position).sqrMagnitude;
+            playerMainCube = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().player.transform;
+            playerAtractedTo = cubeAttractedToTransform.root;
+
+            closestFaceRelativeToWorld = playerAtractedTo.GetComponent<GridSystem>().ClosestNeighbourPosition(cubeAttractedToTransform.gameObject,transform.position);
+            float shortDistance = (transform.position - closestFaceRelativeToWorld).sqrMagnitude;
             foreach (Collider col in magnetic)
             {
-                float distance = (col.transform.position - transform.position).sqrMagnitude;
+                Vector3 closestFaceOther = col.transform.root.GetComponent<GridSystem>().ClosestNeighbourPosition(col.gameObject, transform.position);
+                float distance = (closestFaceOther - transform.position).sqrMagnitude;
                 if (distance < shortDistance)
                 {
                     cubeAttractedToTransform = col.transform;
-                    closestFace = CalculateClosestFace(col.transform.InverseTransformPoint(transform.position), col.gameObject);
+                    playerAtractedTo = cubeAttractedToTransform.root;
+                    closestFaceRelativeToWorld = closestFaceOther;
                     shortDistance = distance;
-                    cubeAttractedToTransform = col.transform;
+                    playerMainCube = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().player.transform;
+                    
+
                 }
             }
-
         }
     }
 
         private void TransformLerping()
     {
-        if (lerping && t <= 1)
+        if (lerping && timer < moveTime)
         {
+            
+            t = timer / moveTime;
+
+         
+
             transform.localPosition = Vector3.Lerp(startPositionRelativeToAttractedCube, endPositionRelativeToAttractedCube, t);
             transform.localRotation = Quaternion.Slerp(startRotationRelativeToAttractedCube, endRotationRelativeToAttractedCube, t);
-            t += Time.fixedDeltaTime / timeLerpingTransform;
-
+            timer += Time.fixedDeltaTime;
+            if (cubeRB.velocity.magnitude > 1)
+            {
+                cubeRB.velocity = cubeRB.velocity.normalized * 1;
+            }
         }
-        else if (t > 1)
+        else if (timer >= moveTime)
         {
             transform.localPosition = endPositionRelativeToAttractedCube;
             transform.localRotation = endRotationRelativeToAttractedCube;
-            transform.parent = cubeAttractedToTransform.parent;
             AttachCube();
         }
     }
 
         private void VelocityLerping()
     {
-        float distance = (cubeAttractedToTransform.position - transform.position).magnitude;
-        //if (lerping && (errorP > error || errorR > error) && distance< maxDistanceBeforeStop)
+        float distance = (closestFaceRelativeToWorld - transform.position).magnitude;
         if (lerping && (errorP > error || errorR > error * 2) && (distance < lerpingDistance && timer < 0.25))
         {
             //Once its locked 
@@ -223,15 +240,15 @@ public class Feromagnetic : MonoBehaviour
             Quaternion rotationDelta = newRotation * Quaternion.Inverse(cubeRB.rotation);
             rotationDelta.ToAngleAxis(out float angle, out Vector3 axis);
             axis.Normalize();
-            Vector3 angularVelocity = axis * (angle * Mathf.Deg2Rad) * rotationSpeed;
+            Vector3 angularVelocity = axis * (angle * Mathf.Deg2Rad) * rotationSpeed*1.3f;
 
             if (velocity.magnitude > maxSpeed)
             {
                 velocity = velocity.normalized * maxSpeed;
             }
-            if (angularVelocity.magnitude > 30)
+            if (angularVelocity.magnitude > maxSpeed)
             {
-                //  angularVelocity = angularVelocity.normalized * maxSpeed;
+                 angularVelocity = angularVelocity.normalized * maxSpeed;
             }
             //update velocity and rotation
             cubeRB.velocity = velocity;
@@ -244,10 +261,8 @@ public class Feromagnetic : MonoBehaviour
             //Set location and velocity
             cubeRB.velocity = Vector3.zero;
             transform.localPosition = endPositionRelativeToAttractedCube;
-            transform.localRotation = Quaternion.identity;
+            transform.localRotation = endRotationRelativeToAttractedCube;
 
-            //Set parent
-            this.transform.parent = cubeAttractedToTransform.parent;
             AttachCube();
         }
         else
@@ -264,6 +279,9 @@ public class Feromagnetic : MonoBehaviour
         cubeAttractedToTransform = null;
         playerAtractedTo = null;
         t = 0;
+        relativePositionToMainCube = Vector3.zero;
+        closestFaceRelativeToWorld = Vector3.zero;
+
         foreach (var cube in storedFaces)
         {
             List<Vector3> faces = cube.Key.GetComponent<Faces>().faces;
@@ -274,6 +292,7 @@ public class Feromagnetic : MonoBehaviour
         }
         storedFaces = new Dictionary<GameObject, List<Vector3>>();
         transform.parent = this.transform.root.parent;
+        Start();
     }
 
         private void AttachCube()
@@ -284,62 +303,49 @@ public class Feromagnetic : MonoBehaviour
         gameObject.GetComponent<SphereCollider>().radius = activeRadius;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
 
-        //Set rigidBody constraints
-        cubeRB.mass = 1;
-        cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
-
+       
+        this.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
+        transform.root.GetComponent<PlayerObjects>().cubes.Add(gameObject);
         if (springType == SpringType.Free || springType == SpringType.Limited)
         {
+            cubeRB.mass = 1;
+            cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
+            this.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
             attachJ();
+            
         }
         else
         {
             //It's children of mainCube
             this.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
-            DestroyImmediate(cubeRB);
+            if (cubeRB != null)
+            {
+                DestroyImmediate(cubeRB);
+            }
         }
-
-        this.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
-        transform.root.GetComponent<PlayerObjects>().cubes.Add(gameObject);
-        Transform mainCube = playerAtractedTo.GetComponent<PlayerObjects>().cubeRb.transform;
-        Vector3 positionFromCenter = mainCube.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(closestFace));
-
-        transform.root.GetComponent<PlayerObjects>().cubeRb.gameObject.GetComponent<GridSystem>().AttachBlock(gameObject, cubeAttractedToTransform.gameObject, positionFromCenter);
-        //We suppose same orientation of all cubes
+        Debug.Log("CubeName" + gameObject.name + "cubeATo" + cubeAttractedToTransform.name + "Position" + playerMainCube.transform.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube)));
+        playerAtractedTo.GetComponent<GridSystem>().AttachBlock(gameObject, cubeAttractedToTransform.gameObject, playerMainCube.transform.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube)));
+        //Set to magnetic after some time
         Invoke("setLayer", timeBeforeActiveMagnet);
-        //reset
+
+        //Disable script
         this.GetComponent<Feromagnetic>().enabled = false;
     }
 
         private void setLayer()
     {
-        lerping = false;
-        this.cubeRB = null;
-        this.endPositionRelativeToAttractedCube = Vector3.zero;
-        this.cubeAttractedToTransform = null;
-        this.timer = 0;
-        this.t = 0;
         gameObject.layer = 3;
-        storedFaces = new Dictionary<GameObject, List<Vector3>>();
     }
 
         private void attachJ()
     {
 
-        Transform mainCube = cubeAttractedToTransform.parent.GetComponent<PlayerObjects>().cubeRb.transform;
-        GridSystem cubeGrid = mainCube.gameObject.GetComponent<GridSystem>();
+        GridSystem cubeGrid = playerAtractedTo.GetComponent<GridSystem>();
+        List<Vector3> occupiedSpaces = cubeGrid.getOccupiedNeighbours(gameObject);
         int i = 0;
-        var attractedCubePositionRelativeToMainBody = cubeGrid.getPositionOfObject(cubeAttractedToTransform.gameObject);
-        foreach (Vector3 direction in directionsList)
+        foreach (Vector3 cubeAttachToPosition in occupiedSpaces)
         {
-            //Supposing all same orientation
-            Vector3 cubePositionRelativeToMainCube = attractedCubePositionRelativeToMainBody + endPositionRelativeToAttractedCube;
-            Vector3 positionCheck = cubePositionRelativeToMainCube + direction;
-
-            if (cubeGrid.containsKey(positionCheck))
-            {
-
-                GameObject toConnectTo = cubeGrid.getObjectAtPosition(positionCheck);
+                GameObject toConnectTo = cubeGrid.getObjectAtPosition(cubeAttachToPosition);
                 this.AddComponent<ConfigurableJoint>();
                 ConfigurableJoint[] joints = this.GetComponents<ConfigurableJoint>();
                 ConfigurableJoint joint = joints[i];
@@ -375,7 +381,6 @@ public class Feromagnetic : MonoBehaviour
                 joint.slerpDrive = slerpDrive;
                 joint.rotationDriveMode = RotationDriveMode.Slerp;
 
-                //joint.projectionMode = JointProjectionMode.PositionAndRotation;
                 joint.projectionAngle = 0;
                 joint.projectionDistance = 0f;
 
@@ -386,7 +391,7 @@ public class Feromagnetic : MonoBehaviour
                 SoftJointLimit limitAy = new SoftJointLimit();
                 limitAy.limit = AngleLimit;// angleLimit
                 joint.angularYLimit = limitAy;
-                Vector3 positionCenter = transform.parent.GetComponent<PlayerObjects>().player.transform.InverseTransformPoint(transform.position);
+                Vector3 positionCenter = playerMainCube.InverseTransformPoint(transform.position);
                 float xPosition = Mathf.Abs(positionCenter.x);
                 float yPosition = Mathf.Abs(positionCenter.y);
                 float zPosition = Mathf.Abs(positionCenter.z);
@@ -425,10 +430,10 @@ public class Feromagnetic : MonoBehaviour
                 joint.anchor = Vector3.zero;
                 joint.autoConfigureConnectedAnchor = false;
 
-                Vector3 positionBeforeCorrection = toConnectTo.transform.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube));
-                Vector3 correction = Correct(positionBeforeCorrection);
-                correction = cubePositionRelativeToMainCube - positionCheck;
-                joint.connectedAnchor = correction;
+                Vector3 positionBeforeCorrection = toConnectTo.transform.InverseTransformPoint(transform.position);
+                //Vector3 correction = Correct(positionBeforeCorrection);
+                //correction = cubePositionRelativeToMainCube - positionCheck;
+                joint.connectedAnchor = positionBeforeCorrection;
                 if (springType == SpringType.Free)
                 {
                     joint.angularYMotion = ConfigurableJointMotion.Free;
@@ -442,7 +447,7 @@ public class Feromagnetic : MonoBehaviour
                 }
                 i++;
 
-            }
+            
 
         }
     }
@@ -552,9 +557,9 @@ public class Feromagnetic : MonoBehaviour
                         joint.autoConfigureConnectedAnchor = false;
 
                         Vector3 positionBeforeCorrection = toConnectTo.transform.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube));
-                        Vector3 correction = Correct(positionBeforeCorrection);
-                        correction = cubePositionRelativeToMainCube - v.Key;
-                        joint.connectedAnchor = correction;
+                        //Vector3 correction = Correct(positionBeforeCorrection);
+                        //correction = cubePositionRelativeToMainCube - v.Key;
+                        joint.connectedAnchor = positionBeforeCorrection;
                         if (springType == SpringType.Free)
                         {
                             joint.angularYMotion = ConfigurableJointMotion.Free;
@@ -604,11 +609,10 @@ public class Feromagnetic : MonoBehaviour
         return correction;
     }
 
-        private void lerpingMagents(Vector3 direction, Vector3 relativeDirection, Vector3 closestFace)
+        private void lerpingMagents(Vector3 direction, Vector3 relativeDirection, Vector3 closestFaceRelativeToWorld)
     {
-
         // If the distance is bigger than lerpingDistance or the position is not available anymore we keep pushing with CoulombLaw
-        if ((relativePositionToAttractedCube).magnitude > lerpingDistance || LookPositionGridAvailable())
+        if ((transform.position-closestFaceRelativeToWorld).magnitude > lerpingDistance || !LookPositionGridAvailable())
         {
             cubeRB.AddForce(CoulombLaw(direction, charge, charge));
         }
@@ -619,102 +623,22 @@ public class Feromagnetic : MonoBehaviour
             //Set speed to zero and change layer to magnetic.
             cubeRB.velocity = Vector3.zero;
             cubeRB.angularVelocity = Vector3.zero;
-
             //Set parent to attracted cube
             this.transform.parent = cubeAttractedToTransform;
             playerAtractedTo = this.transform.root;
 
-            //Start moving towards final position
+            //Start moving towards final positiond
             lerping = true;
             startPositionRelativeToAttractedCube = transform.localPosition;
             startRotationRelativeToAttractedCube = transform.localRotation;
-            endPositionRelativeToAttractedCube = closestFace;
+            endPositionRelativeToAttractedCube = Correct(cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld));
             endRotationRelativeToAttractedCube = RotationChoice(transform.localRotation);
-
+            playerMainCube.transform.InverseTransformDirection(endPositionRelativeToAttractedCube);
+            Debug.Log(endPositionRelativeToAttractedCube+"atractedCube"+cubeAttractedToTransform+"translation" + playerMainCube.transform.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube)));
             //Predict position and rotation to find face to remove
-            RemoveFaces();
+            //RemoveFaces();
         }
     }
-
-        private void RemoveFaces()
-    {
-        //Calculate position of face to remove in locale cordonates of the cube at end position
-        if (playerAtractedTo != null)
-        {
-
-            Matrix4x4 projectionM = Matrix4x4.TRS(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube),
-            cubeAttractedToTransform.rotation, cubeAttractedToTransform.lossyScale);
-            Vector4 cubeAtractedToPositionHomo = MathExtension.toHomogeneousCords(cubeAttractedToTransform.position);
-            Vector3 faceToRemove = MathExtension.toEuclidianVector(projectionM.inverse * cubeAtractedToPositionHomo);
-
-            //Look if the face is there are other cubes adjacent to our cube
-            Transform mainCube = transform.root.GetComponent<PlayerObjects>().cubeRb.transform;
-            GridSystem cubeGrid = mainCube.GetComponent<GridSystem>();
-            Vector3 attractedCubePositionRelativeToMainBody = cubeGrid.getPositionOfObject(cubeAttractedToTransform.gameObject);
-            List<Vector3> myCubeFaceList = new List<Vector3>();
-
-            foreach (Vector3 dir in directionsList)
-            {
-
-                // We assume all cubes have same orientation
-                Vector3 cubeFinalPositionRelativeToMainBody = attractedCubePositionRelativeToMainBody + endPositionRelativeToAttractedCube;
-                Vector3 positionCheked = cubeFinalPositionRelativeToMainBody + dir;
-
-                //Check if there is adjecent cube
-                if (cubeGrid.containsKey(positionCheked))
-                {
-                    cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube);
-                    //Remove adjecent cube face
-                    Vector3 cubeAtFace;
-                    Vector3 myCubeFace;
-                    cubeAtFace = cubeGrid.getObjectAtPosition(positionCheked).GetComponent<Faces>().removeClosestFace((cubeGrid.getObjectAtPosition(positionCheked).transform.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube))));
-                    myCubeFace = transform.GetComponent<Faces>().removeClosestFace(-(cubeGrid.getObjectAtPosition(positionCheked).transform.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube))));
-                    List<Vector3> cubeAtFaceList = new List<Vector3>();
-                    cubeAtFaceList.Add(cubeAtFace);
-                    myCubeFaceList.Add(myCubeFace);
-                    storedFaces.Add(cubeGrid.getObjectAtPosition(positionCheked), cubeAtFaceList);
-
-                }
-            }
-
-            storedFaces.Add(gameObject, myCubeFaceList);
-        }
-    }
-
-        private void RemoveFacesClean()
-    {
-        //Calculate position of face to remove in locale cordonates of the cube at end position
-        Matrix4x4 projectionM = Matrix4x4.TRS(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube),
-                    cubeAttractedToTransform.rotation, cubeAttractedToTransform.lossyScale);
-        Vector4 cubeAtractedToPositionHomo = MathExtension.toHomogeneousCords(cubeAttractedToTransform.position);
-        Vector3 faceToRemove = MathExtension.toEuclidianVector(projectionM.inverse * cubeAtractedToPositionHomo);
-
-        //Look if the face is there are other cubes adjacent to our cube
-        Transform mainCube = transform.root.GetComponent<PlayerObjects>().cubeRb.transform;
-        GridSystem cubeGrid = mainCube.GetComponent<GridSystem>();
-        Vector3 attractedCubePositionRelativeToMainBody = cubeGrid.getPositionOfObject(cubeAttractedToTransform.gameObject);
-
-        foreach (Vector3 dir in directionsList)
-        {
-            // We assume all cubes have same orientation
-            Vector3 cubeFinalPositionRelativeToMainBody = attractedCubePositionRelativeToMainBody + endPositionRelativeToAttractedCube;
-            Vector3 positionCheked = cubeFinalPositionRelativeToMainBody + dir;
-            //Check if there is adjecent cube
-
-            if (cubeGrid.containsKey(positionCheked))
-            {
-                cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube);
-                //Remove adjecent cube face
-                Vector3 cubeAtFace;
-                Vector3 myCubeFace;
-                cubeAtFace = cubeGrid.getObjectAtPosition(positionCheked).GetComponent<Faces>().removeClosestFace((cubeGrid.getObjectAtPosition(positionCheked).transform.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube))));
-                myCubeFace = transform.GetComponent<Faces>().removeClosestFace(-(cubeGrid.getObjectAtPosition(positionCheked).transform.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube))));
-
-            }
-
-        }
-    }
-
         private Vector3 CoulombLaw(Vector3 distance, float charge1, float charge2)
     {
 
@@ -727,25 +651,6 @@ public class Feromagnetic : MonoBehaviour
         {
             return charge1 * charge2 * maxForceAttraction * distance.normalized;
         }
-    }
-
-        private Vector3 CalculateClosestFace(Vector3 relativeDirection, GameObject cubeAtractedTo)
-    {
-        List<Vector3> faces = cubeAtractedTo.GetComponent<Faces>().faces;
-        if (faces.Count != 0)
-        {
-            Vector3 direction = faces.First<Vector3>();
-
-            foreach (Vector3 dir in faces)
-            {
-                if ((direction - relativeDirection).magnitude > (dir - relativeDirection).magnitude)
-                {
-                    direction = dir;
-                }
-            }
-            return direction;
-        }
-        return Vector3.zero;
     }
 
         private Quaternion RotationChoice(Quaternion blocRotation)
@@ -782,17 +687,15 @@ public class Feromagnetic : MonoBehaviour
         public bool LookPositionGridAvailable()
     {
 
-        bool inGrid = false;
+        bool avaialble = true;
         if (playerAtractedTo != null)
         {
             Transform mainBodyCube = playerAtractedTo.GetComponent<PlayerObjects>().cubeRb.transform;
-            GridSystem grid = mainBodyCube.GetComponent<GridSystem>();
+            GridSystem grid = playerAtractedTo.GetComponent<GridSystem>();
 
-            Debug.Log("CF" + closestFace+"cA"+cubeAttractedToTransform);
-            Vector3 positionFromMainBody = mainBodyCube.InverseTransformPoint(cubeAttractedToTransform.TransformPoint(closestFace));
-            inGrid = grid.containsKey(positionFromMainBody);
-            Debug.Log("Position:" + positionFromMainBody + "grid:" + inGrid);
+            Vector3 positionFromMainBody = mainBodyCube.InverseTransformPoint(closestFaceRelativeToWorld);
+            avaialble = !grid.containsKey(positionFromMainBody);
         }
-        return inGrid;
+        return avaialble;
     }
 }
