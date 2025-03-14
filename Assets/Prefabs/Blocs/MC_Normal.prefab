@@ -136,7 +136,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 84
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &6205908960855129542
 MonoBehaviour:
@@ -151,25 +151,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passiveRadius: 0.75
-  activeRadius: 2.5
-  charge: 0.25
-  error: 0.05
+  activeRadius: 1
+  charge: 1
+  error: 0.1
   interpolates: 1
   timeLerpingTransform: 0.1
   spacingBetweenCubes: 0.2
-  moveTime: 0.15
+  moveTime: 1
   maxForceAttraction: 30
-  lerpingDistance: 1
+  lerpingDistance: 2
   springType: 0
   lerpingType: 1
   xLimit: 0
-  AngleLimit: 0
-  mainLinearDrive: 10000
-  mainLinearDamp: 100
-  secondaryLinearDrive: 10000
-  secondaryLinearDamp: 100
-  angularDrive: 10000
-  angularDamp: 100
+  AngleLimit: 1
+  mainLinearDrive: 100000
+  mainLinearDamp: 1000
+  secondaryLinearDrive: 100000
+  secondaryLinearDamp: 1000
+  angularDrive: 100000
+  angularDamp: 1000
 --- !u!114 &-4726244708395997180
 MonoBehaviour:
   m_ObjectHideFlags: 0

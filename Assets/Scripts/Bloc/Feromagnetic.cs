@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 public class Feromagnetic : MonoBehaviour
 {
     private const float timeBeforeActiveMagnet = 0.01f;
-    private const float maxSpeed = 5f;
+    private const float maxSpeed = 100f;
     private const float maxDistanceBeforeStop = 1f;
 
 
@@ -190,7 +190,7 @@ private void TransformLerping()
     {
         float distance = (cubeAttractedToTransform.position - transform.position).magnitude;
         //if (lerping && (errorP > error || errorR > error) && distance< maxDistanceBeforeStop)
-        if (lerping && (errorP > error || errorR > error*2) && (distance < lerpingDistance && timer<0.25))
+        if (lerping && (errorP > error || errorR > error*2) && (distance < lerpingDistance && timer<2))
         {
             //Once its locked 
             timer += Time.fixedDeltaTime;
@@ -213,7 +213,7 @@ private void TransformLerping()
             {
                 velocity = velocity.normalized * maxSpeed;
             }
-            if(angularVelocity.magnitude > 30)
+            if(angularVelocity.magnitude > 100)
             {
               //  angularVelocity = angularVelocity.normalized * maxSpeed;
             }
