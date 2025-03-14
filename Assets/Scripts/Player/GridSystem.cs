@@ -84,13 +84,7 @@ public class GridSystem : MonoBehaviour
                     playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
                     //Ajouter les faces aux voisins
 
-                    foreach (Vector3Int voisin in neighbors){
-                          if(grid.ContainsKey(voisin)){
-                            Vector3 faceToAdd = (gridBloc.Key - voisin);
-                            faceToAdd = faceToAdd*cubeSize;
-                            grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
-                        }
-                    }
+                    
                 }
 
             }
