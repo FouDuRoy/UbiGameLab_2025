@@ -15,8 +15,6 @@ GameObject:
   - component: {fileID: 5355365516190511092}
   - component: {fileID: 6205908960855129542}
   - component: {fileID: -4726244708395997180}
-  - component: {fileID: 6950955270905734173}
-  - component: {fileID: -2015588491079092952}
   - component: {fileID: 5239627204125198840}
   m_Layer: 0
   m_Name: MC_Normal
@@ -35,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.52, y: 0.4, z: -1.5919999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -119,7 +117,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5694876674060920943}
   serializedVersion: 4
-  m_Mass: 0.001
+  m_Mass: 0.000001
   m_Drag: 5
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -136,8 +134,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
-  m_CollisionDetection: 0
+  m_Constraints: 84
+  m_CollisionDetection: 3
 --- !u!114 &6205908960855129542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,26 +148,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.75
-  activeRadius: 1
-  charge: 1
-  error: 0.1
+  passiveRadius: 0.3
+  activeRadius: 2
+  charge: 0.006
+  error: 0.05
   interpolates: 1
-  timeLerpingTransform: 0.1
+  timeLerpingTransform: 4
   spacingBetweenCubes: 0.2
-  moveTime: 1
+  moveTime: 0.2
   maxForceAttraction: 30
-  lerpingDistance: 2
-  springType: 0
-  lerpingType: 1
+  lerpingDistance: 1
+  springType: 2
+  lerpingType: 0
   xLimit: 0
   AngleLimit: 1
-  mainLinearDrive: 100000
-  mainLinearDamp: 1000
-  secondaryLinearDrive: 100000
-  secondaryLinearDamp: 1000
-  angularDrive: 100000
-  angularDamp: 1000
+  mainLinearDrive: 500000
+  mainLinearDamp: 10000
+  secondaryLinearDrive: 500000
+  secondaryLinearDamp: 10000
+  angularDrive: 500000
+  angularDamp: 10000
 --- !u!114 &-4726244708395997180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,35 +181,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  weight: 0.01
+  weight: 0
   owner: 
   rb: {fileID: 0}
---- !u!114 &6950955270905734173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5694876674060920943}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1095d4e3a74d47e4b9c0de096fc5d84f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-2015588491079092952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5694876674060920943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ad1e9e6fcf2a74386f9b3b1b5bbe6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  faces: []
-  spacingBetweenCubes: 0.2
 --- !u!114 &5239627204125198840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +191,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5694876674060920943}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56b1f66b6b11f704684b152fe1a07198, type: 3}
   m_Name: 

@@ -1,6 +1,4 @@
-﻿using System;
-
-public enum SpringType
+﻿public enum SpringType
 {
-	None,Limited,Free
+    None, Limited, Free
 }
