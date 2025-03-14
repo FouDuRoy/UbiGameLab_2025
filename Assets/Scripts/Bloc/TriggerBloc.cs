@@ -4,6 +4,7 @@ using UnityEngine;
 //Federico Barallobres
 public class TriggerBloc : MonoBehaviour
 {
+    public float cubeShockResistance;
     private Bloc cubeComponent;
 
     void Start()
@@ -20,6 +21,7 @@ public class TriggerBloc : MonoBehaviour
         {
             PlayerInfo playerInfo = collision.gameObject.transform.root.GetComponent<PlayerInfo>();
 
+            float magnitude = collision.relativeVelocity.magnitude;
             if (other.GetComponent<Bloc>() != null)
             {
                 if (other.GetComponent<Bloc>().owner != "Neutral" && other.GetComponent<Bloc>().owner != "" &&
@@ -44,10 +46,14 @@ public class TriggerBloc : MonoBehaviour
                 }
             }
             else if (other.transform.root.name.Contains("Player") && other.gameObject.name != cubeComponent.owner
-                && cubeComponent.owner != "" && cubeComponent.owner != "Neutral")
+                && cubeComponent.owner != "" && cubeComponent.owner != "Neutral" && magnitude >= cubeShockResistance)
             {
                 
                 playerInfo.TakeDamage(cubeComponent.owner); // Send enemy's name
+            }
+            else if(magnitude < cubeShockResistance)
+            {
+                Debug.Log("Magnitude less than shock resistance");
             }
            
 

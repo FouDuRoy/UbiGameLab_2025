@@ -67,7 +67,7 @@ public class DynamicCamera : MonoBehaviour
         {
             camOrthoSize= Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor, minDistance, maxDistance);
             cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, camOrthoSize, ref currentOrthoSizeVelocity, distanceInterpTime,maxSpeed);
-            print(camOrthoSize);
+            //print(camOrthoSize);
         }
     }
 }
