@@ -19,6 +19,8 @@ public class HapticFeedbackController : MonoBehaviour
         {
             Debug.LogError($"Aucune manette trouvée pour {gameObject.name}");
         }
+
+        TriggerVibration(1f, .0f,.10f);
     }
 
     public void TriggerVibration(float leftMotor, float rightMotor, float duration)
