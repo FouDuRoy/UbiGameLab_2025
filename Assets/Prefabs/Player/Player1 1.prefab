@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7850894500233854463}
   - component: {fileID: 4658591005558201665}
   - component: {fileID: 6980508144528851275}
+  - component: {fileID: -1607963941705366508}
   m_Layer: 0
   m_Name: Player1 1
   m_TagString: Untagged
@@ -66,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 30
+  explosionForce: 1
   mouvementSpeed: 1200
   pivotSpeed: 50
   rotationSpeed: 30
@@ -121,6 +122,23 @@ MonoBehaviour:
   m_DefaultActionMap: Mouvement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &-1607963941705366508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134994841213693252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef11832dba477a45bb1904bfde007a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kernel: {fileID: 0}
+  playerObj: {fileID: 0}
+  kernelRotI: {x: 0, y: 0, z: 0, w: 0}
+  cubeSize: 1.2
+  checkGrid: 0
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,9 +152,7 @@ GameObject:
   - component: {fileID: 4397475906366865157}
   - component: {fileID: 4384431802473347577}
   - component: {fileID: 3070630633163488715}
-  - component: {fileID: 578525885588968045}
   - component: {fileID: 4536375940292766682}
-  - component: {fileID: 1357268866952744722}
   - component: {fileID: 3940145880420437646}
   m_Layer: 3
   m_Name: MainBody1
@@ -259,20 +275,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 84
   m_CollisionDetection: 2
---- !u!114 &578525885588968045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3131990571156717056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ad1e9e6fcf2a74386f9b3b1b5bbe6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  faces: []
-  spacingBetweenCubes: 0.2
 --- !u!135 &4536375940292766682
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -294,22 +296,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1357268866952744722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3131990571156717056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aef11832dba477a45bb1904bfde007a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kernel: {fileID: 3131990571156717056}
-  playerObj: {fileID: 0}
-  cubeSize: 1.2
-  checkGrid: 0
 --- !u!114 &3940145880420437646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.66
+      value: -2.6599998
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.z

@@ -10,7 +10,7 @@ public class Feromagnetic : MonoBehaviour
 {
         private const float timeBeforeActiveMagnet = 0;
 
-        private const float maxSpeed = 3f;
+        private const float maxSpeed = 10f;
 
         private const float maxDistanceBeforeStop = 1f;
 
@@ -251,7 +251,7 @@ public class Feromagnetic : MonoBehaviour
             rotationDelta.ToAngleAxis(out float angle, out Vector3 axis);
             axis.Normalize();
             Vector3 angularVelocity = axis * (angle * Mathf.Deg2Rad) * rotationSpeed*2f;
-            Debug.Log("relativeRoataion" + absoluteEndRotation.eulerAngles + "relative" + endRotationRelativeToAttractedCube.eulerAngles);
+
             if (velocity.magnitude > maxSpeed)
             {
                 velocity = velocity.normalized * maxSpeed;
@@ -260,12 +260,12 @@ public class Feromagnetic : MonoBehaviour
             {
                  angularVelocity = angularVelocity.normalized * maxSpeed;
             }
+
             //update velocity and rotation
             cubeRB.velocity = velocity;
             cubeRB.angularVelocity = angularVelocity;
             errorP = Vector3.Distance(absoluteEndPosition, cubeRB.position);
             errorR = Quaternion.Angle(absoluteEndRotation,cubeRB.rotation);
-            Debug.Log("errorP" + errorP + "errorR" + errorR+"Cube"+transform.name);
         }
         else if (!(errorP > error || errorR > 5))
         {
@@ -291,6 +291,8 @@ public class Feromagnetic : MonoBehaviour
         relativePositionToMainCube = Vector3.zero;
         closestFaceRelativeToWorld = Vector3.zero;
         closestFaceRelativeToMainCube = Vector3.zero;
+        errorP = 1;
+        errorR = 1;
         foreach (var cube in storedFaces)
         {
             List<Vector3> faces = cube.Key.GetComponent<Faces>().faces;
@@ -334,7 +336,7 @@ public class Feromagnetic : MonoBehaviour
                 DestroyImmediate(cubeRB);
             }
             playerAtractedTo.GetComponent<GridSystem>().AttachBlock(gameObject, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
-
+            
         }
         //Set to magnetic after some time
         Invoke("setLayer", timeBeforeActiveMagnet);
@@ -647,7 +649,7 @@ public class Feromagnetic : MonoBehaviour
             startRotationRelativeToAttractedCube = transform.localRotation;
             endPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld);
             endRotationRelativeToAttractedCube = RotationChoice(transform.localRotation);
-            Debug.Log("rotation" + endRotationRelativeToAttractedCube);
+            cubeRB.useGravity = false;
             //Predict position and rotation to find face to remove
             //RemoveFaces();
         }

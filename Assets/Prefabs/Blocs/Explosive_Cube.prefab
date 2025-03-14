@@ -15,8 +15,6 @@ GameObject:
   - component: {fileID: 5355365516190511092}
   - component: {fileID: 6205908960855129542}
   - component: {fileID: -4726244708395997180}
-  - component: {fileID: 6950955270905734173}
-  - component: {fileID: -2015588491079092952}
   - component: {fileID: 2525441135307876409}
   - component: {fileID: 1143426935521263120}
   m_Layer: 0
@@ -189,32 +187,6 @@ MonoBehaviour:
   weight: 0
   owner: 
   rb: {fileID: 0}
---- !u!114 &6950955270905734173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5694876674060920943}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1095d4e3a74d47e4b9c0de096fc5d84f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-2015588491079092952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5694876674060920943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ad1e9e6fcf2a74386f9b3b1b5bbe6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  faces: []
-  spacingBetweenCubes: 0.2
 --- !u!114 &2525441135307876409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +204,7 @@ MonoBehaviour:
   repulsionRange: 7
   repulsionForce: 0.1
   repulsionDistanceFactor: 1.2
+  timeBeforeExplosionEnabled: 1
   gizmoDuration: 1
   explosionMaterial: {fileID: 2100000, guid: 66738dc35de92b74cb58ea78afa39514, type: 2}
   repulsionMaterial: {fileID: 2100000, guid: b23c39ceb913006449663ef0f0b80157, type: 2}
