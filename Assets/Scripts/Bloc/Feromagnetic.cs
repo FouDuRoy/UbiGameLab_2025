@@ -199,7 +199,6 @@ public class Feromagnetic : MonoBehaviour
 
                 }
             }
-            Debug.Log("worldFace" + closestFaceRelativeToWorld + "mainCubeFace" + closestFaceRelativeToMainCube);
         }
     }
 
@@ -231,7 +230,7 @@ public class Feromagnetic : MonoBehaviour
         private void VelocityLerping()
     {
         float distance = (closestFaceRelativeToWorld - transform.position).magnitude;
-        if (lerping && (errorP > error || errorR > 5) && (distance < lerpingDistance && timer < 0.25))
+        if (lerping && (errorP > error || errorR > 5) && (distance < lerpingDistance && timer < 1))
         {
             //Once its locked 
             timer += Time.fixedDeltaTime;
@@ -241,7 +240,7 @@ public class Feromagnetic : MonoBehaviour
             Vector3 absoluteEndPosition = cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube);
             Vector3 newPosition = Vector3.Lerp(absoluteStartP, absoluteEndPosition, t);
             Vector3 velocity = (newPosition - cubeRB.position) / Time.fixedDeltaTime;
-
+            
             Quaternion absoluteRoatationStart = cubeAttractedToTransform.rotation * startRotationRelativeToAttractedCube;
             Quaternion absoluteEndRotation = cubeAttractedToTransform.rotation * endRotationRelativeToAttractedCube;
             Quaternion newRotation = Quaternion.Slerp(absoluteRoatationStart, absoluteEndRotation, t);
@@ -249,7 +248,7 @@ public class Feromagnetic : MonoBehaviour
             rotationDelta.ToAngleAxis(out float angle, out Vector3 axis);
             axis.Normalize();
             Vector3 angularVelocity = axis * (angle * Mathf.Deg2Rad) * rotationSpeed*2f;
-
+            Debug.Log("relativeRoataion" + absoluteEndRotation.eulerAngles + "relative" + endRotationRelativeToAttractedCube.eulerAngles);
             if (velocity.magnitude > maxSpeed)
             {
                 velocity = velocity.normalized * maxSpeed;
@@ -263,6 +262,7 @@ public class Feromagnetic : MonoBehaviour
             cubeRB.angularVelocity = angularVelocity;
             errorP = Vector3.Distance(absoluteEndPosition, cubeRB.position);
             errorR = Quaternion.Angle(absoluteEndRotation,cubeRB.rotation);
+            Debug.Log("errorP" + errorP + "errorR" + errorR+"Cube"+transform.name);
         }
         else if (!(errorP > error || errorR > 5))
         {
@@ -643,7 +643,8 @@ public class Feromagnetic : MonoBehaviour
             startPositionRelativeToAttractedCube = transform.localPosition;
             startRotationRelativeToAttractedCube = transform.localRotation;
             endPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld);
-            endRotationRelativeToAttractedCube = RotationChoice(transform.rotation);
+            endRotationRelativeToAttractedCube = RotationChoice(transform.localRotation);
+            Debug.Log("rotation" + endRotationRelativeToAttractedCube);
             //Predict position and rotation to find face to remove
             //RemoveFaces();
         }

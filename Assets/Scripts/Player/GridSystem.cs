@@ -17,8 +17,6 @@ public class GridSystem : MonoBehaviour
     {
         kernel = transform.GetComponent<PlayerObjects>().cubeRb.gameObject;
         grid.Add(new Vector3Int(0, 0, 0), kernel);
-         playerObj = this.transform.parent.GetComponent<PlayerObjects>();
-        Debug.Log(playerObj.weight);
         playerObj = transform.GetComponent<PlayerObjects>();
     }
 
@@ -363,7 +361,6 @@ public class GridSystem : MonoBehaviour
                 foundPoint = !containsKey(positionRelativeToKernel);
                 if (foundPoint)
                 {
-                    Debug.Log("correction:" + kernel.transform.InverseTransformDirection(directionsList[i]).normalized * cubeSize);
                     facePositionWorld = directionsList[i]+cube.transform.position;
                 }
                 i++;
