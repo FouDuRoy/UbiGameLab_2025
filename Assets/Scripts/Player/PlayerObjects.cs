@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+//Federico Barallobres
 public class PlayerObjects : MonoBehaviour
 {
     [SerializeField] public List<GameObject> cubes = new List<GameObject>();

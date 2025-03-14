@@ -17,6 +17,7 @@ using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
+//Federico Barallobres
 public class PlayerMouvement : MonoBehaviour
 {
     private const float collisionDistance = 0.1f;
@@ -57,8 +58,8 @@ public class PlayerMouvement : MonoBehaviour
         rb = this.GetComponent<PlayerObjects>().cubeRb;
         if (moveType == MouvementType.rigidBody || moveType == MouvementType.move3d)
         {
-            rb.centerOfMass = Vector3.zero;
-            rb.inertiaTensor= new Vector3(1,1,1);
+          ///  rb.centerOfMass = Vector3.zero;
+           // rb.inertiaTensor= new Vector3(1,1,1);
         }
         golem = transform.Find("GolemBuilt").GetComponent<Rigidbody>();
         
@@ -108,9 +109,7 @@ public class PlayerMouvement : MonoBehaviour
         }else if(moveType == MouvementType.move3d){
             //Left joystick
             rb.AddForce(direction * mouvementSpeed / weight);
-            //rb.AddForceAtPosition(direction * mouvementSpeed, CalculateCenterMass());
-            //if (!rotatingRight)
-                rotateAndDirection2(direction);
+            rotateAndDirection2(direction);
             
 
             //Right joystick

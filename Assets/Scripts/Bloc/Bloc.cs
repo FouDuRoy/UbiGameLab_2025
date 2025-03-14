@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//Federico Barallobres
 public class Bloc : MonoBehaviour
 {
     [SerializeField] float minimalSpeed = 0.5f;
