@@ -264,46 +264,52 @@ public class GridSystem : MonoBehaviour
         }
     }
 
-    public Vector3 ClosestNeighbourPosition(GameObject cube,Vector3 position)
+    public Vector3[] ClosestNeighbourPosition(GameObject cube,Vector3 position)
     {
         Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
-        Vector3 relativePositionToKernel = kernel.transform.InverseTransformPoint(position);
+        Vector3 cubePositionToKernel = tranformToVector3(positionCube);
        
         if (positionCube == null)
         {
-            return Vector3.zero;
+            return null;
         }
         else
         {
-            List<Vector3> cubeNeighbours = getAvailableNeighbours(cube);
-            Vector3 closest = Vector3.zero;
-            if(cubeNeighbours.Count > 0)
+
+            //Look for closest position relative to current position and rotation
+            float scaleFactor = cube.transform.lossyScale.x;
+            Vector3[] directions = new Vector3[] {cube.transform.forward*cubeSize*scaleFactor, -cube.transform.forward * cubeSize*scaleFactor
+                , cube.transform.up * cubeSize*scaleFactor,-cube.transform.up*cubeSize*scaleFactor
+                , cube.transform.right * cubeSize*scaleFactor,-cube.transform.right*cubeSize*scaleFactor };
+            List<Vector3> directionsList = directions.ToList();
+            directionsList.Sort((x,y) =>
             {
-                
-                
-                Vector3 direction = cubeNeighbours.First()+(kernel.transform.InverseTransformPoint(cube.transform.position)- tranformToVector3(positionCube));
-                Vector3 faceRelativeToAtCube = Quaternion.Inverse(cube.transform.rotation) * direction;
-                float distance = (cube.transform.TransformPoint(faceRelativeToAtCube)-position).sqrMagnitude;
-                closest = cube.transform.TransformPoint(faceRelativeToAtCube);
-                
-                foreach (Vector3 neighbour in cubeNeighbours)
+                float distanceX = (cube.transform.position + x - position).magnitude;
+                float distanceY = (cube.transform.position + y - position).magnitude;
+                return distanceX.CompareTo(distanceY);
+            }); 
+
+            int i = 0;
+            bool foundPoint = false;
+            Vector3 positionRelativeToKernel = Vector3.zero;
+            Vector3 facePositionWorld = Vector3.zero;
+            do
+            {
+                positionRelativeToKernel = cubePositionToKernel+ cube.transform.InverseTransformDirection(directionsList[i]).normalized*cubeSize;
+                foundPoint = !containsKey(positionRelativeToKernel);
+                if (foundPoint)
                 {
-                    
-                    Vector3 direction2 = neighbour - tranformToVector3(positionCube);
-                    Vector3 faceRelativeToAtCube2 = Quaternion.Inverse(cube.transform.rotation) * direction2;
-                    float compare = (cube.transform.TransformPoint(faceRelativeToAtCube2) - position).sqrMagnitude;
-
-                    if (distance > compare)
-                    {
-                        closest = cube.transform.TransformPoint(faceRelativeToAtCube2);
-                        distance = compare;
-
-                    }
+                    Debug.Log("correction:" + kernel.transform.InverseTransformDirection(directionsList[i]).normalized * cubeSize);
+                    facePositionWorld = directionsList[i]+cube.transform.position;
                 }
-            }
-            return closest;
+                i++;
+            }while(!foundPoint && i < directionsList.Count);
+            
+            return new Vector3[] {facePositionWorld,positionRelativeToKernel};
+
         }
     }
+    
     public List<Vector3> getOccupiedNeighbours(GameObject cube)
     {
         Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
@@ -320,6 +326,7 @@ public class GridSystem : MonoBehaviour
             {
                 if (grid.ContainsKey(position))
                 {
+                    
                     occupiedSpaces.Add(tranformToVector3(position));
                 }
             }

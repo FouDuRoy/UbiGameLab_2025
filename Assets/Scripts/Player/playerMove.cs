@@ -36,7 +36,7 @@ public class PlayerMouvement : MonoBehaviour
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
         rotateActionX = playerInput.actions.FindAction("RotateX");
         rb = this.GetComponent<PlayerObjects>().cubeRb;
-        if (moveType == MouvementType.rigidBody || moveType == MouvementType.move3d)
+        if (moveType == MouvementType.rigidBody || moveType == MouvementType.move3d || moveType == MouvementType.spring)
         {
             rb.centerOfMass = Vector3.zero;
             rb.inertiaTensor = new Vector3(1, 1, 1);
