@@ -314,7 +314,6 @@ public class Feromagnetic : MonoBehaviour
         gameObject.GetComponent<SphereCollider>().radius = activeRadius;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
 
-        Debug.Log("attach"); 
         this.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
         transform.root.GetComponent<PlayerObjects>().cubes.Add(gameObject);
         if (springType == SpringType.Free || springType == SpringType.Limited)
@@ -629,13 +628,11 @@ public class Feromagnetic : MonoBehaviour
         
         if ((transform.position-closestFaceRelativeToWorld).magnitude > lerpingDistance || !LookPositionGridAvailable())
         {
-            Debug.DrawLine(cubeAttractedToTransform.position, closestFaceRelativeToWorld, Color.black, 10f);
             cubeRB.AddForce(CoulombLaw(direction, charge, charge));
         }
         // We start attaching the cube 
         else if (!lerping)
         {
-            Debug.DrawLine(cubeAttractedToTransform.position, closestFaceRelativeToWorld, Color.black, 10f);
             //Set speed to zero and change layer to magnetic.
             cubeRB.velocity = Vector3.zero;
             cubeRB.angularVelocity = Vector3.zero;

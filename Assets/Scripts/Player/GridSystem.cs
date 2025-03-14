@@ -40,7 +40,6 @@ public class GridSystem : MonoBehaviour
         if (grid.ContainsValue(attachedBloc))
         {
             grid.Add(fixedVector, blocToAttach);
-            Debug.Log("wow");
             playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
         }
         else if (grid.ContainsValue(attachedBloc))
