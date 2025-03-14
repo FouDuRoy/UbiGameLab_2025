@@ -67,7 +67,6 @@ public class GridSystem : MonoBehaviour
                 {
                     Vector3 faceToAdd = (detachedGridPos - voisin);
                     faceToAdd = faceToAdd * cubeSize;
-                    grid[voisin].GetComponent<Faces>().addFace(faceToAdd);
                 }
 
             }

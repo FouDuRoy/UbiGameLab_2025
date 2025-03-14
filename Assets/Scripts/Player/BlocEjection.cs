@@ -12,7 +12,7 @@ public class BlocEjection : MonoBehaviour
 
     private void Start()
     {
-        gridSystem = gameObject.GetComponent<GridSystem>();
+        gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
         playerObjects = FindObjectOfType<PlayerObjects>();
     }
 

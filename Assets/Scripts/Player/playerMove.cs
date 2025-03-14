@@ -61,7 +61,7 @@ public class PlayerMouvement : MonoBehaviour
           ///  rb.centerOfMass = Vector3.zero;
            // rb.inertiaTensor= new Vector3(1,1,1);
         }
-        golem = transform.Find("GolemBuilt").GetComponent<Rigidbody>();
+        //golem = transform.Find("GolemBuilt").GetComponent<Rigidbody>();
         
     }
 

@@ -21,7 +21,6 @@ public class PlayerObjects : MonoBehaviour
     public bool removeCube(GameObject cube)
     {
         cube.transform.parent = transform.parent;
-        cube.GetComponent<Faces>().resetFaces();
         cubes.Remove(cube);
         cube.layer = 0;
         Destroy(cube.GetComponent<SphereCollider>());
