@@ -77,7 +77,7 @@ public class PlayerMouvement : MonoBehaviour
            // rb.inertiaTensor= new Vector3(1,1,1);
         }
         //golem = transform.Find("GolemBuilt").GetComponent<Rigidbody>();
-        feedback = new HapticFeedbackController();
+        feedback =  this.GetComponent<HapticFeedbackController>();
         if (secondsForMaxCharging >= 2)
         {
             secondsForMaxCharging -= 1;
@@ -253,15 +253,19 @@ public class PlayerMouvement : MonoBehaviour
 
         if(leftTrigger > 0)
         {
-             cone.coneAttraction(rb.transform.Find("GolemBuilt").transform, attractionForce
+            if(leftTriggerHeld == false)
+            {
+                feedback.AttractionVibrationStart();
+            }
+            cone.coneAttraction(rb.transform.Find("GolemBuilt").transform, attractionForce
                 ,initialAngle,distance,leftTrigger, timeHeld);
             leftTriggerHeld = true;
-            feedback.AttractionVibrationStart();
+
             timeHeld += Time.fixedDeltaTime*5f/6;
-            Debug.Log(timeHeld/ secondsForMaxCharging);
         }
         else if (leftTriggerHeld)
         {
+            Debug.Log("here");
             feedback.AttractionVibrationEnd();
             leftTriggerHeld = false;
             cone.resetMagneticLast();
