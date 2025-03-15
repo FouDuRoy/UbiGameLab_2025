@@ -28,6 +28,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float playerCharge = 1000f;
     [SerializeField] float rotParam;
     [SerializeField] float rotationDamping =10f;
+    [SerializeField] float attractionForce = 10f;
     [SerializeField] MouvementType moveType;
     [SerializeField] bool coneProjection;
 
@@ -37,6 +38,7 @@ public class PlayerMouvement : MonoBehaviour
     InputAction throwCubes;
     InputAction rotateActionZ;
     InputAction rotateActionX;
+    InputAction AttractCubes;
 
     Rigidbody rb;
     float totalMass;
@@ -55,6 +57,8 @@ public class PlayerMouvement : MonoBehaviour
         throwCubes = playerInput.actions.FindAction("ThrowCubes");
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
         rotateActionX = playerInput.actions.FindAction("RotateX");
+        AttractCubes = playerInput.actions.FindAction("AttractCubes");
+
         rb = this.GetComponent<PlayerObjects>().cubeRb;
         if (moveType == MouvementType.rigidBody || moveType == MouvementType.move3d)
         {
@@ -75,7 +79,9 @@ public class PlayerMouvement : MonoBehaviour
         float rotationY = rotateAction.ReadValue<float>();
         float rotationZ = rotateActionZ.ReadValue<float>();
         float rotationX = rotateActionX.ReadValue<float>();
-    
+        float leftTrigger = AttractCubes.ReadValue<float>();
+
+
         if (moveType == MouvementType.rigidBody)
         {
             RigidBodyMouvement(direction, rotationY);
@@ -229,6 +235,11 @@ public class PlayerMouvement : MonoBehaviour
             ThrowCubes();
         }
 
+        if(leftTrigger > 0)
+        {
+            ConeEjectionAndProjection.coneAttraction(rb.transform, attractionForce);
+
+        }
 
     }
 
@@ -276,6 +287,11 @@ public class PlayerMouvement : MonoBehaviour
 
                 //Add rigidBody
                 GetComponent<PlayerObjects>().addRigidBody(cube);
+               // ConfigurableJoint[] joints = cube.GetComponents<ConfigurableJoint>();
+                 //foreach (ConfigurableJoint joint in joints)
+                  //  {
+                        //DestroyImmediate(joint);
+                    //}
 
 
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;

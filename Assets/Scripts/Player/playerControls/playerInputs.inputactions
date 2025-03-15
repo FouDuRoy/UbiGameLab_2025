@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "AttractCubes",
+                    "type": "Button",
+                    "id": "d90e1964-7d62-4e36-b591-c337b159e1a8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -414,6 +423,17 @@
                     "action": "RotateZ",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "97425595-4820-411a-97ce-f5f811b6c262",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1;Player2",
+                    "action": "AttractCubes",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
