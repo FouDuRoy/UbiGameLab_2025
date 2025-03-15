@@ -90,8 +90,5 @@ public class HapticFeedbackController : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-
-        // Arrêt de la vibration après la transition
-        playerGamepad.SetMotorSpeeds(leftMotorMin, rightMotorMin);
     }
 }
