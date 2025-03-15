@@ -29,6 +29,8 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float rotParam;
     [SerializeField] float rotationDamping =10f;
     [SerializeField] float attractionForce = 10f;
+    [SerializeField] float angle = 45f;
+    [SerializeField] float distance = 10f;
     [SerializeField] MouvementType moveType;
     [SerializeField] bool coneProjection;
 
@@ -237,7 +239,7 @@ public class PlayerMouvement : MonoBehaviour
 
         if(leftTrigger > 0)
         {
-            ConeEjectionAndProjection.coneAttraction(rb.transform, attractionForce);
+            ConeEjectionAndProjection.coneAttraction(rb.transform.Find("GolemBuilt").transform, attractionForce,angle,distance);
 
         }
 
