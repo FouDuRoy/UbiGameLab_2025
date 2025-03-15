@@ -19,23 +19,50 @@ public class HapticFeedbackController : MonoBehaviour
         {
             Debug.LogError($"Aucune manette trouvée pour {gameObject.name}");
         }
+
+        playerGamepad.SetMotorSpeeds(0, 0);
+        //TriggerRampVibration(.2f, 1, .2f, .1f, 10);
     }
 
-    public void TriggerVibration(float leftMotor, float rightMotor, float duration)
+    public void TriggerRampVibration(float leftMotorMin, float leftMotorMax, float rightMotorMin, float rightMotorMax, float duration)
     {
         if (playerGamepad != null)
         {
+            StartCoroutine(RampVibration(leftMotorMin, leftMotorMax, rightMotorMin, rightMotorMax, duration));
+        }
+    }
+
+    private IEnumerator RampVibration(float leftMotorMin, float leftMotorMax, float rightMotorMin, float rightMotorMax, float duration)
+    {
+        float halfDuration = duration / 2f;
+        float elapsed = 0f;
+
+        // Phase de montée (0 à moitié du temps)
+        while (elapsed < halfDuration)
+        {
+            float progress = elapsed / halfDuration; // Entre 0 et 1
+            float leftMotor = Mathf.Lerp(leftMotorMin, leftMotorMax, progress);
+            float rightMotor = Mathf.Lerp(rightMotorMin, rightMotorMax, progress);
             playerGamepad.SetMotorSpeeds(leftMotor, rightMotor);
-            StartCoroutine(StopVibration(duration));
-        }
-    }
 
-    private IEnumerator StopVibration(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        if (playerGamepad != null)
-        {
-            playerGamepad.SetMotorSpeeds(0f, 0f);
+            elapsed += Time.deltaTime;
+            yield return null;
         }
+
+        // Phase de descente (moitié à fin)
+        elapsed = 0f;
+        while (elapsed < halfDuration)
+        {
+            float progress = elapsed / halfDuration; // Entre 0 et 1
+            float leftMotor = Mathf.Lerp(leftMotorMax, leftMotorMin, progress);
+            float rightMotor = Mathf.Lerp(rightMotorMax, rightMotorMin, progress);
+            playerGamepad.SetMotorSpeeds(leftMotor, rightMotor);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Arrêt complet de la vibration
+        playerGamepad.SetMotorSpeeds(0, 0);
     }
 }
