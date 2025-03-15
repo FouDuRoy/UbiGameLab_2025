@@ -146,6 +146,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3881893778887793840, guid: 83e2e9cf36c7b854988c6ae7c2752bce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4849188280878380009, guid: 83e2e9cf36c7b854988c6ae7c2752bce, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.35
@@ -186,6 +190,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6727704873555021889, guid: 83e2e9cf36c7b854988c6ae7c2752bce, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727704873555021889, guid: 83e2e9cf36c7b854988c6ae7c2752bce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.51
+      objectReference: {fileID: 0}
     - target: {fileID: 7850894500233854463, guid: 83e2e9cf36c7b854988c6ae7c2752bce, type: 3}
       propertyPath: moveType
       value: 3
@@ -196,7 +208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7850894500233854463, guid: 83e2e9cf36c7b854988c6ae7c2752bce, type: 3}
       propertyPath: initialAngle
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7850894500233854463, guid: 83e2e9cf36c7b854988c6ae7c2752bce, type: 3}
       propertyPath: rotationSpeed
@@ -982,6 +994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gauche: 0
+  vibratingMax: 0
 --- !u!1001 &1321853364
 PrefabInstance:
   m_ObjectHideFlags: 0

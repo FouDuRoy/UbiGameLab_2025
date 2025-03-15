@@ -277,7 +277,7 @@ public class Feromagnetic : MonoBehaviour
         }
     }
 
-        private void ResetObject()
+        public void ResetObject()
     {
         lerping = false;
         timer = 0;

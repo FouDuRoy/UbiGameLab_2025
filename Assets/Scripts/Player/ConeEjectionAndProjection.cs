@@ -40,13 +40,17 @@ public class ConeEjectionAndProjection : MonoBehaviour
             Vector3 distanceBetweenPlayerAndCube = player.position - cube.transform.position;
             Rigidbody cubeRB = cube.GetComponent<Rigidbody>();
             cubeRB.AddForce(distanceBetweenPlayerAndCube.normalized* attractionForce* magnitude, ForceMode.Acceleration);
-            cube.GetComponent<Feromagnetic>().enabled = false;
+            Feromagnetic fero = cube.GetComponent<Feromagnetic>();
+            fero.ResetObject();
+            fero.enabled = false;
 
         });
         //Remagnetize those that are not in range anymore
         magneticLast = magneticLast.FindAll(cube => !magnetic.Contains(cube));
         magneticLast.ForEach(cube => cube.GetComponent<Feromagnetic>().enabled = true);
 
+        Debug.DrawRay(player.position, Quaternion.AngleAxis(angle* angleFactor, Vector3.up) * player.forward*distance,Color.red, Time.deltaTime);
+        Debug.DrawRay(player.position, Quaternion.AngleAxis(-angle* angleFactor, Vector3.up) * player.forward *distance, Color.red, Time.deltaTime);
         magneticLast = magnetic;
     }
 
