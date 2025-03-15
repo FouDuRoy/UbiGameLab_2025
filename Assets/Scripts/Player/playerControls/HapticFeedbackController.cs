@@ -6,6 +6,8 @@ public class HapticFeedbackController : MonoBehaviour
 {
     private Gamepad playerGamepad;
 
+    public bool gauche;
+
     void Start()
     {
         // Récupérer la manette liée à ce joueur (nécessite un script qui gère l'attribution des manettes)
@@ -21,12 +23,31 @@ public class HapticFeedbackController : MonoBehaviour
         }
 
         playerGamepad.SetMotorSpeeds(0, 0);
-        //TriggerRampVibration(.2f, 1, .2f, .1f, 10);
+
+        if (gauche)
+        {
+            TriggerRampVibration(.5f, .5f, 0, 0, 30);
+        }
+        else
+        {
+            TriggerRampVibration(0, 0, .5f, 1, 30);
+        }
     }
 
-    public void AttractionVibration()
+    public void AttractionVibrationStart()
     {
-        playerGamepad.SetMotorSpeeds(0.2f, 0);
+        if (playerGamepad != null)
+        {
+            //StartCoroutine(VibrationTransition(bigRumbleMin, bigRumbleMax, smoothRumbleMin, smoothRumbleMax, duration, crescendo));
+        }
+    }
+
+    public void AttractionVibrationEnd()
+    {
+        if (playerGamepad != null)
+        {
+            //StartCoroutine(VibrationTransition(bigRumbleMin, bigRumbleMax, smoothRumbleMin, smoothRumbleMax, duration, crescendo));
+        }
     }
 
     public void StopVibrations()
@@ -34,45 +55,33 @@ public class HapticFeedbackController : MonoBehaviour
         playerGamepad.SetMotorSpeeds(0, 0);
     }
 
-    public void TriggerRampVibration(float leftMotorMin, float leftMotorMax, float rightMotorMin, float rightMotorMax, float duration)
+    private IEnumerator VibrationTransition(float leftMotorMin, float leftMotorMax, float rightMotorMin, float rightMotorMax, float duration, bool crescendo)
     {
-        if (playerGamepad != null)
-        {
-            StartCoroutine(RampVibration(leftMotorMin, leftMotorMax, rightMotorMin, rightMotorMax, duration));
-        }
-    }
-
-    private IEnumerator RampVibration(float leftMotorMin, float leftMotorMax, float rightMotorMin, float rightMotorMax, float duration)
-    {
-        float halfDuration = duration / 2f;
         float elapsed = 0f;
 
-        // Phase de montée (0 à moitié du temps)
-        while (elapsed < halfDuration)
+        while (elapsed < duration)
         {
-            float progress = elapsed / halfDuration; // Entre 0 et 1
-            float leftMotor = Mathf.Lerp(leftMotorMin, leftMotorMax, progress);
-            float rightMotor = Mathf.Lerp(rightMotorMin, rightMotorMax, progress);
+            float progress = elapsed / duration; // Progression entre 0 et 1
+            float leftMotor, rightMotor;
+
+            if (crescendo)
+            {
+                leftMotor = Mathf.Lerp(leftMotorMin, leftMotorMax, progress);
+                rightMotor = Mathf.Lerp(rightMotorMin, rightMotorMax, progress);
+            }
+            else
+            {
+                leftMotor = Mathf.Lerp(leftMotorMax, leftMotorMin, progress);
+                rightMotor = Mathf.Lerp(rightMotorMax, rightMotorMin, progress);
+            }
+
             playerGamepad.SetMotorSpeeds(leftMotor, rightMotor);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        // Phase de descente (moitié à fin)
-        elapsed = 0f;
-        while (elapsed < halfDuration)
-        {
-            float progress = elapsed / halfDuration; // Entre 0 et 1
-            float leftMotor = Mathf.Lerp(leftMotorMax, leftMotorMin, progress);
-            float rightMotor = Mathf.Lerp(rightMotorMax, rightMotorMin, progress);
-            playerGamepad.SetMotorSpeeds(leftMotor, rightMotor);
-
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        // Arrêt complet de la vibration
-        playerGamepad.SetMotorSpeeds(0, 0);
+        // Arrêt de la vibration après la transition
+        playerGamepad.SetMotorSpeeds(leftMotorMin, rightMotorMin);
     }
 }
