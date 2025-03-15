@@ -22,15 +22,9 @@ public class HapticFeedbackController : MonoBehaviour
             Debug.LogError($"Aucune manette trouvée pour {gameObject.name}");
         }
 
-        playerGamepad.SetMotorSpeeds(0, 0);
-
-        if (gauche)
+        if (playerGamepad != null)
         {
-            TriggerRampVibration(.5f, .5f, 0, 0, 30);
-        }
-        else
-        {
-            TriggerRampVibration(0, 0, .5f, 1, 30);
+            playerGamepad.SetMotorSpeeds(0, 0);
         }
     }
 
@@ -38,7 +32,7 @@ public class HapticFeedbackController : MonoBehaviour
     {
         if (playerGamepad != null)
         {
-            //StartCoroutine(VibrationTransition(bigRumbleMin, bigRumbleMax, smoothRumbleMin, smoothRumbleMax, duration, crescendo));
+            StartCoroutine(VibrationTransition(0, 0, 0, .5f, .5f, true));
         }
     }
 
@@ -46,7 +40,23 @@ public class HapticFeedbackController : MonoBehaviour
     {
         if (playerGamepad != null)
         {
-            //StartCoroutine(VibrationTransition(bigRumbleMin, bigRumbleMax, smoothRumbleMin, smoothRumbleMax, duration, crescendo));
+            StartCoroutine(VibrationTransition(0, 0, 0, .5f, .2f, false));
+        }
+    }
+
+    public void EjectionVibrationStart()
+    {
+        if (playerGamepad != null)
+        {
+            StartCoroutine(VibrationTransition(0, 1f, 0, 0, .2f, true));
+        }
+    }
+
+    public void EjectionVibrationEnd()
+    {
+        if (playerGamepad != null)
+        {
+            StartCoroutine(VibrationTransition(0, 1f, 0, 0, .05f, false));
         }
     }
 
