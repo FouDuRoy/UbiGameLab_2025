@@ -8,7 +8,8 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] public GameObject player;
     [SerializeField] public Rigidbody cubeRb;
     [SerializeField] public GameObject passiveCube;
-    public GridSystem gridSystem;
+
+    protected GridSystem gridSystem;
     public float weight=1;
 
     void Start()

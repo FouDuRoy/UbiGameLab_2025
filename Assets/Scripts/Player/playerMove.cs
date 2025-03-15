@@ -29,10 +29,13 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float rotParam;
     [SerializeField] float rotationDamping =10f;
     [SerializeField] float attractionForce = 10f;
-    [SerializeField] float angle = 45f;
+    [SerializeField] float initialAngle = 45f;
+    [SerializeField] float secondsForMaxCharging = 2f;
     [SerializeField] float distance = 10f;
     [SerializeField] MouvementType moveType;
     [SerializeField] bool coneProjection;
+
+
 
     PlayerInput playerInput;
     InputAction moveAction;
@@ -42,14 +45,20 @@ public class PlayerMouvement : MonoBehaviour
     InputAction rotateActionX;
     InputAction AttractCubes;
 
-    Rigidbody rb;
+   
     float totalMass;
     float weight;
+    float timeHeld = 0;
+    ConeEjectionAndProjection cone;
     Rigidbody golem;
-    private GameObject reff;
-    bool rotatingRight = false;
-    
+    Rigidbody rb;
 
+    private GameObject reff;
+
+    bool rotatingRight = false;
+    bool leftTriggerHeld = false;
+
+    HapticFeedbackController feedback;
 
     void Start()
     {
@@ -68,7 +77,12 @@ public class PlayerMouvement : MonoBehaviour
            // rb.inertiaTensor= new Vector3(1,1,1);
         }
         //golem = transform.Find("GolemBuilt").GetComponent<Rigidbody>();
-        
+        feedback = new HapticFeedbackController();
+        if (secondsForMaxCharging >= 2)
+        {
+            secondsForMaxCharging -= 1;
+        }
+        cone = new ConeEjectionAndProjection();
     }
 
     // Update is called once per frame
@@ -239,12 +253,23 @@ public class PlayerMouvement : MonoBehaviour
 
         if(leftTrigger > 0)
         {
-            ConeEjectionAndProjection.coneAttraction(rb.transform.Find("GolemBuilt").transform, attractionForce,angle,distance);
-
+             cone.coneAttraction(rb.transform.Find("GolemBuilt").transform, attractionForce
+                ,initialAngle,distance,leftTrigger, timeHeld);
+            leftTriggerHeld = true;
+            feedback.AttractionVibrationStart();
+            timeHeld += Time.fixedDeltaTime*5f/6;
+            Debug.Log(timeHeld/ secondsForMaxCharging);
+        }
+        else if (leftTriggerHeld)
+        {
+            feedback.AttractionVibrationEnd();
+            leftTriggerHeld = false;
+            cone.resetMagneticLast();
+            timeHeld = 0;
         }
 
     }
-
+    
     private void TranslateMouvement(Vector3 direction, float rotation)
     {
         transform.position += direction * mouvementSpeed * Time.fixedDeltaTime;
@@ -516,7 +541,7 @@ public class PlayerMouvement : MonoBehaviour
         }else{
           rb.AddRelativeTorque(Vector3.forward*zValue*pivotSpeed* 10000);
         }
-      
+       
     }
     public Vector3 QuaternionToAngularVelocity(Quaternion rotation)
     {

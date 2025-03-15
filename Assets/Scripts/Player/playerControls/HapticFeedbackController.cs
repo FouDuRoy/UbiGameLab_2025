@@ -26,11 +26,11 @@ public class HapticFeedbackController : MonoBehaviour
 
         if (gauche)
         {
-            TriggerRampVibration(.5f, .5f, 0, 0, 30);
+            //TriggerRampVibration(.5f, .5f, 0, 0, 30);
         }
         else
         {
-            TriggerRampVibration(0, 0, .5f, 1, 30);
+            //TriggerRampVibration(0, 0, .5f, 1, 30);
         }
     }
 

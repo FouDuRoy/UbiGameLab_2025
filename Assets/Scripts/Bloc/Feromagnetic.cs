@@ -24,10 +24,6 @@ public class Feromagnetic : MonoBehaviour
 
         [SerializeField] float error = 0.05f;
 
-        [SerializeField] bool interpolates;
-
-        [SerializeField] float timeLerpingTransform = 0.2f;
-
         [SerializeField] float spacingBetweenCubes = 0.1f;
 
         [SerializeField] float moveTime = 0.1f;
