@@ -8,6 +8,7 @@ public class DynamicCamera : MonoBehaviour
 {
     [SerializeField] private GameObject Player1;
     [SerializeField] private GameObject Player2;
+    [SerializeField] private GameObject ArenaCenter;
 
     [SerializeField] private float maxSpeed = Mathf.Infinity;
 
@@ -24,6 +25,7 @@ public class DynamicCamera : MonoBehaviour
     private float currentOrthoSizeVelocity;
     private Vector3 playerOnePlanePos;
     private Vector3 playerTwoPlanePos;
+    private Vector3 arenaCenterPlanePos;
     private Vector2 angleCam;
     private Vector2 camLocalPos;
     private float camOrthoSize;
@@ -51,8 +53,9 @@ public class DynamicCamera : MonoBehaviour
         //Récupère la position des joueurs sur un plan XZ pour que l'objet caméra reste fixe sur l'axe Y
         playerOnePlanePos = new Vector3 (Player1.transform.position.x, 0, Player1.transform.position.z);
         playerTwoPlanePos = new Vector3 (Player2.transform.position.x, 0, Player2.transform.position.z);
+        arenaCenterPlanePos = new Vector3(ArenaCenter.transform.position.x, 0, ArenaCenter.transform.position.z);
 
-        transform.position= Vector3.SmoothDamp(transform.position, (playerOnePlanePos + playerTwoPlanePos) / 2, ref currentHorizontalVelocity, horizontalInterpTime, maxSpeed);
+        transform.position= Vector3.SmoothDamp(transform.position, (playerOnePlanePos + playerTwoPlanePos + arenaCenterPlanePos) / 3, ref currentHorizontalVelocity, horizontalInterpTime, maxSpeed);
 
         // DISTANCE DE LA CAMERA PAR RAPPORT AU PIVOT DE L'OBJET DYNAMIC CAMERA
 

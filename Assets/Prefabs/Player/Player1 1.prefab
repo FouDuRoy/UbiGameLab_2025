@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6980508144528851275}
   - component: {fileID: -1607963941705366508}
   - component: {fileID: 1512615688132316089}
+  - component: {fileID: 778599230980870438}
   m_Layer: 0
   m_Name: Player1 1
   m_TagString: Untagged
@@ -75,6 +76,9 @@ MonoBehaviour:
   playerCharge: 10
   rotParam: 4
   rotationDamping: 10
+  attractionForce: 100
+  angle: 20
+  distance: 15
   moveType: 3
   coneProjection: 0
 --- !u!114 &4658591005558201665
@@ -150,6 +154,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60be84a4f442e994f967251cc6241ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &778599230980870438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134994841213693252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e37e11737801404ab826afec355bb28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3131990571156717056

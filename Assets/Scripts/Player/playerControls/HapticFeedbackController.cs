@@ -24,6 +24,16 @@ public class HapticFeedbackController : MonoBehaviour
         //TriggerRampVibration(.2f, 1, .2f, .1f, 10);
     }
 
+    public void AttractionVibration()
+    {
+        playerGamepad.SetMotorSpeeds(0.2f, 0);
+    }
+
+    public void StopVibrations()
+    {
+        playerGamepad.SetMotorSpeeds(0, 0);
+    }
+
     public void TriggerRampVibration(float leftMotorMin, float leftMotorMax, float rightMotorMin, float rightMotorMax, float duration)
     {
         if (playerGamepad != null)
