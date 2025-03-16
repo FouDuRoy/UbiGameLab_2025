@@ -6,6 +6,7 @@ public class HapticFeedbackController : MonoBehaviour
 {
     private Gamepad playerGamepad;
     private Coroutine attractionCoroutine;
+    private Coroutine impulseCoroutine;
 
     void Start()
     {
@@ -33,7 +34,11 @@ public class HapticFeedbackController : MonoBehaviour
     {
         if (playerGamepad != null)
         {
-            StartCoroutine(ImpulseVibration(.2f, .1f, 0, 0, .2f));
+            if (impulseCoroutine != null)
+            {
+                StopCoroutine(impulseCoroutine);
+            }
+            impulseCoroutine=StartCoroutine(ImpulseVibration(.5f, 0, .5f, .02f, .1f));
         }
     }
 
