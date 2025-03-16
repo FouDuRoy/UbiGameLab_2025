@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4658591005558201665}
   - component: {fileID: 6980508144528851275}
   - component: {fileID: 6543554295134868653}
+  - component: {fileID: 6893537620641671257}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -53,7 +54,6 @@ MonoBehaviour:
   player: {fileID: 3131990571156717056}
   cubeRb: {fileID: 3070630633163488715}
   passiveCube: {fileID: 5694876674060920943, guid: 50ccf99298a1cff4f923b13da4a2a01b, type: 3}
-  gridSystem: {fileID: 0}
   weight: 1
 --- !u!114 &7850894500233854463
 MonoBehaviour:
@@ -75,7 +75,8 @@ MonoBehaviour:
   rotParam: 4
   rotationDamping: 10
   attractionForce: 10
-  angle: 45
+  initialAngle: 45
+  secondsForMaxCharging: 2
   distance: 10
   moveType: 3
   coneProjection: 0
@@ -142,6 +143,20 @@ MonoBehaviour:
   kernelRotI: {x: 0, y: 0, z: 0, w: 0}
   cubeSize: 1.2
   checkGrid: 0
+--- !u!114 &6893537620641671257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134994841213693252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60be84a4f442e994f967251cc6241ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gauche: 0
+  vibratingMax: 0
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,11 +13,15 @@ public class GridSystem : MonoBehaviour
     public float cubeSize = 1.2f;
     [SerializeField] bool checkGrid = false;
 
+    HapticFeedbackController feedback;
+
     private void Start()
     {
         kernel = transform.GetComponent<PlayerObjects>().cubeRb.gameObject;
         grid.Add(new Vector3Int(0, 0, 0), kernel);
         playerObj = transform.GetComponent<PlayerObjects>();
+
+        feedback = GetComponent<HapticFeedbackController>();
     }
 
     void Update()
@@ -34,7 +38,6 @@ public class GridSystem : MonoBehaviour
 
     public void AttachBlock(GameObject blocToAttach, GameObject attachedBloc, Vector3 closestFace)
     {
-
         Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt( (closestFace.x/ cubeSize))
             , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
         if (grid.ContainsValue(attachedBloc))
@@ -48,6 +51,9 @@ public class GridSystem : MonoBehaviour
             playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
             grid.Add(newGridPos, blocToAttach);
         }
+
+        //Déclenche un feedback à chaque bloc qui s'attache
+        feedback.BlocAttachedVibration();
     }
     public void DetachBlock(GameObject bloc)
     {
