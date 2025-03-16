@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "BlocEjection",
+                    "type": "Button",
+                    "id": "9b923547-2a93-417a-b779-6b76892ef477",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -432,6 +441,17 @@
                     "processors": "",
                     "groups": "Player1;Player2",
                     "action": "AttractCubes",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "968563c4-24e3-4ed5-8627-1e94ea6e7cb9",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1;Player2",
+                    "action": "BlocEjection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

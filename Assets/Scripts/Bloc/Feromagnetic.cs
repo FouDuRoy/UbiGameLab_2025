@@ -10,7 +10,7 @@ public class Feromagnetic : MonoBehaviour
 {
         private const float timeBeforeActiveMagnet = 0;
 
-        private const float maxSpeed = 10f;
+        private  float maxSpeed = 10f;
 
         private const float maxDistanceBeforeStop = 1f;
 
@@ -31,6 +31,8 @@ public class Feromagnetic : MonoBehaviour
         [SerializeField] int maxForceAttraction = 30;
 
         [SerializeField] float lerpingDistance;
+
+        [SerializeField] float timeBeforeSwitching = 0.5f;
 
     //Joint settings
 
@@ -97,13 +99,13 @@ public class Feromagnetic : MonoBehaviour
         void Start()
     {
         mask = LayerMask.GetMask("magnetic");
-
         // We assume all cubes have same scale
         cubeSize = 1f + spacingBetweenCubes;
         quaternions = createListAngles();
-
+        timeBeforeSwitching += Random.Range(-0.05f,0.05f);
         directionsList = new Vector3[] { new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0), new Vector3(0, 0, cubeSize)
     ,   new Vector3(0, 0, -cubeSize),new Vector3(0,cubeSize,0),new Vector3(0,-cubeSize,0) };
+        
     }
 
      void OnEnable()
@@ -229,7 +231,7 @@ public class Feromagnetic : MonoBehaviour
         private void VelocityLerping()
     {
         float distance = (closestFaceRelativeToWorld - transform.position).magnitude;
-        if (lerping && (errorP > error || errorR > 5) && (distance < lerpingDistance && timer < 1))
+        if (lerping && (errorP > error || errorR > 5) && (distance < lerpingDistance && timer < timeBeforeSwitching))
         {
             //Once its locked 
             timer += Time.fixedDeltaTime;
@@ -248,6 +250,8 @@ public class Feromagnetic : MonoBehaviour
             axis.Normalize();
             Vector3 angularVelocity = axis * (angle * Mathf.Deg2Rad) * rotationSpeed*2f;
 
+            
+
             if (velocity.magnitude > maxSpeed)
             {
                 velocity = velocity.normalized * maxSpeed;
@@ -256,7 +260,7 @@ public class Feromagnetic : MonoBehaviour
             {
                  angularVelocity = angularVelocity.normalized * maxSpeed;
             }
-
+           
             //update velocity and rotation
             cubeRB.velocity = velocity;
             cubeRB.angularVelocity = angularVelocity;
@@ -299,7 +303,6 @@ public class Feromagnetic : MonoBehaviour
         }
         storedFaces = new Dictionary<GameObject, List<Vector3>>();
         transform.parent = this.transform.root.parent;
-        Start();
     }
 
         private void AttachCube()

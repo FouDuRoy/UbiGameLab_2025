@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class GridSystem : MonoBehaviour
 {
-    protected Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int,  GameObject>();
+    public Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int,  GameObject>();
     public GameObject kernel; // Le noyau du syst�me, point (0,0,0)
     public PlayerObjects playerObj;
     public Quaternion kernelRotI;
@@ -370,4 +371,13 @@ public class GridSystem : MonoBehaviour
             block.GetComponent<Bloc>().setOwner("Neutral");
         }
     }
+
+    public Vector3 FindMaxDimensions(){
+        float maxX = grid.Keys.Max(x => x.x);
+        float minX = grid.Keys.Min(x => x.x);
+        float maxY = grid.Keys.Max(x => x.y);
+        return new Vector3(maxX,minX,maxY);
+    }
+        
+    
 }
