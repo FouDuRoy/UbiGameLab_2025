@@ -98,7 +98,7 @@ public class HapticFeedbackController : MonoBehaviour
         }
     }
 
-    public void RepulsionVibrationEnd()
+    public void RepulsionVibrationEnd(float chargeWhenReleased)
     {
         if (playerGamepad != null)
         {
