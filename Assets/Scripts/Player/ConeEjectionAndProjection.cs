@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Callbacks;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,11 +14,15 @@ using UnityEngine.UI;
 
 public class ConeEjectionAndProjection : MonoBehaviour
 {
+    [SerializeField] float rightDriftProportion = 0.1f;
+
     // Start is called before the first frame update
     [SerializeField] float attractionForce = 10f;
     [SerializeField] float initialAngle = 45f;
     [SerializeField] float secondsForMaxCharging = 2f;
     [SerializeField] float distance = 10f;
+    [SerializeField] float secondsForMaxChargingEjection = 3f;
+    [SerializeField] float ejectionSpeed = 3f;
     List<Collider> magneticLast = new List<Collider>();
     List<GameObject> blocsToEject = new List<GameObject>();
     GridSystem playerGrid;
@@ -76,7 +81,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         }
         else if (rightTriggerHeld)
         {
-           // coneProjection(timeHeld);
+            coneProjection(timeHeld);
             rightTriggerHeld = false;
             timeHeld = 0;
         }
@@ -128,55 +133,90 @@ public class ConeEjectionAndProjection : MonoBehaviour
     }
 
     public void coneProjection(float time){
-
+        
+        Transform golem = mainCubeRb.transform.Find("GolemBuilt").transform ; 
         int maxX = playerGrid.grid.Keys.Max(x => x.x);
         int minX = playerGrid.grid.Keys.Min(x => x.x);
-        int rows = 0;
-        int numberPos = Mathf.Min(rows,maxX);
-        int numberNeg = Mathf.Min(rows,minX);
-        Vector3Int currentBloc = new Vector3Int(0,0,0);
-        while(playerGrid.grid.ContainsKey(currentBloc)){
-
-            currentBloc += new Vector3Int(0,0,1);
-        }
-        currentBloc -= new Vector3Int(0,0,1);
-        EjectBloc(playerGrid.grid[currentBloc]);
-
-        for(int i = 1; i <=numberPos; i++){
-            currentBloc = new Vector3Int(i,0,0);
-            while(playerGrid.grid.ContainsKey(currentBloc)){
-
-                currentBloc += new Vector3Int(0,0,1);
-            }
-            currentBloc -= new Vector3Int(0,0,1);
-            EjectBloc(playerGrid.grid[currentBloc]);
-            
-        }
+        int maxZ = playerGrid.grid.Keys.Max(x => x.z);
+        int minZ = playerGrid.grid.Keys.Min(x => x.z);
+        int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX),Mathf.Abs(minX),Mathf.Abs(maxZ),Mathf.Abs(minZ));
         
-        for(int i = 1; i <=numberNeg; i++){
-            currentBloc = new Vector3Int(-i,0,0);
-            while(playerGrid.grid.ContainsKey(currentBloc)){
-
-                currentBloc += new Vector3Int(0,0,1);
+        float blocSizeWorld = playerGrid.cubeSize*playerGrid.kernel.transform.lossyScale.x;
+        float radius = radiusInBlocs*blocSizeWorld;
+        float boundaryDistanceRatio = time/secondsForMaxChargingEjection;
+        float maxAngle = initialAngle+(90-initialAngle)*(boundaryDistanceRatio);
+       
+       List<Collider> magnetic = Physics.OverlapSphere(golem.position, radius).ToList<Collider>();
+       magnetic = magnetic.FindAll(cube => {
+            //Look if cube is on the player
+            if(cube.gameObject == mainCubeRb.gameObject){
+                return false;
             }
-            currentBloc -= new Vector3Int(0,0,1);
-            EjectBloc(playerGrid.grid[currentBloc]);
-        }
+            if(cube.transform.root != transform){
+                
+                return false;
+            }
+
+            //Look if the cube is within the angle of ejection
+            float angle =  Vector3.Angle(cube.transform.position-golem.position,golem.forward);
+            if(angle > maxAngle){
+                return false;
+            }
+            
+            //look if the cube is within the neighberhood of the boundary
+            float maxDistance = MaxDistanceForDirection((cube.transform.position-golem.position).normalized,radius);
+            float distance = (cube.transform.position-golem.position).magnitude;
+            float boundaryDistanceMax = (1-boundaryDistanceRatio)*maxDistance;
+            if(distance < boundaryDistanceMax){
+                return false;
+            }
+            return true;
+        });
+       magnetic.ForEach(x => EjectBloc(x.gameObject,golem));
+        //
+       // int rows = 0;
+       // int numberPos = Mathf.Min(rows,maxX);
+       // int numberNeg = Mathf.Min(rows,minX);
+       // Vector3Int currentBloc = new Vector3Int(0,0,0);
+       // while(playerGrid.grid.ContainsKey(currentBloc)){
+
+           //currentBloc += new Vector3Int(0,0,1);
+       // }
+       // currentBloc -= new Vector3Int(0,0,1);
+      //  EjectBloc(playerGrid.grid[currentBloc]);
+
+      //  for(int i = 1; i <=numberPos; i++){
+           // currentBloc = new Vector3Int(i,0,0);
+            //while(playerGrid.grid.ContainsKey(currentBloc)){
+
+                //currentBloc += new Vector3Int(0,0,1);
+           // }
+           // currentBloc -= new Vector3Int(0,0,1);
+           // EjectBloc(playerGrid.grid[currentBloc]);
+            
+       // }
+        
+       // for(int i = 1; i <=numberNeg; i++){
+            //currentBloc = new Vector3Int(-i,0,0);
+            //while(playerGrid.grid.ContainsKey(currentBloc)){
+
+               // currentBloc += new Vector3Int(0,0,1);
+           // }
+           // currentBloc -= new Vector3Int(0,0,1);
+           // EjectBloc(playerGrid.grid[currentBloc]);
+       // }
     }
 
-    private void EjectBloc(GameObject cube)
+    private void EjectBloc(GameObject cube, Transform golem)
     {
-        float ejectionSpeed = 10f;
         cube.gameObject.layer = 0;
         cube.transform.parent = this.transform.parent;
         playerGrid.DetachBlocSingle(cube);
-        Rigidbody rb = this.GetComponent<PlayerObjects>().cubeRb;
-        Debug.Log(cube);
         //Add rigidBody
         GetComponent<PlayerObjects>().addRigidBody(cube);
-
+        float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
         cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-        cube.GetComponent<Rigidbody>().AddForce((rb.transform.forward + rb.transform.right * cube.transform.position.x * 0.1f)*ejectionSpeed, ForceMode.VelocityChange );
+        cube.GetComponent<Rigidbody>().AddForce((golem.forward + golem.right *rightDrift * rightDriftProportion) *ejectionSpeed, ForceMode.VelocityChange );
         cube.GetComponent<Bloc>().owner += "projectile";
         //Remove owner of cube
         StartCoroutine(blockNeutral(cube));
@@ -191,5 +231,32 @@ public class ConeEjectionAndProjection : MonoBehaviour
             block.GetComponent<Bloc>().setOwner("Neutral");
         }
        
+    }
+    public float MaxDistanceForDirection(Vector3 direction, float radius){
+
+
+        Ray ray = new Ray(mainCubeRb.position, direction);
+       // Debug.DrawRay(mainCubeRb.position,direction*20,Color.green,10f);
+        List<RaycastHit> hits = Physics.RaycastAll(ray, radius, ~0,QueryTriggerInteraction.Ignore).ToList<RaycastHit>();
+        hits = hits.FindAll(hit => {
+            if(hit.collider.transform.root != transform){
+                return false;
+            }
+            return true;
+        });
+        
+        float maxDistance = 0;
+
+        foreach (RaycastHit hit in hits)
+        {
+            float distance = Vector3.Distance(mainCubeRb.position, hit.collider.transform.position);
+            //Debug.Log("mainCUbe"+mainCubeRb.position+"collider"+hit.collider.transform.position+"name:"+hit.collider.name+"direction:"+direction);
+            if (distance > maxDistance)
+            {
+                maxDistance = distance;
+            }
+        }
+      //  Debug.Log("direction:"+direction+"maxDistance:"+maxDistance);
+        return maxDistance;
     }
 }
