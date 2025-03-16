@@ -67,17 +67,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 30
+  explosionForce: 0.02
   mouvementSpeed: 1200
   pivotSpeed: 50
   rotationSpeed: 30
   playerCharge: 10
   rotParam: 4
   rotationDamping: 10
-  attractionForce: 10
-  initialAngle: 45
+  attractionForce: 100
+  initialAngle: 15
   secondsForMaxCharging: 2
-  distance: 10
+  distance: 15
   moveType: 3
   coneProjection: 0
 --- !u!114 &4658591005558201665
@@ -155,8 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60be84a4f442e994f967251cc6241ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gauche: 0
-  vibratingMax: 0
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0

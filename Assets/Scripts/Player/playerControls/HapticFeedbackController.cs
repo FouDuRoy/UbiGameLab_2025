@@ -39,7 +39,7 @@ public class HapticFeedbackController : MonoBehaviour
             {
                 StopCoroutine(impulseCoroutine);
             }
-            impulseCoroutine=StartCoroutine(ImpulseVibration(.5f, 0, .5f, .02f, .1f));
+            impulseCoroutine=StartCoroutine(ImpulseVibration(.5f, 0, .5f, .02f, .06f));
         }
     }
 
