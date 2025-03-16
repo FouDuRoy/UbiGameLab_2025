@@ -7,6 +7,7 @@ public class HapticFeedbackController : MonoBehaviour
     private Gamepad playerGamepad;
     private Coroutine attractionCoroutine;
     private Coroutine impulseCoroutine;
+    private Coroutine repulsionCoroutine;
 
     void Start()
     {
@@ -83,6 +84,31 @@ public class HapticFeedbackController : MonoBehaviour
 
         // Arrêt complet
         playerGamepad.SetMotorSpeeds(0f, 0f);
+    }
+
+    public void RepulsionVibrationStart(float maxChargeTime)
+    {
+        if (playerGamepad != null)
+        {
+            if (repulsionCoroutine != null)
+            {
+                StopCoroutine(repulsionCoroutine);
+            }
+            attractionCoroutine = StartCoroutine(VibrationTransition(0, 1f, 0, 0.2f, maxChargeTime, true));
+        }
+    }
+
+    public void RepulsionVibrationEnd()
+    {
+        if (playerGamepad != null)
+        {
+            if (repulsionCoroutine != null)
+            {
+                StopCoroutine(repulsionCoroutine);
+                repulsionCoroutine = null;
+            }
+            StartCoroutine(ImpulseVibration(1,.07f,1,.07f,2));
+        }
     }
 
     public void AttractionVibrationStart()
