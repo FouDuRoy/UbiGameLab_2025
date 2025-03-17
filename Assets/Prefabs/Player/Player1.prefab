@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionForce: 0.02
   mouvementSpeed: 100
-  pivotSpeed: 50
+  pivotSpeed: 60
   rotationSpeed: 30
   playerCharge: 10
   rotParam: 4
@@ -152,6 +152,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60be84a4f442e994f967251cc6241ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blocAttached:
+    leftMotorMax: 0.5
+    leftMidTime: 0
+    rightMotorMax: 0.5
+    rightMidTime: 0.02
+    totalDuration: 0.06
+  attraction:
+    leftMotorMin: 0
+    leftMotorMax: 0.1
+    rightMotorMin: 0
+    rightMotorMax: 0.4
+    duration: 0.5
+  repulsionCharge:
+    leftMotorMin: 0
+    leftMotorMax: 0.1
+    rightMotorMin: 0
+    rightMotorMax: 0.5
+    duration: 0.5
+  repulsionShoot:
+    leftMotorMax: 0.5
+    leftMidTime: 0
+    rightMotorMax: 0.5
+    rightMidTime: 0.02
+    totalDuration: 0.06
+  ejectionCharge:
+    leftMotorMin: 0
+    leftMotorMax: 0.1
+    rightMotorMin: 0
+    rightMotorMax: 0.5
+    duration: 0.5
+  ejectionShoot:
+    leftMotorMax: 0.5
+    leftMidTime: 0
+    rightMotorMax: 0.5
+    rightMidTime: 0.02
+    totalDuration: 0.06
 --- !u!114 &1662070221946770721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,11 +202,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightDriftProportion: 0.1
   attractionForce: 50
-  initialAngle: 45
-  secondsForMaxCharging: 2
+  initialAngle: 15
+  secondsForMaxCharging: 0.2
   distance: 15
-  secondsForMaxChargingEjection: 3
-  ejectionSpeed: 50
+  secondsForMaxChargingEjection: 1
+  ejectionSpeed: 100
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd95b2b2b493274faea4d774e20a3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 1000
+  velocityTreshold: 600000
   energyLoss: 0.8
 --- !u!1001 &3760971721746178517
 PrefabInstance:
@@ -360,7 +396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.6599998
+      value: -2.66
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -368,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00000023841858
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y

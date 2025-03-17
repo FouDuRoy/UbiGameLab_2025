@@ -4,10 +4,83 @@ using System.Collections;
 
 public class HapticFeedbackController : MonoBehaviour
 {
+    [System.Serializable]
+    public struct HoldHapticPattern
+    {
+        public float leftMotorMin;
+        public float leftMotorMax;
+        public float rightMotorMin;
+        public float rightMotorMax;
+        public float duration;
+    }
+
+    [System.Serializable]
+    public struct ImpulseHapticPattern
+    {
+        public float leftMotorMax;
+        public float leftMidTime;
+        public float rightMotorMax;
+        public float rightMidTime;
+        public float totalDuration;
+    }
+
+    public ImpulseHapticPattern blocAttached = new ImpulseHapticPattern
+    {
+        leftMotorMax=.5f,
+        leftMidTime=0,
+        rightMotorMax=.5f,
+        rightMidTime=.02f,
+        totalDuration=.06f,
+    };
+    public HoldHapticPattern attraction=new HoldHapticPattern
+    {
+        leftMotorMin=0,
+        leftMotorMax=.1f,
+        rightMotorMin=0,
+        rightMotorMax=.5f,
+        duration=.2f,
+    };
+    public HoldHapticPattern repulsionCharge=new HoldHapticPattern
+    {
+        leftMotorMin=0,
+        leftMotorMax=.1f,
+        rightMotorMin=0,
+        rightMotorMax=.5f,
+        duration=.5f,
+    };
+    public ImpulseHapticPattern repulsionShoot = new ImpulseHapticPattern
+    {
+        leftMotorMax = .5f,
+        leftMidTime = 0,
+        rightMotorMax = .5f,
+        rightMidTime = .02f,
+        totalDuration = .06f,
+    };
+    public HoldHapticPattern ejectionCharge=new HoldHapticPattern
+    {
+        leftMotorMin=0,
+        leftMotorMax=.1f,
+        rightMotorMin=0,
+        rightMotorMax=.5f,
+        duration=.5f,
+    };
+    public ImpulseHapticPattern ejectionShoot = new ImpulseHapticPattern
+    {
+        leftMotorMax = .5f,
+        leftMidTime = 0,
+        rightMotorMax = .5f,
+        rightMidTime = .02f,
+        totalDuration = .06f,
+    };
+
     private Gamepad playerGamepad;
     private Coroutine attractionCoroutine;
     private Coroutine impulseCoroutine;
     private Coroutine repulsionCoroutine;
+
+    private bool attractionOngoing;
+    private bool repulsionOngoing;
+    private bool ejectionOngoing;
 
     void Start()
     {
@@ -30,16 +103,67 @@ public class HapticFeedbackController : MonoBehaviour
         }
     }
 
-
-    public void BlocAttachedVibration()
+    private IEnumerator VibrationTransition(float leftMotorMin, float leftMotorMax, float rightMotorMin, float rightMotorMax, float duration, bool crescendo)
     {
-        if (playerGamepad != null)
+        float elapsed = 0f;
+
+        while (elapsed < duration)
         {
-            if (impulseCoroutine != null)
+            float progress = elapsed / duration; // Progression entre 0 et 1
+            float leftMotor, rightMotor;
+
+            if (crescendo)
             {
-                StopCoroutine(impulseCoroutine);
+                leftMotor = Mathf.Lerp(leftMotorMin, leftMotorMax, progress);
+                rightMotor = Mathf.Lerp(rightMotorMin, rightMotorMax, progress);
             }
-            impulseCoroutine=StartCoroutine(ImpulseVibration(.5f, 0, .5f, .02f, .06f));
+            else
+            {
+                leftMotor = Mathf.Lerp(leftMotorMax, leftMotorMin, progress);
+                rightMotor = Mathf.Lerp(rightMotorMax, rightMotorMin, progress);
+            }
+
+            playerGamepad.SetMotorSpeeds(leftMotor, rightMotor);
+            yield return null;
+
+            elapsed += Time.deltaTime;
+        }
+
+        if (!crescendo)
+        {
+            playerGamepad.SetMotorSpeeds(0, 0);
+        }
+    }
+
+    private IEnumerator VibrationTransition(HoldHapticPattern pattern, bool crescendo)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < pattern.duration)
+        {
+            float progress = elapsed / pattern.duration; // Progression entre 0 et 1
+            float leftMotor, rightMotor;
+
+            if (crescendo)
+            {
+                leftMotor = Mathf.Lerp(pattern.leftMotorMin, pattern.leftMotorMax, progress);
+                rightMotor = Mathf.Lerp(pattern.rightMotorMin, pattern.rightMotorMax, progress);
+            }
+            else
+            {
+                leftMotor = Mathf.Lerp(pattern.leftMotorMax, pattern.leftMotorMin, progress);
+                rightMotor = Mathf.Lerp(pattern.rightMotorMax, pattern.rightMotorMin, progress);
+            }
+
+            playerGamepad.SetMotorSpeeds(leftMotor, rightMotor);
+            yield return null;
+
+            elapsed += Time.deltaTime;
+        }
+
+        if (!crescendo)
+        {
+            playerGamepad.SetMotorSpeeds(0, 0);
         }
     }
 
@@ -86,28 +210,58 @@ public class HapticFeedbackController : MonoBehaviour
         playerGamepad.SetMotorSpeeds(0f, 0f);
     }
 
-    public void RepulsionVibrationStart(float maxChargeTime)
+    private IEnumerator ImpulseVibration(ImpulseHapticPattern pattern)
     {
-        if (playerGamepad != null)
+        pattern.leftMidTime = Mathf.Min(pattern.leftMidTime, pattern.totalDuration);
+        pattern.rightMidTime = Mathf.Min(pattern.rightMidTime, pattern.totalDuration);
+
+        float elapsed = 0f;
+
+        // Phase de montée
+        while (elapsed < Mathf.Max(pattern.leftMidTime, pattern.rightMidTime))
         {
-            if (repulsionCoroutine != null)
-            {
-                StopCoroutine(repulsionCoroutine);
-            }
-            attractionCoroutine = StartCoroutine(VibrationTransition(0, 1f, 0, 0.2f, maxChargeTime, true));
+            float leftProgress = pattern.leftMidTime > 0 ? Mathf.Clamp01(elapsed / pattern.leftMidTime) : 1f;
+            float rightProgress = pattern.rightMidTime > 0 ? Mathf.Clamp01(elapsed / pattern.rightMidTime) : 1f;
+
+            float leftMotor = Mathf.Lerp(0, pattern.leftMotorMax, leftProgress);
+            float rightMotor = Mathf.Lerp(0, pattern.rightMotorMax, rightProgress);
+
+            playerGamepad.SetMotorSpeeds(leftMotor, rightMotor);
+
+            elapsed += Time.deltaTime;
+            yield return null;
         }
+
+        // Phase de descente
+        float remainingTime = pattern.totalDuration - Mathf.Max(pattern.leftMidTime, pattern.rightMidTime);
+        elapsed = 0f;
+
+        while (elapsed < remainingTime)
+        {
+            float progress = elapsed / remainingTime;
+
+            float leftMotor = Mathf.Lerp(pattern.leftMotorMax, 0, progress);
+            float rightMotor = Mathf.Lerp(pattern.rightMotorMax, 0, progress);
+
+            playerGamepad.SetMotorSpeeds(leftMotor, rightMotor);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Arrêt complet
+        playerGamepad.SetMotorSpeeds(0f, 0f);
     }
 
-    public void RepulsionVibrationEnd(float chargeWhenReleased)
+    public void BlocAttachedVibration()
     {
-        if (playerGamepad != null)
+        if (playerGamepad != null && !attractionOngoing)
         {
-            if (repulsionCoroutine != null)
+            if (impulseCoroutine != null)
             {
-                StopCoroutine(repulsionCoroutine);
-                repulsionCoroutine = null;
+                StopCoroutine(impulseCoroutine);
             }
-            StartCoroutine(ImpulseVibration(1,.07f,1,.07f,2));
+            impulseCoroutine = StartCoroutine(ImpulseVibration(blocAttached));
         }
     }
 
@@ -119,7 +273,9 @@ public class HapticFeedbackController : MonoBehaviour
             {
                 StopCoroutine(attractionCoroutine); 
             }
-            attractionCoroutine = StartCoroutine(VibrationTransition(0, 0.1f, 0, 0.5f, .5f, true));
+            attractionCoroutine = StartCoroutine(VibrationTransition(attraction, true));
+
+            attractionOngoing = true;
         }
     }
 
@@ -132,7 +288,38 @@ public class HapticFeedbackController : MonoBehaviour
                     StopCoroutine(attractionCoroutine);
                     attractionCoroutine = null;
                 }
-            StartCoroutine(VibrationTransition(0, 0.1f, 0, 0.5f, .2f, false));
+            StartCoroutine(VibrationTransition(attraction.leftMotorMin,attraction.leftMotorMax,attraction.rightMotorMin,attraction.rightMotorMax,.2f, false));
+
+            attractionOngoing = false;
+        }
+    }
+
+    public void RepulsionVibrationStart(float maxChargeTime)
+    {
+        if (playerGamepad != null)
+        {
+            if (repulsionCoroutine != null)
+            {
+                StopCoroutine(repulsionCoroutine);
+            }
+            attractionCoroutine = StartCoroutine(VibrationTransition(repulsionCharge.leftMotorMin, repulsionCharge.leftMotorMax, repulsionCharge.rightMotorMin, repulsionCharge.rightMotorMax, maxChargeTime, true));
+
+            repulsionOngoing=true;
+        }
+    }
+
+    public void RepulsionVibrationEnd(float chargeWhenReleased)
+    {
+        if (playerGamepad != null)
+        {
+            if (repulsionCoroutine != null)
+            {
+                StopCoroutine(repulsionCoroutine);
+                repulsionCoroutine = null;
+            }
+            StartCoroutine(ImpulseVibration(repulsionShoot.leftMotorMax*chargeWhenReleased,repulsionShoot.leftMidTime,repulsionShoot.rightMotorMax*chargeWhenReleased,repulsionShoot.rightMidTime,repulsionShoot.totalDuration));
+
+            repulsionOngoing=false;
         }
     }
 
@@ -140,7 +327,9 @@ public class HapticFeedbackController : MonoBehaviour
     {
         if (playerGamepad != null)
         {
-            StartCoroutine(VibrationTransition(0, 1f, 0, 0, .2f, true));
+            StartCoroutine(VibrationTransition(ejectionCharge, true));
+
+            ejectionOngoing=true;
         }
     }
 
@@ -148,7 +337,9 @@ public class HapticFeedbackController : MonoBehaviour
     {
         if (playerGamepad != null)
         {
-            StartCoroutine(VibrationTransition(0, 1f, 0, 0, .05f, false));
+            StartCoroutine(ImpulseVibration(ejectionShoot));
+
+            ejectionOngoing=false;
         }
     }
 
@@ -157,35 +348,5 @@ public class HapticFeedbackController : MonoBehaviour
         playerGamepad.SetMotorSpeeds(0, 0);
     }
 
-     IEnumerator VibrationTransition(float leftMotorMin, float leftMotorMax, float rightMotorMin, float rightMotorMax, float duration, bool crescendo)
-    {
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            float progress = elapsed / duration; // Progression entre 0 et 1
-            float leftMotor, rightMotor;
-
-            if (crescendo)
-            {
-                leftMotor = Mathf.Lerp(leftMotorMin, leftMotorMax, progress);
-                rightMotor = Mathf.Lerp(rightMotorMin, rightMotorMax, progress);
-            }
-            else
-            {
-                leftMotor = Mathf.Lerp(leftMotorMax, leftMotorMin, progress);
-                rightMotor = Mathf.Lerp(rightMotorMax, rightMotorMin, progress);
-            }
-            
-            playerGamepad.SetMotorSpeeds(leftMotor, rightMotor);
-            yield return null;
-
-            elapsed += Time.deltaTime;
-        }
-
-        if (!crescendo)
-        {
-            playerGamepad.SetMotorSpeeds(0, 0);
-        }
-    }
+     
 }

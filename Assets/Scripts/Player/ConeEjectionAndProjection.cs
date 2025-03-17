@@ -76,11 +76,13 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         if((rightTrigger > 0 && leftTrigger==0) ||(rightTrigger > 0 && rightTriggerHeld ))
         {
+            feedback.RepulsionVibrationStart(secondsForMaxCharging);
             timeHeld += Time.fixedDeltaTime*5f/6;
             rightTriggerHeld = true;
         }
         else if (rightTriggerHeld)
         {
+            feedback.RepulsionVibrationEnd(timeHeld);
             coneProjection(timeHeld);
             rightTriggerHeld = false;
             timeHeld = 0;
