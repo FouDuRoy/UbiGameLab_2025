@@ -3,8 +3,6 @@ using UnityEngine;
 //Federico Barallobres
 public class PlayerObjects : MonoBehaviour
 {
-    [SerializeField] public List<GameObject> cubes = new List<GameObject>();
-    [SerializeField] public Dictionary<Vector3, GameObject> cubesHash = new Dictionary<Vector3, GameObject>();
     [SerializeField] public GameObject player;
     [SerializeField] public Rigidbody cubeRb;
     [SerializeField] public GameObject passiveCube;
@@ -15,25 +13,14 @@ public class PlayerObjects : MonoBehaviour
     void Start()
     {
         gridSystem = FindObjectOfType<GridSystem>();
-        cubes.Add(player);
         weight = 1;
     }
 
-    public bool removeCube(GameObject cube)
+    public void removeCube(GameObject cube)
     {
         cube.transform.parent = transform.parent;
-        cubes.Remove(cube);
         cube.layer = 0;
         Destroy(cube.GetComponent<SphereCollider>());
-
-        foreach (var v in cubesHash)
-        {
-            if (v.Value == cube)
-            {
-                return cubesHash.Remove(v.Key);
-            }
-        }
-        return false;
     }
 
     public void addRigidBody(GameObject cube)

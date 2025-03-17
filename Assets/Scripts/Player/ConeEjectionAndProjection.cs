@@ -34,6 +34,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     HapticFeedbackController feedback;
     float timeHeld = 0;
     Rigidbody mainCubeRb;
+    Transform golem;
     bool rightTriggerHeld = false;
     bool leftTriggerHeld = false;
     void Start()
@@ -44,6 +45,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         AttractCubes = playerInput.actions.FindAction("AttractCubes");
         feedback =  this.GetComponent<HapticFeedbackController>();
         mainCubeRb = this.GetComponent<PlayerObjects>().cubeRb;
+        golem = mainCubeRb.transform.Find("GolemBuilt");
           if (secondsForMaxCharging >= 2)
         {
             secondsForMaxCharging -= 1;
@@ -78,6 +80,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             timeHeld += Time.fixedDeltaTime*5f/6;
             rightTriggerHeld = true;
+
+            //Draw rays to indicate current range
+            float maxAngle = initialAngle+(90-initialAngle)*(timeHeld/secondsForMaxChargingEjection);
+             Debug.DrawRay(golem.position, Quaternion.AngleAxis(maxAngle, Vector3.up) * golem.forward*distance,Color.red, Time.deltaTime);
+             Debug.DrawRay(golem.position, Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward *distance, Color.red, Time.deltaTime);
         }
         else if (rightTriggerHeld)
         {
@@ -173,38 +180,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
             return true;
         });
        magnetic.ForEach(x => EjectBloc(x.gameObject,golem));
-        //
-       // int rows = 0;
-       // int numberPos = Mathf.Min(rows,maxX);
-       // int numberNeg = Mathf.Min(rows,minX);
-       // Vector3Int currentBloc = new Vector3Int(0,0,0);
-       // while(playerGrid.grid.ContainsKey(currentBloc)){
-
-           //currentBloc += new Vector3Int(0,0,1);
-       // }
-       // currentBloc -= new Vector3Int(0,0,1);
-      //  EjectBloc(playerGrid.grid[currentBloc]);
-
-      //  for(int i = 1; i <=numberPos; i++){
-           // currentBloc = new Vector3Int(i,0,0);
-            //while(playerGrid.grid.ContainsKey(currentBloc)){
-
-                //currentBloc += new Vector3Int(0,0,1);
-           // }
-           // currentBloc -= new Vector3Int(0,0,1);
-           // EjectBloc(playerGrid.grid[currentBloc]);
-            
-       // }
-        
-       // for(int i = 1; i <=numberNeg; i++){
-            //currentBloc = new Vector3Int(-i,0,0);
-            //while(playerGrid.grid.ContainsKey(currentBloc)){
-
-               // currentBloc += new Vector3Int(0,0,1);
-           // }
-           // currentBloc -= new Vector3Int(0,0,1);
-           // EjectBloc(playerGrid.grid[currentBloc]);
-       // }
     }
 
     private void EjectBloc(GameObject cube, Transform golem)
@@ -236,7 +211,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
 
         Ray ray = new Ray(mainCubeRb.position, direction);
-       // Debug.DrawRay(mainCubeRb.position,direction*20,Color.green,10f);
         List<RaycastHit> hits = Physics.RaycastAll(ray, radius, ~0,QueryTriggerInteraction.Ignore).ToList<RaycastHit>();
         hits = hits.FindAll(hit => {
             if(hit.collider.transform.root != transform){
@@ -250,13 +224,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
         foreach (RaycastHit hit in hits)
         {
             float distance = Vector3.Distance(mainCubeRb.position, hit.collider.transform.position);
-            //Debug.Log("mainCUbe"+mainCubeRb.position+"collider"+hit.collider.transform.position+"name:"+hit.collider.name+"direction:"+direction);
             if (distance > maxDistance)
             {
                 maxDistance = distance;
             }
         }
-      //  Debug.Log("direction:"+direction+"maxDistance:"+maxDistance);
         return maxDistance;
     }
 }
