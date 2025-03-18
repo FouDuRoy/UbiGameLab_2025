@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3745680985456743881}
   - component: {fileID: 2341062450622316672}
   - component: {fileID: 6873425469701635572}
+  - component: {fileID: 451798940658644205}
   m_Layer: 6
   m_Name: MC_Spring
   m_TagString: magnetic
@@ -187,3 +188,21 @@ MonoBehaviour:
   owner: Neutral
   state: 3
   rb: {fileID: 0}
+--- !u!114 &451798940658644205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515478394461614388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd95b2b2b493274faea4d774e20a3e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 10
+  velocityTresholdMelee: 15
+  energyLoss: 0.8
+  upEjectionMax: 1
+  ejectionFactor: 1
+  maxAngle: 5

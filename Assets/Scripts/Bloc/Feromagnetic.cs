@@ -466,8 +466,6 @@ public class Feromagnetic : MonoBehaviour
                 }
                 i++;
 
-            
-
         }
     }
 

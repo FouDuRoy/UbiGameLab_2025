@@ -14,7 +14,7 @@ public class GridSystem : MonoBehaviour
     public Quaternion kernelRotI;
     public float cubeSize = 1.2f;
     [SerializeField] bool checkGrid = false;
-
+    MouvementType moveType;
     HapticFeedbackController feedback;
 
     private void Start()
@@ -24,6 +24,7 @@ public class GridSystem : MonoBehaviour
         playerObj = transform.GetComponent<PlayerObjects>();
 
         feedback = GetComponent<HapticFeedbackController>();
+        moveType = GetComponent<PlayerMouvement>().moveType;
     }
 
     void Update()
@@ -74,7 +75,46 @@ public class GridSystem : MonoBehaviour
             {
                 if (!IsBlockConnected(gridBloc.Value))
                 {
-                    playerObj.addRigidBody(gridBloc.Value);
+                    if (moveType == MouvementType.move3dSpring)
+                    {
+                        ConfigurableJoint[] joints = gridBloc.Value.GetComponents<ConfigurableJoint>();
+                        foreach (ConfigurableJoint joint in joints)
+                        {
+                            JointDrive xDrive = joint.xDrive;
+                            xDrive.positionSpring = 0;
+                            xDrive.positionDamper = 0;
+                            joint.xDrive = xDrive;
+
+                            JointDrive yDrive = joint.yDrive;
+                            yDrive.positionSpring = 0;
+                            yDrive.positionDamper = 0;
+                            joint.yDrive = yDrive;
+
+                            JointDrive zDrive = joint.zDrive;
+                            zDrive.positionSpring = 0;
+                            zDrive.positionDamper = 0;
+                            joint.zDrive = zDrive;
+
+                            JointDrive angularXDrive = joint.angularXDrive;
+                            angularXDrive.positionSpring = 0;
+                            angularXDrive.positionDamper = 0;
+                            joint.angularXDrive = angularXDrive;
+
+                            JointDrive angularYZDrive = joint.angularYZDrive;
+                            angularYZDrive.positionSpring = 0;
+                            angularYZDrive.positionDamper = 0;
+                            joint.angularYZDrive = angularYZDrive;
+
+                            JointDrive slerpDrive = joint.slerpDrive;
+                            slerpDrive.positionSpring = 0;
+                            slerpDrive.positionDamper = 0;
+                            Destroy(joint);
+                        }
+                    }
+                    else
+                    {
+                        GetComponent<PlayerObjects>().addRigidBody(gridBloc.Value);
+                    }
                     playerObj.removeCube(gridBloc.Value);
                     keys.Add(gridBloc.Key);
                     gridBloc.Value.GetComponent<Bloc>().state = BlocState.detached; 
@@ -114,7 +154,47 @@ public class GridSystem : MonoBehaviour
             if (!IsBlockConnected(gridBloc.Value))
             {
                 neighbors = GetNeighbors(gridBloc.Key);
-                playerObj.addRigidBody(gridBloc.Value);
+                if (moveType == MouvementType.move3dSpring)
+                {
+                    ConfigurableJoint[] joints = gridBloc.Value.GetComponents<ConfigurableJoint>();
+                    foreach (ConfigurableJoint joint in joints)
+                    {
+                        JointDrive xDrive = joint.xDrive;
+                        xDrive.positionSpring = 0;
+                        xDrive.positionDamper = 0;
+                        joint.xDrive = xDrive;
+
+                        JointDrive yDrive = joint.yDrive;
+                        yDrive.positionSpring = 0;
+                        yDrive.positionDamper = 0;
+                        joint.yDrive = yDrive;
+
+                        JointDrive zDrive = joint.zDrive;
+                        zDrive.positionSpring = 0;
+                        zDrive.positionDamper = 0;
+                        joint.zDrive = zDrive;
+
+                        JointDrive angularXDrive = joint.angularXDrive;
+                        angularXDrive.positionSpring = 0;
+                        angularXDrive.positionDamper = 0;
+                        joint.angularXDrive = angularXDrive;
+
+                        JointDrive angularYZDrive = joint.angularYZDrive;
+                        angularYZDrive.positionSpring = 0;
+                        angularYZDrive.positionDamper = 0;
+                        joint.angularYZDrive = angularYZDrive;
+
+                        JointDrive slerpDrive = joint.slerpDrive;
+                        slerpDrive.positionSpring = 0;
+                        slerpDrive.positionDamper = 0;
+                        Destroy(joint);
+                    }
+                }
+                else
+                {
+                    playerObj.addRigidBody(gridBloc.Value);
+
+                }
                 playerObj.removeCube(gridBloc.Value);
                 keys.Add(gridBloc.Key);
                 gridBloc.Value.GetComponent<Bloc>().owner = "projectile";

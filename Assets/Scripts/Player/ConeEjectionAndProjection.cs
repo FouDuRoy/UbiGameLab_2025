@@ -38,6 +38,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     Transform golem;
     bool rightTriggerHeld = false;
     bool leftTriggerHeld = false;
+    MouvementType moveType;
     void Start()
     {
         playerGrid = GetComponent<GridSystem>();
@@ -51,12 +52,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             secondsForMaxCharging -= 1;
         }
+        moveType = this.transform.GetComponent<PlayerMouvement>().moveType;
     }
     void FixedUpdate()
     {
         float rightTrigger = ejectCubes.ReadValue<float>();
         float leftTrigger = AttractCubes.ReadValue<float>();
-        Debug.Log(leftTrigger);
         if ((leftTrigger > 0 && rightTrigger==0) ||(leftTrigger > 0 && leftTriggerHeld ) )
         {
             if(leftTriggerHeld == false)
@@ -198,7 +199,46 @@ public class ConeEjectionAndProjection : MonoBehaviour
         playerGrid.DetachBlocSingle(cube);
 
         //Add rigidBody
-        GetComponent<PlayerObjects>().addRigidBody(cube);
+        if (moveType == MouvementType.move3dSpring)
+        {
+            ConfigurableJoint[] joints = cube.GetComponents<ConfigurableJoint>();
+            foreach (ConfigurableJoint joint in joints)
+            {
+                JointDrive xDrive = joint.xDrive;
+                xDrive.positionSpring = 0;
+                xDrive.positionDamper = 0;
+                joint.xDrive = xDrive;
+
+                JointDrive yDrive = joint.yDrive;
+                yDrive.positionSpring = 0;
+                yDrive.positionDamper = 0;
+                joint.yDrive = yDrive;
+
+                JointDrive zDrive = joint.zDrive;
+                zDrive.positionSpring = 0;
+                zDrive.positionDamper = 0;
+                joint.zDrive = zDrive;
+
+                JointDrive angularXDrive = joint.angularXDrive;
+                angularXDrive.positionSpring = 0;
+                angularXDrive.positionDamper = 0;
+                joint.angularXDrive = angularXDrive;
+
+                JointDrive angularYZDrive = joint.angularYZDrive;
+                angularYZDrive.positionSpring = 0;
+                angularYZDrive.positionDamper = 0;
+                joint.angularYZDrive = angularYZDrive;
+
+                JointDrive slerpDrive = joint.slerpDrive;
+                slerpDrive.positionSpring = 0;
+                slerpDrive.positionDamper = 0;
+                Destroy(joint);
+            }
+        }
+        else
+        {
+            GetComponent<PlayerObjects>().addRigidBody(cube);
+        }
         float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
         cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
         cube.GetComponent<Rigidbody>().AddForce((golem.forward + golem.right *rightDrift * rightDriftProportion) *ejectionSpeed, ForceMode.VelocityChange );

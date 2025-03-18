@@ -308,7 +308,6 @@ public class HapticFeedbackController : MonoBehaviour
             StopCoroutine(repulsionCoroutine);
             repulsionCoroutine = null;
 
-            print(chargeWhenReleased);
             StartCoroutine(ImpulseVibration(repulsionShoot.leftMotorMax*chargeWhenReleased,repulsionShoot.leftMidTime,repulsionShoot.rightMotorMax*chargeWhenReleased,repulsionShoot.rightMidTime,repulsionShoot.totalDuration));
         }
     }
