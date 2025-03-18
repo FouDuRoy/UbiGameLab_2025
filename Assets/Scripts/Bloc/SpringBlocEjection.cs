@@ -16,6 +16,7 @@ public class SpringBlocEjection : MonoBehaviour
     [SerializeField] float upEjectionMax = 1f;
     [SerializeField] float ejectionFactor = 1f;
     [SerializeField] float maxAngle = 5f;
+    [SerializeField] float springBreakForce = 500f;
     private GridSystem gridSystem;
     private PlayerObjects playerObjects;
     Rigidbody mainCubeRb;
@@ -69,7 +70,7 @@ public class SpringBlocEjection : MonoBehaviour
                         Joint[] joints = v.Value.GetComponents<Joint>();
                         foreach(Joint joint in joints)
                         {
-                            joint.breakTorque = 150f;
+                            joint.breakTorque = springBreakForce;
                         }
                     }
                     StartCoroutine(resetTorque(gridSystem));

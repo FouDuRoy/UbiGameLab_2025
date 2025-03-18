@@ -95,7 +95,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6515478394461614388}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4b7dca46f19028947abf42aca5c05e90, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -201,9 +201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 10
+  velocityTreshold: 50
   velocityTresholdMelee: 3
-  energyLoss: 0.8
+  energyLoss: 0.5
   upEjectionMax: 0.4
   ejectionFactor: 1
   maxAngle: 5
+  springBreakForce: 500

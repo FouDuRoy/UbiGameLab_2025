@@ -13,7 +13,7 @@ public class PlayerObjects : MonoBehaviour
 
     void Start()
     {
-        gridSystem = FindObjectOfType<GridSystem>();
+        gridSystem = this.GetComponent<GridSystem>();
         weight = 1;
         moveType = this.GetComponent<PlayerMouvement>().moveType;
     }
@@ -76,7 +76,7 @@ public class PlayerObjects : MonoBehaviour
                 joints = m.Value.GetComponents<ConfigurableJoint>();
                 foreach (ConfigurableJoint joint in joints)
                 {
-                    if(joint.connectedBody == cube)
+                    if (joint.connectedBody.gameObject == cube)
                     {
                         JointDrive xDrive = joint.xDrive;
                         xDrive.positionSpring = 0;
