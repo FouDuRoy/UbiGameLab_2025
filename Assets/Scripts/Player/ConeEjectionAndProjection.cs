@@ -65,7 +65,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
                 feedback.AttractionVibrationStart();
             }
             coneAttraction(mainCubeRb.transform.Find("GolemBuilt").transform, attractionForce
-                ,initialAngle,distance,leftTrigger, timeHeld);
+                ,initialAngle,distance,1, timeHeld);
             leftTriggerHeld = true;
 
             timeHeld += Time.fixedDeltaTime*5f/6;
@@ -114,11 +114,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
             //If the cube is used by a player dont pull
             if (cube.transform.root.GetComponent<PlayerObjects>() != null || cube.transform.tag != "magnetic" || cube.GetComponent<Bloc>().owner!="Neutral")
             {
-                
                 return false;
             }
             Vector3 distanceBetweenPlayerAndCube = cube.transform.position - player.position;
-           
+            
             return Vector3.Angle(distanceBetweenPlayerAndCube, player.forward) <= angle* angleFactor;
         });
 
@@ -127,7 +126,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             Vector3 distanceBetweenPlayerAndCube = player.position - cube.transform.position;
             Rigidbody cubeRB = cube.GetComponent<Rigidbody>();
+            cubeRB.useGravity = false;
             cubeRB.AddForce(distanceBetweenPlayerAndCube.normalized* attractionForce* magnitude, ForceMode.Acceleration);
+            
             Feromagnetic fero = cube.GetComponent<Feromagnetic>();
             fero.ResetObject();
             fero.enabled = false;
@@ -144,7 +145,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     public void resetMagneticLast()
     {
-        magneticLast.ForEach(cube => cube.GetComponent<Feromagnetic>().enabled = true);
+        magneticLast.ForEach(cube => {
+            cube.GetComponent<Feromagnetic>().enabled = true;
+            cube.GetComponent<Rigidbody>().useGravity = true; });
         magneticLast.Clear();
     }
 
