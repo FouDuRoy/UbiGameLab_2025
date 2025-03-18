@@ -79,6 +79,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         if((rightTrigger > 0 && leftTrigger==0) ||(rightTrigger > 0 && rightTriggerHeld ))
         {
+            if (timeHeld == 0) //On appelle VibrationStart une seule fois, au début
+            {
+                feedback.RepulsionVibrationStart(secondsForMaxCharging);
+            }
             timeHeld += Time.fixedDeltaTime*5f/6;
             rightTriggerHeld = true;
 
@@ -89,6 +93,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         }
         else if (rightTriggerHeld)
         {
+            feedback.RepulsionVibrationEnd(timeHeld);
             coneProjection(timeHeld);
             rightTriggerHeld = false;
             timeHeld = 0;
