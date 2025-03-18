@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //Federico Barallobres
@@ -53,6 +54,14 @@ public class PlayerObjects : MonoBehaviour
                 slerpDrive.positionSpring = 0;
                 slerpDrive.positionDamper = 0;
                 Destroy(joint);
+                Rigidbody rb2 = passiveCube.GetComponent<Rigidbody>();
+                Rigidbody rb =cube.GetComponent<Rigidbody>();
+                rb.mass = rb2.mass;
+                rb.drag = rb2.drag;
+                rb.angularDrag = rb2.angularDrag;
+                rb.collisionDetectionMode = rb2.collisionDetectionMode;
+                rb.useGravity = rb2.useGravity;
+                rb.constraints = rb2.constraints;
             }
         }
         else
@@ -62,6 +71,7 @@ public class PlayerObjects : MonoBehaviour
         cube.transform.parent = transform.parent;
         cube.layer = 0;
         Destroy(cube.GetComponent<SphereCollider>());
+        StartCoroutine(blockNeutral(cube));
     }
 
     public void addRigidBody(GameObject cube)
@@ -78,5 +88,16 @@ public class PlayerObjects : MonoBehaviour
             rb.useGravity = rb2.useGravity;
             rb.constraints = rb2.constraints;
         }
+    }
+    IEnumerator blockNeutral(GameObject block)
+    {
+
+        yield return new WaitForSeconds(3f);
+        if (block != null)
+        {
+            block.GetComponent<Bloc>().setOwner("Neutral");
+            block.GetComponent<Bloc>().state = BlocState.none;
+        }
+
     }
 }

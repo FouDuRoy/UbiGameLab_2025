@@ -292,53 +292,7 @@ public class PlayerMouvement : MonoBehaviour
             {
                 GameObject cube = item.Value;
                 if(cube != this.rb.gameObject){
-                cube.gameObject.layer = 0;
-                cube.transform.parent = this.transform.parent;
-                GameObject.Destroy(cube.GetComponent<SphereCollider>());
-
-                //Add rigidBody
-                
-                if(moveType == MouvementType.move3dSpring){
-                    ConfigurableJoint[] joints = cube.GetComponents<ConfigurableJoint>();
-                    foreach (ConfigurableJoint joint in joints)
-                      {
-                            JointDrive xDrive = joint.xDrive;
-                            xDrive.positionSpring = 0;
-                            xDrive.positionDamper = 0;
-                            joint.xDrive = xDrive;
-
-                            JointDrive yDrive = joint.yDrive;
-                            yDrive.positionSpring = 0;
-                            yDrive.positionDamper = 0;
-                            joint.yDrive = yDrive;
-
-                            JointDrive zDrive = joint.zDrive;
-                            zDrive.positionSpring = 0;
-                            zDrive.positionDamper = 0;
-                            joint.zDrive = zDrive;
-
-                            JointDrive angularXDrive = joint.angularXDrive;
-                            angularXDrive.positionSpring = 0;
-                            angularXDrive.positionDamper = 0;
-                            joint.angularXDrive = angularXDrive;
-
-                            JointDrive angularYZDrive = joint.angularYZDrive;
-                            angularYZDrive.positionSpring = 0;
-                            angularYZDrive.positionDamper = 0;
-                            joint.angularYZDrive = angularYZDrive;
-
-                            JointDrive slerpDrive = joint.slerpDrive;
-                            slerpDrive.positionSpring = 0;
-                            slerpDrive.positionDamper = 0;
-                            Destroy( joint );
-                        }
-                }
-                else
-                {
-                    GetComponent<PlayerObjects>().addRigidBody(cube);
-                }
-              
-                cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+                this.GetComponent<PlayerObjects>().removeCube(cube);
                 cube.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, this.rb.position, playerCharge);
                 cube.GetComponent<Bloc>().state = BlocState.projectile;
                 //Remove owner of cube

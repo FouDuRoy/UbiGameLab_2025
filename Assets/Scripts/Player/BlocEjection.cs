@@ -63,54 +63,13 @@ public class BlocEjection : MonoBehaviour
                 float hittedVelocityMag = hitted.transform.parent.GetComponent<Rigidbody>().velocity.magnitude;
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity> hittedVelocityMag)
                 {
-                    // Calculate normal average
-                    if (moveType == MouvementType.move3dSpring)
-                    {
-                        ConfigurableJoint[] joints = hitted.GetComponents<ConfigurableJoint>();
-                        foreach (ConfigurableJoint joint in joints)
-                        {
-                            JointDrive xDrive = joint.xDrive;
-                            xDrive.positionSpring = 0;
-                            xDrive.positionDamper = 0;
-                            joint.xDrive = xDrive;
-
-                            JointDrive yDrive = joint.yDrive;
-                            yDrive.positionSpring = 0;
-                            yDrive.positionDamper = 0;
-                            joint.yDrive = yDrive;
-
-                            JointDrive zDrive = joint.zDrive;
-                            zDrive.positionSpring = 0;
-                            zDrive.positionDamper = 0;
-                            joint.zDrive = zDrive;
-
-                            JointDrive angularXDrive = joint.angularXDrive;
-                            angularXDrive.positionSpring = 0;
-                            angularXDrive.positionDamper = 0;
-                            joint.angularXDrive = angularXDrive;
-
-                            JointDrive angularYZDrive = joint.angularYZDrive;
-                            angularYZDrive.positionSpring = 0;
-                            angularYZDrive.positionDamper = 0;
-                            joint.angularYZDrive = angularYZDrive;
-
-                            JointDrive slerpDrive = joint.slerpDrive;
-                            slerpDrive.positionSpring = 0;
-                            slerpDrive.positionDamper = 0;
-                            Destroy(joint);
-                        }
-                    }
-                    else
-                    {
-                        GetComponent<PlayerObjects>().addRigidBody(hitted);
-                    }
+                   
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.melee;
                     Vector3 ejectionVeolcity = relativeVelocity*energyLoss;
                     float ejectionMag = ejectionVeolcity.magnitude;
                     Vector3 hittedVelocity = (ejectionVeolcity.normalized*(1-randomHeightFactor)+Vector3.up*randomHeightFactor)*ejectionMag;
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity*ejectionFactor;
-                    StartCoroutine(blockNeutral(hitted));
                     mainCubeRb.AddForce(ejectionVeolcity,ForceMode.VelocityChange);
                 }
             }
@@ -129,53 +88,13 @@ public class BlocEjection : MonoBehaviour
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
                     // Calculate normal average
-                    if (moveType == MouvementType.move3dSpring)
-                    {
-                        ConfigurableJoint[] joints = hitted.GetComponents<ConfigurableJoint>();
-                        foreach (ConfigurableJoint joint in joints)
-                        {
-                            JointDrive xDrive = joint.xDrive;
-                            xDrive.positionSpring = 0;
-                            xDrive.positionDamper = 0;
-                            joint.xDrive = xDrive;
-
-                            JointDrive yDrive = joint.yDrive;
-                            yDrive.positionSpring = 0;
-                            yDrive.positionDamper = 0;
-                            joint.yDrive = yDrive;
-
-                            JointDrive zDrive = joint.zDrive;
-                            zDrive.positionSpring = 0;
-                            zDrive.positionDamper = 0;
-                            joint.zDrive = zDrive;
-
-                            JointDrive angularXDrive = joint.angularXDrive;
-                            angularXDrive.positionSpring = 0;
-                            angularXDrive.positionDamper = 0;
-                            joint.angularXDrive = angularXDrive;
-
-                            JointDrive angularYZDrive = joint.angularYZDrive;
-                            angularYZDrive.positionSpring = 0;
-                            angularYZDrive.positionDamper = 0;
-                            joint.angularYZDrive = angularYZDrive;
-
-                            JointDrive slerpDrive = joint.slerpDrive;
-                            slerpDrive.positionSpring = 0;
-                            slerpDrive.positionDamper = 0;
-                            Destroy(joint);
-                        }
-                    }
-                    else
-                    {
-                        GetComponent<PlayerObjects>().addRigidBody(hitted);
-                    }
+                  
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.melee;
                     Vector3 ejectionVeolcity = relativeVelocity * energyLoss;
                     float ejectionMag = ejectionVeolcity.magnitude;
                     Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
-                    StartCoroutine(blockNeutral(hitted));
                     //mainCubeRb.AddForce(ejectionVeolcity,ForceMode.VelocityChange);
                 }
             }
@@ -204,46 +123,6 @@ public class BlocEjection : MonoBehaviour
                 if (relativeVelocity.magnitude > velocityTreshold)
                 {
 
-                    if (moveType == MouvementType.move3dSpring)
-                    {
-                        ConfigurableJoint[] joints = hitted.GetComponents<ConfigurableJoint>();
-                        foreach (ConfigurableJoint joint in joints)
-                        {
-                            JointDrive xDrive = joint.xDrive;
-                            xDrive.positionSpring = 0;
-                            xDrive.positionDamper = 0;
-                            joint.xDrive = xDrive;
-
-                            JointDrive yDrive = joint.yDrive;
-                            yDrive.positionSpring = 0;
-                            yDrive.positionDamper = 0;
-                            joint.yDrive = yDrive;
-
-                            JointDrive zDrive = joint.zDrive;
-                            zDrive.positionSpring = 0;
-                            zDrive.positionDamper = 0;
-                            joint.zDrive = zDrive;
-
-                            JointDrive angularXDrive = joint.angularXDrive;
-                            angularXDrive.positionSpring = 0;
-                            angularXDrive.positionDamper = 0;
-                            joint.angularXDrive = angularXDrive;
-
-                            JointDrive angularYZDrive = joint.angularYZDrive;
-                            angularYZDrive.positionSpring = 0;
-                            angularYZDrive.positionDamper = 0;
-                            joint.angularYZDrive = angularYZDrive;
-
-                            JointDrive slerpDrive = joint.slerpDrive;
-                            slerpDrive.positionSpring = 0;
-                            slerpDrive.positionDamper = 0;
-                            Destroy(joint);
-                        }
-                    }
-                    else
-                    {
-                        GetComponent<PlayerObjects>().addRigidBody(hitted);
-                    }
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.detached;
                     Vector3 ejectionVeolcity = relativeVelocity*energyLoss;
@@ -254,7 +133,6 @@ public class BlocEjection : MonoBehaviour
                     Quaternion randomDeviation = Quaternion.AngleAxis(Random.Range(-maxAngle,maxAngle),Vector3.up);
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity*ejectionFactor;
                     hitter.GetComponent<Rigidbody>().velocity = randomDeviation*(-ejectionVeolcity);
-                    StartCoroutine(blockNeutral(hitted));
                 }
             }
             if ((playerHittedByotherPlayer) && areOwnedByPlayers)
@@ -267,47 +145,6 @@ public class BlocEjection : MonoBehaviour
                 Vector3 relativeVelocity = collision.relativeVelocity;
                 if (relativeVelocity.magnitude > velocityTreshold)
                 {
-
-                    if (moveType == MouvementType.move3dSpring)
-                    {
-                        ConfigurableJoint[] joints = hitted.GetComponents<ConfigurableJoint>();
-                        foreach (ConfigurableJoint joint in joints)
-                        {
-                            JointDrive xDrive = joint.xDrive;
-                            xDrive.positionSpring = 0;
-                            xDrive.positionDamper = 0;
-                            joint.xDrive = xDrive;
-
-                            JointDrive yDrive = joint.yDrive;
-                            yDrive.positionSpring = 0;
-                            yDrive.positionDamper = 0;
-                            joint.yDrive = yDrive;
-
-                            JointDrive zDrive = joint.zDrive;
-                            zDrive.positionSpring = 0;
-                            zDrive.positionDamper = 0;
-                            joint.zDrive = zDrive;
-
-                            JointDrive angularXDrive = joint.angularXDrive;
-                            angularXDrive.positionSpring = 0;
-                            angularXDrive.positionDamper = 0;
-                            joint.angularXDrive = angularXDrive;
-
-                            JointDrive angularYZDrive = joint.angularYZDrive;
-                            angularYZDrive.positionSpring = 0;
-                            angularYZDrive.positionDamper = 0;
-                            joint.angularYZDrive = angularYZDrive;
-
-                            JointDrive slerpDrive = joint.slerpDrive;
-                            slerpDrive.positionSpring = 0;
-                            slerpDrive.positionDamper = 0;
-                            Destroy(joint);
-                        }
-                    }
-                    else
-                    {
-                        GetComponent<PlayerObjects>().addRigidBody(hitted);
-                    }
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.detached;
                     Vector3 ejectionVeolcity = relativeVelocity * energyLoss;
@@ -318,7 +155,6 @@ public class BlocEjection : MonoBehaviour
                     Quaternion randomDeviation = Quaternion.AngleAxis(Random.Range(-maxAngle, maxAngle), Vector3.up);
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
                     hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity);
-                    StartCoroutine(blockNeutral(hitted));
                 }
             }
         }

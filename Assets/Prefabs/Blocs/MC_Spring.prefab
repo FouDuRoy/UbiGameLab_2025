@@ -117,7 +117,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6515478394461614388}
   serializedVersion: 4
-  m_Mass: 0.000001
+  m_Mass: 0.01
   m_Drag: 2
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd95b2b2b493274faea4d774e20a3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 10
-  velocityTresholdMelee: 15
+  velocityTreshold: 5
+  velocityTresholdMelee: 5
   energyLoss: 0.8
   upEjectionMax: 1
   ejectionFactor: 1

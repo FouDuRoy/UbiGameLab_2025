@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3131990571156717056}
   cubeRb: {fileID: 3070630633163488715}
-  passiveCube: {fileID: 5694876674060920943, guid: 50ccf99298a1cff4f923b13da4a2a01b, type: 3}
+  passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   weight: 1
 --- !u!114 &7850894500233854463
 MonoBehaviour:
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 100
+  explosionForce: 10
   mouvementSpeed: 120
   pivotSpeed: 80
   rotationSpeed: 30
@@ -221,7 +221,6 @@ GameObject:
   - component: {fileID: 4384431802473347577}
   - component: {fileID: 3070630633163488715}
   - component: {fileID: 4536375940292766682}
-  - component: {fileID: 3940145880420437646}
   m_Layer: 3
   m_Name: MainBody1
   m_TagString: Player
@@ -364,24 +363,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3940145880420437646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3131990571156717056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cd95b2b2b493274faea4d774e20a3e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 600000
-  velocityTresholdMelee: 10
-  energyLoss: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  maxAngle: 5
 --- !u!1001 &3760971721746178517
 PrefabInstance:
   m_ObjectHideFlags: 0
