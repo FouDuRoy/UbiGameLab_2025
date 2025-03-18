@@ -56,8 +56,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
     {
         float rightTrigger = ejectCubes.ReadValue<float>();
         float leftTrigger = AttractCubes.ReadValue<float>();
-        
-         if((leftTrigger > 0 && rightTrigger==0) ||(leftTrigger > 0 && leftTriggerHeld ) )
+        Debug.Log(leftTrigger);
+        if ((leftTrigger > 0 && rightTrigger==0) ||(leftTrigger > 0 && leftTriggerHeld ) )
         {
             if(leftTriggerHeld == false)
             {
@@ -113,9 +113,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
             //If the cube is used by a player dont pull
             if (cube.transform.root.GetComponent<PlayerObjects>() != null || cube.transform.tag != "magnetic" || cube.GetComponent<Bloc>().owner!="Neutral")
             {
+                
                 return false;
             }
             Vector3 distanceBetweenPlayerAndCube = cube.transform.position - player.position;
+           
             return Vector3.Angle(distanceBetweenPlayerAndCube, player.forward) <= angle* angleFactor;
         });
 

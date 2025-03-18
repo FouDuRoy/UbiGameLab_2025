@@ -323,7 +323,7 @@ public class Feromagnetic : MonoBehaviour
         this.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
         if (springType == SpringType.Free || springType == SpringType.Limited)
         {
-            cubeRB.mass = 1;
+            cubeRB.mass = 0.01f;
             cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
             this.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
             playerAtractedTo.GetComponent<GridSystem>().AttachBlock(gameObject, cubeAttractedToTransform.gameObject,closestFaceRelativeToMainCube);
