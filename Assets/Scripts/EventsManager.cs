@@ -12,7 +12,6 @@ public class EventsManager : MonoBehaviour
 
     private List<GameObject> spawnpoints;
     private float nextEventTime;
-    private bool prefabSpawned;
 
     void Start()
     {
@@ -29,13 +28,11 @@ public class EventsManager : MonoBehaviour
 
     void Update()
     {
-        if (Time.time >= nextEventTime)
+        if (Time.time >= nextEventTime) 
         {
             nextEventTime = Time.time + timeBetweenEvents;
 
-            prefabSpawned = false;
-
-            foreach (GameObject spawnpoint in spawnpoints)
+            foreach (GameObject spawnpoint in spawnpoints) // On parcourt tous les points de spawn, et on tire aléatoirement ceux qui spawnent une structure
             {
                 if(Random.Range(0f, 1f)<= chancesForEachSpawnpointToSpawnAPrefab)
                 {
@@ -47,7 +44,6 @@ public class EventsManager : MonoBehaviour
 
     private IEnumerator SummonPrefab(GameObject prefab, Vector3 loc, Quaternion rot)
     {
-        print("caca");
         // Instancier le beacon sans collision
         GameObject beaconInstance = Instantiate(spawnBeacon, loc, rot);
 
