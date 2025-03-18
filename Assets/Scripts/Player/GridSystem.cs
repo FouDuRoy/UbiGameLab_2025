@@ -4,6 +4,7 @@ using System.IO.Compression;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class GridSystem : MonoBehaviour
 {
@@ -76,13 +77,12 @@ public class GridSystem : MonoBehaviour
                     playerObj.addRigidBody(gridBloc.Value);
                     playerObj.removeCube(gridBloc.Value);
                     keys.Add(gridBloc.Key);
-                    gridBloc.Value.GetComponent<Bloc>().owner = "projectile";
+                    gridBloc.Value.GetComponent<Bloc>().state = BlocState.detached; 
                     StartCoroutine(blockNeutral(gridBloc.Value));
                     neighbors = GetNeighbors(gridBloc.Key);
                     playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
-                    //Ajouter les faces aux voisins
-
-                    
+                    gridBloc.Value.GetComponent<Rigidbody>().AddForce(
+                        (gridBloc.Value.transform.position - kernel.transform.position).normalized * 10f, ForceMode.VelocityChange);
                 }
 
             }
@@ -378,6 +378,33 @@ public class GridSystem : MonoBehaviour
         float maxY = grid.Keys.Max(x => x.y);
         return new Vector3(maxX,minX,maxY);
     }
-        
+    public void coneEjectRest(float ejectionSpeed, float rightDriftProportion)
+    {
+        List<Vector3Int> keys = new List<Vector3Int>();
+        foreach (var gridBloc in grid)
+        {
+            if (!IsBlockConnected(gridBloc.Value))
+            {
+                GameObject cube = gridBloc.Value;
+                playerObj.addRigidBody(gridBloc.Value);
+                playerObj.removeCube(gridBloc.Value);
+                keys.Add(gridBloc.Key);
+                gridBloc.Value.GetComponent<Bloc>().state = BlocState.projectile;
+                StartCoroutine(blockNeutral(gridBloc.Value));
+                playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
+
+                Transform golem = kernel.transform.Find("GolemBuilt");
+                float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
+                cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+                cube.GetComponent<Rigidbody>().AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
+               
+            }
+
+        }
+        foreach (Vector3Int key in keys)
+        {
+            grid.Remove(key);
+        }
+    }
     
 }

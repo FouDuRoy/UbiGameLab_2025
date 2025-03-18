@@ -8,6 +8,7 @@ using UnityEditor.ShaderGraph.Internal;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
 
@@ -180,6 +181,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             return true;
         });
        magnetic.ForEach(x => EjectBloc(x.gameObject,golem));
+       playerGrid.coneEjectRest(ejectionSpeed, rightDriftProportion);
     }
 
     private void EjectBloc(GameObject cube, Transform golem)
@@ -187,23 +189,24 @@ public class ConeEjectionAndProjection : MonoBehaviour
         cube.gameObject.layer = 0;
         cube.transform.parent = this.transform.parent;
         playerGrid.DetachBlocSingle(cube);
+
         //Add rigidBody
         GetComponent<PlayerObjects>().addRigidBody(cube);
         float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
         cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
         cube.GetComponent<Rigidbody>().AddForce((golem.forward + golem.right *rightDrift * rightDriftProportion) *ejectionSpeed, ForceMode.VelocityChange );
-        cube.GetComponent<Bloc>().owner += "projectile";
+        cube.GetComponent<Bloc>().state = BlocState.projectile;
+       
         //Remove owner of cube
         StartCoroutine(blockNeutral(cube));
     }
-
     IEnumerator blockNeutral(GameObject block)
     {
-
         yield return new WaitForSeconds(3f);
         if(block !=null)
         {
             block.GetComponent<Bloc>().setOwner("Neutral");
+            block.GetComponent<Bloc>().state = BlocState.none;
         }
        
     }

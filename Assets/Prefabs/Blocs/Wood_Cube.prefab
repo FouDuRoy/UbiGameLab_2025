@@ -151,11 +151,16 @@ MonoBehaviour:
   passiveRadius: 2
   activeRadius: 2
   charge: 0.25
+  maxSpeed: 10
   error: 0.05
+  AngleError: 0.05
   spacingBetweenCubes: 0.2
   moveTime: 0.15
   maxForceAttraction: 30
   lerpingDistance: 1
+  timeBeforeSwitching: 0.5
+  timeBeforeSwitchingVariation: 0.05
+  maxSpeedVariation: 3
   springType: 0
   lerpingType: 1
   xLimit: 0
@@ -181,6 +186,7 @@ MonoBehaviour:
   minimalSpeed: 0.5
   weight: 0
   owner: 
+  state: 3
   rb: {fileID: 0}
 --- !u!114 &-6839377658913007990
 MonoBehaviour:

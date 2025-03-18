@@ -36,7 +36,7 @@ public class DynamicCamera : MonoBehaviour
     private void Start()
     {
         cam = GetComponentInChildren<Camera>();
-
+        Debug.Log(cam);
         //Récupère l'angle de la caméra par rapport à son pivot
         angleCam =new Vector2(cam.transform.localPosition.z, cam.transform.localPosition.y).normalized;
 

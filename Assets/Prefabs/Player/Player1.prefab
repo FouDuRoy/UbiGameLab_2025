@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f919ac17cd234524291e998efdd2adf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubes: []
   player: {fileID: 3131990571156717056}
   cubeRb: {fileID: 3070630633163488715}
   passiveCube: {fileID: 5694876674060920943, guid: 50ccf99298a1cff4f923b13da4a2a01b, type: 3}
@@ -74,9 +73,10 @@ MonoBehaviour:
   rotationSpeed: 30
   playerCharge: 10
   rotParam: 4
-  rotationDamping: 10
+  rotationDamping: 5
+  weightMouvementFactor: 1
+  weightRotationFactor: 1
   moveType: 3
-  coneProjection: 0
 --- !u!114 &4658591005558201665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +342,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 1000
   energyLoss: 0.8
+  upEjectionMax: 1
+  ejectionFactor: 1
+  maxAngle: 5
 --- !u!1001 &3760971721746178517
 PrefabInstance:
   m_ObjectHideFlags: 0

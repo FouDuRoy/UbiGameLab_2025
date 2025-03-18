@@ -1,10 +1,12 @@
+using System.Buffers;
 using UnityEngine;
 //Federico Barallobres
 public class Bloc : MonoBehaviour
 {
     [SerializeField] float minimalSpeed = 0.5f;
     public float weight;
-    public string owner;
+    public string owner; 
+    public BlocState state;
     public Rigidbody rb;
 
     private Vector3Int gridPosition;
@@ -36,5 +38,8 @@ public class Bloc : MonoBehaviour
     {
         this.owner = owner;
     }
-
+    public void setState(BlocState state)
+    {
+        this.state = state;
+    }
 }

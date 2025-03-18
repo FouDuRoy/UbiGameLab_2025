@@ -128,8 +128,11 @@ public class Feromagnetic : MonoBehaviour
         if (!LookPositionGridAvailable() && lerping)
         {
             ResetObject();
-        } 
-
+        }
+        if (cubeAttractedToTransform!=null && cubeAttractedToTransform.root.GetComponent<PlayerObjects>() == null)
+        {
+            ResetObject();
+        }
         // Set the position of the block and look for all magnetic blocs in range
         if (!lerping)
         {
@@ -311,6 +314,7 @@ public class Feromagnetic : MonoBehaviour
         private void AttachCube()
     {
         //Attach magnetic field
+        
         gameObject.AddComponent<SphereCollider>();
         gameObject.GetComponent<SphereCollider>().transform.position = transform.position;
         gameObject.GetComponent<SphereCollider>().radius = activeRadius;
@@ -339,6 +343,7 @@ public class Feromagnetic : MonoBehaviour
             
         }
         //Set to magnetic after some time
+        this.GetComponent<Bloc>().state = BlocState.structure;
         Invoke("setLayer", timeBeforeActiveMagnet);
 
         //Disable script

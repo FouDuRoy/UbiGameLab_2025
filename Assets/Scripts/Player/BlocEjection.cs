@@ -40,10 +40,15 @@ public class BlocEjection : MonoBehaviour
 
         if (hitterComponent != null && hittedComponent != null)
         {
+
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
-             
-            if (ownerHitter != ownerHitted && ownerHitter.Contains("Player") && ownerHitted.Contains("Player") && !ownerHitter.Contains("projectile"))
+            BlocState stateHitter = hitterComponent.state;
+            BlocState stateHitted = hittedComponent.state;
+
+            bool playerHittedByotherPlayerStructure = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.structure;
+            bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
+            if (playerHittedByotherPlayerStructure && areOwnedByPlayers)
             {
                 Vector3 relativeVelocity = collision.relativeVelocity;
                 if (relativeVelocity.magnitude > velocityTreshold)
@@ -51,9 +56,11 @@ public class BlocEjection : MonoBehaviour
                     // Calculate normal average
                     hitted.transform.root.GetComponent<PlayerObjects>().addRigidBody(hitted);
                     gridSystem.DetachBlock(hitted);
+                    hittedComponent.state = BlocState.detached;
                     Vector3 ejectionVeolcity = relativeVelocity*energyLoss;
                     float ejectionMag = ejectionVeolcity.magnitude;
-                    Vector3 hittedVelocity = (ejectionVeolcity.normalized*(1-randomHeightFactor)+Vector3.up*randomHeightFactor)*ejectionMag;
+                   // Vector3 hittedVelocity = (ejectionVeolcity.normalized*(1-randomHeightFactor)+Vector3.up*randomHeightFactor)*ejectionMag;
+                    Vector3 hittedVelocity = ejectionVeolcity + Vector3.up * randomHeightFactor * ejectionMag;
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity*ejectionFactor;
                     StartCoroutine(blockNeutral(hitted));
                 }
@@ -67,8 +74,12 @@ public class BlocEjection : MonoBehaviour
         {
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
-             
-            if (ownerHitter != ownerHitted  && ownerHitted.Contains("Player") && ownerHitter.Contains("projectile"))
+            BlocState stateHitter =hitterComponent.state;
+            BlocState stateHitted = hittedComponent.state;
+            bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
+            bool playerHittedByotherPlayer = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.projectile;
+            bool playerHittedByOwenBlock = ownerHitter == ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.detached;
+            if ((playerHittedByotherPlayer || playerHittedByOwenBlock)&& areOwnedByPlayers)
             {
                 Vector3 relativeVelocity = collision.relativeVelocity;
                 if (relativeVelocity.magnitude > velocityTreshold)
@@ -76,12 +87,13 @@ public class BlocEjection : MonoBehaviour
 
                     hitted.transform.root.GetComponent<PlayerObjects>().addRigidBody(hitted);
                     gridSystem.DetachBlock(hitted);
-                    hitted.GetComponent<Bloc>().owner = "projectile";
+                    hittedComponent.state = BlocState.detached;
                     Vector3 ejectionVeolcity = relativeVelocity*energyLoss;
                     float ejectionMag = ejectionVeolcity.magnitude;
                     float randomHeightFactor= Random.Range(0,upEjectionMax);
 
-                    Vector3 hittedVelocity = (ejectionVeolcity.normalized*(1-randomHeightFactor)+Vector3.up*randomHeightFactor)*ejectionMag;
+                   // Vector3 hittedVelocity = (ejectionVeolcity.normalized*(1-randomHeightFactor)+Vector3.up*randomHeightFactor)*ejectionMag;
+                    Vector3 hittedVelocity = ejectionVeolcity + Vector3.up * randomHeightFactor * ejectionMag;
                     Quaternion randomDeviation = Quaternion.AngleAxis(Random.Range(-maxAngle,maxAngle),Vector3.up);
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity*ejectionFactor;
                     hitter.GetComponent<Rigidbody>().velocity = randomDeviation*(-ejectionVeolcity);
@@ -97,6 +109,8 @@ public class BlocEjection : MonoBehaviour
         if (block != null)
         {
             block.GetComponent<Bloc>().setOwner("Neutral");
+
+            block.GetComponent<Bloc>().state = BlocState.none;
         }
     }
 }

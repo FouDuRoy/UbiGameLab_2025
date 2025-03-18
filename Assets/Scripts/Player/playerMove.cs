@@ -113,7 +113,6 @@ public class PlayerMouvement : MonoBehaviour
 
       
             ThrowCubes();
-        
     }
 
     private void Spring(Vector3 direction, float rotationY)
@@ -313,11 +312,10 @@ public class PlayerMouvement : MonoBehaviour
               
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
                 cube.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, this.rb.position, playerCharge);
-                cube.GetComponent<Bloc>().owner += "projectile"; 
+                cube.GetComponent<Bloc>().state = BlocState.projectile;
                 //Remove owner of cube
                 StartCoroutine(blockNeutral(cube));
                 }
-                
             }
             gridPlayer.clearGrid();
         }
@@ -330,6 +328,7 @@ public class PlayerMouvement : MonoBehaviour
         if(block !=null)
         {
             block.GetComponent<Bloc>().setOwner("Neutral");
+            block.GetComponent<Bloc>().state = BlocState.none;
         }
        
     }
