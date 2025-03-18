@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum BlocState
 {
-    projectile, structure, detached,none
+    projectile, structure, detached,none,melee
 }

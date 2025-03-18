@@ -111,7 +111,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         //Look for those that are in front of the player with maximum angle
         magnetic = magnetic.FindAll(cube => {
             //If the cube is used by a player dont pull
-            if (cube.transform.root.GetComponent<PlayerObjects>() != null || cube.transform.tag != "magnetic")
+            if (cube.transform.root.GetComponent<PlayerObjects>() != null || cube.transform.tag != "magnetic" || cube.GetComponent<Bloc>().owner!="Neutral")
             {
                 return false;
             }
