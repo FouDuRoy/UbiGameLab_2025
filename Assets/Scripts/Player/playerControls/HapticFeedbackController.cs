@@ -43,9 +43,9 @@ public class HapticFeedbackController : MonoBehaviour
     public HoldHapticPattern repulsionCharge=new HoldHapticPattern
     {
         leftMotorMin=0,
-        leftMotorMax=.1f,
+        leftMotorMax=.0f,
         rightMotorMin=0,
-        rightMotorMax=.5f,
+        rightMotorMax=.0f,
         duration=.5f,
     };
     public ImpulseHapticPattern repulsionShoot = new ImpulseHapticPattern
@@ -53,8 +53,8 @@ public class HapticFeedbackController : MonoBehaviour
         leftMotorMax = .5f,
         leftMidTime = 0,
         rightMotorMax = .5f,
-        rightMidTime = .02f,
-        totalDuration = .06f,
+        rightMidTime = 0,
+        totalDuration = .5f,
     };
     public HoldHapticPattern ejectionCharge=new HoldHapticPattern
     {
@@ -77,10 +77,6 @@ public class HapticFeedbackController : MonoBehaviour
     private Coroutine attractionCoroutine;
     private Coroutine impulseCoroutine;
     private Coroutine repulsionCoroutine;
-
-    private bool attractionOngoing;
-    private bool repulsionOngoing;
-    private bool ejectionOngoing;
 
     void Start()
     {
@@ -255,7 +251,7 @@ public class HapticFeedbackController : MonoBehaviour
 
     public void BlocAttachedVibration()
     {
-        if (playerGamepad != null && !attractionOngoing)
+        if (playerGamepad != null && attractionCoroutine == null && repulsionCoroutine == null) // Onvérifie qu'une vibration prioritaire n'est pas en cours
         {
             if (impulseCoroutine != null)
             {
@@ -274,8 +270,6 @@ public class HapticFeedbackController : MonoBehaviour
                 StopCoroutine(attractionCoroutine); 
             }
             attractionCoroutine = StartCoroutine(VibrationTransition(attraction, true));
-
-            attractionOngoing = true;
         }
     }
 
@@ -283,14 +277,10 @@ public class HapticFeedbackController : MonoBehaviour
     {
         if (playerGamepad != null)
         {
-                if (attractionCoroutine != null)
-                {
-                    StopCoroutine(attractionCoroutine);
-                    attractionCoroutine = null;
-                }
-            StartCoroutine(VibrationTransition(attraction.leftMotorMin,attraction.leftMotorMax,attraction.rightMotorMin,attraction.rightMotorMax,.2f, false));
+            StopCoroutine(attractionCoroutine);
+            attractionCoroutine = null;
 
-            attractionOngoing = false;
+            StartCoroutine(VibrationTransition(attraction.leftMotorMin,attraction.leftMotorMax,attraction.rightMotorMin,attraction.rightMotorMax,.2f, false));
         }
     }
 
@@ -302,9 +292,12 @@ public class HapticFeedbackController : MonoBehaviour
             {
                 StopCoroutine(repulsionCoroutine);
             }
-            attractionCoroutine = StartCoroutine(VibrationTransition(repulsionCharge.leftMotorMin, repulsionCharge.leftMotorMax, repulsionCharge.rightMotorMin, repulsionCharge.rightMotorMax, maxChargeTime, true));
-
-            repulsionOngoing=true;
+            if (attractionCoroutine != null)
+            {
+                StopCoroutine(attractionCoroutine);
+                attractionCoroutine = null;
+            }
+            repulsionCoroutine = StartCoroutine(VibrationTransition(repulsionCharge.leftMotorMin, repulsionCharge.leftMotorMax, repulsionCharge.rightMotorMin, repulsionCharge.rightMotorMax, maxChargeTime, true));
         }
     }
 
@@ -312,14 +305,11 @@ public class HapticFeedbackController : MonoBehaviour
     {
         if (playerGamepad != null)
         {
-            if (repulsionCoroutine != null)
-            {
-                StopCoroutine(repulsionCoroutine);
-                repulsionCoroutine = null;
-            }
-            StartCoroutine(ImpulseVibration(repulsionShoot.leftMotorMax*chargeWhenReleased,repulsionShoot.leftMidTime,repulsionShoot.rightMotorMax*chargeWhenReleased,repulsionShoot.rightMidTime,repulsionShoot.totalDuration));
+            StopCoroutine(repulsionCoroutine);
+            repulsionCoroutine = null;
 
-            repulsionOngoing=false;
+            print(chargeWhenReleased);
+            StartCoroutine(ImpulseVibration(repulsionShoot.leftMotorMax*chargeWhenReleased,repulsionShoot.leftMidTime,repulsionShoot.rightMotorMax*chargeWhenReleased,repulsionShoot.rightMidTime,repulsionShoot.totalDuration));
         }
     }
 
@@ -328,8 +318,6 @@ public class HapticFeedbackController : MonoBehaviour
         if (playerGamepad != null)
         {
             StartCoroutine(VibrationTransition(ejectionCharge, true));
-
-            ejectionOngoing=true;
         }
     }
 
@@ -338,8 +326,6 @@ public class HapticFeedbackController : MonoBehaviour
         if (playerGamepad != null)
         {
             StartCoroutine(ImpulseVibration(ejectionShoot));
-
-            ejectionOngoing=false;
         }
     }
 
