@@ -8,14 +8,14 @@ using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 //Federico Barallobres
-public class BlocEjection : MonoBehaviour
+public class SpringBlocEjection : MonoBehaviour
 {
     [SerializeField] float velocityTreshold = 10f;
     [SerializeField] float velocityTresholdMelee = 10f;
     [SerializeField] float energyLoss = 0.8f;
-    [SerializeField] float upEjectionMax =1f;
-    [SerializeField] float ejectionFactor=1f;
-    [SerializeField] float maxAngle=5f;
+    [SerializeField] float upEjectionMax = 1f;
+    [SerializeField] float ejectionFactor = 1f;
+    [SerializeField] float maxAngle = 5f;
     private GridSystem gridSystem;
     private PlayerObjects playerObjects;
     Rigidbody mainCubeRb;
@@ -25,10 +25,10 @@ public class BlocEjection : MonoBehaviour
 
     private void Start()
     {
-     
+
     }
 
- 
+
     void OnCollisionEnter(Collision collision)
     {
 
@@ -36,7 +36,7 @@ public class BlocEjection : MonoBehaviour
         GameObject hitted = collision.GetContact(0).thisCollider.gameObject;
         Bloc hitterComponent = hitter.GetComponent<Bloc>();
         Bloc hittedComponent = hitted.GetComponent<Bloc>();
-        float randomHeightFactor= Random.Range(0,upEjectionMax);
+        float randomHeightFactor = Random.Range(0, upEjectionMax);
 
         checkCollisionBetweenPlayerAndBlock(collision, hitter, hitted, hitterComponent, hittedComponent);
         if (hitterComponent != null && hittedComponent != null)
@@ -47,11 +47,12 @@ public class BlocEjection : MonoBehaviour
             BlocState stateHitter = hitterComponent.state;
             BlocState stateHitted = hittedComponent.state;
 
-            bool playerHittedByotherPlayerStructure = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.structure;
             bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
-        
+            bool playerHittedByownMelee = ownerHitter == ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.melee;
+            bool playerHittedByotherPlayerStructure = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.structure;
             if (playerHittedByotherPlayerStructure && areOwnedByPlayers)
             {
+                
                 gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
                 playerObjects = FindObjectOfType<PlayerObjects>();
                 upEjectionMax = Mathf.Clamp01(upEjectionMax);
@@ -61,19 +62,19 @@ public class BlocEjection : MonoBehaviour
                 Vector3 relativeVelocity = collision.relativeVelocity;
                 float hitterVelocity = hitter.transform.parent.GetComponent<Rigidbody>().velocity.magnitude;
                 float hittedVelocityMag = hitted.transform.parent.GetComponent<Rigidbody>().velocity.magnitude;
-                if (hittedVelocityMag > velocityTresholdMelee && hitterVelocity> hittedVelocityMag)
+                if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
-
-                    gridSystem.DetachBlock(hitted);
-                    hittedComponent.state = BlocState.detached;
-                    Vector3 ejectionVeolcity = relativeVelocity*energyLoss;
-                    float ejectionMag = ejectionVeolcity.magnitude;
-                    Vector3 hittedVelocity = (ejectionVeolcity.normalized*(1-randomHeightFactor)+Vector3.up*randomHeightFactor)*ejectionMag;
-                    hitted.GetComponent<Rigidbody>().velocity = hittedVelocity*ejectionFactor;
-                    mainCubeRb.AddForce(ejectionVeolcity,ForceMode.VelocityChange);
+                    foreach (var v in gridSystem.grid)
+                    {
+                        Joint[] joints = v.Value.GetComponents<Joint>();
+                        foreach(Joint joint in joints)
+                        {
+                            joint.breakTorque = 150f;
+                        }
+                    }
+                    StartCoroutine(resetTorque(gridSystem));
                 }
             }
-            bool playerHittedByownMelee = ownerHitter == ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.melee;
             if (playerHittedByownMelee && areOwnedByPlayers)
             {
                 gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
@@ -88,7 +89,7 @@ public class BlocEjection : MonoBehaviour
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
                     // Calculate normal average
-                  
+
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.melee;
                     Vector3 ejectionVeolcity = relativeVelocity * energyLoss;
@@ -107,12 +108,12 @@ public class BlocEjection : MonoBehaviour
         {
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
-            BlocState stateHitter =hitterComponent.state;
+            BlocState stateHitter = hitterComponent.state;
             BlocState stateHitted = hittedComponent.state;
             bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
             bool playerHittedByotherPlayer = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.projectile;
             bool playerHittedByOwenBlock = ownerHitter == ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.detached;
-            if (( playerHittedByOwenBlock)&& areOwnedByPlayers)
+            if ((playerHittedByOwenBlock) && areOwnedByPlayers)
             {
                 gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
                 playerObjects = FindObjectOfType<PlayerObjects>();
@@ -125,21 +126,20 @@ public class BlocEjection : MonoBehaviour
 
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.detached;
-                    Vector3 ejectionVeolcity = relativeVelocity*energyLoss;
+                    Vector3 ejectionVeolcity = relativeVelocity * energyLoss;
                     float ejectionMag = ejectionVeolcity.magnitude;
-                    float randomHeightFactor= Random.Range(0,upEjectionMax);
+                    float randomHeightFactor = Random.Range(0, upEjectionMax);
 
-                    Vector3 hittedVelocity = (ejectionVeolcity.normalized*(1-randomHeightFactor)+Vector3.up*randomHeightFactor)*ejectionMag;
-                    Quaternion randomDeviation = Quaternion.AngleAxis(Random.Range(-maxAngle,maxAngle),Vector3.up);
-                    hitted.GetComponent<Rigidbody>().velocity = hittedVelocity*ejectionFactor;
-                    hitter.GetComponent<Rigidbody>().velocity = randomDeviation*(-ejectionVeolcity);
+                    Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
+                    Quaternion randomDeviation = Quaternion.AngleAxis(Random.Range(-maxAngle, maxAngle), Vector3.up);
+                    hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
+                    hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity);
                 }
             }
             if ((playerHittedByotherPlayer) && areOwnedByPlayers)
             {
                 gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
                 playerObjects = FindObjectOfType<PlayerObjects>();
-                upEjectionMax = Mathf.Clamp01(upEjectionMax);
                 mainCubeRb = transform.GetComponent<Rigidbody>();
                 moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
                 Vector3 relativeVelocity = collision.relativeVelocity;
@@ -151,7 +151,7 @@ public class BlocEjection : MonoBehaviour
                     float ejectionMag = ejectionVeolcity.magnitude;
                     float randomHeightFactor = Random.Range(0, upEjectionMax);
 
-                    Vector3 hittedVelocity = (ejectionVeolcity.normalized*(1-randomHeightFactor)+Vector3.up*randomHeightFactor)*ejectionMag;
+                    Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
                     Quaternion randomDeviation = Quaternion.AngleAxis(Random.Range(-maxAngle, maxAngle), Vector3.up);
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
                     hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity);
@@ -159,10 +159,10 @@ public class BlocEjection : MonoBehaviour
             }
         }
     }
-   void  OnJointBreak(float breakForce)
+    void OnJointBreak(float breakForce)
     {
+        Debug.Log(breakForce);
         gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
-        Debug.Log(this.gameObject);
         gridSystem.DetachBlock(this.gameObject);
         this.GetComponent<Bloc>().state = BlocState.detached;
     }
@@ -174,6 +174,19 @@ public class BlocEjection : MonoBehaviour
             block.GetComponent<Bloc>().setOwner("Neutral");
 
             block.GetComponent<Bloc>().state = BlocState.none;
+        }
+    }
+    IEnumerator resetTorque(GridSystem grid)
+    {
+        yield return new WaitForSeconds(3f);
+
+        foreach (var v in gridSystem.grid)
+        {
+            Joint[] joints = v.Value.GetComponents<Joint>();
+            foreach (Joint joint in joints)
+            {
+                joint.breakTorque = 100000f;
+            }
         }
     }
 }

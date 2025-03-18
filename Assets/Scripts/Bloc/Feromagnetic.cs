@@ -35,6 +35,7 @@ public class Feromagnetic : MonoBehaviour
         [SerializeField] float timeBeforeSwitching = 0.5f;
         [SerializeField] float timeBeforeSwitchingVariation =0.05f;
         [SerializeField] float maxSpeedVariation = 3f;
+        [SerializeField] float springTorqueBreak = 1000f;
 
     //Joint settings
 
@@ -417,29 +418,29 @@ public class Feromagnetic : MonoBehaviour
 
                 if (xPosition > yPosition && xPosition > zPosition)
                 {
-                    joint.yMotion = ConfigurableJointMotion.Locked;
-                    joint.xMotion = ConfigurableJointMotion.Locked;
-                    joint.zMotion = ConfigurableJointMotion.Locked;
+                    joint.yMotion = ConfigurableJointMotion.Limited;
+                    joint.xMotion = ConfigurableJointMotion.Limited;
+                    joint.zMotion = ConfigurableJointMotion.Limited;
                 }
                 else if (yPosition > xPosition && yPosition > zPosition)
                 {
-                    joint.yMotion = ConfigurableJointMotion.Locked;
-                    joint.xMotion = ConfigurableJointMotion.Locked;
-                    joint.zMotion = ConfigurableJointMotion.Locked;
+                    joint.yMotion = ConfigurableJointMotion.Limited;
+                    joint.xMotion = ConfigurableJointMotion.Limited;
+                    joint.zMotion = ConfigurableJointMotion.Limited;
                 }
                 else if (zPosition > yPosition && zPosition > xPosition)
                 {
-                    joint.yMotion = ConfigurableJointMotion.Locked;
-                    joint.xMotion = ConfigurableJointMotion.Locked;
-                    joint.zMotion = ConfigurableJointMotion.Locked;
+                    joint.yMotion = ConfigurableJointMotion.Limited;
+                    joint.xMotion = ConfigurableJointMotion.Limited;
+                    joint.zMotion = ConfigurableJointMotion.Limited;
                 }
                 else
                 {
-                    joint.yMotion = ConfigurableJointMotion.Locked;
-                    joint.xMotion = ConfigurableJointMotion.Locked;
-                    joint.zMotion = ConfigurableJointMotion.Locked;
+                    joint.yMotion = ConfigurableJointMotion.Limited;
+                    joint.xMotion = ConfigurableJointMotion.Limited;
+                    joint.zMotion = ConfigurableJointMotion.Limited;
                 }
-
+                
                 SoftJointLimit limitX = new SoftJointLimit();
                 limitX.limit = xLimit;
                 joint.linearLimit = limitX;
@@ -465,7 +466,7 @@ public class Feromagnetic : MonoBehaviour
 
                 }
                 i++;
-
+            joint.breakTorque = springTorqueBreak;
         }
     }
 

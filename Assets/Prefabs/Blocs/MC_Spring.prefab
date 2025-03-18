@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3745680985456743881}
   - component: {fileID: 2341062450622316672}
   - component: {fileID: 6873425469701635572}
-  - component: {fileID: 451798940658644205}
+  - component: {fileID: 4853838727377016838}
   m_Layer: 6
   m_Name: MC_Spring
   m_TagString: magnetic
@@ -161,16 +161,17 @@ MonoBehaviour:
   timeBeforeSwitching: 0.2
   timeBeforeSwitchingVariation: 0.05
   maxSpeedVariation: 3
-  springType: 2
+  springTorqueBreak: 10000
+  springType: 1
   lerpingType: 0
-  xLimit: 0
-  AngleLimit: 1
-  mainLinearDrive: 500000
-  mainLinearDamp: 10000
-  secondaryLinearDrive: 500000
-  secondaryLinearDamp: 10000
-  angularDrive: 500000
-  angularDamp: 10000
+  xLimit: 10
+  AngleLimit: 10
+  mainLinearDrive: 5000
+  mainLinearDamp: 100
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 5000
+  angularDamp: 100
 --- !u!114 &6873425469701635572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +189,7 @@ MonoBehaviour:
   owner: Neutral
   state: 3
   rb: {fileID: 0}
---- !u!114 &451798940658644205
+--- !u!114 &4853838727377016838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,12 +198,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6515478394461614388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cd95b2b2b493274faea4d774e20a3e1, type: 3}
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 5
-  velocityTresholdMelee: 5
+  velocityTreshold: 10
+  velocityTresholdMelee: 3
   energyLoss: 0.8
-  upEjectionMax: 1
+  upEjectionMax: 0.4
   ejectionFactor: 1
   maxAngle: 5
