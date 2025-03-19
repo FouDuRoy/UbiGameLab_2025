@@ -161,7 +161,7 @@ MonoBehaviour:
   timeBeforeSwitching: 0.2
   timeBeforeSwitchingVariation: 0.05
   maxSpeedVariation: 3
-  springTorqueBreak: 10000
+  springTorqueBreak: Infinity
   springType: 1
   lerpingType: 0
   xLimit: 10
@@ -202,9 +202,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocityTreshold: 50
-  velocityTresholdMelee: 3
+  velocityTresholdMelee: 9
   energyLoss: 0.5
   upEjectionMax: 0.4
   ejectionFactor: 1
   maxAngle: 5
-  springBreakForce: 300
+  springBreakForce: 400
+  range: 2
