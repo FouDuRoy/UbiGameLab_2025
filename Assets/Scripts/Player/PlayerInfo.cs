@@ -11,7 +11,6 @@ public class PlayerInfo : MonoBehaviour
     public GameObject gameOverCanvas; // Assign in Inspector
     public TextMeshProUGUI attackerText; // Assign in Inspector
     public Button restartButton;
-    [SerializeField] private GameObject _restartMenu;
 
     void Start()
     {
@@ -37,11 +36,11 @@ public class PlayerInfo : MonoBehaviour
     }
     IEnumerator gameOver(string attackerName)
     {
-
         yield return new WaitForSeconds(1.5f);
+        //Time.timeScale = 0;
         gameOverCanvas.SetActive(true); // Show UI
         attackerText.text = "Victoire par : " + attackerName; // Display attacker's name
-        EventSystem.current.SetSelectedGameObject(_restartMenu);
+        EventSystem.current.SetSelectedGameObject(restartButton.gameObject);
 
     }
 

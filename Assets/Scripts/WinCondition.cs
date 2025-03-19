@@ -7,6 +7,7 @@ public class WinCondition : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] float victoryConditionSpeedRange = 10f;
     [SerializeField] float victoryConditionSpeedMelee = 10f;
+    [SerializeField] GameObject Ennemy;
     void Start()
     {
         
@@ -27,25 +28,29 @@ public class WinCondition : MonoBehaviour
             string ownerHitted = transform.parent.name;
             BlocState stateHitter = hitterComponent.state;
             bool projectileFromOtherPlayer = stateHitter == BlocState.projectile && (ownerHitter != ownerHitted);
+            string player = this.gameObject.transform.parent.name;
 
             if (projectileFromOtherPlayer)
             {
                 Vector3 projectileVelocity = hitter.GetComponent<Rigidbody>().velocity;
-                print(projectileVelocity.magnitude);
-
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
-                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(ownerHitter);
+                    print("Range Attack " + this.gameObject.name + " : " + hitter.name);
+                    this.GetComponent<WinCondition>().enabled = false;
+                    Ennemy.GetComponent<WinCondition>().enabled = false;
+                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(player);
                 }
             }
             bool meleeFromOtherPlayer = stateHitter == BlocState.structure && (ownerHitter != ownerHitted);
             if (meleeFromOtherPlayer)
             {
                 Vector3 projectileVelocity = hitter.GetComponent<Rigidbody>().velocity;
-
                 if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                 {
-                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(ownerHitter);
+                    print("Melee attack " + this.gameObject.name + " : " + hitter.name);
+                    this.GetComponent<WinCondition>().enabled = false;
+                    Ennemy.GetComponent<WinCondition>().enabled = false;
+                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.transform.parent.name);
                 }
             }
         }
