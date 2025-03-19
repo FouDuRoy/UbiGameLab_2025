@@ -161,7 +161,7 @@ MonoBehaviour:
   timeBeforeSwitching: 0.2
   timeBeforeSwitchingVariation: 0.05
   maxSpeedVariation: 3
-  springTorqueBreak: Infinity
+  springTorqueBreak: 10000
   springType: 1
   lerpingType: 0
   xLimit: 10
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  weight: 0
+  weight: 0.01
   owner: Neutral
   state: 3
   rb: {fileID: 0}
@@ -201,11 +201,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 50
-  velocityTresholdMelee: 9
+  velocityTreshold: 1
+  velocityTresholdMelee: 3
   energyLoss: 0.5
   upEjectionMax: 0.4
   ejectionFactor: 1
   maxAngle: 5
-  springBreakForce: 400
-  range: 2
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+  springBreakForce: 300
+=======
+  springBreakForce: 1
+>>>>>>> Stashed changes
+=======
+  springBreakForce: 1
+>>>>>>> Stashed changes

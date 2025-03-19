@@ -31,6 +31,8 @@ public class WinCondition : MonoBehaviour
             if (projectileFromOtherPlayer)
             {
                 Vector3 projectileVelocity = hitter.GetComponent<Rigidbody>().velocity;
+                print(projectileVelocity.magnitude);
+
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
                     this.transform.root.GetComponent<PlayerInfo>().TakeDamage(ownerHitter);
@@ -40,6 +42,7 @@ public class WinCondition : MonoBehaviour
             if (meleeFromOtherPlayer)
             {
                 Vector3 projectileVelocity = hitter.GetComponent<Rigidbody>().velocity;
+
                 if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                 {
                     this.transform.root.GetComponent<PlayerInfo>().TakeDamage(ownerHitter);
