@@ -67,15 +67,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 10
+  explosionForce: 100
   mouvementSpeed: 120
-  pivotSpeed: 80
-  rotationSpeed: 30
+  pivotSpeed: 230
+  rotationSpeed: 150
   playerCharge: 10
   rotParam: 4
-  rotationDamping: 5
+  rotationDamping: 15
   weightMouvementFactor: 1
-  weightRotationFactor: 1
+  weightRotationFactor: 1.5
   moveType: 4
 --- !u!114 &4658591005558201665
 MonoBehaviour:
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 4384431802473347577}
   - component: {fileID: 3070630633163488715}
   - component: {fileID: 4536375940292766682}
-  - component: {fileID: 4863577039673014637}
+  - component: {fileID: 6839929964872536719}
   m_Layer: 3
   m_Name: MainBody1
   m_TagString: Player
@@ -364,7 +364,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4863577039673014637
+--- !u!114 &6839929964872536719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,8 +376,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9811b1fd60f6f3439581d73b9e800cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   victoryConditionSpeedRange: 10
   victoryConditionSpeedMelee: 2
+=======
+  victoryConditionSpeedRange: 100
+  victoryConditionSpeedMelee: 20
+>>>>>>> Stashed changes
 --- !u!1001 &3760971721746178517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -392,7 +397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00000023841858
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y

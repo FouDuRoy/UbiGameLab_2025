@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6543554295134868653}
   - component: {fileID: 6893537620641671257}
   - component: {fileID: -4883607572675082173}
+  - component: {fileID: 7455013400852431859}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -76,7 +77,7 @@ MonoBehaviour:
   rotationDamping: 5
   weightMouvementFactor: 1
   weightRotationFactor: 1
-  moveType: 3
+  moveType: 6
 --- !u!114 &4658591005558201665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +208,20 @@ MonoBehaviour:
   distance: 15
   secondsForMaxChargingEjection: 1
   ejectionSpeed: 100
+--- !u!114 &7455013400852431859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134994841213693252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9811b1fd60f6f3439581d73b9e800cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  victoryConditionSpeedRange: 0.1
+  victoryConditionSpeedMelee: 10
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.66
+      value: -2.6599998
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.z

@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: -1607963941705366508}
   - component: {fileID: 1846468097935250436}
   - component: {fileID: 1662070221946770721}
-  - component: {fileID: 5225245342745251630}
   m_Layer: 0
   m_Name: Player2 Spring
   m_TagString: Untagged
@@ -70,13 +69,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionForce: 100
   mouvementSpeed: 120
-  pivotSpeed: 80
-  rotationSpeed: 30
+  pivotSpeed: 230
+  rotationSpeed: 150
   playerCharge: 10
   rotParam: 4
-  rotationDamping: 5
+  rotationDamping: 15
   weightMouvementFactor: 1
-  weightRotationFactor: 1
+  weightRotationFactor: 1.5
   moveType: 4
 --- !u!114 &4658591005558201665
 MonoBehaviour:
@@ -208,20 +207,6 @@ MonoBehaviour:
   distance: 15
   secondsForMaxChargingEjection: 1
   ejectionSpeed: 100
---- !u!114 &5225245342745251630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134994841213693252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9811b1fd60f6f3439581d73b9e800cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  victoryConditionSpeedRange: 10
-  victoryConditionSpeedMelee: 10
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +221,7 @@ GameObject:
   - component: {fileID: 4384431802473347577}
   - component: {fileID: 3070630633163488715}
   - component: {fileID: 4536375940292766682}
-  - component: {fileID: 8551098595509127116}
+  - component: {fileID: 4731994683824895664}
   m_Layer: 3
   m_Name: MainBody2
   m_TagString: Player
@@ -379,7 +364,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8551098595509127116
+--- !u!114 &4731994683824895664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -391,8 +376,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9811b1fd60f6f3439581d73b9e800cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   victoryConditionSpeedRange: 10
   victoryConditionSpeedMelee: 2
+=======
+  victoryConditionSpeedRange: 100
+  victoryConditionSpeedMelee: 20
+>>>>>>> Stashed changes
 --- !u!1001 &3760971721746178517
 PrefabInstance:
   m_ObjectHideFlags: 0
