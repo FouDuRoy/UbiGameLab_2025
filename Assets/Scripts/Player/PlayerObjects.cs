@@ -7,6 +7,7 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] public GameObject player;
     [SerializeField] public Rigidbody cubeRb;
     [SerializeField] public GameObject passiveCube;
+    [SerializeField] private float magnetTimer = 3f;
     MouvementType moveType;
     protected GridSystem gridSystem;
     public float weight=1;
@@ -158,7 +159,7 @@ public class PlayerObjects : MonoBehaviour
     IEnumerator blockNeutral(GameObject block)
     {
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(magnetTimer);
         if (block != null)
         {
             block.GetComponent<Bloc>().setOwner("Neutral");

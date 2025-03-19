@@ -15,6 +15,7 @@ public class ExplosiveBloc : MonoBehaviour
     public float timeBeforeExplosionEnabled = 1f;
     private float gameStartTime;
     private bool canExplode = false;
+    public GameObject[] players;
 
     [Header("Gizmos Settings")]
     public float gizmoDuration = 3f; // Temps d'affichage des sphères visuelles
@@ -98,6 +99,11 @@ public class ExplosiveBloc : MonoBehaviour
             boxCollider.enabled = false;
         }
 
+        foreach(GameObject go in players)
+        {
+            GridSystem pGrid = go.GetComponent<GridSystem>();
+            pGrid.DetachBlock(gameObject);
+        }
         Destroy(gameObject, gizmoDuration);
     }
 
