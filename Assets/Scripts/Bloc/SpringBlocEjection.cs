@@ -17,7 +17,7 @@ public class SpringBlocEjection : MonoBehaviour
     [SerializeField] float ejectionFactor = 1f;
     [SerializeField] float maxAngle = 5f;
     [SerializeField] float springBreakForce = 500f;
-    [SerializeField] float range = 500f;
+    [SerializeField] float range = 4;
     private GridSystem gridSystem;
     private PlayerObjects playerObjects;
     Rigidbody mainCubeRb;
@@ -66,6 +66,7 @@ public class SpringBlocEjection : MonoBehaviour
                 Rigidbody hittedRB = hitted.transform.parent.GetComponent<Rigidbody>();
                 float hitterVelocity = hitterRB.velocity.magnitude + hitterRB.angularVelocity.magnitude * (hitter.transform.position - hitterRB.position).magnitude;
                 float hittedVelocityMag = hittedRB.velocity.magnitude + hittedRB.angularVelocity.magnitude* (hitted.transform.position - hittedRB.position).magnitude;
+                Debug.Log(hitted.name + "velocity" + hitterVelocity);
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
                     foreach (var v in gridSystem.grid)
@@ -73,7 +74,11 @@ public class SpringBlocEjection : MonoBehaviour
                         Joint[] joints = v.Value.GetComponents<Joint>();
                         foreach(Joint joint in joints)
                         {
-                            joint.breakTorque = springBreakForce;
+                            if ((joint.transform.position - hitted.transform.position).magnitude < range)
+                            {
+                                joint.breakTorque = springBreakForce;
+
+                            }
                         }
                     }
                     StartCoroutine(resetTorque(gridSystem));
@@ -189,7 +194,7 @@ public class SpringBlocEjection : MonoBehaviour
             Joint[] joints = v.Value.GetComponents<Joint>();
             foreach (Joint joint in joints)
             {
-                joint.breakTorque = 100000f;
+                joint.breakTorque = 1000000000f;
             }
         }
     }
