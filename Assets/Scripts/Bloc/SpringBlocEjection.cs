@@ -17,6 +17,7 @@ public class SpringBlocEjection : MonoBehaviour
     [SerializeField] float ejectionFactor = 1f;
     [SerializeField] float maxAngle = 5f;
     [SerializeField] float springBreakForce = 500f;
+    [SerializeField] float range = 500f;
     private GridSystem gridSystem;
     private PlayerObjects playerObjects;
     Rigidbody mainCubeRb;
@@ -61,8 +62,10 @@ public class SpringBlocEjection : MonoBehaviour
                 moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
 
                 Vector3 relativeVelocity = collision.relativeVelocity;
-                float hitterVelocity = hitter.transform.parent.GetComponent<Rigidbody>().velocity.magnitude;
-                float hittedVelocityMag = hitted.transform.parent.GetComponent<Rigidbody>().velocity.magnitude;
+                Rigidbody hitterRB = hitter.transform.parent.GetComponent<Rigidbody>();
+                Rigidbody hittedRB = hitted.transform.parent.GetComponent<Rigidbody>();
+                float hitterVelocity = hitterRB.velocity.magnitude + hitterRB.angularVelocity.magnitude * (hitter.transform.position - hitterRB.position).magnitude;
+                float hittedVelocityMag = hittedRB.velocity.magnitude + hittedRB.angularVelocity.magnitude* (hitted.transform.position - hittedRB.position).magnitude;
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
                     foreach (var v in gridSystem.grid)
