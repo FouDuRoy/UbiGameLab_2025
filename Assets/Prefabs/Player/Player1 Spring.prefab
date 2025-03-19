@@ -67,13 +67,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 100
+  explosionForce: 140
   mouvementSpeed: 120
   pivotSpeed: 230
   rotationSpeed: 150
   playerCharge: 10
   rotParam: 4
-  rotationDamping: 15
+  rotationDamping: 17
   weightMouvementFactor: 1
   weightRotationFactor: 1.5
   moveType: 4
@@ -204,9 +204,9 @@ MonoBehaviour:
   attractionForce: 100
   initialAngle: 15
   secondsForMaxCharging: 0.2
-  distance: 15
+  distance: 19
   secondsForMaxChargingEjection: 1
-  ejectionSpeed: 100
+  ejectionSpeed: 60
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,10 +376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9811b1fd60f6f3439581d73b9e800cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victoryConditionSpeedRange: 100
-  victoryConditionSpeedMelee: 20
-
-
+  victoryConditionSpeedRange: 10
+  victoryConditionSpeedMelee: 15
 --- !u!1001 &3760971721746178517
 PrefabInstance:
   m_ObjectHideFlags: 0
