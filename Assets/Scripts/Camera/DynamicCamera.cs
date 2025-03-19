@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder;
 
 public class DynamicCamera : MonoBehaviour
@@ -36,6 +37,8 @@ public class DynamicCamera : MonoBehaviour
 
     private Camera cam;
     private Animator animator;
+    private PlayerInput playerOneInputs;
+    private PlayerInput playerTwoInputs;
     private bool shouldFollowPlayers;
 
     private void Start()
@@ -43,9 +46,17 @@ public class DynamicCamera : MonoBehaviour
         cam = GetComponentInChildren<Camera>();
         animator = GetComponent<Animator>();
 
+        playerOneInputs=Player1.GetComponentInParent<PlayerInput>();
+        playerTwoInputs=Player2.GetComponentInParent<PlayerInput>();
+
         if(!playIntroAnimation)
         {
             IntroFinished();
+        }
+        else
+        {
+            playerOneInputs.DeactivateInput();
+            playerTwoInputs.DeactivateInput();
         }
 
         //Récupère l'angle de la caméra par rapport à son pivot
@@ -93,6 +104,9 @@ public class DynamicCamera : MonoBehaviour
         Debug.Log("Intro anim finished");
 
         animator.enabled = false;
+        playerOneInputs.ActivateInput();
+        playerTwoInputs.ActivateInput();
+
         shouldFollowPlayers = true;
     }
 }

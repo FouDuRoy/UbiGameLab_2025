@@ -76,7 +76,7 @@ MonoBehaviour:
   rotationDamping: 17
   weightMouvementFactor: 1
   weightRotationFactor: 1.5
-  moveType: 4
+  moveType: 7
 --- !u!114 &4658591005558201665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,7 +92,6 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 0}
   attackerText: {fileID: 0}
   restartButton: {fileID: 0}
-  _restartMenu: {fileID: 0}
 --- !u!114 &6980508144528851275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +117,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Player2
   m_DefaultActionMap: Mouvement
   m_SplitScreenIndex: -1
@@ -378,6 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victoryConditionSpeedRange: 10
   victoryConditionSpeedMelee: 10
+  Ennemy: {fileID: 0}
 --- !u!1001 &8191278625299958161
 PrefabInstance:
   m_ObjectHideFlags: 0
