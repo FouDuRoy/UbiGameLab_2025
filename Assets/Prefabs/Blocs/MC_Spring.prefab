@@ -185,10 +185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  weight: 0.01
+  weight: 0.1
   owner: Neutral
   state: 3
-  rb: {fileID: 0}
+  ownerTranform: {fileID: 0}
 --- !u!114 &4853838727377016838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,11 +201,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 1
+  velocityTreshold: 10
   velocityTresholdMelee: 3
   energyLoss: 0.5
-  upEjectionMax: 0.4
-  ejectionFactor: 1
+  upEjectionMax: 1
+  ejectionFactor: 2
   maxAngle: 5
   springBreakForce: 300
   range: 2
