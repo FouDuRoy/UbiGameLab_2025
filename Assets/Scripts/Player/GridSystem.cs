@@ -43,6 +43,7 @@ public class GridSystem : MonoBehaviour
     {
         Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt( (closestFace.x/ cubeSize))
             , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
+        blocToAttach.GetComponent<Bloc>().ownerTranform = this.transform;
         if (grid.ContainsValue(attachedBloc))
         {
             grid.Add(fixedVector, blocToAttach);
@@ -60,6 +61,7 @@ public class GridSystem : MonoBehaviour
     }
     public void DetachBlock(GameObject bloc)
     {
+
         Vector3Int detachedGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
         {
@@ -369,6 +371,7 @@ public class GridSystem : MonoBehaviour
         if (block != null)
         {
             block.GetComponent<Bloc>().setOwner("Neutral");
+            block.GetComponent<Bloc>().ownerTranform = null;
         }
     }
 

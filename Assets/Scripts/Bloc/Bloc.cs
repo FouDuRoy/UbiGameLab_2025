@@ -7,7 +7,7 @@ public class Bloc : MonoBehaviour
     public float weight;
     public string owner; 
     public BlocState state;
-    public Rigidbody rb;
+    public Transform ownerTranform;
 
     private Vector3Int gridPosition;
 

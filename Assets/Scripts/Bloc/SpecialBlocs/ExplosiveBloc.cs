@@ -98,12 +98,12 @@ public class ExplosiveBloc : MonoBehaviour
         {
             boxCollider.enabled = false;
         }
-
-        foreach(GameObject go in players)
-        {
-            GridSystem pGrid = go.GetComponent<GridSystem>();
-            pGrid.DetachBlock(gameObject);
+        Transform ownerTransform = this.GetComponent<Bloc>().ownerTranform;
+        if (ownerTransform != null) {
+            ownerTransform.GetComponent<GridSystem>().DetachBlock(this.gameObject);
         }
+        gameObject.GetComponent<Feromagnetic>().enabled = false;
+        gameObject.GetComponent<Bloc>().owner = "toDie";
         Destroy(gameObject, gizmoDuration);
     }
 
@@ -141,6 +141,10 @@ public class ExplosiveBloc : MonoBehaviour
         {
             Debug.Log("Boom");
             Destroy(bloc);
+        }
+        else if (bloc.CompareTag("explosive"))
+        {
+            bloc.GetComponent<ExplosiveBloc>().Explode();
         }
         else
         {
