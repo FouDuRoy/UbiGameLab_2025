@@ -813,6 +813,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6839929964872536719, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
+      propertyPath: Ennemy
+      value: 
+      objectReference: {fileID: 821138757}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -942,6 +946,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &347939708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3131990571156717056, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
+  m_PrefabInstance: {fileID: 264443483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &351678614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1064,42 +1073,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 451798940658644205, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: velocityTreshold
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.517225
@@ -1351,42 +1324,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 451798940658644205, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: velocityTreshold
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.0672255
@@ -1501,38 +1438,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.95
@@ -1878,6 +1783,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9113259329698814297571bf21c84310, type: 3}
+--- !u!1 &821138757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3131990571156717056, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
+  m_PrefabInstance: {fileID: 1076256020}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &824596524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1886,38 +1796,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.387225
@@ -2166,6 +2044,10 @@ PrefabInstance:
       propertyPath: gameOverCanvas
       value: 
       objectReference: {fileID: 2095820184}
+    - target: {fileID: 4731994683824895664, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
+      propertyPath: Ennemy
+      value: 
+      objectReference: {fileID: 347939708}
     - target: {fileID: 4849188280878380009, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.1113043
@@ -2276,38 +2158,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.227225
@@ -6932,42 +6782,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 451798940658644205, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: velocityTreshold
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.92
@@ -7082,42 +6896,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 451798940658644205, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: velocityTreshold
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.0699997
@@ -7460,42 +7238,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 451798940658644205, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: velocityTreshold
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.367226
@@ -7553,42 +7295,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 451798940658644205, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: velocityTreshold
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.37
@@ -8275,6 +7981,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9113259329698814297571bf21c84310, type: 3}
+--- !u!1001 &1833517006
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5694876674060920943, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_Name
+      value: Explosive_Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.324831
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.34932
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
 --- !u!1001 &1855275911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8397,42 +8160,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 451798940658644205, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: velocityTreshold
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.487226
@@ -8718,38 +8445,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.21
@@ -8807,42 +8502,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 451798940658644205, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: velocityTreshold
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: AngleLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: angularDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: mainLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDamp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: secondaryLinearDrive
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.9499998
@@ -9150,3 +8809,4 @@ SceneRoots:
   - {fileID: 549233377}
   - {fileID: 264443483}
   - {fileID: 1076256020}
+  - {fileID: 1833517006}
