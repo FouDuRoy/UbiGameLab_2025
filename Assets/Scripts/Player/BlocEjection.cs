@@ -162,7 +162,6 @@ public class BlocEjection : MonoBehaviour
    void  OnJointBreak(float breakForce)
     {
         gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
-        Debug.Log(this.gameObject);
         gridSystem.DetachBlock(this.gameObject);
         this.GetComponent<Bloc>().state = BlocState.detached;
     }

@@ -20,7 +20,7 @@ public class PlayerObjects : MonoBehaviour
 
     public void removeCube(GameObject cube)
     {
-        if (moveType == MouvementType.move3dSpring)
+        if (moveType == MouvementType.move3dSpring || moveType == MouvementType.Move3dBothJoystickSpring)
         {
             ConfigurableJoint[] joints = cube.GetComponents<ConfigurableJoint>();
             foreach (ConfigurableJoint joint in joints)

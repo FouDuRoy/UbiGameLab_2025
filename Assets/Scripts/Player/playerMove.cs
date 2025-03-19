@@ -109,6 +109,9 @@ public class PlayerMouvement : MonoBehaviour
             case MouvementType.Move3dBothJoystick:
                 BoothJoystickMove(direction, rotationY);
                 break;
+            case MouvementType.Move3dBothJoystickSpring:
+                Move3dSpringBothJoystick(direction, rotationY);
+                break;
         }
 
       
@@ -185,7 +188,30 @@ public class PlayerMouvement : MonoBehaviour
             }
         }
     }
+    private void Move3dSpringBothJoystick(Vector3 direction, float rotationY)
+    {
+        rb.AddForceAtPosition(direction * mouvementSpeed / (weight + weightMouvementFactor), CalculateCenterMass(), ForceMode.Acceleration);
+        if (!rotatingRight)
+        {
+            rotateAndDirection2(direction);
 
+        }
+        if (Mathf.Abs(rotationY) > 0)
+        {
+            rotatingRight = true;
+            rb.AddTorque(Vector3.up * rotationY * rotationSpeed / (weight + weightRotationFactor), ForceMode.Acceleration);
+            rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
+        }
+        else
+        {
+            if (rotatingRight)
+            {
+                rb.angularVelocity = Vector3.zero;
+                rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(false);
+                rotatingRight = false;
+            }
+        }
+    }
     private void HingeMove(Vector3 direction, float rotationY)
     {
         golem.AddForce(direction * mouvementSpeed / weight);
@@ -385,7 +411,6 @@ public class PlayerMouvement : MonoBehaviour
         
        Vector3 planeProjection = golem.transform.forward;
        float angle = Vector3.SignedAngle(planeProjection,direction.normalized,Vector3.up);
-        Debug.Log(angle);
        Vector3 angularVelocity = Vector3.up * (angle*Mathf.Deg2Rad )* direction.magnitude*pivotSpeed/ weight;
         if (direction != Vector3.zero && Mathf.Abs(angle)>1) {
           

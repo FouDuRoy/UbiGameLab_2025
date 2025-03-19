@@ -159,7 +159,6 @@ public class GridSystem : MonoBehaviour
         foreach (GameObject bloc in detachedBlocks)
         {
             Vector3Int detachedGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
-            Debug.Log(bloc.name + " " + detachedBlocks);
             grid.Remove(bloc.GetComponent<Bloc>().GetGridPosition());
             bloc.transform.parent = null;
             bloc.GetComponent<Rigidbody>().isKinematic = false;
