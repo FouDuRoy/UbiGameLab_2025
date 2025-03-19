@@ -519,9 +519,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 134994841213693252, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
+    - target: {fileID: 5422366713031629224, guid: 3f807266ad9fc0c4a966e4644864bc69, type: 3}
       propertyPath: m_Name
-      value: Le roi Arouf
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1662070221946770721, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: distance
@@ -531,7 +531,7 @@ PrefabInstance:
       propertyPath: ejectionSpeed
       value: 60
       objectReference: {fileID: 0}
-    - target: {fileID: 2677978790615057912, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
+    - target: {fileID: 8220500156077352469, guid: 3f807266ad9fc0c4a966e4644864bc69, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
@@ -611,16 +611,23 @@ PrefabInstance:
       propertyPath: rotationDamping
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 2677978790615057912, guid: a898c219a1cb4a846b506a506beb685b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881893778887793840, guid: a898c219a1cb4a846b506a506beb685b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881893778887793840, guid: a898c219a1cb4a846b506a506beb685b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.66
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
---- !u!1 &78334762 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3131990571156717056, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-  m_PrefabInstance: {fileID: 78334761}
-  m_PrefabAsset: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: 3f807266ad9fc0c4a966e4644864bc69, type: 3}
 --- !u!1 &86195079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,7 +1501,7 @@ PrefabInstance:
     - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: Player2
       value: 
-      objectReference: {fileID: 78334762}
+      objectReference: {fileID: 0}
     - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: ArenaCenter
       value: 
