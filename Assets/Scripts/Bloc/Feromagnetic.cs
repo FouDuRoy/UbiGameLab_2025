@@ -467,6 +467,7 @@ public class Feromagnetic : MonoBehaviour
                 }
                 i++;
             joint.breakTorque = springTorqueBreak;
+            joint.enableCollision = false;
         }
     }
 

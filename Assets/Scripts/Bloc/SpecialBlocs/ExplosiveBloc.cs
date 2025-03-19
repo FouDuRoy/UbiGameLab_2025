@@ -138,16 +138,15 @@ public class ExplosiveBloc : MonoBehaviour
         }
         else
         {
-            PlayerObjects player = bloc.GetComponentInParent<PlayerObjects>();
-            if (player != null)
+            GridSystem grid = bloc.transform.root.GetComponent<GridSystem>();
+            if (grid != null)
             {
-                player.addRigidBody(bloc);
-                player.removeCube(bloc);
+                grid.DetachBlock(bloc);
+                bloc.GetComponent<Bloc>().state = BlocState.detached;
             }
             Rigidbody targetRb = bloc.GetComponent<Rigidbody>();
             Vector3 forceDirection = (targetRb.transform.position - transform.position).normalized;
-            targetRb.AddForce(forceDirection * repulsionForce, ForceMode.Impulse);
-            StartCoroutine(blockNeutral(bloc));
+            targetRb.AddForce(forceDirection * repulsionForce, ForceMode.VelocityChange);
         }
     }
 
@@ -155,23 +154,19 @@ public class ExplosiveBloc : MonoBehaviour
     {
         PlayerObjects obj = col.transform.root.GetComponent<PlayerObjects>();
         Rigidbody colRigidBody = col.GetComponent<Rigidbody>();
-        if (obj != null && colRigidBody == null)
+      
+        if (colRigidBody != null)
         {
-            Rigidbody mainBody = obj.cubeRb;
-            mainBody.AddForceAtPosition(distance * repulsionForce, col.transform.position);
-        }
-        else if (colRigidBody != null)
-        {
-            colRigidBody.AddForce(distance * repulsionForce);
+            colRigidBody.AddForce(distance * repulsionForce, ForceMode.VelocityChange);
         }
     }
 
     IEnumerator blockNeutral(GameObject block)
     {
+        yield return new WaitForSeconds(3f);
         if (block != null)
         {
             block.GetComponent<Bloc>().setOwner("Neutral");
         }
-        yield return null;
     }
 }

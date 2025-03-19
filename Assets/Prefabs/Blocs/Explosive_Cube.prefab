@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -4726244708395997180}
   - component: {fileID: 2525441135307876409}
   - component: {fileID: 1143426935521263120}
+  - component: {fileID: 7479162396638217673}
   m_Layer: 0
   m_Name: Explosive_Cube
   m_TagString: explosive
@@ -120,8 +121,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5694876674060920943}
   serializedVersion: 4
-  m_Mass: 0.000001
-  m_Drag: 0.1
+  m_Mass: 0.01
+  m_Drag: 2
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -137,7 +138,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &6205908960855129542
 MonoBehaviour:
@@ -151,30 +152,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.75
-  activeRadius: 2.5
-  charge: 0.25
+  passiveRadius: 0.7
+  activeRadius: 2
+  charge: 0.006
   maxSpeed: 10
-  error: 0.05
-  AngleError: 0.05
+  error: 0.2
+  AngleError: 8
   spacingBetweenCubes: 0.2
-  moveTime: 0.15
-  maxForceAttraction: 30
-  lerpingDistance: 1
-  timeBeforeSwitching: 0.5
+  moveTime: 0.05
+  maxForceAttraction: 10
+  lerpingDistance: 50
+  timeBeforeSwitching: 0.2
   timeBeforeSwitchingVariation: 0.05
   maxSpeedVariation: 3
-  springTorqueBreak: 1000
-  springType: 0
-  lerpingType: 1
-  xLimit: 0
-  AngleLimit: 0
-  mainLinearDrive: 10000
+  springTorqueBreak: 10000
+  springType: 1
+  lerpingType: 0
+  xLimit: 0.01
+  AngleLimit: 8
+  mainLinearDrive: 5000
   mainLinearDamp: 100
-  secondaryLinearDrive: 10000
+  secondaryLinearDrive: 5000
   secondaryLinearDamp: 100
-  angularDrive: 10000
-  angularDamp: 100
+  angularDrive: 50000
+  angularDamp: 1000
 --- !u!114 &-4726244708395997180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,9 +189,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  weight: 0
-  owner: 
-  state: 0
+  weight: 0.01
+  owner: Neutral
+  state: 3
   rb: {fileID: 0}
 --- !u!114 &2525441135307876409
 MonoBehaviour:
@@ -204,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ea55e9940ca642bf8d17224f3f85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resistance: 1
+  resistance: 10
   explosionRange: 5
   repulsionRange: 7
   repulsionForce: 0.1
@@ -226,6 +227,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b1f66b6b11f704684b152fe1a07198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7479162396638217673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694876674060920943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 1
+  velocityTresholdMelee: 3
+  energyLoss: 0.5
+  upEjectionMax: 0.4
+  ejectionFactor: 1
+  maxAngle: 5
+  springBreakForce: 300
+  range: 2
+  pushFactor: 35
 --- !u!1001 &1045223509533804679
 PrefabInstance:
   m_ObjectHideFlags: 0
