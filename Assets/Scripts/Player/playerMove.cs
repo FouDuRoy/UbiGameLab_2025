@@ -284,7 +284,7 @@ public class PlayerMouvement : MonoBehaviour
         }
     }
 
-    private void ThrowCubes()
+    public void ThrowCubes()
     {
         if (throwCubes.ReadValue<float>() == 1)
         {

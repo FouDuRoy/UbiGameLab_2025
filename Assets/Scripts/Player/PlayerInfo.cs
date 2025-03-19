@@ -1,6 +1,8 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -19,10 +21,10 @@ public class PlayerInfo : MonoBehaviour
     // Call this function when player gets hit
     public void TakeDamage(string attackerName)
     {
-        gameOverCanvas.SetActive(true); // Show UI
-        attackerText.text = "Victoire par : " + attackerName; // Display attacker's name
-        EventSystem.current.SetSelectedGameObject(_restartMenu);
-
+        this.GetComponent<PlayerInput>().enabled = false;
+        this.GetComponent<PlayerMouvement>().ThrowCubes();
+        this.GetComponent<PlayerObjects>().cubeRb.AddTorque(0, 1000f, 0,ForceMode.VelocityChange);
+        StartCoroutine(gameOver(attackerName));
     }
 
     public void RestartLevel()
@@ -33,6 +35,14 @@ public class PlayerInfo : MonoBehaviour
     {
         Application.Quit();
     }
+    IEnumerator gameOver(string attackerName)
+    {
 
+        yield return new WaitForSeconds(1.5f);
+        gameOverCanvas.SetActive(true); // Show UI
+        attackerText.text = "Victoire par : " + attackerName; // Display attacker's name
+        EventSystem.current.SetSelectedGameObject(_restartMenu);
+
+    }
 
 }
