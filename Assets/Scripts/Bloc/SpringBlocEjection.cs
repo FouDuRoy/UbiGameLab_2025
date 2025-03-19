@@ -18,6 +18,7 @@ public class SpringBlocEjection : MonoBehaviour
     [SerializeField] float maxAngle = 5f;
     [SerializeField] float springBreakForce = 500f;
     [SerializeField] float range = 4;
+    [SerializeField] float  pushFactor = 30f;
     private GridSystem gridSystem;
     private PlayerObjects playerObjects;
     Rigidbody mainCubeRb;
@@ -27,7 +28,7 @@ public class SpringBlocEjection : MonoBehaviour
 
     private void Start()
     {
-
+        
     }
 
 
@@ -54,11 +55,10 @@ public class SpringBlocEjection : MonoBehaviour
             bool playerHittedByotherPlayerStructure = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.structure;
             if (playerHittedByotherPlayerStructure && areOwnedByPlayers)
             {
-                
                 gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
                 playerObjects = FindObjectOfType<PlayerObjects>();
                 upEjectionMax = Mathf.Clamp01(upEjectionMax);
-                mainCubeRb = transform.GetComponent<Rigidbody>();
+                mainCubeRb = transform.parent.GetComponent<Rigidbody>();
                 moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
 
                 Vector3 relativeVelocity = collision.relativeVelocity;
@@ -66,7 +66,6 @@ public class SpringBlocEjection : MonoBehaviour
                 Rigidbody hittedRB = hitted.transform.parent.GetComponent<Rigidbody>();
                 float hitterVelocity = hitterRB.velocity.magnitude + hitterRB.angularVelocity.magnitude * (hitter.transform.position - hitterRB.position).magnitude;
                 float hittedVelocityMag = hittedRB.velocity.magnitude + hittedRB.angularVelocity.magnitude* (hitted.transform.position - hittedRB.position).magnitude;
-                Debug.Log(hitted.name + "velocity" + hitterVelocity);
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
                     foreach (var v in gridSystem.grid)
@@ -81,6 +80,8 @@ public class SpringBlocEjection : MonoBehaviour
                             }
                         }
                     }
+                   // float pushFactor = 0.7f;
+                    //mainCubeRb.AddForce(relativeVelocity * pushFactor, ForceMode.VelocityChange);
                     StartCoroutine(resetTorque(gridSystem));
                 }
             }
@@ -105,7 +106,7 @@ public class SpringBlocEjection : MonoBehaviour
                     float ejectionMag = ejectionVeolcity.magnitude;
                     Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
-                    //mainCubeRb.AddForce(ejectionVeolcity,ForceMode.VelocityChange);
+                    
                 }
             }
         }
@@ -170,10 +171,14 @@ public class SpringBlocEjection : MonoBehaviour
     }
     void OnJointBreak(float breakForce)
     {
-        Debug.Log(breakForce);
         gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
+        mainCubeRb = gridSystem.kernel.GetComponent<Rigidbody>();
         gridSystem.DetachBlock(this.gameObject);
         this.GetComponent<Bloc>().state = BlocState.detached;
+       
+        Rigidbody cubeRB = this.GetComponent<Rigidbody>();
+        
+        mainCubeRb.AddForce(-cubeRB.velocity.normalized * pushFactor, ForceMode.VelocityChange);
     }
     IEnumerator blockNeutral(GameObject block)
     {

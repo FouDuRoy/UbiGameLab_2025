@@ -31,7 +31,6 @@ public class WinCondition : MonoBehaviour
             if (projectileFromOtherPlayer)
             {
                 Vector3 projectileVelocity = hitter.GetComponent<Rigidbody>().velocity;
-                print(projectileVelocity.magnitude);
 
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
