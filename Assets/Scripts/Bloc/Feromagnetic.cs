@@ -300,15 +300,7 @@ public class Feromagnetic : MonoBehaviour
         closestFaceRelativeToMainCube = Vector3.zero;
         errorP = 1;
         errorR = 1;
-        foreach (var cube in storedFaces)
-        {
-            List<Vector3> faces = cube.Key.GetComponent<Faces>().faces;
-            foreach (Vector3 face in cube.Value)
-            {
-                faces.Add(face);
-            }
-        }
-        storedFaces = new Dictionary<GameObject, List<Vector3>>();
+    
         transform.parent = this.transform.root.parent;
     }
 

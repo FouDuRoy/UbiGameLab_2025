@@ -54,6 +54,7 @@ MonoBehaviour:
   player: {fileID: 3131990571156717056}
   cubeRb: {fileID: 3070630633163488715}
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
+  magnetTimer: 3
   weight: 1
 --- !u!114 &7850894500233854463
 MonoBehaviour:
@@ -361,7 +362,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6839929964872536719
 MonoBehaviour:
