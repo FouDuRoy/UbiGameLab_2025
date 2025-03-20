@@ -11,6 +11,7 @@ using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Switch;
+using UnityEngine.ProBuilder.Shapes;
 using static UnityEngine.Rendering.DebugUI;
 using static UnityEngine.Rendering.DebugUI.Table;
 using Matrix4x4 = UnityEngine.Matrix4x4;
@@ -210,6 +211,25 @@ public class PlayerMouvement : MonoBehaviour
                 rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(false);
                 rotatingRight = false;
             }
+        }
+    }
+    private void Move3dSpringBothJoystickSnap90(Vector3 direction, float rotationY)
+    {
+        rb.AddForceAtPosition(direction * mouvementSpeed / (weight + weightMouvementFactor), CalculateCenterMass(), ForceMode.Acceleration);
+        if (!rotatingRight)
+        {
+            rotateAndDirection2(direction);
+
+        }
+        if (Mathf.Abs(rotationY) > 0)
+        {
+            if (!rotatingRight)
+            {
+                rotatingRight = true;
+                rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
+                StartCoroutine(AngleRotation());
+            }
+
         }
     }
     private void HingeMove(Vector3 direction, float rotationY)
@@ -470,6 +490,28 @@ public class PlayerMouvement : MonoBehaviour
         // Convert the angle to radians and scale by the rotation speed
         return axis * (angle * Mathf.Deg2Rad / Time.fixedDeltaTime);
     }
+    private IEnumerator AngleRotation()
+    {
+        float t = 0;
+        Quaternion rotationAmount = Quaternion.AngleAxis(90f, Vector3.up);
+        Quaternion initialRotation = rb.rotation;
+        Quaternion rotationTarget = initialRotation * rotationAmount;
+        rb.MoveRotation(rotationTarget);
+        rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(false);
+        rb.angularVelocity = Vector3.zero;
+
+        foreach (var v in gridPlayer.grid)
+        {
+            GameObject obj = v.Value;
+            Rigidbody rbb = obj.GetComponent<Rigidbody>();
+            rbb.angularVelocity = Vector3.zero;
+            rbb.velocity = Vector3.zero;
+        }
+        yield return new WaitForSeconds(3f);
+        rotatingRight = false;
+        
+    }
+
 
 }
 
