@@ -13,6 +13,7 @@ public class SpringBlocEjection : MonoBehaviour
     [SerializeField] float velocityTreshold = 10f;
     [SerializeField] float velocityTresholdMelee = 10f;
     [SerializeField] float energyLoss = 0.8f;
+    [SerializeField] float upEjectionMin = .2f;
     [SerializeField] float upEjectionMax = 1f;
     [SerializeField] float ejectionFactor = 1f;
     [SerializeField] float maxAngle = 5f;
@@ -39,7 +40,7 @@ public class SpringBlocEjection : MonoBehaviour
         GameObject hitted = collision.GetContact(0).thisCollider.gameObject;
         Bloc hitterComponent = hitter.GetComponent<Bloc>();
         Bloc hittedComponent = hitted.GetComponent<Bloc>();
-        float randomHeightFactor = Random.Range(0, upEjectionMax);
+        float randomHeightFactor = Random.Range(upEjectionMin, upEjectionMax);
 
         checkCollisionBetweenPlayerAndBlock(collision, hitter, hitted, hitterComponent, hittedComponent);
         if (hitterComponent != null && hittedComponent != null)
