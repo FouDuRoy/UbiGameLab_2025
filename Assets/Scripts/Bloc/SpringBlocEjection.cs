@@ -149,7 +149,6 @@ public class SpringBlocEjection : MonoBehaviour
             }
             if ((playerHittedByotherPlayer) && areOwnedByPlayers)
             {
-                Debug.Log("wow");
                 gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
                 playerObjects = FindObjectOfType<PlayerObjects>();
                 mainCubeRb = transform.GetComponent<Rigidbody>();

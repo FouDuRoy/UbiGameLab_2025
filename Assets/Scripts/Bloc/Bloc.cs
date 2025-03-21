@@ -49,7 +49,11 @@ public class Bloc : MonoBehaviour
         }
         if(rb.velocity.magnitude > maxSpeed)
         {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+            float brakeSpeed = rb.velocity.magnitude - maxSpeed;  // calculate the speed decrease
+            Vector3 normalisedVelocity = rb.velocity.normalized;
+            Vector3 brakeVelocity = normalisedVelocity * brakeSpeed;  // make the brake Vector3 value  
+            rb.AddForce(-brakeVelocity,ForceMode.Acceleration);
+            Debug.Log("break!");
         }
         
     }

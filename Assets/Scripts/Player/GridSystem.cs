@@ -53,7 +53,6 @@ public class GridSystem : MonoBehaviour
             grid.Add(fixedVector, blocToAttach);
             playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
             blocToAttach.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
-            Debug.Log(materials.Count);
             blocToAttach.gameObject.GetComponent<MeshRenderer>().SetMaterials(materials);
         }
     
