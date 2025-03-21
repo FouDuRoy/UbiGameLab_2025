@@ -33,15 +33,17 @@ public class Bloc : MonoBehaviour
 
     void Update()
     {
-        if (owner == "Neutral" && state == BlocState.nonMagnetic)
+        if (state != BlocState.structure && owner!="Neutral")
         {
             float speed = rb.velocity.magnitude;
 
-            if (speed < minimalSpeed)
+            if (speed < minimalSpeed && state == BlocState.magnetic)
             {
                 this.GetComponent<Feromagnetic>().enabled = true;
                 state = BlocState.magnetic;
                 this.GetComponent<MeshRenderer>().SetMaterials(materials);
+                owner = "Neutral";
+                ownerTranform = null;
             }
 
         }

@@ -165,9 +165,7 @@ public class PlayerObjects : MonoBehaviour
         yield return new WaitForSeconds(magnetTimer);
         if (block != null)
         {
-            block.GetComponent<Bloc>().setOwner("Neutral");
-            block.GetComponent<Bloc>().state = BlocState.nonMagnetic;
-            block.gameObject.GetComponent<MeshRenderer>().SetMaterials(materials);
+            block.GetComponent<Bloc>().state = BlocState.magnetic;
         }
 
     }

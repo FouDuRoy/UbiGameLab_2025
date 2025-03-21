@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 7479162396638217673}
   m_Layer: 0
   m_Name: Explosive_Cube
-  m_TagString: explosive
+  m_TagString: magnetic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,6 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
+  magneticMaterial: {fileID: 0}
+  maxSpeed: 100
   weight: 0.07
   owner: Neutral
   state: 3
