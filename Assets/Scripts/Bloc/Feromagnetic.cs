@@ -443,9 +443,8 @@ public class Feromagnetic : MonoBehaviour
                 joint.autoConfigureConnectedAnchor = false;
 
                 Vector3 positionBeforeCorrection = toConnectTo.transform.InverseTransformPoint(transform.position);
-                //Vector3 correction = Correct(positionBeforeCorrection);
-                //correction = cubePositionRelativeToMainCube - positionCheck;
-                joint.connectedAnchor = positionBeforeCorrection;
+                joint.connectedAnchor = cubeGrid.getPositionOfObject(this.gameObject) - cubeAttachToPosition;
+               // joint.connectedAnchor = positionBeforeCorrection;
                 if (springType == SpringType.Free)
                 {
                     joint.angularYMotion = ConfigurableJointMotion.Free;
