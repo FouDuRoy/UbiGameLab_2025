@@ -41,7 +41,8 @@ public class PlayerMouvement : MonoBehaviour
     InputAction rotateActionZ;
     InputAction rotateActionX;
 
-   
+    float weightRotation;
+    float weightTranslation;
     float totalMass;
     float weight;
     Rigidbody golem;
@@ -77,7 +78,8 @@ public class PlayerMouvement : MonoBehaviour
     void FixedUpdate()
     {
         weight = this.GetComponent<PlayerObjects>().weight;
-
+         weightRotation = Mathf.Clamp(weight * weightRotationFactor, 1, 10 * weight);
+         weightTranslation = Mathf.Clamp(weight * weightMouvementFactor, 1, 10 * weight);
         Vector3 direction2 = moveAction.ReadValue<Vector3>();
         Vector3 direction = new Vector3(direction2.x,0,direction2.y);
         float rotationY = rotateAction.ReadValue<float>();
@@ -145,14 +147,14 @@ public class PlayerMouvement : MonoBehaviour
     private void Move3d(Vector3 direction, float rotationY)
     {
         //Left joystick
-        rb.AddForce(direction * mouvementSpeed / (weight+weightMouvementFactor),ForceMode.Acceleration);
+        rb.AddForce(direction * mouvementSpeed / weightMouvementFactor, ForceMode.Acceleration);
         rotateAndDirection2(direction);
 
         //Right joystick
         if (Mathf.Abs(rotationY) > 0)
         {
             rotatingRight = true;
-            rb.AddTorque(Vector3.up * rotationY * rotationSpeed/(weight+weightRotationFactor), ForceMode.Acceleration);
+            rb.AddTorque(Vector3.up * rotationY * rotationSpeed/weightRotationFactor, ForceMode.Acceleration);
             rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
 
 
@@ -171,12 +173,12 @@ public class PlayerMouvement : MonoBehaviour
 
     private void Move3dSpring(Vector3 direction, float rotationY)
     {
-        rb.AddForceAtPosition(direction * mouvementSpeed/(weight+weightMouvementFactor), CalculateCenterMass(),ForceMode.Acceleration);
+        rb.AddForceAtPosition(direction * mouvementSpeed/weightTranslation, CalculateCenterMass(),ForceMode.Acceleration);
         rotateAndDirection2(direction);
         if (Mathf.Abs(rotationY) > 0)
         {
             rotatingRight = true;
-            rb.AddTorque(Vector3.up * rotationY * rotationSpeed/(weight+weightRotationFactor), ForceMode.Acceleration);
+            rb.AddTorque(Vector3.up * rotationY * rotationSpeed/weightRotation, ForceMode.Acceleration);
             rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
         }
         else
@@ -191,7 +193,7 @@ public class PlayerMouvement : MonoBehaviour
     }
     private void Move3dSpringBothJoystick(Vector3 direction, float rotationY)
     {
-        rb.AddForceAtPosition(direction * mouvementSpeed / (weight + weightMouvementFactor), CalculateCenterMass(), ForceMode.Acceleration);
+        rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
         if (!rotatingRight)
         {
             rotateAndDirection2(direction);
@@ -200,7 +202,7 @@ public class PlayerMouvement : MonoBehaviour
         if (Mathf.Abs(rotationY) > 0)
         {
             rotatingRight = true;
-            rb.AddTorque(Vector3.up * rotationY * rotationSpeed / (weight + weightRotationFactor), ForceMode.Acceleration);
+            rb.AddTorque(Vector3.up * rotationY * rotationSpeed / weightRotation, ForceMode.Acceleration);
             rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
         }
         else
@@ -449,7 +451,7 @@ public class PlayerMouvement : MonoBehaviour
     {
         Vector3 planeProjection = rb.transform.Find("GolemBuilt").forward;
         float angle = Vector3.SignedAngle(planeProjection, direction.normalized, Vector3.up);
-        Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / (weight+weightRotationFactor);
+        Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weightRotation;
 
         if (direction != Vector3.zero)
         {
