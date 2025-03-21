@@ -167,7 +167,7 @@ public class ExplosiveBloc : MonoBehaviour
       
         if (colRigidBody != null)
         {
-            colRigidBody.AddForce(distance * repulsionForce, ForceMode.VelocityChange);
+            colRigidBody.AddForce(distance.normalized * repulsionForce, ForceMode.VelocityChange);
         }
     }
 
