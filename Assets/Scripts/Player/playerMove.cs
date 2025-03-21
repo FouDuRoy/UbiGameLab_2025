@@ -339,28 +339,18 @@ public class PlayerMouvement : MonoBehaviour
             {
                 GameObject cube = item.Value;
                 if(cube != this.rb.gameObject){
-                this.GetComponent<PlayerObjects>().removeCube(cube);
+          
                 cube.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, this.rb.position, playerCharge);
                 cube.GetComponent<Bloc>().state = BlocState.projectile;
-                //Remove owner of cube
-                StartCoroutine(blockNeutral(cube));
+                 //Remove cube
+                GetComponent<PlayerObjects>().removeCube(cube);
                 }
             }
             gridPlayer.clearGrid();
         }
     }
    
-    IEnumerator blockNeutral(GameObject block)
-    {
-
-        yield return new WaitForSeconds(3f);
-        if(block !=null)
-        {
-            block.GetComponent<Bloc>().setOwner("Neutral");
-            block.GetComponent<Bloc>().state = BlocState.none;
-        }
-       
-    }
+  
     public Vector3 CalculateCenterMass()
     {
         Vector3 center = Vector3.zero;

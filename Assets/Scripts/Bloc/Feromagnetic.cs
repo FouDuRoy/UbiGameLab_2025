@@ -313,7 +313,7 @@ public class Feromagnetic : MonoBehaviour
         gameObject.GetComponent<SphereCollider>().radius = activeRadius;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
 
-        this.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
+       
         if (springType == SpringType.Free || springType == SpringType.Limited)
         {
             cubeRB.mass = 0.01f;

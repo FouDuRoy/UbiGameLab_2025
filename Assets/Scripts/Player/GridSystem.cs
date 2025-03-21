@@ -8,15 +8,17 @@ using UnityEngine.ProBuilder.Shapes;
 
 public class GridSystem : MonoBehaviour
 {
+    [SerializeField] bool checkGrid = false;
+    [SerializeField] Material playerMat;
+
     public Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int,  GameObject>();
     public GameObject kernel; // Le noyau du syst�me, point (0,0,0)
     public PlayerObjects playerObj;
     public Quaternion kernelRotI;
     public float cubeSize = 1.2f;
-    [SerializeField] bool checkGrid = false;
+    List<Material> materials = new List<Material>();
     MouvementType moveType;
     HapticFeedbackController feedback;
-
     private void Start()
     {
         kernel = transform.GetComponent<PlayerObjects>().cubeRb.gameObject;
@@ -25,6 +27,8 @@ public class GridSystem : MonoBehaviour
 
         feedback = GetComponent<HapticFeedbackController>();
         moveType = GetComponent<PlayerMouvement>().moveType;
+        materials.Add(playerMat);
+        
     }
 
     void Update()
@@ -48,14 +52,11 @@ public class GridSystem : MonoBehaviour
         {
             grid.Add(fixedVector, blocToAttach);
             playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
+            blocToAttach.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
+            Debug.Log(materials.Count);
+            blocToAttach.gameObject.GetComponent<MeshRenderer>().SetMaterials(materials);
         }
-        else if (grid.ContainsValue(attachedBloc))
-        {
-            Vector3Int newGridPos = grid.FirstOrDefault(x => x.Value == attachedBloc).Key + fixedVector;
-            playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
-            grid.Add(newGridPos, blocToAttach);
-        }
-
+    
         //Déclenche un feedback à chaque bloc qui s'attache
         feedback.BlocAttachedVibration();
     }

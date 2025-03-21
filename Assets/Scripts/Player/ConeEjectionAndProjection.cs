@@ -208,16 +208,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
        
         //Remove owner of cube
     }
-    IEnumerator blockNeutral(GameObject block)
-    {
-        yield return new WaitForSeconds(3f);
-        if(block !=null)
-        {
-            block.GetComponent<Bloc>().setOwner("Neutral");
-            block.GetComponent<Bloc>().state = BlocState.none;
-        }
-       
-    }
+
     public float MaxDistanceForDirection(Vector3 direction, float radius){
 
 

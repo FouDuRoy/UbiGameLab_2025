@@ -1,16 +1,23 @@
 using System.Buffers;
+using System.Collections.Generic;
 using UnityEngine;
 //Federico Barallobres
 public class Bloc : MonoBehaviour
 {
     [SerializeField] float minimalSpeed = 0.5f;
+    [SerializeField] Material magneticMaterial;
     public float weight;
     public string owner; 
     public BlocState state;
     public Transform ownerTranform;
 
+    List<Material> materials = new List<Material>();
     private Vector3Int gridPosition;
 
+    private void Start()
+    {
+        materials.Add(magneticMaterial);
+    }
     public void SetGridPosition(Vector3Int pos)
     {
         gridPosition = pos;
@@ -23,13 +30,15 @@ public class Bloc : MonoBehaviour
 
     void Update()
     {
-        if (owner == "Neutral")
+        if (owner == "Neutral" && state == BlocState.nonMagnetic)
         {
             float speed = this.GetComponent<Rigidbody>().velocity.magnitude;
 
             if (speed < minimalSpeed)
             {
                 this.GetComponent<Feromagnetic>().enabled = true;
+                state = BlocState.magnetic;
+                this.GetComponent<MeshRenderer>().SetMaterials(materials);
             }
 
         }

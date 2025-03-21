@@ -165,14 +165,5 @@ public class BlocEjection : MonoBehaviour
         gridSystem.DetachBlock(this.gameObject);
         this.GetComponent<Bloc>().state = BlocState.detached;
     }
-    IEnumerator blockNeutral(GameObject block)
-    {
-        yield return new WaitForSeconds(3f);
-        if (block != null)
-        {
-            block.GetComponent<Bloc>().setOwner("Neutral");
 
-            block.GetComponent<Bloc>().state = BlocState.none;
-        }
-    }
 }

@@ -8,15 +8,18 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] public Rigidbody cubeRb;
     [SerializeField] public GameObject passiveCube;
     [SerializeField] private float magnetTimer = 3f;
+    [SerializeField] Material blocNonMagnetic;
+
     MouvementType moveType;
     protected GridSystem gridSystem;
     public float weight=1;
-
+    List<Material>  materials = new List<Material>();
     void Start()
     {
         gridSystem = this.GetComponent<GridSystem>();
         weight = 1;
         moveType = this.GetComponent<PlayerMouvement>().moveType;
+        materials.Add(blocNonMagnetic);
     }
 
     public void removeCube(GameObject cube)
@@ -163,7 +166,8 @@ public class PlayerObjects : MonoBehaviour
         if (block != null)
         {
             block.GetComponent<Bloc>().setOwner("Neutral");
-            block.GetComponent<Bloc>().state = BlocState.none;
+            block.GetComponent<Bloc>().state = BlocState.nonMagnetic;
+            block.gameObject.GetComponent<MeshRenderer>().SetMaterials(materials);
         }
 
     }

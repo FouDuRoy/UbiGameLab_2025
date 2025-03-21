@@ -182,16 +182,7 @@ public class SpringBlocEjection : MonoBehaviour
         
         mainCubeRb.AddForce(-cubeRB.velocity.normalized * pushFactor, ForceMode.VelocityChange);
     }
-    IEnumerator blockNeutral(GameObject block)
-    {
-        yield return new WaitForSeconds(3f);
-        if (block != null)
-        {
-            block.GetComponent<Bloc>().setOwner("Neutral");
 
-            block.GetComponent<Bloc>().state = BlocState.none;
-        }
-    }
     IEnumerator resetTorque(GridSystem grid)
     {
         yield return new WaitForSeconds(3f);
