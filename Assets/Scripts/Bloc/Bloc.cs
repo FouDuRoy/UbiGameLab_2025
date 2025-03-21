@@ -6,6 +6,7 @@ public class Bloc : MonoBehaviour
 {
     [SerializeField] float minimalSpeed = 0.5f;
     [SerializeField] Material magneticMaterial;
+    [SerializeField] float maxSpeed = 1000f;
     public float weight;
     public string owner; 
     public BlocState state;
@@ -13,10 +14,12 @@ public class Bloc : MonoBehaviour
 
     List<Material> materials = new List<Material>();
     private Vector3Int gridPosition;
+    Rigidbody rb;
 
     private void Start()
     {
         materials.Add(magneticMaterial);
+        rb = GetComponent<Rigidbody>();
     }
     public void SetGridPosition(Vector3Int pos)
     {
@@ -32,7 +35,7 @@ public class Bloc : MonoBehaviour
     {
         if (owner == "Neutral" && state == BlocState.nonMagnetic)
         {
-            float speed = this.GetComponent<Rigidbody>().velocity.magnitude;
+            float speed = rb.velocity.magnitude;
 
             if (speed < minimalSpeed)
             {
@@ -42,6 +45,11 @@ public class Bloc : MonoBehaviour
             }
 
         }
+        if(rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxSpeed;
+        }
+        
     }
     public void setOwner(string owner)
     {
