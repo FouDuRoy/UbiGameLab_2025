@@ -8,6 +8,7 @@ public class WinCondition : MonoBehaviour
     [SerializeField] float victoryConditionSpeedRange = 10f;
     [SerializeField] float victoryConditionSpeedMelee = 10f;
     [SerializeField] GameObject Ennemy;
+
     void Start()
     {
         
@@ -36,21 +37,21 @@ public class WinCondition : MonoBehaviour
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
                     print("Range Attack " + this.gameObject.name + " : " + hitter.name);
-                    this.GetComponent<WinCondition>().enabled = false;
-                    Ennemy.GetComponent<WinCondition>().enabled = false;
-                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(player);
+                    //this.GetComponent<WinCondition>().enabled = false;
+                   // Ennemy.GetComponent<WinCondition>().enabled = false;
+                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(player,projectileVelocity);
                 }
             }
             bool meleeFromOtherPlayer = stateHitter == BlocState.structure && (ownerHitter != ownerHitted);
             if (meleeFromOtherPlayer)
             {
-                Vector3 projectileVelocity = hitter.GetComponent<Rigidbody>().velocity;
+                Vector3 projectileVelocity = hitter.transform.parent.GetComponent<Rigidbody>().velocity;
                 if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                 {
                     print("Melee attack " + this.gameObject.name + " : " + hitter.name);
-                    this.GetComponent<WinCondition>().enabled = false;
-                    Ennemy.GetComponent<WinCondition>().enabled = false;
-                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.transform.parent.name);
+                  //  this.GetComponent<WinCondition>().enabled = false;
+                   // Ennemy.GetComponent<WinCondition>().enabled = false;
+                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.transform.parent.name,projectileVelocity);
                 }
             }
         }

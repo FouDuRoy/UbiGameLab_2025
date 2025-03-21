@@ -318,6 +318,8 @@ public class Feromagnetic : MonoBehaviour
         {
             cubeRB.mass = 0.01f;
             cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
+            cubeRB.drag = 5f;
+            cubeRB.angularDrag = 5f;
             this.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
             playerAtractedTo.GetComponent<GridSystem>().AttachBlock(gameObject, cubeAttractedToTransform.gameObject,closestFaceRelativeToMainCube);
 

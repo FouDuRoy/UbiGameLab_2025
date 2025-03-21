@@ -11,6 +11,12 @@ public class PlayerInfo : MonoBehaviour
     public GameObject gameOverCanvas; // Assign in Inspector
     public TextMeshProUGUI attackerText; // Assign in Inspector
     public Button restartButton;
+    public float maxDamage =30f;
+    public float impulsionWhenHit = 30f;
+    public float invincibilityDelay=1f;
+    public float hitStopDelay;
+    public float healthValue = 100f;
+    bool invun = false;
 
     void Start()
     {
@@ -18,11 +24,33 @@ public class PlayerInfo : MonoBehaviour
     }
 
     // Call this function when player gets hit
-    public void TakeDamage(string attackerName)
+    public void TakeDamage(string attackerName,Vector3 impactForce)
     {
-        this.GetComponent<PlayerInput>().enabled = false;
+        if (!invun)
+        {
+            float damage = Mathf.Clamp(impactForce.magnitude, 10, maxDamage);
+            healthValue -= damage;
+            Debug.Log("Current Health:" + healthValue + "damageTook:" + damage);
+            if (healthValue > 0)
+            {
+                this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit, ForceMode.VelocityChange);
+                invun =true;
+                StartCoroutine(invunerable());
+            }
+            else
+            {
+                this.GetComponent<PlayerInput>().enabled = false;
+                this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit * 1.5f, ForceMode.VelocityChange);
+                deathRotation(attackerName);
+            }
+        }
+       
+    }
+
+    private void deathRotation(string attackerName)
+    {
         this.GetComponent<PlayerMouvement>().ThrowCubes();
-        this.GetComponent<PlayerObjects>().cubeRb.AddTorque(0, 1000f, 0,ForceMode.VelocityChange);
+        this.GetComponent<PlayerObjects>().cubeRb.AddTorque(0, 100f, 0, ForceMode.VelocityChange);
         StartCoroutine(gameOver(attackerName));
     }
 
@@ -33,6 +61,11 @@ public class PlayerInfo : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+    IEnumerator invunerable()
+    {
+        yield return new WaitForSeconds(invincibilityDelay);
+        invun = false;
     }
     IEnumerator gameOver(string attackerName)
     {
