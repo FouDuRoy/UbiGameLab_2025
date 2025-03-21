@@ -1202,6 +1202,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 716668350774821169, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: repulsionForce
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
@@ -6346,9 +6350,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 539881370}
     - target: {fileID: 4658591005558201665, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
+      propertyPath: hitStopDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
       propertyPath: restartButton
       value: 
       objectReference: {fileID: 476904944}
+    - target: {fileID: 4658591005558201665, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
+      propertyPath: MaxhealthValue
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
       propertyPath: gameOverCanvas
       value: 
