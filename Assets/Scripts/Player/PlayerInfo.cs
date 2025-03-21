@@ -42,6 +42,7 @@ public class PlayerInfo : MonoBehaviour
             }
             else
             {
+                invun = true;
                 this.GetComponent<PlayerInput>().enabled = false;
                 this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit * 1.5f, ForceMode.VelocityChange);
                 deathRotation(attackerName);

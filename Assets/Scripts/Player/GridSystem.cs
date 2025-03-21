@@ -82,7 +82,6 @@ public class GridSystem : MonoBehaviour
                     playerObj.removeCube(gridBloc.Value);
                     keys.Add(gridBloc.Key);
                     gridBloc.Value.GetComponent<Bloc>().state = BlocState.detached; 
-                    StartCoroutine(blockNeutral(gridBloc.Value));
                     neighbors = GetNeighbors(gridBloc.Key);
                     playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
                     gridBloc.Value.GetComponent<Rigidbody>().AddForce(
@@ -109,31 +108,7 @@ public class GridSystem : MonoBehaviour
 
         }
     }
-    public void detachDisconnectedBlocks()
-    {
-        List<Vector3Int> keys = new List<Vector3Int>();
-        List<Vector3Int> neighbors = new List<Vector3Int>();
-        foreach (var gridBloc in grid)
-        {
-            if (!IsBlockConnected(gridBloc.Value))
-            {
-                neighbors = GetNeighbors(gridBloc.Key);
-               
-                playerObj.removeCube(gridBloc.Value);
-                keys.Add(gridBloc.Key);
-                gridBloc.Value.GetComponent<Bloc>().owner = "projectile";
-                StartCoroutine(blockNeutral(gridBloc.Value));
-                neighbors = GetNeighbors(gridBloc.Key);
-                playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
-              
-            }
 
-        }
-        foreach (Vector3Int key in keys)
-        {
-            grid.Remove(key);
-        }
-    }
     public void CheckAndDetachDisconnectedBlocks()
     {
         HashSet<Vector3Int> safeBlocks = new HashSet<Vector3Int>();
@@ -366,15 +341,7 @@ public class GridSystem : MonoBehaviour
             return occupiedSpaces;
         }
     }
-    IEnumerator blockNeutral(GameObject block)
-    {
-        yield return new WaitForSeconds(3f);
-        if (block != null)
-        {
-            block.GetComponent<Bloc>().setOwner("Neutral");
-            block.GetComponent<Bloc>().ownerTranform = null;
-        }
-    }
+
 
     public Vector3 FindMaxDimensions(){
         float maxX = grid.Keys.Max(x => x.x);
@@ -390,11 +357,9 @@ public class GridSystem : MonoBehaviour
             if (!IsBlockConnected(gridBloc.Value))
             {
                 GameObject cube = gridBloc.Value;
-                playerObj.addRigidBody(gridBloc.Value);
                 playerObj.removeCube(gridBloc.Value);
                 keys.Add(gridBloc.Key);
                 gridBloc.Value.GetComponent<Bloc>().state = BlocState.projectile;
-                StartCoroutine(blockNeutral(gridBloc.Value));
                 playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
 
                 Transform golem = kernel.transform.Find("GolemBuilt");
