@@ -15,11 +15,14 @@ public class PlayerInfo : MonoBehaviour
     public float impulsionWhenHit = 30f;
     public float invincibilityDelay=1f;
     public float hitStopDelay;
-    public float healthValue = 100f;
+    public float MaxhealthValue = 100f;
+    public float waitDelayAfterPlayerDeath = 1.5f;
     bool invun = false;
+    public float healthValue;
 
     void Start()
     {
+        healthValue = MaxhealthValue;
         gameOverCanvas.SetActive(false); // Hide canvas at start
     }
 
@@ -42,6 +45,7 @@ public class PlayerInfo : MonoBehaviour
                 this.GetComponent<PlayerInput>().enabled = false;
                 this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit * 1.5f, ForceMode.VelocityChange);
                 deathRotation(attackerName);
+                StartCoroutine(gameOver(attackerName));
             }
         }
        
