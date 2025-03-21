@@ -97,9 +97,10 @@ MonoBehaviour:
   maxDamage: 30
   impulsionWhenHit: 30
   invincibilityDelay: 1
-  hitStopDelay: 0
+  hitStopDelay: 1
   MaxhealthValue: 100
   waitDelayAfterPlayerDeath: 1.5
+  timeScaleFactor: 0.2
   healthValue: 10
 --- !u!114 &6980508144528851275
 MonoBehaviour:
@@ -351,7 +352,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 84
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!135 &4536375940292766682
 SphereCollider:
   m_ObjectHideFlags: 0

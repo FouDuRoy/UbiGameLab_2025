@@ -33,10 +33,11 @@ public class WinCondition : MonoBehaviour
 
             if (projectileFromOtherPlayer)
             {
-                Vector3 projectileVelocity = hitter.GetComponent<Rigidbody>().velocity;
+                
+                Vector3 projectileVelocity = collision.relativeVelocity;
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
-                    print("Range Attack " + this.gameObject.name + " : " + hitter.name);
+                    print("Range Attack " + this.gameObject.name + " : " + hitter.name+"velocity"+ projectileVelocity);
                     //this.GetComponent<WinCondition>().enabled = false;
                    // Ennemy.GetComponent<WinCondition>().enabled = false;
                     this.transform.root.GetComponent<PlayerInfo>().TakeDamage(player,projectileVelocity);

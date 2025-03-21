@@ -14,9 +14,10 @@ public class PlayerInfo : MonoBehaviour
     public float maxDamage =30f;
     public float impulsionWhenHit = 30f;
     public float invincibilityDelay=1f;
-    public float hitStopDelay;
+    public float hitStopDelay=0.5f;
     public float MaxhealthValue = 100f;
     public float waitDelayAfterPlayerDeath = 1.5f;
+    public float timeScaleFactor = 0.2f;
     bool invun = false;
     public float healthValue;
 
@@ -36,17 +37,21 @@ public class PlayerInfo : MonoBehaviour
             Debug.Log("Current Health:" + healthValue + "damageTook:" + damage);
             if (healthValue > 0)
             {
+                invun = true;
+                StartCoroutine(DoHitStop(hitStopDelay));
                 this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit, ForceMode.VelocityChange);
-                invun =true;
                 StartCoroutine(invunerable());
+
             }
             else
             {
                 invun = true;
+                StartCoroutine(DoHitStop(hitStopDelay));
                 this.GetComponent<PlayerInput>().enabled = false;
                 this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit * 1.5f, ForceMode.VelocityChange);
                 deathRotation(attackerName);
                 StartCoroutine(gameOver(attackerName));
+                
             }
         }
        
@@ -81,5 +86,10 @@ public class PlayerInfo : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(restartButton.gameObject);
 
     }
-
+     IEnumerator DoHitStop(float duration)
+    {
+        Time.timeScale = timeScaleFactor; 
+        yield return new WaitForSecondsRealtime(duration); 
+        Time.timeScale = 1f; 
+    }
 }
