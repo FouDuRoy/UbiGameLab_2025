@@ -21,13 +21,12 @@ public class LevelLoader : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerMouvement player=other.GetComponentInParent<PlayerMouvement>(); // Vérifie si l'objet entrant est bien un Player
+        WinCondition player=other.GetComponent<WinCondition>(); // Vérifie si l'objet entrant est bien le mainbody du Player
 
         if (player!=null) // Si oui, on l'ajoute à la liste des joueurs prêts
         {
             playersReady.Add(player.gameObject);
             player.gameObject.SetActive(false);
-            print("ccacs");
 
             if(playersReady.Count >= nPlayers)
             {
