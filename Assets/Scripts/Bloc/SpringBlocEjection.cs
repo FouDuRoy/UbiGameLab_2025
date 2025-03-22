@@ -41,7 +41,9 @@ public class SpringBlocEjection : MonoBehaviour
         Bloc hitterComponent = hitter.GetComponent<Bloc>();
         Bloc hittedComponent = hitted.GetComponent<Bloc>();
         float randomHeightFactor = Random.Range(upEjectionMin, upEjectionMax);
+
         checkCollisionBetweenPlayerAndBlock(collision, hitter, hitted, hitterComponent, hittedComponent);
+
         if (hitterComponent != null && hittedComponent != null)
         {
             Debug.Log("hitter veolcity:" + hitter.GetComponent<StoredVelocity>().lastTickVelocity+ "curentTick" +hitter.GetComponent<Rigidbody>().velocity);
@@ -53,6 +55,7 @@ public class SpringBlocEjection : MonoBehaviour
             bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
             bool playerHittedByownMelee = ownerHitter == ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.melee;
             bool playerHittedByotherPlayerStructure = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.structure;
+
             if (playerHittedByotherPlayerStructure && areOwnedByPlayers)
             {
                 gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
@@ -61,11 +64,12 @@ public class SpringBlocEjection : MonoBehaviour
                 mainCubeRb = transform.parent.GetComponent<Rigidbody>();
                 moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
 
-                Vector3 relativeVelocity = collision.relativeVelocity;
                 Rigidbody hitterRB = hitter.transform.parent.GetComponent<Rigidbody>();
                 Rigidbody hittedRB = hitted.transform.parent.GetComponent<Rigidbody>();
-                float hitterVelocity = hitterRB.velocity.magnitude + hitterRB.angularVelocity.magnitude * (hitter.transform.position - hitterRB.position).magnitude;
-                float hittedVelocityMag = hittedRB.velocity.magnitude + hittedRB.angularVelocity.magnitude* (hitted.transform.position - hittedRB.position).magnitude;
+
+                float hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
+                float hittedVelocityMag = hitted.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
+
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
                     foreach (var v in gridSystem.grid)
@@ -93,16 +97,18 @@ public class SpringBlocEjection : MonoBehaviour
                 mainCubeRb = transform.GetComponent<Rigidbody>();
                 moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
 
-                Vector3 relativeVelocity = collision.relativeVelocity;
-                float hitterVelocity = hitter.GetComponent<Rigidbody>().velocity.magnitude;
-                float hittedVelocityMag = hitted.transform.parent.GetComponent<Rigidbody>().velocity.magnitude;
+          
+                float hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
+                float hittedVelocityMag = hitted.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
+                Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
+
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
                     // Calculate normal average
 
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.melee;
-                    Vector3 ejectionVeolcity = relativeVelocity * energyLoss;
+                    Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
                     float ejectionMag = ejectionVeolcity.magnitude;
                     Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
@@ -120,23 +126,28 @@ public class SpringBlocEjection : MonoBehaviour
             string ownerHitted = hittedComponent.owner;
             BlocState stateHitter = hitterComponent.state;
             BlocState stateHitted = hittedComponent.state;
+
             bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
             bool playerHittedByotherPlayer = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.projectile;
-            bool playerHittedByOwenBlock = ownerHitter == ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.detached;
-            if ((playerHittedByOwenBlock) && areOwnedByPlayers)
+            bool playerHittedByOwnBlock = ownerHitter == ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.detached;
+
+            if ((playerHittedByOwnBlock) && areOwnedByPlayers)
             {
                 gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
                 playerObjects = FindObjectOfType<PlayerObjects>();
                 upEjectionMax = Mathf.Clamp01(upEjectionMax);
                 mainCubeRb = transform.GetComponent<Rigidbody>();
                 moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
-                Vector3 relativeVelocity = collision.relativeVelocity;
-                if (relativeVelocity.magnitude > velocityTreshold)
+
+              
+                Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
+
+                if (hitterVelocityBeforeImpact.magnitude > velocityTreshold)
                 {
 
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.detached;
-                    Vector3 ejectionVeolcity = relativeVelocity * energyLoss;
+                    Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
                     float ejectionMag = ejectionVeolcity.magnitude;
                     float randomHeightFactor = Random.Range(0, upEjectionMax);
 
@@ -146,18 +157,21 @@ public class SpringBlocEjection : MonoBehaviour
                     hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity);
                 }
             }
+
             if ((playerHittedByotherPlayer) && areOwnedByPlayers)
             {
                 gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
                 playerObjects = FindObjectOfType<PlayerObjects>();
                 mainCubeRb = transform.GetComponent<Rigidbody>();
                 moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
-                Vector3 relativeVelocity = collision.relativeVelocity;
-                if (relativeVelocity.magnitude > velocityTreshold)
+
+                Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
+
+                if (hitterVelocityBeforeImpact.magnitude > velocityTreshold)
                 {
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.detached;
-                    Vector3 ejectionVeolcity = relativeVelocity * energyLoss;
+                    Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
                     float ejectionMag = ejectionVeolcity.magnitude;
                     float randomHeightFactor = Random.Range(0, upEjectionMax);
 
