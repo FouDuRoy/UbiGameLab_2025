@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2341062450622316672}
   - component: {fileID: 6873425469701635572}
   - component: {fileID: 4853838727377016838}
+  - component: {fileID: 2128704170243825558}
   m_Layer: 6
   m_Name: MC_Spring
   m_TagString: magnetic
@@ -117,7 +118,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6515478394461614388}
   serializedVersion: 4
-  m_Mass: 0.0001
+  m_Mass: 0.001
   m_Drag: 2
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -135,7 +136,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 80
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &2341062450622316672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +162,8 @@ MonoBehaviour:
   timeBeforeSwitching: 0.2
   timeBeforeSwitchingVariation: 0.05
   maxSpeedVariation: 3
-  springTorqueBreak: Infinity
+  springTorqueBreak: 50000
+  springForceBreak: 50000
   springType: 1
   lerpingType: 0
   xLimit: 0.01
@@ -186,7 +188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
   magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
-  maxSpeed: 50000
+  maxSpeed: 1000
+  contactOffset: 0.03
   weight: 0.03
   owner: Neutral
   state: 3
@@ -213,3 +216,16 @@ MonoBehaviour:
   springBreakForce: 500
   range: 2
   pushFactor: 35
+--- !u!114 &2128704170243825558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515478394461614388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9d2e8bbe5afa04da47682374207ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastTickVelocity: {x: 0, y: 0, z: 0}

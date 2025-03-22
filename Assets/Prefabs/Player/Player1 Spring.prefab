@@ -78,7 +78,7 @@ MonoBehaviour:
   rotationDamping: 20
   weightMouvementFactor: 1
   weightRotationFactor: 1.3
-  moveType: 7
+  moveType: 3
 --- !u!114 &4658591005558201665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,8 +347,8 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 0
-  m_ImplicitTensor: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -538,7 +538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.6599998
+      value: -2.66
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -598,7 +598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3369690493817710893, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3454389509678048327, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -606,7 +606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4995969142354872981, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5346239013487951123, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y

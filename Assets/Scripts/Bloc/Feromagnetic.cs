@@ -35,7 +35,8 @@ public class Feromagnetic : MonoBehaviour
         [SerializeField] float timeBeforeSwitching = 0.5f;
         [SerializeField] float timeBeforeSwitchingVariation =0.05f;
         [SerializeField] float maxSpeedVariation = 3f;
-        [SerializeField] float springTorqueBreak = 1000f;
+        [SerializeField] public float springTorqueBreak = 1000f;
+        [SerializeField] public float springForceBreak = 1000f;
 
     //Joint settings
 
@@ -300,7 +301,11 @@ public class Feromagnetic : MonoBehaviour
         closestFaceRelativeToMainCube = Vector3.zero;
         errorP = 1;
         errorR = 1;
-    
+        if (cubeRB != null)
+        {
+            cubeRB.useGravity = true;
+
+        }
         transform.parent = this.transform.root.parent;
     }
 
@@ -460,7 +465,11 @@ public class Feromagnetic : MonoBehaviour
                 }
                 i++;
             joint.breakTorque = springTorqueBreak;
+            joint.breakForce = springForceBreak;
             joint.enableCollision = false;
+            joint.projectionMode = JointProjectionMode.PositionAndRotation;
+            joint.projectionAngle = AngleLimit;
+            joint.projectionDistance = xLimit;
         }
     }
 

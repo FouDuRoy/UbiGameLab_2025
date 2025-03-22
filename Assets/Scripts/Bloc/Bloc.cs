@@ -7,6 +7,7 @@ public class Bloc : MonoBehaviour
     [SerializeField] float minimalSpeed = 0.5f;
     [SerializeField] Material magneticMaterial;
     [SerializeField] float maxSpeed = 1000f;
+    public float contactOffset = 0.1f;
     public float weight;
     public string owner; 
     public BlocState state;
@@ -20,6 +21,7 @@ public class Bloc : MonoBehaviour
     {
         materials.Add(magneticMaterial);
         rb = GetComponent<Rigidbody>();
+        this.GetComponent<BoxCollider>().contactOffset = contactOffset;
     }
     public void SetGridPosition(Vector3Int pos)
     {
@@ -52,7 +54,7 @@ public class Bloc : MonoBehaviour
             float brakeSpeed = rb.velocity.magnitude - maxSpeed;  // calculate the speed decrease
             Vector3 normalisedVelocity = rb.velocity.normalized;
             Vector3 brakeVelocity = normalisedVelocity * brakeSpeed;  // make the brake Vector3 value  
-            rb.AddForce(-brakeVelocity,ForceMode.Acceleration);
+            rb.velocity = rb.velocity.normalized * maxSpeed;
             Debug.Log("break!");
         }
         

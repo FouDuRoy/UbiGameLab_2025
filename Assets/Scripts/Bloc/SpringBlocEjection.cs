@@ -37,15 +37,14 @@ public class SpringBlocEjection : MonoBehaviour
     {
 
         GameObject hitter = collision.collider.gameObject;
-        GameObject hitted = collision.GetContact(0).thisCollider.gameObject;
+        GameObject hitted = gameObject;
         Bloc hitterComponent = hitter.GetComponent<Bloc>();
         Bloc hittedComponent = hitted.GetComponent<Bloc>();
         float randomHeightFactor = Random.Range(upEjectionMin, upEjectionMax);
-
         checkCollisionBetweenPlayerAndBlock(collision, hitter, hitted, hitterComponent, hittedComponent);
         if (hitterComponent != null && hittedComponent != null)
         {
-
+            Debug.Log("hitter veolcity:" + hitter.GetComponent<StoredVelocity>().lastTickVelocity+ "curentTick" +hitter.GetComponent<Rigidbody>().velocity);
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
             BlocState stateHitter = hitterComponent.state;
@@ -191,7 +190,8 @@ public class SpringBlocEjection : MonoBehaviour
             Joint[] joints = v.Value.GetComponents<Joint>();
             foreach (Joint joint in joints)
             {
-                joint.breakTorque = 1000000000f;
+                joint.breakTorque = this.GetComponent<Feromagnetic>().springTorqueBreak;
+                joint.breakForce = this.GetComponent<Feromagnetic>().springForceBreak;
             }
         }
     }

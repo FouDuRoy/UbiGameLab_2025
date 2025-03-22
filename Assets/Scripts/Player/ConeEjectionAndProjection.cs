@@ -11,6 +11,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 
 public class ConeEjectionAndProjection : MonoBehaviour
@@ -34,10 +35,17 @@ public class ConeEjectionAndProjection : MonoBehaviour
     InputAction AttractCubes;
     HapticFeedbackController feedback;
     float timeHeld = 0;
+    float handTimer = 0;
     Rigidbody mainCubeRb;
     Transform golem;
     bool rightTriggerHeld = false;
     bool leftTriggerHeld = false;
+    Transform leftHandTransform;
+    Transform rightHandTransform;
+    Vector3 leftHandInitialPoint;
+    Vector3 rightHandInitialPoint;
+    Vector3 leftHandFinalPoint;
+    Vector3 rightHandFinalPoint;
     MouvementType moveType;
     void Start()
     {
@@ -53,6 +61,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
             secondsForMaxCharging -= 1;
         }
         moveType = this.transform.GetComponent<PlayerMouvement>().moveType;
+        leftHandTransform = golem.Find("L_Hand_IK_Target");
+        rightHandTransform = golem.Find("R_Hand_IK_Target");
     }
     void FixedUpdate()
     {
@@ -63,11 +73,43 @@ public class ConeEjectionAndProjection : MonoBehaviour
             if(leftTriggerHeld == false)
             {
                 feedback.AttractionVibrationStart();
+               
             }
+
+            int maxX = playerGrid.grid.Keys.Max(x => x.x);
+            int minX = playerGrid.grid.Keys.Min(x => x.x);
+            int maxZ = playerGrid.grid.Keys.Max(x => x.z);
+            int minZ = playerGrid.grid.Keys.Min(x => x.z);
+            int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX), Mathf.Abs(minX), Mathf.Abs(maxZ), Mathf.Abs(minZ));
+            float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
+            float radius = radiusInBlocs * blocSizeWorld;
+            float maxDistance = MaxDistanceForDirection((golem.forward).normalized, radius);
+            leftHandInitialPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * maxDistance + new Vector3(0, 0.15f, 0);
+            rightHandInitialPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * maxDistance + new Vector3(0, 0.15f, 0);
+            leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * distance + new Vector3(0, 0.15f, 0); 
+            rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * distance + new Vector3(0, 0.15f, 0); 
+            if (handTimer <= 1f / 2)
+            {
+                
+                leftHandTransform.position = Vector3.Lerp(leftHandInitialPoint, leftHandFinalPoint, 2 * handTimer);
+                rightHandTransform.position = Vector3.Lerp(rightHandInitialPoint, rightHandFinalPoint, 2 * handTimer);
+
+            }
+            else
+            {
+
+                leftHandTransform.position = Vector3.Lerp( leftHandFinalPoint, leftHandInitialPoint, 2*(handTimer-1f/2));
+                rightHandTransform.position = Vector3.Lerp( rightHandFinalPoint, rightHandInitialPoint, 2 * (handTimer - 1f/ 2));
+            }
+            
+            
+            handTimer += Time.fixedDeltaTime;
+            handTimer = handTimer % 1;
             coneAttraction(mainCubeRb.transform.Find("GolemBuilt").transform, attractionForce
                 ,initialAngle,distance,1);
             leftTriggerHeld = true;
 
+       
         }
         else if (leftTriggerHeld)
         {
@@ -124,12 +166,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             Vector3 distanceBetweenPlayerAndCube = player.position - cube.transform.position;
             Rigidbody cubeRB = cube.GetComponent<Rigidbody>();
-            cubeRB.useGravity = false;
             cubeRB.AddForce(distanceBetweenPlayerAndCube.normalized* attractionForce* magnitude, ForceMode.Acceleration);
-            
             Feromagnetic fero = cube.GetComponent<Feromagnetic>();
             fero.ResetObject();
             fero.enabled = false;
+            cubeRB.useGravity = false;
 
         });
         //Remagnetize those that are not in range anymore

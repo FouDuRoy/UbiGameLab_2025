@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WinCondition : MonoBehaviour
@@ -11,13 +9,13 @@ public class WinCondition : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -33,14 +31,14 @@ public class WinCondition : MonoBehaviour
 
             if (projectileFromOtherPlayer)
             {
-                
+
                 Vector3 projectileVelocity = collision.relativeVelocity;
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
-                    print("Range Attack " + this.gameObject.name + " : " + hitter.name+"velocity"+ projectileVelocity);
+                    print("Range Attack " + this.gameObject.name + " : " + hitter.name + "velocity" + projectileVelocity);
                     //this.GetComponent<WinCondition>().enabled = false;
-                   // Ennemy.GetComponent<WinCondition>().enabled = false;
-                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(player,projectileVelocity);
+                    // Ennemy.GetComponent<WinCondition>().enabled = false;
+                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(player, projectileVelocity);
                 }
             }
             bool meleeFromOtherPlayer = stateHitter == BlocState.structure && (ownerHitter != ownerHitted);
@@ -50,9 +48,9 @@ public class WinCondition : MonoBehaviour
                 if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                 {
                     print("Melee attack " + this.gameObject.name + " : " + hitter.name);
-                  //  this.GetComponent<WinCondition>().enabled = false;
-                   // Ennemy.GetComponent<WinCondition>().enabled = false;
-                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.transform.parent.name,projectileVelocity);
+                    //  this.GetComponent<WinCondition>().enabled = false;
+                    // Ennemy.GetComponent<WinCondition>().enabled = false;
+                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.transform.parent.name, projectileVelocity);
                 }
             }
         }
