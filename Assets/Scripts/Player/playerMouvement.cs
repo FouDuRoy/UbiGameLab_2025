@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Security.Cryptography;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Switch;
@@ -32,6 +34,9 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float weightRotationFactor = 1f;
     [SerializeField] public MouvementType moveType;
 
+    public GameObject pauseMenu; // Assign in Inspector
+    public GameObject selectedGUI; // Assign in Inspector
+    bool isPaused = false;
 
     PlayerInput playerInput;
     InputAction moveAction;
@@ -39,6 +44,7 @@ public class PlayerMouvement : MonoBehaviour
     InputAction throwCubes;
     InputAction rotateActionZ;
     InputAction rotateActionX;
+    InputAction pauseAction;
 
     float weightRotation;
     float weightTranslation;
@@ -54,7 +60,7 @@ public class PlayerMouvement : MonoBehaviour
 
     GridSystem gridPlayer;
 
-    void Start()
+    void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions.FindAction("Move");
@@ -62,10 +68,12 @@ public class PlayerMouvement : MonoBehaviour
         throwCubes = playerInput.actions.FindAction("ThrowCubes");
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
         rotateActionX = playerInput.actions.FindAction("RotateX");
+        pauseMenu.SetActive(false); // Hide canvas at start
+        pauseAction = playerInput.actions.FindAction("Pause");
         gridPlayer = GetComponent<GridSystem>();
         rb = this.GetComponent<PlayerObjects>().cubeRb;
     }
-
+        
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -104,6 +112,39 @@ public class PlayerMouvement : MonoBehaviour
 
       
             ThrowCubes();
+    }
+
+    private void OnEnable()
+    {
+        pauseAction.performed += OnPause;
+        pauseAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        pauseAction.performed -= OnPause;
+        pauseAction.Disable();
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        TogglePause();
+    }
+
+    public void TogglePause()
+    {
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(selectedGUI);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+        }
+        isPaused = !isPaused;
     }
 
     private void Spring(Vector3 direction, float rotationY)

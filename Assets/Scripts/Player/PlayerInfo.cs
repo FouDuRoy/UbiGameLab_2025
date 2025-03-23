@@ -25,6 +25,7 @@ public class PlayerInfo : MonoBehaviour
     {
         healthValue = MaxhealthValue;
         gameOverCanvas.SetActive(false); // Hide canvas at start
+
     }
 
     // Call this function when player gets hit
