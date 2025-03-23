@@ -1152,7 +1152,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846468097935250436, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
+      propertyPath: maxDamage
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
+      propertyPath: healthValue
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
+      propertyPath: MaxhealthValue
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4731994683824895664, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: Ennemy
@@ -13937,6 +13949,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429113f014549df4c93e36504ee97a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelToLoad: {fileID: 0}
+  nPlayers: 2
 --- !u!23 &1669498281
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13993,7 +14007,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846468097935250436, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
+      propertyPath: maxDamage
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
+      propertyPath: healthValue
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
+      propertyPath: MaxhealthValue
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4849188280878380009, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
       propertyPath: m_LocalPosition.x
