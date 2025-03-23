@@ -69,24 +69,38 @@ public class SpringBlocEjection : MonoBehaviour
 
                 float hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
                 float hittedVelocityMag = hitted.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
+                Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
 
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
-                    foreach (var v in gridSystem.grid)
+                    if (true)
                     {
-                        Joint[] joints = v.Value.GetComponents<Joint>();
-                        foreach(Joint joint in joints)
+                        foreach (var v in gridSystem.grid)
                         {
-                            if ((joint.transform.position - hitted.transform.position).magnitude < range)
+                            Joint[] joints = v.Value.GetComponents<Joint>();
+                            foreach (Joint joint in joints)
                             {
-                                joint.breakTorque = springBreakForce;
+                                if ((joint.transform.position - hitted.transform.position).magnitude < range)
+                                {
+                                    joint.breakTorque = springBreakForce;
 
+                                }
                             }
                         }
+
                     }
-                   // float pushFactor = 0.7f;
-                    //mainCubeRb.AddForce(relativeVelocity * pushFactor, ForceMode.VelocityChange);
-                    StartCoroutine(resetTorque(gridSystem));
+                    else
+                    {
+                        StartCoroutine(resetTorque(gridSystem));
+                        gridSystem.DetachBlock(hitted);
+                        hittedComponent.state = BlocState.detached;
+                        Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
+                        float ejectionMag = ejectionVeolcity.magnitude;
+                        Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
+                        hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
+                    }
+              
+
                 }
             }
             if (playerHittedByownMelee && areOwnedByPlayers)

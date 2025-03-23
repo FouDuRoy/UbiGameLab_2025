@@ -23,10 +23,6 @@ public class Bloc : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         this.GetComponent<BoxCollider>().contactOffset = contactOffset;
     }
-    public void SetGridPosition(Vector3Int pos)
-    {
-        gridPosition = pos;
-    }
 
     public Vector3Int GetGridPosition()
     {
@@ -35,25 +31,22 @@ public class Bloc : MonoBehaviour
 
     void Update()
     {
-        if (state != BlocState.structure && owner!="Neutral")
+        if (state != BlocState.structure && owner != "Neutral")
         {
             float speed = rb.velocity.magnitude;
 
+            //If speed is small enough we enable script
             if (speed < minimalSpeed && state == BlocState.magnetic)
             {
                 this.GetComponent<Feromagnetic>().enabled = true;
-                state = BlocState.magnetic;
                 this.GetComponent<MeshRenderer>().SetMaterials(materials);
                 owner = "Neutral";
                 ownerTranform = null;
             }
 
         }
-        if(rb.velocity.magnitude > maxSpeed)
-        {
-            float brakeSpeed = rb.velocity.magnitude - maxSpeed;  // calculate the speed decrease
-            Vector3 normalisedVelocity = rb.velocity.normalized;
-            Vector3 brakeVelocity = normalisedVelocity * brakeSpeed;  // make the brake Vector3 value  
+        if (rb.velocity.magnitude > maxSpeed)
+        { 
             rb.velocity = rb.velocity.normalized * maxSpeed;
             Debug.Log("break!");
         }
