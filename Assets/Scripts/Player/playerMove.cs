@@ -56,50 +56,56 @@ public class PlayerMouvement : MonoBehaviour
 
     void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions.FindAction("Move");
-        rotateAction = playerInput.actions.FindAction("Rotate");
-        throwCubes = playerInput.actions.FindAction("ThrowCubes");
-        rotateActionZ = playerInput.actions.FindAction("RotateZ");
-        rotateActionX = playerInput.actions.FindAction("RotateX");
-        gridPlayer = GetComponent<GridSystem>();
-        rb = this.GetComponent<PlayerObjects>().cubeRb;
+        if (moveType != MouvementType.none)
+        {
+            playerInput = GetComponent<PlayerInput>();
+            moveAction = playerInput.actions.FindAction("Move");
+            rotateAction = playerInput.actions.FindAction("Rotate");
+            throwCubes = playerInput.actions.FindAction("ThrowCubes");
+            rotateActionZ = playerInput.actions.FindAction("RotateZ");
+            rotateActionX = playerInput.actions.FindAction("RotateX");
+            gridPlayer = GetComponent<GridSystem>();
+            rb = this.GetComponent<PlayerObjects>().cubeRb;
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        weight = this.GetComponent<PlayerObjects>().weight;
-         weightRotation = Mathf.Clamp(weight * weightRotationFactor, 1, 10 * weight);
-         weightTranslation = Mathf.Clamp(weight * weightMouvementFactor, 1, 10 * weight);
-        Vector3 direction2 = moveAction.ReadValue<Vector3>();
-        Vector3 direction = new Vector3(direction2.x,0,direction2.y);
-        float rotationY = rotateAction.ReadValue<float>();
-        float rotationZ = rotateActionZ.ReadValue<float>();
-        float rotationX = rotateActionX.ReadValue<float>();
-
-
-        switch (moveType)
+        if (moveType != MouvementType.none)
         {
-       
-            case MouvementType.spring:
-                Spring(direction, rotationY);
-                break;
+            weight = this.GetComponent<PlayerObjects>().weight;
+            weightRotation = Mathf.Clamp(weight * weightRotationFactor, 1, 10 * weight);
+            weightTranslation = Mathf.Clamp(weight * weightMouvementFactor, 1, 10 * weight);
+            Vector3 direction2 = moveAction.ReadValue<Vector3>();
+            Vector3 direction = new Vector3(direction2.x, 0, direction2.y);
+            float rotationY = rotateAction.ReadValue<float>();
+            float rotationZ = rotateActionZ.ReadValue<float>();
+            float rotationX = rotateActionX.ReadValue<float>();
 
-            case MouvementType.move3d:
-                Move3d(direction, rotationY);
-                break;
 
-            case MouvementType.move3dSpring:
-                Move3dSpring(direction, rotationY);
-                break;
+            switch (moveType)
+            {
 
-            case MouvementType.Move3dBothJoystick:
-                BoothJoystickMove(direction, rotationY);
-                break;
-            case MouvementType.Move3dBothJoystickSpring:
-                Move3dSpringBothJoystick(direction, rotationY);
-                break;
+                case MouvementType.spring:
+                    Spring(direction, rotationY);
+                    break;
+
+                case MouvementType.move3d:
+                    Move3d(direction, rotationY);
+                    break;
+
+                case MouvementType.move3dSpring:
+                    Move3dSpring(direction, rotationY);
+                    break;
+
+                case MouvementType.Move3dBothJoystick:
+                    BoothJoystickMove(direction, rotationY);
+                    break;
+                case MouvementType.Move3dBothJoystickSpring:
+                    Move3dSpringBothJoystick(direction, rotationY);
+                    break;
+            }
         }
 
       
@@ -264,6 +270,9 @@ public class PlayerMouvement : MonoBehaviour
 
     public void ThrowCubes()
     {
+        if (moveType == MouvementType.none)
+            return;
+
         if (throwCubes.ReadValue<float>() == 1)
         {
             foreach (var item in gridPlayer.grid)

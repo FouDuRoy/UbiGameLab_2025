@@ -146,6 +146,7 @@ public class Feromagnetic : MonoBehaviour
             // Enleve les cubes avec aucune face disponible. 
             foreach (Collider mag in magneticColliderList)
             {
+                Debug.Log(mag.transform.root);
                 GridSystem grid =  mag.transform.root.GetComponent<GridSystem>();
                 if (grid == null || grid.getAvailableNeighbours(mag.gameObject).Count==0)
                 {
