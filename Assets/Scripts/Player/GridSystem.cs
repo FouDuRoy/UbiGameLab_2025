@@ -17,7 +17,6 @@ public class GridSystem : MonoBehaviour
     public Quaternion kernelRotI;
     public float cubeSize = 1.2f;
     List<Material> materials = new List<Material>();
-    MouvementType moveType;
     HapticFeedbackController feedback;
     private void Start()
     {
@@ -26,7 +25,6 @@ public class GridSystem : MonoBehaviour
         playerObj = transform.GetComponent<PlayerObjects>();
 
         feedback = GetComponent<HapticFeedbackController>();
-        moveType = GetComponent<PlayerMouvement>().moveType;
         materials.Add(playerMat);
         
     }
@@ -57,7 +55,10 @@ public class GridSystem : MonoBehaviour
         }
     
         //Déclenche un feedback à chaque bloc qui s'attache
-        feedback.BlocAttachedVibration();
+        if(feedback != null)
+        {
+            feedback.BlocAttachedVibration();
+        }
     }
     public void DetachBlock(GameObject bloc)
     {
@@ -282,17 +283,21 @@ public class GridSystem : MonoBehaviour
         }
         else
         {
-
+            Transform cubeTransform = cube.transform;
+            if (cube.transform.Find("Orientation")!=null)
+            {
+                cubeTransform = cube.transform.Find("Orientation");
+            }
             //Look for closest position relative to current position and rotation
-            float scaleFactor = cube.transform.lossyScale.x;
-            Vector3[] directions = new Vector3[] {cube.transform.forward*cubeSize*scaleFactor, -cube.transform.forward * cubeSize*scaleFactor
-                , cube.transform.up * cubeSize*scaleFactor,-cube.transform.up*cubeSize*scaleFactor
-                , cube.transform.right * cubeSize*scaleFactor,-cube.transform.right*cubeSize*scaleFactor };
+            float scaleFactor = cubeTransform.lossyScale.x;
+            Vector3[] directions = new Vector3[] {cubeTransform.forward*cubeSize*scaleFactor, -cubeTransform.forward * cubeSize*scaleFactor
+                , cubeTransform.up * cubeSize*scaleFactor,-cubeTransform.up*cubeSize*scaleFactor
+                , cubeTransform.right * cubeSize*scaleFactor,-cubeTransform.right*cubeSize*scaleFactor };
             List<Vector3> directionsList = directions.ToList();
             directionsList.Sort((x,y) =>
             {
-                float distanceX = (cube.transform.position + x - position).magnitude;
-                float distanceY = (cube.transform.position + y - position).magnitude;
+                float distanceX = (cubeTransform.position + x - position).magnitude;
+                float distanceY = (cubeTransform.position + y - position).magnitude;
                 return distanceX.CompareTo(distanceY);
             }); 
 
@@ -302,11 +307,11 @@ public class GridSystem : MonoBehaviour
             Vector3 facePositionWorld = Vector3.zero;
             do
             {
-                positionRelativeToKernel = cubePositionToKernel+ cube.transform.InverseTransformDirection(directionsList[i]).normalized*cubeSize;
+                positionRelativeToKernel = cubePositionToKernel+ cubeTransform.InverseTransformDirection(directionsList[i]).normalized*cubeSize;
                 foundPoint = !containsKey(positionRelativeToKernel);
                 if (foundPoint)
                 {
-                    facePositionWorld = directionsList[i]+cube.transform.position;
+                    facePositionWorld = directionsList[i]+cubeTransform.position;
                 }
                 i++;
             }while(!foundPoint && i < directionsList.Count);
