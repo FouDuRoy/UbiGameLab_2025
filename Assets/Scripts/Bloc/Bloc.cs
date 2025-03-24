@@ -47,7 +47,7 @@ public class Bloc : MonoBehaviour
         }
         if (rb.velocity.magnitude > maxSpeed)
         { 
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+            //rb.velocity = rb.velocity.normalized * maxSpeed;
             Debug.Log("break!");
         }
         

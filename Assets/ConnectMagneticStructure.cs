@@ -99,6 +99,7 @@ public class ConnectMagneticStructure : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (!lerping)
         {
             List<Collider> magneticStructure = new List<Collider>();
@@ -151,7 +152,7 @@ public class ConnectMagneticStructure : MonoBehaviour
                     }
                     else
                     {
-                        comparedDistance = Vector3.Distance(closestCube.transform.position, v.Value.transform.position);
+                        comparedDistance = Vector3.Distance(comparedCube.transform.position, v.Value.transform.position);
                     }
 
                     if (comparedDistance < shortestDistance)
@@ -235,7 +236,7 @@ public class ConnectMagneticStructure : MonoBehaviour
        
 
             transform.position = absoluteEndPosition - (closestCubeOwn.transform.position - transform.position);
-            transform.rotation = absoluteEndRotation;
+     
             Quaternion rotationAmount = Quaternion.Inverse(closestCubeOwn.transform.Find("Orientation").transform.rotation) * cubeAttractedToTransform.Find("Orientation").rotation;
             foreach (var v in playerGrid.grid)
             {
@@ -255,25 +256,21 @@ public class ConnectMagneticStructure : MonoBehaviour
     private void AttachCube()
     {
         //Attach magnetic field
+        transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
+        List<GameObject> childsList = new List<GameObject>();
         for (int i = 0; i < this.transform.childCount; i++)
         {
-            Debug.Log("childs" + transform.GetChild(i));
-            if (this.transform.GetChild(i).name != "Orientation")
+            if(transform.GetChild(i).GetComponent<Bloc>() != null)
             {
-                this.transform.GetChild(i).parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
-
+                childsList.Add(transform.GetChild(i).gameObject);
             }
         }
 
-        closestCubeOwn.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
-        for (int i = 0; i < this.transform.childCount; i++)
+        foreach(GameObject child in childsList)
         {
-            if (this.transform.GetChild(i).name != "Orientation")
-            {
-                this.transform.GetChild(i).parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
-
-            }
+            child.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform; 
         }
+  
         //Set magnetic rb
         cubeRB = this.GetComponent<Rigidbody>();
         cubeRB.mass = 0.01f;
@@ -281,7 +278,6 @@ public class ConnectMagneticStructure : MonoBehaviour
         cubeRB.drag = 5f;
         cubeRB.angularDrag = 5f;
 
-        this.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
         playerAtractedTo.GetComponent<GridSystem>().AttachBlock( closestCubeOwn, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
         closestCubeOwn.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
         attachJ();

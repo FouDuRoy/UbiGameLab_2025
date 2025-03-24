@@ -141,6 +141,7 @@ public class Feromagnetic : MonoBehaviour
                 GridSystem grid = mag.transform.root.GetComponent<GridSystem>();
                 if (grid == null || grid.getAvailableNeighbours(mag.gameObject).Count == 0)
                 {
+                    Debug.Log(grid);
                     magnetic.Remove(mag);
                 }
             }
@@ -506,6 +507,7 @@ public class Feromagnetic : MonoBehaviour
         // We start attaching the cube 
         else if (!lerping)
         {
+
             //Set speed to zero and change layer to magnetic.
             cubeRB.velocity = Vector3.zero;
             cubeRB.angularVelocity = Vector3.zero;

@@ -133,8 +133,16 @@ public class PlayerObjects : MonoBehaviour
 
 
         cube.transform.parent = transform.parent;
-        cube.layer = 0;
-        Destroy(cube.GetComponent<SphereCollider>());
+        ConnectMagneticStructure magneticStructure = cube.GetComponent<ConnectMagneticStructure>();
+        if(magneticStructure != null)
+        {
+            //magneticStructure.enabled = true;
+        }
+        else
+        {
+            cube.layer = 0;
+            Destroy(cube.GetComponent<SphereCollider>());
+        }
         StartCoroutine(blockNeutral(cube));
     }
 
