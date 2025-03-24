@@ -59,6 +59,7 @@ public class DynamicCamera : MonoBehaviour
         {
             playerOneInputs.DeactivateInput();
             playerTwoInputs.DeactivateInput();
+            camUI.enabled = false;
         }
 
         //Récupère l'angle de la caméra par rapport à son pivot
@@ -97,8 +98,6 @@ public class DynamicCamera : MonoBehaviour
                 camOrthoSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor, minDistance, maxDistance);
                 cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, camOrthoSize, ref currentOrthoSizeVelocity, distanceInterpTime, maxSpeed);
                 camUI.orthographicSize = cam.orthographicSize;
-                print(camUI.orthographicSize +"  "+ cam.orthographicSize);
-                print("caca");
             }
         }
     }
@@ -110,6 +109,7 @@ public class DynamicCamera : MonoBehaviour
         animator.enabled = false;
         playerOneInputs.ActivateInput();
         playerTwoInputs.ActivateInput();
+        camUI.enabled = true;
 
         shouldFollowPlayers = true;
     }

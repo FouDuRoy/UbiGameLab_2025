@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,7 @@ public class SceneEventSystem : MonoBehaviour
 {
 
     public Button playButton;
+    public SceneAsset sceneToLoad;
 
     private void Awake()
     {
@@ -17,7 +19,7 @@ public class SceneEventSystem : MonoBehaviour
     }
     public void LoadScene()
     {
-        SceneManager.LoadScene("Level02");
+        SceneManager.LoadScene(sceneToLoad.name);
     }
 
     public void ExitGame()
