@@ -520,8 +520,6 @@ public class Feromagnetic : MonoBehaviour
             endPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld);
             endRotationRelativeToAttractedCube = RotationChoice(transform.localRotation);
             cubeRB.useGravity = false;
-            //Predict position and rotation to find face to remove
-            //RemoveFaces();
         }
     }
     private Vector3 CoulombLaw(Vector3 distance, float charge1, float charge2)

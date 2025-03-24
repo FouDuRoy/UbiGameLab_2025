@@ -194,8 +194,8 @@ MonoBehaviour:
   timeBeforeSwitching: 0.2
   timeBeforeSwitchingVariation: 0.05
   maxSpeedVariation: 3
-  springTorqueBreak: 50000
-  springForceBreak: 50000
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
   springType: 1
   lerpingType: 0
   xLimit: 0.01
@@ -206,7 +206,7 @@ MonoBehaviour:
   secondaryLinearDamp: 100
   angularDrive: 50000
   angularDamp: 1000
-  projectionMode: 1
+  projection: 1
 --- !u!114 &6873425469701635572
 MonoBehaviour:
   m_ObjectHideFlags: 0
