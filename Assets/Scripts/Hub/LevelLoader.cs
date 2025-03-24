@@ -3,11 +3,14 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private SceneAsset levelToLoad;
-    [SerializeField] private int nPlayers=2;
+    [SerializeField] private int nPlayers = 2;
+    [SerializeField] private TMP_Text j1Ready;
+    [SerializeField] private TMP_Text j2Ready;
 
     private Collider trigger;
     private List<GameObject> playersReady = new List<GameObject>();
@@ -16,6 +19,8 @@ public class LevelLoader : MonoBehaviour
     private void Start()
     {
         trigger = GetComponent<Collider>();
+        j1Ready.enabled = false;
+        j2Ready.enabled = false;
     }
 
 
@@ -27,6 +32,9 @@ public class LevelLoader : MonoBehaviour
         {
             playersReady.Add(player.gameObject);
             player.gameObject.SetActive(false);
+
+            if (player.gameObject.name.Contains("1")){ j1Ready.enabled=true; }
+            else if(player.gameObject.name.Contains("2")) { j2Ready.enabled=true; }
 
             if(playersReady.Count >= nPlayers)
             {
