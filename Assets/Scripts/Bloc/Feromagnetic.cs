@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 //Federico Barallobres
 public class Feromagnetic : MonoBehaviour
@@ -58,6 +57,8 @@ public class Feromagnetic : MonoBehaviour
 
     [SerializeField] float angularDamp = 100f;
 
+    [SerializeField] bool projectionMode = true;
+
     Rigidbody cubeRB;
 
     Transform cubeAttractedToTransform;
@@ -78,15 +79,12 @@ public class Feromagnetic : MonoBehaviour
 
     Vector3 relativePositionToMainCube;
 
-    Dictionary<GameObject, List<Vector3>> storedFaces = new Dictionary<GameObject, List<Vector3>>();
 
     Quaternion endRotationRelativeToAttractedCube;
 
     Quaternion startRotationRelativeToAttractedCube;
 
     List<Quaternion> quaternions;
-
-    Vector3[] directionsList;
 
     float cubeSize = 0.5f;
 
@@ -104,15 +102,15 @@ public class Feromagnetic : MonoBehaviour
         // We assume all cubes have same scale
         cubeSize = 1f + spacingBetweenCubes;
         quaternions = createListAngles();
+
+        // Variations on max speed and time before switching targets
         timeBeforeSwitching += Random.Range(-timeBeforeSwitchingVariation, timeBeforeSwitchingVariation);
         maxSpeed += Random.Range(-maxSpeedVariation, maxSpeedVariation);
-        directionsList = new Vector3[] { new Vector3(cubeSize, 0, 0), new Vector3(-cubeSize, 0, 0), new Vector3(0, 0, cubeSize)
-    ,   new Vector3(0, 0, -cubeSize),new Vector3(0,cubeSize,0),new Vector3(0,-cubeSize,0) };
-
     }
 
     void OnEnable()
     {
+        // When enable again we reset object
         ResetObject();
     }
     public float getPassiveRadius()
@@ -129,22 +127,24 @@ public class Feromagnetic : MonoBehaviour
         {
             ResetObject();
         }
+
+        //We reset if there is problem with target
         if (cubeAttractedToTransform != null && cubeAttractedToTransform.root.GetComponent<PlayerObjects>() == null)
         {
             ResetObject();
         }
+
         // Set the position of the block and look for all magnetic blocs in range
         if (!lerping)
         {
             //Regarde les cubes magentiques dans le range du cube. 
             List<Collider> magnetic = Physics.OverlapSphere(transform.position, passiveRadius, mask).ToList<Collider>();
-            List<Collider> magneticColliderList = magnetic.ToList<Collider>();
+            List<Collider> magneticColliderList = Physics.OverlapSphere(transform.position, passiveRadius, mask).ToList<Collider>();
             cubeRB = this.GetComponent<Rigidbody>();
 
             // Enleve les cubes avec aucune face disponible. 
             foreach (Collider mag in magneticColliderList)
             {
-                Debug.Log(mag.transform.root);
                 GridSystem grid = mag.transform.root.GetComponent<GridSystem>();
                 if (grid == null || grid.getAvailableNeighbours(mag.gameObject).Count == 0)
                 {
@@ -180,7 +180,7 @@ public class Feromagnetic : MonoBehaviour
     {
         if (magnetic.Count > 0)
         {
-            
+
             cubeAttractedToTransform = magnetic[0].transform;
             playerMainCube = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().player.transform;
             playerAtractedTo = cubeAttractedToTransform.root;
@@ -204,8 +204,6 @@ public class Feromagnetic : MonoBehaviour
                     playerMainCube = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().player.transform;
                     closestFaceRelativeToMainCube = closestFaceOtherMain;
 
-
-
                 }
             }
         }
@@ -217,8 +215,6 @@ public class Feromagnetic : MonoBehaviour
         {
 
             t = timer / moveTime;
-
-
 
             transform.localPosition = Vector3.Lerp(startPositionRelativeToAttractedCube, endPositionRelativeToAttractedCube, t);
             transform.localRotation = Quaternion.Slerp(startRotationRelativeToAttractedCube, endRotationRelativeToAttractedCube, t);
@@ -279,8 +275,9 @@ public class Feromagnetic : MonoBehaviour
         {
             //Set location and velocity
             cubeRB.velocity = Vector3.zero;
+            Quaternion absoluteEndRotation = cubeAttractedToTransform.rotation * endRotationRelativeToAttractedCube;
             transform.localPosition = endPositionRelativeToAttractedCube;
-            transform.localRotation = endRotationRelativeToAttractedCube;
+            transform.rotation = absoluteEndRotation;
             if (cubeAttractedToTransform.Find("Orientation") != null)
             {
                 transform.Find("Orientation").transform.rotation = cubeAttractedToTransform.Find("Orientation").rotation;
@@ -330,15 +327,14 @@ public class Feromagnetic : MonoBehaviour
 
         if (springType == SpringType.Free || springType == SpringType.Limited)
         {
+            //Set cube rigidbody parameters when in structure
             cubeRB.mass = 0.01f;
             cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
             cubeRB.drag = 5f;
             cubeRB.angularDrag = 5f;
             this.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
             playerAtractedTo.GetComponent<GridSystem>().AttachBlock(gameObject, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
-
             attachJ();
-
         }
         else
         {
@@ -352,6 +348,7 @@ public class Feromagnetic : MonoBehaviour
 
         }
         //Set to magnetic after some time
+
         this.GetComponent<Bloc>().state = BlocState.structure;
         Invoke("setLayer", timeBeforeActiveMagnet);
 
@@ -419,52 +416,26 @@ public class Feromagnetic : MonoBehaviour
                 joint.angularXMotion = ConfigurableJointMotion.Locked;
                 joint.angularZMotion = ConfigurableJointMotion.Locked;
 
+                joint.xMotion = ConfigurableJointMotion.Locked;
+                joint.yMotion = ConfigurableJointMotion.Locked;
+                joint.zMotion = ConfigurableJointMotion.Locked;
+                joint.angularXMotion = ConfigurableJointMotion.Locked;
+                joint.angularZMotion = ConfigurableJointMotion.Locked;
                 SoftJointLimit limitAy = new SoftJointLimit();
                 limitAy.limit = AngleLimit;// angleLimit
                 joint.angularYLimit = limitAy;
+
                 Vector3 positionCenter = playerMainCube.InverseTransformPoint(transform.position);
+
                 float xPosition = Mathf.Abs(positionCenter.x);
                 float yPosition = Mathf.Abs(positionCenter.y);
                 float zPosition = Mathf.Abs(positionCenter.z);
-
-                if (xPosition > yPosition && xPosition > zPosition)
-                {
-                    joint.yMotion = ConfigurableJointMotion.Limited;
-                    joint.xMotion = ConfigurableJointMotion.Limited;
-                    joint.zMotion = ConfigurableJointMotion.Limited;
-                }
-                else if (yPosition > xPosition && yPosition > zPosition)
-                {
-                    joint.yMotion = ConfigurableJointMotion.Limited;
-                    joint.xMotion = ConfigurableJointMotion.Limited;
-                    joint.zMotion = ConfigurableJointMotion.Limited;
-                }
-                else if (zPosition > yPosition && zPosition > xPosition)
-                {
-                    joint.yMotion = ConfigurableJointMotion.Limited;
-                    joint.xMotion = ConfigurableJointMotion.Limited;
-                    joint.zMotion = ConfigurableJointMotion.Limited;
-                }
-                else
-                {
-                    joint.yMotion = ConfigurableJointMotion.Limited;
-                    joint.xMotion = ConfigurableJointMotion.Limited;
-                    joint.zMotion = ConfigurableJointMotion.Limited;
-                }
-
-                SoftJointLimit limitX = new SoftJointLimit();
-                limitX.limit = xLimit;
-                joint.linearLimit = limitX;
-
-                joint.enableCollision = true;
+                
                 joint.connectedBody = toConnectTo.GetComponent<Rigidbody>();
                 joint.anchor = Vector3.zero;
                 joint.autoConfigureConnectedAnchor = false;
-
-                Vector3 positionBeforeCorrection = toConnectTo.transform.InverseTransformPoint(transform.position);
                 if (toConnectTo.transform.Find("Orientation") != null)
                 {
-                    Debug.Log("ori");
                     joint.connectedAnchor = toConnectTo.transform.InverseTransformPoint(toConnectTo.transform.Find("Orientation")
                         .TransformPoint(cubeGrid.getPositionOfObject(this.gameObject) - cubeAttachToPosition));
 
@@ -473,7 +444,6 @@ public class Feromagnetic : MonoBehaviour
                 {
                     joint.connectedAnchor = cubeGrid.getPositionOfObject(this.gameObject) - cubeAttachToPosition;
                 }
-                // joint.connectedAnchor = positionBeforeCorrection;
                 if (springType == SpringType.Free)
                 {
                     joint.angularYMotion = ConfigurableJointMotion.Free;
@@ -485,13 +455,16 @@ public class Feromagnetic : MonoBehaviour
                     joint.projectionMode = JointProjectionMode.None;
 
                 }
-                
+
                 joint.breakTorque = springTorqueBreak;
                 joint.breakForce = springForceBreak;
                 joint.enableCollision = false;
-                joint.projectionMode = JointProjectionMode.None;
-                joint.projectionAngle = AngleLimit;
-                joint.projectionDistance = xLimit;
+                if (projectionMode)
+                {
+                    joint.projectionMode = JointProjectionMode.PositionAndRotation;
+                    joint.projectionAngle = AngleLimit;
+                    joint.projectionDistance = xLimit;
+                }
             }
             i++;
         }

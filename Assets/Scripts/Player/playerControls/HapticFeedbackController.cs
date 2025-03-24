@@ -72,6 +72,14 @@ public class HapticFeedbackController : MonoBehaviour
         rightMidTime = .02f,
         totalDuration = .06f,
     };
+    public ImpulseHapticPattern damageTaken = new ImpulseHapticPattern
+    {
+        leftMotorMax = .2f,
+        leftMidTime = .5f,
+        rightMotorMax = .8f,
+        rightMidTime = .5f,
+        totalDuration = 1.5f,
+    };
 
     private Gamepad playerGamepad;
     private Coroutine attractionCoroutine;
@@ -326,6 +334,11 @@ public class HapticFeedbackController : MonoBehaviour
         {
             StartCoroutine(ImpulseVibration(ejectionShoot));
         }
+    }
+
+    public void damageTakenVibration()
+    {
+
     }
 
     public void StopVibrations()
