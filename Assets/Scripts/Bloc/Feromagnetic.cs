@@ -375,10 +375,9 @@ public class Feromagnetic : MonoBehaviour
         {
             GameObject toConnectTo = cubeGrid.getObjectAtPosition(cubeAttachToPosition);
             this.AddComponent<ConfigurableJoint>();
-            // List<ConfigurableJoint> joints = this.GetComponents<ConfigurableJoint>().ToList();
-            ConfigurableJoint[] joints = this.GetComponents<ConfigurableJoint>();
-            // joints.RemoveAll(joint => joint.connectedBody != null);
-            ConfigurableJoint joint = joints[i];
+            List<ConfigurableJoint> joints = this.GetComponents<ConfigurableJoint>().ToList();
+            joints.RemoveAll(joint => joint.connectedBody != null);
+            ConfigurableJoint joint = joints.First();
 
             if (joint.connectedBody == null)
             {
