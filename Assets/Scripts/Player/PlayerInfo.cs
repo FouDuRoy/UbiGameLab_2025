@@ -43,12 +43,14 @@ public class PlayerInfo : MonoBehaviour
     {
         if(isInvincible)
         {
+            this.GetComponent<HapticFeedbackController>().damageTakenVibration();
             deathRotation(attackerName);
         }
         else
         {
             if (!invun)
             {
+                this.GetComponent<HapticFeedbackController>().damageTakenVibration();
                 float damage = Mathf.Clamp(impactForce.magnitude, 10, maxDamage);
                 healthValue -= damage;
                 Debug.Log("Current Health:" + healthValue + "damageTook:" + damage);
