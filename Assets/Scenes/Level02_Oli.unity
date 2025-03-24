@@ -245,6 +245,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3131990571156717056, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
   m_PrefabInstance: {fileID: 307359146}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &47004259 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7847107767003649144, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
+  m_PrefabInstance: {fileID: 307359146}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &58380222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1285,7 +1290,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7847107767003649144, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 822377287}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
 --- !u!4 &331913187 stripped
@@ -1746,13 +1754,13 @@ MonoBehaviour:
   springType: 0
   lerpingType: 0
   xLimit: 0.01
-  AngleLimit: 5
-  mainLinearDrive: 1000
+  AngleLimit: 4
+  mainLinearDrive: 5000
   mainLinearDamp: 50
   secondaryLinearDrive: 5000
   secondaryLinearDamp: 100
-  angularDrive: 5000
-  angularDamp: 100
+  angularDrive: 50000
+  angularDamp: 1000
   projection: 1
   springTorqueBreak: Infinity
   springForceBreak: Infinity
@@ -1821,8 +1829,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706163903}
   serializedVersion: 4
-  m_Mass: 0.001
-  m_Drag: 2
+  m_Mass: 0.01
+  m_Drag: 5
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2063,6 +2071,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   m_PrefabInstance: {fileID: 854314528}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &822377286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822377287}
+  m_Layer: 3
+  m_Name: Orientation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &822377287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822377286}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47004259}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &831233567
 GameObject:
   m_ObjectHideFlags: 0

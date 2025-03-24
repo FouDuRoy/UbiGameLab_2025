@@ -231,21 +231,17 @@ public class ConnectMagneticStructure : MonoBehaviour
             Quaternion absoluteEndRotation = cubeAttractedToTransform.rotation * endRotationRelativeToAttractedCube;
             Debug.Log(absoluteEndRotation.eulerAngles+"cubeAttractedRotation"+cubeAttractedToTransform.rotation.eulerAngles);
             Vector3 absoluteEndPosition = cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube);
-            cubeRB.velocity = Vector3.zero;
-            //closestCubeOwn.transform.localPosition = endPositionRelativeToAttractedCube;
-            //transform.localRotation = endRotationRelativeToAttractedCube;
-          //  closestCubeOwn.transform.rotation = absoluteEndRotation;
+
+       
+
             transform.position = absoluteEndPosition - (closestCubeOwn.transform.position - transform.position);
             transform.rotation = absoluteEndRotation;
-
-            Quaternion rotationAmount = Quaternion.Inverse(closestCubeOwn.transform.Find("Orientation").transform.rotation)* cubeAttractedToTransform.Find("Orientation").rotation;
-            
-            foreach(var v in playerGrid.grid)
+            Quaternion rotationAmount = Quaternion.Inverse(closestCubeOwn.transform.Find("Orientation").transform.rotation) * cubeAttractedToTransform.Find("Orientation").rotation;
+            foreach (var v in playerGrid.grid)
             {
                 v.Value.transform.Find("Orientation").transform.rotation *= rotationAmount;
-
+                v.Value.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
-
 
 
             AttachCube();
@@ -278,8 +274,16 @@ public class ConnectMagneticStructure : MonoBehaviour
 
             }
         }
+        //Set magnetic rb
+        cubeRB = this.GetComponent<Rigidbody>();
+        cubeRB.mass = 0.01f;
+        cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
+        cubeRB.drag = 5f;
+        cubeRB.angularDrag = 5f;
+
         this.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
         playerAtractedTo.GetComponent<GridSystem>().AttachBlock( closestCubeOwn, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
+        closestCubeOwn.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
         attachJ();
         playerAtractedTo.GetComponent<GridSystem>().AttachGrid(playerGrid, closestCubeOwn, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
         playerGrid.clearGrid();
@@ -442,15 +446,14 @@ public class ConnectMagneticStructure : MonoBehaviour
 
             //Start moving towards final positiond
             lerping = true;
-            //startPositionRelativeToAttractedCube =  closestCubeOwn.transform.localPosition;
-            //startRotationRelativeToAttractedCube = closestCubeOwn.transform.localRotation;
-            // endPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld);
-            // endRotationRelativeToAttractedCube = RotationChoice(closestCubeOwn.transform.localRotation);
             startPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestCubeOwn.transform.position);
             startRotationRelativeToAttractedCube = Quaternion.Inverse(cubeAttractedToTransform.rotation) * closestCubeOwn.transform.rotation;
             endPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld);
             endRotationRelativeToAttractedCube = RotationChoice(startRotationRelativeToAttractedCube);
-            cubeRB.useGravity = false;
+            foreach(var v in playerGrid.grid)
+            {
+                v.Value.GetComponent<Rigidbody>().useGravity = false;
+            }
         }
     
     }

@@ -271,10 +271,10 @@ public class Feromagnetic : MonoBehaviour
         else if (!(errorP > error || errorR > AngleError))
         {
             //Set location and velocity
+            Vector3 absoluteEndPosition = cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube);
             Quaternion absoluteEndRotation = cubeAttractedToTransform.rotation * endRotationRelativeToAttractedCube;
             cubeRB.velocity = Vector3.zero;
-            transform.localPosition = endPositionRelativeToAttractedCube;
-            //transform.localRotation = endRotationRelativeToAttractedCube;
+            transform.position = absoluteEndPosition;
             transform.rotation = absoluteEndRotation;
             if (cubeAttractedToTransform.Find("Orientation") != null)
             {
@@ -510,15 +510,15 @@ public class Feromagnetic : MonoBehaviour
             cubeRB.velocity = Vector3.zero;
             cubeRB.angularVelocity = Vector3.zero;
             //Set parent to attracted cube
-            this.transform.parent = cubeAttractedToTransform;
-            playerAtractedTo = this.transform.root;
+           // this.transform.parent = cubeAttractedToTransform;
+            playerAtractedTo = cubeAttractedToTransform.root;
 
             //Start moving towards final positiond
             lerping = true;
-            startPositionRelativeToAttractedCube = transform.localPosition;
-            startRotationRelativeToAttractedCube = transform.localRotation;
+            startPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(transform.position);
+            startRotationRelativeToAttractedCube = Quaternion.Inverse(cubeAttractedToTransform.rotation) * transform.rotation;
             endPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld);
-            endRotationRelativeToAttractedCube = RotationChoice(transform.localRotation);
+            endRotationRelativeToAttractedCube = RotationChoice(startRotationRelativeToAttractedCube);
             cubeRB.useGravity = false;
         }
     }

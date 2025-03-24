@@ -31,7 +31,7 @@ public class Bloc : MonoBehaviour
 
     void Update()
     {
-        if (state != BlocState.structure && owner != "Neutral")
+        if (state != BlocState.structure && owner != "Neutral" && this.GetComponent<Feromagnetic>() != null)
         {
             float speed = rb.velocity.magnitude;
 

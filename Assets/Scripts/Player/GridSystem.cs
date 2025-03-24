@@ -76,6 +76,9 @@ public class GridSystem : MonoBehaviour
                     , Mathf.RoundToInt((blocAttachToA.y / cubeSize)), Mathf.RoundToInt((blocAttachToA.z / cubeSize)));
 
                 grid.Add(intCord, v.Value);
+                v.Value.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
+                v.Value.GetComponent<Bloc>().state = BlocState.structure;
+                v.Value.GetComponent<MeshRenderer>().SetMaterials(materials);
             }
         
         }
