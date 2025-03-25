@@ -47,6 +47,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
     Vector3 leftHandFinalPoint;
     Vector3 rightHandFinalPoint;
     MouvementType moveType;
+
+    [Header("LineSection")]
+    [SerializeField] Material lineMat;
+    public float maxAngle = 15f;
+    LineRenderer leftRay;
+    LineRenderer rightRay;
     void Start()
     {
         playerGrid = GetComponent<GridSystem>();
@@ -63,6 +69,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         moveType = this.transform.GetComponent<PlayerMouvement>().moveType;
         leftHandTransform = golem.Find("L_Hand_IK_Target");
         rightHandTransform = golem.Find("R_Hand_IK_Target");
+        leftRay = CreateRay(Color.red);
+        rightRay = CreateRay(Color.red);
     }
     void FixedUpdate()
     {
@@ -105,8 +113,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             
             handTimer += Time.fixedDeltaTime;
             handTimer = handTimer % 1;
-            coneAttraction(mainCubeRb.transform.Find("GolemBuilt").transform, attractionForce
-                ,initialAngle,distance,1);
+            coneAttraction(mainCubeRb.transform.Find("GolemBuilt").transform,attractionForce,initialAngle,distance,1);
             leftTriggerHeld = true;
 
        
@@ -115,11 +122,15 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             feedback.AttractionVibrationEnd();
             leftTriggerHeld = false;
+            leftRay.gameObject.SetActive(false);
+            rightRay.gameObject.SetActive(false);
             resetMagneticLast();
         }
 
         if((rightTrigger > 0))
         {
+            leftRay.gameObject.SetActive(true);
+            rightRay.gameObject.SetActive(true);
             if (timeHeld == 0) //On appelle VibrationStart une seule fois, au début
             {
                 feedback.RepulsionVibrationStart(secondsForMaxCharging);
@@ -130,20 +141,48 @@ public class ConeEjectionAndProjection : MonoBehaviour
             //Draw rays to indicate current range
             timeHeld = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
             float maxAngle = initialAngle+(90-initialAngle)*(timeHeld/secondsForMaxChargingEjection);
-             Debug.DrawRay(golem.position, Quaternion.AngleAxis(maxAngle, Vector3.up) * golem.forward*distance,Color.red, Time.deltaTime);
-             Debug.DrawRay(golem.position, Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward *distance, Color.red, Time.deltaTime);
+
+            //Draw Rays in Build
+            Vector3 origin = golem.position;
+
+            Vector3 rightDir = Quaternion.AngleAxis(maxAngle, Vector3.up) * golem.forward;
+            Vector3 leftDir = Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward;
+
+
+            rightRay.SetPosition(0, origin);
+            rightRay.SetPosition(1, origin + rightDir * distance);
+
+            leftRay.SetPosition(0, origin);
+            leftRay.SetPosition(1, origin + leftDir * distance);
+            //Debug.DrawRay(golem.position, Quaternion.AngleAxis(maxAngle, Vector3.up) * golem.forward*distance,Color.red, Time.deltaTime);
+            //Debug.DrawRay(golem.position, Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward *distance, Color.red, Time.deltaTime);
         }
         else if (rightTriggerHeld)
         {
             feedback.RepulsionVibrationEnd(timeHeld);
             coneProjection(timeHeld);
+            leftRay.gameObject.SetActive(false);
+            rightRay.gameObject.SetActive(false);
             rightTriggerHeld = false;
             timeHeld = 0;
         }
     }
-
+    LineRenderer CreateRay(Color color)
+    {
+        GameObject go = new GameObject("Ray");
+        var lr = go.AddComponent<LineRenderer>();
+        lr.material = lineMat;
+        lr.startColor = color;
+        lr.endColor = color;
+        lr.startWidth = 0.05f;
+        lr.endWidth = 0.05f;
+        lr.positionCount = 2;
+        return lr;
+    }
     public void coneAttraction(Transform player,float attractionForce,float angle, float distance,float magnitude)
     {
+        leftRay.gameObject.SetActive(true);
+        rightRay.gameObject.SetActive(true);
         LayerMask mask = LayerMask.GetMask("magnetic");
         // Find all magneticblocs in radiusZone
         float sphereRadius = distance;
@@ -177,8 +216,20 @@ public class ConeEjectionAndProjection : MonoBehaviour
         magneticLast = magneticLast.FindAll(cube => !magnetic.Contains(cube));
         magneticLast.ForEach(cube => cube.GetComponent<Feromagnetic>().enabled = true);
 
-        Debug.DrawRay(player.position, Quaternion.AngleAxis(angle, Vector3.up) * player.forward*distance,Color.red, Time.deltaTime);
-        Debug.DrawRay(player.position, Quaternion.AngleAxis(-angle, Vector3.up) * player.forward *distance, Color.red, Time.deltaTime);
+        //Draw Rays in Build
+        Vector3 origin = golem.position;
+
+        Vector3 rightDir = Quaternion.AngleAxis(angle, Vector3.up) * golem.forward;
+        Vector3 leftDir = Quaternion.AngleAxis(-angle, Vector3.up) * golem.forward;
+
+
+        rightRay.SetPosition(0, origin);
+        rightRay.SetPosition(1, origin + rightDir * distance);
+
+        leftRay.SetPosition(0, origin);
+        leftRay.SetPosition(1, origin + leftDir * distance);
+        //Debug.DrawRay(player.position, Quaternion.AngleAxis(angle, Vector3.up) * player.forward*distance,Color.red, Time.deltaTime);
+        //Debug.DrawRay(player.position, Quaternion.AngleAxis(-angle, Vector3.up) * player.forward *distance, Color.red, Time.deltaTime);
         magneticLast = magnetic;
     }
 
