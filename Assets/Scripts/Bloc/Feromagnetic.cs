@@ -342,7 +342,6 @@ public class Feromagnetic : MonoBehaviour
             {
                 DestroyImmediate(cubeRB);
             }
-            Debug.Log(playerAtractedTo.GetComponent<GridSystem>());
             playerAtractedTo.GetComponent<GridSystem>().AttachBlock(gameObject, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
 
         }
@@ -373,37 +372,43 @@ public class Feromagnetic : MonoBehaviour
             List<ConfigurableJoint> joints = this.GetComponents<ConfigurableJoint>().ToList();
             joints.RemoveAll(joint => joint.connectedBody != null);
             ConfigurableJoint joint = joints.First();
-
+            float maxForce = 5000f;
             if (joint.connectedBody == null)
             {
                 JointDrive xDrive = joint.xDrive;
                 xDrive.positionSpring = mainLinearDrive;
                 xDrive.positionDamper = mainLinearDamp;
+                xDrive.maximumForce = maxForce;
                 joint.xDrive = xDrive;
 
                 JointDrive yDrive = joint.yDrive;
                 yDrive.positionSpring = secondaryLinearDrive;
                 yDrive.positionDamper = secondaryLinearDamp;
+                yDrive.maximumForce = maxForce;
                 joint.yDrive = yDrive;
 
                 JointDrive zDrive = joint.zDrive;
                 zDrive.positionSpring = secondaryLinearDrive;
                 zDrive.positionDamper = secondaryLinearDamp;
+                zDrive.maximumForce = maxForce;
                 joint.zDrive = zDrive;
 
                 JointDrive angularXDrive = joint.angularXDrive;
                 angularXDrive.positionSpring = mainLinearDrive;
                 angularXDrive.positionDamper = mainLinearDamp;
+                angularXDrive.maximumForce = maxForce;
                 joint.angularXDrive = angularXDrive;
 
                 JointDrive angularYZDrive = joint.angularYZDrive;
                 angularYZDrive.positionSpring = mainLinearDrive;
                 angularYZDrive.positionDamper = mainLinearDamp;
+                angularYZDrive.maximumForce = maxForce;
                 joint.angularYZDrive = angularYZDrive;
 
                 JointDrive slerpDrive = joint.slerpDrive;
                 slerpDrive.positionSpring = angularDrive;
                 slerpDrive.positionDamper = angularDamp;
+                slerpDrive.maximumForce = maxForce;
                 joint.slerpDrive = slerpDrive;
                 joint.rotationDriveMode = RotationDriveMode.Slerp;
 
@@ -411,8 +416,8 @@ public class Feromagnetic : MonoBehaviour
                 joint.projectionDistance = 0f;
 
                 joint.angularYMotion = ConfigurableJointMotion.Limited;
-                joint.angularXMotion = ConfigurableJointMotion.Locked;
-                joint.angularZMotion = ConfigurableJointMotion.Locked;
+                joint.angularXMotion = ConfigurableJointMotion.Limited;
+                joint.angularZMotion = ConfigurableJointMotion.Limited;
 
                 SoftJointLimit limitAy = new SoftJointLimit();
                 limitAy.limit = AngleLimit;// angleLimit

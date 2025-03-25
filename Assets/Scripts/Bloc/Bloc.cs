@@ -55,7 +55,14 @@ public class Bloc : MonoBehaviour
     }
     void FixedUpdate()
     {
-      
+        rb = GetComponent<Rigidbody>();
+        if(rb != null)
+        {
+            rb.maxLinearVelocity = maxSpeed;
+
+
+        }
+        
     }
     public void setOwner(string owner)
     {

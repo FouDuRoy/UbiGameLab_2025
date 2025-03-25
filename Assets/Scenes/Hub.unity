@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 70276290}
   - component: {fileID: 70276289}
   - component: {fileID: 70276288}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1245,42 +1245,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1607963941705366508, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
+      propertyPath: cubeSize
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 134994841213693252, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: m_Name
       value: Player 2 Le roi Arouf
-      objectReference: {fileID: 0}
-    - target: {fileID: 1846468097935250436, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: maxDamage
-      value: 99
-      objectReference: {fileID: 0}
-    - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: playerLife
-      value: 
-      objectReference: {fileID: 1741347661}
-    - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: healthValue
-      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: attackerText
       value: 
       objectReference: {fileID: 1577884351}
     - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: isInvincible
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: restartButton
       value: 
       objectReference: {fileID: 1577884350}
-    - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: MaxhealthValue
-      value: 300
-      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: gameOverCanvas
       value: 
@@ -1329,18 +1309,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6969026705895550396, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6969026705895550396, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.616
-      objectReference: {fileID: 0}
-    - target: {fileID: 6969026705895550396, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7850894500233854463, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: pauseMenu
       value: 
@@ -1349,18 +1317,6 @@ PrefabInstance:
       propertyPath: selectedGUI
       value: 
       objectReference: {fileID: 214131713}
-    - target: {fileID: 8089488074441929972, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8089488074441929972, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 8089488074441929972, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2825,10 +2781,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1288465849}
     m_Modifications:
-    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: xLimit
-      value: 0.01
-      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2872,10 +2824,6 @@ PrefabInstance:
     - target: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_Name
       value: MC_Spring (61)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6873425469701635572, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
-      propertyPath: maxSpeed
-      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10018,6 +9966,10 @@ PrefabInstance:
       propertyPath: xLimit
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 2341062450622316672, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
+      propertyPath: spacingBetweenCubes
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.875
@@ -15062,11 +15014,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
---- !u!1 &1741347661 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1302336306964384794, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
-  m_PrefabInstance: {fileID: 307359146}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1763602019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
@@ -15100,7 +15047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.15358616
+      value: -0.153
       objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15108,7 +15055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.15440474
+      value: 0.154
       objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15663,21 +15610,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1543439969089887489, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
-      propertyPath: projection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1543439969089887489, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
-      propertyPath: springType
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2877455228711921279, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
       propertyPath: m_Name
       value: MagneticCube 1
       objectReference: {fileID: 0}
     - target: {fileID: 8402648714665336278, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.81
+      value: -6.49
       objectReference: {fileID: 0}
     - target: {fileID: 8402648714665336278, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15685,7 +15624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8402648714665336278, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.45
+      value: -6.6
       objectReference: {fileID: 0}
     - target: {fileID: 8402648714665336278, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
       propertyPath: m_LocalRotation.w

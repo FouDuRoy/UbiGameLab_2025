@@ -9,28 +9,18 @@ public class ConnectMagneticStructure : MonoBehaviour
 {
     [SerializeField] float passiveRadius = 5.0f;
 
-    [SerializeField] float activeRadius = 5f;
 
-    [SerializeField] float charge = 5.0f;
     [SerializeField] float maxSpeed = 10f;
     [SerializeField] float error = 0.05f;
     [SerializeField] float AngleError = 0.05f;
 
-    [SerializeField] float spacingBetweenCubes = 0.1f;
 
     [SerializeField] float moveTime = 0.1f;
 
-    [SerializeField] int maxForceAttraction = 30;
 
     [SerializeField] float lerpingDistance;
 
     [SerializeField] float timeBeforeSwitching = 0.5f;
-    [SerializeField] float timeBeforeSwitchingVariation = 0.05f;
-    [SerializeField] float maxSpeedVariation = 3f;
-
-    [SerializeField] SpringType springType;
-
-    [SerializeField] LerpingType lerpingType;
 
     [SerializeField] float xLimit = 0f;
 
@@ -78,9 +68,6 @@ public class ConnectMagneticStructure : MonoBehaviour
     Quaternion startRotationRelativeToAttractedCube;
 
     List<Quaternion> quaternions;
-
-
-    float cubeSize = 0.5f;
 
     float errorP = 1;
 
@@ -134,6 +121,7 @@ public class ConnectMagneticStructure : MonoBehaviour
         {
             ResetObject();
         }
+
         if (!lerping)
         {
             List<Collider> magneticStructure = new List<Collider>();
@@ -333,6 +321,7 @@ public class ConnectMagneticStructure : MonoBehaviour
            if(currentCubeRb.transform.parent == this.transform || currentCubeRb.transform == transform)
             {
                 attachJ(v.Value);
+                
 
             }
 
@@ -351,51 +340,56 @@ public class ConnectMagneticStructure : MonoBehaviour
     {
         GridSystem cubeGrid = playerAtractedTo.GetComponent<GridSystem>();
         List<Vector3> occupiedSpaces = cubeGrid.getOccupiedNeighbours(attachingCube);
+        Rigidbody attachingCubeRB= attachingCube.GetComponent<Rigidbody>();
+      
 
-        int i = 0;
         foreach (Vector3 cubeAttachToPosition in occupiedSpaces)
         {
-
+      
             GameObject toConnectTo = cubeGrid.getObjectAtPosition(cubeAttachToPosition);
             
             attachingCube.AddComponent<ConfigurableJoint>();
             List<ConfigurableJoint> joints = attachingCube.GetComponents<ConfigurableJoint>().ToList();
-            foreach(ConfigurableJoint joint1 in joints)
-            {
-            }
             joints.RemoveAll(joint => joint.connectedBody != null);
             ConfigurableJoint joint = joints.First();
+            float maxForce = 5000f;
             if (joint.connectedBody == null)
             {
-                
+
                 JointDrive xDrive = joint.xDrive;
                 xDrive.positionSpring = mainLinearDrive;
                 xDrive.positionDamper = mainLinearDamp;
+                xDrive.maximumForce = maxForce;
                 joint.xDrive = xDrive;
 
                 JointDrive yDrive = joint.yDrive;
                 yDrive.positionSpring = secondaryLinearDrive;
                 yDrive.positionDamper = secondaryLinearDamp;
+                yDrive.maximumForce = maxForce;
                 joint.yDrive = yDrive;
 
                 JointDrive zDrive = joint.zDrive;
                 zDrive.positionSpring = secondaryLinearDrive;
                 zDrive.positionDamper = secondaryLinearDamp;
+                zDrive.maximumForce = maxForce;
                 joint.zDrive = zDrive;
 
                 JointDrive angularXDrive = joint.angularXDrive;
                 angularXDrive.positionSpring = mainLinearDrive;
                 angularXDrive.positionDamper = mainLinearDamp;
+                angularXDrive.maximumForce = maxForce;
                 joint.angularXDrive = angularXDrive;
 
                 JointDrive angularYZDrive = joint.angularYZDrive;
                 angularYZDrive.positionSpring = mainLinearDrive;
                 angularYZDrive.positionDamper = mainLinearDamp;
+                angularYZDrive.maximumForce = maxForce;
                 joint.angularYZDrive = angularYZDrive;
 
                 JointDrive slerpDrive = joint.slerpDrive;
                 slerpDrive.positionSpring = angularDrive;
                 slerpDrive.positionDamper = angularDamp;
+                slerpDrive.maximumForce = maxForce;
                 joint.slerpDrive = slerpDrive;
                 joint.rotationDriveMode = RotationDriveMode.Slerp;
 
@@ -403,8 +397,8 @@ public class ConnectMagneticStructure : MonoBehaviour
                 joint.projectionDistance = 0f;
 
                 joint.angularYMotion = ConfigurableJointMotion.Limited;
-                joint.angularXMotion = ConfigurableJointMotion.Locked;
-                joint.angularZMotion = ConfigurableJointMotion.Locked;
+                joint.angularXMotion = ConfigurableJointMotion.Limited;
+                joint.angularZMotion = ConfigurableJointMotion.Limited;
 
                 SoftJointLimit limitAy = new SoftJointLimit();
                 limitAy.limit = AngleLimit;// angleLimit
@@ -435,16 +429,7 @@ public class ConnectMagneticStructure : MonoBehaviour
                     joint.connectedAnchor = cubeGrid.getPositionOfObject(attachingCube) - cubeAttachToPosition;
                 }
                 
-                if (springType == SpringType.Free)
-                {
-                    joint.angularYMotion = ConfigurableJointMotion.Free;
-                    joint.angularXMotion = ConfigurableJointMotion.Locked;
-                    joint.angularZMotion = ConfigurableJointMotion.Locked;
-                    joint.xMotion = ConfigurableJointMotion.Locked;
-                    joint.yMotion = ConfigurableJointMotion.Locked;
-                    joint.zMotion = ConfigurableJointMotion.Locked;
-
-                }
+         
 
                 joint.breakTorque = springTorqueBreak;
                 joint.breakForce = springForceBreak;
@@ -457,7 +442,6 @@ public class ConnectMagneticStructure : MonoBehaviour
                 }
 
             }
-            i++;
         }
     }
     GameObject CheckClosestMagnet(List<Collider> magnetic, Transform cube)

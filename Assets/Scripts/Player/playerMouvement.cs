@@ -27,7 +27,6 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float mouvementSpeed = 1f;
     [SerializeField] float pivotSpeed = 1f;
     [SerializeField] float rotationSpeed = 1f;
-    [SerializeField] float playerCharge = 1000f;
     [SerializeField] float rotParam;
     [SerializeField] float rotationDamping =10f;
     [SerializeField] float weightMouvementFactor =1f;
@@ -400,7 +399,6 @@ public class PlayerMouvement : MonoBehaviour
     }
     private IEnumerator AngleRotation()
     {
-        float t = 0;
         Quaternion rotationAmount = Quaternion.AngleAxis(90f, Vector3.up);
         Quaternion initialRotation = rb.rotation;
         Quaternion rotationTarget = initialRotation * rotationAmount;

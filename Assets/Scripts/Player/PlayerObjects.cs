@@ -139,6 +139,7 @@ public class PlayerObjects : MonoBehaviour
             cube.transform.Find("Orientation").rotation = cube.transform.rotation;
             StartCoroutine(magenticStructure(cube));
             cube.GetComponent<Rigidbody>().mass = 50;
+            cube.layer = 0;
         }
         else
         {
@@ -184,6 +185,7 @@ public class PlayerObjects : MonoBehaviour
         } while (blocRb.velocity.magnitude > 1);
         block.GetComponent<ConnectMagneticStructure>().enabled = true;
         block.GetComponent<Bloc>().state = BlocState.magnetic;
+        block.layer = 3;
 
     }
 }

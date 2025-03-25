@@ -160,7 +160,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4549032222228033677
 MonoBehaviour:
@@ -210,20 +210,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passiveRadius: 2
-  activeRadius: 5
-  charge: 5
   maxSpeed: 10
   error: 0.2
   AngleError: 8
-  spacingBetweenCubes: 0.2
   moveTime: 0.05
-  maxForceAttraction: 10
-  lerpingDistance: 1
+  lerpingDistance: 10
   timeBeforeSwitching: 0.2
-  timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
-  springType: 1
-  lerpingType: 0
   xLimit: 0.01
   AngleLimit: 4
   mainLinearDrive: 5000
@@ -233,8 +225,8 @@ MonoBehaviour:
   angularDrive: 50000
   angularDamp: 1000
   projection: 1
-  springTorqueBreak: Infinity
-  springForceBreak: Infinity
+  springTorqueBreak: 50000
+  springForceBreak: 50000
 --- !u!114 &601833731030724977
 MonoBehaviour:
   m_ObjectHideFlags: 0
