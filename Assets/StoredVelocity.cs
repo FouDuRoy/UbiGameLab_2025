@@ -16,9 +16,12 @@ public class StoredVelocity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-   
+        if (rb != null)
+        {
             lastTickVelocity = curentTickVelocity;
             curentTickVelocity = rb.velocity;
+
+        }
 
         
     }

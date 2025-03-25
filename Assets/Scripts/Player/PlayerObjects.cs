@@ -12,136 +12,142 @@ public class PlayerObjects : MonoBehaviour
 
     MouvementType moveType;
     protected GridSystem gridSystem;
-    public float weight=1;
-    List<Material>  materials = new List<Material>();
+    public float weight = 1;
+    List<Material> materials = new List<Material>();
     void Start()
     {
         gridSystem = this.GetComponent<GridSystem>();
         weight = 1;
-        moveType = this.GetComponent<PlayerMouvement>().moveType;
         materials.Add(blocNonMagnetic);
     }
 
     public void removeCube(GameObject cube)
     {
-        if (moveType == MouvementType.move3dSpring || moveType == MouvementType.Move3dBothJoystickSpring)
+
+        ConfigurableJoint[] joints = cube.GetComponents<ConfigurableJoint>();
+        foreach (ConfigurableJoint joint in joints)
         {
-            ConfigurableJoint[] joints = cube.GetComponents<ConfigurableJoint>();
+            JointDrive xDrive = joint.xDrive;
+            xDrive.positionSpring = 0;
+            xDrive.positionDamper = 0;
+            joint.xDrive = xDrive;
+
+            JointDrive yDrive = joint.yDrive;
+            yDrive.positionSpring = 0;
+            yDrive.positionDamper = 0;
+            joint.yDrive = yDrive;
+
+            JointDrive zDrive = joint.zDrive;
+            zDrive.positionSpring = 0;
+            zDrive.positionDamper = 0;
+            joint.zDrive = zDrive;
+
+            JointDrive angularXDrive = joint.angularXDrive;
+            angularXDrive.positionSpring = 0;
+            angularXDrive.positionDamper = 0;
+            joint.angularXDrive = angularXDrive;
+
+            JointDrive angularYZDrive = joint.angularYZDrive;
+            angularYZDrive.positionSpring = 0;
+            angularYZDrive.positionDamper = 0;
+            joint.angularYZDrive = angularYZDrive;
+
+            JointDrive slerpDrive = joint.slerpDrive;
+            slerpDrive.positionSpring = 0;
+            slerpDrive.positionDamper = 0;
+            joint.angularYMotion = ConfigurableJointMotion.Free;
+            joint.angularXMotion = ConfigurableJointMotion.Free;
+            joint.angularZMotion = ConfigurableJointMotion.Free;
+            joint.xMotion = ConfigurableJointMotion.Free;
+            joint.yMotion = ConfigurableJointMotion.Free;
+            joint.zMotion = ConfigurableJointMotion.Free;
+            joint.projectionMode = JointProjectionMode.None;
+
+            Destroy(joint);
+            Rigidbody rb2 = passiveCube.GetComponent<Rigidbody>();
+            Rigidbody rb = cube.GetComponent<Rigidbody>();
+            rb.mass = rb2.mass;
+            rb.drag = rb2.drag;
+            rb.angularDrag = rb2.angularDrag;
+            rb.collisionDetectionMode = rb2.collisionDetectionMode;
+            rb.useGravity = rb2.useGravity;
+            rb.constraints = rb2.constraints;
+        }
+        foreach (var m in gridSystem.grid)
+        {
+            joints = m.Value.GetComponents<ConfigurableJoint>();
             foreach (ConfigurableJoint joint in joints)
             {
-                JointDrive xDrive = joint.xDrive;
-                xDrive.positionSpring = 0;
-                xDrive.positionDamper = 0;
-                joint.xDrive = xDrive;
-
-                JointDrive yDrive = joint.yDrive;
-                yDrive.positionSpring = 0;
-                yDrive.positionDamper = 0;
-                joint.yDrive = yDrive;
-
-                JointDrive zDrive = joint.zDrive;
-                zDrive.positionSpring = 0;
-                zDrive.positionDamper = 0;
-                joint.zDrive = zDrive;
-
-                JointDrive angularXDrive = joint.angularXDrive;
-                angularXDrive.positionSpring = 0;
-                angularXDrive.positionDamper = 0;
-                joint.angularXDrive = angularXDrive;
-
-                JointDrive angularYZDrive = joint.angularYZDrive;
-                angularYZDrive.positionSpring = 0;
-                angularYZDrive.positionDamper = 0;
-                joint.angularYZDrive = angularYZDrive;
-
-                JointDrive slerpDrive = joint.slerpDrive;
-                slerpDrive.positionSpring = 0;
-                slerpDrive.positionDamper = 0;
-                joint.angularYMotion = ConfigurableJointMotion.Free;
-                joint.angularXMotion = ConfigurableJointMotion.Free;
-                joint.angularZMotion = ConfigurableJointMotion.Free;
-                joint.xMotion = ConfigurableJointMotion.Free;
-                joint.yMotion = ConfigurableJointMotion.Free;
-                joint.zMotion = ConfigurableJointMotion.Free;
-                joint.projectionMode = JointProjectionMode.None;
-
-                Destroy(joint);
-                Rigidbody rb2 = passiveCube.GetComponent<Rigidbody>();
-                Rigidbody rb = cube.GetComponent<Rigidbody>();
-                rb.mass = rb2.mass;
-                rb.drag = rb2.drag;
-                rb.angularDrag = rb2.angularDrag;
-                rb.collisionDetectionMode = rb2.collisionDetectionMode;
-                rb.useGravity = rb2.useGravity;
-                rb.constraints = rb2.constraints;
-            }
-            foreach (var m in gridSystem.grid)
-            {
-                joints = m.Value.GetComponents<ConfigurableJoint>();
-                foreach (ConfigurableJoint joint in joints)
+                if (joint.connectedBody.gameObject == cube)
                 {
-                    if (joint.connectedBody.gameObject == cube)
-                    {
-                        JointDrive xDrive = joint.xDrive;
-                        xDrive.positionSpring = 0;
-                        xDrive.positionDamper = 0;
-                        joint.xDrive = xDrive;
+                    JointDrive xDrive = joint.xDrive;
+                    xDrive.positionSpring = 0;
+                    xDrive.positionDamper = 0;
+                    joint.xDrive = xDrive;
 
-                        JointDrive yDrive = joint.yDrive;
-                        yDrive.positionSpring = 0;
-                        yDrive.positionDamper = 0;
-                        joint.yDrive = yDrive;
+                    JointDrive yDrive = joint.yDrive;
+                    yDrive.positionSpring = 0;
+                    yDrive.positionDamper = 0;
+                    joint.yDrive = yDrive;
 
-                        JointDrive zDrive = joint.zDrive;
-                        zDrive.positionSpring = 0;
-                        zDrive.positionDamper = 0;
-                        joint.zDrive = zDrive;
+                    JointDrive zDrive = joint.zDrive;
+                    zDrive.positionSpring = 0;
+                    zDrive.positionDamper = 0;
+                    joint.zDrive = zDrive;
 
-                        JointDrive angularXDrive = joint.angularXDrive;
-                        angularXDrive.positionSpring = 0;
-                        angularXDrive.positionDamper = 0;
-                        joint.angularXDrive = angularXDrive;
+                    JointDrive angularXDrive = joint.angularXDrive;
+                    angularXDrive.positionSpring = 0;
+                    angularXDrive.positionDamper = 0;
+                    joint.angularXDrive = angularXDrive;
 
-                        JointDrive angularYZDrive = joint.angularYZDrive;
-                        angularYZDrive.positionSpring = 0;
-                        angularYZDrive.positionDamper = 0;
-                        joint.angularYZDrive = angularYZDrive;
+                    JointDrive angularYZDrive = joint.angularYZDrive;
+                    angularYZDrive.positionSpring = 0;
+                    angularYZDrive.positionDamper = 0;
+                    joint.angularYZDrive = angularYZDrive;
 
-                        JointDrive slerpDrive = joint.slerpDrive;
-                        slerpDrive.positionSpring = 0;
-                        slerpDrive.positionDamper = 0;
-                        joint.angularYMotion = ConfigurableJointMotion.Free;
-                        joint.angularXMotion = ConfigurableJointMotion.Free;
-                        joint.angularZMotion = ConfigurableJointMotion.Free;
-                        joint.xMotion = ConfigurableJointMotion.Free;
-                        joint.yMotion = ConfigurableJointMotion.Free;
-                        joint.zMotion = ConfigurableJointMotion.Free;
-                        joint.projectionMode = JointProjectionMode.None;
+                    JointDrive slerpDrive = joint.slerpDrive;
+                    slerpDrive.positionSpring = 0;
+                    slerpDrive.positionDamper = 0;
+                    joint.angularYMotion = ConfigurableJointMotion.Free;
+                    joint.angularXMotion = ConfigurableJointMotion.Free;
+                    joint.angularZMotion = ConfigurableJointMotion.Free;
+                    joint.xMotion = ConfigurableJointMotion.Free;
+                    joint.yMotion = ConfigurableJointMotion.Free;
+                    joint.zMotion = ConfigurableJointMotion.Free;
+                    joint.projectionMode = JointProjectionMode.None;
 
-                        Destroy(joint);
-                        Rigidbody rb2 = passiveCube.GetComponent<Rigidbody>();
-                        Rigidbody rb = cube.GetComponent<Rigidbody>();
-                        rb.mass = rb2.mass;
-                        rb.drag = rb2.drag;
-                        rb.angularDrag = rb2.angularDrag;
-                        rb.collisionDetectionMode = rb2.collisionDetectionMode;
-                        rb.useGravity = rb2.useGravity;
-                        rb.constraints = rb2.constraints;
-                    }
-                   
+                    Destroy(joint);
+                    Rigidbody rb2 = passiveCube.GetComponent<Rigidbody>();
+                    Rigidbody rb = cube.GetComponent<Rigidbody>();
+                    rb.mass = rb2.mass;
+                    rb.drag = rb2.drag;
+                    rb.angularDrag = rb2.angularDrag;
+                    rb.collisionDetectionMode = rb2.collisionDetectionMode;
+                    rb.useGravity = rb2.useGravity;
+                    rb.constraints = rb2.constraints;
                 }
+
             }
-            
-          
+        }
+
+
+
+        cube.transform.parent = transform.parent;
+        ConnectMagneticStructure magneticStructure = cube.GetComponent<ConnectMagneticStructure>();
+        if(magneticStructure != null)
+        {
+            cube.transform.Find("Orientation").rotation = cube.transform.rotation;
+            StartCoroutine(magenticStructure(cube));
+            cube.GetComponent<Rigidbody>().mass = 50;
+            cube.layer = 0;
         }
         else
         {
-            GetComponent<PlayerObjects>().addRigidBody(cube);
+            cube.layer = 0;
+            Destroy(cube.GetComponent<SphereCollider>());
+            StartCoroutine(blockNeutral(cube));
+
         }
-        cube.transform.parent = transform.parent;
-        cube.layer = 0;
-        Destroy(cube.GetComponent<SphereCollider>());
-        StartCoroutine(blockNeutral(cube));
     }
 
     public void addRigidBody(GameObject cube)
@@ -167,6 +173,19 @@ public class PlayerObjects : MonoBehaviour
         {
             block.GetComponent<Bloc>().state = BlocState.magnetic;
         }
+
+    }
+    IEnumerator magenticStructure(GameObject block)
+    {
+
+      Rigidbody blocRb = block.GetComponent<Rigidbody>();
+        do
+        {
+            yield return null;
+        } while (blocRb.velocity.magnitude > 1);
+        block.GetComponent<ConnectMagneticStructure>().enabled = true;
+        block.GetComponent<Bloc>().state = BlocState.magnetic;
+        block.layer = 3;
 
     }
 }

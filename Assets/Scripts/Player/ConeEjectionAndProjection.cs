@@ -287,7 +287,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     private void EjectBloc(GameObject cube, Transform golem)
     {
-        cube.gameObject.layer = 0;
+   
         cube.transform.parent = this.transform.parent;
         playerGrid.DetachBlocSingle(cube);
 

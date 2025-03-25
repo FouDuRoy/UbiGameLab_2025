@@ -286,13 +286,18 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
+  maxSpeed: 10
   error: 0.05
-  interpolates: 0
-  timeLerpingTransform: 0.2
+  AngleError: 0.05
   spacingBetweenCubes: 0.1
   moveTime: 0.1
   maxForceAttraction: 30
   lerpingDistance: 0
+  timeBeforeSwitching: 0.5
+  timeBeforeSwitchingVariation: 0.05
+  maxSpeedVariation: 3
+  springTorqueBreak: 1000
+  springForceBreak: 1000
   springType: 0
   lerpingType: 0
   xLimit: 0
@@ -585,13 +590,18 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
+  maxSpeed: 10
   error: 0.05
-  interpolates: 0
-  timeLerpingTransform: 0.2
+  AngleError: 0.05
   spacingBetweenCubes: 0.1
   moveTime: 0.1
   maxForceAttraction: 30
   lerpingDistance: 0
+  timeBeforeSwitching: 0.5
+  timeBeforeSwitchingVariation: 0.05
+  maxSpeedVariation: 3
+  springTorqueBreak: 1000
+  springForceBreak: 1000
   springType: 0
   lerpingType: 0
   xLimit: 0
@@ -766,13 +776,18 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
+  maxSpeed: 10
   error: 0.05
-  interpolates: 0
-  timeLerpingTransform: 0.2
+  AngleError: 0.05
   spacingBetweenCubes: 0.1
   moveTime: 0.1
   maxForceAttraction: 30
   lerpingDistance: 0
+  timeBeforeSwitching: 0.5
+  timeBeforeSwitchingVariation: 0.05
+  maxSpeedVariation: 3
+  springTorqueBreak: 1000
+  springForceBreak: 1000
   springType: 0
   lerpingType: 0
   xLimit: 0
@@ -947,13 +962,18 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
+  maxSpeed: 10
   error: 0.05
-  interpolates: 0
-  timeLerpingTransform: 0.2
+  AngleError: 0.05
   spacingBetweenCubes: 0.1
   moveTime: 0.1
   maxForceAttraction: 30
   lerpingDistance: 0
+  timeBeforeSwitching: 0.5
+  timeBeforeSwitchingVariation: 0.05
+  maxSpeedVariation: 3
+  springTorqueBreak: 1000
+  springForceBreak: 1000
   springType: 0
   lerpingType: 0
   xLimit: 0
@@ -1128,13 +1148,18 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
+  maxSpeed: 10
   error: 0.05
-  interpolates: 0
-  timeLerpingTransform: 0.2
+  AngleError: 0.05
   spacingBetweenCubes: 0.1
   moveTime: 0.1
   maxForceAttraction: 30
   lerpingDistance: 0
+  timeBeforeSwitching: 0.5
+  timeBeforeSwitchingVariation: 0.05
+  maxSpeedVariation: 3
+  springTorqueBreak: 1000
+  springForceBreak: 1000
   springType: 0
   lerpingType: 0
   xLimit: 0
@@ -1309,13 +1334,18 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
+  maxSpeed: 10
   error: 0.05
-  interpolates: 0
-  timeLerpingTransform: 0.2
+  AngleError: 0.05
   spacingBetweenCubes: 0.1
   moveTime: 0.1
   maxForceAttraction: 30
   lerpingDistance: 0
+  timeBeforeSwitching: 0.5
+  timeBeforeSwitchingVariation: 0.05
+  maxSpeedVariation: 3
+  springTorqueBreak: 1000
+  springForceBreak: 1000
   springType: 0
   lerpingType: 0
   xLimit: 0
@@ -1729,13 +1759,18 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
+  maxSpeed: 10
   error: 0.05
-  interpolates: 0
-  timeLerpingTransform: 0.2
+  AngleError: 0.05
   spacingBetweenCubes: 0.1
   moveTime: 0.1
   maxForceAttraction: 30
   lerpingDistance: 0
+  timeBeforeSwitching: 0.5
+  timeBeforeSwitchingVariation: 0.05
+  maxSpeedVariation: 3
+  springTorqueBreak: 1000
+  springForceBreak: 1000
   springType: 0
   lerpingType: 0
   xLimit: 0
@@ -1887,13 +1922,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionForce: 30
-  speed: 2
-  speedRotation: 100
+  mouvementSpeed: 1
+  pivotSpeed: 1
+  rotationSpeed: 1
   playerCharge: 1000
   rotParam: 0
   rotationDamping: 10
+  weightMouvementFactor: 1
+  weightRotationFactor: 1
   moveType: 0
-  reff: {fileID: 0}
 --- !u!43 &1694656762
 Mesh:
   m_ObjectHideFlags: 0
@@ -8490,13 +8527,18 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
+  maxSpeed: 10
   error: 0.05
-  interpolates: 0
-  timeLerpingTransform: 0.2
+  AngleError: 0.05
   spacingBetweenCubes: 0.1
   moveTime: 0.1
   maxForceAttraction: 30
   lerpingDistance: 0
+  timeBeforeSwitching: 0.5
+  timeBeforeSwitchingVariation: 0.05
+  maxSpeedVariation: 3
+  springTorqueBreak: 1000
+  springForceBreak: 1000
   springType: 0
   lerpingType: 0
   xLimit: 0
@@ -8671,13 +8713,18 @@ MonoBehaviour:
   passiveRadius: 5
   activeRadius: 5
   charge: 10
+  maxSpeed: 10
   error: 0.05
-  interpolates: 0
-  timeLerpingTransform: 0.2
+  AngleError: 0.05
   spacingBetweenCubes: 0.1
   moveTime: 0.1
   maxForceAttraction: 30
   lerpingDistance: 0
+  timeBeforeSwitching: 0.5
+  timeBeforeSwitchingVariation: 0.05
+  maxSpeedVariation: 3
+  springTorqueBreak: 1000
+  springForceBreak: 1000
   springType: 0
   lerpingType: 0
   xLimit: 0

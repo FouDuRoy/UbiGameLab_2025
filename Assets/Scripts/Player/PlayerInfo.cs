@@ -22,7 +22,7 @@ public class PlayerInfo : MonoBehaviour
     public float timeScaleFactor = 0.2f;
     bool invun = false;
     public float healthValue;
-    [Header("Débogage")]
+    [Header("Dï¿½bogage")]
     [SerializeField] GameObject playerLife;
     [SerializeField] bool isInvincible;
 

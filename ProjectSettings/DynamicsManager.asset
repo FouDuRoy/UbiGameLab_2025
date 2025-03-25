@@ -4,23 +4,23 @@
 PhysicsManager:
   m_ObjectHideFlags: 0
   serializedVersion: 14
-  m_Gravity: {x: 0, y: -80, z: 0}
+  m_Gravity: {x: 0, y: -10, z: 0}
   m_DefaultMaterial: {fileID: 0}
   m_BounceThreshold: 2
-  m_DefaultMaxDepenetrationVelocity: 10
-  m_SleepThreshold: 0.005
+  m_DefaultMaxDepenetrationVelocity: 5
+  m_SleepThreshold: 0.001
   m_DefaultContactOffset: 0.01
-  m_DefaultSolverIterations: 40
-  m_DefaultSolverVelocityIterations: 40
+  m_DefaultSolverIterations: 20
+  m_DefaultSolverVelocityIterations: 20
   m_QueriesHitBackfaces: 0
   m_QueriesHitTriggers: 1
-  m_EnableAdaptiveForce: 0
+  m_EnableAdaptiveForce: 1
   m_ClothInterCollisionDistance: 0
   m_ClothInterCollisionStiffness: 0
   m_ContactsGeneration: 1
   m_LayerCollisionMatrix: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
   m_SimulationMode: 0
-  m_AutoSyncTransforms: 0
+  m_AutoSyncTransforms: 1
   m_ReuseCollisionCallbacks: 1
   m_InvokeCollisionCallbacks: 1
   m_ClothInterCollisionSettingsToggle: 0
