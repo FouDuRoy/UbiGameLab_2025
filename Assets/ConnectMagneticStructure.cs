@@ -438,11 +438,11 @@ public class ConnectMagneticStructure : MonoBehaviour
                 if (springType == SpringType.Free)
                 {
                     joint.angularYMotion = ConfigurableJointMotion.Free;
-                    joint.angularXMotion = ConfigurableJointMotion.Free;
-                    joint.angularZMotion = ConfigurableJointMotion.Free;
-                    joint.xMotion = ConfigurableJointMotion.Free;
-                    joint.yMotion = ConfigurableJointMotion.Free;
-                    joint.zMotion = ConfigurableJointMotion.Free;
+                    joint.angularXMotion = ConfigurableJointMotion.Locked;
+                    joint.angularZMotion = ConfigurableJointMotion.Locked;
+                    joint.xMotion = ConfigurableJointMotion.Locked;
+                    joint.yMotion = ConfigurableJointMotion.Locked;
+                    joint.zMotion = ConfigurableJointMotion.Locked;
 
                 }
 

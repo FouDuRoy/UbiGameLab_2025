@@ -53,6 +53,10 @@ public class Bloc : MonoBehaviour
         
 
     }
+    void FixedUpdate()
+    {
+      
+    }
     public void setOwner(string owner)
     {
         this.owner = owner;
