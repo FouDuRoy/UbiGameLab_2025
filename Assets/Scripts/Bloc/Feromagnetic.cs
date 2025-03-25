@@ -137,7 +137,6 @@ public class Feromagnetic : MonoBehaviour
             // Enleve les cubes avec aucune face disponible. 
             foreach (Collider mag in magneticColliderList)
             {
-                Debug.Log(mag.transform.root);
                 GridSystem grid = mag.transform.root.GetComponent<GridSystem>();
                 if (grid == null || grid.getAvailableNeighbours(mag.gameObject).Count == 0)
                 {
@@ -309,6 +308,8 @@ public class Feromagnetic : MonoBehaviour
         if (cubeRB != null)
         {
             cubeRB.useGravity = true;
+            //here
+            cubeRB.mass = 0.1f;
 
         }
         transform.parent = this.transform.root.parent;
@@ -323,8 +324,7 @@ public class Feromagnetic : MonoBehaviour
         gameObject.GetComponent<SphereCollider>().radius = activeRadius;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
 
-
-        if (springType == SpringType.Free || springType == SpringType.Limited)
+        if ((springType == SpringType.Free || springType == SpringType.Limited) && cubeAttractedToTransform.root.GetComponent<ConnectMagneticStructure>()==null)
         {
             cubeRB.mass = 0.01f;
             cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
@@ -342,6 +342,7 @@ public class Feromagnetic : MonoBehaviour
             {
                 DestroyImmediate(cubeRB);
             }
+            Debug.Log(playerAtractedTo.GetComponent<GridSystem>());
             playerAtractedTo.GetComponent<GridSystem>().AttachBlock(gameObject, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
 
         }
@@ -522,6 +523,7 @@ public class Feromagnetic : MonoBehaviour
             endPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld);
             endRotationRelativeToAttractedCube = RotationChoice(startRotationRelativeToAttractedCube);
             cubeRB.useGravity = false;
+            cubeRB.mass = 0.001f;
         }
     }
     private Vector3 CoulombLaw(Vector3 distance, float charge1, float charge2)

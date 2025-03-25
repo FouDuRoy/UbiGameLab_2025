@@ -94,12 +94,46 @@ public class ConnectMagneticStructure : MonoBehaviour
     {
         playerGrid = GetComponent<GridSystem>();
         quaternions = createListAngles();
+        cubeRB = GetComponent<Rigidbody>();
     }
-
+    void OnEnable()
+    {
+        ResetObject();
+    }
     // Update is called once per frame
+    public void ResetObject()
+    {
+        lerping = false;
+        timer = 0;
+        cubeAttractedToTransform = null;
+        playerAtractedTo = null;
+        t = 0;
+        relativePositionToMainCube = Vector3.zero;
+        closestFaceRelativeToWorld = Vector3.zero;
+        closestFaceRelativeToMainCube = Vector3.zero;
+        closestCube = null;
+        closestCubeOwn = null;
+        errorP = 1;
+        errorR = 1;
+        if (cubeRB != null)
+        {
+            cubeRB.useGravity = true;
+
+        }
+        transform.parent = this.transform.root.parent;
+       
+    }
     void FixedUpdate()
     {
 
+        if (!LookPositionGridAvailable() && lerping)
+        {
+            ResetObject();
+        }
+        if (cubeAttractedToTransform != null && cubeAttractedToTransform.root.GetComponent<PlayerObjects>() == null)
+        {
+            ResetObject();
+        }
         if (!lerping)
         {
             List<Collider> magneticStructure = new List<Collider>();
@@ -188,9 +222,8 @@ public class ConnectMagneticStructure : MonoBehaviour
     private void VelocityLerping()
     {
         float distance = (closestFaceRelativeToWorld - closestCubeOwn.transform.position).magnitude;
-        cubeRB = closestCubeOwn.GetComponent<Rigidbody>();
-       
-        if (lerping && (errorP > error || errorR > AngleError) &&  timer < timeBeforeSwitching)
+
+        if (lerping && (errorP > error || errorR > AngleError) && (distance < lerpingDistance && timer < timeBeforeSwitching))
         {
             //Once its locked 
             timer += Time.fixedDeltaTime;
@@ -198,6 +231,7 @@ public class ConnectMagneticStructure : MonoBehaviour
             float rotationSpeed = moveTime / Time.fixedDeltaTime;
             Vector3 absoluteStartP = cubeAttractedToTransform.TransformPoint(startPositionRelativeToAttractedCube);
             Vector3 absoluteEndPosition = cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube);
+            absoluteEndPosition=absoluteEndPosition - (closestCubeOwn.transform.position - transform.position);
             Vector3 newPosition = Vector3.Lerp(absoluteStartP, absoluteEndPosition, t);
             Vector3 velocity = (newPosition - cubeRB.position) / Time.fixedDeltaTime;
 
@@ -229,28 +263,24 @@ public class ConnectMagneticStructure : MonoBehaviour
         else if (!(errorP > error || errorR > AngleError))
         {
             //Set location and velocity
+            cubeRB.velocity = Vector3.zero;
             Quaternion absoluteEndRotation = cubeAttractedToTransform.rotation * endRotationRelativeToAttractedCube;
-            Debug.Log(absoluteEndRotation.eulerAngles+"cubeAttractedRotation"+cubeAttractedToTransform.rotation.eulerAngles);
             Vector3 absoluteEndPosition = cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube);
 
-       
 
             transform.position = absoluteEndPosition - (closestCubeOwn.transform.position - transform.position);
-     
-            Quaternion rotationAmount = Quaternion.Inverse(closestCubeOwn.transform.Find("Orientation").transform.rotation) * cubeAttractedToTransform.Find("Orientation").rotation;
-            foreach (var v in playerGrid.grid)
+            transform.rotation = absoluteEndRotation;
+            Quaternion rotationAmount = Quaternion.Inverse(transform.Find("Orientation").transform.rotation) * cubeAttractedToTransform.Find("Orientation").rotation;
+            foreach(var v in playerGrid.grid)
             {
-                v.Value.transform.Find("Orientation").transform.rotation *= rotationAmount;
-                v.Value.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                v.Value.transform.Find("Orientation").rotation *= rotationAmount;
             }
-
 
             AttachCube();
         }
         else
         {
-            Debug.Log(timer+":"+timeBeforeSwitching);
-            // ResetObject();
+            ResetObject();
         }
     }
     private void AttachCube()
@@ -265,12 +295,10 @@ public class ConnectMagneticStructure : MonoBehaviour
                 childsList.Add(transform.GetChild(i).gameObject);
             }
         }
-
-        foreach(GameObject child in childsList)
+        foreach (var v in playerGrid.grid)
         {
-            child.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform; 
+            v.Value.layer = 3;
         }
-  
         //Set magnetic rb
         cubeRB = this.GetComponent<Rigidbody>();
         cubeRB.mass = 0.01f;
@@ -278,33 +306,65 @@ public class ConnectMagneticStructure : MonoBehaviour
         cubeRB.drag = 5f;
         cubeRB.angularDrag = 5f;
 
-        playerAtractedTo.GetComponent<GridSystem>().AttachBlock( closestCubeOwn, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
         closestCubeOwn.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
-        attachJ();
         playerAtractedTo.GetComponent<GridSystem>().AttachGrid(playerGrid, closestCubeOwn, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
         playerGrid.clearGrid();
-        //this.GetComponent<Bloc>().state = BlocState.structure;
-        Invoke("setLayer", 0f);
+        foreach (var v in playerAtractedTo.GetComponent<GridSystem>().grid)
+        {
+            Rigidbody currentCubeRb = v.Value.GetComponent<Rigidbody>();
+            if(currentCubeRb == null)
+            {
+                playerAtractedTo.GetComponent<PlayerObjects>().addRigidBody(v.Value);
+                
+            }
+        }
+        foreach (var v in playerAtractedTo.GetComponent<GridSystem>().grid)
+        {
+            
+            Rigidbody currentCubeRb = v.Value.GetComponent<Rigidbody>();
+           if( cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb != currentCubeRb )
+            {
+                currentCubeRb.mass = 0.01f;
+                currentCubeRb.interpolation = RigidbodyInterpolation.Interpolate;
+                currentCubeRb.drag = 5f;
+                currentCubeRb.angularDrag = 5f;
+                currentCubeRb.useGravity = false;
+            }
+           if(currentCubeRb.transform.parent == this.transform || currentCubeRb.transform == transform)
+            {
+                attachJ(v.Value);
+
+            }
+
+        }
 
         //Disable script
+        foreach (GameObject child in childsList)
+        {
+            child.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
+        }
+        
         this.GetComponent<ConnectMagneticStructure>().enabled = false;
     }
 
-    private void attachJ()
+    private void attachJ(GameObject attachingCube)
     {
         GridSystem cubeGrid = playerAtractedTo.GetComponent<GridSystem>();
-        List<Vector3> occupiedSpaces = cubeGrid.getOccupiedNeighbours(closestCubeOwn);
+        List<Vector3> occupiedSpaces = cubeGrid.getOccupiedNeighbours(attachingCube);
 
         int i = 0;
         foreach (Vector3 cubeAttachToPosition in occupiedSpaces)
         {
+
             GameObject toConnectTo = cubeGrid.getObjectAtPosition(cubeAttachToPosition);
-            Debug.Log(toConnectTo.name);
-            closestCubeOwn.AddComponent<ConfigurableJoint>();
-            List<ConfigurableJoint> joints = closestCubeOwn.GetComponents<ConfigurableJoint>().ToList();
+            
+            attachingCube.AddComponent<ConfigurableJoint>();
+            List<ConfigurableJoint> joints = attachingCube.GetComponents<ConfigurableJoint>().ToList();
+            foreach(ConfigurableJoint joint1 in joints)
+            {
+            }
             joints.RemoveAll(joint => joint.connectedBody != null);
             ConfigurableJoint joint = joints.First();
-
             if (joint.connectedBody == null)
             {
                 
@@ -363,17 +423,18 @@ public class ConnectMagneticStructure : MonoBehaviour
                 joint.anchor = Vector3.zero;
                 joint.autoConfigureConnectedAnchor = false;
 
-                Vector3 positionBeforeCorrection = toConnectTo.transform.InverseTransformPoint(closestCubeOwn.transform.position);
+                Vector3 positionBeforeCorrection = toConnectTo.transform.InverseTransformPoint(attachingCube.transform.position);
                 if (toConnectTo.transform.Find("Orientation") != null)
                 {
                     joint.connectedAnchor = toConnectTo.transform.InverseTransformPoint(toConnectTo.transform.Find("Orientation")
-                        .TransformPoint(cubeGrid.getPositionOfObject(closestCubeOwn) - cubeAttachToPosition));
+                        .TransformPoint(cubeGrid.getPositionOfObject(attachingCube) - cubeAttachToPosition));
 
                 }
                 else
                 {
-                    joint.connectedAnchor = cubeGrid.getPositionOfObject(closestCubeOwn) - cubeAttachToPosition;
+                    joint.connectedAnchor = cubeGrid.getPositionOfObject(attachingCube) - cubeAttachToPosition;
                 }
+                
                 if (springType == SpringType.Free)
                 {
                     joint.angularYMotion = ConfigurableJointMotion.Free;
@@ -428,7 +489,6 @@ public class ConnectMagneticStructure : MonoBehaviour
         Vector3[] list = playerAtractedTo.GetComponent<GridSystem>().ClosestNeighbourPosition(cubeAttractedToTransform.gameObject, closestCubeOwn.transform.position);
         closestFaceRelativeToWorld = list[0];
         closestFaceRelativeToMainCube = list[1];
-        cubeRB = cube.GetComponent<Rigidbody>();
 
     }
 
@@ -442,16 +502,17 @@ public class ConnectMagneticStructure : MonoBehaviour
 
             //Start moving towards final positiond
             lerping = true;
-            startPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestCubeOwn.transform.position);
-            startRotationRelativeToAttractedCube = Quaternion.Inverse(cubeAttractedToTransform.rotation) * closestCubeOwn.transform.rotation;
+            startPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestCubeOwn.transform.position) - (closestCubeOwn.transform.position - transform.position); ;
+            startRotationRelativeToAttractedCube = Quaternion.Inverse(cubeAttractedToTransform.rotation) * transform.rotation;
             endPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld);
             endRotationRelativeToAttractedCube = RotationChoice(startRotationRelativeToAttractedCube);
-            foreach(var v in playerGrid.grid)
+            cubeRB.useGravity = false;
+            cubeRB.GetComponent<Rigidbody>().mass = 0.001f;
+            foreach (var v in playerGrid.grid)
             {
-                v.Value.GetComponent<Rigidbody>().useGravity = false;
+                v.Value.layer = 0;
             }
         }
-    
     }
     public bool LookPositionGridAvailable()
     {

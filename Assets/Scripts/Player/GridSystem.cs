@@ -10,7 +10,6 @@ public class GridSystem : MonoBehaviour
     public Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
     public GameObject kernel; // Le noyau du syst�me, point (0,0,0)
     public PlayerObjects playerObj;
-    public Quaternion kernelRotI;
     public float cubeSize = 1.2f;
     List<Material> materials = new List<Material>();
     HapticFeedbackController feedback;
@@ -77,6 +76,7 @@ public class GridSystem : MonoBehaviour
 
                 grid.Add(intCord, v.Value);
                 v.Value.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
+                v.Value.GetComponent<Bloc>().ownerTranform = transform.root.transform;
                 v.Value.GetComponent<Bloc>().state = BlocState.structure;
                 v.Value.GetComponent<MeshRenderer>().SetMaterials(materials);
             }

@@ -199,14 +199,13 @@ public class SpringBlocEjection : MonoBehaviour
     }
     void OnJointBreak(float breakForce)
     {
-        gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
-        mainCubeRb = gridSystem.kernel.GetComponent<Rigidbody>();
+        gridSystem = gameObject.GetComponent<Bloc>().ownerTranform.GetComponent<GridSystem>();
         gridSystem.DetachBlock(this.gameObject);
         this.GetComponent<Bloc>().state = BlocState.detached;
        
         Rigidbody cubeRB = this.GetComponent<Rigidbody>();
         
-        mainCubeRb.AddForce(-cubeRB.velocity.normalized * pushFactor, ForceMode.VelocityChange);
+       // mainCubeRb.AddForce(-cubeRB.velocity.normalized * pushFactor, ForceMode.VelocityChange);
     }
 
     IEnumerator resetTorque(GridSystem grid)

@@ -136,14 +136,17 @@ public class PlayerObjects : MonoBehaviour
         ConnectMagneticStructure magneticStructure = cube.GetComponent<ConnectMagneticStructure>();
         if(magneticStructure != null)
         {
-            //magneticStructure.enabled = true;
+            cube.transform.Find("Orientation").rotation = cube.transform.rotation;
+            StartCoroutine(magenticStructure(cube));
+            cube.GetComponent<Rigidbody>().mass = 50;
         }
         else
         {
             cube.layer = 0;
             Destroy(cube.GetComponent<SphereCollider>());
+            StartCoroutine(blockNeutral(cube));
+
         }
-        StartCoroutine(blockNeutral(cube));
     }
 
     public void addRigidBody(GameObject cube)
@@ -169,6 +172,18 @@ public class PlayerObjects : MonoBehaviour
         {
             block.GetComponent<Bloc>().state = BlocState.magnetic;
         }
+
+    }
+    IEnumerator magenticStructure(GameObject block)
+    {
+
+      Rigidbody blocRb = block.GetComponent<Rigidbody>();
+        do
+        {
+            yield return null;
+        } while (blocRb.velocity.magnitude > 1);
+        block.GetComponent<ConnectMagneticStructure>().enabled = true;
+        block.GetComponent<Bloc>().state = BlocState.magnetic;
 
     }
 }

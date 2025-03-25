@@ -31,26 +31,27 @@ public class Bloc : MonoBehaviour
 
     void Update()
     {
-        if (state != BlocState.structure && owner != "Neutral" && this.GetComponent<Feromagnetic>() != null)
+        rb = GetComponent<Rigidbody>();
+        if (state != BlocState.structure && owner != "Neutral" )
         {
             float speed = rb.velocity.magnitude;
-
             //If speed is small enough we enable script
-            if (speed < minimalSpeed && state == BlocState.magnetic)
+            if (speed < minimalSpeed && state == BlocState.magnetic )
             {
-                this.GetComponent<Feromagnetic>().enabled = true;
+                if( this.GetComponent<Feromagnetic>() != null)
+                {
+                    this.GetComponent<Feromagnetic>().enabled = true;
+                  
+                }
                 this.GetComponent<MeshRenderer>().SetMaterials(materials);
                 owner = "Neutral";
                 ownerTranform = null;
             }
-
-        }
-        if (rb.velocity.magnitude > maxSpeed)
-        { 
-            //rb.velocity = rb.velocity.normalized * maxSpeed;
-            Debug.Log("break!");
+            
+            
         }
         
+
     }
     public void setOwner(string owner)
     {

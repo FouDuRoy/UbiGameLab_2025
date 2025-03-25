@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1543439969089887489}
   - component: {fileID: 601833731030724977}
   - component: {fileID: 4141580320307584352}
+  - component: {fileID: 2127751005520048226}
   m_Layer: 3
   m_Name: MagneticCube 1
   m_TagString: magnetic
@@ -34,7 +35,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2877455228711921279}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.080484, y: 0.6792145, z: -5.1720743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -121,7 +122,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2877455228711921279}
   serializedVersion: 4
-  m_Mass: 0.001
+  m_Mass: 50
   m_Drag: 2
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -135,7 +136,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 80
@@ -195,7 +196,6 @@ MonoBehaviour:
   playerMat: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
   kernel: {fileID: 2877455228711921279}
   playerObj: {fileID: 0}
-  kernelRotI: {x: 0, y: 0, z: 0, w: 0}
   cubeSize: 1.2
 --- !u!114 &1543439969089887489
 MonoBehaviour:
@@ -209,32 +209,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b37aa249f80cd44cacf96ce551efa98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 5
+  passiveRadius: 2
   activeRadius: 5
   charge: 5
   maxSpeed: 10
   error: 0.2
   AngleError: 8
-  spacingBetweenCubes: 0.1
-  moveTime: 0.1
-  maxForceAttraction: 30
+  spacingBetweenCubes: 0.2
+  moveTime: 0.05
+  maxForceAttraction: 10
   lerpingDistance: 1
-  timeBeforeSwitching: 1000000
+  timeBeforeSwitching: 0.2
   timeBeforeSwitchingVariation: 0.05
   maxSpeedVariation: 3
-  springType: 0
+  springType: 1
   lerpingType: 0
   xLimit: 0.01
   AngleLimit: 4
   mainLinearDrive: 5000
-  mainLinearDamp: 50
+  mainLinearDamp: 100
   secondaryLinearDrive: 5000
   secondaryLinearDamp: 100
   angularDrive: 50000
   angularDamp: 1000
-  projection: 1
-  springTorqueBreak: Infinity
-  springForceBreak: Infinity
+  projection: 0
+  springTorqueBreak: 100000
+  springForceBreak: 100000
 --- !u!114 &601833731030724977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,13 +248,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 0}
-  maxSpeed: 1000
+  magneticMaterial: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  maxSpeed: Infinity
   contactOffset: 0.1
   weight: 0
   owner: Neutral
   state: 3
-  ownerTranform: {fileID: 0}
+  ownerTranform: {fileID: 8402648714665336278}
 --- !u!114 &4141580320307584352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +268,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+--- !u!114 &2127751005520048226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877455228711921279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 10
+  velocityTresholdMelee: 1
+  energyLoss: 0.4
+  upEjectionMin: 0.8
+  upEjectionMax: 1
+  ejectionFactor: 6
+  maxAngle: 10
+  springBreakForce: 500
+  range: 2
+  pushFactor: 35
 --- !u!1 &7028254759574544782
 GameObject:
   m_ObjectHideFlags: 0
