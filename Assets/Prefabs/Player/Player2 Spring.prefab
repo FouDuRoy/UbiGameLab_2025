@@ -73,7 +73,6 @@ MonoBehaviour:
   mouvementSpeed: 120
   pivotSpeed: 230
   rotationSpeed: 130
-  playerCharge: 10
   rotParam: 4
   rotationDamping: 20
   weightMouvementFactor: 1
@@ -152,7 +151,7 @@ MonoBehaviour:
   playerMat: {fileID: 2100000, guid: ee7f85b04e41b7e4691b855f2795b6e0, type: 2}
   kernel: {fileID: 3131990571156717056}
   playerObj: {fileID: 0}
-  cubeSize: 1.4
+  cubeSize: 1.2
 --- !u!114 &1846468097935250436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +344,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3131990571156717056}
   serializedVersion: 4
-  m_Mass: 50
+  m_Mass: 25
   m_Drag: 5
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
