@@ -16,10 +16,10 @@ GameObject:
   - component: {fileID: 9061322104497783714}
   - component: {fileID: 4549032222228033677}
   - component: {fileID: 3659590908044369442}
-  - component: {fileID: 1543439969089887489}
   - component: {fileID: 601833731030724977}
   - component: {fileID: 4141580320307584352}
   - component: {fileID: 2127751005520048226}
+  - component: {fileID: 7908459055162129070}
   m_Layer: 3
   m_Name: MagneticCube 1
   m_TagString: magnetic
@@ -160,7 +160,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4549032222228033677
 MonoBehaviour:
@@ -197,36 +197,6 @@ MonoBehaviour:
   kernel: {fileID: 2877455228711921279}
   playerObj: {fileID: 0}
   cubeSize: 1.2
---- !u!114 &1543439969089887489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877455228711921279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b37aa249f80cd44cacf96ce551efa98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  passiveRadius: 2
-  maxSpeed: 10
-  error: 0.2
-  AngleError: 8
-  moveTime: 0.05
-  lerpingDistance: 10
-  timeBeforeSwitching: 0.2
-  xLimit: 0.01
-  AngleLimit: 4
-  mainLinearDrive: 5000
-  mainLinearDamp: 100
-  secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
-  angularDrive: 50000
-  angularDamp: 1000
-  projection: 1
-  springTorqueBreak: 50000
-  springForceBreak: 50000
 --- !u!114 &601833731030724977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,6 +252,36 @@ MonoBehaviour:
   springBreakForce: 500
   range: 2
   pushFactor: 35
+--- !u!114 &7908459055162129070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877455228711921279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47acc957430336548b3526eca6a819ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveRadius: 0.7
+  maxSpeed: 10
+  error: 0.2
+  AngleError: 1
+  moveTime: 0.1
+  lerpingDistance: 2
+  timeBeforeSwitching: 0.05
+  xLimit: 0.01
+  AngleLimit: 4
+  mainLinearDrive: 5000
+  mainLinearDamp: 100
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 100
+  angularDrive: 50000
+  angularDamp: 1000
+  projection: 1
+  springTorqueBreak: 50000
+  springForceBreak: 50000
 --- !u!1 &7028254759574544782
 GameObject:
   m_ObjectHideFlags: 0
