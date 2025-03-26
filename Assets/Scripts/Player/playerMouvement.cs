@@ -10,6 +10,7 @@ public class PlayerMouvement : MonoBehaviour
 {
     [SerializeField] float explosionForce = 30;
     [SerializeField] float mouvementSpeed = 1f;
+    [SerializeField] float mouvementReductionFactor = 1f;
     [SerializeField] float pivotSpeed = 1f;
     [SerializeField] float rotationSpeed = 1f;
     [SerializeField] float rotParam;
@@ -203,7 +204,14 @@ public class PlayerMouvement : MonoBehaviour
 
     private void Move3dSpring(Vector3 direction, float rotationY)
     {
-        rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        if (rotationY > 0.1)
+        {
+            rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        }
+        else
+        {
+            rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        }
         rotateAndDirection2(direction);
         if (Mathf.Abs(rotationY) > 0)
         {
@@ -226,7 +234,14 @@ public class PlayerMouvement : MonoBehaviour
     }
     private void Move3dSpringBothJoystick(Vector3 direction, float rotationY)
     {
-        rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        if (rotationY > 0.1)
+        {
+            rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        }
+        else
+        {
+            rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        }
         if (!rotatingRight)
         {
             rotateAndDirection2(direction);
@@ -254,7 +269,15 @@ public class PlayerMouvement : MonoBehaviour
 
     private void twinStickShooter(Vector3 direction, Vector3 directionTwin)
     {
-        rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        if (directionTwin.magnitude > 0.1)
+        {
+            rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        }
+        else
+        {
+            rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        }
+
         if (!rotatingRight)
         {
             rotateAndDirection2(direction);
@@ -290,7 +313,15 @@ public class PlayerMouvement : MonoBehaviour
         {
             golem.GetComponent<Synchro2>().rotationFixed = true;
         }
-        rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        if (directionTwin.magnitude > 0.1)
+        {
+            rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        }
+        else
+        {
+            rb.AddForceAtPosition (direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        }
+
 
         rotateAndDirection3(direction);
 
@@ -317,13 +348,14 @@ public class PlayerMouvement : MonoBehaviour
     {
         if(directionTwin.magnitude > 0.1)
         {
+            rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             golem.GetComponent<Synchro2>().rotationFixed = false;
         }
         else
         {
+            rb.AddForceAtPosition( direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             golem.GetComponent<Synchro2>().rotationFixed = true;
         }
-        rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
 
         rotateAndDirection4(direction);
 
