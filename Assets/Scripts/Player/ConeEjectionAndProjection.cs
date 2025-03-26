@@ -61,8 +61,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         AttractCubes = playerInput.actions.FindAction("AttractCubes");
         feedback =  this.GetComponent<HapticFeedbackController>();
         mainCubeRb = this.GetComponent<PlayerObjects>().cubeRb;
-        golem = mainCubeRb.transform.Find("GolemBuilt");
-          if (secondsForMaxCharging >= 2)
+        golem = this.GetComponent<PlayerObjects>().golem.transform;
+        if (secondsForMaxCharging >= 2)
         {
             secondsForMaxCharging -= 1;
         }
@@ -113,7 +113,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             
             handTimer += Time.fixedDeltaTime;
             handTimer = handTimer % 1;
-            coneAttraction(mainCubeRb.transform.Find("GolemBuilt").transform,attractionForce,initialAngle,distance,1);
+            coneAttraction(golem,attractionForce,initialAngle,distance,1);
             leftTriggerHeld = true;
 
        
@@ -243,7 +243,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     public void coneProjection(float time){
         
-        Transform golem = mainCubeRb.transform.Find("GolemBuilt").transform ; 
         int maxX = playerGrid.grid.Keys.Max(x => x.x);
         int minX = playerGrid.grid.Keys.Min(x => x.x);
         int maxZ = playerGrid.grid.Keys.Max(x => x.z);

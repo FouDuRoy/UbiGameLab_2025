@@ -391,7 +391,7 @@ public class GridSystem : MonoBehaviour
                 gridBloc.Value.GetComponent<Bloc>().state = BlocState.projectile;
                 playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
 
-                Transform golem = kernel.transform.Find("GolemBuilt");
+                Transform golem = GetComponent<PlayerObjects>().golem.transform;
                 float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
                 cube.GetComponent<Rigidbody>().AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);

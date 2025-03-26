@@ -101,7 +101,6 @@ public class Feromagnetic : MonoBehaviour
         timeBeforeSwitching += Random.Range(-timeBeforeSwitchingVariation, timeBeforeSwitchingVariation);
         maxSpeed += Random.Range(-maxSpeedVariation, maxSpeedVariation);
 
-
     }
 
     void OnEnable()
@@ -257,9 +256,9 @@ public class Feromagnetic : MonoBehaviour
             {
                 velocity = velocity.normalized * maxSpeed;
             }
-            if (angularVelocity.magnitude > maxSpeed)
+            if (angularVelocity.magnitude > maxSpeed*10)
             {
-                angularVelocity = angularVelocity.normalized * maxSpeed;
+                //angularVelocity = angularVelocity.normalized * maxSpeed*10;
             }
 
             //update velocity and rotation
@@ -297,6 +296,12 @@ public class Feromagnetic : MonoBehaviour
     {
         lerping = false;
         timer = 0;
+        if (cubeRB != null && playerAtractedTo != null)
+        {
+
+            playerAtractedTo.GetComponent<PlayerObjects>().resetRb(gameObject);
+
+        }
         cubeAttractedToTransform = null;
         playerAtractedTo = null;
         t = 0;
@@ -305,13 +310,7 @@ public class Feromagnetic : MonoBehaviour
         closestFaceRelativeToMainCube = Vector3.zero;
         errorP = 1;
         errorR = 1;
-        if (cubeRB != null)
-        {
-            cubeRB.useGravity = true;
-            //here
-            cubeRB.mass = 0.1f;
-
-        }
+     
         transform.parent = this.transform.root.parent;
     }
 
@@ -530,7 +529,7 @@ public class Feromagnetic : MonoBehaviour
             endPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld);
             endRotationRelativeToAttractedCube = RotationChoice(startRotationRelativeToAttractedCube);
             cubeRB.useGravity = false;
-            cubeRB.mass = 0.001f;
+            cubeRB.mass = 0.0001f;
         }
     }
     private Vector3 CoulombLaw(Vector3 distance, float charge1, float charge2)
