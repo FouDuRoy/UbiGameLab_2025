@@ -9,6 +9,7 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] public GameObject passiveCube;
     [SerializeField] private float magnetTimer = 3f;
     [SerializeField] Material blocNonMagnetic;
+    [SerializeField] public GameObject golem;
 
     MouvementType moveType;
     protected GridSystem gridSystem;
@@ -117,14 +118,8 @@ public class PlayerObjects : MonoBehaviour
                     joint.projectionMode = JointProjectionMode.None;
 
                     Destroy(joint);
-                    Rigidbody rb2 = passiveCube.GetComponent<Rigidbody>();
-                    Rigidbody rb = cube.GetComponent<Rigidbody>();
-                    rb.mass = rb2.mass;
-                    rb.drag = rb2.drag;
-                    rb.angularDrag = rb2.angularDrag;
-                    rb.collisionDetectionMode = rb2.collisionDetectionMode;
-                    rb.useGravity = rb2.useGravity;
-                    rb.constraints = rb2.constraints;
+
+                    resetRb(cube);
                 }
 
             }
@@ -148,6 +143,18 @@ public class PlayerObjects : MonoBehaviour
             StartCoroutine(blockNeutral(cube));
 
         }
+    }
+
+    public void resetRb(GameObject cube)
+    {
+        Rigidbody rb2 = passiveCube.GetComponent<Rigidbody>();
+        Rigidbody rb = cube.GetComponent<Rigidbody>();
+        rb.mass = rb2.mass;
+        rb.drag = rb2.drag;
+        rb.angularDrag = rb2.angularDrag;
+        rb.collisionDetectionMode = rb2.collisionDetectionMode;
+        rb.useGravity = rb2.useGravity;
+        rb.constraints = rb2.constraints;
     }
 
     public void addRigidBody(GameObject cube)
