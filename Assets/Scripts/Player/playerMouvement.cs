@@ -282,6 +282,14 @@ public class PlayerMouvement : MonoBehaviour
     }
     private void twinStickShooter2(Vector3 direction, Vector3 directionTwin)
     {
+        if (directionTwin.magnitude > 0.1 || direction.magnitude > 0.1)
+        {
+            golem.GetComponent<Synchro2>().rotationFixed = false;
+        }
+        else
+        {
+            golem.GetComponent<Synchro2>().rotationFixed = true;
+        }
         rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
 
         rotateAndDirection3(direction);
@@ -307,11 +315,17 @@ public class PlayerMouvement : MonoBehaviour
     }
     private void twinStickShooter3(Vector3 direction, Vector3 directionTwin)
     {
-
+        if(directionTwin.magnitude > 0.1)
+        {
+            golem.GetComponent<Synchro2>().rotationFixed = false;
+        }
+        else
+        {
+            golem.GetComponent<Synchro2>().rotationFixed = true;
+        }
         rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
 
         rotateAndDirection4(direction);
-
 
         if (directionTwin.sqrMagnitude > 0.1f)
         {
