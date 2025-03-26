@@ -304,6 +304,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         List<Collider> magnetic = Physics.OverlapSphere(golem.position, radius).ToList<Collider>();
         magnetic = magnetic.FindAll(cube => {
             //Look if cube is on the player
+            cube.gameObject.GetComponent<Renderer>().material.color = playerGrid.playerMat.color;
             if (cube.gameObject == mainCubeRb.gameObject)
             {
                 return false;
