@@ -11,7 +11,7 @@ public class SceneEventSystem : MonoBehaviour
 {
 
     public Button playButton;
-    public SceneAsset sceneToLoad;
+    public string sceneToLoad;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class SceneEventSystem : MonoBehaviour
     }
     public void LoadScene()
     {
-        SceneManager.LoadScene(sceneToLoad.name);
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     public void ExitGame()

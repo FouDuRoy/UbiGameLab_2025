@@ -7,7 +7,7 @@ using TMPro;
 
 public class LevelLoader : MonoBehaviour
 {
-    [SerializeField] private SceneAsset levelToLoad;
+    [SerializeField] private string levelToLoad;
     [SerializeField] private int nPlayers = 2;
     [SerializeField] private TMP_Text j1Ready;
     [SerializeField] private TMP_Text j2Ready;
@@ -38,7 +38,7 @@ public class LevelLoader : MonoBehaviour
 
             if(playersReady.Count >= nPlayers)
             {
-                StartCoroutine(AsyncLevelLoad(levelToLoad.name));
+                StartCoroutine(AsyncLevelLoad(levelToLoad));
             }
         }
     }

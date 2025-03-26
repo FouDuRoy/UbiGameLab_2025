@@ -72,14 +72,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionForce: 140
-  mouvementSpeed: 110
+  mouvementSpeed: 100
+  mouvementReductionFactor: 1
   pivotSpeed: 200
   rotationSpeed: 50
   rotParam: 4
   rotationDamping: 20
   weightMouvementFactor: 0.95
   weightRotationFactor: 1
-  moveType: 7
+  moveType: 8
   pauseMenu: {fileID: 0}
   selectedGUI: {fileID: 0}
 --- !u!114 &4658591005558201665
@@ -190,6 +191,7 @@ MonoBehaviour:
   kernel: {fileID: 3131990571156717056}
   playerObj: {fileID: 0}
   cubeSize: 1.2
+  materials: []
 --- !u!114 &1846468097935250436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +265,7 @@ MonoBehaviour:
   distance: 19
   secondsForMaxChargingEjection: 1
   ejectionSpeed: 60
+  colorChangeIntensity: 3
   lineMat: {fileID: 2100000, guid: 5de4fbdbb1ac55345a979f6a4e9c97fe, type: 2}
   maxAngle: 15
 --- !u!1 &3131990571156717056
@@ -499,7 +502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.616
+      value: -2.6160002
       objectReference: {fileID: 0}
     - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -595,6 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5ec926abcc349438f9839e8eeef1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationFixed: 1
 --- !u!1001 &9093331320022469689
 PrefabInstance:
   m_ObjectHideFlags: 0

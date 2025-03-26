@@ -32,6 +32,9 @@ public class PlayerMouvement : MonoBehaviour
     InputAction pauseAction;
     InputAction rotateTwinStick;
 
+    InputAction ejectCubes;
+    InputAction attractCubes;
+
     float weightRotation;
     float weightTranslation;
     float totalMass;
@@ -39,6 +42,9 @@ public class PlayerMouvement : MonoBehaviour
     float t = 0;
     Transform golem;
     Rigidbody rb;
+
+    float leftTrigger;
+    float rightTrigger;
 
     private GameObject reff;
 
@@ -56,6 +62,8 @@ public class PlayerMouvement : MonoBehaviour
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
         rotateActionX = playerInput.actions.FindAction("RotateX");
         rotateTwinStick = playerInput.actions.FindAction("RotateTwinStick");
+        ejectCubes = playerInput.actions.FindAction("BlocEjection");
+        attractCubes = playerInput.actions.FindAction("AttractCubes");
         pauseMenu.SetActive(false); // Hide canvas at start
         pauseAction = playerInput.actions.FindAction("Pause");
         gridPlayer = GetComponent<GridSystem>();
@@ -80,6 +88,8 @@ public class PlayerMouvement : MonoBehaviour
             float rotationZ = rotateActionZ.ReadValue<float>();
             float rotationX = rotateActionX.ReadValue<float>();
 
+            leftTrigger=attractCubes.ReadValue<float>();
+            rightTrigger=ejectCubes.ReadValue<float>();
 
             switch (moveType)
             {
@@ -348,13 +358,21 @@ public class PlayerMouvement : MonoBehaviour
     {
         if(directionTwin.magnitude > 0.1)
         {
-            rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            //rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             golem.GetComponent<Synchro2>().rotationFixed = false;
         }
         else
         {
-            rb.AddForceAtPosition( direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            //rb.AddForceAtPosition( direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             golem.GetComponent<Synchro2>().rotationFixed = true;
+        }
+        if(leftTrigger >.1f || rightTrigger > .1f)
+        {
+            rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        }
+        else
+        {
+            rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
         }
 
         rotateAndDirection4(direction);
