@@ -44,11 +44,13 @@ public class PlayerMouvement : MonoBehaviour
     InputAction rotateActionZ;
     InputAction rotateActionX;
     InputAction pauseAction;
+    InputAction rotateTwinStick;
 
     float weightRotation;
     float weightTranslation;
     float totalMass;
     float weight;
+    float t = 0;
     Rigidbody golem;
     Rigidbody rb;
 
@@ -67,6 +69,7 @@ public class PlayerMouvement : MonoBehaviour
         throwCubes = playerInput.actions.FindAction("ThrowCubes");
         rotateActionZ = playerInput.actions.FindAction("RotateZ");
         rotateActionX = playerInput.actions.FindAction("RotateX");
+        rotateTwinStick = playerInput.actions.FindAction("RotateTwinStick");
         pauseMenu.SetActive(false); // Hide canvas at start
         pauseAction = playerInput.actions.FindAction("Pause");
         gridPlayer = GetComponent<GridSystem>();
@@ -83,6 +86,8 @@ public class PlayerMouvement : MonoBehaviour
             weightTranslation = Mathf.Clamp(weight * weightMouvementFactor, 1, 10 * weight);
             Vector3 direction2 = moveAction.ReadValue<Vector3>();
             Vector3 direction = new Vector3(direction2.x, 0, direction2.y);
+            Vector3 directionTwin2 = rotateTwinStick.ReadValue<Vector3>();
+            Vector3 directionTwin = new Vector3(directionTwin2.x, 0, directionTwin2.y);
             float rotationY = rotateAction.ReadValue<float>();
             float rotationZ = rotateActionZ.ReadValue<float>();
             float rotationX = rotateActionX.ReadValue<float>();
@@ -108,6 +113,9 @@ public class PlayerMouvement : MonoBehaviour
                     break;
                 case MouvementType.Move3dBothJoystickSpring:
                     Move3dSpringBothJoystick(direction, rotationY);
+                    break;
+                case MouvementType.TwinStickShooter:
+                    twinStickShooter(direction, directionTwin);
                     break;
             }
         }
@@ -250,24 +258,35 @@ public class PlayerMouvement : MonoBehaviour
             }
         }
     }
-    private void Move3dSpringBothJoystickSnap90(Vector3 direction, float rotationY)
+    private void twinStickShooter(Vector3 direction, Vector3 directionTwin)
     {
-        rb.AddForceAtPosition(direction * mouvementSpeed / (weight + weightMouvementFactor), CalculateCenterMass(), ForceMode.Acceleration);
+        Transform golem = rb.transform.Find("GolemBuilt");
+        rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(false);
+        rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
         if (!rotatingRight)
         {
             rotateAndDirection2(direction);
 
         }
-        if (Mathf.Abs(rotationY) > 0)
+        if (directionTwin.sqrMagnitude > 0.1f)
         {
-            if (!rotatingRight)
-            {
-                rotatingRight = true;
-                rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(true);
-                StartCoroutine(AngleRotation());
-            }
+            float targetAngle = Mathf.Atan2(directionTwin.x, directionTwin.z) * Mathf.Rad2Deg;
+            rotatingRight = true;
+            Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
 
+            golem.rotation = Quaternion.Lerp(
+                golem.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+  
         }
+        else
+        {
+            rotatingRight = false;
+            t = 0;
+        }
+
     }
 
     private void BoothJoystickMove(Vector3 direction, float rotationY)
