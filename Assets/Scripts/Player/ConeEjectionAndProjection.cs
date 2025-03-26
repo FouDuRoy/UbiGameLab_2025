@@ -25,6 +25,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float distance = 10f;
     [SerializeField] float secondsForMaxChargingEjection = 3f;
     [SerializeField] float ejectionSpeed = 3f;
+    [SerializeField] float colorChangeIntensity = 3f;
     List<Collider> magneticLast = new List<Collider>();
     List<GameObject> blocsToEject = new List<GameObject>();
     GridSystem playerGrid;
@@ -47,7 +48,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     Vector3 leftHandFinalPoint;
     Vector3 rightHandFinalPoint;
     MouvementType moveType;
-
+    Color chargedColor;
     [Header("LineSection")]
     [SerializeField] Material lineMat;
     public float maxAngle = 15f;
@@ -71,6 +72,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         rightHandTransform = golem.Find("R_Hand_IK_Target");
         leftRay = CreateRay(Color.red);
         rightRay = CreateRay(Color.red);
+        Color curentColor = playerGrid.playerMat.color;
+        chargedColor = new Color(curentColor.r * colorChangeIntensity, curentColor.g * colorChangeIntensity, curentColor.b * colorChangeIntensity);
     }
     void FixedUpdate()
     {
@@ -131,6 +134,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             leftRay.gameObject.SetActive(true);
             rightRay.gameObject.SetActive(true);
+            coneProjectionColor(timeHeld);
             if (timeHeld == 0) //On appelle VibrationStart une seule fois, au début
             {
                 feedback.RepulsionVibrationStart(secondsForMaxCharging);
@@ -283,7 +287,55 @@ public class ConeEjectionAndProjection : MonoBehaviour
        magnetic.ForEach(x => EjectBloc(x.gameObject,golem));
        playerGrid.coneEjectRest(ejectionSpeed, rightDriftProportion);
     }
+    public void coneProjectionColor(float time)
+    {
 
+        int maxX = playerGrid.grid.Keys.Max(x => x.x);
+        int minX = playerGrid.grid.Keys.Min(x => x.x);
+        int maxZ = playerGrid.grid.Keys.Max(x => x.z);
+        int minZ = playerGrid.grid.Keys.Min(x => x.z);
+        int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX), Mathf.Abs(minX), Mathf.Abs(maxZ), Mathf.Abs(minZ));
+
+        float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
+        float radius = radiusInBlocs * blocSizeWorld;
+        float boundaryDistanceRatio = time / secondsForMaxChargingEjection;
+        float maxAngle = initialAngle + (90 - initialAngle) * (boundaryDistanceRatio);
+
+        List<Collider> magnetic = Physics.OverlapSphere(golem.position, radius).ToList<Collider>();
+        magnetic = magnetic.FindAll(cube => {
+            //Look if cube is on the player
+            if (cube.gameObject == mainCubeRb.gameObject)
+            {
+                return false;
+            }
+            if (cube.transform.root != transform)
+            {
+
+                return false;
+            }
+
+            //Look if the cube is within the angle of ejection
+            float angle = Vector3.Angle(cube.transform.position - golem.position, golem.forward);
+            if (angle > maxAngle)
+            {
+                return false;
+            }
+
+            //look if the cube is within the neighberhood of the boundary
+            float maxDistance = MaxDistanceForDirection((cube.transform.position - golem.position).normalized, radius);
+            float distance = (cube.transform.position - golem.position).magnitude;
+            float boundaryDistanceMax = (1 - boundaryDistanceRatio) * maxDistance;
+            if (distance < boundaryDistanceMax)
+            {
+                return false;
+            }
+            return true;
+        });
+        magnetic.ForEach(x => {
+            x.gameObject.GetComponent<Renderer>().material.color = chargedColor;
+                });
+        playerGrid.coneEjectRest(ejectionSpeed, rightDriftProportion);
+    }
     private void EjectBloc(GameObject cube, Transform golem)
     {
    

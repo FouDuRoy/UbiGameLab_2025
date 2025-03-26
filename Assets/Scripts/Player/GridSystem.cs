@@ -5,13 +5,13 @@ using UnityEngine;
 public class GridSystem : MonoBehaviour
 {
     [SerializeField] bool checkGrid = false;
-    [SerializeField] Material playerMat;
+    [SerializeField] public Material playerMat;
 
     public Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
     public GameObject kernel; // Le noyau du syst�me, point (0,0,0)
     public PlayerObjects playerObj;
     public float cubeSize = 1.2f;
-    List<Material> materials = new List<Material>();
+    public List<Material> materials = new List<Material>();
     HapticFeedbackController feedback;
     private void Start()
     {

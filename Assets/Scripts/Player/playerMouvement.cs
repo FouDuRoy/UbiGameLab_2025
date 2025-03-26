@@ -501,7 +501,8 @@ public class PlayerMouvement : MonoBehaviour
     public void rotateAndDirection3(Vector3 direction)
     {
         Rigidbody rb = GetComponent<PlayerObjects>().cubeRb;
-        Vector3 structureFoward = rb.transform.forward;
+        Vector3 structureFoward = rb.transform.forward; ;
+   
         float angle = Vector3.SignedAngle(structureFoward, direction.normalized, Vector3.up);
         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weightRotation;
 
@@ -521,7 +522,8 @@ public class PlayerMouvement : MonoBehaviour
     public void rotateAndDirection4(Vector3 direction)
     {
         Rigidbody rb = GetComponent<PlayerObjects>().cubeRb;
-        Vector3 structureFoward = rb.transform.forward;
+        Vector3 structureFoward = rb.transform.forward; ;
+    
         float angle = Vector3.SignedAngle(structureFoward, direction.normalized, Vector3.up);
         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weightRotation;
 
