@@ -9,6 +9,8 @@ public class EventsManager : MonoBehaviour
     [SerializeField] private float timeBetweenEvents;
     [SerializeField] private float chancesForEachSpawnpointToSpawnAPrefab;
     [SerializeField] private GameObject spawnBeacon;
+    [SerializeField] private float beaconMaxIntensity = 600f;
+    [SerializeField] private float beaconDurationBeforePrefabSpawn = 3f;
 
     private List<GameObject> spawnpoints;
     private float nextEventTime;
@@ -44,21 +46,27 @@ public class EventsManager : MonoBehaviour
 
     private IEnumerator SummonPrefab(GameObject prefab, Vector3 loc, Quaternion rot)
     {
-        // Instancier le beacon sans collision
         GameObject beaconInstance = Instantiate(spawnBeacon, loc, rot);
 
-        // Supprimer son collider s'il en a un (au cas où)
         Collider beaconCollider = beaconInstance.GetComponent<Collider>();
         if (beaconCollider) Destroy(beaconCollider);
 
-        yield return new WaitForSeconds(2); // Attendre 2 secondes
+        Light beaconLight = beaconInstance.GetComponentInChildren<Light>();
+        float elapsedTime = 0f;
 
-        // Détruire le beacon
+        if (beaconLight)
+        {
+            beaconLight.intensity = 0f;
+
+            while (elapsedTime < beaconDurationBeforePrefabSpawn)
+            {
+                elapsedTime += Time.deltaTime;
+                beaconLight.intensity = Mathf.Lerp(0f, beaconMaxIntensity, elapsedTime / beaconDurationBeforePrefabSpawn);
+                yield return null;
+            }
+        }
+
         Destroy(beaconInstance);
-
-        // Instancier le vrai prefab
         Instantiate(prefab, loc, rot);
-
-        yield return null;
     }
 }

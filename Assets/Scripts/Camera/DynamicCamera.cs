@@ -7,6 +7,10 @@ using UnityEngine.ProBuilder;
 
 public class DynamicCamera : MonoBehaviour
 {
+    [Header("Cameras")]
+    [SerializeField] private Camera cam;
+    [SerializeField] private Camera camUI;
+
     [Header("References")]
     [SerializeField] private GameObject Player1;
     [SerializeField] private GameObject Player2;
@@ -35,7 +39,6 @@ public class DynamicCamera : MonoBehaviour
     private float camOrthoSize;
     private float distanceBetweenPlayers=0;
 
-    private Camera cam;
     private Animator animator;
     private PlayerInput playerOneInputs;
     private PlayerInput playerTwoInputs;
@@ -43,7 +46,6 @@ public class DynamicCamera : MonoBehaviour
 
     private void Start()
     {
-        cam = GetComponentInChildren<Camera>();
         animator = GetComponent<Animator>();
 
         playerOneInputs=Player1.GetComponentInParent<PlayerInput>();
@@ -57,6 +59,7 @@ public class DynamicCamera : MonoBehaviour
         {
             playerOneInputs.DeactivateInput();
             playerTwoInputs.DeactivateInput();
+            camUI.enabled = false;
         }
 
         //Récupère l'angle de la caméra par rapport à son pivot
@@ -94,7 +97,7 @@ public class DynamicCamera : MonoBehaviour
             {
                 camOrthoSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor, minDistance, maxDistance);
                 cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, camOrthoSize, ref currentOrthoSizeVelocity, distanceInterpTime, maxSpeed);
-                //print(camOrthoSize);
+                camUI.orthographicSize = cam.orthographicSize;
             }
         }
     }
@@ -106,6 +109,7 @@ public class DynamicCamera : MonoBehaviour
         animator.enabled = false;
         playerOneInputs.ActivateInput();
         playerTwoInputs.ActivateInput();
+        camUI.enabled = true;
 
         shouldFollowPlayers = true;
     }

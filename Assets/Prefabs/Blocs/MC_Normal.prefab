@@ -161,6 +161,8 @@ MonoBehaviour:
   timeBeforeSwitching: 0.2
   timeBeforeSwitchingVariation: 0.05
   maxSpeedVariation: 3
+  springTorqueBreak: 1000
+  springForceBreak: 1000
   springType: 0
   lerpingType: 0
   xLimit: 0
@@ -184,10 +186,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
+  magneticMaterial: {fileID: 0}
+  maxSpeed: 1000
+  contactOffset: 0.1
   weight: 0.01
   owner: Neutral
   state: 3
-  rb: {fileID: 0}
+  ownerTranform: {fileID: 0}
 --- !u!114 &5239627204125198840
 MonoBehaviour:
   m_ObjectHideFlags: 0

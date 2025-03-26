@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
+
+    [Header("Info joueur")]
     public GameObject gameOverCanvas; // Assign in Inspector
     public TextMeshProUGUI attackerText; // Assign in Inspector
     public Button restartButton;
@@ -20,40 +22,59 @@ public class PlayerInfo : MonoBehaviour
     public float timeScaleFactor = 0.2f;
     bool invun = false;
     public float healthValue;
+    [Header("D�bogage")]
+    [SerializeField] GameObject playerLife;
+    [SerializeField] bool isInvincible;
 
     void Start()
     {
         healthValue = MaxhealthValue;
         gameOverCanvas.SetActive(false); // Hide canvas at start
+
+        if (isInvincible)
+        {
+            playerLife.SetActive(false);
+        }
+
     }
 
     // Call this function when player gets hit
     public void TakeDamage(string attackerName,Vector3 impactForce)
     {
-        if (!invun)
+        if(isInvincible)
         {
-            float damage = Mathf.Clamp(impactForce.magnitude, 10, maxDamage);
-            healthValue -= damage;
-            Debug.Log("Current Health:" + healthValue + "damageTook:" + damage);
-            if (healthValue > 0)
+            this.GetComponent<HapticFeedbackController>().damageTakenVibration();
+            deathRotation(attackerName);
+        }
+        else
+        {
+            if (!invun)
             {
-                invun = true;
-                StartCoroutine(DoHitStop(hitStopDelay));
-                this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit, ForceMode.VelocityChange);
-                StartCoroutine(invunerable());
+                this.GetComponent<HapticFeedbackController>().damageTakenVibration();
+                float damage = Mathf.Clamp(impactForce.magnitude, 10, maxDamage);
+                healthValue -= damage;
+                Debug.Log("Current Health:" + healthValue + "damageTook:" + damage);
+                if (healthValue > 0)
+                {
+                    invun = true;
+                    StartCoroutine(DoHitStop(hitStopDelay));
+                    this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit, ForceMode.VelocityChange);
+                    StartCoroutine(invunerable());
 
-            }
-            else
-            {
-                invun = true;
-                StartCoroutine(DoHitStop(hitStopDelay));
-                this.GetComponent<PlayerInput>().enabled = false;
-                this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit * 1.5f, ForceMode.VelocityChange);
-                deathRotation(attackerName);
-                StartCoroutine(gameOver(attackerName));
-                
+                }
+                else
+                {
+                    invun = true;
+                    StartCoroutine(DoHitStop(hitStopDelay));
+                    this.GetComponent<PlayerInput>().enabled = false;
+                    this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit * 1.5f, ForceMode.VelocityChange);
+                    deathRotation(attackerName);
+                    //StartCoroutine(gameOver(attackerName));
+
+                }
             }
         }
+
        
     }
 
@@ -61,7 +82,10 @@ public class PlayerInfo : MonoBehaviour
     {
         this.GetComponent<PlayerMouvement>().ThrowCubes();
         this.GetComponent<PlayerObjects>().cubeRb.AddTorque(0, 100f, 0, ForceMode.VelocityChange);
-        StartCoroutine(gameOver(attackerName));
+        if(!isInvincible)
+        {
+            StartCoroutine(gameOver(attackerName));
+        }
     }
 
     public void RestartLevel()

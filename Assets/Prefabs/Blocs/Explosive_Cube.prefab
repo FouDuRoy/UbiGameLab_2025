@@ -40,6 +40,7 @@ Transform:
   m_Children:
   - {fileID: 651852353394913132}
   - {fileID: 4057901920016843952}
+  - {fileID: 7412229742775297856}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6170319606920083062
@@ -166,6 +167,7 @@ MonoBehaviour:
   timeBeforeSwitchingVariation: 0.05
   maxSpeedVariation: 3
   springTorqueBreak: 10000
+  springForceBreak: 1000
   springType: 1
   lerpingType: 0
   xLimit: 0.01
@@ -176,6 +178,7 @@ MonoBehaviour:
   secondaryLinearDamp: 100
   angularDrive: 50000
   angularDamp: 1000
+  projection: 1
 --- !u!114 &-4726244708395997180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +194,7 @@ MonoBehaviour:
   minimalSpeed: 0.5
   magneticMaterial: {fileID: 0}
   maxSpeed: 100
+  contactOffset: 0.1
   weight: 0.07
   owner: Neutral
   state: 3
@@ -207,8 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ea55e9940ca642bf8d17224f3f85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resistance: 15
-  explosionRange: 5
+  resistance: 20
+  explosionRange: 3
   repulsionRange: 7
   repulsionForce: 15
   repulsionDistanceFactor: 1.2
@@ -254,6 +258,37 @@ MonoBehaviour:
   springBreakForce: 300
   range: 2
   pushFactor: 35
+--- !u!1 &8339096798682944052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7412229742775297856}
+  m_Layer: 0
+  m_Name: Orientation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7412229742775297856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339096798682944052}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9004300913510534856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1045223509533804679
 PrefabInstance:
   m_ObjectHideFlags: 0

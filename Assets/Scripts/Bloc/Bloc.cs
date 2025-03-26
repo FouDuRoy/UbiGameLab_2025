@@ -7,6 +7,7 @@ public class Bloc : MonoBehaviour
     [SerializeField] float minimalSpeed = 0.5f;
     [SerializeField] Material magneticMaterial;
     [SerializeField] float maxSpeed = 1000f;
+    public float contactOffset = 0.1f;
     public float weight;
     public string owner; 
     public BlocState state;
@@ -20,10 +21,7 @@ public class Bloc : MonoBehaviour
     {
         materials.Add(magneticMaterial);
         rb = GetComponent<Rigidbody>();
-    }
-    public void SetGridPosition(Vector3Int pos)
-    {
-        gridPosition = pos;
+        this.GetComponent<BoxCollider>().contactOffset = contactOffset;
     }
 
     public Vector3Int GetGridPosition()
@@ -33,27 +31,36 @@ public class Bloc : MonoBehaviour
 
     void Update()
     {
-        if (state != BlocState.structure && owner!="Neutral")
+        rb = GetComponent<Rigidbody>();
+        if (state != BlocState.structure && owner != "Neutral" )
         {
             float speed = rb.velocity.magnitude;
-
-            if (speed < minimalSpeed && state == BlocState.magnetic)
+            //If speed is small enough we enable script
+            if (speed < minimalSpeed && state == BlocState.magnetic )
             {
-                this.GetComponent<Feromagnetic>().enabled = true;
-                state = BlocState.magnetic;
+                if( this.GetComponent<Feromagnetic>() != null)
+                {
+                    this.GetComponent<Feromagnetic>().enabled = true;
+                  
+                }
                 this.GetComponent<MeshRenderer>().SetMaterials(materials);
                 owner = "Neutral";
                 ownerTranform = null;
             }
-
+            
+            
         }
-        if(rb.velocity.magnitude > maxSpeed)
+        
+
+    }
+    void FixedUpdate()
+    {
+        rb = GetComponent<Rigidbody>();
+        if(rb != null)
         {
-            float brakeSpeed = rb.velocity.magnitude - maxSpeed;  // calculate the speed decrease
-            Vector3 normalisedVelocity = rb.velocity.normalized;
-            Vector3 brakeVelocity = normalisedVelocity * brakeSpeed;  // make the brake Vector3 value  
-            rb.AddForce(-brakeVelocity,ForceMode.Acceleration);
-            Debug.Log("break!");
+            rb.maxLinearVelocity = maxSpeed;
+
+
         }
         
     }

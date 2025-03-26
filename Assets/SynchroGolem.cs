@@ -15,7 +15,7 @@ public class SynchroGolem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (lockRotation)
         {
@@ -31,6 +31,7 @@ public class SynchroGolem : MonoBehaviour
     {
         if(lockRotation)
         {
+            Debug.Log("wow");
             initialRotation = transform.rotation;
         }
         this.lockRotation = lockRotation;

@@ -2,5 +2,5 @@
 //Federico Barallobres
 public enum MouvementType
 {
-	rigidBody,transform,spring,move3d,move3dSpring,move3d_RbGolem,Move3dBothJoystick, Move3dBothJoystickSpring
+	move3d,move3dSpring,Move3dBothJoystick, Move3dBothJoystickSpring,spring,none,TwinStickShooter
 }

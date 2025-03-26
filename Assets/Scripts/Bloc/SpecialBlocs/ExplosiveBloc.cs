@@ -103,7 +103,7 @@ public class ExplosiveBloc : MonoBehaviour
             ownerTransform.GetComponent<GridSystem>().DetachBlock(this.gameObject);
         }
         gameObject.GetComponent<Feromagnetic>().enabled = false;
-        gameObject.GetComponent<Bloc>().owner = "toDie";
+        gameObject.SetActive(false);
         Destroy(gameObject, gizmoDuration);
     }
 
@@ -149,7 +149,8 @@ public class ExplosiveBloc : MonoBehaviour
         else
         {
             GridSystem grid = bloc.transform.root.GetComponent<GridSystem>();
-            if (grid != null)
+            PlayerMouvement move = bloc.transform.root.GetComponent<PlayerMouvement>();
+            if (move != null)
             {
                 grid.DetachBlock(bloc);
                 bloc.GetComponent<Bloc>().state = BlocState.detached;

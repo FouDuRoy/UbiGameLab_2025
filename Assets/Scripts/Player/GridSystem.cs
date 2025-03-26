@@ -1,23 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO.Compression;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.ProBuilder.Shapes;
 
 public class GridSystem : MonoBehaviour
 {
     [SerializeField] bool checkGrid = false;
     [SerializeField] Material playerMat;
 
-    public Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int,  GameObject>();
+    public Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
     public GameObject kernel; // Le noyau du syst�me, point (0,0,0)
     public PlayerObjects playerObj;
-    public Quaternion kernelRotI;
     public float cubeSize = 1.2f;
     List<Material> materials = new List<Material>();
-    MouvementType moveType;
     HapticFeedbackController feedback;
     private void Start()
     {
@@ -26,9 +20,8 @@ public class GridSystem : MonoBehaviour
         playerObj = transform.GetComponent<PlayerObjects>();
 
         feedback = GetComponent<HapticFeedbackController>();
-        moveType = GetComponent<PlayerMouvement>().moveType;
         materials.Add(playerMat);
-        
+
     }
 
     void Update()
@@ -45,7 +38,7 @@ public class GridSystem : MonoBehaviour
 
     public void AttachBlock(GameObject blocToAttach, GameObject attachedBloc, Vector3 closestFace)
     {
-        Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt( (closestFace.x/ cubeSize))
+        Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt((closestFace.x / cubeSize))
             , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
         blocToAttach.GetComponent<Bloc>().ownerTranform = this.transform;
         if (grid.ContainsValue(attachedBloc))
@@ -55,9 +48,40 @@ public class GridSystem : MonoBehaviour
             blocToAttach.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
             blocToAttach.gameObject.GetComponent<MeshRenderer>().SetMaterials(materials);
         }
-    
+
         //Déclenche un feedback à chaque bloc qui s'attache
-        feedback.BlocAttachedVibration();
+        if (feedback != null)
+        {
+            feedback.BlocAttachedVibration();
+        }
+    }
+    public void AttachGrid(GridSystem gridToAttach, GameObject attachedBloc, GameObject blocToAttach, Vector3 closestFace)
+    {
+        Vector3Int systemACoordinates = new Vector3Int(Mathf.RoundToInt((closestFace.x / cubeSize))
+            , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
+
+        Vector3 blocToattachPositionB = gridToAttach.getPositionOfObject(blocToAttach);
+        Vector3Int systemBCoordinates = new Vector3Int(Mathf.RoundToInt((blocToattachPositionB.x / cubeSize))
+            , Mathf.RoundToInt((blocToattachPositionB.y / cubeSize)), Mathf.RoundToInt((blocToattachPositionB.z / cubeSize)));
+        Vector3Int changeOfCoordinatesBtoA = systemACoordinates - systemBCoordinates;
+
+        foreach (var v in gridToAttach.grid)
+        {
+            if (!grid.ContainsValue(v.Value))
+            {
+                Vector3 blocAttachToA = kernel.transform.InverseTransformPoint(gridToAttach.kernel.transform
+          .TransformPoint(gridToAttach.getPositionOfObject(v.Value)));
+                Vector3Int intCord = new Vector3Int(Mathf.RoundToInt((blocAttachToA.x / cubeSize))
+                    , Mathf.RoundToInt((blocAttachToA.y / cubeSize)), Mathf.RoundToInt((blocAttachToA.z / cubeSize)));
+
+                grid.Add(intCord, v.Value);
+                v.Value.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
+                v.Value.GetComponent<Bloc>().ownerTranform = transform.root.transform;
+                v.Value.GetComponent<Bloc>().state = BlocState.structure;
+                v.Value.GetComponent<MeshRenderer>().SetMaterials(materials);
+            }
+        
+        }
     }
     public void DetachBlock(GameObject bloc)
     {
@@ -70,17 +94,17 @@ public class GridSystem : MonoBehaviour
             playerObj.weight -= bloc.GetComponent<Bloc>().weight;
             List<Vector3Int> neighbors = GetNeighbors(detachedGridPos);
 
-         
-            
+
+
             List<Vector3Int> keys = new List<Vector3Int>();
             foreach (var gridBloc in grid)
             {
                 if (!IsBlockConnected(gridBloc.Value))
                 {
-                   
+
                     playerObj.removeCube(gridBloc.Value);
                     keys.Add(gridBloc.Key);
-                    gridBloc.Value.GetComponent<Bloc>().state = BlocState.detached; 
+                    gridBloc.Value.GetComponent<Bloc>().state = BlocState.detached;
                     neighbors = GetNeighbors(gridBloc.Key);
                     playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
                     gridBloc.Value.GetComponent<Rigidbody>().AddForce(
@@ -236,9 +260,10 @@ public class GridSystem : MonoBehaviour
 
     }
 
-    public void clearGrid(){
+    public void clearGrid()
+    {
         grid.Clear();
-        grid.Add(new Vector3Int(0,0,0),kernel);
+        grid.Add(new Vector3Int(0, 0, 0), kernel);
         playerObj.weight = 1;
     }
     public Vector3 tranformToVector3(Vector3Int position)
@@ -246,10 +271,10 @@ public class GridSystem : MonoBehaviour
         return new Vector3(position.x * cubeSize, position.y * cubeSize, position.z * cubeSize);
     }
 
-    public List<Vector3>  getAvailableNeighbours(GameObject cube)
+    public List<Vector3> getAvailableNeighbours(GameObject cube)
     {
         Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
-        if(positionCube == null)
+        if (positionCube == null)
         {
             return null;
         }
@@ -260,7 +285,7 @@ public class GridSystem : MonoBehaviour
 
             foreach (Vector3Int position in positions)
             {
-                
+
                 if (!grid.ContainsKey(position))
                 {
                     availableSpaces.Add(tranformToVector3(position));
@@ -271,30 +296,34 @@ public class GridSystem : MonoBehaviour
         }
     }
 
-    public Vector3[] ClosestNeighbourPosition(GameObject cube,Vector3 position)
+    public Vector3[] ClosestNeighbourPosition(GameObject cube, Vector3 position)
     {
         Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
         Vector3 cubePositionToKernel = tranformToVector3(positionCube);
-       
+
         if (positionCube == null)
         {
             return null;
         }
         else
         {
-
-            //Look for closest position relative to current position and rotation
-            float scaleFactor = cube.transform.lossyScale.x;
-            Vector3[] directions = new Vector3[] {cube.transform.forward*cubeSize*scaleFactor, -cube.transform.forward * cubeSize*scaleFactor
-                , cube.transform.up * cubeSize*scaleFactor,-cube.transform.up*cubeSize*scaleFactor
-                , cube.transform.right * cubeSize*scaleFactor,-cube.transform.right*cubeSize*scaleFactor };
-            List<Vector3> directionsList = directions.ToList();
-            directionsList.Sort((x,y) =>
+            Transform cubeTransform = cube.transform;
+            if (cube.transform.Find("Orientation") != null)
             {
-                float distanceX = (cube.transform.position + x - position).magnitude;
-                float distanceY = (cube.transform.position + y - position).magnitude;
+                cubeTransform = cube.transform.Find("Orientation");
+            }
+            //Look for closest position relative to current position and rotation
+            float scaleFactor = cubeTransform.lossyScale.x;
+            Vector3[] directions = new Vector3[] {cubeTransform.forward*cubeSize*scaleFactor, -cubeTransform.forward * cubeSize*scaleFactor
+                , cubeTransform.up * cubeSize*scaleFactor,-cubeTransform.up*cubeSize*scaleFactor
+                , cubeTransform.right * cubeSize*scaleFactor,-cubeTransform.right*cubeSize*scaleFactor };
+            List<Vector3> directionsList = directions.ToList();
+            directionsList.Sort((x, y) =>
+            {
+                float distanceX = (cubeTransform.position + x - position).magnitude;
+                float distanceY = (cubeTransform.position + y - position).magnitude;
                 return distanceX.CompareTo(distanceY);
-            }); 
+            });
 
             int i = 0;
             bool foundPoint = false;
@@ -302,20 +331,20 @@ public class GridSystem : MonoBehaviour
             Vector3 facePositionWorld = Vector3.zero;
             do
             {
-                positionRelativeToKernel = cubePositionToKernel+ cube.transform.InverseTransformDirection(directionsList[i]).normalized*cubeSize;
+                positionRelativeToKernel = cubePositionToKernel + cubeTransform.InverseTransformDirection(directionsList[i]).normalized * cubeSize;
                 foundPoint = !containsKey(positionRelativeToKernel);
                 if (foundPoint)
                 {
-                    facePositionWorld = directionsList[i]+cube.transform.position;
+                    facePositionWorld = directionsList[i] + cubeTransform.position;
                 }
                 i++;
-            }while(!foundPoint && i < directionsList.Count);
-            
-            return new Vector3[] {facePositionWorld,positionRelativeToKernel};
+            } while (!foundPoint && i < directionsList.Count);
+
+            return new Vector3[] { facePositionWorld, positionRelativeToKernel };
 
         }
     }
-    
+
     public List<Vector3> getOccupiedNeighbours(GameObject cube)
     {
         Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
@@ -332,7 +361,7 @@ public class GridSystem : MonoBehaviour
             {
                 if (grid.ContainsKey(position))
                 {
-                    
+
                     occupiedSpaces.Add(tranformToVector3(position));
                 }
             }
@@ -342,11 +371,12 @@ public class GridSystem : MonoBehaviour
     }
 
 
-    public Vector3 FindMaxDimensions(){
+    public Vector3 FindMaxDimensions()
+    {
         float maxX = grid.Keys.Max(x => x.x);
         float minX = grid.Keys.Min(x => x.x);
         float maxY = grid.Keys.Max(x => x.y);
-        return new Vector3(maxX,minX,maxY);
+        return new Vector3(maxX, minX, maxY);
     }
     public void coneEjectRest(float ejectionSpeed, float rightDriftProportion)
     {
@@ -365,7 +395,7 @@ public class GridSystem : MonoBehaviour
                 float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
                 cube.GetComponent<Rigidbody>().AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
-               
+
             }
 
         }
@@ -374,5 +404,5 @@ public class GridSystem : MonoBehaviour
             grid.Remove(key);
         }
     }
-    
+
 }
