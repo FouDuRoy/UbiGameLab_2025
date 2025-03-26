@@ -73,12 +73,11 @@ MonoBehaviour:
   mouvementSpeed: 110
   pivotSpeed: 200
   rotationSpeed: 50
-  playerCharge: 10
   rotParam: 4
   rotationDamping: 20
   weightMouvementFactor: 0.95
   weightRotationFactor: 1
-  moveType: 3
+  moveType: 6
   pauseMenu: {fileID: 0}
   selectedGUI: {fileID: 0}
 --- !u!114 &4658591005558201665
@@ -97,12 +96,12 @@ MonoBehaviour:
   attackerText: {fileID: 0}
   restartButton: {fileID: 0}
   maxDamage: 200
-  impulsionWhenHit: 50
+  impulsionWhenHit: 100
   invincibilityDelay: 3
   hitStopDelay: 0.4
   MaxhealthValue: 300
   waitDelayAfterPlayerDeath: 1.5
-  timeScaleFactor: 0.001
+  timeScaleFactor: 0.1
   healthValue: 300
   playerLife: {fileID: 4000077683436356578}
   isInvincible: 0
@@ -163,6 +162,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a16e9c4f-d8c8-4970-8243-a6669cd3ebcc
     m_ActionName: Mouvement/Pause[/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 90f2f932-3bc7-4bce-b4bc-12a85c1887d3
+    m_ActionName: Mouvement/RotateTwinStick[/XInputControllerWindows/rightStick/up,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/rightStick/right]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Player1
   m_DefaultActionMap: Mouvement
@@ -204,23 +207,23 @@ MonoBehaviour:
     rightMidTime: 0.02
     totalDuration: 0.06
   attraction:
-    leftMotorMin: 0
-    leftMotorMax: 0.1
+    leftMotorMin: 0.1
+    leftMotorMax: 0
     rightMotorMin: 0
-    rightMotorMax: 0.4
-    duration: 0.5
+    rightMotorMax: 0
+    duration: 0.1
   repulsionCharge:
     leftMotorMin: 0
-    leftMotorMax: 0.1
+    leftMotorMax: 0
     rightMotorMin: 0
-    rightMotorMax: 0.5
-    duration: 0.5
+    rightMotorMax: 0.05
+    duration: 1
   repulsionShoot:
-    leftMotorMax: 0.5
+    leftMotorMax: 5
     leftMidTime: 0
-    rightMotorMax: 0.5
-    rightMidTime: 0.02
-    totalDuration: 0.06
+    rightMotorMax: 0.05
+    rightMidTime: 0
+    totalDuration: 0.2
   ejectionCharge:
     leftMotorMin: 0
     leftMotorMax: 0.1
@@ -258,6 +261,8 @@ MonoBehaviour:
   distance: 19
   secondsForMaxChargingEjection: 1
   ejectionSpeed: 60
+  lineMat: {fileID: 2100000, guid: 5de4fbdbb1ac55345a979f6a4e9c97fe, type: 2}
+  maxAngle: 15
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class HapticFeedbackController : MonoBehaviour
         rightMidTime=.02f,
         totalDuration=.06f,
     };
-    public HoldHapticPattern attraction=new HoldHapticPattern
+    public HoldHapticPattern attraction =new HoldHapticPattern
     {
         leftMotorMin=0,
         leftMotorMax=.1f,
@@ -40,6 +40,7 @@ public class HapticFeedbackController : MonoBehaviour
         rightMotorMax=.5f,
         duration=.2f,
     };
+
     public HoldHapticPattern repulsionCharge=new HoldHapticPattern
     {
         leftMotorMin=0,
@@ -270,7 +271,7 @@ public class HapticFeedbackController : MonoBehaviour
     }
 
     public void AttractionVibrationStart()
-    {
+    {/*
         if (playerGamepad != null)
         {
             if (attractionCoroutine != null)
@@ -278,18 +279,18 @@ public class HapticFeedbackController : MonoBehaviour
                 StopCoroutine(attractionCoroutine); 
             }
             attractionCoroutine = StartCoroutine(VibrationTransition(attraction, true));
-        }
+        }*/
     }
 
     public void AttractionVibrationEnd()
-    {
+    {/*
         if (playerGamepad != null)
         {
             StopCoroutine(attractionCoroutine);
             attractionCoroutine = null;
 
             StartCoroutine(VibrationTransition(attraction.leftMotorMin,attraction.leftMotorMax,attraction.rightMotorMin,attraction.rightMotorMax,.2f, false));
-        }
+        }*/
     }
 
     public void RepulsionVibrationStart(float maxChargeTime)
