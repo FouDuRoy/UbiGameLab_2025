@@ -107,6 +107,9 @@ public class PlayerMouvement : MonoBehaviour
                 case MouvementType.TwinStickShooter2:
                     twinStickShooter2(direction, directionTwin);
                     break;
+                case MouvementType.TwinStickShooter3:
+                    twinStickShooter3(direction, directionTwin);
+                    break;
             }
         }
 
@@ -122,8 +125,8 @@ public class PlayerMouvement : MonoBehaviour
 
     private void OnDisable()
     {
-       pauseAction.performed -= OnPause;
-       pauseAction.Disable();
+        pauseAction.performed -= OnPause;
+        pauseAction.Disable();
     }
 
     public void OnPause(InputAction.CallbackContext context)
@@ -233,7 +236,7 @@ public class PlayerMouvement : MonoBehaviour
         {
             if (!rotatingRight)
             {
-               golem.GetComponent<SynchroGolem>().setLockRotation(true);
+                golem.GetComponent<SynchroGolem>().setLockRotation(true);
             }
             rotatingRight = true;
             rb.AddTorque(Vector3.up * rotationY * rotationSpeed / weightRotation, ForceMode.Acceleration);
@@ -248,6 +251,7 @@ public class PlayerMouvement : MonoBehaviour
             }
         }
     }
+
     private void twinStickShooter(Vector3 direction, Vector3 directionTwin)
     {
         rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
@@ -297,6 +301,34 @@ public class PlayerMouvement : MonoBehaviour
         }
         else
         {
+            t = 0;
+        }
+
+    }
+    private void twinStickShooter3(Vector3 direction, Vector3 directionTwin)
+    {
+
+        rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+
+        rotateAndDirection4(direction);
+
+
+        if (directionTwin.sqrMagnitude > 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(directionTwin.x, directionTwin.z) * Mathf.Rad2Deg;
+            rotatingRight = true;
+            Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
+
+            golem.rotation = Quaternion.Lerp(
+                golem.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+
+        }
+        else
+        {
+            rotatingRight = false;
             t = 0;
         }
 
@@ -433,6 +465,33 @@ public class PlayerMouvement : MonoBehaviour
             {
                 rb.AddTorque(angularVelocity, ForceMode.Acceleration);
                 rb.AddTorque(-rb.angularVelocity * rotationDamping, ForceMode.Acceleration);
+            }
+            else
+            {
+                rb.angularVelocity = Vector3.zero;
+            }
+        }
+    }
+    public void rotateAndDirection4(Vector3 direction)
+    {
+        Rigidbody rb = GetComponent<PlayerObjects>().cubeRb;
+        Vector3 structureFoward = rb.transform.forward;
+        float angle = Vector3.SignedAngle(structureFoward, direction.normalized, Vector3.up);
+        Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weightRotation;
+
+        if (direction != Vector3.zero)
+        {
+            if (Mathf.Abs(angle) > 1)
+            {
+                rb.AddTorque(angularVelocity, ForceMode.Acceleration);
+                rb.AddTorque(-rb.angularVelocity * rotationDamping, ForceMode.Acceleration);
+                float angleRot = rb.angularVelocity.magnitude * Time.fixedDeltaTime;
+
+                Vector3 axis = angleRot > Mathf.Epsilon ? angularVelocity.normalized : Vector3.forward;
+
+                Quaternion deltaRotation = Quaternion.AngleAxis(angleRot * Mathf.Rad2Deg, axis);
+
+                golem.rotation *= deltaRotation;
             }
             else
             {
