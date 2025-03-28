@@ -169,6 +169,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 90f2f932-3bc7-4bce-b4bc-12a85c1887d3
     m_ActionName: Mouvement/RotateTwinStick[/XInputControllerWindows/rightStick/up,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/rightStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 62453619-0255-4c19-8fdd-78ff74a2308e
+    m_ActionName: Mouvement/RightShoulder[/DualSenseGamepadHID/rightShoulder]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Player1
   m_DefaultActionMap: Mouvement
@@ -187,7 +191,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkGrid: 0
+  saveGrid: 0
+  restoreGrid: 0
   playerMat: {fileID: 2100000, guid: 5de4fbdbb1ac55345a979f6a4e9c97fe, type: 2}
+  keyValuePairs: []
   kernel: {fileID: 3131990571156717056}
   playerObj: {fileID: 0}
   cubeSize: 1.2
@@ -386,7 +393,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3131990571156717056}
   serializedVersion: 4
-  m_Mass: 25
+  m_Mass: 50
   m_Drag: 5
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -490,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.6599998
+      value: -2.66
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -502,7 +509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.6160002
+      value: -2.616
       objectReference: {fileID: 0}
     - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.z

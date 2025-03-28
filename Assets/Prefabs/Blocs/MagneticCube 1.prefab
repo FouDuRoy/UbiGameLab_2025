@@ -194,10 +194,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkGrid: 0
+  saveGrid: 0
+  restoreGrid: 0
   playerMat: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  keyValuePairs: []
   kernel: {fileID: 2877455228711921279}
   playerObj: {fileID: 0}
   cubeSize: 1.2
+  materials: []
 --- !u!114 &601833731030724977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,21 +270,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passiveRadius: 0.7
-  maxSpeed: 30
+  maxSpeed: 10
   error: 0.4
   AngleError: 8
-  moveTime: 0.1
+  moveTime: 0.2
   lerpingDistance: 2
-  timeBeforeSwitching: 0.05
+  timeBeforeSwitching: 1
   xLimit: 0.01
-  AngleLimit: 4
+  AngleLimit: 1
   mainLinearDrive: 5000
   mainLinearDamp: 100
   secondaryLinearDrive: 5000
   secondaryLinearDamp: 100
-  angularDrive: 50000
-  angularDamp: 1000
-  projection: 1
+  angularDrive: 100000
+  angularDamp: 5000
+  projection: 0
   springTorqueBreak: 50000
   springForceBreak: 50000
 --- !u!1 &7028254759574544782

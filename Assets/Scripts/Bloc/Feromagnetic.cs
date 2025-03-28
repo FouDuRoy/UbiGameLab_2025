@@ -377,7 +377,7 @@ public class Feromagnetic : MonoBehaviour
             List<ConfigurableJoint> joints = this.GetComponents<ConfigurableJoint>().ToList();
             joints.RemoveAll(joint => joint.connectedBody != null);
             ConfigurableJoint joint = joints.First();
-            float maxForce = 5000f;
+            float maxForce = 5000000000000000000f;
             if (joint.connectedBody == null)
             {
                 JointDrive xDrive = joint.xDrive;
@@ -428,6 +428,18 @@ public class Feromagnetic : MonoBehaviour
                 limitAy.limit = AngleLimit;// angleLimit
                 joint.angularYLimit = limitAy;
 
+                SoftJointLimit limitAx1 = new SoftJointLimit();
+                limitAx1.limit = -2;// angleLimit
+                joint.lowAngularXLimit = limitAx1;
+
+                SoftJointLimit limitAx = new SoftJointLimit();
+                limitAx.limit = 2;// angleLimit
+                joint.highAngularXLimit = limitAx;
+
+                SoftJointLimit limitAZ = new SoftJointLimit();
+                limitAZ.limit = AngleLimit;// angleLimit
+                joint.angularZLimit = limitAZ;
+
                 joint.yMotion = ConfigurableJointMotion.Limited;
                 joint.xMotion = ConfigurableJointMotion.Limited;
                 joint.zMotion = ConfigurableJointMotion.Limited;
@@ -441,6 +453,8 @@ public class Feromagnetic : MonoBehaviour
                 joint.anchor = Vector3.zero;
                 joint.autoConfigureConnectedAnchor = false;
 
+                joint.axis = -transform.InverseTransformDirection(transform.Find("Orientation").forward);
+                joint.secondaryAxis = Vector3.up;
                 Vector3 positionBeforeCorrection = toConnectTo.transform.InverseTransformPoint(transform.position);
                 if (toConnectTo.transform.Find("Orientation") != null)
                 {
@@ -456,11 +470,11 @@ public class Feromagnetic : MonoBehaviour
                 if (springType == SpringType.Free)
                 {
                     joint.angularYMotion = ConfigurableJointMotion.Free;
-                    joint.angularXMotion = ConfigurableJointMotion.Locked;
-                    joint.angularZMotion = ConfigurableJointMotion.Locked;
-                    joint.xMotion = ConfigurableJointMotion.Locked;
-                    joint.yMotion = ConfigurableJointMotion.Locked;
-                    joint.zMotion = ConfigurableJointMotion.Locked;
+                    joint.angularXMotion = ConfigurableJointMotion.Free;
+                    joint.angularZMotion = ConfigurableJointMotion.Free;
+                    joint.xMotion = ConfigurableJointMotion.Free;
+                    joint.yMotion = ConfigurableJointMotion.Free;
+                    joint.zMotion = ConfigurableJointMotion.Free;
 
                 }
 

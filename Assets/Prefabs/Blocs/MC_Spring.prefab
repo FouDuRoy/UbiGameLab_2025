@@ -196,17 +196,21 @@ MonoBehaviour:
   maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
+  lerpingMass: 0.001
+  structureMass: 0.01
+  structureDrag: 5
+  structureAngularDrag: 5
   springType: 1
   lerpingType: 0
   xLimit: 0.01
-  AngleLimit: 4
+  AngleLimit: 1
   mainLinearDrive: 5000
   mainLinearDamp: 100
   secondaryLinearDrive: 5000
   secondaryLinearDamp: 100
-  angularDrive: 50000
-  angularDamp: 1000
-  projection: 1
+  angularDrive: 100000
+  angularDamp: 5000
+  projection: 0
 --- !u!114 &6873425469701635572
 MonoBehaviour:
   m_ObjectHideFlags: 0

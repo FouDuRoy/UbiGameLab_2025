@@ -306,7 +306,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
                 return false;
             }
-
+            if(cube.gameObject.GetComponent<Renderer>().material.color == chargedColor)
+            {
+                return false;
+            }
             //Look if the cube is within the angle of ejection
             float angle = Vector3.Angle(cube.transform.position - golem.position, golem.forward);
             if (angle > maxAngle)

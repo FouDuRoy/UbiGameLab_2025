@@ -1,13 +1,30 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
+
+[System.Serializable]
+public class KeyValuePair
+{
+    public Vector3Int key;
+    public GameObject value;
+
+   public KeyValuePair(Vector3Int key, GameObject value)
+    {
+        this.key = key;
+        this.value = value;
+    }
+}
 
 public class GridSystem : MonoBehaviour
 {
     [SerializeField] bool checkGrid = false;
+    [SerializeField] bool saveGrid = false;
+    [SerializeField] bool restoreGrid = false;
     [SerializeField] public Material playerMat;
-
-    public Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
+    public KeyValuePair[] keyValuePairs;
+    [SerializeField] public Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
     public GameObject kernel; // Le noyau du syst�me, point (0,0,0)
     public PlayerObjects playerObj;
     public float cubeSize = 1.2f;
@@ -34,8 +51,40 @@ public class GridSystem : MonoBehaviour
             }
             checkGrid = false;
         }
-    }
+        if (saveGrid)
+        {
+            convertDictToArray();
+            saveGrid = false;
+        }
 
+        if (restoreGrid)
+        {
+            convertArrayToDict();
+            restoreGrid = false;
+        }
+    }
+    public void convertDictToArray()
+    {
+        // Convert array to dictionary at runtime
+        keyValuePairs = new KeyValuePair[grid.Count];
+        int i = 0;
+        foreach (var pair in grid)
+        {
+            keyValuePairs[i] = new KeyValuePair(pair.Key, pair.Value);
+            i++;
+        }
+    }
+    public void convertArrayToDict()
+    {
+
+        foreach (var pair in keyValuePairs)
+        {
+            if (!grid.ContainsKey(pair.key))
+            {
+                grid.Add(pair.key, pair.value);
+            }
+        }
+    }
     public void AttachBlock(GameObject blocToAttach, GameObject attachedBloc, Vector3 closestFace)
     {
         Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt((closestFace.x / cubeSize))
@@ -80,7 +129,7 @@ public class GridSystem : MonoBehaviour
                 v.Value.GetComponent<Bloc>().state = BlocState.structure;
                 v.Value.GetComponent<MeshRenderer>().SetMaterials(materials);
             }
-        
+
         }
     }
     public void DetachBlock(GameObject bloc)
@@ -404,5 +453,4 @@ public class GridSystem : MonoBehaviour
             grid.Remove(key);
         }
     }
-
 }
