@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -53,6 +51,10 @@ public class PlayerMouvement : MonoBehaviour
 
     bool rotatingRight = false;
     HapticFeedbackController feedback;
+    private bool shoulderLeftPressed = false;
+    private bool shoulderRightPressed = false;
+    float shoulderLeftTime = 0;
+    float shoulderRightTime = 0;
 
     GridSystem gridPlayer;
 
@@ -92,8 +94,8 @@ public class PlayerMouvement : MonoBehaviour
             float rotationZ = rotateActionZ.ReadValue<float>();
             float rotationX = rotateActionX.ReadValue<float>();
 
-            leftTrigger=attractCubes.ReadValue<float>();
-            rightTrigger=ejectCubes.ReadValue<float>();
+            leftTrigger = attractCubes.ReadValue<float>();
+            rightTrigger = ejectCubes.ReadValue<float>();
 
             switch (moveType)
             {
@@ -129,7 +131,7 @@ public class PlayerMouvement : MonoBehaviour
         }
 
 
-       // ThrowCubes();
+        // ThrowCubes();
     }
 
     private void OnEnable()
@@ -137,16 +139,34 @@ public class PlayerMouvement : MonoBehaviour
         feedback = GetComponent<HapticFeedbackController>();
         pauseAction.performed += OnPause;
         pauseAction.Enable();
-        throwCubes.performed += ShouldersPressed;
-        rightShoulder.performed+= ShouldersPressed;
+        throwCubes.performed += _ =>
+        {
+            shoulderLeftPressed = true;
+            Ejection();
+        };
+        rightShoulder.performed += _ =>
+        {
+            shoulderRightPressed = true;
+            Ejection();
+        };
+        throwCubes.canceled += _ =>
+        {
+            shoulderLeftPressed = false;
+        };
+        rightShoulder.canceled += _ =>
+        {
+            shoulderRightPressed = false;
+        };
 
-        throwCubes.canceled += ShouldersReleased;
-        rightShoulder.canceled += ShouldersReleased;
     }
 
-    private void ShouldersReleased(InputAction.CallbackContext context)
+    private void Ejection()
     {
-        ThrowCubes();
+        if(shoulderLeftPressed && shoulderRightPressed)
+        {
+            feedback.EjectionVibrationEnd();
+            ThrowCubes();
+        }
 
     }
 
@@ -170,6 +190,7 @@ public class PlayerMouvement : MonoBehaviour
 
     private void ShouldersPressed(InputAction.CallbackContext context)
     {
+
         feedback.EjectionVibrationStart();
     }
 
@@ -368,7 +389,7 @@ public class PlayerMouvement : MonoBehaviour
         }
         else
         {
-            rb.AddForceAtPosition (direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
         }
 
 
@@ -395,7 +416,7 @@ public class PlayerMouvement : MonoBehaviour
     }
     private void twinStickShooter3(Vector3 direction, Vector3 directionTwin)
     {
-        if(directionTwin.magnitude > 0.1)
+        if (directionTwin.magnitude > 0.1)
         {
             //rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             golem.GetComponent<Synchro2>().rotationFixed = false;
@@ -405,7 +426,7 @@ public class PlayerMouvement : MonoBehaviour
             //rb.AddForceAtPosition( direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             golem.GetComponent<Synchro2>().rotationFixed = true;
         }
-        if(leftTrigger >.1f || rightTrigger > .1f)
+        if (leftTrigger > .1f || rightTrigger > .1f)
         {
             rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
         }
@@ -533,7 +554,7 @@ public class PlayerMouvement : MonoBehaviour
     {
         Rigidbody rb = GetComponent<PlayerObjects>().cubeRb;
         Vector3 structureFoward = rb.transform.forward; ;
-   
+
         float angle = Vector3.SignedAngle(structureFoward, direction.normalized, Vector3.up);
         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weightRotation;
 
@@ -554,7 +575,7 @@ public class PlayerMouvement : MonoBehaviour
     {
         Rigidbody rb = GetComponent<PlayerObjects>().cubeRb;
         Vector3 structureFoward = rb.transform.forward; ;
-    
+
         float angle = Vector3.SignedAngle(structureFoward, direction.normalized, Vector3.up);
         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weightRotation;
 
