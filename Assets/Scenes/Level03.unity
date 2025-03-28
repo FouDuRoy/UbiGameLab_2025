@@ -737,10 +737,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Player2 Spring TEST '
       objectReference: {fileID: 0}
-    - target: {fileID: 3131990571156717056, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      propertyPath: m_Name
-      value: Golem Bleu
-      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: playerLife
       value: 
@@ -810,25 +806,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 518762752}
     - target: {fileID: 7850894500233854463, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      propertyPath: pivotSpeed
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 7850894500233854463, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: selectedGUI
       value: 
       objectReference: {fileID: 970148421}
-    - target: {fileID: 7850894500233854463, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      propertyPath: rotationSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7850894500233854463, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      propertyPath: mouvementSpeed
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 7850894500233854463, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      propertyPath: mouvementReductionFactor
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1238,6 +1218,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
+--- !u!1001 &177565408
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727362545004941349, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
+      propertyPath: m_Name
+      value: PillarExplosive
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
 --- !u!1001 &195905526
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1679,31 +1716,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &496664322 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3715524003834981654, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
-  m_PrefabInstance: {fileID: 4430064122159765847}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &496664325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 496664322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fef95d7248fd49248aff9d6db4d849f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventsPrefabs:
-  - {fileID: 6727362545004941349, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-  delayBeforeFirstEvent: 2
-  timeBetweenEvents: 30
-  chancesForEachSpawnpointToSpawnAPrefab: 1
-  spawnBeacon: {fileID: 6727362545004941349, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-  beaconMaxIntensity: 600
-  beaconDurationBeforePrefabSpawn: 3
 --- !u!4 &497850241 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
@@ -1938,63 +1950,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
---- !u!1001 &654443067
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.92387956
-      objectReference: {fileID: 0}
-    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.38268343
-      objectReference: {fileID: 0}
-    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6727362545004941349, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
-      propertyPath: m_Name
-      value: PillarExplosive
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
 --- !u!1 &809616326
 GameObject:
   m_ObjectHideFlags: 0
@@ -7364,10 +7319,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1 Spring TEST
       objectReference: {fileID: 0}
-    - target: {fileID: 3131990571156717056, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      propertyPath: m_Name
-      value: Golem Rouge
-      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: attackerText
       value: 
@@ -7433,25 +7384,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 518762752}
     - target: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      propertyPath: pivotSpeed
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: selectedGUI
       value: 
       objectReference: {fileID: 970148421}
-    - target: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      propertyPath: rotationSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      propertyPath: mouvementSpeed
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      propertyPath: mouvementReductionFactor
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8308,25 +8243,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
-      propertyPath: timeBetweenEvents
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
-      propertyPath: delayBeforeFirstEvent
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3715524003834981654, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 496664325}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -8342,7 +8262,6 @@ SceneRoots:
   - {fileID: 809616327}
   - {fileID: 831233568}
   - {fileID: 1832251198}
-  - {fileID: 654443067}
   - {fileID: 401354634}
   - {fileID: 195905526}
   - {fileID: 518762756}
@@ -8356,3 +8275,4 @@ SceneRoots:
   - {fileID: 1389680879}
   - {fileID: 1709085650}
   - {fileID: 111579645}
+  - {fileID: 177565408}
