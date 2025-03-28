@@ -30,6 +30,10 @@ public class Feromagnetic : MonoBehaviour
     [SerializeField] float maxSpeedVariation = 3f;
     [SerializeField] public float springTorqueBreak = 1000f;
     [SerializeField] public float springForceBreak = 1000f;
+    [SerializeField] float lerpingMass = 0.001f;
+    [SerializeField] float structureMass = 0.01f;
+    [SerializeField] float structureDrag = 5f;
+    [SerializeField] float structureAngularDrag = 5f;
 
     //Joint settings
 
@@ -256,9 +260,9 @@ public class Feromagnetic : MonoBehaviour
             {
                 velocity = velocity.normalized * maxSpeed;
             }
-            if (angularVelocity.magnitude > maxSpeed*10)
+            if (angularVelocity.magnitude > maxSpeed * 10)
             {
-                //angularVelocity = angularVelocity.normalized * maxSpeed*10;
+                angularVelocity = angularVelocity.normalized * maxSpeed * 10;
             }
 
             //update velocity and rotation
@@ -310,7 +314,7 @@ public class Feromagnetic : MonoBehaviour
         closestFaceRelativeToMainCube = Vector3.zero;
         errorP = 1;
         errorR = 1;
-     
+
         transform.parent = this.transform.root.parent;
     }
 
@@ -323,13 +327,13 @@ public class Feromagnetic : MonoBehaviour
         gameObject.GetComponent<SphereCollider>().radius = activeRadius;
         gameObject.GetComponent<SphereCollider>().isTrigger = true;
 
-        if ((springType == SpringType.Free || springType == SpringType.Limited) && cubeAttractedToTransform.root.GetComponent<ConnectMagneticStructure>()==null)
+        if ((springType == SpringType.Free || springType == SpringType.Limited) && cubeAttractedToTransform.root.GetComponent<ConnectMagneticStructure>() == null)
         {
             //Set cube rigidbody parameters when in structure
-            cubeRB.mass = 0.01f;
+            cubeRB.mass = structureMass;
             cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
-            cubeRB.drag = 5f;
-            cubeRB.angularDrag = 5f;
+            cubeRB.drag = structureDrag;
+            cubeRB.angularDrag = structureAngularDrag;
             this.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
             playerAtractedTo.GetComponent<GridSystem>().AttachBlock(gameObject, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
             attachJ();
@@ -413,8 +417,8 @@ public class Feromagnetic : MonoBehaviour
                 joint.slerpDrive = slerpDrive;
                 joint.rotationDriveMode = RotationDriveMode.Slerp;
 
-            joint.projectionAngle = 0;
-            joint.projectionDistance = 0f;
+                joint.projectionAngle = 0;
+                joint.projectionDistance = 0f;
 
                 joint.angularYMotion = ConfigurableJointMotion.Limited;
                 joint.angularXMotion = ConfigurableJointMotion.Limited;
@@ -503,6 +507,8 @@ public class Feromagnetic : MonoBehaviour
         return correction;
     }
 
+
+
     private void lerpingMagents(Vector3 direction, Vector3 relativeDirection, Vector3 closestFaceRelativeToWorld)
     {
         // If the distance is bigger than lerpingDistance or the position is not available anymore we keep pushing with CoulombLaw
@@ -518,18 +524,17 @@ public class Feromagnetic : MonoBehaviour
             //Set speed to zero and change layer to magnetic.
             cubeRB.velocity = Vector3.zero;
             cubeRB.angularVelocity = Vector3.zero;
-            //Set parent to attracted cube
-           // this.transform.parent = cubeAttractedToTransform;
+
             playerAtractedTo = cubeAttractedToTransform.root;
 
-            //Start moving towards final positiond
+            //Start moving towards final position
             lerping = true;
             startPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(transform.position);
             startRotationRelativeToAttractedCube = Quaternion.Inverse(cubeAttractedToTransform.rotation) * transform.rotation;
             endPositionRelativeToAttractedCube = cubeAttractedToTransform.InverseTransformPoint(closestFaceRelativeToWorld);
             endRotationRelativeToAttractedCube = RotationChoice(startRotationRelativeToAttractedCube);
             cubeRB.useGravity = false;
-            cubeRB.mass = 0.0001f;
+            cubeRB.mass = lerpingMass;
         }
     }
     private Vector3 CoulombLaw(Vector3 distance, float charge1, float charge2)

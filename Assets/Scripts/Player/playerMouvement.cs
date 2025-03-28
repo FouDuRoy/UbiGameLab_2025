@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -27,6 +29,7 @@ public class PlayerMouvement : MonoBehaviour
     InputAction moveAction;
     InputAction rotateAction;
     InputAction throwCubes;
+    InputAction rightShoulder;
     InputAction rotateActionZ;
     InputAction rotateActionX;
     InputAction pauseAction;
@@ -64,6 +67,7 @@ public class PlayerMouvement : MonoBehaviour
         rotateTwinStick = playerInput.actions.FindAction("RotateTwinStick");
         ejectCubes = playerInput.actions.FindAction("BlocEjection");
         attractCubes = playerInput.actions.FindAction("AttractCubes");
+        rightShoulder = playerInput.actions.FindAction("RightShoulder");
         pauseMenu.SetActive(false); // Hide canvas at start
         pauseAction = playerInput.actions.FindAction("Pause");
         gridPlayer = GetComponent<GridSystem>();
@@ -125,13 +129,48 @@ public class PlayerMouvement : MonoBehaviour
         }
 
 
-        ThrowCubes();
+       // ThrowCubes();
     }
 
     private void OnEnable()
     {
+        feedback = GetComponent<HapticFeedbackController>();
         pauseAction.performed += OnPause;
         pauseAction.Enable();
+        throwCubes.performed += ShouldersPressed;
+        rightShoulder.performed+= ShouldersPressed;
+
+        throwCubes.canceled += ShouldersReleased;
+        rightShoulder.canceled += ShouldersReleased;
+    }
+
+    private void ShouldersReleased(InputAction.CallbackContext context)
+    {
+        ThrowCubes();
+
+    }
+
+    public void ThrowCubes()
+    {
+        foreach (var item in gridPlayer.grid)
+        {
+            GameObject cube = item.Value;
+            if (cube != this.rb.gameObject)
+            {
+
+                cube.GetComponent<Rigidbody>().AddForce((cube.GetComponent<Rigidbody>().position - rb.position).normalized * explosionForce, ForceMode.VelocityChange);
+                cube.GetComponent<Bloc>().state = BlocState.projectile;
+                //Remove cube
+                GetComponent<PlayerObjects>().removeCube(cube);
+            }
+        }
+        gridPlayer.clearGrid();
+        feedback.EjectionVibrationEnd();
+    }
+
+    private void ShouldersPressed(InputAction.CallbackContext context)
+    {
+        feedback.EjectionVibrationStart();
     }
 
     private void OnDisable()
@@ -426,32 +465,6 @@ public class PlayerMouvement : MonoBehaviour
                 rb.transform.Find("GolemBuilt").GetComponent<SynchroGolem>().setLockRotation(false);
                 rotatingRight = false;
             }
-        }
-    }
-
-
-
-
-    public void ThrowCubes()
-    {
-        if (moveType == MouvementType.none)
-            return;
-
-        if (throwCubes.ReadValue<float>() == 1)
-        {
-            foreach (var item in gridPlayer.grid)
-            {
-                GameObject cube = item.Value;
-                if (cube != this.rb.gameObject)
-                {
-
-                    cube.GetComponent<Rigidbody>().AddForce((cube.GetComponent<Rigidbody>().position - rb.position).normalized * explosionForce, ForceMode.VelocityChange);
-                    cube.GetComponent<Bloc>().state = BlocState.projectile;
-                    //Remove cube
-                    GetComponent<PlayerObjects>().removeCube(cube);
-                }
-            }
-            gridPlayer.clearGrid();
         }
     }
 

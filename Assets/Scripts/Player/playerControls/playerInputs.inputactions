@@ -85,6 +85,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "RightShoulder",
+                    "type": "Button",
+                    "id": "62453619-0255-4c19-8fdd-78ff74a2308e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -560,6 +569,17 @@
                     "action": "RotateTwinStick",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "393fbdbe-e89a-4dc2-95a4-0baedb3fa143",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1;Player2",
+                    "action": "RightShoulder",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
