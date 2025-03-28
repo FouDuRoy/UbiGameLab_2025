@@ -481,7 +481,6 @@ public class PlayerMouvement : MonoBehaviour
             rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             rotatingRight = false;
             rotateAndDirection5(direction);
-            t = 0;
         }
     }
     private void BoothJoystickMove(Vector3 direction, float rotationY)

@@ -13,6 +13,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] float attractionForce = 10f;
     [SerializeField] float initialAngle = 45f;
+    [SerializeField] float maxAngleRepulsion = 90f;
     [SerializeField] float secondsForMaxCharging = 2f;
     [SerializeField] float distance = 10f;
     [SerializeField] float secondsForMaxChargingEjection = 3f;
@@ -136,7 +137,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
             //Draw rays to indicate current range
             timeHeld = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
-            float maxAngle = initialAngle+(90-initialAngle)*(timeHeld/secondsForMaxChargingEjection);
+            float maxAngle = initialAngle+(maxAngleRepulsion-initialAngle)*(timeHeld/secondsForMaxChargingEjection);
 
             //Draw Rays in Build
             Vector3 origin = golem.position;
@@ -248,7 +249,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float blocSizeWorld = playerGrid.cubeSize*playerGrid.kernel.transform.lossyScale.x;
         float radius = radiusInBlocs*blocSizeWorld;
         float boundaryDistanceRatio = time/secondsForMaxChargingEjection;
-        float maxAngle = initialAngle+(90-initialAngle)*(boundaryDistanceRatio);
+        float maxAngle = initialAngle+(maxAngleRepulsion-initialAngle)*(boundaryDistanceRatio);
        
        List<Collider> magnetic = Physics.OverlapSphere(golem.position, radius).ToList<Collider>();
        magnetic = magnetic.FindAll(cube => {
@@ -291,7 +292,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
         float radius = radiusInBlocs * blocSizeWorld;
         float boundaryDistanceRatio = time / secondsForMaxChargingEjection;
-        float maxAngle = initialAngle + (90 - initialAngle) * (boundaryDistanceRatio);
+        float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (boundaryDistanceRatio);
 
         List<Collider> magnetic = Physics.OverlapSphere(golem.position, radius).ToList<Collider>();
         magnetic = magnetic.FindAll(cube => {
