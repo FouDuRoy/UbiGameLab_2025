@@ -72,10 +72,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionForce: 140
-  mouvementSpeed: 100
-  mouvementReductionFactor: 1
-  pivotSpeed: 200
-  rotationSpeed: 50
+  mouvementSpeed: 70
+  mouvementReductionFactor: 0
+  pivotSpeed: 180
+  rotationSpeed: 30
   rotParam: 4
   rotationDamping: 20
   weightMouvementFactor: 0.95
@@ -172,7 +172,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 62453619-0255-4c19-8fdd-78ff74a2308e
-    m_ActionName: Mouvement/RightShoulder[/DualSenseGamepadHID/rightShoulder]
+    m_ActionName: Mouvement/RightShoulder[/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Player2
   m_DefaultActionMap: Mouvement
@@ -218,41 +218,35 @@ MonoBehaviour:
     rightMidTime: 0.02
     totalDuration: 0.06
   attraction:
-    leftMotorMin: 0.1
+    leftMotorMin: 0
     leftMotorMax: 0
     rightMotorMin: 0
     rightMotorMax: 0
-    duration: 0.1
+    duration: 0
   repulsionCharge:
     leftMotorMin: 0
-    leftMotorMax: 0
+    leftMotorMax: 0.15
     rightMotorMin: 0
     rightMotorMax: 0.05
-    duration: 1
+    duration: 2
   repulsionShoot:
+    leftMotorMax: 10
+    leftMidTime: 0
+    rightMotorMax: 0
+    rightMidTime: 0
+    totalDuration: 0.12
+  ejectionShoot:
     leftMotorMax: 5
     leftMidTime: 0
-    rightMotorMax: 0.05
-    rightMidTime: 0
-    totalDuration: 0.2
-  ejectionCharge:
-    leftMotorMin: 0
-    leftMotorMax: 0.1
-    rightMotorMin: 0
-    rightMotorMax: 0.5
-    duration: 0.5
-  ejectionShoot:
-    leftMotorMax: 0.5
-    leftMidTime: 0
-    rightMotorMax: 0.5
-    rightMidTime: 0.02
-    totalDuration: 0.06
+    rightMotorMax: 0.1
+    rightMidTime: 0.05
+    totalDuration: 0.4
   damageTaken:
-    leftMotorMax: 0.2
-    leftMidTime: 0.5
-    rightMotorMax: 0.8
-    rightMidTime: 0.5
-    totalDuration: 1.5
+    leftMotorMax: 1
+    leftMidTime: 0.4
+    rightMotorMax: 1
+    rightMidTime: 0.4
+    totalDuration: 0.8
 --- !u!114 &1662070221946770721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +264,7 @@ MonoBehaviour:
   initialAngle: 15
   secondsForMaxCharging: 0.2
   distance: 19
-  secondsForMaxChargingEjection: 1
+  secondsForMaxChargingEjection: 2
   ejectionSpeed: 60
   colorChangeIntensity: 3
   lineMat: {fileID: 2100000, guid: ee7f85b04e41b7e4691b855f2795b6e0, type: 2}
@@ -291,7 +285,7 @@ GameObject:
   - component: {fileID: 4536375940292766682}
   - component: {fileID: 6839929964872536719}
   m_Layer: 3
-  m_Name: MainBody2
+  m_Name: Golem Bleu
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
