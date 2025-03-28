@@ -1141,7 +1141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 134994841213693252, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
       propertyPath: attackerText
@@ -1788,7 +1788,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 134994841213693252, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 732931797341517999, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1662070221946770721, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: colorChangeIntensity
@@ -1840,7 +1844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: moveType
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: pauseMenu
@@ -6667,7 +6671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 134994841213693252, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1662070221946770721, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
       propertyPath: attractionForce
@@ -6775,7 +6779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6980508144528851275, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6980508144528851275, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_ActionId
@@ -6840,6 +6844,10 @@ PrefabInstance:
     - target: {fileID: 6980508144528851275, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_ActionName
       value: Mouvement/Pause[/XInputControllerWindows/start]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980508144528851275, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: Mouvement/RotateTwinStick[/DualSenseGamepadHID/rightStick/up,/DualSenseGamepadHID/rightStick/down,/DualSenseGamepadHID/rightStick/left,/DualSenseGamepadHID/rightStick/right]
       objectReference: {fileID: 0}
     - target: {fileID: 7847107767003649144, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
       propertyPath: m_LocalPosition.x

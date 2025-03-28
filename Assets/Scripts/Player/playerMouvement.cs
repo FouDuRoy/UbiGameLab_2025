@@ -127,6 +127,9 @@ public class PlayerMouvement : MonoBehaviour
                 case MouvementType.TwinStickShooter3:
                     twinStickShooter3(direction, directionTwin);
                     break;
+                case MouvementType.Joystick4:
+                    joystick4(direction);
+                    break;
             }
         }
 
@@ -418,12 +421,10 @@ public class PlayerMouvement : MonoBehaviour
     {
         if (directionTwin.magnitude > 0.1)
         {
-            //rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             golem.GetComponent<Synchro2>().rotationFixed = false;
         }
         else
         {
-            //rb.AddForceAtPosition( direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             golem.GetComponent<Synchro2>().rotationFixed = true;
         }
         if (leftTrigger > .1f || rightTrigger > .1f)
@@ -435,7 +436,7 @@ public class PlayerMouvement : MonoBehaviour
             rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
         }
 
-        rotateAndDirection4(direction);
+        rotateAndDirection5(direction);
 
         if (directionTwin.sqrMagnitude > 0.1f)
         {
@@ -456,6 +457,32 @@ public class PlayerMouvement : MonoBehaviour
             t = 0;
         }
 
+    }
+    private void joystick4(Vector3 direction)
+    {
+  
+        if ((leftTrigger > .1f || rightTrigger > .1f) && direction.magnitude>0.1f)
+        {
+            golem.GetComponent<Synchro2>().rotationFixed = false;
+            rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            rotatingRight = true;
+            Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
+
+            golem.rotation = Quaternion.Lerp(
+                golem.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+        }
+        else
+        {
+            golem.GetComponent<Synchro2>().rotationFixed = true;
+            rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            rotatingRight = false;
+            rotateAndDirection5(direction);
+            t = 0;
+        }
     }
     private void BoothJoystickMove(Vector3 direction, float rotationY)
     {
@@ -579,6 +606,34 @@ public class PlayerMouvement : MonoBehaviour
         float angle = Vector3.SignedAngle(structureFoward, direction.normalized, Vector3.up);
         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weightRotation;
 
+        if (direction != Vector3.zero)
+        {
+            if (Mathf.Abs(angle) > 1)
+            {
+                rb.AddTorque(angularVelocity, ForceMode.Acceleration);
+                rb.AddTorque(-rb.angularVelocity * rotationDamping, ForceMode.Acceleration);
+                float angleRot = rb.angularVelocity.magnitude * Time.fixedDeltaTime;
+
+                Vector3 axis = angleRot > Mathf.Epsilon ? angularVelocity.normalized : Vector3.forward;
+
+                Quaternion deltaRotation = Quaternion.AngleAxis(angleRot * Mathf.Rad2Deg, axis);
+
+                golem.rotation *= deltaRotation;
+            }
+            else
+            {
+                rb.angularVelocity = Vector3.zero;
+            }
+        }
+    }
+    public void rotateAndDirection5(Vector3 direction)
+    {
+        Rigidbody rb = GetComponent<PlayerObjects>().cubeRb;
+        Vector3 structureFoward = golem.transform.forward; ;
+        
+        float angle = Vector3.SignedAngle(structureFoward, direction.normalized, Vector3.up);
+        Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weightRotation;
+        Debug.Log(angle);
         if (direction != Vector3.zero)
         {
             if (Mathf.Abs(angle) > 1)
