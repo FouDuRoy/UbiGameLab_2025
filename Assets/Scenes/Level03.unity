@@ -1815,6 +1815,10 @@ PrefabInstance:
       propertyPath: playIntroAnimation
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
+      propertyPath: distanceFromPlayersFactor
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 7513625886291757825, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: m_Name
       value: Dynamic Camera
@@ -8817,10 +8821,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventsPrefabs:
-  - {fileID: 4468813103985672358, guid: 608420b22086db24b81adc9bb42a8959, type: 3}
+  - {fileID: 4923816383618738422, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
   delayBeforeFirstEvent: 2
   timeBetweenEvents: 9999
-  chancesForEachSpawnpointToSpawnAPrefab: 1
+  chancesForEachSpawnpointToSpawnAPrefab: 0.4
   spawnBeacon: {fileID: 2122797384517485039, guid: 85492a36700258749bc0f6f13d279e9c, type: 3}
   beaconMaxIntensity: 600
   beaconDurationBeforePrefabSpawn: 3
