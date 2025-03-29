@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BasicCube
+  m_Name: Explosive_Cube_Emissive 1
   m_Shader: {fileID: -6465566751694194690, guid: 8d61498bb9b71914c831507162acd9f7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AO_Tex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: ce440cfbe62dfdd4abc464cf7b031b8c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Alpha:
@@ -46,7 +46,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Tex:
-        m_Texture: {fileID: 2800000, guid: 806f7bc1ed25d364989af80074944164, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveMask:
@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Tex:
-        m_Texture: {fileID: 2800000, guid: edea02b4b5a8cdb41bf85b680ac5761c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -87,28 +87,28 @@ Material:
     - _Cull: 2
     - _DstBlend: 0
     - _MatCap_Lerp: 0
-    - _Move_Gradient_Line: 4.33
-    - _Move_Shadow_Line: 0.5
+    - _Move_Gradient_Line: 0.63
+    - _Move_Shadow_Line: 1
     - _Normal_Intensity: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Shadow_Opacity_Intensity: 0.687
+    - _Shadow_Opacity_Intensity: 0.447
     - _Smoothness: 0
     - _SrcBlend: 1
     - _Surface: 0
     - _Use_Gradient_Tex_Map_Instead: 0
-    - _Use_Local_Space: 0
+    - _Use_Local_Space: 1
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Emissive_Color: {r: 0, g: 0, b: 0, a: 0}
-    - _Gradient_Bot_Color: {r: 0.6152779, g: 0.6603774, b: 0.6136526, a: 1}
-    - _Gradient_Smooth_Step: {r: 0, g: 1, b: 0, a: 0}
-    - _Gradient_Top_Color: {r: 0.75, g: 1, b: 0.8427217, a: 0}
-    - _Shadow_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Emissive_Color: {r: 1, g: 0.6831584, b: 0, a: 0}
+    - _Gradient_Bot_Color: {r: 0.42745098, g: 0.33333334, b: 0.27058825, a: 1}
+    - _Gradient_Smooth_Step: {r: -0.24, g: 0.89, b: 0, a: 0}
+    - _Gradient_Top_Color: {r: 0.5377358, g: 0.41446242, b: 0.33228016, a: 1}
+    - _Shadow_Color: {r: 0.58431375, g: 0.40726885, b: 0.16862743, a: 1}
     - _SmoothStepShadows: {r: 0.5, g: 0.35, b: 0, a: 0}
     - _Tint: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
