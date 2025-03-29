@@ -125,7 +125,12 @@ public class PlayerObjects : MonoBehaviour
             }
         }
 
-
+        Rigidbody cubeRigidBody = cube.gameObject.GetComponent<Rigidbody>();
+        if(cubeRigidBody == null)
+        {
+            addRigidBody(cube);
+            
+        }
 
         cube.transform.parent = transform.parent;
         ConnectMagneticStructure magneticStructure = cube.GetComponent<ConnectMagneticStructure>();

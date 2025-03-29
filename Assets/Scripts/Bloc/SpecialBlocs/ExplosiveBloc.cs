@@ -26,7 +26,7 @@ public class ExplosiveBloc : MonoBehaviour
     [SerializeField] bool explode = false;
     private GameObject explosionSphere;
     private GameObject repulsionSphere;
-
+    bool pushed = false;
 
     private void Start()
     {
@@ -87,7 +87,7 @@ public class ExplosiveBloc : MonoBehaviour
                 }
             }
         }
-
+        pushed = false;
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(false);
@@ -150,10 +150,14 @@ public class ExplosiveBloc : MonoBehaviour
         {
             GridSystem grid = bloc.transform.root.GetComponent<GridSystem>();
             PlayerMouvement move = bloc.transform.root.GetComponent<PlayerMouvement>();
-            if (move != null)
+            if (grid != null)
             {
-                grid.DetachBlock(bloc);
-                bloc.GetComponent<Bloc>().state = BlocState.detached;
+                if(bloc != grid.kernel)
+                {
+                    grid.DetachBlock(bloc);
+                    bloc.GetComponent<Bloc>().state = BlocState.detached;
+                }
+               
             }
             Rigidbody targetRb = bloc.GetComponent<Rigidbody>();
             Vector3 forceDirection = (targetRb.transform.position - transform.position).normalized;
@@ -165,10 +169,17 @@ public class ExplosiveBloc : MonoBehaviour
     {
         PlayerObjects obj = col.transform.root.GetComponent<PlayerObjects>();
         Rigidbody colRigidBody = col.GetComponent<Rigidbody>();
-      
-        if (colRigidBody != null)
+        if (colRigidBody != null )
         {
-            colRigidBody.AddForce(distance.normalized * repulsionForce, ForceMode.VelocityChange);
+            if(obj == null)
+            {
+                colRigidBody.AddForce(distance.normalized * repulsionForce, ForceMode.VelocityChange);
+            }
+            else if(!pushed)
+            {
+                obj.cubeRb.AddForceAtPosition(distance.normalized * repulsionForce,col.transform.root.GetComponent<PlayerMouvement>().CalculateCenterMass(), ForceMode.VelocityChange);
+                pushed = true;
+            }
         }
     }
 
