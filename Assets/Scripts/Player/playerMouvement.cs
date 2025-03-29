@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -465,10 +466,10 @@ public class PlayerMouvement : MonoBehaviour
         {
             golem.GetComponent<Synchro2>().rotationFixed = false;
             rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            stopStructure();
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             rotatingRight = true;
             Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
-
             golem.rotation = Quaternion.Lerp(
                 golem.rotation,
                 targetRotation,
@@ -539,7 +540,15 @@ public class PlayerMouvement : MonoBehaviour
 
     }
 
-
+    public void stopStructure()
+    {
+        foreach (var v in gridPlayer.grid)
+        {
+            Rigidbody cubeRigidBody = v.Value.GetComponent<Rigidbody>();
+            cubeRigidBody.angularVelocity = Vector3.zero;
+            cubeRigidBody.velocity = Vector3.zero;
+        }
+    }
     public void rotateAndDirection2(Vector3 direction)
     {
         Vector3 planeProjection = golem.transform.forward;

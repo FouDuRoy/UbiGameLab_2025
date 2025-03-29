@@ -73,7 +73,7 @@ public class SpringBlocEjection : MonoBehaviour
 
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
-                    if (true)
+                    if (false)
                     {
                         foreach (var v in gridSystem.grid)
                         {
