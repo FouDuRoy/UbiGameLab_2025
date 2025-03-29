@@ -1642,6 +1642,7 @@ GameObject:
   - component: {fileID: 8721291557867430541}
   - component: {fileID: 7346539410254985170}
   - component: {fileID: 4582162757894150389}
+  - component: {fileID: 7227650055871118735}
   m_Layer: 3
   m_Name: Hammer2
   m_TagString: magnetic
@@ -1957,6 +1958,19 @@ MonoBehaviour:
   projection: 0
   springTorqueBreak: 50000
   springForceBreak: 50000
+--- !u!114 &7227650055871118735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4468813103985672358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9d2e8bbe5afa04da47682374207ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastTickVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &4839282042003720499
 GameObject:
   m_ObjectHideFlags: 0
