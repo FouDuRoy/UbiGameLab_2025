@@ -632,7 +632,7 @@ public class PlayerMouvement : MonoBehaviour
         
         float angle = Vector3.SignedAngle(structureFoward, direction.normalized, Vector3.up);
         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weightRotation;
-        Debug.Log(angle);
+        //Debug.Log(angle);
         if (direction != Vector3.zero)
         {
             if (Mathf.Abs(angle) > 1)
