@@ -260,11 +260,7 @@ public class ConnectMagneticStructure : MonoBehaviour
 
             transform.position = absoluteEndPosition - (closestCubeOwn.transform.position - transform.position);
             transform.rotation = absoluteEndRotation;
-            Quaternion rotationAmount = Quaternion.Inverse(transform.Find("Orientation").transform.rotation) * cubeAttractedToTransform.Find("Orientation").rotation;
-            foreach(var v in playerGrid.grid)
-            {
-                v.Value.transform.Find("Orientation").rotation *= rotationAmount;
-            }
+          
 
             AttachCube();
         }
@@ -276,7 +272,7 @@ public class ConnectMagneticStructure : MonoBehaviour
     private void AttachCube()
     {
         //Attach magnetic field
-        transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
+       // transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
         List<GameObject> childsList = new List<GameObject>();
         for (int i = 0; i < this.transform.childCount; i++)
         {
@@ -297,8 +293,14 @@ public class ConnectMagneticStructure : MonoBehaviour
         cubeRB.angularDrag = 5f;
 
         closestCubeOwn.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
-        playerAtractedTo.GetComponent<GridSystem>().AttachGrid(playerGrid, closestCubeOwn, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
+        playerAtractedTo.GetComponent<GridSystem>().AttachGrid(playerGrid,  cubeAttractedToTransform.gameObject, closestCubeOwn, closestFaceRelativeToMainCube);
+        Quaternion rotationAmount = Quaternion.Inverse(transform.Find("Orientation").transform.rotation) * cubeAttractedToTransform.Find("Orientation").rotation;
+        foreach (var v in playerGrid.grid)
+        {
+            v.Value.transform.Find("Orientation").rotation *= rotationAmount;
+        }
         playerGrid.clearGrid();
+       
         foreach (var v in playerAtractedTo.GetComponent<GridSystem>().grid)
         {
             Rigidbody currentCubeRb = v.Value.GetComponent<Rigidbody>();
@@ -330,6 +332,7 @@ public class ConnectMagneticStructure : MonoBehaviour
         }
 
         //Disable script
+        transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
         foreach (GameObject child in childsList)
         {
             child.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;

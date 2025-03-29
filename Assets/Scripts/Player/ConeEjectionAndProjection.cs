@@ -127,7 +127,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             leftRay.gameObject.SetActive(true);
             rightRay.gameObject.SetActive(true);
-            coneProjectionColor(timeHeld);
+            // coneProjectionColor(timeHeld);
             if (timeHeld == 0) //On appelle VibrationStart une seule fois, au début
             {
                 feedback.RepulsionVibrationStart(secondsForMaxCharging);
@@ -294,7 +294,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float boundaryDistanceRatio = time / secondsForMaxChargingEjection;
         float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (boundaryDistanceRatio);
 
-        List<Collider> magnetic = Physics.OverlapSphere(golem.position, radius).ToList<Collider>();
+        Collider[] magnetics = Physics.OverlapSphere(golem.position, radius);
+        List<BoxCollider> magnetic = magnetics.OfType<BoxCollider>().ToList();
         magnetic = magnetic.FindAll(cube => {
             //Look if cube is on the player
             cube.gameObject.GetComponent<Renderer>().material.color = playerGrid.playerMat.color;
