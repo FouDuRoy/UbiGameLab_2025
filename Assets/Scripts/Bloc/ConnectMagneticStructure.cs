@@ -143,7 +143,7 @@ public class ConnectMagneticStructure : MonoBehaviour
             foreach (Collider mag in magneticStructureBloc)
             {
                 GridSystem grid = mag.transform.root.GetComponent<GridSystem>();
-                if (grid == null || grid.getAvailableNeighbours(mag.gameObject).Count == 0)
+                if (grid == null )
                 {
                     magneticColliderList.Remove(mag);
                 }
@@ -155,26 +155,10 @@ public class ConnectMagneticStructure : MonoBehaviour
             }
             foreach (var v in playerGrid.grid)
             {
-               // mask = LayerMask.GetMask("magnetic");
-               // List<Collider> magneticStructureBloc = Physics.OverlapSphere(v.Value.transform.position, passiveRadius, mask).ToList();
-               // List<Collider> magneticColliderList = magneticStructureBloc.ToList<Collider>();
-               // foreach (Collider mag in magneticStructureBloc)
-                //{
-                   // GridSystem grid = mag.transform.root.GetComponent<GridSystem>();
-                    //if (grid == null || grid.getAvailableNeighbours(mag.gameObject).Count == 0)
-                   // {
-                      //  magneticColliderList.Remove(mag);
-                   // }
-                    //if (mag.gameObject.transform.root.GetComponent<ConnectMagneticStructure>() != null)
-                   // {
-                     //   magneticColliderList.Remove(mag);
-                   // }
-
-                //}
+           
 
                 if (i == 0)
                 {
-                    Debug.Log(magneticColliderList.Count);
                     closestCube = CheckClosestMagnet(magneticColliderList, v.Value.transform);
                     closestCubeOwn = v.Value;
                     if (closestCube == null)
@@ -246,9 +230,8 @@ public class ConnectMagneticStructure : MonoBehaviour
             absoluteEndPosition=absoluteEndPosition - (closestCubeOwn.transform.position - transform.position);
             Vector3 desiredVelocity = (absoluteEndPosition - transform.position)/Time.fixedDeltaTime;
             Vector3 relativeVelocity = (cubeAttractedToTransform.GetComponent<Rigidbody>().velocity);
-           // Vector3 newPosition = Vector3.Lerp(absoluteStartP, absoluteEndPosition, t);
-           // Vector3 velocity = (newPosition - cubeRB.position) / Time.fixedDeltaTime;
-           Vector3 velocity = Vector3.Lerp(relativeVelocity, desiredVelocity, t);
+
+            Vector3 velocity = Vector3.Lerp(relativeVelocity, desiredVelocity, t);
             Quaternion absoluteRoatationStart = cubeAttractedToTransform.rotation * startRotationRelativeToAttractedCube;
             Quaternion absoluteEndRotation = cubeAttractedToTransform.rotation * endRotationRelativeToAttractedCube;
             Quaternion newRotation = Quaternion.Slerp(absoluteRoatationStart, absoluteEndRotation, t);
@@ -308,6 +291,7 @@ public class ConnectMagneticStructure : MonoBehaviour
         {
             v.Value.layer = 3;
         }
+
         //Set magnetic rb
         cubeRB = this.GetComponent<Rigidbody>();
         cubeRB.mass = 0.01f;
@@ -316,7 +300,9 @@ public class ConnectMagneticStructure : MonoBehaviour
         cubeRB.angularDrag = 5f;
 
         closestCubeOwn.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
-        playerAtractedTo.GetComponent<GridSystem>().AttachGrid(playerGrid,  cubeAttractedToTransform.gameObject, closestCubeOwn, closestFaceRelativeToMainCube);
+        GridSystem playerAtrcatedGrid = playerAtractedTo.GetComponent<GridSystem>();
+        PlayerObjects playerAtractedObjects = playerAtractedTo.GetComponent<PlayerObjects>();
+        playerAtrcatedGrid.AttachGrid(playerGrid,  cubeAttractedToTransform.gameObject, closestCubeOwn, closestFaceRelativeToMainCube);
         Quaternion rotationAmount = Quaternion.Inverse(transform.Find("Orientation").transform.rotation) * cubeAttractedToTransform.Find("Orientation").rotation;
         foreach (var v in playerGrid.grid)
         {
@@ -324,20 +310,20 @@ public class ConnectMagneticStructure : MonoBehaviour
         }
         playerGrid.clearGrid();
        
-        foreach (var v in playerAtractedTo.GetComponent<GridSystem>().grid)
+        foreach (var v in playerAtrcatedGrid.grid)
         {
             Rigidbody currentCubeRb = v.Value.GetComponent<Rigidbody>();
             if(currentCubeRb == null)
             {
-                playerAtractedTo.GetComponent<PlayerObjects>().addRigidBody(v.Value);
+                playerAtractedObjects.addRigidBody(v.Value);
                 
             }
         }
-        foreach (var v in playerAtractedTo.GetComponent<GridSystem>().grid)
+        foreach (var v in playerAtrcatedGrid.grid)
         {
             
             Rigidbody currentCubeRb = v.Value.GetComponent<Rigidbody>();
-           if( cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb != currentCubeRb )
+           if(playerAtractedObjects.cubeRb != currentCubeRb )
             {
                 currentCubeRb.mass = 0.01f;
                 currentCubeRb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -355,10 +341,10 @@ public class ConnectMagneticStructure : MonoBehaviour
         }
 
         //Disable script
-        transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
+        transform.parent = playerAtractedObjects.cubeRb.transform;
         foreach (GameObject child in childsList)
         {
-            child.transform.parent = cubeAttractedToTransform.root.GetComponent<PlayerObjects>().cubeRb.transform;
+            child.transform.parent = playerAtractedObjects.cubeRb.transform;
         }
         
         this.GetComponent<ConnectMagneticStructure>().enabled = false;
