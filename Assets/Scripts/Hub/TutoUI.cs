@@ -103,10 +103,14 @@ public class TutoUI : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(mainCamera.transform.forward);
     }
 
-    private void NextTuto()
+    public void NextTuto()
     {
-        Debug.Log(name + " skips to next tuto : " + nextTuto.name);
-        nextTuto.gameObject.SetActive(true);
+        //Debug.Log(name + " skips to next tuto : " + nextTuto.name);
+
+        if (nextTuto != null)
+        {
+            nextTuto.gameObject.SetActive(true);
+        }
         gameObject.SetActive(false);
     }
 }

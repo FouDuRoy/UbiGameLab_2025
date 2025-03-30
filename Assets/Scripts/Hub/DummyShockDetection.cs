@@ -6,8 +6,10 @@ public class DummyShockDetection : MonoBehaviour
     [SerializeField] float victoryConditionSpeedRange = 10f;
     [SerializeField] float victoryConditionSpeedMelee = 15f;
     [SerializeField] GameObject Ennemy;
+    [SerializeField] private TutoUI attackTutoUI;
 
     private Rigidbody rb;
+    private int nHits = 0;
 
     void Start()
     {
@@ -34,7 +36,6 @@ public class DummyShockDetection : MonoBehaviour
 
             if (projectileFromOtherPlayer)
             {
-
                 Vector3 hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
                 Vector3 projectileVelocity = projectileVelocity = hitterVelocity;
 
@@ -42,6 +43,11 @@ public class DummyShockDetection : MonoBehaviour
                 {
                     //print("Range Attack " + this.gameObject.name + " : " + hitter.name + "velocity" + projectileVelocity);
                     DoRotation();
+                    nHits++;
+                    if (nHits > 1)
+                    {
+                        attackTutoUI.NextTuto();
+                    }
                 }
             }
             bool meleeFromOtherPlayer = stateHitter == BlocState.structure && (ownerHitter != ownerHitted);
@@ -54,6 +60,11 @@ public class DummyShockDetection : MonoBehaviour
                 {
                     //print("Melee attack " + this.gameObject.name + " : " + hitter.name);
                     DoRotation();
+                    nHits++;
+                    if (nHits > 1)
+                    {
+                        attackTutoUI.NextTuto();
+                    }
                 }
             }
         }
