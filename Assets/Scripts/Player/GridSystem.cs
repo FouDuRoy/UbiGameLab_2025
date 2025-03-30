@@ -156,7 +156,7 @@ public class GridSystem : MonoBehaviour
                     neighbors = GetNeighbors(gridBloc.Key);
                     playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
                     gridBloc.Value.GetComponent<Rigidbody>().AddForce(
-                        (gridBloc.Value.transform.position - kernel.transform.position).normalized * 10f, ForceMode.VelocityChange);
+                        (gridBloc.Value.transform.position - kernel.transform.position).normalized * 100f, ForceMode.VelocityChange);
                 }
 
             }

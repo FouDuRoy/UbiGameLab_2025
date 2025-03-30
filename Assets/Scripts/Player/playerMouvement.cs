@@ -466,7 +466,7 @@ public class PlayerMouvement : MonoBehaviour
         {
             golem.GetComponent<Synchro2>().rotationFixed = false;
             rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
-            stopStructure();
+            //stopStructure();
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             rotatingRight = true;
             Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
