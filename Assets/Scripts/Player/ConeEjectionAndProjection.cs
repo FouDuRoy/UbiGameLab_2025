@@ -92,7 +92,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     }
   
 
-    void Update()
+    void FixedUpdate()
     {
         float rightTrigger = ejectCubes.ReadValue<float>();
         float leftTrigger = AttractCubes.ReadValue<float>();
@@ -111,7 +111,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX), Mathf.Abs(minX), Mathf.Abs(maxZ), Mathf.Abs(minZ));
             float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
             float radius = radiusInBlocs * blocSizeWorld;
-            float maxDistance = MaxDistanceForDirection((golem.forward).normalized, radius);
+            float maxDistance = MaxDistanceForDirection((golem.forward).normalized, radius+10);
             leftHandInitialPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * maxDistance + new Vector3(0, 0.15f, 0);
             rightHandInitialPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * maxDistance + new Vector3(0, 0.15f, 0);
             leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * distance + new Vector3(0, 0.15f, 0);
@@ -131,7 +131,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             }
 
 
-            handTimer += Time.deltaTime;
+            handTimer += Time.fixedDeltaTime;
             handTimer = handTimer % 1;
             coneAttraction(golem, attractionForce, initialAngle, distance, 1);
             leftTriggerHeld = true;
@@ -161,7 +161,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             {
                 feedback.RepulsionVibrationStart(secondsForMaxCharging);
             }
-            timeHeld += Time.deltaTime;
+            timeHeld += Time.fixedDeltaTime;
             rightTriggerHeld = true;
 
             //Draw rays to indicate current range
