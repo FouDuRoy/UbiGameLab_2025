@@ -92,7 +92,6 @@ public class SpringBlocEjection : MonoBehaviour
                     else
                     {
                         Debug.Log("it good: "+ hitterVelocity+"hitter:"+hitter.name);
-                        StartCoroutine(resetTorque(gridSystem));
                         gridSystem.DetachBlock(hitted);
                         hittedComponent.state = BlocState.detached;
                         Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
@@ -199,6 +198,7 @@ public class SpringBlocEjection : MonoBehaviour
     }
     void OnJointBreak(float breakForce)
     {
+        Debug.Log("here");
         gridSystem = gameObject.GetComponent<Bloc>().ownerTranform.GetComponent<GridSystem>();
         gridSystem.DetachBlock(this.gameObject);
         this.GetComponent<Bloc>().state = BlocState.detached;
