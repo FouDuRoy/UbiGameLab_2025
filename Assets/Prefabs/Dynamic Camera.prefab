@@ -26,14 +26,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853986461232213366}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 40, z: -44}
+  m_LocalRotation: {x: 0.40673664, y: 0, z: 0, w: 0.9135455}
+  m_LocalPosition: {x: 0, y: 40, z: -34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5301039223810340334}
   m_Father: {fileID: 3135449770639455276}
-  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 48, y: 0, z: 0}
 --- !u!20 &6101837734968640617
 Camera:
   m_ObjectHideFlags: 0
@@ -244,12 +244,12 @@ MonoBehaviour:
   ArenaCenter: {fileID: 0}
   maxSpeed: Infinity
   horizontalInterpTime: 0.1
-  distanceFromPlayersFactor: 0.6
+  distanceFromPlayersFactor: 0.7
   minDistance: 12
   maxDistance: 24
   distanceInterpTime: 0.6
   isOrthographic: 1
-  playIntroAnimation: 1
+  playIntroAnimation: 0
 --- !u!95 &6266391422150885637
 Animator:
   serializedVersion: 5

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class KeyValuePair
@@ -30,6 +31,15 @@ public class GridSystem : MonoBehaviour
     public float cubeSize = 1.2f;
     public List<Material> materials = new List<Material>();
     HapticFeedbackController feedback;
+    List<Vector3Int> neighborsList = new List<Vector3Int>
+    {
+             Vector3Int.right,
+             Vector3Int.left,
+            Vector3Int.up,
+             Vector3Int.down,
+            new Vector3Int(0, 0, 1),
+             new Vector3Int(0, 0, -1)
+        };
     private void Start()
     {
         kernel = transform.GetComponent<PlayerObjects>().cubeRb.gameObject;
@@ -140,7 +150,6 @@ public class GridSystem : MonoBehaviour
             playerObj.removeCube(grid[detachedGridPos]);
             grid.Remove(detachedGridPos);
             playerObj.weight -= bloc.GetComponent<Bloc>().weight;
-            List<Vector3Int> neighbors = GetNeighbors(detachedGridPos);
 
 
 
@@ -153,7 +162,6 @@ public class GridSystem : MonoBehaviour
                     playerObj.removeCube(gridBloc.Value);
                     keys.Add(gridBloc.Key);
                     gridBloc.Value.GetComponent<Bloc>().state = BlocState.detached;
-                    neighbors = GetNeighbors(gridBloc.Key);
                     playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
                     gridBloc.Value.GetComponent<Rigidbody>().AddForce(
                         (gridBloc.Value.transform.position - kernel.transform.position).normalized * 100f, ForceMode.VelocityChange);
@@ -175,7 +183,6 @@ public class GridSystem : MonoBehaviour
             playerObj.removeCube(grid[detachedGridPos]);
             grid.Remove(detachedGridPos);
             playerObj.weight -= bloc.GetComponent<Bloc>().weight;
-            List<Vector3Int> neighbors = GetNeighbors(detachedGridPos);
 
         }
     }
@@ -237,11 +244,11 @@ public class GridSystem : MonoBehaviour
                 isConnectedToKernel = true;
             }
 
-            foreach (Vector3Int neighbor in GetNeighbors(current))
+            foreach (Vector3Int neighbor in neighborsList)
             {
-                if (grid.ContainsKey(neighbor) && !localVisited.Contains(neighbor))
+                if (grid.ContainsKey(neighbor+current) && !localVisited.Contains(neighbor + current))
                 {
-                    toCheck.Enqueue(neighbor);
+                    toCheck.Enqueue(neighbor + current);
                 }
             }
         }
@@ -249,20 +256,6 @@ public class GridSystem : MonoBehaviour
         return isConnectedToKernel;
     }
 
-
-    protected List<Vector3Int> GetNeighbors(Vector3Int position)
-    {
-        List<Vector3Int> neighbors = new List<Vector3Int>
-        {
-            position + Vector3Int.right,
-            position + Vector3Int.left,
-            position + Vector3Int.up,
-            position + Vector3Int.down,
-            position + new Vector3Int(0, 0, 1),
-            position + new Vector3Int(0, 0, -1)
-        };
-        return neighbors;
-    }
 
     protected bool IsBlockConnected(GameObject bloc)
     {
@@ -278,11 +271,11 @@ public class GridSystem : MonoBehaviour
             if (current == Vector3Int.zero) return true; // Le noyau est atteint
             visited.Add(current);
 
-            foreach (Vector3Int neighbor in GetNeighbors(current))
+            foreach (Vector3Int neighbor in neighborsList)
             {
-                if (grid.ContainsKey(neighbor) && !visited.Contains(neighbor))
+                if (grid.ContainsKey(neighbor + current) && !visited.Contains(neighbor + current))
                 {
-                    toVisit.Enqueue(neighbor);
+                    toVisit.Enqueue(neighbor+current);
                 }
             }
         }
@@ -329,14 +322,13 @@ public class GridSystem : MonoBehaviour
         else
         {
             List<Vector3> availableSpaces = new List<Vector3>();
-            List<Vector3Int> positions = GetNeighbors(positionCube);
 
-            foreach (Vector3Int position in positions)
+            foreach (Vector3Int position in neighborsList)
             {
 
-                if (!grid.ContainsKey(position))
+                if (!grid.ContainsKey(position+ positionCube))
                 {
-                    availableSpaces.Add(tranformToVector3(position));
+                    availableSpaces.Add(tranformToVector3(position+ positionCube));
                 }
             }
 
@@ -403,14 +395,13 @@ public class GridSystem : MonoBehaviour
         else
         {
             List<Vector3> occupiedSpaces = new List<Vector3>();
-            List<Vector3Int> positions = GetNeighbors(positionCube);
 
-            foreach (Vector3Int position in positions)
+            foreach (Vector3Int position in neighborsList)
             {
-                if (grid.ContainsKey(position))
+                if (grid.ContainsKey(position+ positionCube))
                 {
 
-                    occupiedSpaces.Add(tranformToVector3(position));
+                    occupiedSpaces.Add(tranformToVector3(position+ positionCube));
                 }
             }
 
