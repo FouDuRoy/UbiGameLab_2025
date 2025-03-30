@@ -523,6 +523,7 @@ public class Feromagnetic : MonoBehaviour
 
         if ((transform.position - closestFaceRelativeToWorld).magnitude > lerpingDistance || !LookPositionGridAvailable())
         {
+            
             cubeRB.AddForce(CoulombLaw(direction, charge, charge));
         }
         // We start attaching the cube 

@@ -75,6 +75,8 @@ public class ConnectMagneticStructure : MonoBehaviour
     float timer = 0;
 
     float t = 0;
+
+    Collider[] magnetic = new Collider[1000];
     // Start is called before the first frame update
     void Start()
     {
@@ -137,67 +139,70 @@ public class ConnectMagneticStructure : MonoBehaviour
             int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX), Mathf.Abs(minX), Mathf.Abs(maxZ), Mathf.Abs(minZ));
             float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
             float radius = radiusInBlocs * blocSizeWorld;
-
-            List<Collider> magneticStructureBloc = Physics.OverlapSphere(transform.position, radius+10, mask).ToList();
-            List<Collider> magneticColliderList = magneticStructureBloc.ToList<Collider>();
-            foreach (Collider mag in magneticStructureBloc)
+            cubeRB = this.GetComponent<Rigidbody>();
+            int hits = Physics.OverlapSphereNonAlloc(transform.position, radius+10, magnetic, mask);
+          
+            //Remove magnets not available
+            for (int j = 0; j < hits; j++)
             {
-                GridSystem grid = mag.transform.root.GetComponent<GridSystem>();
-                if (grid == null )
+                GridSystem grid = magnetic[j].transform.root.GetComponent<GridSystem>();
+             
+                if ((grid == null || grid.getAvailableNeighbours(magnetic[j].gameObject).Count == 0) || (
+                    magnetic[j].transform.root != null && !magnetic[j].transform.root.name.Contains("Player")))
                 {
-                    magneticColliderList.Remove(mag);
+                    magnetic[j] = null;
                 }
-                if (mag.gameObject.transform.root.GetComponent<ConnectMagneticStructure>() != null)
-                {
-                    magneticColliderList.Remove(mag);
-                }
-
             }
-            foreach (var v in playerGrid.grid)
+         
+            if(hits > 0)
             {
-           
-
-                if (i == 0)
+                foreach (var v in playerGrid.grid)
                 {
-                    closestCube = CheckClosestMagnet(magneticColliderList, v.Value.transform);
-                    closestCubeOwn = v.Value;
-                    if (closestCube == null)
-                    {
-                        shortestDistance = Mathf.Infinity;
-                    }
-                    else
-                    {
-                        shortestDistance = Vector3.Distance(closestCube.transform.position, v.Value.transform.position);
 
-                    }
-                }
-                else
-                {
-                    GameObject comparedCube = CheckClosestMagnet(magneticColliderList, v.Value.transform);
-                    float comparedDistance;
 
-                    if (comparedCube == null)
+                    if (i == 0)
                     {
-                        comparedDistance = Mathf.Infinity;
-                    }
-                    else
-                    {
-                        comparedDistance = Vector3.Distance(comparedCube.transform.position, v.Value.transform.position);
-                    }
-
-                    if (comparedDistance < shortestDistance)
-                    {
-                        shortestDistance = comparedDistance;
-                        closestCube = comparedCube;
+                        closestCube = CheckClosestMagnet(magnetic, v.Value.transform, hits);
                         closestCubeOwn = v.Value;
+                        if (closestCube == null)
+                        {
+                            shortestDistance = Mathf.Infinity;
+                        }
+                        else
+                        {
+                            shortestDistance = Vector3.Distance(closestCube.transform.position, v.Value.transform.position);
+
+                        }
                     }
+                    else
+                    {
+                        GameObject comparedCube = CheckClosestMagnet(magnetic, v.Value.transform, hits);
+                        float comparedDistance;
+
+                        if (comparedCube == null)
+                        {
+                            comparedDistance = Mathf.Infinity;
+                        }
+                        else
+                        {
+                            comparedDistance = Vector3.Distance(comparedCube.transform.position, v.Value.transform.position);
+                        }
+
+                        if (comparedDistance < shortestDistance)
+                        {
+                            shortestDistance = comparedDistance;
+                            closestCube = comparedCube;
+                            closestCubeOwn = v.Value;
+                        }
+                    }
+                    i++;
+
                 }
-                i++;
-                
             }
 
             if (closestCube != null)
             {
+
                 CheckClosestFace(closestCube);
                 Vector3 direction = cubeAttractedToTransform.position - closestCubeOwn.transform.position;
                 relativePositionToMainCube = playerMainCube.InverseTransformPoint(closestCubeOwn.transform.position);
@@ -471,23 +476,36 @@ public class ConnectMagneticStructure : MonoBehaviour
             }
         }
     }
-    GameObject CheckClosestMagnet(List<Collider> magnetic, Transform cube)
+    GameObject CheckClosestMagnet(Collider[] magnetic, Transform cube,int hits)
     {
         GameObject closestCube = null;
-        if (magnetic.Count > 0)
+        bool first = true;
+        float shortDistance = -1;
+        if (hits > 0)
         {
-            closestCube = magnetic.First().gameObject;
-            float shortDistance = (closestCube.transform.position - cube.position).sqrMagnitude;
-            foreach (Collider col in magnetic)
+            for (int i = 0; i < hits; i++)
             {
-                float distance = (col.transform.position - cube.position).sqrMagnitude;
-                
-                if (distance < shortDistance)
+                if (magnetic[i] != null)
                 {
-                    shortDistance = distance;
-                    closestCube = col.gameObject;
+                    if (first)
+                    {
+
+                        closestCube = magnetic[i].gameObject;
+                        shortDistance = (closestCube.transform.position - cube.position).sqrMagnitude;
+                        first = false;
+                    }
+                    else
+                    {
+                        float distance = (magnetic[i].transform.position - cube.position).sqrMagnitude;
+                        if (distance < shortDistance)
+                        {
+                            shortDistance = distance;
+                            closestCube = magnetic[i].gameObject;
+                        }
+                    }
                 }
             }
+           
         }
         return closestCube;
     }
