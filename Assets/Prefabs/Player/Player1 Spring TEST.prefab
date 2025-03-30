@@ -72,8 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionForce: 140
-  mouvementSpeed: 70
-  mouvementReductionFactor: 0
+  mouvementSpeed: 80
+  mouvementReductionFactor: 0.3
   pivotSpeed: 180
   rotationSpeed: 30
   rotParam: 4
@@ -98,7 +98,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 0}
   attackerText: {fileID: 0}
   restartButton: {fileID: 0}
-  maxDamage: 200
+  maxDamage: 150
   impulsionWhenHit: 100
   invincibilityDelay: 3
   hitStopDelay: 0.4
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightDriftProportion: 0.1
-  attractionForce: 100
+  attractionForce: 400
   initialAngle: 15
   maxAngleRepulsion: 60
   secondsForMaxCharging: 0.2
