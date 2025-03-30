@@ -6,6 +6,7 @@ using UnityEngine;
 public class TriggerDoor : MonoBehaviour
 {
     [SerializeField] int nDoor;
+    [SerializeField] private TutoUI ejectionTutoUI;
     private LevelLoader levelLoader;
 
     void Start()
@@ -20,6 +21,7 @@ public class TriggerDoor : MonoBehaviour
         if (player != null) // Si oui, on l'ajoute à la liste des joueurs prêts
         {
             levelLoader.AddPlayerReady(player, nDoor);
+            ejectionTutoUI.NextTuto();
         }
     } 
 }
