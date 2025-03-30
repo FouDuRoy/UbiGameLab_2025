@@ -102,6 +102,7 @@ public class HapticFeedbackController : MonoBehaviour
         if (playerGamepad == null)
         {
             Debug.LogError($"Aucune manette trouvée pour {gameObject.name}");
+            enabled = false;
         }
 
         if (playerGamepad != null)

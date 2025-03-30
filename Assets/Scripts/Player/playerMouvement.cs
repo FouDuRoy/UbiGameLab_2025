@@ -54,9 +54,6 @@ public class PlayerMouvement : MonoBehaviour
     HapticFeedbackController feedback;
     private bool shoulderLeftPressed = false;
     private bool shoulderRightPressed = false;
-    float shoulderLeftTime = 0;
-    float shoulderRightTime = 0;
-
     GridSystem gridPlayer;
 
     void Awake()
