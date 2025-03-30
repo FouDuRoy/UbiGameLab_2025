@@ -234,12 +234,6 @@ MonoBehaviour:
     rightMotorMax: 0.05
     rightMidTime: 0
     totalDuration: 0.2
-  ejectionCharge:
-    leftMotorMin: 0
-    leftMotorMax: 0.1
-    rightMotorMin: 0
-    rightMotorMax: 0.5
-    duration: 0.5
   ejectionShoot:
     leftMotorMax: 0.5
     leftMidTime: 0
@@ -267,6 +261,7 @@ MonoBehaviour:
   rightDriftProportion: 0.1
   attractionForce: 100
   initialAngle: 15
+  maxAngleRepulsion: 90
   secondsForMaxCharging: 0.2
   distance: 19
   secondsForMaxChargingEjection: 1
@@ -274,6 +269,10 @@ MonoBehaviour:
   colorChangeIntensity: 3
   lineMat: {fileID: 2100000, guid: ee7f85b04e41b7e4691b855f2795b6e0, type: 2}
   maxAngle: 15
+  visionConeObject: {fileID: 0}
+  distanceCone: 5
+  resolution: 20
+  visionMaterial: {fileID: 0}
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +309,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3843622058421858783}
+  - {fileID: 7995715180616706420}
   - {fileID: 6646084492349680764}
   - {fileID: 6958914024700633422}
   m_Father: {fileID: 4849188280878380009}
@@ -448,6 +448,37 @@ MonoBehaviour:
   victoryConditionSpeedRange: 10
   victoryConditionSpeedMelee: 15
   Ennemy: {fileID: 0}
+--- !u!1 &6121946032618023519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7995715180616706420}
+  m_Layer: 0
+  m_Name: ConeView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7995715180616706420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6121946032618023519}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00024282932, y: 0.22358942, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7847107767003649144}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7816860239019306979
 GameObject:
   m_ObjectHideFlags: 0
