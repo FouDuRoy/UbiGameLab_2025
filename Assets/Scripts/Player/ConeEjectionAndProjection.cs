@@ -305,7 +305,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         List<BoxCollider> magnetic = magnetics.OfType<BoxCollider>().ToList();
         magnetic = magnetic.FindAll(cube => {
             //Look if cube is on the player
-            cube.gameObject.GetComponent<Renderer>().material.color = playerGrid.playerMat.color;
+           
             if (cube.gameObject == mainCubeRb.gameObject)
             {
                 return false;
@@ -315,7 +315,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
                 return false;
             }
-            if(cube.gameObject.GetComponent<Renderer>().material.color == chargedColor)
+            cube.gameObject.GetComponent<Renderer>().material.color = playerGrid.playerMat.color;
+            if (cube.gameObject.GetComponent<Renderer>().material.color == chargedColor)
             {
                 return false;
             }
