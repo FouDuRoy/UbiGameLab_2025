@@ -42,13 +42,35 @@ public class ConeEjectionAndProjection : MonoBehaviour
     Vector3 rightHandFinalPoint;
     MouvementType moveType;
     Color chargedColor;
+    
+    
     [Header("LineSection")]
     [SerializeField] Material lineMat;
     public float maxAngle = 15f;
     LineRenderer leftRay;
     LineRenderer rightRay;
-    void Awake()
+
+
+    [Header("ConeSection")]
+    [SerializeField] GameObject visionConeObject;
+    private MeshFilter coneMeshFilter;
+    private MeshRenderer coneRenderer;
+    public float distanceCone = 5f;
+    public int resolution = 20; // Plus c’est haut, plus le cône est lisse
+    public Material visionMaterial;
+    void Start()
     {
+
+    }
+    void Awake()
+
+    {
+        //Cone vision attribution Mesh
+        coneMeshFilter = visionConeObject.GetComponent<MeshFilter>();
+        coneRenderer = visionConeObject.GetComponent<MeshRenderer>();
+        coneRenderer.material = visionMaterial;
+
+
         playerGrid = GetComponent<GridSystem>();
         playerInput = GetComponent<PlayerInput>();
         ejectCubes =  playerInput.actions.FindAction("BlocEjection");
@@ -122,6 +144,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             leftTriggerHeld = false;
             leftRay.gameObject.SetActive(false);
             rightRay.gameObject.SetActive(false);
+            visionConeObject.gameObject.SetActive(false);
             resetMagneticLast();
         }
         EjectionAlgo(rightTrigger);
@@ -157,6 +180,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
             leftRay.SetPosition(0, origin);
             leftRay.SetPosition(1, origin + leftDir * distance);
+
+
+            visionConeObject.SetActive(true);
+            visionConeObject.transform.position = golem.position + new Vector3(0f, -0.5f, 0f);
+            visionConeObject.transform.rotation = Quaternion.LookRotation(golem.forward);
+            GenerateMesh(maxAngle);
             //Debug.DrawRay(golem.position, Quaternion.AngleAxis(maxAngle, Vector3.up) * golem.forward*distance,Color.red, Time.deltaTime);
             //Debug.DrawRay(golem.position, Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward *distance, Color.red, Time.deltaTime);
         }
@@ -164,6 +193,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             feedback.RepulsionVibrationEnd(timeHeld);
             coneProjection(timeHeld);
+            visionConeObject.SetActive(false);
             leftRay.gameObject.SetActive(false);
             rightRay.gameObject.SetActive(false);
             rightTriggerHeld = false;
@@ -226,6 +256,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Vector3 rightDir = Quaternion.AngleAxis(angle, Vector3.up) * golem.forward;
         Vector3 leftDir = Quaternion.AngleAxis(-angle, Vector3.up) * golem.forward;
 
+
+        visionConeObject.SetActive(true);
+        visionConeObject.transform.position = player.position + new Vector3(0f, -0.5f, 0f);
+        visionConeObject.transform.rotation = Quaternion.LookRotation(player.forward);
+        GenerateMesh(maxAngle);
 
         rightRay.SetPosition(0, origin);
         rightRay.SetPosition(1, origin + rightDir * distance);
@@ -380,5 +415,37 @@ public class ConeEjectionAndProjection : MonoBehaviour
             }
         }
         return maxDistance;
+    }
+
+    void GenerateMesh(float maxAngle)
+    {
+        Mesh mesh = new Mesh();
+        coneMeshFilter.mesh = mesh;
+
+        Vector3[] vertices = new Vector3[resolution + 2];
+        int[] triangles = new int[resolution * 3];
+
+        vertices[0] = Vector3.zero;
+
+        float step = maxAngle * 2f / resolution;
+
+        for (int i = 0; i <= resolution; i++)
+        {
+            float currentAngle = -maxAngle + step * i;
+            float rad = currentAngle * Mathf.Deg2Rad;
+            Vector3 dir = new Vector3(Mathf.Sin(rad), 0f, Mathf.Cos(rad));
+            vertices[i + 1] = dir * distance;
+        }
+
+        for (int i = 0; i < resolution; i++)
+        {
+            triangles[i * 3] = 0;
+            triangles[i * 3 + 1] = i + 1;
+            triangles[i * 3 + 2] = i + 2;
+        }
+
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
     }
 }
