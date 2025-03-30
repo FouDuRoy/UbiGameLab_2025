@@ -55,6 +55,9 @@ MonoBehaviour:
   player: {fileID: 3131990571156717056}
   cubeRb: {fileID: 3070630633163488715}
   passiveCube: {fileID: 5694876674060920943, guid: 50ccf99298a1cff4f923b13da4a2a01b, type: 3}
+  magnetTimer: 3
+  blocNonMagnetic: {fileID: 0}
+  golem: {fileID: 0}
   weight: 1
 --- !u!114 &7850894500233854463
 MonoBehaviour:
@@ -70,14 +73,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionForce: 0.02
   mouvementSpeed: 100
+  mouvementReductionFactor: 1
   pivotSpeed: 60
   rotationSpeed: 30
-  playerCharge: 10
   rotParam: 4
   rotationDamping: 5
   weightMouvementFactor: 1
   weightRotationFactor: 1
   moveType: 6
+  pauseMenu: {fileID: 0}
+  selectedGUI: {fileID: 0}
 --- !u!114 &4658591005558201665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +98,16 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 0}
   attackerText: {fileID: 0}
   restartButton: {fileID: 0}
-  _restartMenu: {fileID: 0}
+  maxDamage: 30
+  impulsionWhenHit: 30
+  invincibilityDelay: 1
+  hitStopDelay: 0.5
+  MaxhealthValue: 100
+  waitDelayAfterPlayerDeath: 1.5
+  timeScaleFactor: 0.2
+  healthValue: 0
+  playerLife: {fileID: 0}
+  isInvincible: 0
 --- !u!114 &6980508144528851275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,11 +150,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef11832dba477a45bb1904bfde007a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkGrid: 0
+  saveGrid: 0
+  restoreGrid: 0
+  playerMat: {fileID: 0}
+  keyValuePairs: []
   kernel: {fileID: 3131990571156717056}
   playerObj: {fileID: 0}
-  kernelRotI: {x: 0, y: 0, z: 0, w: 0}
   cubeSize: 1.2
-  checkGrid: 0
+  materials: []
 --- !u!114 &6893537620641671257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,18 +195,18 @@ MonoBehaviour:
     rightMotorMax: 0.5
     rightMidTime: 0.02
     totalDuration: 0.06
-  ejectionCharge:
-    leftMotorMin: 0
-    leftMotorMax: 0.1
-    rightMotorMin: 0
-    rightMotorMax: 0.5
-    duration: 0.5
   ejectionShoot:
     leftMotorMax: 0.5
     leftMidTime: 0
     rightMotorMax: 0.5
     rightMidTime: 0.02
     totalDuration: 0.06
+  damageTaken:
+    leftMotorMax: 0.2
+    leftMidTime: 0.5
+    rightMotorMax: 0.8
+    rightMidTime: 0.5
+    totalDuration: 0
 --- !u!114 &-4883607572675082173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,10 +222,18 @@ MonoBehaviour:
   rightDriftProportion: 0.1
   attractionForce: 50
   initialAngle: 15
+  maxAngleRepulsion: 90
   secondsForMaxCharging: 0.2
   distance: 15
   secondsForMaxChargingEjection: 1
   ejectionSpeed: 100
+  colorChangeIntensity: 3
+  lineMat: {fileID: 0}
+  maxAngle: 15
+  visionConeObject: {fileID: 0}
+  distanceCone: 5
+  resolution: 20
+  visionMaterial: {fileID: 0}
 --- !u!114 &7455013400852431859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victoryConditionSpeedRange: 0.1
   victoryConditionSpeedMelee: 10
+  Ennemy: {fileID: 0}
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +262,6 @@ GameObject:
   - component: {fileID: 4397475906366865157}
   - component: {fileID: 4384431802473347577}
   - component: {fileID: 3070630633163488715}
-  - component: {fileID: 578525885588968045}
   - component: {fileID: 4536375940292766682}
   - component: {fileID: 3940145880420437646}
   m_Layer: 3
@@ -258,6 +284,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 8315161468190957960}
   - {fileID: 1848518714862158904}
   m_Father: {fileID: 4849188280878380009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -359,20 +386,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 84
   m_CollisionDetection: 2
---- !u!114 &578525885588968045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3131990571156717056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ad1e9e6fcf2a74386f9b3b1b5bbe6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  faces: []
-  spacingBetweenCubes: 0.2
 --- !u!135 &4536375940292766682
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -424,13 +437,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: GolemBuilt
       objectReference: {fileID: 0}
+    - target: {fileID: 26474199121064330, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00000047683716
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.6599998
+      value: -2.66
       objectReference: {fileID: 0}
     - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -438,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000047683716
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -531,3 +548,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockRotation: 0
+--- !u!1001 &8426193335163864675
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7847107767003649144}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+      propertyPath: m_Name
+      value: SK_CubeGolem_Full
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+--- !u!4 &8315161468190957960 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b79c689dd02cf7b49950662cd862c60d, type: 3}
+  m_PrefabInstance: {fileID: 8426193335163864675}
+  m_PrefabAsset: {fileID: 0}
