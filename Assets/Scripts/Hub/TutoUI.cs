@@ -25,13 +25,15 @@ public class TutoUI : MonoBehaviour
 
     private Image inputImage;
     private Camera mainCamera;
+    private GridSystem playerGrid;
+    private float normalPlayerSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Image img in GetComponentsInChildren<Image>())
+        foreach (Image img in GetComponentsInChildren<Image>())
         {
-            if(img.name== "TutoImage")
+            if (img.name == "TutoImage")
             {
                 inputImage = img;
             }
@@ -42,6 +44,7 @@ public class TutoUI : MonoBehaviour
         }
 
         mainCamera = Camera.main;
+        playerGrid = playerMouvement.GetComponent<GridSystem>();
 
         switch (tutoType)
         {
@@ -61,11 +64,49 @@ public class TutoUI : MonoBehaviour
                 inputImage.sprite = emergencyEjectionInput;
                 break;
         }
+
+        if (tutoType != TutoType.Attraction)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            normalPlayerSpeed = playerMouvement.mouvementSpeed;
+            playerMouvement.mouvementSpeed = 0;
+        }
+
+        if (tutoType == TutoType.Movement)
+        {
+            
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (tutoType == TutoType.Attraction)
+        {
+            if (playerGrid.grid.Count > 1)
+            {
+                playerMouvement.mouvementSpeed = normalPlayerSpeed;
+                NextTuto();
+            }
+        }
+        else if (tutoType == TutoType.Movement)
+        {
+            
+        }
     }
 
     void LateUpdate()
     {
         // Met à jour la rotation pour que la barre fasse face à la caméra
         transform.rotation = Quaternion.LookRotation(mainCamera.transform.forward);
+    }
+
+    private void NextTuto()
+    {
+        Debug.Log(name + " skips to next tuto : " + nextTuto.name);
+        nextTuto.gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

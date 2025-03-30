@@ -9,7 +9,7 @@ using Vector3 = UnityEngine.Vector3;
 public class PlayerMouvement : MonoBehaviour
 {
     [SerializeField] float explosionForce = 30;
-    [SerializeField] float mouvementSpeed = 1f;
+    [SerializeField] public float mouvementSpeed = 1f;
     [SerializeField] float mouvementReductionFactor = 1f;
     [SerializeField] float pivotSpeed = 1f;
     [SerializeField] float rotationSpeed = 1f;
@@ -680,7 +680,5 @@ public class PlayerMouvement : MonoBehaviour
         rotatingRight = false;
 
     }
-
-
 }
 
