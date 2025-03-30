@@ -34,8 +34,7 @@ public class WinCondition : MonoBehaviour
             {
 
                 Vector3 hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
-                Vector3 projectileVelocity = projectileVelocity = hitterVelocity;
-
+                Vector3 projectileVelocity  = hitterVelocity;
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
                     print("Range Attack " + this.gameObject.name + " : " + hitter.name + "velocity" + projectileVelocity);
@@ -46,7 +45,7 @@ public class WinCondition : MonoBehaviour
             if (meleeFromOtherPlayer)
             {
                 Vector3 hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
-                Vector3 projectileVelocity = projectileVelocity = hitterVelocity;
+                Vector3 projectileVelocity  = hitterVelocity;
 
                 if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                 {

@@ -46,11 +46,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Tex:
-        m_Texture: {fileID: 2800000, guid: d90c329def4400c439dbbf307b3a86d9, type: 3}
+        m_Texture: {fileID: 2800000, guid: c0f9aa886e493544aa128d2d2f73f858, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveMask:
-        m_Texture: {fileID: 2800000, guid: 8b0063481769d5745a03bf41544a12d2, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Gradient_Color_Map:
@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Tex:
-        m_Texture: {fileID: 2800000, guid: b7acbc37c95b0ab48b5578c811166c42, type: 3}
+        m_Texture: {fileID: 2800000, guid: f7a0c4967b4ed464788f85de9d8de96d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -104,11 +104,12 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Emissive_Color: {r: 1, g: 0.048171833, b: 0.09084173, a: 0}
+    - _Emissive_Color: {r: 0, g: 0, b: 0, a: 0}
     - _Gradient_Bot_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Gradient_Smooth_Step: {r: 0, g: 1, b: 0, a: 0}
     - _Gradient_Top_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Shadow_Color: {r: 0.32941177, g: 0.25822327, b: 0.1882353, a: 1}
+    - _Lighten: {r: 0.2924528, g: 0.19344242, b: 0.16140084, a: 0}
+    - _Shadow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _SmoothStepShadows: {r: 0.5, g: 0.35, b: 0, a: 0}
     - _Tint: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

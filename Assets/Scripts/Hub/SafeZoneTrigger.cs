@@ -4,6 +4,7 @@ using UnityEngine;
 public class SafeZoneTrigger : MonoBehaviour
 {
     [SerializeField] private float groundY = 0.5f;
+    [SerializeField] private TutoUI mouvementTutoUI;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,7 @@ public class SafeZoneTrigger : MonoBehaviour
             if (player != null) // Si oui, on le descend de la safezone
             {
                 StartCoroutine(LerpToGround(player.gameObject));
+                mouvementTutoUI.NextTuto();
             }
         }
     }

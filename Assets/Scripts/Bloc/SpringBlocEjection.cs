@@ -73,7 +73,7 @@ public class SpringBlocEjection : MonoBehaviour
 
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
-                    if (true)
+                    if (false)
                     {
                         foreach (var v in gridSystem.grid)
                         {
@@ -91,7 +91,7 @@ public class SpringBlocEjection : MonoBehaviour
                     }
                     else
                     {
-                        StartCoroutine(resetTorque(gridSystem));
+                        Debug.Log("it good: "+ hitterVelocity+"hitter:"+hitter.name);
                         gridSystem.DetachBlock(hitted);
                         hittedComponent.state = BlocState.detached;
                         Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
@@ -119,7 +119,7 @@ public class SpringBlocEjection : MonoBehaviour
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
                     // Calculate normal average
-
+                    Debug.Log("its ok ");
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.melee;
                     Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
@@ -154,8 +154,7 @@ public class SpringBlocEjection : MonoBehaviour
                 moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
 
               
-                Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
-
+                Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<Rigidbody>().velocity; 
                 if (hitterVelocityBeforeImpact.magnitude > velocityTreshold)
                 {
 
@@ -174,13 +173,13 @@ public class SpringBlocEjection : MonoBehaviour
 
             if ((playerHittedByotherPlayer) && areOwnedByPlayers)
             {
+
                 gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
                 playerObjects = FindObjectOfType<PlayerObjects>();
                 mainCubeRb = transform.GetComponent<Rigidbody>();
                 moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
 
                 Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
-
                 if (hitterVelocityBeforeImpact.magnitude > velocityTreshold)
                 {
                     gridSystem.DetachBlock(hitted);
@@ -199,6 +198,7 @@ public class SpringBlocEjection : MonoBehaviour
     }
     void OnJointBreak(float breakForce)
     {
+        Debug.Log("here");
         gridSystem = gameObject.GetComponent<Bloc>().ownerTranform.GetComponent<GridSystem>();
         gridSystem.DetachBlock(this.gameObject);
         this.GetComponent<Bloc>().state = BlocState.detached;

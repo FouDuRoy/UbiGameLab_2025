@@ -47,7 +47,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     public float maxAngle = 15f;
     LineRenderer leftRay;
     LineRenderer rightRay;
-    void Start()
+    void Awake()
     {
         playerGrid = GetComponent<GridSystem>();
         playerInput = GetComponent<PlayerInput>();
@@ -68,16 +68,18 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Color curentColor = playerGrid.playerMat.color;
         chargedColor = new Color(curentColor.r * colorChangeIntensity, curentColor.g * colorChangeIntensity, curentColor.b * colorChangeIntensity);
     }
-    void FixedUpdate()
+  
+
+    void Update()
     {
         float rightTrigger = ejectCubes.ReadValue<float>();
         float leftTrigger = AttractCubes.ReadValue<float>();
-        if ((leftTrigger > 0 && rightTrigger==0) )
+        if ((leftTrigger > 0 && rightTrigger == 0))
         {
-            if(leftTriggerHeld == false)
+            if (leftTriggerHeld == false)
             {
                 feedback.AttractionVibrationStart();
-               
+
             }
 
             int maxX = playerGrid.grid.Keys.Max(x => x.x);
@@ -90,11 +92,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
             float maxDistance = MaxDistanceForDirection((golem.forward).normalized, radius);
             leftHandInitialPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * maxDistance + new Vector3(0, 0.15f, 0);
             rightHandInitialPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * maxDistance + new Vector3(0, 0.15f, 0);
-            leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * distance + new Vector3(0, 0.15f, 0); 
-            rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * distance + new Vector3(0, 0.15f, 0); 
+            leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * distance + new Vector3(0, 0.15f, 0);
+            rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * distance + new Vector3(0, 0.15f, 0);
             if (handTimer <= 1f / 2)
             {
-                
+
                 leftHandTransform.position = Vector3.Lerp(leftHandInitialPoint, leftHandFinalPoint, 2 * handTimer);
                 rightHandTransform.position = Vector3.Lerp(rightHandInitialPoint, rightHandFinalPoint, 2 * handTimer);
 
@@ -102,17 +104,17 @@ public class ConeEjectionAndProjection : MonoBehaviour
             else
             {
 
-                leftHandTransform.position = Vector3.Lerp( leftHandFinalPoint, leftHandInitialPoint, 2*(handTimer-1f/2));
-                rightHandTransform.position = Vector3.Lerp( rightHandFinalPoint, rightHandInitialPoint, 2 * (handTimer - 1f/ 2));
+                leftHandTransform.position = Vector3.Lerp(leftHandFinalPoint, leftHandInitialPoint, 2 * (handTimer - 1f / 2));
+                rightHandTransform.position = Vector3.Lerp(rightHandFinalPoint, rightHandInitialPoint, 2 * (handTimer - 1f / 2));
             }
-            
-            
-            handTimer += Time.fixedDeltaTime;
+
+
+            handTimer += Time.deltaTime;
             handTimer = handTimer % 1;
-            coneAttraction(golem,attractionForce,initialAngle,distance,1);
+            coneAttraction(golem, attractionForce, initialAngle, distance, 1);
             leftTriggerHeld = true;
 
-       
+
         }
         else if (leftTriggerHeld)
         {
@@ -122,8 +124,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
             rightRay.gameObject.SetActive(false);
             resetMagneticLast();
         }
+        EjectionAlgo(rightTrigger);
+    }
 
-        if((rightTrigger > 0))
+    private void EjectionAlgo(float rightTrigger)
+    {
+        if ((rightTrigger > 0))
         {
             leftRay.gameObject.SetActive(true);
             rightRay.gameObject.SetActive(true);
@@ -132,12 +138,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
             {
                 feedback.RepulsionVibrationStart(secondsForMaxCharging);
             }
-            timeHeld += Time.fixedDeltaTime;
+            timeHeld += Time.deltaTime;
             rightTriggerHeld = true;
 
             //Draw rays to indicate current range
             timeHeld = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
-            float maxAngle = initialAngle+(maxAngleRepulsion-initialAngle)*(timeHeld/secondsForMaxChargingEjection);
+            float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (timeHeld / secondsForMaxChargingEjection);
 
             //Draw Rays in Build
             Vector3 origin = golem.position;
@@ -164,6 +170,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             timeHeld = 0;
         }
     }
+
     LineRenderer CreateRay(Color color)
     {
         GameObject go = new GameObject("Ray");
@@ -294,10 +301,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float boundaryDistanceRatio = time / secondsForMaxChargingEjection;
         float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (boundaryDistanceRatio);
 
-        List<Collider> magnetic = Physics.OverlapSphere(golem.position, radius).ToList<Collider>();
+        Collider[] magnetics = Physics.OverlapSphere(golem.position, radius);
+        List<BoxCollider> magnetic = magnetics.OfType<BoxCollider>().ToList();
         magnetic = magnetic.FindAll(cube => {
             //Look if cube is on the player
-            cube.gameObject.GetComponent<Renderer>().material.color = playerGrid.playerMat.color;
+           
             if (cube.gameObject == mainCubeRb.gameObject)
             {
                 return false;
@@ -307,7 +315,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
                 return false;
             }
-            if(cube.gameObject.GetComponent<Renderer>().material.color == chargedColor)
+            cube.gameObject.GetComponent<Renderer>().material.color = playerGrid.playerMat.color;
+            if (cube.gameObject.GetComponent<Renderer>().material.color == chargedColor)
             {
                 return false;
             }
@@ -331,7 +340,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
         magnetic.ForEach(x => {
             x.gameObject.GetComponent<Renderer>().material.color = chargedColor;
                 });
-        playerGrid.coneEjectRest(ejectionSpeed, rightDriftProportion);
     }
     private void EjectBloc(GameObject cube, Transform golem)
     {

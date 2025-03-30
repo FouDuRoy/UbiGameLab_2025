@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 4141580320307584352}
   - component: {fileID: 2127751005520048226}
   - component: {fileID: 7908459055162129070}
+  - component: {fileID: 9014884664581853237}
   m_Layer: 3
   m_Name: MagneticCube 1
   m_TagString: magnetic
@@ -136,7 +137,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 80
@@ -160,7 +161,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4549032222228033677
 MonoBehaviour:
@@ -247,8 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 10
-  velocityTresholdMelee: 1
+  velocityTreshold: 6
+  velocityTresholdMelee: 2
   energyLoss: 0.4
   upEjectionMin: 0.8
   upEjectionMax: 1
@@ -270,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passiveRadius: 0.7
-  maxSpeed: 10
+  maxSpeed: 100
   error: 0.4
   AngleError: 8
   moveTime: 0.2
@@ -287,6 +288,19 @@ MonoBehaviour:
   projection: 0
   springTorqueBreak: 50000
   springForceBreak: 50000
+--- !u!114 &9014884664581853237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877455228711921279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9d2e8bbe5afa04da47682374207ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastTickVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &7028254759574544782
 GameObject:
   m_ObjectHideFlags: 0

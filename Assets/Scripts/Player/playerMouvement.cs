@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -9,7 +10,7 @@ using Vector3 = UnityEngine.Vector3;
 public class PlayerMouvement : MonoBehaviour
 {
     [SerializeField] float explosionForce = 30;
-    [SerializeField] float mouvementSpeed = 1f;
+    [SerializeField] public float mouvementSpeed = 1f;
     [SerializeField] float mouvementReductionFactor = 1f;
     [SerializeField] float pivotSpeed = 1f;
     [SerializeField] float rotationSpeed = 1f;
@@ -465,10 +466,10 @@ public class PlayerMouvement : MonoBehaviour
         {
             golem.GetComponent<Synchro2>().rotationFixed = false;
             rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            //stopStructure();
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             rotatingRight = true;
             Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
-
             golem.rotation = Quaternion.Lerp(
                 golem.rotation,
                 targetRotation,
@@ -539,7 +540,15 @@ public class PlayerMouvement : MonoBehaviour
 
     }
 
-
+    public void stopStructure()
+    {
+        foreach (var v in gridPlayer.grid)
+        {
+            Rigidbody cubeRigidBody = v.Value.GetComponent<Rigidbody>();
+            cubeRigidBody.angularVelocity = Vector3.zero;
+            cubeRigidBody.velocity = Vector3.zero;
+        }
+    }
     public void rotateAndDirection2(Vector3 direction)
     {
         Vector3 planeProjection = golem.transform.forward;
@@ -632,7 +641,6 @@ public class PlayerMouvement : MonoBehaviour
         
         float angle = Vector3.SignedAngle(structureFoward, direction.normalized, Vector3.up);
         Vector3 angularVelocity = Vector3.up * (angle * Mathf.Deg2Rad) * direction.magnitude * pivotSpeed / weightRotation;
-        Debug.Log(angle);
         if (direction != Vector3.zero)
         {
             if (Mathf.Abs(angle) > 1)
@@ -681,7 +689,5 @@ public class PlayerMouvement : MonoBehaviour
         rotatingRight = false;
 
     }
-
-
 }
 

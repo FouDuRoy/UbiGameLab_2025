@@ -9,8 +9,8 @@ public class KeyValuePair
 {
     public Vector3Int key;
     public GameObject value;
-
-   public KeyValuePair(Vector3Int key, GameObject value)
+ 
+    public KeyValuePair(Vector3Int key, GameObject value)
     {
         this.key = key;
         this.value = value;
@@ -106,28 +106,27 @@ public class GridSystem : MonoBehaviour
     }
     public void AttachGrid(GridSystem gridToAttach, GameObject attachedBloc, GameObject blocToAttach, Vector3 closestFace)
     {
-        Vector3Int systemACoordinates = new Vector3Int(Mathf.RoundToInt((closestFace.x / cubeSize))
-            , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
-
-        Vector3 blocToattachPositionB = gridToAttach.getPositionOfObject(blocToAttach);
-        Vector3Int systemBCoordinates = new Vector3Int(Mathf.RoundToInt((blocToattachPositionB.x / cubeSize))
-            , Mathf.RoundToInt((blocToattachPositionB.y / cubeSize)), Mathf.RoundToInt((blocToattachPositionB.z / cubeSize)));
-        Vector3Int changeOfCoordinatesBtoA = systemACoordinates - systemBCoordinates;
-
+        Vector3Int systemNewGridCoordinates = new Vector3Int(Mathf.RoundToInt((closestFace.x / cubeSize))
+         , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
+        Vector3Int systemOldGridCoordinates = gridToAttach.grid.FirstOrDefault(x => x.Value == blocToAttach).Key;
+      
+        Quaternion rotationDifference = blocToAttach.transform.Find("Orientation").rotation * Quaternion.Inverse(attachedBloc.transform.Find("Orientation").rotation);
+        Vector3 kernelPosition = systemNewGridCoordinates - rotationDifference * systemOldGridCoordinates;
         foreach (var v in gridToAttach.grid)
         {
             if (!grid.ContainsValue(v.Value))
             {
-                Vector3 blocAttachToA = kernel.transform.InverseTransformPoint(gridToAttach.kernel.transform
-          .TransformPoint(gridToAttach.getPositionOfObject(v.Value)));
-                Vector3Int intCord = new Vector3Int(Mathf.RoundToInt((blocAttachToA.x / cubeSize))
-                    , Mathf.RoundToInt((blocAttachToA.y / cubeSize)), Mathf.RoundToInt((blocAttachToA.z / cubeSize)));
-
+                Vector3 cubePositionNewGrid = kernelPosition + rotationDifference * v.Key;
+                Vector3Int intCord = new Vector3Int(Mathf.RoundToInt(cubePositionNewGrid.x), Mathf.RoundToInt( cubePositionNewGrid.y), Mathf.RoundToInt(cubePositionNewGrid.z));
                 grid.Add(intCord, v.Value);
                 v.Value.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
                 v.Value.GetComponent<Bloc>().ownerTranform = transform.root.transform;
                 v.Value.GetComponent<Bloc>().state = BlocState.structure;
                 v.Value.GetComponent<MeshRenderer>().SetMaterials(materials);
+            }
+            else
+            {
+                Debug.Log("wow");
             }
 
         }
@@ -157,7 +156,7 @@ public class GridSystem : MonoBehaviour
                     neighbors = GetNeighbors(gridBloc.Key);
                     playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
                     gridBloc.Value.GetComponent<Rigidbody>().AddForce(
-                        (gridBloc.Value.transform.position - kernel.transform.position).normalized * 10f, ForceMode.VelocityChange);
+                        (gridBloc.Value.transform.position - kernel.transform.position).normalized * 100f, ForceMode.VelocityChange);
                 }
 
             }

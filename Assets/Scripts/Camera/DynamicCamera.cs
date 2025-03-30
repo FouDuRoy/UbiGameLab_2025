@@ -104,7 +104,7 @@ public class DynamicCamera : MonoBehaviour
 
     public void IntroFinished()
     {
-        Debug.Log("Intro anim finished");
+        //Debug.Log("Intro anim finished");
 
         animator.enabled = false;
         playerOneInputs.ActivateInput();
