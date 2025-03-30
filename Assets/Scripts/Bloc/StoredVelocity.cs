@@ -16,6 +16,7 @@ public class StoredVelocity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
             lastTickVelocity = curentTickVelocity;
