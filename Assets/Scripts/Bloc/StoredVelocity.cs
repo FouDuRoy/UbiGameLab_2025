@@ -9,7 +9,7 @@ public class StoredVelocity : MonoBehaviour
     Rigidbody rb;
     void Start()
     {
-            rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         curentTickVelocity = Vector3.zero;
     }
 
