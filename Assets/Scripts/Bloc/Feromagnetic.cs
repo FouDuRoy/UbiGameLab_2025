@@ -75,7 +75,7 @@ public class Feromagnetic : MonoBehaviour
     Collider[] magnetic = new Collider[1000];
     void Start()
     {
-        mask = LayerMask.GetMask("magnetic");
+        mask = LayerMask.GetMask("magnetic") | LayerMask.GetMask("magneticStructure");
         // We assume all cubes have same scale
         quaternions = createListAngles();
         timeBeforeSwitching += Random.Range(-timeBeforeSwitchingVariation, timeBeforeSwitchingVariation);
@@ -355,7 +355,8 @@ public class Feromagnetic : MonoBehaviour
 
     private void setLayer()
     {
-        gameObject.layer = 3;
+       
+        gameObject.layer = cubeAttractedToTransform.gameObject.layer;
     }
 
     private void attachJ()

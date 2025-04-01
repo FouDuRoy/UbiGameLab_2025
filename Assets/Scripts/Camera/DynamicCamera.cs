@@ -46,8 +46,8 @@ public class DynamicCamera : MonoBehaviour
 
     private void Start()
     {
-    QualitySettings.vSyncCount = 1;
-	Application.targetFrameRate = 120;
+   // QualitySettings.vSyncCount = 1;
+	//Application.targetFrameRate = 120;
         animator = GetComponent<Animator>();
 
         playerOneInputs=Player1.GetComponentInParent<PlayerInput>();

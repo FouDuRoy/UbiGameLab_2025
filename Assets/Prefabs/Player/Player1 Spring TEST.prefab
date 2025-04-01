@@ -58,7 +58,7 @@ MonoBehaviour:
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   magnetTimer: 1
   blocNonMagnetic: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
-  golem: {fileID: 0}
+  golem: {fileID: 1597069548048436721}
   weight: 1
 --- !u!114 &7850894500233854463
 MonoBehaviour:
@@ -74,6 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionForce: 140
   mouvementSpeed: 80
+  deadZone: 0.9
   mouvementReductionFactor: 0.3
   pivotSpeed: 180
   rotationSpeed: 30
@@ -267,6 +268,7 @@ MonoBehaviour:
   secondsForMaxCharging: 0.2
   distance: 22
   secondsForMaxChargingEjection: 2
+  secondsForMaxChargingEjectionLength: 10
   ejectionSpeed: 60
   colorChangeIntensity: 3
   lineMat: {fileID: 2100000, guid: 5de4fbdbb1ac55345a979f6a4e9c97fe, type: 2}
@@ -625,7 +627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1380078002464352268, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
       propertyPath: m_Name
-      value: GolemCube_Assembled
+      value: GolemCube_Assembled1
       objectReference: {fileID: 0}
     - target: {fileID: 1380078002464352268, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
       propertyPath: m_Layer
@@ -1394,8 +1396,29 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8968282644001089855, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
       insertIndex: 1
       addedObject: {fileID: 6739573438933691895}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1380078002464352268, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6087993874332026928}
   m_SourcePrefab: {fileID: 100100000, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
+--- !u!1 &1597069548048436721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1380078002464352268, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
+  m_PrefabInstance: {fileID: 364488015725372925}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6087993874332026928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597069548048436721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ec926abcc349438f9839e8eeef1b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationFixed: 1
 --- !u!1 &8721610333923546856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8937263206788838165, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}

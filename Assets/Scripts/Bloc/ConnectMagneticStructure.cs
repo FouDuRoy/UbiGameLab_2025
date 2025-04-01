@@ -140,15 +140,14 @@ public class ConnectMagneticStructure : MonoBehaviour
             float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
             float radius = radiusInBlocs * blocSizeWorld;
             cubeRB = this.GetComponent<Rigidbody>();
-            int hits = Physics.OverlapSphereNonAlloc(transform.position, radius+10, magnetic, mask);
-          
+            int hits = Physics.OverlapSphereNonAlloc(transform.position, radius, magnetic, mask);
             //Remove magnets not available
             for (int j = 0; j < hits; j++)
             {
                 GridSystem grid = magnetic[j].transform.root.GetComponent<GridSystem>();
              
-                if (grid == null || !grid.hasNeighbours(magnetic[j].gameObject) || (
-                    magnetic[j].transform.root != null && !magnetic[j].transform.root.name.Contains("Player")))
+                if ( (magnetic[j].transform.root != null && !magnetic[j].transform.root.name.Contains("Player"))
+                || grid == null || !grid.hasNeighbours(magnetic[j].gameObject) )
                 {
                     magnetic[j] = null;
                 }
