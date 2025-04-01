@@ -103,11 +103,11 @@ public class ConnectMagneticStructure : MonoBehaviour
         closestCubeOwn = null;
         errorP = 1;
         errorR = 1;
-        if (cubeRB != null)
-        {
-            cubeRB.useGravity = true;
+       
+        
+        cubeRB.useGravity = true;
 
-        }
+        
         transform.parent = this.transform.root.parent;
        
     }
@@ -126,7 +126,7 @@ public class ConnectMagneticStructure : MonoBehaviour
         if (!lerping)
         {
             
-            //Trouver la distance la plus petite par rapport à la structucture 
+            //Trouver la distance la plus petite par rapport ï¿½ la structucture 
             int i = 0;
             closestCube = null;
             float shortestDistance = 1000f;

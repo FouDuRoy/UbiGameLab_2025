@@ -11,6 +11,7 @@ public class PlayerMouvement : MonoBehaviour
 {
     [SerializeField] float explosionForce = 30;
     [SerializeField] public float mouvementSpeed = 1f;
+    public float deadZone = 0.9f;
     [SerializeField] float mouvementReductionFactor = 1f;
     [SerializeField] float pivotSpeed = 1f;
     [SerializeField] float rotationSpeed = 1f;
@@ -462,8 +463,11 @@ public class PlayerMouvement : MonoBehaviour
         if ((leftTrigger > .1f || rightTrigger > .1f) && direction.magnitude>0.1f)
         {
             golem.GetComponent<Synchro2>().rotationFixed = false;
-            rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
-            //stopStructure();
+
+            if(direction.magnitude > deadZone ){
+                 rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            }
+            
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             rotatingRight = true;
             Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
