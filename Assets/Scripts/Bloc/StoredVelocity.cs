@@ -6,7 +6,7 @@ public class StoredVelocity : MonoBehaviour
 {
     public Vector3 lastTickVelocity;
     Vector3 curentTickVelocity;
-    Rigidbody rb;
+    public Rigidbody rb;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,7 +16,7 @@ public class StoredVelocity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb = GetComponent<Rigidbody>();
+     
         if (rb != null)
         {
             lastTickVelocity = curentTickVelocity;

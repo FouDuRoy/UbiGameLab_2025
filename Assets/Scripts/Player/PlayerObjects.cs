@@ -175,6 +175,9 @@ public class PlayerObjects : MonoBehaviour
             rb.collisionDetectionMode = rb2.collisionDetectionMode;
             rb.useGravity = rb2.useGravity;
             rb.constraints = rb2.constraints;
+            cube.GetComponent<Bloc>().rb = rb;
+            cube.GetComponent<StoredVelocity>().rb = rb;
+            
         }
     }
     IEnumerator blockNeutral(GameObject block)

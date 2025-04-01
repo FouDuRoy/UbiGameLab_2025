@@ -15,7 +15,7 @@ public class Bloc : MonoBehaviour
 
     List<Material> materials = new List<Material>();
     private Vector3Int gridPosition;
-    Rigidbody rb;
+    public Rigidbody rb;
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public class Bloc : MonoBehaviour
 
     void Update()
     {
-        rb = GetComponent<Rigidbody>();
+      
         if (state != BlocState.structure && owner != "Neutral" )
         {
             float speed = rb.velocity.magnitude;
@@ -55,11 +55,9 @@ public class Bloc : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb = GetComponent<Rigidbody>();
         if(rb != null)
         {
             rb.maxLinearVelocity = maxSpeed;
-
 
         }
         

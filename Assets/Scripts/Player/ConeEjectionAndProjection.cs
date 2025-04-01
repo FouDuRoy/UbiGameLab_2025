@@ -23,8 +23,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float colorChangeIntensity = 3f;
     List<Collider> magneticLast = new List<Collider>();
 
-     RaycastHit[] hitsArray = new RaycastHit[200];
-    Collider[] magnetic = new Collider[200];
+     RaycastHit[] hitsArray = new RaycastHit[500];
+    Collider[] magnetic = new Collider[500];
     GridSystem playerGrid;
     PlayerInput playerInput;
     
@@ -376,7 +376,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (angleRatio);
         LayerMask mask = LayerMask.GetMask("magnetic");
         int nbHits = Physics.OverlapSphereNonAlloc(golem.position, radius,magnetic,mask);
-
         for(int i = 0; i < nbHits; i++){
             
                   //look if the cube is within the neighberhood of the boundary

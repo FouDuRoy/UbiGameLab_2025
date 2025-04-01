@@ -131,7 +131,6 @@ public class ConnectMagneticStructure : MonoBehaviour
             closestCube = null;
             float shortestDistance = 1000f;
             mask = LayerMask.GetMask("magnetic");
-
             int maxX = playerGrid.grid.Keys.Max(x => x.x);
             int minX = playerGrid.grid.Keys.Min(x => x.x);
             int maxZ = playerGrid.grid.Keys.Max(x => x.z);
@@ -144,10 +143,11 @@ public class ConnectMagneticStructure : MonoBehaviour
             //Remove magnets not available
             for (int j = 0; j < hits; j++)
             {
-                GridSystem grid = magnetic[j].transform.root.GetComponent<GridSystem>();
+                GridSystem grid;
+                bool hasGrid = magnetic[j].transform.root.TryGetComponent<GridSystem>(out grid);
              
                 if ( (magnetic[j].transform.root != null && !magnetic[j].transform.root.name.Contains("Player"))
-                || grid == null || !grid.hasNeighbours(magnetic[j].gameObject) )
+                || !hasGrid || !grid.hasNeighbours(magnetic[j].gameObject) )
                 {
                     magnetic[j] = null;
                 }
