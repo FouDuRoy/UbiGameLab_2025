@@ -118,7 +118,7 @@ public class GridSystem : MonoBehaviour
     {
         Vector3Int systemNewGridCoordinates = new Vector3Int(Mathf.RoundToInt((closestFace.x / cubeSize))
          , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
-        Vector3Int systemOldGridCoordinates = gridToAttach.grid.FirstOrDefault(x => x.Value == blocToAttach).Key;
+        Vector3Int systemOldGridCoordinates = gridToAttach.findFirstKey(blocToAttach);
       
         Quaternion rotationDifference = blocToAttach.transform.Find("Orientation").rotation * Quaternion.Inverse(attachedBloc.transform.Find("Orientation").rotation);
         Vector3 kernelPosition = systemNewGridCoordinates - rotationDifference * systemOldGridCoordinates;
@@ -144,7 +144,7 @@ public class GridSystem : MonoBehaviour
     public void DetachBlock(GameObject bloc)
     {
 
-        Vector3Int detachedGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
+        Vector3Int detachedGridPos = findFirstKey(bloc);
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
         {
             playerObj.removeCube(grid[detachedGridPos]);
@@ -177,7 +177,7 @@ public class GridSystem : MonoBehaviour
     }
     public void DetachBlocSingle(GameObject bloc)
     {
-        Vector3Int detachedGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
+        Vector3Int detachedGridPos = findFirstKey(bloc);
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
         {
             playerObj.removeCube(grid[detachedGridPos]);
@@ -214,7 +214,7 @@ public class GridSystem : MonoBehaviour
 
         foreach (GameObject bloc in detachedBlocks)
         {
-            Vector3Int detachedGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
+            Vector3Int detachedGridPos = findFirstKey(bloc);
             grid.Remove(bloc.GetComponent<Bloc>().GetGridPosition());
             bloc.transform.parent = null;
             bloc.GetComponent<Rigidbody>().isKinematic = false;
@@ -260,7 +260,7 @@ public class GridSystem : MonoBehaviour
     protected bool IsBlockConnected(GameObject bloc)
     {
         if (!grid.ContainsValue(bloc)) return false;
-        Vector3Int blocGridPos = grid.FirstOrDefault(x => x.Value == bloc).Key;
+        Vector3Int blocGridPos = findFirstKey(bloc);
         HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
         Queue<Vector3Int> toVisit = new Queue<Vector3Int>();
         toVisit.Enqueue(blocGridPos);
@@ -284,7 +284,7 @@ public class GridSystem : MonoBehaviour
 
     public Vector3 getPositionOfObject(GameObject cube)
     {
-        Vector3Int blocGridPos = grid.FirstOrDefault(x => x.Value == cube).Key;
+        Vector3Int blocGridPos = findFirstKey(cube);
         return new Vector3(blocGridPos.x * cubeSize, blocGridPos.y * cubeSize, blocGridPos.z * cubeSize);
 
     }
@@ -314,7 +314,7 @@ public class GridSystem : MonoBehaviour
 
     public List<Vector3> getAvailableNeighbours(GameObject cube)
     {
-        Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
+        Vector3Int positionCube = findFirstKey(cube);
         if (positionCube == null)
         {
             return null;
@@ -337,7 +337,7 @@ public class GridSystem : MonoBehaviour
     }
         public bool hasNeighbours(GameObject cube)
     {
-        Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
+        Vector3Int positionCube = findFirstKey(cube);
         if (positionCube == null)
         {
             return false;
@@ -360,7 +360,7 @@ public class GridSystem : MonoBehaviour
 
     public Vector3[] ClosestNeighbourPosition(GameObject cube, Vector3 position)
     {
-        Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
+        Vector3Int positionCube = findFirstKey(cube);
         Vector3 cubePositionToKernel = tranformToVector3(positionCube);
 
         if (positionCube == null)
@@ -409,7 +409,7 @@ public class GridSystem : MonoBehaviour
 
     public List<Vector3> getOccupiedNeighbours(GameObject cube)
     {
-        Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
+        Vector3Int positionCube = findFirstKey(cube);
         if (positionCube == null)
         {
             return null;
@@ -464,5 +464,14 @@ public class GridSystem : MonoBehaviour
         {
             grid.Remove(key);
         }
+    }
+    public Vector3Int findFirstKey( GameObject value){
+
+        foreach(var v in grid){
+            if(v.Value == value){
+                return v.Key;
+            }
+        }
+        return new Vector3Int(1000000000,0,0);
     }
 }
