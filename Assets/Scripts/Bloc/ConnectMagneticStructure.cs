@@ -78,7 +78,7 @@ public class ConnectMagneticStructure : MonoBehaviour
 
     Collider[] magnetic = new Collider[1000];
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerGrid = GetComponent<GridSystem>();
         quaternions = createListAngles();
@@ -147,7 +147,7 @@ public class ConnectMagneticStructure : MonoBehaviour
             {
                 GridSystem grid = magnetic[j].transform.root.GetComponent<GridSystem>();
              
-                if ((grid == null || grid.getAvailableNeighbours(magnetic[j].gameObject).Count == 0) || (
+                if (grid == null || !grid.hasNeighbours(magnetic[j].gameObject) || (
                     magnetic[j].transform.root != null && !magnetic[j].transform.root.name.Contains("Player")))
                 {
                     magnetic[j] = null;
@@ -158,9 +158,8 @@ public class ConnectMagneticStructure : MonoBehaviour
             {
                 foreach (var v in playerGrid.grid)
                 {
-
-
-                    if (i == 0)
+                    if(playerGrid.hasNeighbours(v.Value)){
+                         if (i == 0)
                     {
                         closestCube = CheckClosestMagnet(magnetic, v.Value.transform, hits);
                         closestCubeOwn = v.Value;
@@ -196,7 +195,7 @@ public class ConnectMagneticStructure : MonoBehaviour
                         }
                     }
                     i++;
-
+                    }
                 }
             }
 

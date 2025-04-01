@@ -46,6 +46,8 @@ public class DynamicCamera : MonoBehaviour
 
     private void Start()
     {
+    QualitySettings.vSyncCount = 1;
+	Application.targetFrameRate = 120;
         animator = GetComponent<Animator>();
 
         playerOneInputs=Player1.GetComponentInParent<PlayerInput>();
@@ -62,7 +64,7 @@ public class DynamicCamera : MonoBehaviour
             camUI.enabled = false;
         }
 
-        //Récupère l'angle de la caméra par rapport à son pivot
+        //Rï¿½cupï¿½re l'angle de la camï¿½ra par rapport ï¿½ son pivot
         angleCam =new Vector2(cam.transform.localPosition.z, cam.transform.localPosition.y).normalized;
 
         if (isOrthographic)
@@ -77,7 +79,7 @@ public class DynamicCamera : MonoBehaviour
         {
             // POSTION DE L'OBJET DYNAMIC CAMERA
 
-            //Récupère la position des joueurs sur un plan XZ pour que l'objet caméra reste fixe sur l'axe Y
+            //Rï¿½cupï¿½re la position des joueurs sur un plan XZ pour que l'objet camï¿½ra reste fixe sur l'axe Y
             playerOnePlanePos = new Vector3(Player1.transform.position.x, 0, Player1.transform.position.z);
             playerTwoPlanePos = new Vector3(Player2.transform.position.x, 0, Player2.transform.position.z);
             arenaCenterPlanePos = new Vector3(ArenaCenter.transform.position.x, 0, ArenaCenter.transform.position.z);

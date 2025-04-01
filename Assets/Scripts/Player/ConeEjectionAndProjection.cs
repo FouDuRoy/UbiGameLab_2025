@@ -46,7 +46,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     Vector3 rightHandFinalPoint;
     MouvementType moveType;
     Color chargedColor;
-    
+    LayerMask mask ;
     
     [Header("LineSection")]
     [SerializeField] Material lineMat;
@@ -70,6 +70,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     {
         //Cone vision attribution Mesh
+        mask = LayerMask.GetMask("magnetic");
         coneMeshFilter = visionConeObject.GetComponent<MeshFilter>();
         coneRenderer = visionConeObject.GetComponent<MeshRenderer>();
         coneRenderer.material = visionMaterial;
@@ -96,7 +97,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     }
   
 
-    void FixedUpdate()
+    void Update()
     {
         float rightTrigger = ejectCubes.ReadValue<float>();
         float leftTrigger = AttractCubes.ReadValue<float>();
@@ -138,7 +139,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             }
 
 
-            handTimer += Time.fixedDeltaTime;
+            handTimer += Time.deltaTime;
             handTimer = handTimer % 1;
             coneAttraction(golem, attractionForce, initialAngle, distance, 1);
             leftTriggerHeld = true;
@@ -168,7 +169,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             {
                 feedback.RepulsionVibrationStart(secondsForMaxCharging);
             }
-            timeHeld += Time.fixedDeltaTime;
+            timeHeld += Time.deltaTime;
             rightTriggerHeld = true;
 
             //Draw rays to indicate current range
@@ -246,7 +247,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             Vector3 distanceBetweenPlayerAndCube = player.position - cube.transform.position;
             Rigidbody cubeRB = cube.GetComponent<Rigidbody>();
-            cubeRB.AddForce(distanceBetweenPlayerAndCube.normalized* attractionForce* magnitude, ForceMode.Acceleration);
+            cubeRB.AddForce(distanceBetweenPlayerAndCube.normalized* attractionForce* magnitude*Time.deltaTime*100f, ForceMode.Acceleration);
             Feromagnetic fero = cube.GetComponent<Feromagnetic>();
             fero.ResetObject();
             fero.enabled = false;
@@ -289,8 +290,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     }
 
     public void coneProjection(float time){
-        
-         int maxX = playerGrid.grid.Keys.Max(x => x.x);
+        int maxX = playerGrid.grid.Keys.Max(x => x.x);
         int minX = playerGrid.grid.Keys.Min(x => x.x);
         int maxZ = playerGrid.grid.Keys.Max(x => x.z);
         int minZ = playerGrid.grid.Keys.Min(x => x.z);
@@ -299,43 +299,61 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX), Mathf.Abs(minX), Mathf.Abs(maxZ), Mathf.Abs(minZ),Mathf.Abs(maxY), Mathf.Abs(minY));
         float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
-        float radius = radiusInBlocs * blocSizeWorld+3;
- 
+        float radius = radiusInBlocs * blocSizeWorld*1.2f;
+
         float timeHeldAngle = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
         float timeHeldLength = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjectionLength);
         float boundaryDistanceRatio = timeHeldLength / secondsForMaxChargingEjectionLength;
         float angleRatio = timeHeldAngle/secondsForMaxChargingEjection;
         float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (angleRatio);
-
-       List<Collider> magnetic = Physics.OverlapSphere(golem.position, radius).ToList<Collider>();
-       magnetic = magnetic.FindAll(cube => {
-            //Look if cube is on the player
-            if(cube.gameObject == mainCubeRb.gameObject){
-                return false;
-            }
-            if(cube.transform.root != transform){
-                
-                return false;
-            }
-
-            //Look if the cube is within the angle of ejection
-            Vector3 planeProjection = Vector3.ProjectOnPlane(cube.transform.position,Vector3.up);
-            float angle =  Vector3.Angle(planeProjection-golem.position,golem.forward);
-            if(angle > maxAngle){
-                return false;
-            }
+        LayerMask mask = LayerMask.GetMask("magnetic");
+        int nbHits = Physics.OverlapSphereNonAlloc(golem.position, radius,magnetic,mask);
+         foreach(var v in playerGrid.grid){
+        v.Value.GetComponent<Renderer>().material.color = playerGrid.playerMat.color;
+       }
+        for(int i = 0; i < nbHits; i++){
             
-            //look if the cube is within the neighberhood of the boundary
-            float maxDistance = MaxDistanceForDirection((cube.transform.position-golem.position).normalized,radius);
-            float distance = (cube.transform.position-golem.position).magnitude;
-            float boundaryDistanceMax = (1-boundaryDistanceRatio)*maxDistance;
-            if(distance < boundaryDistanceMax){
-                return false;
+                  //look if the cube is within the neighberhood of the boundary
+      
+             if (magnetic[i].GetComponent<BoxCollider>() == null)
+             {
+                magnetic[i] = null;
+                continue;
+             }
+             if (magnetic[i].gameObject == mainCubeRb.gameObject)
+            {
+                 magnetic[i] = null;
+                 continue;
             }
-            return true;
-        });
-       magnetic.ForEach(x => EjectBloc(x.gameObject,golem));
+             if (magnetic[i].transform.root != transform)
+            {
+                 magnetic[i] = null;
+                 continue;
+            }
+         
+                //Look if the cube is within the angle of ejection
+            Vector3 planeProjection = Vector3.ProjectOnPlane(magnetic[i].transform.position,Vector3.up);
+            Vector3 golemProjection = Vector3.ProjectOnPlane(golem.position,Vector3.up);
+            float angle = Vector3.Angle(planeProjection - golemProjection, golem.forward);
+             if (angle > maxAngle)
+            {   
+                 magnetic[i] = null;
+                 continue;
+            }
+            float maxDistance = MaxDistanceForDirection((planeProjection -golemProjection).normalized, radius);
+            float distance = (planeProjection - golemProjection).magnitude;
+            float boundaryDistanceMax = (1 - boundaryDistanceRatio) * maxDistance;
+             if (distance <= boundaryDistanceMax)
+            {
+                 magnetic[i] = null;
+                 continue;
+            }
+            if(magnetic[i]!=null){
+                 EjectBloc( magnetic[i].gameObject,golem);
+            }
+        }
        playerGrid.coneEjectRest(ejectionSpeed, rightDriftProportion);
+
     }
     public void coneProjectionColor(float time)
     {
@@ -349,7 +367,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX), Mathf.Abs(minX), Mathf.Abs(maxZ), Mathf.Abs(minZ),Mathf.Abs(maxY), Mathf.Abs(minY));
         float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
-        float radius = radiusInBlocs * blocSizeWorld+3;
+        float radius = radiusInBlocs * blocSizeWorld*1.2f;
 
         float timeHeldAngle = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
         float timeHeldLength = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjectionLength);
@@ -378,6 +396,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
                  magnetic[i] = null;
                  continue;
             }
+            magnetic[i].gameObject.GetComponent<Renderer>().material.color = playerGrid.playerMat.color;
             if (magnetic[i].gameObject.GetComponent<Renderer>().material.color == chargedColor)
             {
                  magnetic[i] = null;
@@ -385,16 +404,17 @@ public class ConeEjectionAndProjection : MonoBehaviour
             }
                 //Look if the cube is within the angle of ejection
             Vector3 planeProjection = Vector3.ProjectOnPlane(magnetic[i].transform.position,Vector3.up);
-            float angle = Vector3.Angle(planeProjection - golem.position, golem.forward);
+            Vector3 golemProjection = Vector3.ProjectOnPlane(golem.position,Vector3.up);
+            float angle = Vector3.Angle(planeProjection - golemProjection, golem.forward);
              if (angle > maxAngle)
-            {
+            {   
                  magnetic[i] = null;
                  continue;
             }
-            float maxDistance = MaxDistanceForDirection((planeProjection - golem.position).normalized, radius);
-            float distance = (planeProjection - golem.position).magnitude;
+            float maxDistance = MaxDistanceForDirection((planeProjection -golemProjection).normalized, radius);
+            float distance = (planeProjection - golemProjection).magnitude;
             float boundaryDistanceMax = (1 - boundaryDistanceRatio) * maxDistance;
-             if (distance < boundaryDistanceMax)
+             if (distance <= boundaryDistanceMax)
             {
                  magnetic[i] = null;
                  continue;
@@ -422,29 +442,18 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     public float MaxDistanceForDirection(Vector3 direction, float radius){
 
+       Vector3 golemProjection =  new Vector3(golem.position.x,0,golem.position.z);
        LayerMask mask = LayerMask.GetMask("magnetic");
-       int nbHits = Physics.BoxCastNonAlloc( mainCubeRb.position, new Vector3(0.01f, 10f, 0.01f),direction,hitsArray,mainCubeRb.rotation, radius,mask,QueryTriggerInteraction.Ignore);
-       for(int i=0; i<nbHits; i++){
-            if(hitsArray[i].collider.transform.root != transform){
-                hitsArray[i]= new RaycastHit();
-            }
-       }
-
-        float maxDistance = 0;
-
-        for  (int i = 0; i< nbHits; i++)
+       int nbHits = Physics.BoxCastNonAlloc( mainCubeRb.position, new Vector3(0.2f, 20f, 0.2f),direction,hitsArray,mainCubeRb.rotation, radius,mask,QueryTriggerInteraction.Ignore);
+    
+        for  (int i =nbHits-1; i>=0 ; i--)
         {
-            float distance;
             Collider hit = hitsArray[i].collider;
-            if(hit!=null){
-                distance = Vector3.Distance(mainCubeRb.position, hit.transform.position);
-                if (distance > maxDistance)
-                {
-                    maxDistance = distance;
-                }
+            if(hitsArray[i].collider.transform.root == transform){
+               return Vector3.Distance(golemProjection, new Vector3(hit.transform.position.x,0,hit.transform.position.z));
             }
         }
-        return maxDistance;
+        return 0;
     }
 
     void GenerateMesh(float maxAngle)

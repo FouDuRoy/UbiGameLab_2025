@@ -335,6 +335,28 @@ public class GridSystem : MonoBehaviour
             return availableSpaces;
         }
     }
+        public bool hasNeighbours(GameObject cube)
+    {
+        Vector3Int positionCube = grid.FirstOrDefault(x => x.Value == cube).Key;
+        if (positionCube == null)
+        {
+            return false;
+        }
+        else
+        {
+
+            foreach (Vector3Int position in neighborsList)
+            {
+
+                if (!grid.ContainsKey(position+ positionCube))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
 
     public Vector3[] ClosestNeighbourPosition(GameObject cube, Vector3 position)
     {
