@@ -799,14 +799,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Player2 Spring TEST '
       objectReference: {fileID: 0}
-    - target: {fileID: 1662070221946770721, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      propertyPath: visionMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: b23c39ceb913006449663ef0f0b80157, type: 2}
-    - target: {fileID: 1662070221946770721, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      propertyPath: visionConeObject
-      value: 
-      objectReference: {fileID: 696960579}
     - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: playerLife
       value: 
@@ -1310,7 +1302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1318,7 +1310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1330,7 +1322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 811220687696822283, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1819,14 +1811,6 @@ PrefabInstance:
       propertyPath: ArenaCenter
       value: 
       objectReference: {fileID: 1358112523}
-    - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
-      propertyPath: playIntroAnimation
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
-      propertyPath: distanceFromPlayersFactor
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 7513625886291757825, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: m_Name
       value: Dynamic Camera
@@ -2147,16 +2131,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   m_PrefabInstance: {fileID: 568960930}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &592823098 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 134994841213693252, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-  m_PrefabInstance: {fileID: 1709085650}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &696960579 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7466266776518265088, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-  m_PrefabInstance: {fileID: 111579645}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &781182045
 PrefabInstance:
@@ -7807,10 +7781,6 @@ PrefabInstance:
       propertyPath: Ennemy
       value: 
       objectReference: {fileID: 111579646}
-    - target: {fileID: 6905163406376771707, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      propertyPath: golem
-      value: 
-      objectReference: {fileID: 592823098}
     - target: {fileID: 7587764504867593769, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_Camera
       value: 

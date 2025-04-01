@@ -799,6 +799,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Player2 Spring TEST '
       objectReference: {fileID: 0}
+    - target: {fileID: 549415377602034863, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 549415377602034863, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1662070221946770721, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: visionMaterial
       value: 
@@ -867,6 +875,10 @@ PrefabInstance:
       propertyPath: Ennemy
       value: 
       objectReference: {fileID: 1520659245}
+    - target: {fileID: 6905163406376771707, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: golem
+      value: 
+      objectReference: {fileID: 977572669}
     - target: {fileID: 7587764504867593769, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_Camera
       value: 
@@ -879,6 +891,14 @@ PrefabInstance:
       propertyPath: selectedGUI
       value: 
       objectReference: {fileID: 970148421}
+    - target: {fileID: 8973013042489349675, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973013042489349675, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2148,15 +2168,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   m_PrefabInstance: {fileID: 568960930}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &592823098 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 134994841213693252, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-  m_PrefabInstance: {fileID: 1709085650}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &696960579 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7466266776518265088, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
   m_PrefabInstance: {fileID: 111579645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &773537672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1597069548048436721, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+  m_PrefabInstance: {fileID: 1709085650}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &781182045
 PrefabInstance:
@@ -2695,6 +2715,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 970148421}
   m_CullTransparentMesh: 1
+--- !u!1 &977572669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7406773669950310810, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+  m_PrefabInstance: {fileID: 111579645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1002984419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7751,6 +7776,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1 Spring TEST
       objectReference: {fileID: 0}
+    - target: {fileID: 1432936546183953285, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432936546183953285, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613578262778957225, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2613578262778957225, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: attackerText
       value: 
@@ -7810,7 +7851,7 @@ PrefabInstance:
     - target: {fileID: 6905163406376771707, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: golem
       value: 
-      objectReference: {fileID: 592823098}
+      objectReference: {fileID: 773537672}
     - target: {fileID: 7587764504867593769, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_Camera
       value: 
