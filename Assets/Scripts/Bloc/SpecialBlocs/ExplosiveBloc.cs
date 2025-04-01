@@ -15,6 +15,7 @@ public class ExplosiveBloc : MonoBehaviour
     public float timeBeforeExplosionEnabled = 1f;
     private float gameStartTime;
     private bool canExplode = false;
+    private ParticleSystem ps;
     public GameObject[] players;
 
     [Header("Gizmos Settings")]
@@ -32,6 +33,7 @@ public class ExplosiveBloc : MonoBehaviour
     {
         gameStartTime = Time.time;
         StartCoroutine(EnableExplosionAfterDelay(timeBeforeExplosionEnabled));
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     private IEnumerator EnableExplosionAfterDelay(float delay)
@@ -53,6 +55,7 @@ public class ExplosiveBloc : MonoBehaviour
     {
         if (explode && canExplode)
         {
+            ps.Play();
             Explode();
         }
     }
