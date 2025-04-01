@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3051198423747670007}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 7458378236628095324}
   - component: {fileID: 3378363953543743681}
   - component: {fileID: 2360828147244814276}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: MC_Spring (6)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -158,15 +158,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 28.519733
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.15401872
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -204,6 +203,7 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 8083684521338334020}
+  rb: {fileID: 0}
 --- !u!114 &7458378236628095324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: -0.0000030847891, y: -1.6370905e-10, z: -0.000000024214387}
+  rb: {fileID: 0}
 --- !u!135 &2360828147244814276
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -269,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6980955997625232882}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2203134748617259656}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8256244767148558374}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +371,7 @@ GameObject:
   - component: {fileID: 3138148944583542859}
   - component: {fileID: 7394832319872421801}
   - component: {fileID: 8348719109970197740}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: MC_Spring (4)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -480,15 +481,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 28.73515
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.23082665
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -526,6 +526,7 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 8083684521338334020}
+  rb: {fileID: 0}
 --- !u!114 &3138148944583542859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,6 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!135 &8348719109970197740
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -599,7 +601,7 @@ GameObject:
   - component: {fileID: 5075755618591106592}
   - component: {fileID: 8143871181856334856}
   - component: {fileID: 6378150066994131303}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: MC_Spring (1)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -709,15 +711,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.431143
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.23872341
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -755,6 +756,7 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 8083684521338334020}
+  rb: {fileID: 0}
 --- !u!114 &5075755618591106592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,6 +792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!135 &6378150066994131303
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -828,7 +831,7 @@ GameObject:
   - component: {fileID: 1905145744652186591}
   - component: {fileID: 6866335887210430869}
   - component: {fileID: 3469755858893412481}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: MC_Spring (2)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -938,15 +941,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.56177
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.17536364
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -984,6 +986,7 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 8083684521338334020}
+  rb: {fileID: 0}
 --- !u!114 &1905145744652186591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,6 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 6.073448, y: 0.00001180172, z: 14.7270355}
+  rb: {fileID: 0}
 --- !u!135 &3469755858893412481
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1049,7 +1053,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5839486842792464279}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1088,7 +1092,7 @@ GameObject:
   - component: {fileID: 4714454262254015161}
   - component: {fileID: 424056868251681739}
   - component: {fileID: 4407086739568278732}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: MC_Spring (3)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -1198,15 +1202,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.534714
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.24111463
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -1244,6 +1247,7 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 8083684521338334020}
+  rb: {fileID: 0}
 --- !u!114 &4714454262254015161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1279,6 +1283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!135 &4407086739568278732
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1309,7 +1314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5044054398784469790}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1340,7 +1345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7409628615688462465}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1379,7 +1384,7 @@ GameObject:
   - component: {fileID: 7042893183734003466}
   - component: {fileID: 1678513496029407147}
   - component: {fileID: 2535444923103904433}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: MC_Spring (5)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -1489,15 +1494,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.669342
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.17250766
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -1535,6 +1539,7 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 8083684521338334020}
+  rb: {fileID: 0}
 --- !u!114 &7042893183734003466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1570,6 +1575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!135 &2535444923103904433
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1608,7 +1614,7 @@ GameObject:
   - component: {fileID: 1298944082101687534}
   - component: {fileID: 212378573140032739}
   - component: {fileID: 5007588041373239727}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: MC_Spring (156)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -1718,15 +1724,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 27.582306
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.122721
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -1764,6 +1769,7 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 8083684521338334020}
+  rb: {fileID: 0}
 --- !u!114 &1298944082101687534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1799,6 +1805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: -0.8094168, y: 0, z: -1.5281181}
+  rb: {fileID: 0}
 --- !u!135 &5007588041373239727
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1829,7 +1836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5996977220630079988}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1872,7 +1879,7 @@ GameObject:
   - component: {fileID: 57908636354162082}
   - component: {fileID: 8817904320491156572}
   - component: {fileID: 8339968865083296406}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Magnet
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -2098,6 +2105,7 @@ MonoBehaviour:
   owner: Neutral
   state: 3
   ownerTranform: {fileID: 8083684521338334020}
+  rb: {fileID: 0}
 --- !u!114 &1985609421335504057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2111,6 +2119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 2.303125e-22, y: 0, z: -3.2935223e-22}
+  rb: {fileID: 0}
 --- !u!114 &57908636354162082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2150,7 +2159,7 @@ MonoBehaviour:
   error: 0.4
   AngleError: 8
   moveTime: 0.2
-  lerpingDistance: 2
+  lerpingDistance: 0.5
   timeBeforeSwitching: 1
   xLimit: 0.01
   AngleLimit: 1
@@ -2176,3 +2185,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 2.303125e-22, y: 0, z: -3.2935223e-22}
+  rb: {fileID: 0}
