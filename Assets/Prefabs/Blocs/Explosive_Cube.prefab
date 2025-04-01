@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 7479162396638217673}
   m_Layer: 0
   m_Name: Explosive_Cube
-  m_TagString: magnetic
+  m_TagString: explosive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,9 +38,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 651852353394913132}
   - {fileID: 4057901920016843952}
   - {fileID: 7412229742775297856}
+  - {fileID: 2430050822486376234}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6170319606920083062
@@ -157,15 +157,14 @@ MonoBehaviour:
   activeRadius: 2
   charge: 0.006
   maxSpeed: 10
+  maxSpeedVariation: 3
   error: 0.2
   AngleError: 8
-  spacingBetweenCubes: 0.2
   moveTime: 0.05
   maxForceAttraction: 10
   lerpingDistance: 50
   timeBeforeSwitching: 0.2
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 10000
   springForceBreak: 1000
   lerpingMass: 0.001
@@ -203,6 +202,8 @@ MonoBehaviour:
   owner: Neutral
   state: 3
   ownerTranform: {fileID: 0}
+  objectToChangeMesh: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &2525441135307876409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +263,38 @@ MonoBehaviour:
   springBreakForce: 500
   range: 2
   pushFactor: 35
+--- !u!1 &8239625925558140238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2430050822486376234}
+  m_Layer: 0
+  m_Name: SM_ExplosiveCube_Centered
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2430050822486376234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239625925558140238}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 651852353394913132}
+  m_Father: {fileID: 9004300913510534856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8339096798682944052
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +332,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 9004300913510534856}
+    m_TransformParent: {fileID: 2430050822486376234}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 72613138e0aba0442b406de9e271f678, type: 3}
       propertyPath: m_LocalScale.x
@@ -315,7 +348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72613138e0aba0442b406de9e271f678, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.451
+      value: 0.466
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72613138e0aba0442b406de9e271f678, type: 3}
       propertyPath: m_LocalPosition.y
@@ -323,7 +356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72613138e0aba0442b406de9e271f678, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.521
+      value: -0.445
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72613138e0aba0442b406de9e271f678, type: 3}
       propertyPath: m_LocalRotation.w
@@ -331,7 +364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72613138e0aba0442b406de9e271f678, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72613138e0aba0442b406de9e271f678, type: 3}
       propertyPath: m_LocalRotation.y

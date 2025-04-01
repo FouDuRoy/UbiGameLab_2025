@@ -105,7 +105,10 @@ public class GridSystem : MonoBehaviour
             grid.Add(fixedVector, blocToAttach);
             playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
             blocToAttach.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
-            blocToAttach.gameObject.GetComponent<MeshRenderer>().SetMaterials(materials);
+           // blocToAttach.GetComponentInChildren<MeshRenderer>().SetMaterials(materials);
+            if(blocToAttach.tag != "explosive"){
+                blocToAttach.GetComponent<Bloc>().changeMeshMaterial(materials.First());
+            }
         }
 
         //Déclenche un feedback à chaque bloc qui s'attache
@@ -132,7 +135,10 @@ public class GridSystem : MonoBehaviour
                 v.Value.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
                 v.Value.GetComponent<Bloc>().ownerTranform = transform.root.transform;
                 v.Value.GetComponent<Bloc>().state = BlocState.structure;
-                v.Value.GetComponent<MeshRenderer>().SetMaterials(materials);
+                 if(v.Value.tag != "explosive"){
+                v.Value.GetComponent<Bloc>().changeMeshMaterial(materials.First());
+            }
+        
             }
             else
             {

@@ -1,5 +1,6 @@
 using System.Buffers;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 //Federico Barallobres
 public class Bloc : MonoBehaviour
@@ -13,15 +14,16 @@ public class Bloc : MonoBehaviour
     public BlocState state;
     public Transform ownerTranform;
 
-    List<Material> materials = new List<Material>();
+    public GameObject objectToChangeMesh;
+    MeshRenderer meshToChange; 
     private Vector3Int gridPosition;
     public Rigidbody rb;
 
     private void Start()
     {
-        materials.Add(magneticMaterial);
         rb = GetComponent<Rigidbody>();
         this.GetComponent<BoxCollider>().contactOffset = contactOffset;
+        meshToChange = objectToChangeMesh.GetComponent<MeshRenderer>();
     }
 
     public Vector3Int GetGridPosition()
@@ -43,7 +45,9 @@ public class Bloc : MonoBehaviour
                     this.GetComponent<Feromagnetic>().enabled = true;
                   
                 }
-                this.GetComponent<MeshRenderer>().SetMaterials(materials);
+                if(tag!="explosive"){
+                    changeMeshMaterial(magneticMaterial);
+                }
                 owner = "Neutral";
                 ownerTranform = null;
             }
@@ -69,5 +73,9 @@ public class Bloc : MonoBehaviour
     public void setState(BlocState state)
     {
         this.state = state;
+    }
+
+    public void changeMeshMaterial(Material mat){
+        meshToChange.material = mat;
     }
 }
