@@ -90,7 +90,11 @@ public class ConnectMagneticStructure : MonoBehaviour
     }
     // Update is called once per frame
     public void ResetObject()
-    {
+    {   
+        foreach (var v in playerGrid.grid)
+            {
+                v.Value.layer = LayerMask.NameToLayer("magneticStructure");
+            }
         lerping = false;
         timer = 0;
         cubeAttractedToTransform = null;
@@ -265,11 +269,11 @@ public class ConnectMagneticStructure : MonoBehaviour
             //Set location and velocity
             cubeRB.velocity = Vector3.zero;
             Quaternion absoluteEndRotation = cubeAttractedToTransform.rotation * endRotationRelativeToAttractedCube;
-            Vector3 absoluteEndPosition = cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube);
-
-
-            transform.position = absoluteEndPosition - (closestCubeOwn.transform.position - transform.position);
             transform.rotation = absoluteEndRotation;
+            Vector3 absoluteEndPosition = cubeAttractedToTransform.TransformPoint(endPositionRelativeToAttractedCube);
+            absoluteEndPosition=absoluteEndPosition - (closestCubeOwn.transform.position - transform.position);
+
+            transform.position = absoluteEndPosition;
           
 
             AttachCube();
@@ -522,7 +526,7 @@ public class ConnectMagneticStructure : MonoBehaviour
     private void lerpingMagents(Vector3 direction, Vector3 relativeDirection, Vector3 closestFaceRelativeToWorld)
     {
         // If the distance is bigger than lerpingDistance or the position is not available anymore we keep pushing with CoulombLaw
-        if (!((closestCubeOwn.transform.position - closestFaceRelativeToWorld).magnitude > lerpingDistance || !LookPositionGridAvailable()))
+        if ((closestCubeOwn.transform.position - closestFaceRelativeToWorld).magnitude < lerpingDistance && LookPositionGridAvailable())
         {
             //closestCubeOwn.transform.parent = cubeAttractedToTransform;
             playerAtractedTo = closestCube.transform.root;
@@ -537,8 +541,9 @@ public class ConnectMagneticStructure : MonoBehaviour
             cubeRB.GetComponent<Rigidbody>().mass = 0.001f;
             foreach (var v in playerGrid.grid)
             {
-                v.Value.layer = 0;
+                v.Value.layer = LayerMask.NameToLayer("magneticStructureConnect");
             }
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("magneticStructureConnect"),LayerMask.NameToLayer("Wall"));
         }
     }
     public bool LookPositionGridAvailable()
