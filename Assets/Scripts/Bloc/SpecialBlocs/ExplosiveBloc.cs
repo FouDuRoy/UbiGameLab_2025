@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -19,7 +20,7 @@ public class ExplosiveBloc : MonoBehaviour
     public GameObject[] players;
 
     [Header("Gizmos Settings")]
-    public float gizmoDuration = 3f; // Temps d'affichage des sphères visuelles
+    public float gizmoDuration = 3f; // Temps d'affichage des sphï¿½res visuelles
     private float explosionTime = -1f;
     private bool hasExploded = false;
     [SerializeField] bool explode = false;
@@ -49,7 +50,7 @@ public class ExplosiveBloc : MonoBehaviour
 
     void Update()
     {
-        if (explode && canExplode)
+        if (explode && canExplode && !hasExploded)
         {
             Explode();
         }
@@ -57,20 +58,19 @@ public class ExplosiveBloc : MonoBehaviour
 
     public void Explode()
     {
-        if (hasExploded) return;
+       
         hasExploded = true;
         explosionTime = Time.time;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, repulsionRange);
         BoxCollider[] affectedObjects = colliders.OfType<BoxCollider>().ToArray();
-        List<Rigidbody> repulsedBodies = new List<Rigidbody>();
 
         foreach (Collider col in affectedObjects)
         {
             Bloc bloc = col.GetComponent<Bloc>();
+            float distance = Vector3.Distance(transform.position, col.transform.position);
             if (bloc)
             {
-                float distance = Vector3.Distance(transform.position, col.transform.position);
                 Vector3 dist = col.transform.position - transform.position;
 
                 if (distance <= explosionRange)
@@ -80,6 +80,12 @@ public class ExplosiveBloc : MonoBehaviour
                 else if (distance <= repulsionRange)
                 {
                     ApplyRepulsionEffect(col, dist);
+                }
+            }else{
+                if(col.gameObject.GetComponent<WinCondition>() != null && distance <= repulsionRange){
+                    Rigidbody targetRb = col.gameObject.GetComponent<Rigidbody>();
+                    Vector3 forceDirection = (targetRb.transform.position - transform.position).normalized;
+                    targetRb.AddForce(forceDirection * repulsionForce, ForceMode.VelocityChange);
                 }
             }
         }
@@ -107,10 +113,9 @@ public class ExplosiveBloc : MonoBehaviour
     {
         if (bloc.CompareTag("wood"))
         {
-            Debug.Log(bloc.name);
             Destroy(bloc);
         }
-        else if (bloc.CompareTag("explosive"))
+        else if (bloc.CompareTag("explosive") && bloc != gameObject)
         {
             bloc.GetComponent<ExplosiveBloc>().Explode();
         }
@@ -124,7 +129,6 @@ public class ExplosiveBloc : MonoBehaviour
                     grid.DetachBlock(bloc);
                     bloc.GetComponent<Bloc>().state = BlocState.detached;
                 }
-               
             }
             Rigidbody targetRb = bloc.GetComponent<Rigidbody>();
             Vector3 forceDirection = (targetRb.transform.position - transform.position).normalized;
@@ -134,19 +138,9 @@ public class ExplosiveBloc : MonoBehaviour
 
     private void ApplyRepulsionEffect(Collider col, Vector3 distance)
     {
-        PlayerObjects obj = col.transform.root.GetComponent<PlayerObjects>();
         Rigidbody colRigidBody = col.GetComponent<Rigidbody>();
-        if (colRigidBody != null )
-        {
-            if(obj == null)
-            {
-                colRigidBody.AddForce(distance.normalized * repulsionForce, ForceMode.VelocityChange);
-            }
-            else if(!pushed)
-            {
-                obj.cubeRb.AddForceAtPosition(distance.normalized * repulsionForce,col.transform.root.GetComponent<PlayerMouvement>().CalculateCenterMass(), ForceMode.VelocityChange);
-                pushed = true;
-            }
+        if(colRigidBody!=null){
+             colRigidBody.AddForce(distance.normalized * repulsionForce, ForceMode.VelocityChange);
         }
     }
 }

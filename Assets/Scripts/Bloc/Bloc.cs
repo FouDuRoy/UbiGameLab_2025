@@ -23,7 +23,9 @@ public class Bloc : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         this.GetComponent<BoxCollider>().contactOffset = contactOffset;
-        meshToChange = objectToChangeMesh.GetComponent<MeshRenderer>();
+        if(objectToChangeMesh != null){
+         meshToChange = objectToChangeMesh.GetComponent<MeshRenderer>();
+        }
     }
 
     public Vector3Int GetGridPosition()
