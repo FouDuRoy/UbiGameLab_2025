@@ -204,7 +204,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         }
         else if (rightTriggerHeld)
         {
-            feedback.RepulsionVibrationEnd(timeHeld);
+            feedback.RepulsionVibrationEnd(timeHeld,true);
             coneProjection();
             visionConeObject.SetActive(false);
             leftRay.gameObject.SetActive(false);
