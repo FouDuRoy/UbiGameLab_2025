@@ -23,7 +23,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float maxNumberBlocsEjection = 20f;
     [SerializeField] float ejectionSpeed = 3f;
     [SerializeField] float colorChangeIntensity = 3f;
-
+    int nbBlocsSelect;
     List<Collider> magneticLast = new List<Collider>();
 
 
@@ -381,7 +381,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             if (v.Value != playerGrid.kernel)
                 v.Value.GetComponent<Bloc>().changeMeshMaterialColor(playerGrid.playerMat.color);
         }
-        for (int i = 0; i < blocsToEject.Count && i < maxNumberBlocsEjection; i++)
+        for (int i = 0; i < blocsToEject.Count && i < nbBlocsSelect; i++)
         {
             EjectBloc(blocsToEject[i], golem);
         }
@@ -401,7 +401,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX), Mathf.Abs(minX), Mathf.Abs(maxZ), Mathf.Abs(minZ), Mathf.Abs(maxY), Mathf.Abs(minY));
         float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
         float radius = radiusInBlocs * blocSizeWorld * 1.2f;
-
+        nbBlocsSelect = Math.Max((int) ((time / secondsForMaxChargingEjectionLength) * (maxNumberBlocsEjection)),1);
         float timeHeldAngle = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
         float timeHeldLength = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjectionLength);
         float boundaryDistanceRatio = timeHeldLength / secondsForMaxChargingEjectionLength;
@@ -442,14 +442,14 @@ public class ConeEjectionAndProjection : MonoBehaviour
                 magnetic[i] = null;
                 continue;
             }
-            float maxDistance = MaxDistanceForDirection((planeProjection - golemProjection).normalized, radius);
-            float distance = (planeProjection - golemProjection).magnitude;
-            float boundaryDistanceMax = (1 - boundaryDistanceRatio) * maxDistance;
-            if (distance <= boundaryDistanceMax)
-            {
-                magnetic[i] = null;
-                continue;
-            }
+          //  float maxDistance = MaxDistanceForDirection((planeProjection - golemProjection).normalized, radius);
+           // float distance = (planeProjection - golemProjection).magnitude;
+           // float boundaryDistanceMax = (1 - boundaryDistanceRatio) * maxDistance;
+           // if (distance <= boundaryDistanceMax)
+           // {
+               // magnetic[i] = null;
+               // continue;
+           // }
             if (magnetic[i] != null)
             {
                 blocsToEject.Add(magnetic[i].gameObject);
@@ -463,7 +463,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             float distanceY = (positionY - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
             return -Math.Sign(distanceX - distanceY);
         });
-        for (int i = 0; i < blocsToEject.Count && i < maxNumberBlocsEjection; i++)
+        for (int i = 0; i < blocsToEject.Count && i < nbBlocsSelect; i++)
         {
             blocsToEject[i].gameObject.GetComponent<Bloc>().changeMeshMaterialColor(chargedColor);
         }
