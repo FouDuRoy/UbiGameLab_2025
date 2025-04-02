@@ -331,7 +331,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX), Mathf.Abs(minX), Mathf.Abs(maxZ), Mathf.Abs(minZ), Mathf.Abs(maxY), Mathf.Abs(minY));
         float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
         float radius = radiusInBlocs * blocSizeWorld * 1.2f;
-        nbBlocsSelect = Math.Max((int) ((time / secondsForMaxChargingEjectionLength) * (maxNumberBlocsEjection)),1);
+        
         float timeHeldAngle = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
         float timeHeldLength = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjectionLength);
         float boundaryDistanceRatio = timeHeldLength / secondsForMaxChargingEjectionLength;
@@ -339,6 +339,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (angleRatio);
         LayerMask mask = LayerMask.GetMask("magnetic");
         int nbHits = Physics.OverlapSphereNonAlloc(golem.position, radius, magnetic, mask,QueryTriggerInteraction.Ignore);
+        nbBlocsSelect = Math.Max((int)((time / secondsForMaxChargingEjectionLength) * (playerGrid.grid.Count)), 1);
         for (int i = 0; i < nbHits; i++)
         {
 
