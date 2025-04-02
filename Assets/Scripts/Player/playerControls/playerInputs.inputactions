@@ -221,7 +221,7 @@
                 {
                     "name": "Keyboard",
                     "id": "fffae91b-1a5e-4ad3-9edf-7c5d690a306c",
-                    "path": "2DVector",
+                    "path": "3DVector(mode=1)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -230,7 +230,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "Up",
                     "id": "2f917c5b-11da-42f4-80c5-78cc17730794",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -241,34 +241,56 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
+                    "name": "Down",
                     "id": "42f2938a-9507-43e8-bf50-f255965a2406",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard;Player1",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
+                    "name": "Left",
                     "id": "62e60935-34f7-4df6-bef1-924b565625af",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard;Player1",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
+                    "name": "Right",
                     "id": "f858ce2d-1392-401b-af94-fee1a0552517",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard;Player1",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Forward",
+                    "id": "8cf800ae-9f43-4e2a-abc0-8f1e858d493c",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Backward",
+                    "id": "e44b9a62-d3b0-42f9-a6d5-55aacc0dee1a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -386,7 +408,7 @@
                 {
                     "name": "",
                     "id": "14d1c39c-15f4-4f1f-960a-7285d07e2adc",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -473,11 +495,33 @@
                 },
                 {
                     "name": "",
+                    "id": "a03ea9f6-5291-47e2-992e-febf2aa63a68",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "AttractCubes",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "968563c4-24e3-4ed5-8627-1e94ea6e7cb9",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Player1;Player2",
+                    "action": "BlocEjection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c74d9069-3e1f-433f-aa29-e5f86dc65c99",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
                     "action": "BlocEjection",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -576,7 +620,18 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Player1;Player2",
+                    "groups": "Player1;Player2;Gamepad",
+                    "action": "RightShoulder",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "775965e3-3292-4480-9ddb-98dd2445e9a3",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
                     "action": "RightShoulder",
                     "isComposite": false,
                     "isPartOfComposite": false

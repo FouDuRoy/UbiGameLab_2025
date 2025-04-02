@@ -6,7 +6,8 @@ public class DummyShockDetection : MonoBehaviour
     [SerializeField] float victoryConditionSpeedRange = 10f;
     [SerializeField] float victoryConditionSpeedMelee = 15f;
     [SerializeField] GameObject Ennemy;
-    [SerializeField] private TutoUI attackTutoUI;
+    [SerializeField] private TutoUI cacTutoUI;
+    [SerializeField] private TutoUI shootTutoUI;
 
     private Rigidbody rb;
     private int nHits = 0;
@@ -46,7 +47,7 @@ public class DummyShockDetection : MonoBehaviour
                     nHits++;
                     if (nHits > 1)
                     {
-                        attackTutoUI.NextTuto();
+                        shootTutoUI.NextTuto();
                     }
                 }
             }
@@ -63,7 +64,7 @@ public class DummyShockDetection : MonoBehaviour
                     nHits++;
                     if (nHits > 1)
                     {
-                        attackTutoUI.NextTuto();
+                        cacTutoUI.NextTuto();
                     }
                 }
             }

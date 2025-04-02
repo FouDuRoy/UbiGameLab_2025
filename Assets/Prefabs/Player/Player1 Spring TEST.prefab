@@ -73,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionForce: 140
   mouvementSpeed: 80
-  deadZone: 0.9
+  deadZone: 0.99
   mouvementReductionFactor: 0.3
   pivotSpeed: 180
   rotationSpeed: 30
@@ -100,8 +100,7 @@ MonoBehaviour:
   attackerText: {fileID: 0}
   restartButton: {fileID: 0}
   maxDamage: 150
-  impulsionWhenHitMelee: 30
-  impulsionWhenHitRanged: 30
+  impulsionWhenHit: 200
   invincibilityDelay: 3
   hitStopDelay: 0.4
   MaxhealthValue: 300
@@ -276,7 +275,7 @@ MonoBehaviour:
   visionConeObject: {fileID: 8721610333923546856}
   distanceCone: 5
   resolution: 20
-  visionMaterial: {fileID: 2100000, guid: b23c39ceb913006449663ef0f0b80157, type: 2}
+  visionMaterial: {fileID: 2100000, guid: d83594bbc301ceb4a975db4514e2daf3, type: 2}
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,7 +2611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5310062670897909723, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Name
-      value: HealthBar1
+      value: HealthBar Red
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

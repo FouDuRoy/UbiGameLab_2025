@@ -73,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionForce: 140
   mouvementSpeed: 80
-  deadZone: 0.9
+  deadZone: 0.99
   mouvementReductionFactor: 0.3
   pivotSpeed: 180
   rotationSpeed: 30
@@ -100,15 +100,14 @@ MonoBehaviour:
   attackerText: {fileID: 0}
   restartButton: {fileID: 0}
   maxDamage: 150
-  impulsionWhenHitMelee: 50
-  impulsionWhenHitRanged: 30
+  impulsionWhenHit: 200
   invincibilityDelay: 3
   hitStopDelay: 0.4
   MaxhealthValue: 300
   waitDelayAfterPlayerDeath: 1.5
   timeScaleFactor: 0.1
   healthValue: 300
-  playerLife: {fileID: 4000077683436356578}
+  playerLife: {fileID: 0}
   isInvincible: 0
 --- !u!114 &6980508144528851275
 MonoBehaviour:
@@ -2681,7 +2680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5310062670897909723, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Name
-      value: HealthBar2
+      value: HealthBar Blue
       objectReference: {fileID: 0}
     - target: {fileID: 8027716708602471293, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Color.b
@@ -2712,11 +2711,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6659231d97724e24c9161084900dc680, type: 3}
---- !u!1 &4000077683436356578 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5310062670897909723, guid: 6659231d97724e24c9161084900dc680, type: 3}
-  m_PrefabInstance: {fileID: 9093331320022469689}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4972807292421811894 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4265178547906781839, guid: 6659231d97724e24c9161084900dc680, type: 3}

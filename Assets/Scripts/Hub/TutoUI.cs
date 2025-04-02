@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum TutoType
 {
     Attraction,
     Movement,
-    Attack,
+    Shoot,
+    Cac,
     EmergencyEjection
 }
 
@@ -20,10 +22,12 @@ public class TutoUI : MonoBehaviour
 
     [SerializeField] private Sprite attractionInput;
     [SerializeField] private Sprite movementIntput;
-    [SerializeField] private Sprite attackInput;
+    [SerializeField] private Sprite shootInput;
+    [SerializeField] private Sprite cacInput;
     [SerializeField] private Sprite emergencyEjectionInput;
 
     private Image inputImage;
+    private TMP_Text tutoText;
     private Camera mainCamera;
     private GridSystem playerGrid;
     private float normalPlayerSpeed;
@@ -43,6 +47,9 @@ public class TutoUI : MonoBehaviour
             }
         }
 
+        tutoText = GetComponentInChildren<TMP_Text>();
+        tutoText.color = playerColor;
+
         mainCamera = Camera.main;
         playerGrid = playerMouvement.GetComponent<GridSystem>();
 
@@ -56,9 +63,11 @@ public class TutoUI : MonoBehaviour
                 inputImage.sprite = movementIntput;
                 break;
 
-            case TutoType.Attack:
-                inputImage.sprite = attackInput;
+            case TutoType.Shoot:
+                inputImage.sprite = shootInput;
                 break;
+
+            case TutoType.Cac: inputImage.sprite = cacInput; break;
 
             case TutoType.EmergencyEjection:
                 inputImage.sprite = emergencyEjectionInput;
