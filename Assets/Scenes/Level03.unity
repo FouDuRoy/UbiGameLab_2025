@@ -800,9 +800,17 @@ PrefabInstance:
       value: 'Player2 Spring TEST '
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: maxDamage
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: playerLife
       value: 
       objectReference: {fileID: 61497676}
+    - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: healthValue
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: attackerText
       value: 
@@ -812,9 +820,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 476904944}
     - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: MaxhealthValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: gameOverCanvas
       value: 
       objectReference: {fileID: 1428678196}
+    - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: impulsionWhenHitMelee
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: impulsionWhenHitRanged
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4849188280878380009, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -1811,6 +1831,14 @@ PrefabInstance:
       propertyPath: ArenaCenter
       value: 
       objectReference: {fileID: 1358112523}
+    - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
+      propertyPath: playIntroAnimation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266391422150885637, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7513625886291757825, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: m_Name
       value: Dynamic Camera
@@ -7726,6 +7754,14 @@ PrefabInstance:
       value: Player1 Spring TEST
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: maxDamage
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: healthValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: attackerText
       value: 
       objectReference: {fileID: 539881370}
@@ -7734,9 +7770,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 476904944}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: MaxhealthValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: gameOverCanvas
       value: 
       objectReference: {fileID: 1428678196}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: impulsionWhenHitMelee
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: impulsionWhenHitRanged
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4849188280878380009, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14
@@ -8668,8 +8716,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3715524003834981654, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 3715524003834981654, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
       propertyPath: m_Name
       value: EventsManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3715524003834981654, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4317154141657856346, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
       propertyPath: m_LocalPosition.x

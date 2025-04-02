@@ -1,5 +1,7 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -114,5 +116,90 @@ public class DynamicCamera : MonoBehaviour
         camUI.enabled = true;
 
         shouldFollowPlayers = true;
+    }
+
+    public void PlayVictoryAnimation(string winnerName)
+    {
+        GameObject winner;
+
+        if (Player1.name == winnerName)
+        {
+            winner = Player1;
+        }
+        else
+        {
+            winner = Player2;
+        }
+
+        shouldFollowPlayers = false;
+        
+        StartCoroutine(SmoothTransitionToPodium(1.5f, new Vector3(1, 1.2f, -3f), -5, .5f, .2f, winner));
+    }
+
+    private IEnumerator SmoothTransitionToPodium(float desiredOrthoSize, Vector3 desiredPosition, float localXRot, float transitionTime, float teleportTime, GameObject winner)
+    {
+        float elapsedTime = 0f;
+        Vector3 startPosition = cam.transform.position;
+        float startOrthoSize = cam.orthographicSize;
+        Vector3 startLocalPosition = cam.transform.localPosition;
+        float startXRot = cam.transform.localEulerAngles.x;
+
+        bool functionCalled = false;
+
+        while (elapsedTime < transitionTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / transitionTime;
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            // Interpolation de la position de la caméra
+            cam.transform.position = Vector3.Lerp(startPosition, desiredPosition, t);
+
+            // Interpolation de la taille orthographique
+            cam.orthographicSize = Mathf.Lerp(startOrthoSize, desiredOrthoSize, t);
+            camUI.orthographicSize=cam.orthographicSize;
+
+            // Rotation de la caméra
+            cam.transform.localEulerAngles = new Vector3(Mathf.Lerp(startXRot, localXRot, t), cam.transform.localEulerAngles.y, cam.transform.localEulerAngles.z);
+
+            if(elapsedTime >= teleportTime && !functionCalled)
+            {
+                functionCalled = true;
+                
+                ClearingSphere(20, new string[] { "wood", "magnetic", "explosive" });
+
+                winner.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                winner.GetComponent<Rigidbody>().isKinematic = true;
+
+                winner.transform.position = new Vector3(0, 0.6f, 0);
+                winner.transform.eulerAngles = new Vector3(0, 170, 0);
+                Physics.SyncTransforms();
+
+                camUI.enabled = false;
+            }
+
+            yield return null;
+        }
+
+        // S'assurer que les valeurs finales sont bien atteintes
+        cam.transform.position = desiredPosition;
+        cam.orthographicSize = desiredOrthoSize;
+        camUI.orthographicSize = desiredOrthoSize;
+        cam.transform.localEulerAngles = new Vector3(localXRot, cam.transform.localEulerAngles.y, cam.transform.localEulerAngles.z);
+    }
+
+    private void ClearingSphere(float radius, string[] tags)
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        foreach (Collider col in colliders)
+        {
+            foreach (string tag in tags)
+            {
+                if (col.CompareTag(tag))
+                {
+                    col.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 }

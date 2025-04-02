@@ -27,6 +27,8 @@ public class PlayerInfo : MonoBehaviour
     [SerializeField] GameObject playerLife;
     [SerializeField] bool isInvincible;
 
+    private DynamicCamera dynamicCamera;
+
     void Start()
     {
         healthValue = MaxhealthValue;
@@ -37,6 +39,7 @@ public class PlayerInfo : MonoBehaviour
             playerLife.SetActive(false);
         }
 
+        dynamicCamera=Camera.main.GetComponentInParent<DynamicCamera>();
     }
 
     // Call this function when player gets hit
@@ -114,7 +117,8 @@ public class PlayerInfo : MonoBehaviour
     }
     IEnumerator gameOver(string attackerName)
     {
-        yield return new WaitForSeconds(1.5f);
+        dynamicCamera.PlayVictoryAnimation(attackerName);
+        yield return new WaitForSeconds(2f);
         //Time.timeScale = 0;
         gameOverCanvas.SetActive(true); // Show UI
         attackerText.text = "Victoire par : " + attackerName; // Display attacker's name

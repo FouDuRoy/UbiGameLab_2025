@@ -73,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionForce: 140
   mouvementSpeed: 80
-  deadZone: 0.99
+  deadZone: 0.999
   mouvementReductionFactor: 0.3
   pivotSpeed: 180
   rotationSpeed: 30
@@ -99,8 +99,9 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 0}
   attackerText: {fileID: 0}
   restartButton: {fileID: 0}
-  maxDamage: 150
-  impulsionWhenHit: 200
+  maxDamage: 100
+  impulsionWhenHitMelee: 200
+  impulsionWhenHitRanged: 100
   invincibilityDelay: 3
   hitStopDelay: 0.4
   MaxhealthValue: 300
