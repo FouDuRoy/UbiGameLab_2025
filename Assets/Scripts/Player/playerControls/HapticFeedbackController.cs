@@ -341,7 +341,7 @@ public class HapticFeedbackController : MonoBehaviour
         }
     }
 
-    public void RepulsionVibrationEnd(float chargeWhenReleased)
+    public void RepulsionVibrationEnd(float chargeWhenReleased, bool noBlocShot)
     {
         if (playerGamepad != null)
         {
@@ -349,7 +349,10 @@ public class HapticFeedbackController : MonoBehaviour
             StopVibrations();
             repulsionCoroutine = null;
 
-            StartCoroutine(ImpulseVibration(repulsionShoot.leftMotorMax,repulsionShoot.leftMidTime,repulsionShoot.rightMotorMax,repulsionShoot.rightMidTime,repulsionShoot.totalDuration));
+            if (!noBlocShot)
+            {
+                StartCoroutine(ImpulseVibration(repulsionShoot.leftMotorMax, repulsionShoot.leftMidTime, repulsionShoot.rightMotorMax, repulsionShoot.rightMidTime, repulsionShoot.totalDuration));
+            }
         }
     }
 

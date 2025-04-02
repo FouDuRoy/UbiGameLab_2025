@@ -202,6 +202,7 @@ MonoBehaviour:
   owner: Neutral
   state: 3
   ownerTranform: {fileID: 0}
+  objectToChangeMesh: {fileID: 0}
   rb: {fileID: 0}
 --- !u!114 &2525441135307876409
 MonoBehaviour:
@@ -220,13 +221,11 @@ MonoBehaviour:
   repulsionRange: 7
   repulsionForce: 15
   repulsionDistanceFactor: 1.2
-  timeBeforeExplosionEnabled: 1
+  timeBeforeExplosionEnabled: 2
   players:
   - {fileID: 134994841213693252, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
   - {fileID: 134994841213693252, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
   gizmoDuration: 1
-  explosionMaterial: {fileID: 2100000, guid: 66738dc35de92b74cb58ea78afa39514, type: 2}
-  repulsionMaterial: {fileID: 2100000, guid: b23c39ceb913006449663ef0f0b80157, type: 2}
   explode: 0
 --- !u!114 &1143426935521263120
 MonoBehaviour:
