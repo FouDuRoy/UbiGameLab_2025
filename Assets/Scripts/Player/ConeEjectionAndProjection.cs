@@ -238,7 +238,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
             {
                 return false;
             }
-            Vector3 distanceBetweenPlayerAndCube = cube.transform.position - player.position;
+            Vector3 projectedCubePosition = new Vector3(cube.transform.position.x,0,cube.transform.position.z);
+            Vector3 projectedPlayerPosition = new Vector3(player.position.x, 0, player.position.z);
+            Vector3 distanceBetweenPlayerAndCube = projectedCubePosition - projectedPlayerPosition;
             
             return Vector3.Angle(distanceBetweenPlayerAndCube, player.forward) <= angle;
         });

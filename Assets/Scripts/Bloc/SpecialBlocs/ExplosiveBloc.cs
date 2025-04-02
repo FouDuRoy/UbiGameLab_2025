@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class ExplosiveBloc : MonoBehaviour
 {
@@ -58,7 +55,7 @@ public class ExplosiveBloc : MonoBehaviour
 
     public void Explode()
     {
-       
+
         hasExploded = true;
         explosionTime = Time.time;
 
@@ -67,27 +64,20 @@ public class ExplosiveBloc : MonoBehaviour
 
         foreach (Collider col in affectedObjects)
         {
-            Bloc bloc = col.GetComponent<Bloc>();
+            Rigidbody rbBloc = col.GetComponent<Rigidbody>();
             float distance = Vector3.Distance(transform.position, col.transform.position);
-            if (bloc)
-            {
-                Vector3 dist = col.transform.position - transform.position;
 
-                if (distance <= explosionRange)
-                {
-                    HandleExplosionEffect(col.gameObject);
-                }
-                else if (distance <= repulsionRange)
-                {
-                    ApplyRepulsionEffect(col, dist);
-                }
-            }else{
-                if(col.gameObject.GetComponent<WinCondition>() != null && distance <= repulsionRange){
-                    Rigidbody targetRb = col.gameObject.GetComponent<Rigidbody>();
-                    Vector3 forceDirection = (targetRb.transform.position - transform.position).normalized;
-                    targetRb.AddForce(forceDirection * repulsionForce, ForceMode.VelocityChange);
-                }
+            Vector3 dist = col.transform.position - transform.position;
+
+            if (distance <= explosionRange)
+            {
+                HandleExplosionEffect(col.gameObject);
             }
+            else if (distance <= repulsionRange)
+            {
+                ApplyRepulsionEffect(col, dist);
+            }
+
         }
         pushed = false;
 
@@ -97,7 +87,8 @@ public class ExplosiveBloc : MonoBehaviour
             boxCollider.enabled = false;
         }
         Transform ownerTransform = this.GetComponent<Bloc>().ownerTranform;
-        if (ownerTransform != null) {
+        if (ownerTransform != null)
+        {
             ownerTransform.GetComponent<GridSystem>().DetachBlock(this.gameObject);
         }
         ps.transform.parent = null;
@@ -124,23 +115,35 @@ public class ExplosiveBloc : MonoBehaviour
             GridSystem grid = bloc.transform.root.GetComponent<GridSystem>();
             if (grid != null)
             {
-                if(bloc != grid.kernel)
+                if (bloc != grid.kernel)
                 {
                     grid.DetachBlock(bloc);
                     bloc.GetComponent<Bloc>().state = BlocState.detached;
+
                 }
             }
             Rigidbody targetRb = bloc.GetComponent<Rigidbody>();
-            Vector3 forceDirection = (targetRb.transform.position - transform.position).normalized;
-            targetRb.AddForce(forceDirection * repulsionForce, ForceMode.VelocityChange);
+            if (targetRb != null)
+            {
+                Vector3 forceDirection = (targetRb.transform.position - transform.position).normalized;
+                targetRb.AddForce(forceDirection * repulsionForce, ForceMode.VelocityChange);
+            }
         }
     }
 
     private void ApplyRepulsionEffect(Collider col, Vector3 distance)
     {
         Rigidbody colRigidBody = col.GetComponent<Rigidbody>();
-        if(colRigidBody!=null){
-             colRigidBody.AddForce(distance.normalized * repulsionForce, ForceMode.VelocityChange);
+        if (colRigidBody != null)
+        {
+            colRigidBody.AddForce(distance.normalized * repulsionForce, ForceMode.VelocityChange);
+
+        }
+        else if (col.gameObject.layer == LayerMask.NameToLayer("magneticStructure")
+                || col.gameObject.layer == LayerMask.NameToLayer("magneticStructureConnetc"))
+        {
+            Rigidbody coreRb = col.gameObject.transform.root.GetComponent<Rigidbody>();
+            coreRb.AddForce(distance.normalized * repulsionForce, ForceMode.VelocityChange);
         }
     }
 }
