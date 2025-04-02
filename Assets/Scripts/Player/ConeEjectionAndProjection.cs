@@ -340,7 +340,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (angleRatio);
         LayerMask mask = LayerMask.GetMask("magnetic");
         int nbHits = Physics.OverlapSphereNonAlloc(golem.position, radius, magnetic, mask,QueryTriggerInteraction.Ignore);
-        nbBlocsSelect = Math.Max((int)((time / secondsForMaxChargingEjectionLength) * (playerGrid.grid.Count*maxProportion)), 1);
+        float timel = Mathf.Min(1,(time / secondsForMaxChargingEjectionLength));
+        nbBlocsSelect = Math.Max((int)(timel* (playerGrid.grid.Count*maxProportion)), 1);
         for (int i = 0; i < nbHits; i++)
         {
 
