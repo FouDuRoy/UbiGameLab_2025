@@ -23,6 +23,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float maxNumberBlocsEjection = 20f;
     [SerializeField] float ejectionSpeed = 3f;
     [SerializeField] float colorChangeIntensity = 3f;
+    [SerializeField] float maxProportion = 1f;
     int nbBlocsSelect;
     List<Collider> magneticLast = new List<Collider>();
 
@@ -339,7 +340,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (angleRatio);
         LayerMask mask = LayerMask.GetMask("magnetic");
         int nbHits = Physics.OverlapSphereNonAlloc(golem.position, radius, magnetic, mask,QueryTriggerInteraction.Ignore);
-        nbBlocsSelect = Math.Max((int)((time / secondsForMaxChargingEjectionLength) * (playerGrid.grid.Count)), 1);
+        nbBlocsSelect = Math.Max((int)((time / secondsForMaxChargingEjectionLength) * (playerGrid.grid.Count*maxProportion)), 1);
         for (int i = 0; i < nbHits; i++)
         {
 
