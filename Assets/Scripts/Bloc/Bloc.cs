@@ -78,4 +78,7 @@ public class Bloc : MonoBehaviour
     public void changeMeshMaterial(Material mat){
         meshToChange.material = mat;
     }
+     public void changeMeshMaterialColor(Color color){
+        meshToChange.material.color = color;
+    }
 }

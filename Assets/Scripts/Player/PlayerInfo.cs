@@ -14,7 +14,8 @@ public class PlayerInfo : MonoBehaviour
     public TextMeshProUGUI attackerText; // Assign in Inspector
     public Button restartButton;
     public float maxDamage =30f;
-    public float impulsionWhenHit = 30f;
+    public float impulsionWhenHitMelee = 30f;
+    public float impulsionWhenHitRanged = 30f;
     public float invincibilityDelay=1f;
     public float hitStopDelay=0.5f;
     public float MaxhealthValue = 100f;
@@ -39,7 +40,7 @@ public class PlayerInfo : MonoBehaviour
     }
 
     // Call this function when player gets hit
-    public void TakeDamage(string attackerName,Vector3 impactForce)
+    public void TakeDamage(string attackerName,Vector3 impactForce, bool melee)
     {
         if(isInvincible)
         {
@@ -58,7 +59,12 @@ public class PlayerInfo : MonoBehaviour
                 {
                     invun = true;
                     StartCoroutine(DoHitStop(hitStopDelay));
-                    this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit, ForceMode.VelocityChange);
+                    if(melee){
+                        this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHitMelee, ForceMode.VelocityChange);
+                        
+                    }else{
+                        this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHitRanged, ForceMode.VelocityChange);
+                    }
                     StartCoroutine(invunerable());
 
                 }
@@ -67,7 +73,12 @@ public class PlayerInfo : MonoBehaviour
                     invun = true;
                     StartCoroutine(DoHitStop(hitStopDelay));
                     this.GetComponent<PlayerInput>().enabled = false;
-                    this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHit * 1.5f, ForceMode.VelocityChange);
+                     if(melee){
+                        this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHitMelee*1.5f, ForceMode.VelocityChange);
+                        
+                    }else{
+                        this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHitRanged*1.5f, ForceMode.VelocityChange);
+                    }
                     deathRotation(attackerName);
                     //StartCoroutine(gameOver(attackerName));
 

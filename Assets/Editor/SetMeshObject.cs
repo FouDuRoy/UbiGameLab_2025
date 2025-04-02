@@ -23,10 +23,8 @@ public class SetMeshObjects : EditorWindow
 
     private void AddChildToSelected()
     {
-        Debug.Log("wow");
         foreach (GameObject parent in Selection.gameObjects)
         {
-            Debug.Log(parent.gameObject);
            parent.GetComponent<Bloc>().objectToChangeMesh = parent.transform.Find("BasicCube").Find("SM_BasicCube_02").gameObject;
         }
     }

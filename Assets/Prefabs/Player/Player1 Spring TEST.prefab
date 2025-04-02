@@ -57,7 +57,6 @@ MonoBehaviour:
   cubeRb: {fileID: 3070630633163488715}
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   magnetTimer: 1
-  blocNonMagnetic: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
   golem: {fileID: 1597069548048436721}
   weight: 1
 --- !u!114 &7850894500233854463
@@ -101,7 +100,8 @@ MonoBehaviour:
   attackerText: {fileID: 0}
   restartButton: {fileID: 0}
   maxDamage: 150
-  impulsionWhenHit: 100
+  impulsionWhenHitMelee: 30
+  impulsionWhenHitRanged: 30
   invincibilityDelay: 3
   hitStopDelay: 0.4
   MaxhealthValue: 300

@@ -309,7 +309,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("magnetic");
         int nbHits = Physics.OverlapSphereNonAlloc(golem.position, radius,magnetic,mask);
          foreach(var v in playerGrid.grid){
-        v.Value.GetComponent<Renderer>().material.color = playerGrid.playerMat.color;
+            if(v.Value != playerGrid.kernel)
+                 v.Value.GetComponent<Bloc>().changeMeshMaterialColor ( playerGrid.playerMat.color);
        }
         for(int i = 0; i < nbHits; i++){
             
@@ -395,12 +396,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
                  magnetic[i] = null;
                  continue;
             }
-            magnetic[i].gameObject.GetComponent<Renderer>().material.color = playerGrid.playerMat.color;
-            if (magnetic[i].gameObject.GetComponent<Renderer>().material.color == chargedColor)
-            {
-                 magnetic[i] = null;
-                 continue;
-            }
+            magnetic[i].gameObject.GetComponent<Bloc>().changeMeshMaterialColor(playerGrid.playerMat.color);
+          
                 //Look if the cube is within the angle of ejection
             Vector3 planeProjection = Vector3.ProjectOnPlane(magnetic[i].transform.position,Vector3.up);
             Vector3 golemProjection = Vector3.ProjectOnPlane(golem.position,Vector3.up);
@@ -419,7 +416,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
                  continue;
             }
             if(magnetic[i]!=null){
-                  magnetic[i].gameObject.GetComponent<Renderer>().material.color = chargedColor;
+                  magnetic[i].gameObject.GetComponent<Bloc>().changeMeshMaterialColor( chargedColor);
             }
         }
     }
