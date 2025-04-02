@@ -15,23 +15,21 @@ public class ExplosiveBloc : MonoBehaviour
     public float timeBeforeExplosionEnabled = 1f;
     private float gameStartTime;
     private bool canExplode = false;
+    ParticleSystem ps;
     public GameObject[] players;
 
     [Header("Gizmos Settings")]
     public float gizmoDuration = 3f; // Temps d'affichage des sphères visuelles
     private float explosionTime = -1f;
-    public Material explosionMaterial;
-    public Material repulsionMaterial;
     private bool hasExploded = false;
     [SerializeField] bool explode = false;
-    private GameObject explosionSphere;
-    private GameObject repulsionSphere;
     bool pushed = false;
 
     private void Start()
     {
         gameStartTime = Time.time;
         StartCoroutine(EnableExplosionAfterDelay(timeBeforeExplosionEnabled));
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     private IEnumerator EnableExplosionAfterDelay(float delay)
@@ -62,8 +60,6 @@ public class ExplosiveBloc : MonoBehaviour
         if (hasExploded) return;
         hasExploded = true;
         explosionTime = Time.time;
-        HandleParticles();
-        ShowExplosionSpheres();
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, repulsionRange);
         BoxCollider[] affectedObjects = colliders.OfType<BoxCollider>().ToArray();
@@ -88,10 +84,6 @@ public class ExplosiveBloc : MonoBehaviour
             }
         }
         pushed = false;
-        foreach (Transform child in transform)
-        {
-            child.gameObject.SetActive(false);
-        }
 
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         if (boxCollider != null)
@@ -102,44 +94,20 @@ public class ExplosiveBloc : MonoBehaviour
         if (ownerTransform != null) {
             ownerTransform.GetComponent<GridSystem>().DetachBlock(this.gameObject);
         }
+        ps.transform.parent = null;
+        ps.transform.position = transform.position;
+        print(ps);
+        ps.Play();
         gameObject.GetComponent<Feromagnetic>().enabled = false;
         gameObject.SetActive(false);
         Destroy(gameObject, gizmoDuration);
-    }
-
-    private void ShowExplosionSpheres()
-    {
-        // Créer une sphère rouge pour l'explosion
-        explosionSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        explosionSphere.transform.position = transform.position;
-        explosionSphere.transform.localScale = Vector3.one * explosionRange * 2;
-        explosionSphere.GetComponent<Renderer>().material = explosionMaterial;
-        Destroy(explosionSphere, gizmoDuration);
-
-        // Créer une sphère bleue pour la répulsion
-        repulsionSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        repulsionSphere.transform.position = transform.position;
-        repulsionSphere.transform.localScale = Vector3.one * repulsionRange * 2;
-        repulsionSphere.GetComponent<Renderer>().material = repulsionMaterial;
-        Destroy(repulsionSphere, gizmoDuration);
-    }
-
-    private void HandleParticles()
-    {
-        ParticleSystem particles = GetComponentInChildren<ParticleSystem>(true);
-        if (particles != null)
-        {
-            particles.gameObject.SetActive(true);
-            particles.Play();
-            Debug.Log("Boom");
-        }
     }
 
     private void HandleExplosionEffect(GameObject bloc)
     {
         if (bloc.CompareTag("wood"))
         {
-            Debug.Log("Boom");
+            Debug.Log(bloc.name);
             Destroy(bloc);
         }
         else if (bloc.CompareTag("explosive"))
@@ -149,7 +117,6 @@ public class ExplosiveBloc : MonoBehaviour
         else
         {
             GridSystem grid = bloc.transform.root.GetComponent<GridSystem>();
-            PlayerMouvement move = bloc.transform.root.GetComponent<PlayerMouvement>();
             if (grid != null)
             {
                 if(bloc != grid.kernel)
@@ -180,15 +147,6 @@ public class ExplosiveBloc : MonoBehaviour
                 obj.cubeRb.AddForceAtPosition(distance.normalized * repulsionForce,col.transform.root.GetComponent<PlayerMouvement>().CalculateCenterMass(), ForceMode.VelocityChange);
                 pushed = true;
             }
-        }
-    }
-
-    IEnumerator blockNeutral(GameObject block)
-    {
-        yield return new WaitForSeconds(3f);
-        if (block != null)
-        {
-            block.GetComponent<Bloc>().setOwner("Neutral");
         }
     }
 }
