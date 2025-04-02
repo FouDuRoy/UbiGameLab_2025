@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2525441135307876409}
   - component: {fileID: 1143426935521263120}
   - component: {fileID: 7479162396638217673}
+  - component: {fileID: 5615064793267745248}
   m_Layer: 0
   m_Name: Explosive_Cube
   m_TagString: explosive
@@ -202,6 +203,7 @@ MonoBehaviour:
   owner: Neutral
   state: 3
   ownerTranform: {fileID: 0}
+  objectToChangeMesh: {fileID: 8768610324892022174}
   rb: {fileID: 0}
 --- !u!114 &2525441135307876409
 MonoBehaviour:
@@ -220,13 +222,11 @@ MonoBehaviour:
   repulsionRange: 7
   repulsionForce: 15
   repulsionDistanceFactor: 1.2
-  timeBeforeExplosionEnabled: 1
+  timeBeforeExplosionEnabled: 2
   players:
   - {fileID: 134994841213693252, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
   - {fileID: 134994841213693252, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
   gizmoDuration: 1
-  explosionMaterial: {fileID: 2100000, guid: 66738dc35de92b74cb58ea78afa39514, type: 2}
-  repulsionMaterial: {fileID: 2100000, guid: b23c39ceb913006449663ef0f0b80157, type: 2}
   explode: 0
 --- !u!114 &1143426935521263120
 MonoBehaviour:
@@ -262,6 +262,20 @@ MonoBehaviour:
   springBreakForce: 500
   range: 2
   pushFactor: 35
+--- !u!114 &5615064793267745248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694876674060920943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9d2e8bbe5afa04da47682374207ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!1 &8239625925558140238
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +411,11 @@ PrefabInstance:
 --- !u!4 &651852353394913132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 72613138e0aba0442b406de9e271f678, type: 3}
+  m_PrefabInstance: {fileID: 1045223509533804679}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8768610324892022174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -634658316795724519, guid: 72613138e0aba0442b406de9e271f678, type: 3}
   m_PrefabInstance: {fileID: 1045223509533804679}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3286958790143086487
