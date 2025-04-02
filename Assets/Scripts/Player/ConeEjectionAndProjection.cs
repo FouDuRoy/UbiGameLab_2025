@@ -62,6 +62,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     public float distanceCone = 5f;
     public int resolution = 20; // Plus c�est haut, plus le c�ne est lisse
     public Material visionMaterial;
+    List<GameObject> blocsToEject = new List<GameObject>();
     void Start()
     {
 
@@ -200,7 +201,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         else if (rightTriggerHeld)
         {
             feedback.RepulsionVibrationEnd(timeHeld);
-            coneProjection(timeHeld);
+            coneProjection();
             visionConeObject.SetActive(false);
             leftRay.gameObject.SetActive(false);
             rightRay.gameObject.SetActive(false);
@@ -289,7 +290,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         magneticLast.Clear();
     }
 
-    public void coneProjection(float time){
+    public void coneProjection2(float time){
         int maxX = playerGrid.grid.Keys.Max(x => x.x);
         int minX = playerGrid.grid.Keys.Min(x => x.x);
         int maxZ = playerGrid.grid.Keys.Max(x => x.z);
@@ -356,9 +357,19 @@ public class ConeEjectionAndProjection : MonoBehaviour
        playerGrid.coneEjectRest(ejectionSpeed, rightDriftProportion);
 
     }
+     public void coneProjection(){
+
+         foreach(var v in playerGrid.grid){
+            if(v.Value != playerGrid.kernel)
+                 v.Value.GetComponent<Bloc>().changeMeshMaterialColor ( playerGrid.playerMat.color);
+       }
+       blocsToEject.ForEach(x => EjectBloc(x,golem));
+       playerGrid.coneEjectRest(ejectionSpeed, rightDriftProportion);
+
+    }
     public void coneProjectionColor(float time)
     {
-
+        blocsToEject.Clear();
         int maxX = playerGrid.grid.Keys.Max(x => x.x);
         int minX = playerGrid.grid.Keys.Min(x => x.x);
         int maxZ = playerGrid.grid.Keys.Max(x => x.z);
@@ -417,6 +428,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             }
             if(magnetic[i]!=null){
                   magnetic[i].gameObject.GetComponent<Bloc>().changeMeshMaterialColor( chargedColor);
+                  blocsToEject.Add(magnetic[i].gameObject);
             }
         }
     }
