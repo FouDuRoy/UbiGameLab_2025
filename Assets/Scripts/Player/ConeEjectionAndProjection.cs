@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.ProBuilder.MeshOperations;
-using UnityEngine.UIElements;
 
 
 public class ConeEjectionAndProjection : MonoBehaviour
@@ -43,6 +40,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     Transform golem;
     bool rightTriggerHeld = false;
     bool leftTriggerHeld = false;
+    string lastHold = string.Empty;
     Transform leftHandTransform;
     Transform rightHandTransform;
     Vector3 leftHandInitialPoint;
@@ -107,7 +105,16 @@ public class ConeEjectionAndProjection : MonoBehaviour
     {
         float rightTrigger = ejectCubes.ReadValue<float>();
         float leftTrigger = AttractCubes.ReadValue<float>();
-        if ((leftTrigger > 0 && rightTrigger == 0))
+        if (AttractCubes.WasPressedThisFrame())
+        {
+            lastHold = "left";
+        }
+        else if (ejectCubes.WasPressedThisFrame())
+        {
+            lastHold = "right";
+        }
+
+        if ((leftTrigger > 0 && lastHold == "left"))
         {
             if (leftTriggerHeld == false)
             {
@@ -166,7 +173,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     private void EjectionAlgo(float rightTrigger)
     {
-        if ((rightTrigger > 0))
+        if ((rightTrigger > 0 && lastHold == "right"))
         {
             leftRay.gameObject.SetActive(true);
             rightRay.gameObject.SetActive(true);
@@ -205,14 +212,24 @@ public class ConeEjectionAndProjection : MonoBehaviour
         }
         else if (rightTriggerHeld)
         {
-            feedback.RepulsionVibrationEnd(timeHeld,true);
-            coneProjection();
+            feedback.RepulsionVibrationEnd(timeHeld, true);
+            if (lastHold == "right")
+            {
+                coneProjection();
+
+            }
+            foreach (var v in playerGrid.grid)
+            {
+                if (v.Value != playerGrid.kernel)
+                    v.Value.GetComponent<Bloc>().changeMeshMaterialColor(playerGrid.playerMat.color);
+            }
             visionConeObject.SetActive(false);
             leftRay.gameObject.SetActive(false);
             rightRay.gameObject.SetActive(false);
             rightTriggerHeld = false;
             timeHeld = 0;
         }
+
     }
 
     LineRenderer CreateRay(Color color)
@@ -303,15 +320,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
         magneticLast.Clear();
     }
 
- 
+
     public void coneProjection()
     {
 
-        foreach (var v in playerGrid.grid)
-        {
-            if (v.Value != playerGrid.kernel)
-                v.Value.GetComponent<Bloc>().changeMeshMaterialColor(playerGrid.playerMat.color);
-        }
         for (int i = 0; i < blocsToEject.Count && i < nbBlocsSelect; i++)
         {
             EjectBloc(blocsToEject[i], golem);
@@ -332,16 +344,16 @@ public class ConeEjectionAndProjection : MonoBehaviour
         int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX), Mathf.Abs(minX), Mathf.Abs(maxZ), Mathf.Abs(minZ), Mathf.Abs(maxY), Mathf.Abs(minY));
         float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
         float radius = radiusInBlocs * blocSizeWorld * 1.2f;
-        
+
         float timeHeldAngle = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
         float timeHeldLength = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjectionLength);
         float boundaryDistanceRatio = timeHeldLength / secondsForMaxChargingEjectionLength;
         float angleRatio = timeHeldAngle / secondsForMaxChargingEjection;
         float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (angleRatio);
         LayerMask mask = LayerMask.GetMask("magnetic");
-        int nbHits = Physics.OverlapSphereNonAlloc(golem.position, radius, magnetic, mask,QueryTriggerInteraction.Ignore);
-        float timel = Mathf.Min(1,(time / secondsForMaxChargingEjectionLength));
-        nbBlocsSelect = Math.Max((int)(timel* (playerGrid.grid.Count*maxProportion)), 1);
+        int nbHits = Physics.OverlapSphereNonAlloc(golem.position, radius, magnetic, mask, QueryTriggerInteraction.Ignore);
+        float timel = Mathf.Min(1, (time / secondsForMaxChargingEjectionLength));
+        nbBlocsSelect = Math.Max((int)(timel * (playerGrid.grid.Count * maxProportion)), 1);
         for (int i = 0; i < nbHits; i++)
         {
 
@@ -362,7 +374,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
                 magnetic[i] = null;
                 continue;
             }
-           
+
             magnetic[i].gameObject.GetComponent<Bloc>().changeMeshMaterialColor(playerGrid.playerMat.color);
             //Look if the cube is within the angle of ejection
             Vector3 planeProjection = Vector3.ProjectOnPlane(magnetic[i].transform.position, Vector3.up);
