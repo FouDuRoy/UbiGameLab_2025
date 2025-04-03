@@ -8,6 +8,8 @@ public class Dash : MonoBehaviour
     [SerializeField] private float dashForce = 80f;
     [SerializeField] private float dashDuration = .15f;
     [SerializeField] private float cooldown=1f;
+    [SerializeField] private float dashStopTime = 0.05f;
+    [SerializeField] private float magneticRecoveryTime = 0.25f;
 
     private PlayerInfo playerInfo;
     private float lastDashTime;
@@ -35,22 +37,28 @@ public class Dash : MonoBehaviour
     {
         float OG_drag = playerRb.drag;
         float OG_angularDrag= playerRb.angularDrag;
-
+        playerRb.gameObject.layer = 0;
         playerRb.AddForce(playerGolem.transform.forward * dashForce, ForceMode.VelocityChange);
         playerRb.angularDrag = 50000f;
         isDashing=true;
         playerInfo.invun = true;
 
         yield return new WaitForSeconds(dashDuration);
-
-        playerRb.drag = 50000f;
-
-        yield return new WaitForSeconds(.05f);
-
+        float timeDash = 0;
+        while (timeDash<1) {
+            playerRb.velocity = Vector3.Lerp(playerRb.velocity, playerRb.velocity.normalized, timeDash);
+            timeDash += Time.fixedDeltaTime / dashStopTime;
+            yield return new WaitForFixedUpdate();
+        }
         playerRb.drag=OG_drag;
         playerRb.angularDrag=OG_angularDrag;
+       
         isDashing = false;
-        playerInfo.invun = false;
+        if(!playerInfo.recovering)
+            playerInfo.invun = false;
+
+        yield return new WaitForSeconds(magneticRecoveryTime);
+        playerRb.gameObject.layer = 3;
     }
 
     private void OnCollisionEnter(Collision collision)

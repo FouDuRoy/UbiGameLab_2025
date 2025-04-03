@@ -108,6 +108,8 @@ MonoBehaviour:
   MaxhealthValue: 300
   waitDelayAfterPlayerDeath: 1.5
   timeScaleFactor: 0.1
+  invun: 0
+  recovering: 0
   healthValue: 300
   playerLife: {fileID: 4000077683436356578}
   isInvincible: 0
@@ -296,6 +298,7 @@ GameObject:
   - component: {fileID: 3070630633163488715}
   - component: {fileID: 4536375940292766682}
   - component: {fileID: 6839929964872536719}
+  - component: {fileID: 567634103144108437}
   m_Layer: 3
   m_Name: Golem Rouge
   m_TagString: Player
@@ -318,7 +321,6 @@ Transform:
   m_Children:
   - {fileID: 6739573438933691895}
   - {fileID: 2003967730577001992}
-  - {fileID: 4972807292421811894}
   m_Father: {fileID: 4849188280878380009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2671852642049663566
@@ -455,6 +457,21 @@ MonoBehaviour:
   victoryConditionSpeedRange: 10
   victoryConditionSpeedMelee: 15
   Ennemy: {fileID: 0}
+--- !u!114 &567634103144108437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3131990571156717056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b6dafd71fad4184282c718e8e9a64cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashForce: 80
+  dashDuration: 0.15
+  cooldown: 1
 --- !u!1 &7131289492177703505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,11 +1414,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7461082211824948085, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8711506087137526957, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 4972807292421811894}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1380078002464352268, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6087993874332026928}
+    - targetCorrespondingSourceObject: {fileID: 8335789136116719127, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8438536080778407145}
   m_SourcePrefab: {fileID: 100100000, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
 --- !u!1 &1597069548048436721 stripped
 GameObject:
@@ -1421,6 +1444,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationFixed: 1
+--- !u!1 &8547911148651854826 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8335789136116719127, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
+  m_PrefabInstance: {fileID: 364488015725372925}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8438536080778407145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8547911148651854826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8014d422852bf124fa97ca2b87b89ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerGrid: {fileID: 0}
 --- !u!1 &8721610333923546856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8937263206788838165, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
@@ -1429,6 +1470,11 @@ GameObject:
 --- !u!4 &8753685302025833666 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8968282644001089855, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
+  m_PrefabInstance: {fileID: 364488015725372925}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9073512219296063824 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8711506087137526957, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
   m_PrefabInstance: {fileID: 364488015725372925}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2807933406656954670
@@ -2516,7 +2562,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7847107767003649144}
+    m_TransformParent: {fileID: 9073512219296063824}
     m_Modifications:
     - target: {fileID: 2515372048339511418, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Color.b
@@ -2584,7 +2630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4265178547906781839, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4265178547906781839, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2592,7 +2638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4265178547906781839, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4265178547906781839, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_AnchoredPosition.x

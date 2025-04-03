@@ -22,6 +22,7 @@ public class PlayerInfo : MonoBehaviour
     public float waitDelayAfterPlayerDeath = 1.5f;
     public float timeScaleFactor = 0.2f;
     public bool invun = false;
+    public bool recovering = false;
     public float healthValue;
     [Header("D�bogage")]
     [SerializeField] GameObject playerLife;
@@ -112,7 +113,9 @@ public class PlayerInfo : MonoBehaviour
     }
     IEnumerator invunerable()
     {
+        recovering = true;
         yield return new WaitForSeconds(invincibilityDelay);
+        recovering = false;
         invun = false;
     }
     IEnumerator gameOver(string attackerName)
