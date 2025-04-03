@@ -53,6 +53,7 @@ public class PlayerMouvement : MonoBehaviour
 
     bool rotatingRight = false;
     HapticFeedbackController feedback;
+    Dash dash;
     private bool shoulderLeftPressed = false;
     private bool shoulderRightPressed = false;
     GridSystem gridPlayer;
@@ -139,6 +140,7 @@ public class PlayerMouvement : MonoBehaviour
     private void OnEnable()
     {
         feedback = GetComponent<HapticFeedbackController>();
+        dash = GetComponent<Dash>();
         pauseAction.performed += OnPause;
         pauseAction.Enable();
         throwCubes.performed += _ =>
@@ -168,6 +170,10 @@ public class PlayerMouvement : MonoBehaviour
         {
             feedback.EjectionVibrationEnd();
             ThrowCubes();
+            if(dash!= null)
+            {
+                dash.Dash(rb);
+            }
         }
 
     }
