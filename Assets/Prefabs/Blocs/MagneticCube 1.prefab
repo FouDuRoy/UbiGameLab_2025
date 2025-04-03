@@ -222,23 +222,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passiveRadius: 0.7
-  maxSpeed: 100
+  maxSpeed: 2
   error: 0.4
-  AngleError: 8
+  AngleError: 15
   moveTime: 0.2
   lerpingDistance: 0.5
   timeBeforeSwitching: 1
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
-  springTorqueBreak: 50000
-  springForceBreak: 50000
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
 --- !u!114 &9014884664581853237
 MonoBehaviour:
   m_ObjectHideFlags: 0

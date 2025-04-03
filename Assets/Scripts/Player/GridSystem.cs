@@ -95,20 +95,27 @@ public class GridSystem : MonoBehaviour
             }
         }
     }
-    public void AttachBlock(GameObject blocToAttach, GameObject attachedBloc, Vector3 closestFace)
+    public bool AttachBlock(GameObject blocToAttach, GameObject attachedBloc, Vector3 closestFace)
     {
+        bool attach = false;
         Vector3Int fixedVector = new Vector3Int(Mathf.RoundToInt((closestFace.x / cubeSize))
             , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
         blocToAttach.GetComponent<Bloc>().ownerTranform = this.transform;
         if (grid.ContainsValue(attachedBloc))
         {
-            grid.Add(fixedVector, blocToAttach);
-            playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
-            blocToAttach.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
-           // blocToAttach.GetComponentInChildren<MeshRenderer>().SetMaterials(materials);
-            if(blocToAttach.tag != "explosive"){
-                blocToAttach.GetComponent<Bloc>().changeMeshMaterial(materials.First());
+            if (!grid.ContainsKey(fixedVector))
+            {
+                grid.Add(fixedVector, blocToAttach);
+                playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
+                blocToAttach.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
+                attach= true;
+                if (blocToAttach.tag != "explosive")
+                {
+                    blocToAttach.GetComponent<Bloc>().changeMeshMaterial(materials.First());
+                }
+
             }
+          
         }
 
         //Déclenche un feedback à chaque bloc qui s'attache
@@ -116,6 +123,7 @@ public class GridSystem : MonoBehaviour
         {
             feedback.BlocAttachedVibration();
         }
+        return attach;
     }
     public void AttachGrid(GridSystem gridToAttach, GameObject attachedBloc, GameObject blocToAttach, Vector3 closestFace)
     {

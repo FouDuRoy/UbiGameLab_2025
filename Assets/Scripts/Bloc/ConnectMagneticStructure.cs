@@ -126,7 +126,9 @@ public class ConnectMagneticStructure : MonoBehaviour
         {
             ResetObject();
         }
-
+        if(closestCubeOwn != null && !playerGrid.grid.ContainsValue(closestCubeOwn)) {
+            ResetObject();
+        }
         if (!lerping)
         {
             

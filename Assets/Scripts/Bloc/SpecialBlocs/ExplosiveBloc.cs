@@ -19,7 +19,7 @@ public class ExplosiveBloc : MonoBehaviour
     [Header("Gizmos Settings")]
     public float gizmoDuration = 3f; // Temps d'affichage des sph�res visuelles
     private float explosionTime = -1f;
-    private bool hasExploded = false;
+    public bool hasExploded = false;
     [SerializeField] bool explode = false;
     bool pushed = false;
 
@@ -106,7 +106,7 @@ public class ExplosiveBloc : MonoBehaviour
         {
             Destroy(bloc);
         }
-        else if (bloc.CompareTag("explosive") && bloc != gameObject)
+        else if (bloc.CompareTag("explosive") && bloc != gameObject && !bloc.GetComponent<ExplosiveBloc>().hasExploded)
         {
             bloc.GetComponent<ExplosiveBloc>().Explode();
         }

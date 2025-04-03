@@ -316,41 +316,48 @@ public class Feromagnetic : MonoBehaviour
     private void AttachCube()
     {
         //Attach magnetic field
+        
+        bool attach = playerAttractedToGrid.AttachBlock(gameObject, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
 
-        gameObject.AddComponent<SphereCollider>();
-        gameObject.GetComponent<SphereCollider>().transform.position = transform.position;
-        gameObject.GetComponent<SphereCollider>().radius = activeRadius;
-        gameObject.GetComponent<SphereCollider>().isTrigger = true;
-
-        if ((springType == SpringType.Free || springType == SpringType.Limited) && cubeAttractedToTransform.root.GetComponent<ConnectMagneticStructure>() == null)
+        if (attach)
         {
-            //Set cube rigidbody parameters when in structure
-            cubeRB.mass = structureMass;
-            cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
-            cubeRB.drag = structureDrag;
-            cubeRB.angularDrag = structureAngularDrag;
-            this.transform.parent = cubeAtractedToPlayerObjects.cubeRb.transform;
-            playerAttractedToGrid.AttachBlock(gameObject, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
-            attachJ();
+            gameObject.AddComponent<SphereCollider>();
+            gameObject.GetComponent<SphereCollider>().transform.position = transform.position;
+            gameObject.GetComponent<SphereCollider>().radius = activeRadius;
+            gameObject.GetComponent<SphereCollider>().isTrigger = true;
+            GetComponent<Bloc>().state = BlocState.structure;
+            if ((springType == SpringType.Free || springType == SpringType.Limited) && cubeAttractedToTransform.root.GetComponent<ConnectMagneticStructure>() == null)
+            {
+                //Set cube rigidbody parameters when in structure
+                cubeRB.mass = structureMass;
+                cubeRB.interpolation = RigidbodyInterpolation.Interpolate;
+                cubeRB.drag = structureDrag;
+                cubeRB.angularDrag = structureAngularDrag;
+                this.transform.parent = cubeAtractedToPlayerObjects.cubeRb.transform;
+                attachJ();
+            }
+            else
+            {
+                //It's children of mainCube
+                this.transform.parent = cubeAtractedToPlayerObjects.cubeRb.transform;
+                if (cubeRB != null)
+                {
+                    DestroyImmediate(cubeRB);
+                }
+
+            }
+            //Set to magnetic after some time
+
+            Invoke("setLayer", timeBeforeActiveMagnet);
+
+            //Disable script
+            this.GetComponent<Feromagnetic>().enabled = false;
         }
         else
         {
-            //It's children of mainCube
-            this.transform.parent = cubeAtractedToPlayerObjects.cubeRb.transform;
-            if (cubeRB != null)
-            {
-                DestroyImmediate(cubeRB);
-            }
-            playerAttractedToGrid.AttachBlock(gameObject, cubeAttractedToTransform.gameObject, closestFaceRelativeToMainCube);
-
+            ResetObject();
         }
-        //Set to magnetic after some time
-
-        this.GetComponent<Bloc>().state = BlocState.structure;
-        Invoke("setLayer", timeBeforeActiveMagnet);
-
-        //Disable script
-        this.GetComponent<Feromagnetic>().enabled = false;
+    
     }
 
     private void setLayer()

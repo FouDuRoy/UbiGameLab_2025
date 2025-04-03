@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1143426935521263120}
   - component: {fileID: 7479162396638217673}
   - component: {fileID: 5615064793267745248}
+  - component: {fileID: 1322309207985019544}
   m_Layer: 0
   m_Name: Explosive_Cube
   m_TagString: explosive
@@ -177,12 +178,12 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 8
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
-  angularDrive: 50000
-  angularDamp: 1000
-  projection: 1
+  secondaryLinearDamp: 10
+  angularDrive: 100000
+  angularDamp: 100
+  projection: 0
 --- !u!114 &-4726244708395997180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +204,7 @@ MonoBehaviour:
   owner: Neutral
   state: 3
   ownerTranform: {fileID: 0}
-  objectToChangeMesh: {fileID: 8768610324892022174}
+  objectToChangeMesh: {fileID: 1995964589826370076}
   rb: {fileID: 0}
 --- !u!114 &2525441135307876409
 MonoBehaviour:
@@ -218,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resistance: 20
-  explosionRange: 1
+  explosionRange: 6
   repulsionRange: 7
   repulsionForce: 15
   repulsionDistanceFactor: 1.2
@@ -227,7 +228,7 @@ MonoBehaviour:
   - {fileID: 134994841213693252, guid: e1c26e026a8c84342a910b2c1fb7aefd, type: 3}
   - {fileID: 134994841213693252, guid: 35a1f513c3b0a9242a13544bf47b765d, type: 3}
   gizmoDuration: 1
-  explode: 0
+  explode: 1
 --- !u!114 &1143426935521263120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +264,20 @@ MonoBehaviour:
   range: 2
   pushFactor: 35
 --- !u!114 &5615064793267745248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694876674060920943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9d2e8bbe5afa04da47682374207ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
+--- !u!114 &1322309207985019544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -418,6 +433,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3c6656a1b3efcc8459248a88fb9490e0, type: 3}
   m_PrefabInstance: {fileID: 996972739488546924}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1995964589826370076 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7609145667655734672, guid: 3c6656a1b3efcc8459248a88fb9490e0, type: 3}
+  m_PrefabInstance: {fileID: 996972739488546924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1045223509533804679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -494,11 +514,6 @@ PrefabInstance:
 --- !u!4 &651852353394913132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 72613138e0aba0442b406de9e271f678, type: 3}
-  m_PrefabInstance: {fileID: 1045223509533804679}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8768610324892022174 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -634658316795724519, guid: 72613138e0aba0442b406de9e271f678, type: 3}
   m_PrefabInstance: {fileID: 1045223509533804679}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3286958790143086487
