@@ -172,7 +172,7 @@ public class PlayerMouvement : MonoBehaviour
             ThrowCubes();
             if(dash!= null)
             {
-                dash.Dash(rb);
+                dash.DoDash(rb);
             }
         }
 
