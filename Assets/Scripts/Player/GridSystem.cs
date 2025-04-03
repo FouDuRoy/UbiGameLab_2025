@@ -309,6 +309,14 @@ public class GridSystem : MonoBehaviour
         return grid.ContainsKey(key);
 
     }
+    public bool positionAvailable(Vector3 position)
+    {
+        Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x / cubeSize), Mathf.RoundToInt(position.y / cubeSize), Mathf.RoundToInt(position.z / cubeSize));
+        if (key.y < 0)
+            return false;
+        return !grid.ContainsKey(key);
+
+    }
     public GameObject getObjectAtPosition(Vector3 position)
     {
         Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x / cubeSize), Mathf.RoundToInt(position.y / cubeSize), Mathf.RoundToInt(position.z / cubeSize));
@@ -409,7 +417,7 @@ public class GridSystem : MonoBehaviour
             do
             {
                 positionRelativeToKernel = cubePositionToKernel + cubeTransform.InverseTransformDirection(directionsList[i]).normalized * cubeSize;
-                foundPoint = !containsKey(positionRelativeToKernel);
+                foundPoint = positionAvailable(positionRelativeToKernel);
                 if (foundPoint)
                 {
                     facePositionWorld = directionsList[i] + cubeTransform.position;

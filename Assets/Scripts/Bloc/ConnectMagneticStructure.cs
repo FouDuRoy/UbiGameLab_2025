@@ -566,7 +566,7 @@ public class ConnectMagneticStructure : MonoBehaviour
                 positionFromMainBody = mainBodyCube.InverseTransformPoint(closestFaceRelativeToWorld);
 
             }
-            avaialble = !grid.containsKey(positionFromMainBody);
+            avaialble = grid.positionAvailable(positionFromMainBody);
         }
         return avaialble;
     }

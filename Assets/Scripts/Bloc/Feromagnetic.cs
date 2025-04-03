@@ -617,7 +617,7 @@ public class Feromagnetic : MonoBehaviour
                 positionFromMainBody = mainBodyCube.InverseTransformPoint(closestFaceRelativeToWorld);
 
             }
-            avaialble = !playerAttractedToGrid.containsKey(positionFromMainBody);
+            avaialble = playerAttractedToGrid.positionAvailable(positionFromMainBody);
         }
         return avaialble;
     }
