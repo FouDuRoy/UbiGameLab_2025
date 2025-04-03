@@ -25,6 +25,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - ANTI_FLICKER
   - _EMISSION
   - _METALLICGLOSSMAP
   - _NORMALMAP
@@ -346,9 +347,9 @@ Material:
     - _BackfaceForceShadow: 0
     - _BacklightBackfaceMask: 1
     - _BacklightBlur: 0.05
-    - _BacklightBorder: 0.375
+    - _BacklightBorder: 0.41500002
     - _BacklightDirectivity: 5
-    - _BacklightMainStrength: 0
+    - _BacklightMainStrength: 0.4
     - _BacklightNormalStrength: 1
     - _BacklightReceiveShadow: 1
     - _BacklightViewStrength: 1
@@ -677,7 +678,7 @@ Material:
     - _UDIMDiscardUV: 0
     - _UseAnisotropy: 0
     - _UseAudioLink: 0
-    - _UseBacklight: 0
+    - _UseBacklight: 1
     - _UseBump2ndMap: 0
     - _UseBumpMap: 1
     - _UseClippingCanceller: 0
