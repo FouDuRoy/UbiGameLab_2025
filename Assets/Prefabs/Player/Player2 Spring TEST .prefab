@@ -472,6 +472,8 @@ MonoBehaviour:
   dashForce: 80
   dashDuration: 0.15
   cooldown: 1
+  dashStopTime: 0.05
+  magneticRecoveryTime: 0.25
 --- !u!1 &7131289492177703505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,8 +1432,29 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2979750006912547418, guid: f24f1a4742c14214e9bf82ffd0cfb6ea, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4972807292421811894}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2454992262217408736, guid: f24f1a4742c14214e9bf82ffd0cfb6ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5902174128416404182}
   m_SourcePrefab: {fileID: 100100000, guid: f24f1a4742c14214e9bf82ffd0cfb6ea, type: 3}
+--- !u!1 &28373434499013421 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2454992262217408736, guid: f24f1a4742c14214e9bf82ffd0cfb6ea, type: 3}
+  m_PrefabInstance: {fileID: 2482942487808850893}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5902174128416404182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28373434499013421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8014d422852bf124fa97ca2b87b89ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerGrid: {fileID: -1607963941705366508}
 --- !u!4 &107565202590257654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2525124054009506363, guid: f24f1a4742c14214e9bf82ffd0cfb6ea, type: 3}

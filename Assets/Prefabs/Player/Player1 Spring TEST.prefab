@@ -472,6 +472,8 @@ MonoBehaviour:
   dashForce: 80
   dashDuration: 0.15
   cooldown: 1
+  dashStopTime: 0.05
+  magneticRecoveryTime: 0.25
 --- !u!1 &7131289492177703505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,7 +1463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8014d422852bf124fa97ca2b87b89ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGrid: {fileID: 0}
+  playerGrid: {fileID: -1607963941705366508}
 --- !u!1 &8721610333923546856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8937263206788838165, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
