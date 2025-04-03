@@ -6,16 +6,18 @@ public class PlayerObjects : MonoBehaviour
 {
     [SerializeField] public GameObject player;
     [SerializeField] public Rigidbody cubeRb;
+    [SerializeField] public GameObject magneticCube;
     [SerializeField] public GameObject passiveCube;
     [SerializeField] private float magnetTimer = 3f;
     [SerializeField] public GameObject golem;
-
+    Rigidbody magneticCubeRb;
     MouvementType moveType;
     protected GridSystem gridSystem;
     public float weight = 1;
     void Start()
     {
         gridSystem = this.GetComponent<GridSystem>();
+        magneticCubeRb = magneticCube.GetComponent<Rigidbody>();
         weight = 1;
     }
 
@@ -135,7 +137,6 @@ public class PlayerObjects : MonoBehaviour
         {
             cube.transform.Find("Orientation").rotation = cube.transform.rotation;
             StartCoroutine(magenticStructure(cube));
-            cube.GetComponent<Rigidbody>().mass = 50;
             cube.layer = 0;
         }
         else
@@ -149,7 +150,15 @@ public class PlayerObjects : MonoBehaviour
 
     public void resetRb(GameObject cube)
     {
-        Rigidbody rb2 = passiveCube.GetComponent<Rigidbody>();
+        Rigidbody rb2;
+        if (cube.tag == "magneticCube")
+        {
+            rb2 = magneticCube.GetComponent<Rigidbody>();
+        }
+        else
+        {
+            rb2 = passiveCube.GetComponent<Rigidbody>();
+        }
         Rigidbody rb = cube.GetComponent<Rigidbody>();
         rb.mass = rb2.mass;
         rb.drag = rb2.drag;

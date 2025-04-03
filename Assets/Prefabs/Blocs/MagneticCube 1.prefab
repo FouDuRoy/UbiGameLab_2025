@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 9014884664581853237}
   m_Layer: 10
   m_Name: MagneticCube 1
-  m_TagString: magnetic
+  m_TagString: magneticCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,8 +72,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2877455228711921279}
   serializedVersion: 4
-  m_Mass: 50
-  m_Drag: 2
+  m_Mass: 10
+  m_Drag: 5
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2877455228711921279}
   cubeRb: {fileID: 6116836137923090788}
+  magneticCube: {fileID: 2877455228711921279}
   passiveCube: {fileID: 2877455228711921279}
   magnetTimer: 1
   golem: {fileID: 0}
@@ -146,6 +147,7 @@ MonoBehaviour:
   saveGrid: 0
   restoreGrid: 0
   playerMat: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  detachedSpeed: 10
   keyValuePairs: []
   kernel: {fileID: 2877455228711921279}
   playerObj: {fileID: 0}

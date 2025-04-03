@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 1124318550067715504}
   m_Layer: 10
   m_Name: MagneticCube 1
-  m_TagString: magnetic
+  m_TagString: magneticCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,8 +129,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776288186700999852}
   serializedVersion: 4
-  m_Mass: 50
-  m_Drag: 2
+  m_Mass: 10
+  m_Drag: 5
   m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 776288186700999852}
   cubeRb: {fileID: 7171743862790443577}
+  magneticCube: {fileID: 2877455228711921279, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
   passiveCube: {fileID: 776288186700999852}
   magnetTimer: 1
   golem: {fileID: 0}
@@ -203,6 +204,7 @@ MonoBehaviour:
   saveGrid: 0
   restoreGrid: 1
   playerMat: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  detachedSpeed: 10
   keyValuePairs:
   - key: {x: 0, y: 0, z: 0}
     value: {fileID: 776288186700999852}
@@ -294,23 +296,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passiveRadius: 0.7
-  maxSpeed: 10
+  maxSpeed: 2
   error: 0.4
-  AngleError: 8
+  AngleError: 15
   moveTime: 0.2
   lerpingDistance: 0.5
   timeBeforeSwitching: 1
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
-  springTorqueBreak: 50000
-  springForceBreak: 50000
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
 --- !u!1 &1349721572398012612
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,8 +449,8 @@ MonoBehaviour:
   lerpingDistance: 20
   timeBeforeSwitching: 0.23349108
   timeBeforeSwitchingVariation: 0.05
-  springTorqueBreak: 50000
-  springForceBreak: 50000
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
   lerpingMass: 0.001
   structureMass: 0.01
   structureDrag: 5
@@ -458,11 +460,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &8076659883529127831
 MonoBehaviour:
@@ -679,8 +681,8 @@ MonoBehaviour:
   lerpingDistance: 20
   timeBeforeSwitching: 0.17238812
   timeBeforeSwitchingVariation: 0.05
-  springTorqueBreak: 50000
-  springForceBreak: 50000
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
   lerpingMass: 0.001
   structureMass: 0.01
   structureDrag: 5
@@ -690,11 +692,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &967821929777512443
 MonoBehaviour:
@@ -942,8 +944,8 @@ MonoBehaviour:
   lerpingDistance: 20
   timeBeforeSwitching: 0.16957627
   timeBeforeSwitchingVariation: 0.05
-  springTorqueBreak: 50000
-  springForceBreak: 50000
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
   lerpingMass: 0.001
   structureMass: 0.01
   structureDrag: 5
@@ -953,11 +955,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &2256836650057433818
 MonoBehaviour:
@@ -1330,8 +1332,8 @@ MonoBehaviour:
   lerpingDistance: 20
   timeBeforeSwitching: 0.23536645
   timeBeforeSwitchingVariation: 0.05
-  springTorqueBreak: 50000
-  springForceBreak: 50000
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
   lerpingMass: 0.001
   structureMass: 0.01
   structureDrag: 5
@@ -1341,11 +1343,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &7006266681115006561
 MonoBehaviour:
@@ -1624,8 +1626,8 @@ MonoBehaviour:
   lerpingDistance: 20
   timeBeforeSwitching: 0.16430525
   timeBeforeSwitchingVariation: 0.05
-  springTorqueBreak: 50000
-  springForceBreak: 50000
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
   lerpingMass: 0.001
   structureMass: 0.01
   structureDrag: 5
@@ -1635,11 +1637,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &6183394785270316285
 MonoBehaviour:
@@ -1856,8 +1858,8 @@ MonoBehaviour:
   lerpingDistance: 20
   timeBeforeSwitching: 0.16162513
   timeBeforeSwitchingVariation: 0.05
-  springTorqueBreak: 50000
-  springForceBreak: 50000
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
   lerpingMass: 0.001
   structureMass: 0.01
   structureDrag: 5
@@ -1867,11 +1869,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &5793011841278468629
 MonoBehaviour:

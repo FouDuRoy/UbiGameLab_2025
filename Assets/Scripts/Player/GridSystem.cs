@@ -24,6 +24,7 @@ public class GridSystem : MonoBehaviour
     [SerializeField] bool saveGrid = false;
     [SerializeField] bool restoreGrid = false;
     [SerializeField] public Material playerMat;
+    public float detachedSpeed = 10f;
     public KeyValuePair[] keyValuePairs;
     [SerializeField] public Dictionary<Vector3Int, GameObject> grid = new Dictionary<Vector3Int, GameObject>();
     public GameObject kernel; // Le noyau du syst�me, point (0,0,0)
@@ -38,7 +39,7 @@ public class GridSystem : MonoBehaviour
             Vector3Int.up,
              Vector3Int.down,
             new Vector3Int(0, 0, 1),
-             new Vector3Int(0, 0, -1)
+            new Vector3Int(0, 0, -1)
         };
     private void Start()
     {
@@ -178,7 +179,7 @@ public class GridSystem : MonoBehaviour
                     gridBloc.Value.GetComponent<Bloc>().state = BlocState.detached;
                     playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
                     gridBloc.Value.GetComponent<Rigidbody>().AddForce(
-                        (gridBloc.Value.transform.position - kernel.transform.position).normalized * 100f, ForceMode.VelocityChange);
+                        (gridBloc.Value.transform.position - kernel.transform.position).normalized * detachedSpeed, ForceMode.VelocityChange);
                 }
 
             }
@@ -340,7 +341,7 @@ public class GridSystem : MonoBehaviour
             foreach (Vector3Int position in neighborsList)
             {
 
-                if (!grid.ContainsKey(position+ positionCube))
+                if (!grid.ContainsKey(position+ positionCube) && (position + positionCube).y>=0)
                 {
                     availableSpaces.Add(tranformToVector3(position+ positionCube));
                 }
@@ -470,6 +471,30 @@ public class GridSystem : MonoBehaviour
                 float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
                 cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
                 cube.GetComponent<Rigidbody>().AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
+
+            }
+
+        }
+        foreach (Vector3Int key in keys)
+        {
+            grid.Remove(key);
+        }
+    }
+    public void ejectRest(float ejectionSpeed)
+    {
+        List<Vector3Int> keys = new List<Vector3Int>();
+        foreach (var gridBloc in grid)
+        {
+            if (!IsBlockConnected(gridBloc.Value))
+            {
+                GameObject cube = gridBloc.Value;
+                playerObj.removeCube(gridBloc.Value);
+                keys.Add(gridBloc.Key);
+                gridBloc.Value.GetComponent<Bloc>().state = BlocState.projectile;
+                playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
+
+                cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+                cube.GetComponent<Rigidbody>().AddForce((cube.transform.position-kernel.transform.position) * ejectionSpeed, ForceMode.VelocityChange);
 
             }
 
