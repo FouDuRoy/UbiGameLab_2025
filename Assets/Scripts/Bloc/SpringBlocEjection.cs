@@ -46,7 +46,6 @@ public class SpringBlocEjection : MonoBehaviour
 
         if (hitterComponent != null && hittedComponent != null)
         {
-            //Debug.Log("hitter veolcity:" + hitter.GetComponent<StoredVelocity>().lastTickVelocity+ "curentTick" +hitter.GetComponent<Rigidbody>().velocity);
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
             BlocState stateHitter = hitterComponent.state;

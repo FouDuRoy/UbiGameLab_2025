@@ -117,8 +117,9 @@ public class ExplosiveBloc : MonoBehaviour
             {
                 if (bloc != grid.kernel)
                 {
-                    grid.DetachBlock(bloc);
-                    bloc.GetComponent<Bloc>().state = BlocState.detached;
+                    grid.DetachBlocSingle(bloc);
+                    grid.ejectRest(repulsionForce);
+                    bloc.GetComponent<Bloc>().state = BlocState.exploded;
 
                 }
             }
@@ -126,6 +127,7 @@ public class ExplosiveBloc : MonoBehaviour
             if (targetRb != null)
             {
                 Vector3 forceDirection = (targetRb.transform.position - transform.position).normalized;
+                targetRb.velocity = Vector3.zero;
                 targetRb.AddForce(forceDirection * repulsionForce, ForceMode.VelocityChange);
             }
         }
