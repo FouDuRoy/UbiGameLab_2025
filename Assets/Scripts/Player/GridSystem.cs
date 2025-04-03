@@ -31,6 +31,7 @@ public class GridSystem : MonoBehaviour
     public PlayerObjects playerObj;
     public float cubeSize = 1.2f;
     public List<Material> materials = new List<Material>();
+    Vector3Int headPosition = Vector3Int.up;
     HapticFeedbackController feedback;
     List<Vector3Int> neighborsList = new List<Vector3Int>
     {
@@ -146,6 +147,7 @@ public class GridSystem : MonoBehaviour
                 v.Value.GetComponent<Bloc>().state = BlocState.structure;
                  if(v.Value.tag != "explosive"){
                 v.Value.GetComponent<Bloc>().changeMeshMaterial(materials.First());
+              
             }
         
             }
