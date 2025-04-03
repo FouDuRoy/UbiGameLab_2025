@@ -13,8 +13,8 @@ public class Dash : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void DoDash(Rigidbody playerRb)
+    public void DoDash(Rigidbody playerRb, Transform playerGolem)
     {
-        playerRb.AddForce(player dashForce, ForceMode.VelocityChange);
-    }
+        playerRb.AddForce(playerRb.transform.forward*dashForce, ForceMode.VelocityChange);
+    } 
 }
