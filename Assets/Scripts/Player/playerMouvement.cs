@@ -140,7 +140,7 @@ public class PlayerMouvement : MonoBehaviour
     private void OnEnable()
     {
         feedback = GetComponent<HapticFeedbackController>();
-        dash = GetComponent<Dash>();
+        dash = GetComponentInChildren<Dash>();
         pauseAction.performed += OnPause;
         pauseAction.Enable();
         throwCubes.performed += _ =>
