@@ -21,7 +21,7 @@ public class PlayerInfo : MonoBehaviour
     public float MaxhealthValue = 100f;
     public float waitDelayAfterPlayerDeath = 1.5f;
     public float timeScaleFactor = 0.2f;
-    bool invun = false;
+    public bool invun = false;
     public float healthValue;
     [Header("D�bogage")]
     [SerializeField] GameObject playerLife;

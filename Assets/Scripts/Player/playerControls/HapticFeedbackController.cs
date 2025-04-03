@@ -364,7 +364,7 @@ public class HapticFeedbackController : MonoBehaviour
         }*/
     }
 
-    public void EjectionVibrationEnd()
+    public void DashVibration()
     {
         if (playerGamepad != null)
         {

@@ -168,11 +168,9 @@ public class PlayerMouvement : MonoBehaviour
     {
         if(shoulderLeftPressed && shoulderRightPressed)
         {
-            feedback.EjectionVibrationEnd();
-            ThrowCubes();
             if(dash!= null)
             {
-                dash.DoDash(rb, golem);
+                dash.TryToDash(rb, golem, this);
             }
         }
 
@@ -193,7 +191,7 @@ public class PlayerMouvement : MonoBehaviour
             }
         }
         gridPlayer.clearGrid();
-        feedback.EjectionVibrationEnd();
+        feedback.DashVibration();
     }
 
     private void ShouldersPressed(InputAction.CallbackContext context)
