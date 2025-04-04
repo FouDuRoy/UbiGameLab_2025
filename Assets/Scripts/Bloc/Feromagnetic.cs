@@ -130,7 +130,7 @@ public class Feromagnetic : MonoBehaviour
             CheckClosestMagnet(magnetic, hits);
 
             //If there is a magnet in range execute attraction algo
-            if (cubeAttractedToTransform != null)
+            if (cubeAttractedToTransform != null && (transform.position - closestFaceRelativeToWorld).magnitude <2)
             {
                 Vector3 direction = cubeAttractedToTransform.position - transform.position;
                 relativePositionToMainCube = playerMainCube.InverseTransformPoint(transform.position);
@@ -283,12 +283,16 @@ public class Feromagnetic : MonoBehaviour
             }
             AttachCube();
         }
-        else
+        else if(timer > timeBeforeSwitching)
+        {
+            cubeRB.AddForce(Vector3.up * 300, ForceMode.VelocityChange);
+            timer = 0;
+        }else
         {
             ResetObject();
         }
     }
-
+  
     public void ResetObject()
     {
         lerping = false;

@@ -31,6 +31,7 @@ public class GridSystem : MonoBehaviour
     public PlayerObjects playerObj;
     public float cubeSize = 1.2f;
     public List<Material> materials = new List<Material>();
+    public float maxDimension = 3;
     Vector3Int headPosition = Vector3Int.up;
     HapticFeedbackController feedback;
     List<Vector3Int> neighborsList = new List<Vector3Int>
@@ -314,8 +315,10 @@ public class GridSystem : MonoBehaviour
     public bool positionAvailable(Vector3 position)
     {
         Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x / cubeSize), Mathf.RoundToInt(position.y / cubeSize), Mathf.RoundToInt(position.z / cubeSize));
-        if (key.y < 0)
+        if (key.y < 0 || Mathf.Abs(key.x)>maxDimension || Mathf.Abs(key.y) > maxDimension || Mathf.Abs(key.z) > maxDimension)
+        {
             return false;
+        }
         return !grid.ContainsKey(key);
 
     }
@@ -351,7 +354,8 @@ public class GridSystem : MonoBehaviour
             foreach (Vector3Int position in neighborsList)
             {
 
-                if (!grid.ContainsKey(position+ positionCube) && (position + positionCube).y>=0)
+                if (!grid.ContainsKey(position+ positionCube) && (position + positionCube).y>=0 && Mathf.Abs((position + positionCube).y) <= maxDimension &&
+                     Mathf.Abs((position + positionCube).x) <= maxDimension && Mathf.Abs((position + positionCube).z) <= maxDimension)
                 {
                     availableSpaces.Add(tranformToVector3(position+ positionCube));
                 }
@@ -418,15 +422,15 @@ public class GridSystem : MonoBehaviour
             Vector3 facePositionWorld = Vector3.zero;
             do
             {
-                positionRelativeToKernel = cubePositionToKernel + cubeTransform.InverseTransformDirection(directionsList[i]).normalized * cubeSize;
-                foundPoint = positionAvailable(positionRelativeToKernel);
+                foundPoint = positionAvailable(cubePositionToKernel + cubeTransform.InverseTransformDirection(directionsList[i]).normalized * cubeSize);
                 if (foundPoint)
                 {
                     facePositionWorld = directionsList[i] + cubeTransform.position;
+                    positionRelativeToKernel = cubePositionToKernel + cubeTransform.InverseTransformDirection(directionsList[i]).normalized * cubeSize;
                 }
+              
                 i++;
             } while (!foundPoint && i < directionsList.Count);
-
             return new Vector3[] { facePositionWorld, positionRelativeToKernel };
 
         }

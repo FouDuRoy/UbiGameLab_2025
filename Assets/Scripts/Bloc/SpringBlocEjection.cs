@@ -49,8 +49,7 @@ public class SpringBlocEjection : MonoBehaviour
 
     private void checkCollisionMelee(GameObject hitter, GameObject hitted, Bloc hitterComponent, Bloc hittedComponent, float randomHeightFactor)
     {
-        if (hitterComponent != null && hittedComponent != null )
-        {
+        
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
             BlocState stateHitter = hitterComponent.state;
@@ -112,13 +111,12 @@ public class SpringBlocEjection : MonoBehaviour
 
                 }
             }
-        }
+        
     }
 
     private void checkCollisionBetweenPlayerAndBlock(Collision collision, GameObject hitter, GameObject hitted, Bloc hitterComponent, Bloc hittedComponent)
     {
-        if (hitterComponent != null && hittedComponent != null )
-        {
+        
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
             BlocState stateHitter = hitterComponent.state;
@@ -178,7 +176,7 @@ public class SpringBlocEjection : MonoBehaviour
                     hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity);
                 }
             }
-        }
+        
     }
     void OnJointBreak(float breakForce)
     {

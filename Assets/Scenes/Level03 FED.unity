@@ -795,6 +795,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1607963941705366508, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: maxDimension
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 134994841213693252, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_Name
       value: 'Player2 Spring TEST '
@@ -815,6 +819,10 @@ PrefabInstance:
       propertyPath: gameOverCanvas
       value: 
       objectReference: {fileID: 1428678196}
+    - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: invincibilityDelay
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4849188280878380009, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -1166,71 +1174,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8151215fc480e5c4bb3f64e374f4f210, type: 3}
---- !u!1001 &136559325
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4923816383618738422, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_Name
-      value: Crab
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183042046644317371, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183042046644317371, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183042046644317371, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 13.59
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183042046644317371, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183042046644317371, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183042046644317371, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183042046644317371, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183042046644317371, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183042046644317371, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183042046644317371, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7109031267378611720, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: springForceBreak
-      value: Infinity
-      objectReference: {fileID: 0}
-    - target: {fileID: 7109031267378611720, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
-      propertyPath: springTorqueBreak
-      value: Infinity
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a1d0cc3714399a940bcbef98c224b3db, type: 3}
 --- !u!1001 &148959016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7828,9 +7771,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1607963941705366508, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: maxDimension
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 134994841213693252, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_Name
       value: Player1 Spring TEST
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662070221946770721, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: ejectionSpeed
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: attackerText
@@ -8910,4 +8861,3 @@ SceneRoots:
   - {fileID: 111579645}
   - {fileID: 177565408}
   - {fileID: 2137627530}
-  - {fileID: 136559325}
