@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 140
+  explosionForce: 40
   mouvementSpeed: 80
   deadZone: 0.999
   mouvementReductionFactor: 0.3
@@ -246,11 +246,11 @@ MonoBehaviour:
     leftMidTime: 0
     rightMotorMax: 0.1
     rightMidTime: 0.05
-    totalDuration: 0.4
+    totalDuration: 0.15
   damageTaken:
-    leftMotorMax: 0.8
+    leftMotorMax: 0.6
     leftMidTime: 0.2
-    rightMotorMax: 0.8
+    rightMotorMax: 0.6
     rightMidTime: 0.2
     totalDuration: 0.6
 --- !u!114 &1662070221946770721
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightDriftProportion: 0.1
-  attractionForce: 400
+  attractionForce: 500
   initialAngle: 15
   maxAngleRepulsion: 60
   secondsForMaxCharging: 0.2
@@ -274,7 +274,7 @@ MonoBehaviour:
   secondsForMaxChargingEjection: 2
   secondsForMaxChargingEjectionLength: 2
   maxNumberBlocsEjection: 100
-  ejectionSpeed: 60
+  ejectionSpeed: 100
   colorChangeIntensity: 3
   maxProportion: 1
   lineMat: {fileID: 2100000, guid: 5de4fbdbb1ac55345a979f6a4e9c97fe, type: 2}
@@ -473,7 +473,7 @@ MonoBehaviour:
   dashDuration: 0.15
   cooldown: 1
   dashStopTime: 0.05
-  magneticRecoveryTime: 0.25
+  magneticRecoveryTime: 0.15
 --- !u!1 &7131289492177703505
 GameObject:
   m_ObjectHideFlags: 0
