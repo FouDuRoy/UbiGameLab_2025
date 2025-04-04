@@ -21,7 +21,9 @@ public class WinCondition : MonoBehaviour
         GameObject hitter = collision.collider.gameObject;
         Bloc hitterComponent = hitter.GetComponent<Bloc>();
 
-        if (hitterComponent != null)
+        if (hitterComponent != null && 
+           hitterComponent.ownerTranform != null && hitterComponent.ownerTranform.tag != "magneticStructure"
+            )
         {
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = transform.parent.name;

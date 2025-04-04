@@ -66,14 +66,15 @@ public class Dash : MonoBehaviour
         if (isDashing)
         {
             Bloc blocHit = collision.gameObject.GetComponent<Bloc>();
-
-            if (blocHit != null)
+          
+            if (blocHit != null && blocHit.ownerTranform!= null)
             {
-                GridSystem grid = blocHit.GetComponentInParent<GridSystem>();
-
+                Transform blocOwner = blocHit.ownerTranform;
+                GridSystem grid = blocOwner.GetComponent<GridSystem>();
                 if (blocHit.state == BlocState.structure && grid!=null)
                 {
                     grid.DetachBlock(blocHit.gameObject);
+                    blocHit.state = BlocState.detached;
                 }
             }
         }

@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.ProBuilder.Shapes;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
@@ -19,7 +15,7 @@ public class SpringBlocEjection : MonoBehaviour
     [SerializeField] float maxAngle = 5f;
     [SerializeField] float springBreakForce = 500f;
     [SerializeField] float range = 4;
-    [SerializeField] float  pushFactor = 30f;
+    [SerializeField] float pushFactor = 30f;
     private GridSystem gridSystem;
     private PlayerObjects playerObjects;
     Rigidbody mainCubeRb;
@@ -29,7 +25,7 @@ public class SpringBlocEjection : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
 
@@ -41,10 +37,19 @@ public class SpringBlocEjection : MonoBehaviour
         Bloc hitterComponent = hitter.GetComponent<Bloc>();
         Bloc hittedComponent = hitted.GetComponent<Bloc>();
         float randomHeightFactor = Random.Range(upEjectionMin, upEjectionMax);
+       
+        if(hitterComponent != null && hittedComponent != null && 
+            hitterComponent.ownerTranform !=null && hittedComponent.ownerTranform!=null && hitterComponent.ownerTranform.tag != "magneticStructure"
+             && hittedComponent.ownerTranform.tag != "magneticStructure")
+        {
+            checkCollisionBetweenPlayerAndBlock(collision, hitter, hitted, hitterComponent, hittedComponent);
+            checkCollisionMelee(hitter, hitted, hitterComponent, hittedComponent, randomHeightFactor);
+        }
+    }
 
-        checkCollisionBetweenPlayerAndBlock(collision, hitter, hitted, hitterComponent, hittedComponent);
-
-        if (hitterComponent != null && hittedComponent != null)
+    private void checkCollisionMelee(GameObject hitter, GameObject hitted, Bloc hitterComponent, Bloc hittedComponent, float randomHeightFactor)
+    {
+        if (hitterComponent != null && hittedComponent != null )
         {
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
@@ -57,14 +62,14 @@ public class SpringBlocEjection : MonoBehaviour
 
             if (playerHittedByotherPlayerStructure && areOwnedByPlayers)
             {
-                gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
-                playerObjects = FindObjectOfType<PlayerObjects>();
+                gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
+                playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
                 upEjectionMax = Mathf.Clamp01(upEjectionMax);
-                mainCubeRb = transform.parent.GetComponent<Rigidbody>();
-                moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
+                mainCubeRb = playerObjects.cubeRb;
+                moveType = hittedComponent.ownerTranform.GetComponent<PlayerMouvement>().moveType;
 
-                Rigidbody hitterRB = hitter.transform.parent.GetComponent<Rigidbody>();
-                Rigidbody hittedRB = hitted.transform.parent.GetComponent<Rigidbody>();
+                Rigidbody hitterRB = hittedComponent.ownerTranform.GetComponent<PlayerObjects>().cubeRb;
+                Rigidbody hittedRB = mainCubeRb;
 
                 float hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
                 float hittedVelocityMag = hitted.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
@@ -72,45 +77,25 @@ public class SpringBlocEjection : MonoBehaviour
 
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
-                    if (false)
-                    {
-                        foreach (var v in gridSystem.grid)
-                        {
-                            Joint[] joints = v.Value.GetComponents<Joint>();
-                            foreach (Joint joint in joints)
-                            {
-                                if ((joint.transform.position - hitted.transform.position).magnitude < range)
-                                {
-                                    joint.breakTorque = springBreakForce;
-
-                                }
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        Debug.Log("it good: "+ hitterVelocity+"hitter:"+hitter.name);
-                        gridSystem.DetachBlock(hitted);
-                        hittedComponent.state = BlocState.detached;
-                        Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
-                        float ejectionMag = ejectionVeolcity.magnitude;
-                        Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
-                        hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
-                    }
-              
+                    gridSystem.DetachBlock(hitted);
+                    hittedComponent.state = BlocState.detached;
+                    Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
+                    float ejectionMag = ejectionVeolcity.magnitude;
+                    Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
+                    hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
 
                 }
             }
             if (playerHittedByownMelee && areOwnedByPlayers)
             {
-                gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
-                playerObjects = FindObjectOfType<PlayerObjects>();
-                upEjectionMax = Mathf.Clamp01(upEjectionMax);
-                mainCubeRb = transform.GetComponent<Rigidbody>();
-                moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
 
-          
+                gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
+                playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
+                upEjectionMax = Mathf.Clamp01(upEjectionMax);
+                mainCubeRb = playerObjects.cubeRb;
+                moveType = hittedComponent.ownerTranform.GetComponent<PlayerMouvement>().moveType;
+
+
                 float hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
                 float hittedVelocityMag = hitted.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
                 Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
@@ -118,14 +103,13 @@ public class SpringBlocEjection : MonoBehaviour
                 if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
                 {
                     // Calculate normal average
-                    Debug.Log("its ok ");
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.melee;
                     Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
                     float ejectionMag = ejectionVeolcity.magnitude;
                     Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
-                    
+
                 }
             }
         }
@@ -133,7 +117,7 @@ public class SpringBlocEjection : MonoBehaviour
 
     private void checkCollisionBetweenPlayerAndBlock(Collision collision, GameObject hitter, GameObject hitted, Bloc hitterComponent, Bloc hittedComponent)
     {
-        if (hitterComponent != null && hittedComponent != null)
+        if (hitterComponent != null && hittedComponent != null )
         {
             string ownerHitter = hitterComponent.owner;
             string ownerHitted = hittedComponent.owner;
@@ -146,17 +130,17 @@ public class SpringBlocEjection : MonoBehaviour
 
             if ((playerHittedByOwnBlock) && areOwnedByPlayers)
             {
-                gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
-                playerObjects = FindObjectOfType<PlayerObjects>();
+                
+                gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
+                playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
                 upEjectionMax = Mathf.Clamp01(upEjectionMax);
-                mainCubeRb = transform.GetComponent<Rigidbody>();
-                moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
+                mainCubeRb = playerObjects.cubeRb;
+                moveType = hittedComponent.ownerTranform.GetComponent<PlayerMouvement>().moveType;
 
-              
-                Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<Rigidbody>().velocity; 
+
+                Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<Rigidbody>().velocity;
                 if (hitterVelocityBeforeImpact.magnitude > velocityTreshold)
                 {
-
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.detached;
                     Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
@@ -173,10 +157,11 @@ public class SpringBlocEjection : MonoBehaviour
             if ((playerHittedByotherPlayer) && areOwnedByPlayers)
             {
 
-                gridSystem = gameObject.transform.root.GetComponent<GridSystem>();
-                playerObjects = FindObjectOfType<PlayerObjects>();
-                mainCubeRb = transform.GetComponent<Rigidbody>();
-                moveType = transform.root.GetComponent<PlayerMouvement>().moveType;
+                gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
+                playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
+                upEjectionMax = Mathf.Clamp01(upEjectionMax);
+                mainCubeRb = playerObjects.cubeRb;
+                moveType = hittedComponent.ownerTranform.GetComponent<PlayerMouvement>().moveType;
 
                 Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
                 if (hitterVelocityBeforeImpact.magnitude > velocityTreshold)
@@ -201,10 +186,10 @@ public class SpringBlocEjection : MonoBehaviour
         gridSystem = gameObject.GetComponent<Bloc>().ownerTranform.GetComponent<GridSystem>();
         gridSystem.DetachBlock(this.gameObject);
         this.GetComponent<Bloc>().state = BlocState.detached;
-       
+
         Rigidbody cubeRB = this.GetComponent<Rigidbody>();
-        
-       // mainCubeRb.AddForce(-cubeRB.velocity.normalized * pushFactor, ForceMode.VelocityChange);
+
+        // mainCubeRb.AddForce(-cubeRB.velocity.normalized * pushFactor, ForceMode.VelocityChange);
     }
 
     IEnumerator resetTorque(GridSystem grid)
