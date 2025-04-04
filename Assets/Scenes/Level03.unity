@@ -795,17 +795,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1607963941705366508, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 134994841213693252, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_Name
       value: 'Player2 Spring TEST '
-      objectReference: {fileID: 0}
-    - target: {fileID: 1846468097935250436, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      propertyPath: ejectionShoot.totalDuration
-      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: playerLife
@@ -879,17 +871,10 @@ PrefabInstance:
       propertyPath: selectedGUI
       value: 
       objectReference: {fileID: 970148421}
-    - target: {fileID: 7850894500233854463, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      propertyPath: explosionForce
-      value: 40
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3131990571156717056, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 516027725}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
 --- !u!1 &111579646 stripped
 GameObject:
@@ -1807,21 +1792,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
---- !u!114 &516027725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111579646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6dafd71fad4184282c718e8e9a64cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashForce: 80
-  dashDuration: 0.15
-  cooldown: 1
 --- !u!1 &518762752
 GameObject:
   m_ObjectHideFlags: 0
@@ -7556,21 +7526,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3131990571156717056, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
   m_PrefabInstance: {fileID: 1709085650}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1520659253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520659245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6dafd71fad4184282c718e8e9a64cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashForce: 80
-  dashDuration: 0.15
-  cooldown: 1
 --- !u!4 &1544774497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
@@ -7775,21 +7730,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1607963941705366508, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 134994841213693252, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_Name
       value: Player1 Spring TEST
-      objectReference: {fileID: 0}
-    - target: {fileID: 1846468097935250436, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      propertyPath: ejectionShoot.totalDuration
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536375940292766682, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: attackerText
@@ -7859,17 +7802,10 @@ PrefabInstance:
       propertyPath: selectedGUI
       value: 
       objectReference: {fileID: 970148421}
-    - target: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      propertyPath: explosionForce
-      value: 40
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3131990571156717056, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1520659253}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
 --- !u!1001 &1753667946
 PrefabInstance:
