@@ -197,6 +197,17 @@ public class GridSystem : MonoBehaviour
         Vector3Int detachedGridPos = findFirstKey(bloc);
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
         {
+            playerObj.removeCubeProjection(grid[detachedGridPos]);
+            grid.Remove(detachedGridPos);
+            playerObj.weight -= bloc.GetComponent<Bloc>().weight;
+
+        }
+    }
+    public void DetachBlocSingleProjection(GameObject bloc)
+    {
+        Vector3Int detachedGridPos = findFirstKey(bloc);
+        if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
+        {
             playerObj.removeCube(grid[detachedGridPos]);
             grid.Remove(detachedGridPos);
             playerObj.weight -= bloc.GetComponent<Bloc>().weight;

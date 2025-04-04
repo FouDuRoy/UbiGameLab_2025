@@ -65,8 +65,8 @@ public class Dash : MonoBehaviour
     {
         if (isDashing)
         {
-            Bloc blocHit = collision.gameObject.GetComponent<Bloc>();
-          
+            Bloc blocHit = collision.collider.gameObject.GetComponent<Bloc>();
+            Debug.Log(blocHit);
             if (blocHit != null && blocHit.ownerTranform!= null)
             {
                 Transform blocOwner = blocHit.ownerTranform;
