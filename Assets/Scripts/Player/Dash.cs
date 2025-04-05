@@ -44,8 +44,9 @@ public class Dash : MonoBehaviour
         float OG_angularDrag= playerRb.angularDrag;
         playerRb.gameObject.layer = 0;
 
-        if (superDash) { playerRb.AddForce(playerGolem.transform.forward * dashForce, ForceMode.VelocityChange); }
-        else { playerRb.AddForce(playerGolem.transform.forward * superDashForce, ForceMode.VelocityChange); }
+        if (superDash) { playerRb.AddForce(playerGolem.transform.forward * superDashForce, ForceMode.VelocityChange); }
+        else { playerRb.AddForce(playerGolem.transform.forward * dashForce, ForceMode.VelocityChange); }
+
         playerRb.angularDrag = 50000f;
         isDashing=true;
         playerInfo.invun = true;
