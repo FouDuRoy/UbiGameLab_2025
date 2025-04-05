@@ -450,12 +450,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
             time += Time.deltaTime;
             t = time / displaceTimeBloc;
-            destination = golem.position + golem.forward * 2 * 1.2f + golem.right * 1.2f * right * sign + golem.up * 1.2f*blocHeight;
+            destination = golem.position + golem.forward * 2 * 1.2f + golem.right * 1.4f * right * sign + golem.up * 1.2f*blocHeight;
             position = Vector3.Lerp(initialPosition, destination, t);
             blocRb.MovePosition(position);
         }
-         blocRb.position = new Vector3(bloc.transform.position.x,0.5f,bloc.transform.position.z);
-         blocRb.velocity = new Vector3(bloc.transform.position.x,0,bloc.transform.position.z);
+         blocRb.position = new Vector3(bloc.transform.position.x,0.6f,bloc.transform.position.z);
+         blocRb.velocity = new Vector3(blocRb.velocity.x,0,blocRb.velocity.z).normalized*blocRb.velocity.magnitude;
         blocsToEject.Remove(bloc);
 
     }
