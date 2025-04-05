@@ -14,8 +14,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     // Start is called before the first frame update
     [SerializeField] float attractionForce = 10f;
+    [SerializeField] float ejectionAngle = 90f;
+    public bool cancelEjectionShoot = false;
     [SerializeField] float initialAngle = 45f;
     [SerializeField] float maxAngleRepulsion = 90f;
+    public int blocHeight =1;
     [SerializeField] float secondsForMaxCharging = 2f;
     [SerializeField] float distance = 10f;
     [SerializeField] float secondsForMaxChargingEjection = 3f;
@@ -228,7 +231,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         else if (rightTriggerHeld)
         {
             feedback.RepulsionVibrationEnd(timeHeld, true);
-            if (lastHold == "right")
+            if (lastHold == "right" || cancelEjectionShoot)
             {
                 coneProjection();
 
@@ -349,9 +352,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
     {
         potentialBlocs.Clear();
         float timeHeldAngle = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
-        float angleRatio = timeHeldAngle / secondsForMaxChargingEjection;
-        float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (angleRatio);
-
         LayerMask mask = 1 << playerGrid.kernel.layer;
         float timel = Mathf.Min(1, (time / secondsForMaxChargingEjectionLength));
         nbBlocsSelect = Math.Max((int)(timel * maxBlocs), 1);
@@ -380,7 +380,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             Vector3 planeProjection = Vector3.ProjectOnPlane(v.Value.transform.position, Vector3.up);
             Vector3 golemProjection = Vector3.ProjectOnPlane(golem.position, Vector3.up);
             float angle = Vector3.Angle(planeProjection - golemProjection, golem.forward);
-            if (angle > maxAngle)
+            if (angle > maxAngleRepulsion)
             {
                 continue;
             }
@@ -434,7 +434,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             sign = 1;
         }
         int right = Mathf.CeilToInt(number / 2f);
-        Vector3 destination = golem.position + golem.forward * 2 * 1.2f + golem.right * 1.2f * right * sign + golem.up * 1.2f;
+        Vector3 destination = golem.position + golem.forward * 2 * 1.2f + golem.right * 1.2f * right * sign + golem.up * 1.2f*blocHeight;
         Rigidbody blocRb = bloc.GetComponent<Rigidbody>();
         blocRb.useGravity = false;
 
@@ -450,10 +450,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
             time += Time.deltaTime;
             t = time / displaceTimeBloc;
-            destination = golem.position + golem.forward * 2 * 1.2f + golem.right * 1.2f * right * sign + golem.up * 1.2f;
+            destination = golem.position + golem.forward * 2 * 1.2f + golem.right * 1.2f * right * sign + golem.up * 1.2f*blocHeight;
             position = Vector3.Lerp(initialPosition, destination, t);
             blocRb.MovePosition(position);
         }
+         blocRb.position = new Vector3(bloc.transform.position.x,0.5f,bloc.transform.position.z);
+         blocRb.velocity = new Vector3(bloc.transform.position.x,0,bloc.transform.position.z);
         blocsToEject.Remove(bloc);
 
     }
@@ -465,6 +467,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Bloc cubeBloc = cube.GetComponent<Bloc>();
         cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
         cubeRb.interpolation = RigidbodyInterpolation.Interpolate;
+       
         cubeRb.AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
         cubeBloc.state = BlocState.projectile;
         cubeBloc.ownerTranform.GetComponent<PlayerObjects>().finishEjection(cube);
