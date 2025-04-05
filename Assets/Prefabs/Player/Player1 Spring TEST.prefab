@@ -58,6 +58,7 @@ MonoBehaviour:
   magneticCube: {fileID: 2877455228711921279, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   magnetTimer: 1
+  projectionTimer: 0.1
   golem: {fileID: 1597069548048436721}
   weight: 1
 --- !u!114 &7850894500233854463
@@ -75,7 +76,7 @@ MonoBehaviour:
   explosionForce: 40
   mouvementSpeed: 80
   deadZone: 0.999
-  mouvementReductionFactor: 0.3
+  mouvementReductionFactor: 0.2
   pivotSpeed: 180
   rotationSpeed: 30
   rotParam: 4
@@ -205,6 +206,7 @@ MonoBehaviour:
   playerObj: {fileID: 0}
   cubeSize: 1.2
   materials: []
+  negativeY: 0
 --- !u!114 &1846468097935250436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,11 +232,11 @@ MonoBehaviour:
     rightMotorMax: 0
     duration: 0
   repulsionCharge:
-    leftMotorMin: 0
-    leftMotorMax: 0.15
-    rightMotorMin: 0
-    rightMotorMax: 0.05
-    duration: 2
+    leftMotorMax: 0.3
+    leftMidTime: 0.05
+    rightMotorMax: 0.5
+    rightMidTime: 0
+    totalDuration: 0.1
   repulsionShoot:
     leftMotorMax: 10
     leftMidTime: 0
@@ -265,10 +267,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e37e11737801404ab826afec355bb28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightDriftProportion: 0.1
+  rightDriftProportion: 0.05
   attractionForce: 500
+  ejectionAngle: 90
+  cancelEjectionShoot: 0
   initialAngle: 15
-  maxAngleRepulsion: 60
+  angleRepulsion: 60
+  blocHeight: 1
+  blocDiffY: 0.1
   secondsForMaxCharging: 0.2
   distance: 22
   secondsForMaxChargingEjection: 2
@@ -276,7 +282,8 @@ MonoBehaviour:
   maxNumberBlocsEjection: 100
   ejectionSpeed: 100
   colorChangeIntensity: 3
-  maxProportion: 1
+  maxBlocs: 5
+  displaceTimeBloc: 0.1
   lineMat: {fileID: 2100000, guid: 5de4fbdbb1ac55345a979f6a4e9c97fe, type: 2}
   maxAngle: 15
   visionConeObject: {fileID: 8721610333923546856}
@@ -470,10 +477,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashForce: 80
+  superDashForce: 120
   dashDuration: 0.15
   cooldown: 1
   dashStopTime: 0.05
   magneticRecoveryTime: 0.15
+  superDash: 0
+  tutoDash: 0
 --- !u!1 &7131289492177703505
 GameObject:
   m_ObjectHideFlags: 0

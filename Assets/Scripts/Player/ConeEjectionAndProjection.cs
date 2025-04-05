@@ -201,7 +201,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
           
             timeHeld += Time.deltaTime;
             rightTriggerHeld = true;
-
+            /*
             //Draw rays to indicate current range
             float maxAngle = angleRepulsion;
 
@@ -224,7 +224,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             visionConeObject.transform.rotation = Quaternion.LookRotation(golem.forward);
             GenerateMesh(maxAngle);
             //Debug.DrawRay(golem.position, Quaternion.AngleAxis(maxAngle, Vector3.up) * golem.forward*distance,Color.red, Time.deltaTime);
-            //Debug.DrawRay(golem.position, Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward *distance, Color.red, Time.deltaTime);
+            //Debug.DrawRay(golem.position, Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward *distance, Color.red, Time.deltaTime);*/ // Pas de cône affiché pour la répulsion
         }
         else if (rightTriggerHeld)
         {
@@ -260,8 +260,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
     }
     public void coneAttraction(Transform player, float attractionForce, float angle, float distance, float magnitude)
     {
+        /*
         leftRay.gameObject.SetActive(true);
-        rightRay.gameObject.SetActive(true);
+        rightRay.gameObject.SetActive(true);*/ // Plus besoin des ray, le cône au sol fait le taff nickel
+
         // Find all magneticblocs in radiusZone
         float sphereRadius = distance;
         List<Collider> magnetic = Physics.OverlapSphere(player.position, sphereRadius).ToList<Collider>();
@@ -301,7 +303,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             cube.GetComponent<Rigidbody>().useGravity = true;
         });
 
-        //Draw Rays in Build
+        //Draw Rays in Build 
         Vector3 origin = golem.position;
 
         Vector3 rightDir = Quaternion.AngleAxis(angle, Vector3.up) * golem.forward;
@@ -313,11 +315,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
         visionConeObject.transform.rotation = Quaternion.LookRotation(player.forward);
         GenerateMesh(maxAngle);
 
-        rightRay.SetPosition(0, origin);
+        /*rightRay.SetPosition(0, origin);
         rightRay.SetPosition(1, origin + rightDir * distance);
 
         leftRay.SetPosition(0, origin);
-        leftRay.SetPosition(1, origin + leftDir * distance);
+        leftRay.SetPosition(1, origin + leftDir * distance);*/
 
         magneticLast = magnetic;
     }
@@ -335,7 +337,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     public void coneProjection()
     {
-        print("shoot");
+        if (blocsToEject.Count > 0) { feedback.RepulsionVibrationShoot(blocsToEject.Count); }
+
         for (int i = 0; i < blocsToEject.Count && i < nbBlocsSelect; i++)
         {
             EjectBloc(blocsToEject[i], golem);
@@ -405,8 +408,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         if (blocsToEject.Count < nbBlocsSelect && potentialBlocs.Count>0)
         {
-            feedback.BlocAttachedVibration();
-            print("start");
+            feedback.RepulsionVibrationSelect();
             placeBolcAtPosition(potentialBlocs.First(),blocsToEject.Count);
             blocsToEject.Add(potentialBlocs.First());
             if(potentialBlocs.First().tag != "explosive")
