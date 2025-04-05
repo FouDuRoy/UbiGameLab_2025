@@ -17,7 +17,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float ejectionAngle = 90f;
     public bool cancelEjectionShoot = false;
     [SerializeField] float initialAngle = 45f;
-    [SerializeField] float maxAngleRepulsion = 90f;
+    [SerializeField] float angleRepulsion = 90f;
     float angle;
     public int blocHeight =1;
     public float blocDiffY = 0.1f;
@@ -206,8 +206,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             rightTriggerHeld = true;
 
             //Draw rays to indicate current range
-            float timeHeldAngle = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
-            float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (timeHeldAngle / secondsForMaxChargingEjection);
+            float maxAngle = angleRepulsion;
 
             //Draw Rays in Build
             Vector3 origin = golem.position;
@@ -353,7 +352,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
     public void ConeProjectionSelection(float time)
     {
         potentialBlocs.Clear();
-        float timeHeldAngle = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
         LayerMask mask = 1 << playerGrid.kernel.layer;
         float timel = Mathf.Min(1, (time / secondsForMaxChargingEjectionLength));
         nbBlocsSelect = Math.Max((int)(timel * maxBlocs), 1);
@@ -396,11 +394,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         Vector3 positionX = new Vector3(x.transform.position.x, 0, x.transform.position.z);
         Vector3 positionY = new Vector3(y.transform.position.x, 0, y.transform.position.z);
-        float distanceX = (positionX - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
-        float distanceY = (positionY - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
-        if(angleX <=  maxAngleRepulsion && angleY <= maxAngleRepulsion || (angleX > maxAngleRepulsion && angleY > maxAngleRepulsion))
+        float distanceX = (x.transform.position - golem.position).sqrMagnitude;
+        float distanceY = (y.transform.position - golem.position).sqrMagnitude;
+        if(angleX <=  angleRepulsion && angleY <= angleRepulsion || (angleX > angleRepulsion && angleY > angleRepulsion))
             return -Math.Sign(distanceX - distanceY);
-        else if(angleX <= maxAngleRepulsion){
+        else if(angleX <= angleRepulsion){
             return -1;
         }else{
             return 1;
