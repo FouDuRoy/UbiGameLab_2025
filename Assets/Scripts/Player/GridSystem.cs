@@ -192,7 +192,7 @@ public class GridSystem : MonoBehaviour
         }
 
     }
-    public void DetachBlocSingle(GameObject bloc)
+    public void DetachBlocSingleProjection(GameObject bloc)
     {
         Vector3Int detachedGridPos = findFirstKey(bloc);
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
@@ -203,7 +203,7 @@ public class GridSystem : MonoBehaviour
 
         }
     }
-    public void DetachBlocSingleProjection(GameObject bloc)
+    public void DetachBlocSingle(GameObject bloc)
     {
         Vector3Int detachedGridPos = findFirstKey(bloc);
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)

@@ -259,7 +259,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
     {
         leftRay.gameObject.SetActive(true);
         rightRay.gameObject.SetActive(true);
-        LayerMask mask = LayerMask.GetMask("magnetic");
         // Find all magneticblocs in radiusZone
         float sphereRadius = distance;
         List<Collider> magnetic = Physics.OverlapSphere(player.position, sphereRadius).ToList<Collider>();
@@ -316,8 +315,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         leftRay.SetPosition(0, origin);
         leftRay.SetPosition(1, origin + leftDir * distance);
-        //Debug.DrawRay(player.position, Quaternion.AngleAxis(angle, Vector3.up) * player.forward*distance,Color.red, Time.deltaTime);
-        //Debug.DrawRay(player.position, Quaternion.AngleAxis(-angle, Vector3.up) * player.forward *distance, Color.red, Time.deltaTime);
+
         magneticLast = magnetic;
     }
 
@@ -338,7 +336,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             EjectBloc(blocsToEject[i], golem);
         }
-       //playerGrid.coneEjectRest(ejectionSpeed, rightDriftProportion);
     }
     public void ConeProjectionSelection(float time)
     {
@@ -358,14 +355,13 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float angleRatio = timeHeldAngle / secondsForMaxChargingEjection;
         float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (angleRatio);
 
-        LayerMask mask = LayerMask.GetMask("magnetic");
+        LayerMask mask = 1 << playerGrid.kernel.layer;
         int nbHits = Physics.OverlapSphereNonAlloc(golem.position, radius, magnetic, mask, QueryTriggerInteraction.Ignore);
         float timel = Mathf.Min(1, (time / secondsForMaxChargingEjectionLength));
         nbBlocsSelect = Math.Max((int)(timel * maxBlocs), 1);
         for (int i = 0; i < nbHits; i++)
         {
             //look if the cube is within the neighberhood of the boundary
-
             if (magnetic[i].GetComponent<BoxCollider>() == null)
             {
                 magnetic[i] = null;
@@ -419,9 +415,14 @@ public class ConeEjectionAndProjection : MonoBehaviour
     }
     public void placeBolcAtPosition(GameObject bloc,int number)
     {
-       
-        bloc.layer = LayerMask.NameToLayer("ejection");
-        playerGrid.DetachBlocSingle(bloc);
+        if(playerGrid.kernel.layer == LayerMask.NameToLayer("magneticPlayer1")){
+             bloc.layer = LayerMask.NameToLayer("ejection1");
+        }else{
+            bloc.layer = LayerMask.NameToLayer("ejection2");
+        }
+        playerGrid.DetachBlocSingleProjection(bloc);
+        playerGrid.ejectRest(0);
+        bloc.GetComponent<Bloc>().state = BlocState.projectileAnimation;
         // travel to position
         StartCoroutine(displaceBloc(bloc,number));
     }

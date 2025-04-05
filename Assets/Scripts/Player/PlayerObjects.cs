@@ -9,6 +9,7 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] public GameObject magneticCube;
     [SerializeField] public GameObject passiveCube;
     [SerializeField] private float magnetTimer = 3f;
+    [SerializeField] private float projectionTimer = 0.1f;
     [SerializeField] public GameObject golem;
     Rigidbody magneticCubeRb;
     MouvementType moveType;
@@ -257,10 +258,9 @@ public class PlayerObjects : MonoBehaviour
     }
     public void finishEjection(GameObject cube)
     {
-        cube.layer = 0;
         Destroy(cube.GetComponent<SphereCollider>());
         resetRb(cube);
-        StartCoroutine(blockNeutral(cube));
+        StartCoroutine(blockEjection(cube));
     }
     public void addRigidBody(GameObject cube)
     {
@@ -284,6 +284,17 @@ public class PlayerObjects : MonoBehaviour
     {
 
         yield return new WaitForSeconds(magnetTimer);
+        if (block != null)
+        {
+            block.GetComponent<Bloc>().state = BlocState.magnetic;
+        }
+
+    }
+      IEnumerator blockEjection(GameObject block)
+    {
+        yield return new WaitForSeconds(projectionTimer);
+        block.layer = 0;
+        yield return new WaitForSeconds(magnetTimer-projectionTimer);
         if (block != null)
         {
             block.GetComponent<Bloc>().state = BlocState.magnetic;
