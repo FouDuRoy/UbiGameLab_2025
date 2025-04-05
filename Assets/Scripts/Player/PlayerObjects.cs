@@ -262,6 +262,7 @@ public class PlayerObjects : MonoBehaviour
         resetRb(cube);
         StartCoroutine(blockEjection(cube));
     }
+ 
     public void addRigidBody(GameObject cube)
     {
         if (!cube.TryGetComponent<Rigidbody>(out _))
@@ -300,6 +301,13 @@ public class PlayerObjects : MonoBehaviour
             block.GetComponent<Bloc>().state = BlocState.magnetic;
         }
 
+    }
+    public void resetEjection(GameObject cube)
+    {
+        Destroy(cube.GetComponent<SphereCollider>());
+        resetRb(cube);
+        cube.layer = 0;
+        cube.GetComponent<Bloc>().state = BlocState.magnetic; 
     }
     IEnumerator magenticStructure(GameObject block)
     {

@@ -37,6 +37,7 @@ public class Dash : MonoBehaviour
     {
         float OG_drag = playerRb.drag;
         float OG_angularDrag= playerRb.angularDrag;
+        int oldLayer = playerRb.gameObject.layer;
         playerRb.gameObject.layer = 0;
         playerRb.AddForce(playerGolem.transform.forward * dashForce, ForceMode.VelocityChange);
         playerRb.angularDrag = 50000f;
@@ -58,7 +59,7 @@ public class Dash : MonoBehaviour
             playerInfo.invun = false;
 
         yield return new WaitForSeconds(magneticRecoveryTime);
-        playerRb.gameObject.layer = 3;
+        playerRb.gameObject.layer = oldLayer;
     }
 
     private void OnCollisionEnter(Collision collision)

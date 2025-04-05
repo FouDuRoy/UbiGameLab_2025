@@ -356,6 +356,7 @@ public class ConnectMagneticStructure : MonoBehaviour
             child.transform.parent = playerAtractedObjects.cubeRb.transform;
         }
         playerAtractedTo.GetComponent<HapticFeedbackController>().BlocAttachedVibration();
+        playerAtrcatedGrid.ejectRest(0);
         this.GetComponent<ConnectMagneticStructure>().enabled = false;
     }
 
