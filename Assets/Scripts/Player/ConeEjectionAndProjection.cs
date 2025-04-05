@@ -19,6 +19,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float initialAngle = 45f;
     [SerializeField] float maxAngleRepulsion = 90f;
     public int blocHeight =1;
+    public float blocDiffY = 0.1f;
     [SerializeField] float secondsForMaxCharging = 2f;
     [SerializeField] float distance = 10f;
     [SerializeField] float secondsForMaxChargingEjection = 3f;
@@ -434,7 +435,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             sign = 1;
         }
         int right = Mathf.CeilToInt(number / 2f);
-        Vector3 destination = golem.position + golem.forward * 2 * 1.2f + golem.right * 1.2f * right * sign + golem.up * 1.2f*blocHeight;
+        Vector3 destination = golem.position + golem.forward * 2 * (1.2f-right*blocDiffY) + golem.right * 1.4f * right * sign + golem.up * 1.2f*blocHeight;
         Rigidbody blocRb = bloc.GetComponent<Rigidbody>();
         blocRb.useGravity = false;
 
@@ -450,7 +451,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
             time += Time.deltaTime;
             t = time / displaceTimeBloc;
-            destination = golem.position + golem.forward * 2 * 1.2f + golem.right * 1.4f * right * sign + golem.up * 1.2f*blocHeight;
+            destination = golem.position + golem.forward * 2 * (1.2f-right*blocDiffY) + golem.right * 1.4f * right * sign + golem.up * 1.2f*blocHeight;
             position = Vector3.Lerp(initialPosition, destination, t);
             blocRb.MovePosition(position);
         }
