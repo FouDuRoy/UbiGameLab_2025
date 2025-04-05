@@ -36,7 +36,7 @@ public class Bloc : MonoBehaviour
     void Update()
     {
       
-        if (state != BlocState.structure && owner != "Neutral" )
+        if (state != BlocState.structure && owner != "Neutral" && state != BlocState.projectileAnimation)
         {
             float speed = rb.velocity.magnitude;
             //If speed is small enough we enable script

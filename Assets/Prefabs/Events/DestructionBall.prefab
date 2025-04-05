@@ -1729,7 +1729,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!135 &4470161265618434557
 SphereCollider:
@@ -1769,6 +1769,7 @@ MonoBehaviour:
   magneticCube: {fileID: 2877455228711921279, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
   passiveCube: {fileID: 2877455228711921279, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
   magnetTimer: 1
+  projectionTimer: 0.1
   golem: {fileID: 0}
   weight: 1.1799998
 --- !u!114 &5877665383290575578

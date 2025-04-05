@@ -75,7 +75,7 @@ public class Feromagnetic : MonoBehaviour
     Collider[] magnetic = new Collider[1000];
     void Start()
     {
-        mask = LayerMask.GetMask("magnetic") | LayerMask.GetMask("magneticStructure");
+        mask = LayerMask.GetMask("magneticPlayer1") | LayerMask.GetMask("magneticStructure") | LayerMask.GetMask("magneticPlayer2") ;
         // We assume all cubes have same scale
         quaternions = createListAngles();
         timeBeforeSwitching += Random.Range(-timeBeforeSwitchingVariation, timeBeforeSwitchingVariation);

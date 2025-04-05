@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum BlocState
 {
-    projectile, structure, detached,magnetic,melee,nonMagnetic,exploded
+    projectile, structure, detached,magnetic,melee,nonMagnetic,exploded,projectileAnimation
 }

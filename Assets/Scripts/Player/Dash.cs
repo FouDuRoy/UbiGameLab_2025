@@ -42,6 +42,7 @@ public class Dash : MonoBehaviour
     {
         float OG_drag = playerRb.drag;
         float OG_angularDrag= playerRb.angularDrag;
+        int oldLayer = playerRb.gameObject.layer;
         playerRb.gameObject.layer = 0;
 
         if (superDash) { playerRb.AddForce(playerGolem.transform.forward * superDashForce, ForceMode.VelocityChange); }
@@ -66,7 +67,7 @@ public class Dash : MonoBehaviour
             playerInfo.invun = false;
 
         yield return new WaitForSeconds(magneticRecoveryTime);
-        playerRb.gameObject.layer = 3;
+        playerRb.gameObject.layer = oldLayer;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -74,7 +75,6 @@ public class Dash : MonoBehaviour
         if (isDashing)
         {
             Bloc blocHit = collision.collider.gameObject.GetComponent<Bloc>();
-
             if (blocHit != null && blocHit.ownerTranform!= null)
             {
                 Transform blocOwner = blocHit.ownerTranform;
