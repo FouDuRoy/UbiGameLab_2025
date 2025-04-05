@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 //Federico Barallobres
@@ -260,6 +261,7 @@ public class PlayerObjects : MonoBehaviour
     {
         Destroy(cube.GetComponent<SphereCollider>());
         resetRb(cube);
+        cube.GetComponent<Rigidbody>().mass=10f;
         StartCoroutine(blockEjection(cube));
     }
  
@@ -298,7 +300,9 @@ public class PlayerObjects : MonoBehaviour
         yield return new WaitForSeconds(magnetTimer-projectionTimer);
         if (block != null)
         {
+            resetRb(block);
             block.GetComponent<Bloc>().state = BlocState.magnetic;
+            
         }
 
     }
