@@ -335,6 +335,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     public void coneProjection()
     {
+        print("shoot");
         for (int i = 0; i < blocsToEject.Count && i < nbBlocsSelect; i++)
         {
             EjectBloc(blocsToEject[i], golem);
@@ -405,6 +406,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         if (blocsToEject.Count < nbBlocsSelect && potentialBlocs.Count>0)
         {
             feedback.BlocAttachedVibration();
+            print("start");
             placeBolcAtPosition(potentialBlocs.First(),blocsToEject.Count);
             blocsToEject.Add(potentialBlocs.First());
             if(potentialBlocs.First().tag != "explosive")
