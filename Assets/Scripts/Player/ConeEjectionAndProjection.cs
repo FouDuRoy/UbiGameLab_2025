@@ -189,19 +189,16 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     private void EjectionAlgo(float rightTrigger)
     {
-        if ((rightTrigger > 0 && lastHold == "right"))
+        if (rightTrigger > 0 && lastHold == "right")
         {
             leftRay.gameObject.SetActive(true);
             rightRay.gameObject.SetActive(true);
-            if(blocsToEject.Count< maxBlocs)
+            if(blocsToEject.Count< maxBlocs && playerGrid.grid.Count > 1)
             {
                 ConeProjectionSelection(timeHeld);
 
             }
-            if (timeHeld == 0) //On appelle VibrationStart une seule fois, au d�but
-            {
-                feedback.RepulsionVibrationStart(secondsForMaxCharging);
-            }
+          
             timeHeld += Time.deltaTime;
             rightTriggerHeld = true;
 
@@ -231,7 +228,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         }
         else if (rightTriggerHeld)
         {
-            feedback.RepulsionVibrationEnd(timeHeld, true);
+           
             if (lastHold == "right" || cancelEjectionShoot)
             {
                 coneProjection();
@@ -407,6 +404,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         if (blocsToEject.Count < nbBlocsSelect && potentialBlocs.Count>0)
         {
+            feedback.BlocAttachedVibration();
             placeBolcAtPosition(potentialBlocs.First(),blocsToEject.Count);
             blocsToEject.Add(potentialBlocs.First());
             if(potentialBlocs.First().tag != "explosive")
