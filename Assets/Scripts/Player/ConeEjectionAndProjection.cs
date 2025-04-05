@@ -398,9 +398,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Vector3 positionY = new Vector3(y.transform.position.x, 0, y.transform.position.z);
         float distanceX = (positionX - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
         float distanceY = (positionY - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
-        if(angleX <=  maxAngle && angleY <= maxAngle || (angleX > maxAngle && angleY > maxAngle))
+        if(angleX <=  maxAngleRepulsion && angleY <= maxAngleRepulsion || (angleX > maxAngleRepulsion && angleY > maxAngleRepulsion))
             return -Math.Sign(distanceX - distanceY);
-        else if(angleX <= maxAngle){
+        else if(angleX <= maxAngleRepulsion){
             return -1;
         }else{
             return 1;
