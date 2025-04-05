@@ -31,7 +31,7 @@ public class GridSystem : MonoBehaviour
     public PlayerObjects playerObj;
     public float cubeSize = 1.2f;
     public List<Material> materials = new List<Material>();
-    Vector3Int headPosition = Vector3Int.up;
+    public bool negativeY = false;
     HapticFeedbackController feedback;
     List<Vector3Int> neighborsList = new List<Vector3Int>
     {
@@ -325,7 +325,7 @@ public class GridSystem : MonoBehaviour
     public bool positionAvailable(Vector3 position)
     {
         Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x / cubeSize), Mathf.RoundToInt(position.y / cubeSize), Mathf.RoundToInt(position.z / cubeSize));
-        if (key.y < 0)
+        if (key.y < 0 && !negativeY)
             return false;
         return !grid.ContainsKey(key);
 
@@ -361,8 +361,7 @@ public class GridSystem : MonoBehaviour
 
             foreach (Vector3Int position in neighborsList)
             {
-
-                if (!grid.ContainsKey(position+ positionCube) && (position + positionCube).y>=0)
+                if (!grid.ContainsKey(position+ positionCube) && ((position + positionCube).y>=0 || negativeY))
                 {
                     availableSpaces.Add(tranformToVector3(position+ positionCube));
                 }
