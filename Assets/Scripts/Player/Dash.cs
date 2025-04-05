@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class Dash : MonoBehaviour
 {
     [SerializeField] private float dashForce = 80f;
+    [SerializeField] private float superDashForce = 120f;
     [SerializeField] private float dashDuration = .15f;
     [SerializeField] private float cooldown=1f;
     [SerializeField] private float dashStopTime = 0.05f;
     [SerializeField] private float magneticRecoveryTime = 0.25f;
+
+    public bool superDash = false;
+    public bool tutoDash=false; 
 
     private PlayerInfo playerInfo;
     private float lastDashTime;
@@ -38,7 +43,9 @@ public class Dash : MonoBehaviour
         float OG_drag = playerRb.drag;
         float OG_angularDrag= playerRb.angularDrag;
         playerRb.gameObject.layer = 0;
-        playerRb.AddForce(playerGolem.transform.forward * dashForce, ForceMode.VelocityChange);
+
+        if (superDash) { playerRb.AddForce(playerGolem.transform.forward * dashForce, ForceMode.VelocityChange); }
+        else { playerRb.AddForce(playerGolem.transform.forward * superDashForce, ForceMode.VelocityChange); }
         playerRb.angularDrag = 50000f;
         isDashing=true;
         playerInfo.invun = true;
@@ -71,10 +78,23 @@ public class Dash : MonoBehaviour
             {
                 Transform blocOwner = blocHit.ownerTranform;
                 GridSystem grid = blocOwner.GetComponent<GridSystem>();
+
                 if (blocHit.state == BlocState.structure && grid!=null)
                 {
-                    grid.DetachBlock(blocHit.gameObject);
-                    blocHit.state = BlocState.detached;
+                    if (superDash || tutoDash)
+                    {
+                        foreach(var item in grid.grid)
+                        {
+                            GameObject bloc = item.Value;
+                            grid.DetachBlock(bloc);
+                            bloc.GetComponent<Bloc>().state = BlocState.projectile;
+                        }
+                    }
+                    else
+                    {
+                        grid.DetachBlock(blocHit.gameObject);
+                        blocHit.state = BlocState.detached;
+                    }                    
                 }
             }
         }
