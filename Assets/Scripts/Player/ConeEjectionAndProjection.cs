@@ -18,6 +18,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     public bool cancelEjectionShoot = false;
     [SerializeField] float initialAngle = 45f;
     [SerializeField] float maxAngleRepulsion = 90f;
+    float angle;
     public int blocHeight =1;
     public float blocDiffY = 0.1f;
     [SerializeField] float secondsForMaxCharging = 2f;
@@ -378,25 +379,32 @@ public class ConeEjectionAndProjection : MonoBehaviour
                 continue;
             }
             //Look if the cube is within the angle of ejection
-            Vector3 planeProjection = Vector3.ProjectOnPlane(v.Value.transform.position, Vector3.up);
-            Vector3 golemProjection = Vector3.ProjectOnPlane(golem.position, Vector3.up);
-            float angle = Vector3.Angle(planeProjection - golemProjection, golem.forward);
-            if (angle > maxAngleRepulsion)
-            {
-                continue;
-            }
+       
            
             potentialBlocs.Add(v.Value);
             
         }
 
+       
         potentialBlocs.Sort((x, y) =>
         {
-            Vector3 positionX = new Vector3(x.transform.position.x, 0, x.transform.position.z);
-            Vector3 positionY = new Vector3(y.transform.position.x, 0, y.transform.position.z);
-            float distanceX = (positionX - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
-            float distanceY = (positionY - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
+        Vector3 planeProjectionX = Vector3.ProjectOnPlane(x.transform.position, Vector3.up);
+        Vector3 planeProjectionY = Vector3.ProjectOnPlane(y.transform.position, Vector3.up);
+        Vector3 golemProjection = Vector3.ProjectOnPlane(golem.position, Vector3.up);
+        float angleX = Vector3.Angle(planeProjectionX - golemProjection, golem.forward);
+        float  angleY = Vector3.Angle(planeProjectionY - golemProjection, golem.forward);
+
+        Vector3 positionX = new Vector3(x.transform.position.x, 0, x.transform.position.z);
+        Vector3 positionY = new Vector3(y.transform.position.x, 0, y.transform.position.z);
+        float distanceX = (positionX - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
+        float distanceY = (positionY - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
+        if(angleX <=  maxAngle && angleY <= maxAngle || (angleX > maxAngle && angleY > maxAngle))
             return -Math.Sign(distanceX - distanceY);
+        else if(angleX <= maxAngle){
+            return -1;
+        }else{
+            return 1;
+        }
         });
 
         if (blocsToEject.Count < nbBlocsSelect && potentialBlocs.Count>0)
