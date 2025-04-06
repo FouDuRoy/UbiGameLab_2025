@@ -283,11 +283,7 @@ public class Feromagnetic : MonoBehaviour
             }
             AttachCube();
         }
-        else if(timer > timeBeforeSwitching)
-        {
-            cubeRB.AddForce(Vector3.up * 300, ForceMode.VelocityChange);
-            timer = 0;
-        }else
+        else
         {
             ResetObject();
         }

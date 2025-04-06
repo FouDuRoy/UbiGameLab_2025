@@ -287,19 +287,7 @@ public class ConnectMagneticStructure : MonoBehaviour
     }
     private void AttachCube()
     {
-        //Attach magnetic field
-        List<GameObject> childsList = new List<GameObject>();
-        for (int i = 0; i < this.transform.childCount; i++)
-        {
-            if(transform.GetChild(i).GetComponent<Bloc>() != null)
-            {
-                childsList.Add(transform.GetChild(i).gameObject);
-            }
-        }
-        foreach (var v in playerGrid.grid)
-        {
-            v.Value.layer = cubeAttractedToTransform.gameObject.layer;
-        }
+       
 
         //Set magnetic rb
         cubeRB = this.GetComponent<Rigidbody>();
@@ -316,6 +304,19 @@ public class ConnectMagneticStructure : MonoBehaviour
         foreach (var v in playerGrid.grid)
         {
             v.Value.transform.Find("Orientation").rotation *= rotationAmount;
+        }
+         //Attach magnetic field
+        List<GameObject> childsList = new List<GameObject>();
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            if(transform.GetChild(i).GetComponent<Bloc>() != null)
+            {
+                childsList.Add(transform.GetChild(i).gameObject);
+            }
+        }
+        foreach (var v in playerGrid.grid)
+        {
+            v.Value.layer = cubeAttractedToTransform.gameObject.layer;
         }
         playerGrid.clearGrid();
        

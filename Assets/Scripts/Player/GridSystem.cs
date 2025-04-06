@@ -131,10 +131,11 @@ public class GridSystem : MonoBehaviour
     }
     public void AttachGrid(GridSystem gridToAttach, GameObject attachedBloc, GameObject blocToAttach, Vector3 closestFace)
     {
+        List<GameObject> blocsToDetach = new List<GameObject>();
         Vector3Int systemNewGridCoordinates = new Vector3Int(Mathf.RoundToInt((closestFace.x / cubeSize))
          , Mathf.RoundToInt((closestFace.y / cubeSize)), Mathf.RoundToInt((closestFace.z / cubeSize)));
         Vector3Int systemOldGridCoordinates = gridToAttach.findFirstKey(blocToAttach);
-      
+        
         Quaternion rotationDifference = blocToAttach.transform.Find("Orientation").rotation * Quaternion.Inverse(attachedBloc.transform.Find("Orientation").rotation);
         Vector3 kernelPosition = systemNewGridCoordinates - rotationDifference * systemOldGridCoordinates;
         foreach (var v in gridToAttach.grid)
@@ -143,21 +144,30 @@ public class GridSystem : MonoBehaviour
             {
                 Vector3 cubePositionNewGrid = kernelPosition + rotationDifference * v.Key;
                 Vector3Int intCord = new Vector3Int(Mathf.RoundToInt(cubePositionNewGrid.x), Mathf.RoundToInt( cubePositionNewGrid.y), Mathf.RoundToInt(cubePositionNewGrid.z));
-                grid.Add(intCord, v.Value);
-                v.Value.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
-                v.Value.GetComponent<Bloc>().ownerTranform = transform.root.transform;
-                v.Value.GetComponent<Bloc>().state = BlocState.structure;
-                 if(v.Value.tag != "explosive"){
-                v.Value.GetComponent<Bloc>().changeMeshMaterial(materials.First());
-              
-            }
-        
+               
+                if(positionAvailable(intCord)){
+
+                    grid.Add(intCord, v.Value);
+                    v.Value.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
+                    v.Value.GetComponent<Bloc>().ownerTranform = transform.root.transform;
+                    v.Value.GetComponent<Bloc>().state = BlocState.structure;
+                    if(v.Value.tag != "explosive"){
+                    v.Value.GetComponent<Bloc>().changeMeshMaterial(materials.First());
+                    }
+                }else{
+                    blocsToDetach.Add(v.Value);
+                    
+                }
             }
             else
             {
                 Debug.Log("wow");
             }
 
+        }
+        foreach(GameObject bloc in blocsToDetach){
+            gridToAttach.DetachBlocSingle(bloc);
+            bloc.GetComponent<Bloc>().state = BlocState.detached;
         }
     }
     public void DetachBlock(GameObject bloc)
@@ -327,10 +337,31 @@ public class GridSystem : MonoBehaviour
     public bool positionAvailable(Vector3 position)
     {
         Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x / cubeSize), Mathf.RoundToInt(position.y / cubeSize), Mathf.RoundToInt(position.z / cubeSize));
-     
         if (key.y < 0 && !negativeY || Mathf.Abs(key.x)>maxDimension || Mathf.Abs(key.y) > maxDimension || Mathf.Abs(key.z) > maxDimension)
+        {
             return false;
         }
+
+        bool isMaxPosition = Mathf.Abs(key.x) == maxDimension || Mathf.Abs(key.z) == maxDimension;
+        if(isMaxPosition && (key-Vector3Int.up).y ==0){
+            return false;
+        }
+
+        return !grid.ContainsKey(key);
+
+    }
+     public bool positionAvailable(Vector3Int key)
+    {
+        if (key.y < 0 && !negativeY || Mathf.Abs(key.x)>maxDimension || Mathf.Abs(key.y) > maxDimension || Mathf.Abs(key.z) > maxDimension)
+        {
+            return false;
+        }
+
+        bool isMaxPosition = Mathf.Abs(key.x) == maxDimension || Mathf.Abs(key.z) == maxDimension;
+        if(isMaxPosition && (key-Vector3Int.up).y ==0){
+            return false;
+        }
+
         return !grid.ContainsKey(key);
 
     }
@@ -367,13 +398,21 @@ public class GridSystem : MonoBehaviour
             {
 
                 if (!grid.ContainsKey(position+ positionCube) &&  ((position + positionCube).y>=0 || negativeY) && 
-                (position + positionCube).y>=0 && Mathf.Abs((position + positionCube).y) <= maxDimension &&
+                  Mathf.Abs((position + positionCube).y) <= maxDimension &&
                      Mathf.Abs((position + positionCube).x) <= maxDimension && Mathf.Abs((position + positionCube).z) <= maxDimension)
                 {
                     availableSpaces.Add(tranformToVector3(position+ positionCube));
                 }
             }
-
+            
+            if(availableSpaces.Count == 1 ){
+                Vector3 element = availableSpaces.First();
+                bool isMax = Mathf.Abs(element.x) == maxDimension || Mathf.Abs(element.y) == maxDimension || Mathf.Abs(element.z) == maxDimension;
+                bool isY = element - positionCube == new Vector3(0,1,0);
+                if(isMax && isY){
+                    availableSpaces.Clear();
+                }
+            }
             return availableSpaces;
         }
     }
