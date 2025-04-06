@@ -272,7 +272,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         magnetic = magnetic.FindAll(cube =>
         {
             //If the cube is used by a player dont pull
-            if (cube.transform.root.GetComponent<PlayerObjects>() != null || cube.transform.tag != "magnetic" || cube.GetComponent<Bloc>().owner != "Neutral")
+            if (cube.transform.root.GetComponent<PlayerObjects>() != null || (cube.transform.tag != "magnetic" && cube.transform.tag != "explosive" ) || cube.GetComponent<Bloc>().owner != "Neutral")
             {
                 return false;
             }
