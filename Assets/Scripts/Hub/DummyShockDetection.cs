@@ -45,7 +45,7 @@ public class DummyShockDetection : MonoBehaviour
                     //print("Range Attack " + this.gameObject.name + " : " + hitter.name + "velocity" + projectileVelocity);
                     DoRotation();
                     nHits++;
-                    if (nHits > 1)
+                    if (nHits > 2)
                     {
                         shootTutoUI.NextTuto();
                     }

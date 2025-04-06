@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3264004194642966958}
   - component: {fileID: 1184147075252892046}
   - component: {fileID: 6082395043726891876}
+  - component: {fileID: 2644929450397823886}
   m_Layer: 5
   m_Name: Tuto
   m_TagString: Untagged
@@ -123,10 +124,9 @@ MonoBehaviour:
   tutoType: 3
   nextTuto: {fileID: 0}
   attractionInput: {fileID: 21300000, guid: b1c750609ca53fb49af8513034fe6671, type: 3}
-  movementIntput: {fileID: 21300000, guid: 81319f78ca5e9844dbdbffce77e51c03, type: 3}
+  foncerInput: {fileID: 21300000, guid: 25af4935020133c4199859d8ffb97e9b, type: 3}
   shootInput: {fileID: 21300000, guid: 1e756c6927cb9c147be610b6c577520f, type: 3}
   cacInput: {fileID: 21300000, guid: b89a5b97d20758e439d78b66f293948b, type: 3}
-  emergencyEjectionInput: {fileID: 21300000, guid: 25af4935020133c4199859d8ffb97e9b, type: 3}
 --- !u!114 &6082395043726891876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +153,27 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!95 &2644929450397823886
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537601073901146340}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6618a36521cd88b459a0662b8ab1bc56, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2377870709145327513
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,14 +202,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4445567825831239429}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30.336426}
+  m_SizeDelta: {x: 0, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5195435717756335815
 CanvasRenderer:

@@ -129,6 +129,7 @@ MonoBehaviour:
   magneticCube: {fileID: 2877455228711921279}
   passiveCube: {fileID: 2877455228711921279}
   magnetTimer: 1
+  projectionTimer: 0.5
   golem: {fileID: 0}
   weight: 1
 --- !u!114 &3659590908044369442
@@ -146,13 +147,14 @@ MonoBehaviour:
   checkGrid: 0
   saveGrid: 0
   restoreGrid: 0
-  playerMat: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  playerMat: {fileID: 2100000, guid: 6f926dd7c27bd844388757ffb268b2ec, type: 2}
   detachedSpeed: 10
   keyValuePairs: []
   kernel: {fileID: 2877455228711921279}
   playerObj: {fileID: 0}
   cubeSize: 1.2
   materials: []
+  negativeY: 1
 --- !u!114 &601833731030724977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: 6f926dd7c27bd844388757ffb268b2ec, type: 2}
   maxSpeed: Infinity
   contactOffset: 0.1
   weight: 0.02

@@ -136,7 +136,7 @@ public class ConnectMagneticStructure : MonoBehaviour
             int i = 0;
             closestCube = null;
             float shortestDistance = 1000f;
-            mask = LayerMask.GetMask("magnetic");
+            mask = LayerMask.GetMask("magneticPlayer1") | LayerMask.GetMask("magneticPlayer2");
             int maxX = playerGrid.grid.Keys.Max(x => x.x);
             int minX = playerGrid.grid.Keys.Min(x => x.x);
             int maxZ = playerGrid.grid.Keys.Max(x => x.z);
@@ -298,7 +298,7 @@ public class ConnectMagneticStructure : MonoBehaviour
         }
         foreach (var v in playerGrid.grid)
         {
-            v.Value.layer = 3;
+            v.Value.layer = cubeAttractedToTransform.gameObject.layer;
         }
 
         //Set magnetic rb
@@ -356,6 +356,7 @@ public class ConnectMagneticStructure : MonoBehaviour
             child.transform.parent = playerAtractedObjects.cubeRb.transform;
         }
         playerAtractedTo.GetComponent<HapticFeedbackController>().BlocAttachedVibration();
+        playerAtrcatedGrid.ejectRest(0);
         this.GetComponent<ConnectMagneticStructure>().enabled = false;
     }
 
@@ -545,7 +546,6 @@ public class ConnectMagneticStructure : MonoBehaviour
             {
                 v.Value.layer = LayerMask.NameToLayer("magneticStructureConnect");
             }
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("magneticStructureConnect"),LayerMask.NameToLayer("Wall"));
         }
     }
     public bool LookPositionGridAvailable()

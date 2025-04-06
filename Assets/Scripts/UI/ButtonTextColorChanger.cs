@@ -2,8 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using System.Collections;
 
-public class ButtonTextColorChanger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler, IPointerClickHandler
+public class ButtonTextColorChanger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
+    ISelectHandler, IDeselectHandler, IPointerClickHandler, ISubmitHandler
 {
     public TMP_Text targetText;
 
@@ -11,6 +13,8 @@ public class ButtonTextColorChanger : MonoBehaviour, IPointerEnterHandler, IPoin
     public Color highlightColor = Color.yellow;
     public Color selectedColor = Color.cyan;
     public Color pressedColor = Color.red;
+
+    private Coroutine revertCoroutine;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -34,6 +38,26 @@ public class ButtonTextColorChanger : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        SetPressedColor();
+    }
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        SetPressedColor();
+    }
+
+    private void SetPressedColor()
+    {
         targetText.color = pressedColor;
+        print("Pressed Color");
+        StartCoroutine(RevertToSelectedColor());
+    }
+
+    private IEnumerator RevertToSelectedColor()
+    {
+        print(">>> coroutine START");
+        yield return new WaitForSeconds(0.5f);
+        print(">>> coroutine END");
+        targetText.color = selectedColor;
     }
 }

@@ -58,6 +58,7 @@ MonoBehaviour:
   magneticCube: {fileID: 2877455228711921279, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   magnetTimer: 1
+  projectionTimer: 0.1
   golem: {fileID: 7406773669950310810}
   weight: 1
 --- !u!114 &7850894500233854463
@@ -72,10 +73,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 140
+  explosionForce: 40
   mouvementSpeed: 80
   deadZone: 0.999
-  mouvementReductionFactor: 0.3
+  mouvementReductionFactor: 0.2
   pivotSpeed: 180
   rotationSpeed: 30
   rotParam: 4
@@ -205,6 +206,7 @@ MonoBehaviour:
   playerObj: {fileID: 0}
   cubeSize: 1.2
   materials: []
+  negativeY: 0
 --- !u!114 &1846468097935250436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,11 +232,11 @@ MonoBehaviour:
     rightMotorMax: 0
     duration: 0
   repulsionCharge:
-    leftMotorMin: 0
-    leftMotorMax: 0.15
-    rightMotorMin: 0
-    rightMotorMax: 0.05
-    duration: 2
+    leftMotorMax: 0.3
+    leftMidTime: 0.05
+    rightMotorMax: 0.5
+    rightMidTime: 0
+    totalDuration: 0.1
   repulsionShoot:
     leftMotorMax: 10
     leftMidTime: 0
@@ -246,11 +248,11 @@ MonoBehaviour:
     leftMidTime: 0
     rightMotorMax: 0.1
     rightMidTime: 0.05
-    totalDuration: 0.4
+    totalDuration: 0.15
   damageTaken:
-    leftMotorMax: 0.8
+    leftMotorMax: 0.6
     leftMidTime: 0.2
-    rightMotorMax: 0.8
+    rightMotorMax: 0.6
     rightMidTime: 0.2
     totalDuration: 0.6
 --- !u!114 &1662070221946770721
@@ -265,18 +267,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e37e11737801404ab826afec355bb28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightDriftProportion: 0.1
-  attractionForce: 400
+  rightDriftProportion: 0.05
+  attractionForce: 500
+  ejectionAngle: 90
+  cancelEjectionShoot: 0
   initialAngle: 15
-  maxAngleRepulsion: 60
+  angleRepulsion: 60
+  blocHeight: 1
+  blocDiffY: 0.1
   secondsForMaxCharging: 0.2
   distance: 22
   secondsForMaxChargingEjection: 2
   secondsForMaxChargingEjectionLength: 2
   maxNumberBlocsEjection: 100
-  ejectionSpeed: 60
+  ejectionSpeed: 100
   colorChangeIntensity: 3
-  maxProportion: 1
+  maxBlocs: 5
+  displaceTimeBloc: 0.1
   lineMat: {fileID: 2100000, guid: ee7f85b04e41b7e4691b855f2795b6e0, type: 2}
   maxAngle: 15
   visionConeObject: {fileID: 7466266776518265088}
@@ -299,7 +306,7 @@ GameObject:
   - component: {fileID: 4536375940292766682}
   - component: {fileID: 6839929964872536719}
   - component: {fileID: 8481011708396636658}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Golem Bleu
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -470,10 +477,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashForce: 80
+  superDashForce: 120
   dashDuration: 0.15
   cooldown: 1
   dashStopTime: 0.05
-  magneticRecoveryTime: 0.25
+  magneticRecoveryTime: 0.15
+  superDash: 0
+  tutoDash: 0
 --- !u!1 &7131289492177703505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,50 +1493,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4849188280878380009}
     m_Modifications:
-    - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.616
-      objectReference: {fileID: 0}
-    - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3369690493817710893, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3454389509678048327, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 4995969142354872981, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5346239013487951123, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.154
-      objectReference: {fileID: 0}
-    - target: {fileID: 8186035451944999267, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.63
-      objectReference: {fileID: 0}
     - target: {fileID: 94014667416673883, guid: c657abd300fdcd94592dda81f85c9a4b, type: 3}
       propertyPath: m_Layer
       value: 11
@@ -2415,6 +2381,50 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 139301567485427045, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.616
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232772846130586669, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369690493817710893, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454389509678048327, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4995969142354872981, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5346239013487951123, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.154
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186035451944999267, guid: c7297ff0e9b6d5e40b26339e614db2fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.63
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2541,10 +2551,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7847107767003649144}
     m_Modifications:
-    - target: {fileID: -8744666883889611541, guid: 163433122f55b1743ba5d7b2307a4f74, type: 3}
-      propertyPath: m_Layer
-      value: 21
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 163433122f55b1743ba5d7b2307a4f74, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2600,10 +2606,6 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 163433122f55b1743ba5d7b2307a4f74, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035616581401964078, guid: 163433122f55b1743ba5d7b2307a4f74, type: 3}
-      propertyPath: m_Layer
-      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: -8744666883889611541, guid: 996edf6a353526344b086f31a2c203de, type: 3}
       propertyPath: m_Layer

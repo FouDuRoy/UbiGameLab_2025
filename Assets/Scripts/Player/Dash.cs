@@ -2,14 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class Dash : MonoBehaviour
 {
     [SerializeField] private float dashForce = 80f;
+    [SerializeField] private float superDashForce = 120f;
     [SerializeField] private float dashDuration = .15f;
     [SerializeField] private float cooldown=1f;
     [SerializeField] private float dashStopTime = 0.05f;
     [SerializeField] private float magneticRecoveryTime = 0.25f;
+
+    public bool superDash = false;
+    public bool tutoDash=false;
+    public bool canDash = true;
 
     private PlayerInfo playerInfo;
     private float lastDashTime;
@@ -25,7 +31,7 @@ public class Dash : MonoBehaviour
     // Update is called once per frame
     public void TryToDash(Rigidbody playerRb, Transform playerGolem, PlayerMouvement playerMouvement)
     {
-        if (Time.time > lastDashTime+cooldown)
+        if (Time.time > lastDashTime+cooldown && canDash)
         {
             StartCoroutine(dashCoroutine(playerRb, playerGolem, playerInfo));
             playerMouvement.ThrowCubes();
@@ -37,8 +43,12 @@ public class Dash : MonoBehaviour
     {
         float OG_drag = playerRb.drag;
         float OG_angularDrag= playerRb.angularDrag;
+        int oldLayer = playerRb.gameObject.layer;
         playerRb.gameObject.layer = 0;
-        playerRb.AddForce(playerGolem.transform.forward * dashForce, ForceMode.VelocityChange);
+
+        if (superDash) { playerRb.AddForce(playerGolem.transform.forward * superDashForce, ForceMode.VelocityChange); }
+        else { playerRb.AddForce(playerGolem.transform.forward * dashForce, ForceMode.VelocityChange); }
+
         playerRb.angularDrag = 50000f;
         isDashing=true;
         playerInfo.invun = true;
@@ -58,23 +68,42 @@ public class Dash : MonoBehaviour
             playerInfo.invun = false;
 
         yield return new WaitForSeconds(magneticRecoveryTime);
-        playerRb.gameObject.layer = 3;
+        playerRb.gameObject.layer = oldLayer;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (isDashing)
         {
-            Bloc blocHit = collision.gameObject.GetComponent<Bloc>();
-          
+            Bloc blocHit = collision.collider.gameObject.GetComponent<Bloc>();
             if (blocHit != null && blocHit.ownerTranform!= null)
             {
                 Transform blocOwner = blocHit.ownerTranform;
                 GridSystem grid = blocOwner.GetComponent<GridSystem>();
+
                 if (blocHit.state == BlocState.structure && grid!=null)
                 {
-                    grid.DetachBlock(blocHit.gameObject);
-                    blocHit.state = BlocState.detached;
+                    if (superDash || tutoDash)
+                    {
+                        foreach(var item in grid.grid)
+                        {
+                            GameObject bloc = item.Value;
+                            grid.DetachBlock(bloc);
+                            bloc.GetComponent<Bloc>().state = BlocState.projectile;
+
+                            if (tutoDash)
+                            {
+                                GameObject blocToDestroy = grid.gameObject;
+                                blocToDestroy.GetComponent<Rigidbody>().AddForce(new Vector3(0,3000000f,0),ForceMode.Acceleration);
+                                Destroy(blocToDestroy, 2);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        grid.DetachBlock(blocHit.gameObject);
+                        blocHit.state = BlocState.detached;
+                    }                    
                 }
             }
         }

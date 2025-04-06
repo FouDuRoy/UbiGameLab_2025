@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 
 public class ConeEjectionAndProjection : MonoBehaviour
@@ -11,8 +14,13 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     // Start is called before the first frame update
     [SerializeField] float attractionForce = 10f;
+    [SerializeField] float ejectionAngle = 90f;
+    public bool cancelEjectionShoot = false;
     [SerializeField] float initialAngle = 45f;
-    [SerializeField] float maxAngleRepulsion = 90f;
+    [SerializeField] float angleRepulsion = 90f;
+    float angle;
+    public int blocHeight =1;
+    public float blocDiffY = 0.1f;
     [SerializeField] float secondsForMaxCharging = 2f;
     [SerializeField] float distance = 10f;
     [SerializeField] float secondsForMaxChargingEjection = 3f;
@@ -20,7 +28,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float maxNumberBlocsEjection = 20f;
     [SerializeField] float ejectionSpeed = 3f;
     [SerializeField] float colorChangeIntensity = 3f;
-    [SerializeField] float maxProportion = 1f;
+    [SerializeField] int maxBlocs = 5;
+    [SerializeField] float displaceTimeBloc = 0.1f;
     int nbBlocsSelect;
     List<Collider> magneticLast = new List<Collider>();
 
@@ -66,6 +75,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
     public int resolution = 20; // Plus c�est haut, plus le c�ne est lisse
     public Material visionMaterial;
     List<GameObject> blocsToEject = new List<GameObject>();
+    List<GameObject> potentialBlocs= new List<GameObject>();
+    bool readyToEject = false;
     void Start()
     {
 
@@ -98,11 +109,16 @@ public class ConeEjectionAndProjection : MonoBehaviour
         rightRay = CreateRay(Color.red);
         Color curentColor = playerGrid.playerMat.color;
         chargedColor = new Color(curentColor.r * colorChangeIntensity, curentColor.g * colorChangeIntensity, curentColor.b * colorChangeIntensity);
+
     }
 
 
     void Update()
     {
+        if(blocsToEject.Count == 0)
+        {
+            readyToEject = false;
+        }
         float rightTrigger = ejectCubes.ReadValue<float>();
         float leftTrigger = AttractCubes.ReadValue<float>();
         if (AttractCubes.WasPressedThisFrame())
@@ -173,21 +189,21 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     private void EjectionAlgo(float rightTrigger)
     {
-        if ((rightTrigger > 0 && lastHold == "right"))
+        if (rightTrigger > 0 && lastHold == "right")
         {
             leftRay.gameObject.SetActive(true);
             rightRay.gameObject.SetActive(true);
-            coneProjectionColor(timeHeld);
-            if (timeHeld == 0) //On appelle VibrationStart une seule fois, au d�but
+            if(blocsToEject.Count< maxBlocs && playerGrid.grid.Count > 1)
             {
-                feedback.RepulsionVibrationStart(secondsForMaxCharging);
+                ConeProjectionSelection(timeHeld);
+
             }
+          
             timeHeld += Time.deltaTime;
             rightTriggerHeld = true;
-
+            /*
             //Draw rays to indicate current range
-            float timeHeldAngle = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
-            float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (timeHeldAngle / secondsForMaxChargingEjection);
+            float maxAngle = angleRepulsion;
 
             //Draw Rays in Build
             Vector3 origin = golem.position;
@@ -208,26 +224,24 @@ public class ConeEjectionAndProjection : MonoBehaviour
             visionConeObject.transform.rotation = Quaternion.LookRotation(golem.forward);
             GenerateMesh(maxAngle);
             //Debug.DrawRay(golem.position, Quaternion.AngleAxis(maxAngle, Vector3.up) * golem.forward*distance,Color.red, Time.deltaTime);
-            //Debug.DrawRay(golem.position, Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward *distance, Color.red, Time.deltaTime);
+            //Debug.DrawRay(golem.position, Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward *distance, Color.red, Time.deltaTime);*/ // Pas de cône affiché pour la répulsion
         }
         else if (rightTriggerHeld)
         {
-            feedback.RepulsionVibrationEnd(timeHeld, true);
-            if (lastHold == "right")
+           
+            if (lastHold == "right" || cancelEjectionShoot)
             {
                 coneProjection();
 
-            }
-            foreach (var v in playerGrid.grid)
-            {
-                if (v.Value != playerGrid.kernel)
-                    v.Value.GetComponent<Bloc>().changeMeshMaterialColor(playerGrid.playerMat.color);
+            }else{
+                coneReset();
             }
             visionConeObject.SetActive(false);
             leftRay.gameObject.SetActive(false);
             rightRay.gameObject.SetActive(false);
             rightTriggerHeld = false;
             timeHeld = 0;
+            
         }
 
     }
@@ -246,9 +260,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
     }
     public void coneAttraction(Transform player, float attractionForce, float angle, float distance, float magnitude)
     {
+        /*
         leftRay.gameObject.SetActive(true);
-        rightRay.gameObject.SetActive(true);
-        LayerMask mask = LayerMask.GetMask("magnetic");
+        rightRay.gameObject.SetActive(true);*/ // Plus besoin des ray, le cône au sol fait le taff nickel
+
         // Find all magneticblocs in radiusZone
         float sphereRadius = distance;
         List<Collider> magnetic = Physics.OverlapSphere(player.position, sphereRadius).ToList<Collider>();
@@ -257,7 +272,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         magnetic = magnetic.FindAll(cube =>
         {
             //If the cube is used by a player dont pull
-            if (cube.transform.root.GetComponent<PlayerObjects>() != null || cube.transform.tag != "magnetic" || cube.GetComponent<Bloc>().owner != "Neutral")
+            if (cube.transform.root.GetComponent<PlayerObjects>() != null || (cube.transform.tag != "magnetic" && cube.transform.tag != "explosive" ) || cube.GetComponent<Bloc>().owner != "Neutral")
             {
                 return false;
             }
@@ -288,7 +303,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             cube.GetComponent<Rigidbody>().useGravity = true;
         });
 
-        //Draw Rays in Build
+        //Draw Rays in Build 
         Vector3 origin = golem.position;
 
         Vector3 rightDir = Quaternion.AngleAxis(angle, Vector3.up) * golem.forward;
@@ -300,13 +315,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
         visionConeObject.transform.rotation = Quaternion.LookRotation(player.forward);
         GenerateMesh(maxAngle);
 
-        rightRay.SetPosition(0, origin);
+        /*rightRay.SetPosition(0, origin);
         rightRay.SetPosition(1, origin + rightDir * distance);
 
         leftRay.SetPosition(0, origin);
-        leftRay.SetPosition(1, origin + leftDir * distance);
-        //Debug.DrawRay(player.position, Quaternion.AngleAxis(angle, Vector3.up) * player.forward*distance,Color.red, Time.deltaTime);
-        //Debug.DrawRay(player.position, Quaternion.AngleAxis(-angle, Vector3.up) * player.forward *distance, Color.red, Time.deltaTime);
+        leftRay.SetPosition(1, origin + leftDir * distance);*/
+
         magneticLast = magnetic;
     }
 
@@ -323,101 +337,158 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     public void coneProjection()
     {
+        if (blocsToEject.Count > 0) { feedback.RepulsionVibrationShoot(blocsToEject.Count); }
 
         for (int i = 0; i < blocsToEject.Count && i < nbBlocsSelect; i++)
         {
             EjectBloc(blocsToEject[i], golem);
         }
-        playerGrid.coneEjectRest(ejectionSpeed, rightDriftProportion);
-
     }
-    public void coneProjectionColor(float time)
-    {
-        blocsToEject.Clear();
-        int maxX = playerGrid.grid.Keys.Max(x => x.x);
-        int minX = playerGrid.grid.Keys.Min(x => x.x);
-        int maxZ = playerGrid.grid.Keys.Max(x => x.z);
-        int minZ = playerGrid.grid.Keys.Min(x => x.z);
-        int maxY = playerGrid.grid.Keys.Max(x => x.y);
-        int minY = playerGrid.grid.Keys.Min(x => x.y);
-
-        int radiusInBlocs = Mathf.Max(Mathf.Abs(maxX), Mathf.Abs(minX), Mathf.Abs(maxZ), Mathf.Abs(minZ), Mathf.Abs(maxY), Mathf.Abs(minY));
-        float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
-        float radius = radiusInBlocs * blocSizeWorld * 1.2f;
-
-        float timeHeldAngle = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjection);
-        float timeHeldLength = Mathf.Clamp(timeHeld, 0, secondsForMaxChargingEjectionLength);
-        float boundaryDistanceRatio = timeHeldLength / secondsForMaxChargingEjectionLength;
-        float angleRatio = timeHeldAngle / secondsForMaxChargingEjection;
-        float maxAngle = initialAngle + (maxAngleRepulsion - initialAngle) * (angleRatio);
-        LayerMask mask = LayerMask.GetMask("magnetic");
-        int nbHits = Physics.OverlapSphereNonAlloc(golem.position, radius, magnetic, mask, QueryTriggerInteraction.Ignore);
-        float timel = Mathf.Min(1, (time / secondsForMaxChargingEjectionLength));
-        nbBlocsSelect = Math.Max((int)(timel * (playerGrid.grid.Count * maxProportion)), 1);
-        for (int i = 0; i < nbHits; i++)
-        {
-
-            //look if the cube is within the neighberhood of the boundary
-
-            if (magnetic[i].GetComponent<BoxCollider>() == null)
-            {
-                magnetic[i] = null;
-                continue;
-            }
-            if (magnetic[i].gameObject == mainCubeRb.gameObject)
-            {
-                magnetic[i] = null;
-                continue;
-            }
-            if (magnetic[i].transform.root != transform)
-            {
-                magnetic[i] = null;
-                continue;
-            }
-
-            magnetic[i].gameObject.GetComponent<Bloc>().changeMeshMaterialColor(playerGrid.playerMat.color);
-            //Look if the cube is within the angle of ejection
-            Vector3 planeProjection = Vector3.ProjectOnPlane(magnetic[i].transform.position, Vector3.up);
-            Vector3 golemProjection = Vector3.ProjectOnPlane(golem.position, Vector3.up);
-            float angle = Vector3.Angle(planeProjection - golemProjection, golem.forward);
-            if (angle > maxAngle)
-            {
-                magnetic[i] = null;
-                continue;
-            }
-            if (magnetic[i] != null)
-            {
-                blocsToEject.Add(magnetic[i].gameObject);
-            }
-        }
-        blocsToEject.Sort((x, y) =>
-        {
-            Vector3 positionX = new Vector3(x.transform.position.x, 0, x.transform.position.z);
-            Vector3 positionY = new Vector3(y.transform.position.x, 0, y.transform.position.z);
-            float distanceX = (positionX - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
-            float distanceY = (positionY - new Vector3(golem.position.x, 0, golem.position.z)).sqrMagnitude;
-            return -Math.Sign(distanceX - distanceY);
-        });
+    public void coneReset(){
         for (int i = 0; i < blocsToEject.Count && i < nbBlocsSelect; i++)
         {
-            blocsToEject[i].gameObject.GetComponent<Bloc>().changeMeshMaterialColor(chargedColor);
+            resetBloc(blocsToEject[i], golem);
         }
+    }
+    public void ConeProjectionSelection(float time)
+    {
+        potentialBlocs.Clear();
+        LayerMask mask = 1 << playerGrid.kernel.layer;
+        float timel = Mathf.Min(1, (time / secondsForMaxChargingEjectionLength));
+        nbBlocsSelect = Math.Max((int)(timel * maxBlocs), 1);
+        
+        foreach(var v in playerGrid.grid){
+             if (v.Value.GetComponent<BoxCollider>() == null)
+            {
+                continue;
+            }
+            if (v.Value.gameObject == mainCubeRb.gameObject)
+            {
+                continue;
+            }
+            if (v.Value.transform.root != transform)
+            {
+                continue;
+            }
+            if (blocsToEject.Contains(v.Value))
+            {
+                continue;
+            }
+            if(v.Value.tag == "magneticCube"){
+                continue;
+            }
+            //Look if the cube is within the angle of ejection
+       
+           
+            potentialBlocs.Add(v.Value);
+            
+        }
+
+       
+        potentialBlocs.Sort((x, y) =>
+        {
+        Vector3 planeProjectionX = Vector3.ProjectOnPlane(x.transform.position, Vector3.up);
+        Vector3 planeProjectionY = Vector3.ProjectOnPlane(y.transform.position, Vector3.up);
+        Vector3 golemProjection = Vector3.ProjectOnPlane(golem.position, Vector3.up);
+        float angleX = Vector3.Angle(planeProjectionX - golemProjection, golem.forward);
+        float  angleY = Vector3.Angle(planeProjectionY - golemProjection, golem.forward);
+
+        Vector3 positionX = new Vector3(x.transform.position.x, 0, x.transform.position.z);
+        Vector3 positionY = new Vector3(y.transform.position.x, 0, y.transform.position.z);
+        float distanceX = (x.transform.position - golem.position).sqrMagnitude;
+        float distanceY = (y.transform.position - golem.position).sqrMagnitude;
+        if(angleX <=  angleRepulsion && angleY <= angleRepulsion || (angleX > angleRepulsion && angleY > angleRepulsion))
+            return -Math.Sign(distanceX - distanceY);
+        else if(angleX <= angleRepulsion){
+            return -1;
+        }else{
+            return 1;
+        }
+        });
+
+        if (blocsToEject.Count < nbBlocsSelect && potentialBlocs.Count>0)
+        {
+            feedback.RepulsionVibrationSelect();
+            placeBolcAtPosition(potentialBlocs.First(),blocsToEject.Count);
+            blocsToEject.Add(potentialBlocs.First());
+            if(potentialBlocs.First().tag != "explosive")
+                potentialBlocs.First().gameObject.GetComponent<Bloc>().changeMeshMaterialColor(chargedColor);
+        }
+        
+    }
+    public void placeBolcAtPosition(GameObject bloc,int number)
+    {
+        if(playerGrid.kernel.layer == LayerMask.NameToLayer("magneticPlayer1")){
+             bloc.layer = LayerMask.NameToLayer("ejection1");
+        }else{
+            bloc.layer = LayerMask.NameToLayer("ejection2");
+        }
+        playerGrid.DetachBlocSingleProjection(bloc);
+        playerGrid.ejectRest(0);
+        bloc.GetComponent<Bloc>().state = BlocState.projectileAnimation;
+        // travel to position
+        StartCoroutine(displaceBloc(bloc,number));
+    }
+
+    private  IEnumerator displaceBloc( GameObject bloc ,int number)
+    {
+        int sign;
+
+        if (number % 2 == 0)
+        {
+            sign = -1;
+        }
+        else
+        {
+            sign = 1;
+        }
+        int right = Mathf.CeilToInt(number / 2f);
+        Vector3 destination = golem.position + golem.forward * 2 * (1.2f-right*blocDiffY) + golem.right * 1.4f * right * sign + golem.up * 1.2f*blocHeight;
+        Rigidbody blocRb = bloc.GetComponent<Rigidbody>();
+        blocRb.useGravity = false;
+
+        Vector3 initialPosition = bloc.transform.position;
+        float time = 0;
+        time += Time.deltaTime;
+        float t = time / displaceTimeBloc;
+        Vector3 position = Vector3.Lerp(initialPosition, destination, t);
+        blocRb.MovePosition(position);
+
+        while (!readyToEject)
+        {
+            yield return new WaitForSeconds(Time.deltaTime);
+            time += Time.deltaTime;
+            t = time / displaceTimeBloc;
+            destination = golem.position + golem.forward * 2 * (1.2f-right*blocDiffY) + golem.right * 1.4f * right * sign + golem.up * 1.2f*blocHeight;
+            position = Vector3.Lerp(initialPosition, destination, t);
+            blocRb.MovePosition(position);
+        }
+         blocRb.position = new Vector3(bloc.transform.position.x,0.6f,bloc.transform.position.z);
+         blocRb.velocity = new Vector3(blocRb.velocity.x,0,blocRb.velocity.z).normalized*blocRb.velocity.magnitude;
+        blocsToEject.Remove(bloc);
+
     }
     private void EjectBloc(GameObject cube, Transform golem)
     {
-
-        cube.transform.parent = this.transform.parent;
-        playerGrid.DetachBlocSingle(cube);
-
-        //Add rigidBody
-
+        readyToEject = true;
         float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
-        cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-        cube.GetComponent<Rigidbody>().AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
-        cube.GetComponent<Bloc>().state = BlocState.projectile;
-
-        //Remove owner of cube
+        Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
+        Bloc cubeBloc = cube.GetComponent<Bloc>();
+        cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
+        cubeRb.interpolation = RigidbodyInterpolation.Interpolate;
+       
+        cubeRb.AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
+        cubeBloc.state = BlocState.projectile;
+        cubeBloc.ownerTranform.GetComponent<PlayerObjects>().finishEjection(cube);
     }
+    private void resetBloc(GameObject cube, Transform golem)
+    {
+        readyToEject = true;
+        Bloc cubeBloc = cube.GetComponent<Bloc>();
+        cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
+        cubeBloc.ownerTranform.GetComponent<PlayerObjects>().resetEjection(cube);
+    }
+
 
     public float MaxDistanceForDirection(Vector3 direction, float radius)
     {

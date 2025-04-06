@@ -33,6 +33,7 @@ public class GridSystem : MonoBehaviour
     public List<Material> materials = new List<Material>();
     public float maxDimension = 3;
     Vector3Int headPosition = Vector3Int.up;
+    public bool negativeY = false;
     HapticFeedbackController feedback;
     List<Vector3Int> neighborsList = new List<Vector3Int>
     {
@@ -193,6 +194,17 @@ public class GridSystem : MonoBehaviour
         }
 
     }
+    public void DetachBlocSingleProjection(GameObject bloc)
+    {
+        Vector3Int detachedGridPos = findFirstKey(bloc);
+        if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
+        {
+            playerObj.removeCubeProjection(grid[detachedGridPos]);
+            grid.Remove(detachedGridPos);
+            playerObj.weight -= bloc.GetComponent<Bloc>().weight;
+
+        }
+    }
     public void DetachBlocSingle(GameObject bloc)
     {
         Vector3Int detachedGridPos = findFirstKey(bloc);
@@ -315,8 +327,8 @@ public class GridSystem : MonoBehaviour
     public bool positionAvailable(Vector3 position)
     {
         Vector3Int key = new Vector3Int(Mathf.RoundToInt(position.x / cubeSize), Mathf.RoundToInt(position.y / cubeSize), Mathf.RoundToInt(position.z / cubeSize));
-        if (key.y < 0 || Mathf.Abs(key.x)>maxDimension || Mathf.Abs(key.y) > maxDimension || Mathf.Abs(key.z) > maxDimension)
-        {
+     
+        if (key.y < 0 && !negativeY || Mathf.Abs(key.x)>maxDimension || Mathf.Abs(key.y) > maxDimension || Mathf.Abs(key.z) > maxDimension)
             return false;
         }
         return !grid.ContainsKey(key);
@@ -354,7 +366,8 @@ public class GridSystem : MonoBehaviour
             foreach (Vector3Int position in neighborsList)
             {
 
-                if (!grid.ContainsKey(position+ positionCube) && (position + positionCube).y>=0 && Mathf.Abs((position + positionCube).y) <= maxDimension &&
+                if (!grid.ContainsKey(position+ positionCube) &&  ((position + positionCube).y>=0 || negativeY) && 
+                (position + positionCube).y>=0 && Mathf.Abs((position + positionCube).y) <= maxDimension &&
                      Mathf.Abs((position + positionCube).x) <= maxDimension && Mathf.Abs((position + positionCube).z) <= maxDimension)
                 {
                     availableSpaces.Add(tranformToVector3(position+ positionCube));

@@ -7,10 +7,10 @@ using TMPro;
 public enum TutoType
 {
     Attraction,
-    Movement,
+    Foncer,
     Shoot,
     Cac,
-    EmergencyEjection
+    Arene
 }
 
 public class TutoUI : MonoBehaviour
@@ -21,16 +21,17 @@ public class TutoUI : MonoBehaviour
     [SerializeField] private TutoUI nextTuto;
 
     [SerializeField] private Sprite attractionInput;
-    [SerializeField] private Sprite movementIntput;
+    [SerializeField] private Sprite foncerInput;
     [SerializeField] private Sprite shootInput;
     [SerializeField] private Sprite cacInput;
-    [SerializeField] private Sprite emergencyEjectionInput;
 
     private Image inputImage;
     private TMP_Text tutoText;
     private Camera mainCamera;
     private GridSystem playerGrid;
+    private Dash playerDash;
     private float normalPlayerSpeed;
+    private
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +53,7 @@ public class TutoUI : MonoBehaviour
 
         mainCamera = Camera.main;
         playerGrid = playerMouvement.GetComponent<GridSystem>();
+        playerDash = playerMouvement.GetComponentInChildren<Dash>();
 
         switch (tutoType)
         {
@@ -59,8 +61,8 @@ public class TutoUI : MonoBehaviour
                 inputImage.sprite = attractionInput;
                 break;
 
-            case TutoType.Movement:
-                inputImage.sprite = movementIntput;
+            case TutoType.Foncer:
+                inputImage.sprite = foncerInput;
                 break;
 
             case TutoType.Shoot:
@@ -68,10 +70,7 @@ public class TutoUI : MonoBehaviour
                 break;
 
             case TutoType.Cac: inputImage.sprite = cacInput; break;
-
-            case TutoType.EmergencyEjection:
-                inputImage.sprite = emergencyEjectionInput;
-                break;
+            case TutoType.Arene:inputImage.enabled = false;break;
         }
 
         if (tutoType != TutoType.Attraction)
@@ -82,12 +81,13 @@ public class TutoUI : MonoBehaviour
         {
             normalPlayerSpeed = playerMouvement.mouvementSpeed;
             playerMouvement.mouvementSpeed = 0;
+            playerDash.canDash = false;
         }
+    }
 
-        if (tutoType == TutoType.Movement)
-        {
-            
-        }
+    private void OnDestroy()
+    {
+        NextTuto();
     }
 
     private void FixedUpdate()
@@ -97,12 +97,9 @@ public class TutoUI : MonoBehaviour
             if (playerGrid.grid.Count > 1)
             {
                 playerMouvement.mouvementSpeed = normalPlayerSpeed;
+                playerDash.canDash = true;
                 NextTuto();
             }
-        }
-        else if (tutoType == TutoType.Movement)
-        {
-            
         }
     }
 

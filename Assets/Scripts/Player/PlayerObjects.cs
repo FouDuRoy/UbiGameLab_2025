@@ -1,6 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 //Federico Barallobres
 public class PlayerObjects : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] public GameObject magneticCube;
     [SerializeField] public GameObject passiveCube;
     [SerializeField] private float magnetTimer = 3f;
+    [SerializeField] private float projectionTimer = 0.1f;
     [SerializeField] public GameObject golem;
     Rigidbody magneticCubeRb;
     MouvementType moveType;
@@ -62,16 +64,7 @@ public class PlayerObjects : MonoBehaviour
             joint.yMotion = ConfigurableJointMotion.Free;
             joint.zMotion = ConfigurableJointMotion.Free;
             joint.projectionMode = JointProjectionMode.None;
-
             Destroy(joint);
-            Rigidbody rb2 = passiveCube.GetComponent<Rigidbody>();
-            Rigidbody rb = cube.GetComponent<Rigidbody>();
-            rb.mass = rb2.mass;
-            rb.drag = rb2.drag;
-            rb.angularDrag = rb2.angularDrag;
-            rb.collisionDetectionMode = rb2.collisionDetectionMode;
-            rb.useGravity = rb2.useGravity;
-            rb.constraints = rb2.constraints;
         }
         foreach (var m in gridSystem.grid)
         {
@@ -118,22 +111,25 @@ public class PlayerObjects : MonoBehaviour
 
                     Destroy(joint);
 
-                    resetRb(cube);
+
                 }
 
             }
         }
-
         Rigidbody cubeRigidBody = cube.gameObject.GetComponent<Rigidbody>();
-        if(cubeRigidBody == null)
+        if (cubeRigidBody == null)
         {
             addRigidBody(cube);
-            
+
+        }
+        else
+        {
+            resetRb(cube);
         }
 
         cube.transform.parent = transform.parent;
         ConnectMagneticStructure magneticStructure = cube.GetComponent<ConnectMagneticStructure>();
-        if(magneticStructure != null)
+        if (magneticStructure != null)
         {
             cube.transform.Find("Orientation").rotation = cube.transform.rotation;
             StartCoroutine(magenticStructure(cube));
@@ -147,7 +143,101 @@ public class PlayerObjects : MonoBehaviour
 
         }
     }
+    public void removeCubeProjection(GameObject cube)
+    {
 
+        ConfigurableJoint[] joints = cube.GetComponents<ConfigurableJoint>();
+        foreach (ConfigurableJoint joint in joints)
+        {
+            JointDrive xDrive = joint.xDrive;
+            xDrive.positionSpring = 0;
+            xDrive.positionDamper = 0;
+            joint.xDrive = xDrive;
+
+            JointDrive yDrive = joint.yDrive;
+            yDrive.positionSpring = 0;
+            yDrive.positionDamper = 0;
+            joint.yDrive = yDrive;
+
+            JointDrive zDrive = joint.zDrive;
+            zDrive.positionSpring = 0;
+            zDrive.positionDamper = 0;
+            joint.zDrive = zDrive;
+
+            JointDrive angularXDrive = joint.angularXDrive;
+            angularXDrive.positionSpring = 0;
+            angularXDrive.positionDamper = 0;
+            joint.angularXDrive = angularXDrive;
+
+            JointDrive angularYZDrive = joint.angularYZDrive;
+            angularYZDrive.positionSpring = 0;
+            angularYZDrive.positionDamper = 0;
+            joint.angularYZDrive = angularYZDrive;
+
+            JointDrive slerpDrive = joint.slerpDrive;
+            slerpDrive.positionSpring = 0;
+            slerpDrive.positionDamper = 0;
+            joint.angularYMotion = ConfigurableJointMotion.Free;
+            joint.angularXMotion = ConfigurableJointMotion.Free;
+            joint.angularZMotion = ConfigurableJointMotion.Free;
+            joint.xMotion = ConfigurableJointMotion.Free;
+            joint.yMotion = ConfigurableJointMotion.Free;
+            joint.zMotion = ConfigurableJointMotion.Free;
+            joint.projectionMode = JointProjectionMode.None;
+            Destroy(joint);
+        }
+        foreach (var m in gridSystem.grid)
+        {
+            joints = m.Value.GetComponents<ConfigurableJoint>();
+            foreach (ConfigurableJoint joint in joints)
+            {
+                if (joint.connectedBody.gameObject == cube)
+                {
+                    JointDrive xDrive = joint.xDrive;
+                    xDrive.positionSpring = 0;
+                    xDrive.positionDamper = 0;
+                    joint.xDrive = xDrive;
+
+                    JointDrive yDrive = joint.yDrive;
+                    yDrive.positionSpring = 0;
+                    yDrive.positionDamper = 0;
+                    joint.yDrive = yDrive;
+
+                    JointDrive zDrive = joint.zDrive;
+                    zDrive.positionSpring = 0;
+                    zDrive.positionDamper = 0;
+                    joint.zDrive = zDrive;
+
+                    JointDrive angularXDrive = joint.angularXDrive;
+                    angularXDrive.positionSpring = 0;
+                    angularXDrive.positionDamper = 0;
+                    joint.angularXDrive = angularXDrive;
+
+                    JointDrive angularYZDrive = joint.angularYZDrive;
+                    angularYZDrive.positionSpring = 0;
+                    angularYZDrive.positionDamper = 0;
+                    joint.angularYZDrive = angularYZDrive;
+
+                    JointDrive slerpDrive = joint.slerpDrive;
+                    slerpDrive.positionSpring = 0;
+                    slerpDrive.positionDamper = 0;
+                    joint.angularYMotion = ConfigurableJointMotion.Free;
+                    joint.angularXMotion = ConfigurableJointMotion.Free;
+                    joint.angularZMotion = ConfigurableJointMotion.Free;
+                    joint.xMotion = ConfigurableJointMotion.Free;
+                    joint.yMotion = ConfigurableJointMotion.Free;
+                    joint.zMotion = ConfigurableJointMotion.Free;
+                    joint.projectionMode = JointProjectionMode.None;
+
+                    Destroy(joint);
+
+
+                }
+
+            }
+        }
+        cube.transform.parent = transform.parent;
+    }
     public void resetRb(GameObject cube)
     {
         Rigidbody rb2;
@@ -167,7 +257,14 @@ public class PlayerObjects : MonoBehaviour
         rb.useGravity = rb2.useGravity;
         rb.constraints = rb2.constraints;
     }
-
+    public void finishEjection(GameObject cube)
+    {
+        Destroy(cube.GetComponent<SphereCollider>());
+        resetRb(cube);
+        cube.GetComponent<Rigidbody>().mass=10f;
+        StartCoroutine(blockEjection(cube));
+    }
+ 
     public void addRigidBody(GameObject cube)
     {
         if (!cube.TryGetComponent<Rigidbody>(out _))
@@ -183,7 +280,7 @@ public class PlayerObjects : MonoBehaviour
             rb.constraints = rb2.constraints;
             cube.GetComponent<Bloc>().rb = rb;
             cube.GetComponent<StoredVelocity>().rb = rb;
-            
+
         }
     }
     IEnumerator blockNeutral(GameObject block)
@@ -196,10 +293,30 @@ public class PlayerObjects : MonoBehaviour
         }
 
     }
+      IEnumerator blockEjection(GameObject block)
+    {
+        yield return new WaitForSeconds(projectionTimer);
+        block.layer = 0;
+        yield return new WaitForSeconds(magnetTimer-projectionTimer);
+        if (block != null)
+        {
+            resetRb(block);
+            block.GetComponent<Bloc>().state = BlocState.magnetic;
+            
+        }
+
+    }
+    public void resetEjection(GameObject cube)
+    {
+        Destroy(cube.GetComponent<SphereCollider>());
+        resetRb(cube);
+        cube.layer = 0;
+        cube.GetComponent<Bloc>().state = BlocState.magnetic; 
+    }
     IEnumerator magenticStructure(GameObject block)
     {
 
-      Rigidbody blocRb = block.GetComponent<Rigidbody>();
+        Rigidbody blocRb = block.GetComponent<Rigidbody>();
         do
         {
             yield return null;
