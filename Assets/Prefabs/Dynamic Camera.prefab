@@ -242,14 +242,18 @@ MonoBehaviour:
   Player1: {fileID: 0}
   Player2: {fileID: 0}
   ArenaCenter: {fileID: 0}
+  isOrthographic: 1
   maxSpeed: Infinity
-  horizontalInterpTime: 0.1
   distanceFromPlayersFactor: 0.7
   minDistance: 12
   maxDistance: 24
   distanceInterpTime: 0.6
-  isOrthographic: 1
-  playIntroAnimation: 0
+  horizontalInterpTime: 0.1
+  simpleCamera: 1
+  maxRotSpeed: 50
+  minCamDistanceForRot: 13
+  rotationInterpTime: 0.5
+  playIntroAnimation: 1
 --- !u!95 &6266391422150885637
 Animator:
   serializedVersion: 5

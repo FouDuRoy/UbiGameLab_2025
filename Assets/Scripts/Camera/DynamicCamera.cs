@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder;
 
@@ -19,27 +20,35 @@ public class DynamicCamera : MonoBehaviour
     [SerializeField] private GameObject ArenaCenter;
 
     [Header("Parameters")]
+    [SerializeField] private bool isOrthographic = true;
     [SerializeField] private float maxSpeed = Mathf.Infinity;
-    [SerializeField] private float horizontalInterpTime = .5f;
     [SerializeField] private float distanceFromPlayersFactor = 2f;
     [SerializeField] private float minDistance;
     [SerializeField] private float maxDistance;
     [SerializeField] private float distanceInterpTime = .5f;
-    [SerializeField] private bool isOrthographic = true;
+    [SerializeField] private float horizontalInterpTime = .5f;
+    [SerializeField] private bool simpleCamera = false;
+    [SerializeField] private float maxRotSpeed = Mathf.Infinity;
+    [SerializeField] private float minCamDistanceForRot = 13f;
+    [SerializeField] private float rotationInterpTime = .5f;
+    
 
     [Header("Animation Settings")]
     [SerializeField] private bool playIntroAnimation=true;
 
     private Vector3 currentHorizontalVelocity = Vector3.zero;
     private Vector3 currentDistanceVelocity = Vector3.zero;
+    private Vector3 currentRotVelocity= Vector3.zero;
     private float currentOrthoSizeVelocity;
     private Vector3 playerOnePlanePos;
     private Vector3 playerTwoPlanePos;
     private Vector3 arenaCenterPlanePos;
+    private Vector3 cameraRot;
     private Vector2 angleCam;
     private Vector2 camLocalPos;
     private float camOrthoSize;
     private float distanceBetweenPlayers=0;
+    private Vector3 targetEuler;
 
     private Animator animator;
     private PlayerInput playerOneInputs;
@@ -75,7 +84,7 @@ public class DynamicCamera : MonoBehaviour
         }
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (shouldFollowPlayers)
         {
@@ -102,6 +111,26 @@ public class DynamicCamera : MonoBehaviour
                 camOrthoSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor, minDistance, maxDistance);
                 cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, camOrthoSize, ref currentOrthoSizeVelocity, distanceInterpTime, maxSpeed);
                 camUI.orthographicSize = cam.orthographicSize;
+            }
+
+            if (!simpleCamera && cam.orthographicSize>=minCamDistanceForRot)
+            {
+                // ROTATION
+
+                // Rotation cible
+                targetEuler = Quaternion.LookRotation(playerOnePlanePos-playerTwoPlanePos).eulerAngles+new Vector3(0,90,0);
+                //targetEuler.y=Mathf.Clamp(targetEuler.y,baseCamRot-maxRotAngle,baseCamRot+maxRotAngle);
+                
+
+                // Interpolation de la rotation
+                Vector3 currentEuler = transform.rotation.eulerAngles;
+                Vector3 smoothedEuler = new Vector3(
+                    0,
+                    Mathf.SmoothDampAngle(currentEuler.y, targetEuler.y, ref currentRotVelocity.y, rotationInterpTime,maxRotSpeed),
+                    0
+                );
+
+                transform.rotation = Quaternion.Euler(smoothedEuler);
             }
         }
     }

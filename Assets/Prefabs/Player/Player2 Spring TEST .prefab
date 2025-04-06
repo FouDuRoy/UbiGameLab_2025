@@ -78,12 +78,13 @@ MonoBehaviour:
   deadZone: 0.999
   mouvementReductionFactor: 0.2
   pivotSpeed: 180
-  rotationSpeed: 30
+  rotationSpeed: 15
   rotParam: 4
   rotationDamping: 20
   weightMouvementFactor: 0.95
   weightRotationFactor: 1
   moveType: 9
+  cameraOrientationReference: {fileID: 0}
   pauseMenu: {fileID: 0}
   selectedGUI: {fileID: 0}
 --- !u!114 &4658591005558201665
@@ -104,7 +105,7 @@ MonoBehaviour:
   maxDamage: 100
   impulsionWhenHitMelee: 200
   impulsionWhenHitRanged: 100
-  invincibilityDelay: 3
+  invincibilityDelay: 8
   hitStopDelay: 0.4
   MaxhealthValue: 300
   waitDelayAfterPlayerDeath: 1.5
@@ -112,7 +113,7 @@ MonoBehaviour:
   invun: 0
   recovering: 0
   healthValue: 300
-  playerLife: {fileID: 0}
+  playerLife: {fileID: 4000077683436356578}
   isInvincible: 0
 --- !u!114 &6980508144528851275
 MonoBehaviour:
@@ -206,6 +207,7 @@ MonoBehaviour:
   playerObj: {fileID: 0}
   cubeSize: 1.2
   materials: []
+  maxDimension: 10
   negativeY: 0
 --- !u!114 &1846468097935250436
 MonoBehaviour:
@@ -220,34 +222,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocAttached:
-    leftMotorMax: 0.5
+    leftMotorMax: 0.2
     leftMidTime: 0
-    rightMotorMax: 0.5
+    rightMotorMax: 0.4
     rightMidTime: 0.02
     totalDuration: 0.06
-  attraction:
-    leftMotorMin: 0
-    leftMotorMax: 0
-    rightMotorMin: 0
-    rightMotorMax: 0
-    duration: 0
   repulsionCharge:
     leftMotorMax: 0.3
-    leftMidTime: 0.05
-    rightMotorMax: 0.5
+    leftMidTime: 0.08
+    rightMotorMax: 0.1
     rightMidTime: 0
     totalDuration: 0.1
   repulsionShoot:
-    leftMotorMax: 10
+    leftMotorMax: 0.7
     leftMidTime: 0
     rightMotorMax: 0
     rightMidTime: 0
-    totalDuration: 0.12
-  ejectionShoot:
-    leftMotorMax: 5
+    totalDuration: 0.15
+  dash:
+    leftMotorMax: 0.5
     leftMidTime: 0
-    rightMotorMax: 0.1
-    rightMidTime: 0.05
+    rightMotorMax: 5
+    rightMidTime: 0.02
     totalDuration: 0.15
   damageTaken:
     leftMotorMax: 0.6
@@ -267,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e37e11737801404ab826afec355bb28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightDriftProportion: 0.05
+  rightDriftProportion: 0.02
   attractionForce: 500
   ejectionAngle: 90
   cancelEjectionShoot: 0
@@ -280,7 +276,7 @@ MonoBehaviour:
   secondsForMaxChargingEjection: 2
   secondsForMaxChargingEjectionLength: 2
   maxNumberBlocsEjection: 100
-  ejectionSpeed: 100
+  ejectionSpeed: 140
   colorChangeIntensity: 3
   maxBlocs: 5
   displaceTimeBloc: 0.1
@@ -387,7 +383,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3131990571156717056}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1f00530085064dd4296fe747edbf8ee6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -476,14 +472,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b6dafd71fad4184282c718e8e9a64cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashForce: 80
-  superDashForce: 120
+  dashForce: 100
+  superDashForce: 140
   dashDuration: 0.15
   cooldown: 1
   dashStopTime: 0.05
   magneticRecoveryTime: 0.15
   superDash: 0
   tutoDash: 0
+  canDash: 1
 --- !u!1 &7131289492177703505
 GameObject:
   m_ObjectHideFlags: 0
@@ -2639,23 +2636,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 476749208466882296, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2515372048339511418, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2515372048339511418, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Color.g
-      value: 0.7294118
+      value: 0.5835294
       objectReference: {fileID: 0}
     - target: {fileID: 2515372048339511418, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Color.r
-      value: 0.11372549
+      value: 0.09098039
       objectReference: {fileID: 0}
     - target: {fileID: 2902759346957416800, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4147786400664782858, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: playerInfo
@@ -2755,7 +2752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5224404989528505617, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5310062670897909723, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Name
@@ -2763,7 +2760,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5310062670897909723, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5553811935905866806, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8027716708602471293, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Color.b
@@ -2791,13 +2792,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8817687572422406684, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_Layer
-      value: 21
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6659231d97724e24c9161084900dc680, type: 3}
+--- !u!1 &4000077683436356578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5310062670897909723, guid: 6659231d97724e24c9161084900dc680, type: 3}
+  m_PrefabInstance: {fileID: 9093331320022469689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4972807292421811894 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4265178547906781839, guid: 6659231d97724e24c9161084900dc680, type: 3}

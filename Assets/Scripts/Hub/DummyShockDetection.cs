@@ -8,6 +8,8 @@ public class DummyShockDetection : MonoBehaviour
     [SerializeField] GameObject Ennemy;
     [SerializeField] private TutoUI cacTutoUI;
     [SerializeField] private TutoUI shootTutoUI;
+    [SerializeField] private int nShootHits = 2;
+    [SerializeField] private int nCacHits = 2;
 
     private Rigidbody rb;
     private int nHits = 0;
@@ -44,11 +46,16 @@ public class DummyShockDetection : MonoBehaviour
                 {
                     //print("Range Attack " + this.gameObject.name + " : " + hitter.name + "velocity" + projectileVelocity);
                     DoRotation();
-                    nHits++;
-                    if (nHits > 2)
+
+                    if (shootTutoUI.isActiveAndEnabled)
                     {
-                        shootTutoUI.NextTuto();
+                        nHits++;
+                        if (nHits >= nShootHits)
+                        {
+                            shootTutoUI.NextTuto();
+                        }
                     }
+                    
                 }
             }
             bool meleeFromOtherPlayer = stateHitter == BlocState.structure && (ownerHitter != ownerHitted);
@@ -61,10 +68,14 @@ public class DummyShockDetection : MonoBehaviour
                 {
                     //print("Melee attack " + this.gameObject.name + " : " + hitter.name);
                     DoRotation();
-                    nHits++;
-                    if (nHits > 1)
+
+                    if (cacTutoUI.isActiveAndEnabled)
                     {
-                        cacTutoUI.NextTuto();
+                        nHits++;
+                        if (nHits >= nCacHits)
+                        {
+                            cacTutoUI.NextTuto();
+                        }
                     }
                 }
             }
