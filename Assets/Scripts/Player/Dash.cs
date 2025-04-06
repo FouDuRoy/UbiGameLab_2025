@@ -14,7 +14,8 @@ public class Dash : MonoBehaviour
     [SerializeField] private float magneticRecoveryTime = 0.25f;
 
     public bool superDash = false;
-    public bool tutoDash=false; 
+    public bool tutoDash=false;
+    public bool canDash = true;
 
     private PlayerInfo playerInfo;
     private float lastDashTime;
@@ -30,7 +31,7 @@ public class Dash : MonoBehaviour
     // Update is called once per frame
     public void TryToDash(Rigidbody playerRb, Transform playerGolem, PlayerMouvement playerMouvement)
     {
-        if (Time.time > lastDashTime+cooldown)
+        if (Time.time > lastDashTime+cooldown && canDash)
         {
             StartCoroutine(dashCoroutine(playerRb, playerGolem, playerInfo));
             playerMouvement.ThrowCubes();
@@ -89,6 +90,13 @@ public class Dash : MonoBehaviour
                             GameObject bloc = item.Value;
                             grid.DetachBlock(bloc);
                             bloc.GetComponent<Bloc>().state = BlocState.projectile;
+
+                            if (tutoDash)
+                            {
+                                GameObject blocToDestroy = grid.gameObject;
+                                blocToDestroy.GetComponent<Rigidbody>().AddForce(new Vector3(0,3000000f,0),ForceMode.Acceleration);
+                                Destroy(blocToDestroy, 2);
+                            }
                         }
                     }
                     else
