@@ -58,9 +58,11 @@ public class PlayerMouvement : MonoBehaviour
     private bool shoulderLeftPressed = false;
     private bool shoulderRightPressed = false;
     GridSystem gridPlayer;
+    private Animator animator;
 
     void Awake()
     {
+        animator = GetComponentInChildren<Animator>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions.FindAction("Move");
         rotateAction = playerInput.actions.FindAction("Rotate");
@@ -181,6 +183,7 @@ public class PlayerMouvement : MonoBehaviour
         {
             if(dash!= null)
             {
+                animator.SetTrigger("IsEjecting");
                 dash.TryToDash(rb, golem, this);
             }
         }
@@ -475,12 +478,23 @@ public class PlayerMouvement : MonoBehaviour
     private void joystick4(Vector3 direction)
     {
   
+        if(direction.magnitude > 0.1f)
+        {
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
         if ((leftTrigger > .1f || rightTrigger > .1f) && direction.magnitude>0.1f)
         {
+
             golem.GetComponent<Synchro2>().rotationFixed = false;
 
             if(direction.magnitude > deadZone ){
-                 rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+//                animator.SetBool("IsMoving", true);
+//                print("moving");
+                rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             }
             
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
@@ -495,6 +509,7 @@ public class PlayerMouvement : MonoBehaviour
         else
         {
             golem.GetComponent<Synchro2>().rotationFixed = true;
+
             rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             rotatingRight = false;
             rotateAndDirection5(direction);

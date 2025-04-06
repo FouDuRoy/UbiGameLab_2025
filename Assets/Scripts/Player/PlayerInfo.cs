@@ -24,6 +24,8 @@ public class PlayerInfo : MonoBehaviour
     public bool invun = false;
     public bool recovering = false;
     public float healthValue;
+    private Animator animator;
+
     [Header("D�bogage")]
     [SerializeField] GameObject playerLife;
     [SerializeField] bool isInvincible;
@@ -32,6 +34,7 @@ public class PlayerInfo : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         healthValue = MaxhealthValue;
         gameOverCanvas.SetActive(false); // Hide canvas at start
 
@@ -58,6 +61,7 @@ public class PlayerInfo : MonoBehaviour
                 this.GetComponent<HapticFeedbackController>().damageTakenVibration();
                 float damage = Mathf.Clamp(impactForce.magnitude, 10, maxDamage);
                 healthValue -= damage;
+                animator.SetTrigger("IsHit");
                 Debug.Log("Current Health:" + healthValue + "damageTook:" + damage);
                 if (healthValue > 0)
                 {

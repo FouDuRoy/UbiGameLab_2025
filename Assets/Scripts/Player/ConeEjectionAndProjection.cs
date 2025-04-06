@@ -33,6 +33,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
     int nbBlocsSelect;
     List<Collider> magneticLast = new List<Collider>();
 
+    Animator animator;
+
 
     RaycastHit[] hitsArray = new RaycastHit[500];
     Collider[] magnetic = new Collider[500];
@@ -84,6 +86,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
     void Awake()
 
     {
+        animator = GetComponentInChildren<Animator>();
+
         //Cone vision attribution Mesh
         mask = LayerMask.GetMask("magnetic");
         coneMeshFilter = visionConeObject.GetComponent<MeshFilter>();
@@ -177,6 +181,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         }
         else if (leftTriggerHeld)
         {
+            animator.SetBool("IsPulling", false);
             feedback.AttractionVibrationEnd();
             leftTriggerHeld = false;
             leftRay.gameObject.SetActive(false);
@@ -191,6 +196,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     {
         if (rightTrigger > 0 && lastHold == "right")
         {
+            animator.SetTrigger("IsChargingLaunch");
             leftRay.gameObject.SetActive(true);
             rightRay.gameObject.SetActive(true);
             if(blocsToEject.Count< maxBlocs && playerGrid.grid.Count > 1)
@@ -236,6 +242,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
             }else{
                 coneReset();
             }
+            animator.SetTrigger("IsLaunching");
+            animator.ResetTrigger("IsChargingLaunch");
+
             visionConeObject.SetActive(false);
             leftRay.gameObject.SetActive(false);
             rightRay.gameObject.SetActive(false);
@@ -309,7 +318,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Vector3 rightDir = Quaternion.AngleAxis(angle, Vector3.up) * golem.forward;
         Vector3 leftDir = Quaternion.AngleAxis(-angle, Vector3.up) * golem.forward;
 
-
+        animator.SetBool("IsPulling", true);
         visionConeObject.SetActive(true);
         visionConeObject.transform.position = player.position + new Vector3(0f, -0.5f, 0f);
         visionConeObject.transform.rotation = Quaternion.LookRotation(player.forward);
@@ -476,7 +485,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Bloc cubeBloc = cube.GetComponent<Bloc>();
         cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
         cubeRb.interpolation = RigidbodyInterpolation.Interpolate;
-       
+        animator.SetTrigger("IsEjecting");
+        print("IsEjecting");
         cubeRb.AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
         cubeBloc.state = BlocState.projectile;
         cubeBloc.ownerTranform.GetComponent<PlayerObjects>().finishEjection(cube);
