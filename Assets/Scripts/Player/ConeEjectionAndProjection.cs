@@ -14,7 +14,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     // Start is called before the first frame update
     [SerializeField] float attractionForce = 10f;
-    [SerializeField] float ejectionAngle = 90f;
     public bool cancelEjectionShoot = false;
     [SerializeField] float initialAngle = 45f;
     [SerializeField] float angleRepulsion = 90f;
@@ -23,9 +22,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     public float blocDiffY = 0.1f;
     [SerializeField] float secondsForMaxCharging = 2f;
     [SerializeField] float distance = 10f;
-    [SerializeField] float secondsForMaxChargingEjection = 3f;
     [SerializeField] float secondsForMaxChargingEjectionLength = 10f;
-    [SerializeField] float maxNumberBlocsEjection = 20f;
     [SerializeField] float ejectionSpeed = 3f;
     [SerializeField] float colorChangeIntensity = 3f;
     [SerializeField] int maxBlocs = 5;
@@ -489,6 +486,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         print("IsEjecting");
         cubeRb.AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
         cubeBloc.state = BlocState.projectile;
+        cube.GetComponent<DragAfterImpact>().ejected = true;
         cubeBloc.ownerTranform.GetComponent<PlayerObjects>().finishEjection(cube);
     }
     private void resetBloc(GameObject cube, Transform golem)

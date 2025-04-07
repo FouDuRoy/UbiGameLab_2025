@@ -21,7 +21,6 @@ public class ExplosiveBloc : MonoBehaviour
     private float explosionTime = -1f;
     public bool hasExploded = false;
     [SerializeField] bool explode = false;
-    bool pushed = false;
 
     private void Start()
     {
@@ -79,7 +78,6 @@ public class ExplosiveBloc : MonoBehaviour
             }
 
         }
-        pushed = false;
 
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         if (boxCollider != null)

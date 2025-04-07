@@ -12,16 +12,12 @@ public class SpringBlocEjection : MonoBehaviour
     [SerializeField] float upEjectionMin = .2f;
     [SerializeField] float upEjectionMax = 1f;
     [SerializeField] float ejectionFactor = 1f;
+    [SerializeField] float ejectedFactor = 0.75f;
     [SerializeField] float maxAngle = 5f;
-    [SerializeField] float springBreakForce = 500f;
-    [SerializeField] float range = 4;
-    [SerializeField] float pushFactor = 30f;
     private GridSystem gridSystem;
     private PlayerObjects playerObjects;
-    Rigidbody mainCubeRb;
     MouvementType moveType;
-
-
+    Rigidbody mainCubeRb;
 
     private void Start()
     {
@@ -148,7 +144,7 @@ public class SpringBlocEjection : MonoBehaviour
                     Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
                     Quaternion randomDeviation = Quaternion.AngleAxis(Random.Range(-maxAngle, maxAngle), Vector3.up);
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
-                    hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity);
+                    hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity*ejectedFactor);
                 }
             }
 
@@ -173,7 +169,7 @@ public class SpringBlocEjection : MonoBehaviour
                     Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
                     Quaternion randomDeviation = Quaternion.AngleAxis(Random.Range(-maxAngle, maxAngle), Vector3.up);
                     hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
-                    hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity);
+                    hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity* ejectedFactor);
                 }
             }
         
@@ -187,7 +183,6 @@ public class SpringBlocEjection : MonoBehaviour
 
         Rigidbody cubeRB = this.GetComponent<Rigidbody>();
 
-        // mainCubeRb.AddForce(-cubeRB.velocity.normalized * pushFactor, ForceMode.VelocityChange);
     }
 
     IEnumerator resetTorque(GridSystem grid)

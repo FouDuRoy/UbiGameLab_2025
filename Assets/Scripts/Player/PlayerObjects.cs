@@ -301,7 +301,9 @@ public class PlayerObjects : MonoBehaviour
         {
             resetRb(block);
             block.GetComponent<Bloc>().state = BlocState.magnetic;
-            
+            block.GetComponent<DragAfterImpact>().ejected = false;
+            block.GetComponent<DragAfterImpact>().colided = false;
+
         }
 
     }

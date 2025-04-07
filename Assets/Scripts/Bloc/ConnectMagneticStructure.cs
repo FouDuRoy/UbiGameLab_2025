@@ -7,7 +7,6 @@ using UnityEngine.ProBuilder.Shapes;
 
 public class ConnectMagneticStructure : MonoBehaviour
 {
-    [SerializeField] float passiveRadius = 5.0f;
 
 
     [SerializeField] float maxSpeed = 10f;
