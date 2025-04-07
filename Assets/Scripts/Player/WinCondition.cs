@@ -6,6 +6,8 @@ public class WinCondition : MonoBehaviour
     [SerializeField] float victoryConditionSpeedRange = 10f;
     [SerializeField] float victoryConditionSpeedMelee = 15f;
     [SerializeField] GameObject Ennemy;
+    [SerializeField] float rangeDamageFactor = 1f;
+    [SerializeField] float meleeDamageFactor= 1f;
 
     void Start()
     {
@@ -38,8 +40,8 @@ public class WinCondition : MonoBehaviour
                 Vector3 projectileVelocity  = hitterVelocity;
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
-                    print("Range Attack " + this.gameObject.name + " : " + hitter.name + "velocity" + projectileVelocity);
-                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.name, projectileVelocity,false);
+                    //print("Range Attack " + this.gameObject.name + " : " + hitter.name + "velocity" + projectileVelocity);
+                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.name, projectileVelocity*rangeDamageFactor,false);
                 }
             }
             bool meleeFromOtherPlayer = stateHitter == BlocState.structure && (ownerHitter != ownerHitted);
@@ -50,8 +52,8 @@ public class WinCondition : MonoBehaviour
 
                 if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                 {
-                    print("Melee attack " + this.gameObject.name + " : " + hitter.name);
-                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.name, projectileVelocity,true);
+                    //print("Melee attack " + this.gameObject.name + " : " + hitter.name);
+                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.name, projectileVelocity*meleeDamageFactor,true);
                 }
             }
         }
