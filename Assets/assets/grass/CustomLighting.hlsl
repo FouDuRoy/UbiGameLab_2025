@@ -1,6 +1,5 @@
 #ifndef CUSTOM_LIGHTING_INCLUDED
 #define CUSTOM_LIGHTING_INCLUDED
-#pragma multi_compile _SHADOWS_SOFT
 
 void MainLight_float(float3 WorldPos, out float3 Direction, out float3 Color, out float DistanceAtten, out float ShadowAtten)
 {
@@ -20,9 +19,7 @@ void MainLight_float(float3 WorldPos, out float3 Direction, out float3 Color, ou
     Direction = mainLight.direction;
     Color = mainLight.color;
     DistanceAtten = mainLight.distanceAttenuation;
-    ShadowSamplingData shadowSamplingData = GetMainLightShadowSamplingData();
-    float shadowStrength = GetMainLightShadowStrength();
-    ShadowAtten = SampleShadowmap(shadowCoord, TEXTURE2D_ARGS(_MainLightShadowmapTexture, sampler_MainLightShadowmapTexture), shadowSamplingData, shadowStrength, false); 
+    ShadowAtten = mainLight.shadowAttenuation;
 #endif
 }
 
@@ -44,9 +41,7 @@ void MainLight_half(float3 WorldPos, out half3 Direction, out half3 Color, out h
     Direction = mainLight.direction;
     Color = mainLight.color;
     DistanceAtten = mainLight.distanceAttenuation;
-    ShadowSamplingData shadowSamplingData = GetMainLightShadowSamplingData();
-    float shadowStrength = GetMainLightShadowStrength();
-    ShadowAtten = SampleShadowmap(shadowCoord, TEXTURE2D_ARGS(_MainLightShadowmapTexture, sampler_MainLightShadowmapTexture), shadowSamplingData, shadowStrength, false); 
+    ShadowAtten = mainLight.shadowAttenuation;
 #endif
 }
 
