@@ -67,6 +67,9 @@ public class PlayerInfo : MonoBehaviour
                 {
                     invun = true;
                     StartCoroutine(DoHitStop(hitStopDelay));
+
+                    dynamicCamera.LoopBetweenCameras(hitStopDelay);
+
                     if(melee){
                         this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHitMelee, ForceMode.VelocityChange);
                         
