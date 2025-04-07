@@ -265,7 +265,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightDriftProportion: 0.02
   attractionForce: 500
-  ejectionAngle: 90
   cancelEjectionShoot: 0
   initialAngle: 15
   angleRepulsion: 60
@@ -273,13 +272,13 @@ MonoBehaviour:
   blocDiffY: 0.1
   secondsForMaxCharging: 0.2
   distance: 22
-  secondsForMaxChargingEjection: 2
   secondsForMaxChargingEjectionLength: 2
-  maxNumberBlocsEjection: 100
   ejectionSpeed: 140
   colorChangeIntensity: 3
   maxBlocs: 5
   displaceTimeBloc: 0.1
+  leftHandTransform: {fileID: 4126520412925669232}
+  rightHandTransform: {fileID: 3932534389986642022}
   lineMat: {fileID: 2100000, guid: 5de4fbdbb1ac55345a979f6a4e9c97fe, type: 2}
   maxAngle: 15
   visionConeObject: {fileID: 8721610333923546856}
@@ -1572,6 +1571,16 @@ PrefabInstance:
 --- !u!4 &1623932430673458142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 850474137939941157, guid: 1ce52d2d0d69d9c43bde50fa4cc9bc3a, type: 3}
+  m_PrefabInstance: {fileID: 2108846027297924347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3932534389986642022 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3159006277158268061, guid: 1ce52d2d0d69d9c43bde50fa4cc9bc3a, type: 3}
+  m_PrefabInstance: {fileID: 2108846027297924347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4126520412925669232 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2594205576636599179, guid: 1ce52d2d0d69d9c43bde50fa4cc9bc3a, type: 3}
   m_PrefabInstance: {fileID: 2108846027297924347}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5044021858382377452 stripped

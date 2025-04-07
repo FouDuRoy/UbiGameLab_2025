@@ -18,7 +18,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float initialAngle = 45f;
     [SerializeField] float angleRepulsion = 90f;
     float angle;
-    public int blocHeight =1;
+    public int blocHeight = 1;
     public float blocDiffY = 0.1f;
     [SerializeField] float secondsForMaxCharging = 2f;
     [SerializeField] float distance = 10f;
@@ -27,6 +27,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float colorChangeIntensity = 3f;
     [SerializeField] int maxBlocs = 5;
     [SerializeField] float displaceTimeBloc = 0.1f;
+
+    [SerializeField] float handHeight = 1.2f;
+    [SerializeField] float fowardDistance = 2.4f;
     int nbBlocsSelect;
     List<Collider> magneticLast = new List<Collider>();
 
@@ -49,8 +52,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
     bool rightTriggerHeld = false;
     bool leftTriggerHeld = false;
     string lastHold = string.Empty;
-    Transform leftHandTransform;
-    Transform rightHandTransform;
+    public Transform leftHandTransform;
+    public Transform rightHandTransform;
     Vector3 leftHandInitialPoint;
     Vector3 rightHandInitialPoint;
     Vector3 leftHandFinalPoint;
@@ -74,7 +77,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     public int resolution = 20; // Plus c�est haut, plus le c�ne est lisse
     public Material visionMaterial;
     List<GameObject> blocsToEject = new List<GameObject>();
-    List<GameObject> potentialBlocs= new List<GameObject>();
+    List<GameObject> potentialBlocs = new List<GameObject>();
     bool readyToEject = false;
     void Start()
     {
@@ -104,8 +107,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
             secondsForMaxCharging -= 1;
         }
         moveType = this.transform.GetComponent<PlayerMouvement>().moveType;
-        leftHandTransform = golem.Find("L_Hand_IK_Target");
-        rightHandTransform = golem.Find("R_Hand_IK_Target");
         leftRay = CreateRay(Color.red);
         rightRay = CreateRay(Color.red);
         Color curentColor = playerGrid.playerMat.color;
@@ -116,7 +117,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     void Update()
     {
-        if(blocsToEject.Count == 0)
+        if (blocsToEject.Count == 0)
         {
             readyToEject = false;
         }
@@ -150,22 +151,22 @@ public class ConeEjectionAndProjection : MonoBehaviour
             float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
             float radius = radiusInBlocs * blocSizeWorld;
             float maxDistance = MaxDistanceForDirection((golem.forward).normalized, radius);
-            leftHandInitialPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * maxDistance + new Vector3(0, 0.15f, 0);
-            rightHandInitialPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * maxDistance + new Vector3(0, 0.15f, 0);
-            leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * distance + new Vector3(0, 0.15f, 0);
-            rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * distance + new Vector3(0, 0.15f, 0);
+            leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+            rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+            Vector3 restHandPositionLeft = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+            Vector3 restHandPositionRight = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
             if (handTimer <= 1f / 2)
             {
 
-                //                leftHandTransform.position = Vector3.Lerp(leftHandInitialPoint, leftHandFinalPoint, 2 * handTimer);
-                // rightHandTransform.position = Vector3.Lerp(rightHandInitialPoint, rightHandFinalPoint, 2 * handTimer);
+                leftHandTransform.position = Vector3.Lerp(restHandPositionLeft, leftHandFinalPoint, 2 * handTimer);
+                rightHandTransform.position = Vector3.Lerp(restHandPositionRight, rightHandFinalPoint, 2 * handTimer);
 
             }
             else
             {
 
-                // leftHandTransform.position = Vector3.Lerp(leftHandFinalPoint, leftHandInitialPoint, 2 * (handTimer - 1f / 2));
-                // rightHandTransform.position = Vector3.Lerp(rightHandFinalPoint, rightHandInitialPoint, 2 * (handTimer - 1f / 2));
+                leftHandTransform.position = Vector3.Lerp(leftHandFinalPoint, restHandPositionLeft, 2 * (handTimer - 1f / 2));
+                rightHandTransform.position = Vector3.Lerp(rightHandFinalPoint, restHandPositionRight, 2 * (handTimer - 1f / 2));
             }
 
 
@@ -185,6 +186,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             rightRay.gameObject.SetActive(false);
             visionConeObject.gameObject.SetActive(false);
             resetMagneticLast();
+            StartCoroutine(ResetHandsPosition());
         }
         EjectionAlgo(rightTrigger);
     }
@@ -196,47 +198,26 @@ public class ConeEjectionAndProjection : MonoBehaviour
             animator.SetTrigger("IsChargingLaunch");
             leftRay.gameObject.SetActive(true);
             rightRay.gameObject.SetActive(true);
-            if(blocsToEject.Count< maxBlocs && playerGrid.grid.Count > 1)
+            if (blocsToEject.Count < maxBlocs && playerGrid.grid.Count > 1)
             {
                 ConeProjectionSelection(timeHeld);
 
             }
-          
+
             timeHeld += Time.deltaTime;
             rightTriggerHeld = true;
-            /*
-            //Draw rays to indicate current range
-            float maxAngle = angleRepulsion;
-
-            //Draw Rays in Build
-            Vector3 origin = golem.position;
-
-            Vector3 rightDir = Quaternion.AngleAxis(maxAngle, Vector3.up) * golem.forward;
-            Vector3 leftDir = Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward;
-
-
-            rightRay.SetPosition(0, origin);
-            rightRay.SetPosition(1, origin + rightDir * distance);
-
-            leftRay.SetPosition(0, origin);
-            leftRay.SetPosition(1, origin + leftDir * distance);
-
-
-            visionConeObject.SetActive(true);
-            visionConeObject.transform.position = golem.position + new Vector3(0f, -0.5f, 0f);
-            visionConeObject.transform.rotation = Quaternion.LookRotation(golem.forward);
-            GenerateMesh(maxAngle);
-            //Debug.DrawRay(golem.position, Quaternion.AngleAxis(maxAngle, Vector3.up) * golem.forward*distance,Color.red, Time.deltaTime);
-            //Debug.DrawRay(golem.position, Quaternion.AngleAxis(-maxAngle, Vector3.up) * golem.forward *distance, Color.red, Time.deltaTime);*/ // Pas de cône affiché pour la répulsion
+          
         }
         else if (rightTriggerHeld)
         {
-           
+
             if (lastHold == "right" || cancelEjectionShoot)
             {
                 coneProjection();
 
-            }else{
+            }
+            else
+            {
                 coneReset();
             }
             animator.SetTrigger("IsLaunching");
@@ -247,7 +228,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             rightRay.gameObject.SetActive(false);
             rightTriggerHeld = false;
             timeHeld = 0;
-            
+
         }
 
     }
@@ -266,9 +247,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     }
     public void coneAttraction(Transform player, float attractionForce, float angle, float distance, float magnitude)
     {
-        /*
-        leftRay.gameObject.SetActive(true);
-        rightRay.gameObject.SetActive(true);*/ // Plus besoin des ray, le cône au sol fait le taff nickel
+
 
         // Find all magneticblocs in radiusZone
         float sphereRadius = distance;
@@ -278,7 +257,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         magnetic = magnetic.FindAll(cube =>
         {
             //If the cube is used by a player dont pull
-            if (cube.transform.root.GetComponent<PlayerObjects>() != null || (cube.transform.tag != "magnetic" && cube.transform.tag != "explosive" ) || cube.GetComponent<Bloc>().owner != "Neutral")
+            if (cube.transform.root.GetComponent<PlayerObjects>() != null || (cube.transform.tag != "magnetic" && cube.transform.tag != "explosive") || cube.GetComponent<Bloc>().owner != "Neutral")
             {
                 return false;
             }
@@ -350,7 +329,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
             EjectBloc(blocsToEject[i], golem);
         }
     }
-    public void coneReset(){
+    public void coneReset()
+    {
         for (int i = 0; i < blocsToEject.Count && i < nbBlocsSelect; i++)
         {
             resetBloc(blocsToEject[i], golem);
@@ -362,9 +342,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
         LayerMask mask = 1 << playerGrid.kernel.layer;
         float timel = Mathf.Min(1, (time / secondsForMaxChargingEjectionLength));
         nbBlocsSelect = Math.Max((int)(timel * maxBlocs), 1);
-        
-        foreach(var v in playerGrid.grid){
-             if (v.Value.GetComponent<BoxCollider>() == null)
+
+        foreach (var v in playerGrid.grid)
+        {
+            if (v.Value.GetComponent<BoxCollider>() == null)
             {
                 continue;
             }
@@ -380,63 +361,70 @@ public class ConeEjectionAndProjection : MonoBehaviour
             {
                 continue;
             }
-            if(v.Value.tag == "magneticCube"){
+            if (v.Value.tag == "magneticCube")
+            {
                 continue;
             }
             //Look if the cube is within the angle of ejection
-       
-           
+
+
             potentialBlocs.Add(v.Value);
-            
+
         }
 
-       
+
         potentialBlocs.Sort((x, y) =>
         {
-        Vector3 planeProjectionX = Vector3.ProjectOnPlane(x.transform.position, Vector3.up);
-        Vector3 planeProjectionY = Vector3.ProjectOnPlane(y.transform.position, Vector3.up);
-        Vector3 golemProjection = Vector3.ProjectOnPlane(golem.position, Vector3.up);
-        float angleX = Vector3.Angle(planeProjectionX - golemProjection, golem.forward);
-        float  angleY = Vector3.Angle(planeProjectionY - golemProjection, golem.forward);
+            Vector3 planeProjectionX = Vector3.ProjectOnPlane(x.transform.position, Vector3.up);
+            Vector3 planeProjectionY = Vector3.ProjectOnPlane(y.transform.position, Vector3.up);
+            Vector3 golemProjection = Vector3.ProjectOnPlane(golem.position, Vector3.up);
+            float angleX = Vector3.Angle(planeProjectionX - golemProjection, golem.forward);
+            float angleY = Vector3.Angle(planeProjectionY - golemProjection, golem.forward);
 
-        Vector3 positionX = new Vector3(x.transform.position.x, 0, x.transform.position.z);
-        Vector3 positionY = new Vector3(y.transform.position.x, 0, y.transform.position.z);
-        float distanceX = (x.transform.position - golem.position).sqrMagnitude;
-        float distanceY = (y.transform.position - golem.position).sqrMagnitude;
-        if(angleX <=  angleRepulsion && angleY <= angleRepulsion || (angleX > angleRepulsion && angleY > angleRepulsion))
-            return -Math.Sign(distanceX - distanceY);
-        else if(angleX <= angleRepulsion){
-            return -1;
-        }else{
-            return 1;
-        }
+            Vector3 positionX = new Vector3(x.transform.position.x, 0, x.transform.position.z);
+            Vector3 positionY = new Vector3(y.transform.position.x, 0, y.transform.position.z);
+            float distanceX = (x.transform.position - golem.position).sqrMagnitude;
+            float distanceY = (y.transform.position - golem.position).sqrMagnitude;
+            if (angleX <= angleRepulsion && angleY <= angleRepulsion || (angleX > angleRepulsion && angleY > angleRepulsion))
+                return -Math.Sign(distanceX - distanceY);
+            else if (angleX <= angleRepulsion)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
         });
 
-        if (blocsToEject.Count < nbBlocsSelect && potentialBlocs.Count>0)
+        if (blocsToEject.Count < nbBlocsSelect && potentialBlocs.Count > 0)
         {
             feedback.RepulsionVibrationSelect();
-            placeBolcAtPosition(potentialBlocs.First(),blocsToEject.Count);
+            placeBolcAtPosition(potentialBlocs.First(), blocsToEject.Count);
             blocsToEject.Add(potentialBlocs.First());
-            if(potentialBlocs.First().tag != "explosive")
+            if (potentialBlocs.First().tag != "explosive")
                 potentialBlocs.First().gameObject.GetComponent<Bloc>().changeMeshMaterialColor(chargedColor);
         }
-        
+
     }
-    public void placeBolcAtPosition(GameObject bloc,int number)
+    public void placeBolcAtPosition(GameObject bloc, int number)
     {
-        if(playerGrid.kernel.layer == LayerMask.NameToLayer("magneticPlayer1")){
-             bloc.layer = LayerMask.NameToLayer("ejection1");
-        }else{
+        if (playerGrid.kernel.layer == LayerMask.NameToLayer("magneticPlayer1"))
+        {
+            bloc.layer = LayerMask.NameToLayer("ejection1");
+        }
+        else
+        {
             bloc.layer = LayerMask.NameToLayer("ejection2");
         }
         playerGrid.DetachBlocSingleProjection(bloc);
         playerGrid.ejectRest(0);
         bloc.GetComponent<Bloc>().state = BlocState.projectileAnimation;
         // travel to position
-        StartCoroutine(displaceBloc(bloc,number));
+        StartCoroutine(displaceBloc(bloc, number));
     }
 
-    private  IEnumerator displaceBloc( GameObject bloc ,int number)
+    private IEnumerator displaceBloc(GameObject bloc, int number)
     {
         int sign;
 
@@ -449,7 +437,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             sign = 1;
         }
         int right = Mathf.CeilToInt(number / 2f);
-        Vector3 destination = golem.position + golem.forward * 2 * (1.2f-right*blocDiffY) + golem.right * 1.4f * right * sign + golem.up * 1.2f*blocHeight;
+        Vector3 destination = golem.position + golem.forward * 2 * (1.2f - right * blocDiffY) + golem.right * 1.4f * right * sign + golem.up * 1.2f * blocHeight;
         Rigidbody blocRb = bloc.GetComponent<Rigidbody>();
         blocRb.useGravity = false;
 
@@ -465,12 +453,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
             time += Time.deltaTime;
             t = time / displaceTimeBloc;
-            destination = golem.position + golem.forward * 2 * (1.2f-right*blocDiffY) + golem.right * 1.4f * right * sign + golem.up * 1.2f*blocHeight;
+            destination = golem.position + golem.forward * 2 * (1.2f - right * blocDiffY) + golem.right * 1.4f * right * sign + golem.up * 1.2f * blocHeight;
             position = Vector3.Lerp(initialPosition, destination, t);
             blocRb.MovePosition(position);
         }
-         blocRb.position = new Vector3(bloc.transform.position.x,0.6f,bloc.transform.position.z);
-         blocRb.velocity = new Vector3(blocRb.velocity.x,0,blocRb.velocity.z).normalized*blocRb.velocity.magnitude;
+        blocRb.position = new Vector3(bloc.transform.position.x, 0.6f, bloc.transform.position.z);
+        blocRb.velocity = new Vector3(blocRb.velocity.x, 0, blocRb.velocity.z).normalized * blocRb.velocity.magnitude;
         blocsToEject.Remove(bloc);
 
     }
@@ -546,6 +534,24 @@ public class ConeEjectionAndProjection : MonoBehaviour
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
+    }
+    IEnumerator ResetHandsPosition()
+    {
+        Vector3 restHandPositionLeft = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+        Vector3 restHandPositionRight = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+        float time = 0;
+        float t = time / 0.5f;
+        while (t <= 1 && !leftTriggerHeld)
+        {
+            yield return new WaitForSeconds(Time.deltaTime);
+            time += Time.deltaTime;
+            t = time / 0.5f;
+             restHandPositionLeft = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+             restHandPositionRight = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+            leftHandTransform.position = Vector3.Lerp(leftHandTransform.position, restHandPositionLeft, t);
+            rightHandTransform.position = Vector3.Lerp(rightHandTransform.position, restHandPositionRight, t);
+        }
+        handTimer = 0;
     }
 }
 
