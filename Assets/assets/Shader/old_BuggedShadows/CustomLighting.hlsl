@@ -1,6 +1,6 @@
 #ifndef CUSTOM_LIGHTING_INCLUDED
 #define CUSTOM_LIGHTING_INCLUDED
-//#pragma multi_compile _SHADOWS_SOFT
+#pragma multi_compile _SHADOWS_SOFT
 
 void MainLight_float(float3 WorldPos, out float3 Direction, out float3 Color, out float DistanceAtten, out float ShadowAtten)
 {
