@@ -38,14 +38,11 @@ public class DynamicCamera : MonoBehaviour
     [SerializeField] private float distanceFromPlayersFactor = .7f;
     [SerializeField] private float minDistance=12f;
     [SerializeField] private float maxDistance=24f;
-    [Header("Cam 1")]
+    [SerializeField] private float localInterptime = .5f;
+    [Header("Secondary Cams")]
     [SerializeField] private float distanceFromPlayersFactor1 = .4f;
     [SerializeField] private float minDistance1=8f;
     [SerializeField] private float maxDistance1=24f;
-    [Header("Cam 2")]
-    [SerializeField] private float distanceFromPlayersFactor2 = .7f;
-    [SerializeField] private float minDistance2;
-    [SerializeField] private float maxDistance2;
 
     [Header("Animation Settings")]
     [SerializeField] private bool playIntroAnimation=true;
@@ -54,6 +51,8 @@ public class DynamicCamera : MonoBehaviour
     private Vector3 currentDistanceVelocity = Vector3.zero;
     private Vector3 currentRotVelocity= Vector3.zero;
     private Vector3 currentPlayersCenterVelocity = Vector3.zero;
+    private Vector3 currentLocalMainCamPosVelocity= Vector3.zero;
+    private Vector3 currentLocalMainCamRotVelocity= Vector3.zero;
     private float currentOrthoSizeVelocity;
     private Vector3 playerOnePlanePos;
     private Vector3 playerTwoPlanePos;
@@ -64,6 +63,8 @@ public class DynamicCamera : MonoBehaviour
     private float camOrthoSize;
     private float distanceBetweenPlayers=0;
     private Vector3 targetEuler;
+    private Vector3 localMainCamPos;
+    private Vector3 localMainCamRot;
 
     private Animator animator;
     private Animator animatorPlayer1;
@@ -103,15 +104,34 @@ public class DynamicCamera : MonoBehaviour
             mainCam.orthographicSize=maxDistance;
         }
 
-        //PlayersCenter.parent = null;
-        cam1.enabled = false;
-        cam2.enabled = false;
+        localMainCamPos=mainCam.transform.localPosition;
+        localMainCamRot = mainCam.transform.localEulerAngles;
     }
 
     private void LateUpdate()
     {
         if (shouldFollowPlayers)
         {
+            // HAUTEUR ET ROTATION LOCALE DE MAINCAM
+
+            if(mainCam.transform.localPosition!= localMainCamPos)
+            {
+                mainCam.transform.localPosition=Vector3.SmoothDamp(mainCam.transform.localPosition,localMainCamPos,ref currentLocalMainCamPosVelocity, localInterptime);
+                print("adjusting local pos");
+            }
+            if(mainCam.transform.localEulerAngles!= localMainCamRot)
+            {
+                Vector3 currentEuler = mainCam.transform.localEulerAngles;
+
+                float x = Mathf.SmoothDampAngle(currentEuler.x, localMainCamRot.x, ref currentLocalMainCamRotVelocity.x, localInterptime);
+                float y = Mathf.SmoothDampAngle(currentEuler.y, localMainCamRot.y, ref currentLocalMainCamRotVelocity.y, localInterptime);
+                float z = Mathf.SmoothDampAngle(currentEuler.z, localMainCamRot.z, ref currentLocalMainCamRotVelocity.z, localInterptime);
+
+                mainCam.transform.localEulerAngles = new Vector3(x, y, z);
+
+                print("adjusting local rot");
+            }
+
             // POSTION DES OBJETS DYNAMIC CAMERA & PLAYERS CENTER
 
             //R�cup�re la position des joueurs sur un plan XZ pour que l'objet cam�ra reste fixe sur l'axe Y
@@ -139,20 +159,6 @@ public class DynamicCamera : MonoBehaviour
                     camOrthoSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor, minDistance, maxDistance);
                     mainCam.orthographicSize = Mathf.SmoothDamp(mainCam.orthographicSize, camOrthoSize, ref currentOrthoSizeVelocity, distanceInterpTime, maxSpeed);
                     mainCamUI.orthographicSize = mainCam.orthographicSize;
-                }
-
-                // Cam 1
-                if (cam1.isActiveAndEnabled)
-                {
-                    camOrthoSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor1, minDistance1, maxDistance1);
-                    cam1.orthographicSize = Mathf.SmoothDamp(cam1.orthographicSize, camOrthoSize, ref currentOrthoSizeVelocity, distanceInterpTime, maxSpeed);
-                }
-
-                // Cam 2
-                if (cam2.isActiveAndEnabled)
-                {
-                    camOrthoSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor2, minDistance2, maxDistance2);
-                    cam2.orthographicSize = Mathf.SmoothDamp(cam2.orthographicSize, camOrthoSize, ref currentOrthoSizeVelocity, distanceInterpTime, maxSpeed);
                 }
             }
 
@@ -317,48 +323,35 @@ public class DynamicCamera : MonoBehaviour
     {
         if (!simpleCamera)
         {
+            Camera chosenCam;
+
+            // Choose camera closest to arena center
+            if (Vector3.Distance(cam1.transform.position,Vector3.zero) < Vector3.Distance(cam2.transform.position, Vector3.zero))
+            {
+                chosenCam = cam1;
+            }
+            else
+            {
+                chosenCam = cam2;
+            }
             mainCam.orthographicSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor1, minDistance1, maxDistance1);
-            transform.eulerAngles = transform.eulerAngles+new Vector3(0, Random.Range(-60, 60), 0);
-            transform.position = (playerOnePlanePos + playerTwoPlanePos) / 2;
+            mainCam.transform.localPosition=chosenCam.transform.localPosition;
+            mainCam.transform.localEulerAngles = chosenCam.transform.localEulerAngles;
         }
     }
 
     private IEnumerator CamerasChangePattern(float duration)
     {
-        if (duration < 2)
-        {
+        mainCam.enabled = false;
+        cam1.enabled = true;
+        cam2.enabled = false;
+        print("cam1");
 
-            mainCam.enabled = false;
-            cam1.enabled = true;
-            cam2.enabled = false;
-            print("cam1");
+        yield return new WaitForSeconds(duration);
 
-            yield return new WaitForSeconds(duration);
-
-            mainCam.enabled = true;
-            cam1.enabled = false;
-            cam2.enabled = false;
-            print("main");
-        }
-        else {
-            mainCam.enabled = false;
-            cam1.enabled = true;
-            cam2.enabled = false;
-            print("cam1");
-
-            yield return new WaitForSeconds(duration / 2);
-
-            mainCam.enabled = false;
-            cam1.enabled = false;
-            cam2.enabled = true;
-            print("cam2");
-
-            yield return new WaitForSeconds(duration);
-
-            mainCam.enabled = true;
-            cam1.enabled = false;
-            cam2.enabled = false;
-            print("main");
-        }
+        mainCam.enabled = true;
+        cam1.enabled = false;
+        cam2.enabled = false;
+        print("main");
     }
 }
