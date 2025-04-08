@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.Shapes;
 using static UnityEngine.Rendering.DebugUI;
-
+using Random = UnityEngine.Random;
 
 public class ConeEjectionAndProjection : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] int maxBlocs = 5;
     [SerializeField] float displaceTimeBloc = 0.1f;
     [SerializeField] float assitedTrajectoryAngle = 10f;
-
+    [SerializeField] float driftAssisted = 0.5f;
     [SerializeField] float handHeight = 1.2f;
     [SerializeField] float fowardDistance = 2.4f;
     int nbBlocsSelect;
@@ -479,16 +480,22 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Vector3 enemyDirection = (enemy.transform.position - cube.transform.position);
         float enemyAngle = Vector3.Angle(golem.forward, enemyDirection);
         Vector3 ejectionDirection = golem.forward;
+        bool assitedAim = false;
         if(enemyAngle < assitedTrajectoryAngle) {
             ejectionDirection = enemyDirection.normalized;
             Debug.Log("assisted!");
+            assitedAim = true;
         }
         cubeRb.AddForce((ejectionDirection + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
         cubeBloc.state = BlocState.projectile;
         cube.GetComponent<DragAfterImpact>().ejected = true;
         cubeBloc.ownerTranform.GetComponent<PlayerObjects>().finishEjection(cube);
-        StartCoroutine(AssistedAim(cube,rightDrift,enemy));
-        
+        if (assitedAim)
+        {
+            StartCoroutine(AssistedAim(cube, rightDrift, enemy, golem.right));
+
+        }
+
     }
     private void resetBloc(GameObject cube, Transform golem)
     {
@@ -566,11 +573,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
         }
         handTimer = 0;
     }
-    IEnumerator AssistedAim(GameObject cube,float rightDrift,GameObject enemy)
+    IEnumerator AssistedAim(GameObject cube,float rightDrift,GameObject enemy,Vector3 right)
     {
         float time = 0;
         float t = 0;
-        float assitedTime = 1f;
+        float assitedTime = 0.2f;
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
         float dragAfter = cube.GetComponent<DragAfterImpact>().dragAfterImpact;
         while (t< assitedTime && cubeRb.drag != dragAfter)
@@ -578,7 +585,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
             yield return new WaitForSeconds(Time.fixedDeltaTime);
             time += Time.fixedDeltaTime;
             t = time / assitedTime;
-            cubeRb.velocity = (enemy.transform.position - cubeRb.position).normalized * cubeRb.velocity.magnitude + golem.right * rightDrift * rightDriftProportion;
+            float velocityMag = cubeRb.velocity.magnitude;
+            cubeRb.velocity = (enemy.transform.position - cubeRb.position).normalized * (velocityMag) + (right)*  Random.Range(-5,5);
         }
         Debug.Log("out!");
     }
