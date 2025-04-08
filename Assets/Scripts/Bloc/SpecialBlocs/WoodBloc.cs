@@ -15,7 +15,8 @@ public class WoodBloc : MonoBehaviour
             Instantiate(replacementPrefab, transform.position, transform.rotation);
 
             // Détruit l’objet courant
-            Destroy(gameObject);
+            gameObject.transform.parent.gameObject.SetActive(false);
+            Destroy(gameObject.transform.parent.gameObject);
         }
     }
 }
