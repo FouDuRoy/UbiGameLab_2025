@@ -70,7 +70,6 @@ public class EventsManager : MonoBehaviour
                 //beaconLight.intensity = Mathf.Lerp(100f, beaconMaxIntensity, elapsedTime / beaconDurationBeforePrefabSpawn);
                 beaconLight.range = Mathf.Lerp(0f, beaconMaxRange, elapsedTime / beaconDurationBeforePrefabSpawn);
                 sphere.transform.localScale = Vector3.Lerp(Vector3.zero, beaconEndScale, elapsedTime / beaconDurationBeforePrefabSpawn);
-                print(beaconLight.range);
                 yield return null;
             }
         }

@@ -17,7 +17,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] float attractionForce = 10f;
     public bool cancelEjectionShoot = false;
-    [SerializeField] float initialAngle = 45f;
+    [SerializeField] public float initialAngle = 45f;
     [SerializeField] float angleRepulsion = 90f;
     float angle;
     public int blocHeight = 1;
@@ -27,7 +27,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float secondsForMaxChargingEjectionLength = 10f;
     [SerializeField] float ejectionSpeed = 3f;
     [SerializeField] float colorChangeIntensity = 3f;
-    [SerializeField] int maxBlocs = 5;
+    [SerializeField] public int maxBlocs = 5;
     [SerializeField] float displaceTimeBloc = 0.1f;
     [SerializeField] float assitedTrajectoryAngle = 10f;
     [SerializeField] float assistedTime = 0.5f;
@@ -586,13 +586,13 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
         float dragAfter = cube.GetComponent<DragAfterImpact>().dragAfterImpact;
         float dist = 100;
-        while (t< assistedTime && cubeRb.drag != dragAfter && dist> minimalAssitedDistance && cube != null)
+        while (t< 1 && cubeRb.drag != dragAfter && dist> minimalAssitedDistance && cube != null)
         {
             yield return new WaitForSeconds(Time.fixedDeltaTime);
             time += Time.fixedDeltaTime;
             t = time / assistedTime;
             dist = (enemy.transform.position - cubeRb.position + pos).magnitude;
-            if (t > 0.05f)
+            if (time > 0.05f)
             {
                 float velocityMag = cubeRb.velocity.magnitude;
                 if((enemy.transform.position - cubeRb.position + pos != Vector3.zero)){
@@ -600,6 +600,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
                 }
             }
         }
+
     }
 }
 
