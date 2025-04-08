@@ -7,11 +7,10 @@ public class TriggerDoor : MonoBehaviour
 {
     [SerializeField] int nDoor;
     [SerializeField] private TutoUI ejectionTutoUI;
-    private LevelLoader levelLoader;
+    [SerializeField] LevelLoader levelLoader;
 
     void Start()
     {
-        levelLoader=GetComponentInParent<LevelLoader>();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -20,7 +20,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float weightMouvementFactor = 1f;
     [SerializeField] float weightRotationFactor = 1f;
     [SerializeField] public MouvementType moveType;
-    [SerializeField] private Transform cameraOrientationReference;
+    [SerializeField] public GameObject cameraOrientationReference;
 
     public GameObject pauseMenu; // Assign in Inspector
     public GameObject selectedGUI; // Assign in Inspector
@@ -92,8 +92,8 @@ public class PlayerMouvement : MonoBehaviour
             Vector3 direction2 = moveAction.ReadValue<Vector3>();
             
             // Adaptation de l'input direction à la rotation de la caméra
-            Vector3 forward = cameraOrientationReference.forward;
-            Vector3 right = cameraOrientationReference.right;
+            Vector3 forward = cameraOrientationReference.transform.forward;
+            Vector3 right = cameraOrientationReference.transform.right;
             forward.y = 0;
             right.y = 0;
             forward.Normalize();

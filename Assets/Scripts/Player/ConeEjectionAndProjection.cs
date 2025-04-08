@@ -83,18 +83,21 @@ public class ConeEjectionAndProjection : MonoBehaviour
     {
 
     }
-    void Awake()
+    public void Awake()
 
     {
         animator = GetComponentInChildren<Animator>();
-
+        Debug.Log("comeTOMama");
         //Cone vision attribution Mesh
         mask = LayerMask.GetMask("magnetic");
         coneMeshFilter = visionConeObject.GetComponent<MeshFilter>();
         coneRenderer = visionConeObject.GetComponent<MeshRenderer>();
         coneRenderer.material = visionMaterial;
 
-
+        leftRay = CreateRay(Color.red);
+        rightRay = CreateRay(Color.red);
+        DontDestroyOnLoad(leftRay);
+        DontDestroyOnLoad (rightRay);
         playerGrid = GetComponent<GridSystem>();
         playerInput = GetComponent<PlayerInput>();
         ejectCubes = playerInput.actions.FindAction("BlocEjection");
@@ -107,8 +110,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
             secondsForMaxCharging -= 1;
         }
         moveType = this.transform.GetComponent<PlayerMouvement>().moveType;
-        leftRay = CreateRay(Color.red);
-        rightRay = CreateRay(Color.red);
         Color curentColor = playerGrid.playerMat.color;
         chargedColor = new Color(curentColor.r * colorChangeIntensity, curentColor.g * colorChangeIntensity, curentColor.b * colorChangeIntensity);
 
@@ -117,6 +118,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     void Update()
     {
+    
         if (blocsToEject.Count == 0)
         {
             readyToEject = false;

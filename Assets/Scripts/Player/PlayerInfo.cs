@@ -11,8 +11,8 @@ public class PlayerInfo : MonoBehaviour
 
     [Header("Info joueur")]
     public GameObject gameOverCanvas; // Assign in Inspector
-    public TextMeshProUGUI attackerText; // Assign in Inspector
-    public Button restartButton;
+    public GameObject attackerText; // Assign in Inspector
+    public GameObject restartButton;
     public float maxDamage =30f;
     public float impulsionWhenHitMelee = 30f;
     public float impulsionWhenHitRanged = 30f;
@@ -34,6 +34,7 @@ public class PlayerInfo : MonoBehaviour
 
     void Start()
     {
+       
         animator = GetComponentInChildren<Animator>();
         healthValue = MaxhealthValue;
         gameOverCanvas.SetActive(false); // Hide canvas at start
@@ -49,6 +50,10 @@ public class PlayerInfo : MonoBehaviour
     // Call this function when player gets hit
     public void TakeDamage(string attackerName,Vector3 impactForce, bool melee)
     {
+        if(dynamicCamera == null)
+        {
+            dynamicCamera = Camera.main.GetComponentInParent<DynamicCamera>();
+        }
         if(isInvincible)
         {
             this.GetComponent<HapticFeedbackController>().damageTakenVibration();
@@ -131,7 +136,7 @@ public class PlayerInfo : MonoBehaviour
         yield return new WaitForSeconds(2f);
         //Time.timeScale = 0;
         gameOverCanvas.SetActive(true); // Show UI
-        attackerText.text = "Victoire par : " + attackerName; // Display attacker's name
+        attackerText.GetComponent<TextMeshProUGUI>().text = "Victoire par : " + attackerName; // Display attacker's name
         EventSystem.current.SetSelectedGameObject(restartButton.gameObject);
 
     }

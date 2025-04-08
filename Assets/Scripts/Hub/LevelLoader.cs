@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using System.Threading;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] private int nPlayers = 2;
     [SerializeField] private TMP_Text j1Ready;
     [SerializeField] private TMP_Text j2Ready;
+    public GameObject inputManager;
 
     private List<Collider> triggers =new List<Collider>();
     private List<GameObject> playersReady = new List<GameObject>();
@@ -37,7 +39,7 @@ public class LevelLoader : MonoBehaviour
 
         if (playersReady.Count >= nPlayers)
         {
-            StartCoroutine(AsyncLevelLoad(levelToLoad));
+            StartCoroutine(LoadSceneAsync(levelToLoad));
         }
     }
 
@@ -48,5 +50,23 @@ public class LevelLoader : MonoBehaviour
         {
             yield return null;
         }
+        if (operation.isDone)
+        {
+            inputManager.GetComponent<SceneEventSystem>().LoadScene(levelToLoad);
+
+        }
+    }
+    IEnumerator LoadSceneAsync(string sceneName)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        operation.allowSceneActivation = true;
+
+        while (!operation.isDone)
+        {
+            yield return null;
+        }
+
+        inputManager.GetComponent<SceneEventSystem>().LoadScene(levelToLoad);
+
     }
 }

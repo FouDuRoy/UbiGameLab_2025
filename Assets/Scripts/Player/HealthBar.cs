@@ -20,6 +20,9 @@ public class HealthBar : MonoBehaviour
 
     void LateUpdate()
     {
+        if(mainCamera == null) {
+            mainCamera = Camera.main;
+        }
         // Met à jour la rotation pour que la barre fasse face à la caméra
         transform.rotation = Quaternion.LookRotation(mainCamera.transform.forward);
 

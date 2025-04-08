@@ -15,7 +15,7 @@ public enum TutoType
 
 public class TutoUI : MonoBehaviour
 {
-    [SerializeField] private PlayerMouvement playerMouvement;
+    [SerializeField] public PlayerMouvement playerMouvement;
     [SerializeField] private Color playerColor;
     [SerializeField] private TutoType tutoType;
     [SerializeField] private TutoUI nextTuto;

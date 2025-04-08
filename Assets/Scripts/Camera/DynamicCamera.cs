@@ -1,13 +1,6 @@
-using Cinemachine.Utility;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Reflection;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
-using UnityEngine.ProBuilder;
 
 public class DynamicCamera : MonoBehaviour
 {
@@ -18,8 +11,8 @@ public class DynamicCamera : MonoBehaviour
     [SerializeField] private Camera cam2;
 
     [Header("References")]
-    [SerializeField] private GameObject Player1;
-    [SerializeField] private GameObject Player2;
+    [SerializeField] public GameObject Player1;
+    [SerializeField] public GameObject Player2;
     [SerializeField] private GameObject ArenaCenter;
     [SerializeField] private Transform PlayersCenter;
 
@@ -36,23 +29,23 @@ public class DynamicCamera : MonoBehaviour
     [SerializeField] private float rotationSwitchThreshold = 5f;
     [Header("Main Cam")]
     [SerializeField] private float distanceFromPlayersFactor = .7f;
-    [SerializeField] private float minDistance=12f;
-    [SerializeField] private float maxDistance=24f;
+    [SerializeField] private float minDistance = 12f;
+    [SerializeField] private float maxDistance = 24f;
     [Header("Cam 1")]
     [SerializeField] private float distanceFromPlayersFactor1 = .4f;
-    [SerializeField] private float minDistance1=8f;
-    [SerializeField] private float maxDistance1=24f;
+    [SerializeField] private float minDistance1 = 8f;
+    [SerializeField] private float maxDistance1 = 24f;
     [Header("Cam 2")]
     [SerializeField] private float distanceFromPlayersFactor2 = .7f;
     [SerializeField] private float minDistance2;
     [SerializeField] private float maxDistance2;
 
     [Header("Animation Settings")]
-    [SerializeField] private bool playIntroAnimation=true;
+    [SerializeField] private bool playIntroAnimation = true;
 
     private Vector3 currentHorizontalVelocity = Vector3.zero;
     private Vector3 currentDistanceVelocity = Vector3.zero;
-    private Vector3 currentRotVelocity= Vector3.zero;
+    private Vector3 currentRotVelocity = Vector3.zero;
     private Vector3 currentPlayersCenterVelocity = Vector3.zero;
     private float currentOrthoSizeVelocity;
     private Vector3 playerOnePlanePos;
@@ -62,7 +55,7 @@ public class DynamicCamera : MonoBehaviour
     private Vector2 angleCam;
     private Vector2 camLocalPos;
     private float camOrthoSize;
-    private float distanceBetweenPlayers=0;
+    private float distanceBetweenPlayers = 0;
     private Vector3 targetEuler;
 
     private Animator animator;
@@ -71,36 +64,24 @@ public class DynamicCamera : MonoBehaviour
     private PlayerInput playerOneInputs;
     private PlayerInput playerTwoInputs;
     private bool shouldFollowPlayers;
+    private bool setAnimator = true;
     private int chosenRotation = 1;
 
     private void Start()
     {
-   // QualitySettings.vSyncCount = 1;
-	//Application.targetFrameRate = 120;
-        animator = GetComponent<Animator>();
-        animatorPlayer1 = Player1.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
-        animatorPlayer2 = Player2.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
+        // QualitySettings.vSyncCount = 1;
+        //Application.targetFrameRate = 120;
 
-        playerOneInputs=Player1.GetComponentInParent<PlayerInput>();
-        playerTwoInputs=Player2.GetComponentInParent<PlayerInput>();
 
-        if(!playIntroAnimation)
-        {
-            IntroFinished();
-        }
-        else
-        {
-            playerOneInputs.DeactivateInput();
-            playerTwoInputs.DeactivateInput();
-            mainCamUI.enabled = false;
-        }
+        mainCamUI.enabled = false;
+
 
         //R�cup�re l'angle de la cam�ra par rapport � son pivot
-        angleCam =new Vector2(mainCam.transform.localPosition.z, mainCam.transform.localPosition.y).normalized;
+        angleCam = new Vector2(mainCam.transform.localPosition.z, mainCam.transform.localPosition.y).normalized;
 
         if (isOrthographic)
         {
-            mainCam.orthographicSize=maxDistance;
+            mainCam.orthographicSize = maxDistance;
         }
 
         //PlayersCenter.parent = null;
@@ -110,6 +91,23 @@ public class DynamicCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (setAnimator && Player1 != null)
+        {
+            animator = GetComponent<Animator>();
+            animatorPlayer1 = Player1.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
+            animatorPlayer2 = Player2.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
+            playerOneInputs = Player1.GetComponentInParent<PlayerInput>();
+            playerTwoInputs = Player2.GetComponentInParent<PlayerInput>();
+            playerOneInputs.DeactivateInput();
+            playerTwoInputs.DeactivateInput();
+            setAnimator = false;
+        }
+
+
+        if (!setAnimator && !playIntroAnimation)
+        {
+            IntroFinished();
+        }
         if (shouldFollowPlayers)
         {
             // POSTION DES OBJETS DYNAMIC CAMERA & PLAYERS CENTER
@@ -120,7 +118,7 @@ public class DynamicCamera : MonoBehaviour
             arenaCenterPlanePos = new Vector3(ArenaCenter.transform.position.x, 0, ArenaCenter.transform.position.z);
 
             transform.position = Vector3.SmoothDamp(transform.position, (playerOnePlanePos + playerTwoPlanePos + arenaCenterPlanePos) / 3, ref currentHorizontalVelocity, horizontalInterpTime, maxSpeed);
-            PlayersCenter.position= Vector3.SmoothDamp(PlayersCenter.position, (playerOnePlanePos + playerTwoPlanePos) / 2, ref currentPlayersCenterVelocity, horizontalInterpTime, maxSpeed);
+            PlayersCenter.position = Vector3.SmoothDamp(PlayersCenter.position, (playerOnePlanePos + playerTwoPlanePos) / 2, ref currentPlayersCenterVelocity, horizontalInterpTime, maxSpeed);
 
             // DISTANCE DE LA CAMERA PAR RAPPORT AU PIVOT DE L'OBJET DYNAMIC CAMERA
 
@@ -156,7 +154,7 @@ public class DynamicCamera : MonoBehaviour
                 }
             }
 
-            if (!simpleCamera && mainCam.orthographicSize>=minCamDistanceForRot)
+            if (!simpleCamera && mainCam.orthographicSize >= minCamDistanceForRot)
             {
                 // ROTATION
 
@@ -194,7 +192,7 @@ public class DynamicCamera : MonoBehaviour
                 Vector3 currentEuler = transform.rotation.eulerAngles;
                 Vector3 smoothedEuler = new Vector3(
                     0,
-                    Mathf.SmoothDampAngle(currentEuler.y, targetEuler.y, ref currentRotVelocity.y, rotationInterpTime,maxRotSpeed),
+                    Mathf.SmoothDampAngle(currentEuler.y, targetEuler.y, ref currentRotVelocity.y, rotationInterpTime, maxRotSpeed),
                     0
                 );
 
@@ -231,7 +229,7 @@ public class DynamicCamera : MonoBehaviour
         }
 
         shouldFollowPlayers = false;
-        
+
         StartCoroutine(SmoothTransitionToPodium(1.5f, new Vector3(1, 1.2f, -3f), -5, .5f, .2f, winner));
     }
 
@@ -256,15 +254,15 @@ public class DynamicCamera : MonoBehaviour
 
             // Interpolation de la taille orthographique
             mainCam.orthographicSize = Mathf.Lerp(startOrthoSize, desiredOrthoSize, t);
-            mainCamUI.orthographicSize=mainCam.orthographicSize;
+            mainCamUI.orthographicSize = mainCam.orthographicSize;
 
             // Rotation de la caméra
             mainCam.transform.localEulerAngles = new Vector3(Mathf.Lerp(startXRot, localXRot, t), mainCam.transform.localEulerAngles.y, mainCam.transform.localEulerAngles.z);
 
-            if(elapsedTime >= teleportTime && !functionCalled)
+            if (elapsedTime >= teleportTime && !functionCalled)
             {
                 functionCalled = true;
-                
+
                 ClearingSphere(20, new string[] { "wood", "magnetic", "explosive" });
 
                 winner.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
@@ -308,7 +306,8 @@ public class DynamicCamera : MonoBehaviour
         {
             animatorPlayer1.SetTrigger("PlayIntro");
         }
-        else if (nPlayer == 2) {
+        else if (nPlayer == 2)
+        {
             animatorPlayer2.SetTrigger("PlayIntro");
         }
     }
@@ -318,7 +317,7 @@ public class DynamicCamera : MonoBehaviour
         if (!simpleCamera)
         {
             mainCam.orthographicSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor1, minDistance1, maxDistance1);
-            transform.eulerAngles = transform.eulerAngles+new Vector3(0, Random.Range(-60, 60), 0);
+            transform.eulerAngles = transform.eulerAngles + new Vector3(0, Random.Range(-60, 60), 0);
             transform.position = (playerOnePlanePos + playerTwoPlanePos) / 2;
         }
     }
@@ -340,7 +339,8 @@ public class DynamicCamera : MonoBehaviour
             cam2.enabled = false;
             print("main");
         }
-        else {
+        else
+        {
             mainCam.enabled = false;
             cam1.enabled = true;
             cam2.enabled = false;
