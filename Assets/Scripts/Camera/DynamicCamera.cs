@@ -117,7 +117,6 @@ public class DynamicCamera : MonoBehaviour
             if(mainCam.transform.localPosition!= localMainCamPos)
             {
                 mainCam.transform.localPosition=Vector3.SmoothDamp(mainCam.transform.localPosition,localMainCamPos,ref currentLocalMainCamPosVelocity, localInterptime);
-                print("adjusting local pos");
             }
             if(mainCam.transform.localEulerAngles!= localMainCamRot)
             {
@@ -129,7 +128,6 @@ public class DynamicCamera : MonoBehaviour
 
                 mainCam.transform.localEulerAngles = new Vector3(x, y, z);
 
-                print("adjusting local rot");
             }
 
             // POSTION DES OBJETS DYNAMIC CAMERA & PLAYERS CENTER
@@ -178,12 +176,10 @@ public class DynamicCamera : MonoBehaviour
                     if (angleTo1 < angleTo2 && chosenRotation != 1)
                     {
                         chosenRotation = 1;
-                        print("1");
                     }
                     else if (angleTo2 < angleTo1 && chosenRotation != 2)
                     {
                         chosenRotation = 2;
-                        print("2");
                     }
                 }
 
@@ -211,7 +207,6 @@ public class DynamicCamera : MonoBehaviour
 
     public void IntroFinished()
     {
-        //Debug.Log("Intro anim finished");
 
         animator.enabled = false;
         playerOneInputs.ActivateInput();
@@ -347,13 +342,11 @@ public class DynamicCamera : MonoBehaviour
         mainCam.enabled = false;
         cam1.enabled = true;
         cam2.enabled = false;
-        print("cam1");
 
         yield return new WaitForSeconds(duration);
 
         mainCam.enabled = true;
         cam1.enabled = false;
         cam2.enabled = false;
-        print("main");
     }
 }

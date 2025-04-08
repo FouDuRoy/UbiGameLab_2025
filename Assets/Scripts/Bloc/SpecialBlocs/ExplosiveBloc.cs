@@ -91,7 +91,6 @@ public class ExplosiveBloc : MonoBehaviour
         }
         ps.transform.parent = null;
         ps.transform.position = transform.position;
-        print(ps);
         ps.Play();
         gameObject.GetComponent<Feromagnetic>().enabled = false;
         gameObject.SetActive(false);

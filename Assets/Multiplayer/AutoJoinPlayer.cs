@@ -15,7 +15,6 @@ public class AutoJoinPlayer : MonoBehaviour
 
     private void SpawnSecondPlayer()
     {
-        Debug.Log("assigning Second Player");
         if (playerInputManager.playerCount < playerInputManager.maxPlayerCount)
         {
             //on cherche premier joueur

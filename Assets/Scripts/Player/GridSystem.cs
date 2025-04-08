@@ -159,10 +159,7 @@ public class GridSystem : MonoBehaviour
                     
                 }
             }
-            else
-            {
-                Debug.Log("wow");
-            }
+
 
         }
         foreach(GameObject bloc in blocsToDetach){

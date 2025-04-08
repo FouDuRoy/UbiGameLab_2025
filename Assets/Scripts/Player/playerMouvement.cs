@@ -493,7 +493,6 @@ public class PlayerMouvement : MonoBehaviour
 
             if(direction.magnitude > deadZone ){
 //                animator.SetBool("IsMoving", true);
-//                print("moving");
                 rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
             }
             
