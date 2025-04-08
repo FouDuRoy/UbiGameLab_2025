@@ -60,38 +60,85 @@ public class PowerUpBloc : MonoBehaviour
 
     IEnumerator GigaRepulsion()
     {
+        int oldNumberBlocs = ownerTransform.GetComponent<ConeEjectionAndProjection>().maxBlocs;
         ownerTransform.GetComponent<ConeEjectionAndProjection>().maxBlocs = gigaRepulsionNbBlocs;
-        yield return null;
-        Destroy(gameObject);
+        float time = 0;
+        if (gigaRepulsionTimer == float.PositiveInfinity)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            while (time < gigaRepulsionTimer)
+            {
+                yield return new WaitForSeconds(Time.deltaTime);
+                time += Time.deltaTime;
+            }
+            ownerTransform.GetComponent<ConeEjectionAndProjection>().maxBlocs = oldNumberBlocs;
+            Destroy(gameObject);
+        }
+
 
     }
     IEnumerator SuperDash()
     {
         ownerTransform.GetComponent<PlayerObjects>().cubeRb.GetComponent<Dash>().superDash = true;
-        yield return null;
-        Destroy(gameObject);
+        float time = 0;
+        if (superDashTime == float.PositiveInfinity)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            while (time < superDashTime)
+            {
+                yield return new WaitForSeconds(Time.deltaTime);
+                time += Time.deltaTime;
+            }
+            ownerTransform.GetComponent<PlayerObjects>().cubeRb.GetComponent<Dash>().superDash = false;
+            Destroy(gameObject);
+        }
 
     }
 
     IEnumerator AttractionOmni()
     {
+        float oldAngle = ownerTransform.GetComponent<ConeEjectionAndProjection>().initialAngle;
         ownerTransform.GetComponent<ConeEjectionAndProjection>().initialAngle = 360;
-        yield return null;
-        Destroy(gameObject);
-
+        float time = 0;
+        if (attractionOmniscienteTimer == float.PositiveInfinity)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            while (time < attractionOmniscienteTimer)
+            {
+                yield return new WaitForSeconds(Time.deltaTime);
+                time += Time.deltaTime;
+            }
+            ownerTransform.GetComponent<ConeEjectionAndProjection>().initialAngle = oldAngle;
+            Destroy(gameObject);
+        }
     }
     IEnumerator HyperVite()
     {
         ownerTransform.GetComponent<PlayerMouvement>().moveType = MouvementType.HyperVite;
         float time = 0;
-        while (time < HyperViteTimer)
+        if(HyperViteTimer == float.PositiveInfinity)
         {
-            yield return new WaitForSeconds(Time.deltaTime);
-            time += Time.deltaTime;
+            Destroy(gameObject);
         }
-        ownerTransform.GetComponent<PlayerMouvement>().moveType = MouvementType.Joystick4;
-        Destroy(gameObject);
-
+        else
+        {
+            while (time < HyperViteTimer)
+            {
+                yield return new WaitForSeconds(Time.deltaTime);
+                time += Time.deltaTime;
+            }
+            ownerTransform.GetComponent<PlayerMouvement>().moveType = MouvementType.Joystick4;
+            Destroy(gameObject);
+        }
     }
     private void DisablePowerBLoc()
     {

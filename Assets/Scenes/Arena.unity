@@ -643,6 +643,26 @@ PrefabInstance:
       propertyPath: resistance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -9221340577005251470, guid: 787219a3d9b72994580bcdff8d426741, type: 3}
+      propertyPath: superDashTime
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: -9221340577005251470, guid: 787219a3d9b72994580bcdff8d426741, type: 3}
+      propertyPath: HyperViteTimer
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: -9221340577005251470, guid: 787219a3d9b72994580bcdff8d426741, type: 3}
+      propertyPath: gigaRepulsionTimer
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: -9221340577005251470, guid: 787219a3d9b72994580bcdff8d426741, type: 3}
+      propertyPath: gigaRepulsionNbBlocs
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -9221340577005251470, guid: 787219a3d9b72994580bcdff8d426741, type: 3}
+      propertyPath: attractionOmniscienteTimer
+      value: Infinity
+      objectReference: {fileID: 0}
     - target: {fileID: 6399118882087969636, guid: 787219a3d9b72994580bcdff8d426741, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.88
@@ -941,7 +961,7 @@ PrefabInstance:
     - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: restartButton
       value: 
-      objectReference: {fileID: 476904944}
+      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: gameOverCanvas
       value: 
@@ -994,6 +1014,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 472420157}
+    - target: {fileID: 7850894500233854463, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: moveType
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7850894500233854463, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: pauseMenu
       value: 
@@ -1268,7 +1292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a40697f7487a5449a976f085383a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playButton: {fileID: 476904944}
+  playButton: {fileID: 0}
   sceneToLoad: Level03
 --- !u!1001 &240164704
 PrefabInstance:
@@ -1789,17 +1813,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 6101837734968640617, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
   m_PrefabInstance: {fileID: 472420156}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &476904944 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6546355870573506484, guid: c34ad7f6ba3c5fb4c921a680f7b6b257, type: 3}
-  m_PrefabInstance: {fileID: 6237838}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &497850241 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
@@ -8673,7 +8686,7 @@ PrefabInstance:
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: restartButton
       value: 
-      objectReference: {fileID: 476904944}
+      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: gameOverCanvas
       value: 
