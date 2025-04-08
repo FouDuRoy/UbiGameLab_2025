@@ -289,7 +289,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         magnetic = magnetic.FindAll(cube =>
         {
             //If the cube is used by a player dont pull
-            if (cube.transform.root.GetComponent<PlayerObjects>() != null || (cube.transform.tag != "magnetic" && cube.transform.tag != "explosive" && cube.transform.tag != "powerUp") || cube.GetComponent<Bloc>().owner != "Neutral")
+            if (cube.transform.root.GetComponent<PlayerObjects>() != null || (cube.transform.tag != "magnetic" && cube.transform.tag != "explosive" ) || cube.GetComponent<Bloc>().owner != "Neutral")
             {
                 return false;
             }
@@ -612,7 +612,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
         float dragAfter = cube.GetComponent<DragAfterImpact>().dragAfterImpact;
         float dist = 100;
-        while (t< 1 && cubeRb.drag != dragAfter && dist> minimalAssitedDistance && cube != null)
+        while (cube != null && t < 1 && cubeRb.drag != dragAfter && dist> minimalAssitedDistance )
         {
             time += Time.fixedDeltaTime;
             t = time / assistedTime;
@@ -626,7 +626,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             }
             yield return new WaitForSeconds(Time.fixedDeltaTime);
         }
-        if (cubeRb.drag == dragAfter)
+        if (cube != null && cubeRb.drag == dragAfter)
         {
             cubeRb.velocity = -cubeRb.velocity;
         }

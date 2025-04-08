@@ -27,29 +27,42 @@ public class PowerUpBloc : MonoBehaviour
     {
         if (alive && active)
         {
-            GameObject cube = gameObject;
-            Bloc blocComp = cube.GetComponent<Bloc>();
-            if (blocComp == null)
+            GameObject cubeCollided = gameObject;
+            GameObject cubeCollider = collision.gameObject;
+            
+            Bloc blocCompCollided = cubeCollided.GetComponent<Bloc>();
+            Bloc blocCompCollider = cubeCollider.GetComponent<Bloc>();
+
+            if (blocCompCollided == null || blocCompCollider == null)
             {
                 return;
             }
-            ownerName = blocComp.owner;
-            if (ownerName.Contains("Player") && collision.collider.tag != "ground")
+            ownerName = blocCompCollided.owner;
+            string hitterName = blocCompCollider.owner;
+
+            bool conditionProjectile = ownerName.Contains("Player") && collision.collider.tag != "ground" && blocCompCollided.state == BlocState.projectile;
+            bool conditionHitted = hitterName.Contains("Player");
+            if (conditionProjectile || conditionHitted )
             {
                 if (collision.relativeVelocity.magnitude > resistance)
                 {
-                    explode();
+                    if (conditionProjectile)
+                    {
+                        explode(blocCompCollided);
+
+                    }else {
+                        explode(blocCompCollider);
+                    }
                 }
             }
         }
     }
 
-    public void explode()
+    public void explode(Bloc myBloc)
     {
         alive = false;
-        Bloc myBloc = GetComponent<Bloc>();
         ownerTransform = myBloc.ownerTranform;
-        if (myBloc.state == BlocState.structure)
+        if (GetComponent<Bloc>().state == BlocState.structure)
         {
             ownerTransform.GetComponent<GridSystem>().DetachBlock(gameObject);
         }
