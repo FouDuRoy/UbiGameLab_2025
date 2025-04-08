@@ -7,9 +7,9 @@ public class PowerUpBloc : MonoBehaviour
     public float resistance = 5f;
     public int gigaRepulsionNbBlocs = 10;
     public float gigaRepulsionTimer = 10f;
-
     public float superDashTime = 10f;
     public float attractionOmniscienteTimer = 10f;
+    public float HyperViteTimer = 10f;
     bool alive = true;
     string ownerName;
     Transform ownerTransform;
@@ -20,6 +20,7 @@ public class PowerUpBloc : MonoBehaviour
         powerUps.Add(GigaRepulsion());
         powerUps.Add(SuperDash());
         powerUps.Add(AttractionOmni());
+        powerUps.Add(HyperVite());
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -76,6 +77,19 @@ public class PowerUpBloc : MonoBehaviour
     {
         ownerTransform.GetComponent<ConeEjectionAndProjection>().initialAngle = 360;
         yield return null;
+        Destroy(gameObject);
+
+    }
+    IEnumerator HyperVite()
+    {
+        ownerTransform.GetComponent<PlayerMouvement>().moveType = MouvementType.HyperVite;
+        float time = 0;
+        while (time < HyperViteTimer)
+        {
+            yield return new WaitForSeconds(Time.deltaTime);
+            time += Time.deltaTime;
+        }
+        ownerTransform.GetComponent<PlayerMouvement>().moveType = MouvementType.Joystick4;
         Destroy(gameObject);
 
     }
