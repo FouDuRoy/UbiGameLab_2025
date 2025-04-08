@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.ProBuilder.Shapes;
 using static UnityEngine.Rendering.DebugUI;
 
 
@@ -486,6 +487,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         cubeBloc.state = BlocState.projectile;
         cube.GetComponent<DragAfterImpact>().ejected = true;
         cubeBloc.ownerTranform.GetComponent<PlayerObjects>().finishEjection(cube);
+        StartCoroutine(AssistedAim(cube,rightDrift,enemy));
+        
     }
     private void resetBloc(GameObject cube, Transform golem)
     {
@@ -562,6 +565,22 @@ public class ConeEjectionAndProjection : MonoBehaviour
             rightHandTransform.position = Vector3.Lerp(rightHandTransform.position, restHandPositionRight, t);
         }
         handTimer = 0;
+    }
+    IEnumerator AssistedAim(GameObject cube,float rightDrift,GameObject enemy)
+    {
+        float time = 0;
+        float t = 0;
+        float assitedTime = 1f;
+        Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
+        float dragAfter = cube.GetComponent<DragAfterImpact>().dragAfterImpact;
+        while (t< assitedTime && cubeRb.drag != dragAfter)
+        {
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
+            time += Time.fixedDeltaTime;
+            t = time / assitedTime;
+            cubeRb.velocity = (enemy.transform.position - cubeRb.position).normalized * cubeRb.velocity.magnitude + golem.right * rightDrift * rightDriftProportion;
+        }
+        Debug.Log("out!");
     }
 }
 
