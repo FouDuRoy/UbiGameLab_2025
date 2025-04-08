@@ -5,30 +5,149 @@ using UnityEngine;
 public class PowerUpBloc : MonoBehaviour
 {
     public float resistance = 5f;
+    public int gigaRepulsionNbBlocs = 10;
+    public float gigaRepulsionTimer = 10f;
+    public float superDashTime = 10f;
+    public float attractionOmniscienteTimer = 10f;
+    public float HyperViteTimer = 10f;
+    bool alive = true;
+    string ownerName;
+    Transform ownerTransform;
+    private List<IEnumerator> powerUps = new List<IEnumerator>();
 
+    private void Start()
+    {
+        powerUps.Add(GigaRepulsion());
+        powerUps.Add(SuperDash());
+        powerUps.Add(AttractionOmni());
+        powerUps.Add(HyperVite());
+    }
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject cube = collision.collider.gameObject;
-        Bloc blocComp= cube.GetComponent<Bloc>();
-        if (blocComp == null)
+        if (alive)
         {
-            return;
-        }
-        string owner = blocComp.owner;
-        if (owner.Contains("Player"))
-        {
-            if (collision.relativeVelocity.magnitude > resistance)
+            GameObject cube = gameObject;
+            Bloc blocComp = cube.GetComponent<Bloc>();
+            if (blocComp == null)
             {
-                Bloc myBloc = GetComponent<Bloc>();
-                if(myBloc.state == BlocState.structure)
+                return;
+            }
+            ownerName = blocComp.owner;
+            if (ownerName.Contains("Player") && collision.collider.tag != "ground")
+            {
+
+                if (collision.relativeVelocity.magnitude > resistance)
                 {
-                   myBloc.ownerTranform.GetComponent<GridSystem>().DetachBlock(gameObject);
+                    alive = false;
+                    Debug.Log("Collided:" + collision.collider + "speed:" + collision.relativeVelocity.magnitude);
+                    Bloc myBloc = GetComponent<Bloc>();
+                    ownerTransform = myBloc.ownerTranform;
+                    if (myBloc.state == BlocState.structure)
+                    {
+                        ownerTransform.GetComponent<GridSystem>().DetachBlock(gameObject);
+                    }
+                    // Give power up to owner
+                    int powerUpIndex = Random.Range(0, powerUps.Count);
+                    Debug.Log(powerUpIndex);
+                    DisablePowerBLoc();
+                    StartCoroutine(powerUps[powerUpIndex]);
                 }
-                // Give power up to owner
-                Debug.Log(owner + " is super powerfull");
-                Destroy(gameObject);
             }
         }
+    }
+
+
+
+    IEnumerator GigaRepulsion()
+    {
+        int oldNumberBlocs = ownerTransform.GetComponent<ConeEjectionAndProjection>().maxBlocs;
+        ownerTransform.GetComponent<ConeEjectionAndProjection>().maxBlocs = gigaRepulsionNbBlocs;
+        float time = 0;
+        if (gigaRepulsionTimer == float.PositiveInfinity)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            while (time < gigaRepulsionTimer)
+            {
+                yield return new WaitForSeconds(Time.deltaTime);
+                time += Time.deltaTime;
+            }
+            ownerTransform.GetComponent<ConeEjectionAndProjection>().maxBlocs = oldNumberBlocs;
+            Destroy(gameObject);
+        }
+
+
+    }
+    IEnumerator SuperDash()
+    {
+        ownerTransform.GetComponent<PlayerObjects>().cubeRb.GetComponent<Dash>().superDash = true;
+        float time = 0;
+        if (superDashTime == float.PositiveInfinity)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            while (time < superDashTime)
+            {
+                yield return new WaitForSeconds(Time.deltaTime);
+                time += Time.deltaTime;
+            }
+            ownerTransform.GetComponent<PlayerObjects>().cubeRb.GetComponent<Dash>().superDash = false;
+            Destroy(gameObject);
+        }
+
+    }
+
+    IEnumerator AttractionOmni()
+    {
+        float oldAngle = ownerTransform.GetComponent<ConeEjectionAndProjection>().initialAngle;
+        ownerTransform.GetComponent<ConeEjectionAndProjection>().initialAngle = 360;
+        float time = 0;
+        if (attractionOmniscienteTimer == float.PositiveInfinity)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            while (time < attractionOmniscienteTimer)
+            {
+                yield return new WaitForSeconds(Time.deltaTime);
+                time += Time.deltaTime;
+            }
+            ownerTransform.GetComponent<ConeEjectionAndProjection>().initialAngle = oldAngle;
+            Destroy(gameObject);
+        }
+    }
+    IEnumerator HyperVite()
+    {
+        ownerTransform.GetComponent<PlayerMouvement>().moveType = MouvementType.HyperVite;
+        float time = 0;
+        if(HyperViteTimer == float.PositiveInfinity)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            while (time < HyperViteTimer)
+            {
+                yield return new WaitForSeconds(Time.deltaTime);
+                time += Time.deltaTime;
+            }
+            ownerTransform.GetComponent<PlayerMouvement>().moveType = MouvementType.Joystick4;
+            Destroy(gameObject);
+        }
+    }
+    private void DisablePowerBLoc()
+    {
+       GetComponent<BoxCollider>().enabled = false;
+       GetComponent<Feromagnetic>().enabled = false;
+       GetComponent<Bloc>().enabled = false;
+       GetComponent<SpringBlocEjection>().enabled = false;
+       GetComponent<StoredVelocity>().enabled = false;
+        GetComponent<DragAfterImpact>().enabled = false;
     }
 }
 

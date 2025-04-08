@@ -22,6 +22,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] public MouvementType moveType;
     [SerializeField] private Transform cameraOrientationReference;
 
+    [SerializeField] float rotationSpeedPowerUp = 1000f;
     public GameObject pauseMenu; // Assign in Inspector
     public GameObject selectedGUI; // Assign in Inspector
     bool isPaused = false;
@@ -142,6 +143,9 @@ public class PlayerMouvement : MonoBehaviour
                     break;
                 case MouvementType.Joystick4:
                     joystick4(direction);
+                    break;
+                case MouvementType.HyperVite:
+                    HyperVite(direction);
                     break;
             }
         }
@@ -513,6 +517,44 @@ public class PlayerMouvement : MonoBehaviour
             rotatingRight = false;
             rotateAndDirection5(direction);
         }
+    }
+    private void HyperVite(Vector3 direction)
+    {
+        golem.GetComponent<Synchro2>().rotationFixed = false;
+        if (direction.magnitude > 0.1f)
+        {
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
+
+        if ((leftTrigger > .1f || rightTrigger > .1f) && direction.magnitude > 0.1f)
+        {
+            if (direction.magnitude > deadZone)
+            {
+                rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            }
+
+        }
+
+        else
+        {
+            rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+        }
+        if(direction.magnitude > deadZone)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            rotatingRight = true;
+            Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
+            golem.rotation = Quaternion.Lerp(
+                golem.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+        }
+        rb.AddTorque(Vector3.up * rotationSpeedPowerUp);
     }
     private void BoothJoystickMove(Vector3 direction, float rotationY)
     {
