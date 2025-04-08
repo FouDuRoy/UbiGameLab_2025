@@ -54,10 +54,15 @@ public class PowerUpBloc : MonoBehaviour
             ownerTransform.GetComponent<GridSystem>().DetachBlock(gameObject);
         }
         // Give power up to owner
-        int powerUpIndex = Random.Range(0, powerUps.Count);
-        Debug.Log(powerUpIndex);
+        List<int> playerPowers = ownerTransform.GetComponent<PlayerObjects>().availablePowerUps;
+        if(playerPowers.Count > 0)
+        {
+            int powerUpIndex = Random.Range(0, playerPowers.Count);
+            Debug.Log(powerUps[playerPowers[powerUpIndex]]);
+            StartCoroutine(powerUps[playerPowers[powerUpIndex]]);
+            playerPowers.RemoveAt(powerUpIndex);
+        }
         DisablePowerBLoc();
-        StartCoroutine(powerUps[powerUpIndex]);
     }
 
     IEnumerator GigaRepulsion()
