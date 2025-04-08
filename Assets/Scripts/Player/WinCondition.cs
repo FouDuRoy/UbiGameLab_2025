@@ -40,7 +40,6 @@ public class WinCondition : MonoBehaviour
                 Vector3 projectileVelocity  = hitterVelocity;
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
-                    //print("Range Attack " + this.gameObject.name + " : " + hitter.name + "velocity" + projectileVelocity);
                     this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.name, projectileVelocity*rangeDamageFactor,false);
                 }
             }
@@ -52,7 +51,6 @@ public class WinCondition : MonoBehaviour
 
                 if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                 {
-                    //print("Melee attack " + this.gameObject.name + " : " + hitter.name);
                     this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.name, projectileVelocity*meleeDamageFactor,true);
                 }
             }

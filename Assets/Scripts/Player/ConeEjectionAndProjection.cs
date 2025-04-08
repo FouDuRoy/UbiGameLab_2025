@@ -477,7 +477,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
         cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
         cubeRb.interpolation = RigidbodyInterpolation.Interpolate;
         animator.SetTrigger("IsEjecting");
-        print("IsEjecting");
 
         GameObject enemy = GetComponent<PlayerObjects>().cubeRb.GetComponent<WinCondition>().Ennemy;
         Vector3 enemyDirection = (enemy.transform.position - cube.transform.position);
@@ -486,7 +485,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
         bool assitedAim = false;
         if(enemyAngle < assitedTrajectoryAngle) {
             ejectionDirection = enemyDirection.normalized;
-            Debug.Log("assisted!");
             assitedAim = true;
         }
         cubeRb.AddForce((ejectionDirection + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);

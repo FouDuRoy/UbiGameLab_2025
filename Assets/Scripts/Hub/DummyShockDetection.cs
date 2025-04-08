@@ -44,7 +44,6 @@ public class DummyShockDetection : MonoBehaviour
 
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
-                    //print("Range Attack " + this.gameObject.name + " : " + hitter.name + "velocity" + projectileVelocity);
                     DoRotation();
 
                     if (shootTutoUI.isActiveAndEnabled)
@@ -66,7 +65,6 @@ public class DummyShockDetection : MonoBehaviour
 
                 if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                 {
-                    //print("Melee attack " + this.gameObject.name + " : " + hitter.name);
                     DoRotation();
 
                     if (cacTutoUI.isActiveAndEnabled)
@@ -85,6 +83,5 @@ public class DummyShockDetection : MonoBehaviour
     private void DoRotation()
     {
         rb.AddTorque(0, 100f, 0, ForceMode.VelocityChange);
-        print("yes");
     }
 }

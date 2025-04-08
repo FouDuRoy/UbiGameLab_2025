@@ -62,7 +62,6 @@ public class PlayerInfo : MonoBehaviour
                 float damage = Mathf.Clamp(impactForce.magnitude, 10, maxDamage);
                 healthValue -= damage;
                 animator.SetTrigger("IsHit");
-                Debug.Log("Current Health:" + healthValue + "damageTook:" + damage);
                 if (healthValue > 0)
                 {
                     invun = true;
@@ -131,7 +130,7 @@ public class PlayerInfo : MonoBehaviour
         yield return new WaitForSeconds(2f);
         //Time.timeScale = 0;
         gameOverCanvas.SetActive(true); // Show UI
-        attackerText.text = "Victoire par : " + attackerName; // Display attacker's name
+        attackerText.text = "Victoire par  " + attackerName; // Display attacker's name
         EventSystem.current.SetSelectedGameObject(restartButton.gameObject);
 
     }
