@@ -47,8 +47,11 @@ public class ButtonTextColorChanger : MonoBehaviour, IPointerEnterHandler, IPoin
 
     private void SetPressedColor()
     {
-        targetText.color = pressedColor;
-        StartCoroutine(RevertToSelectedColor());
+        if (gameObject != null)
+        {
+            targetText.color = pressedColor;
+            StartCoroutine(RevertToSelectedColor());
+        }
     }
 
     private IEnumerator RevertToSelectedColor()
