@@ -598,6 +598,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
                 }
             }
         }
+        if(cubeRb.drag == dragAfter)
+        {
+            cubeRb.velocity = -cubeRb.velocity;
+        }
 
     }
 }
