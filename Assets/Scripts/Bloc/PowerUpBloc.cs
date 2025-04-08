@@ -75,6 +75,10 @@ public class PowerUpBloc : MonoBehaviour
             StartCoroutine(powerUps[playerPowers[powerUpIndex]]);
             playerPowers.RemoveAt(powerUpIndex);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
         DisablePowerBLoc();
     }
 
