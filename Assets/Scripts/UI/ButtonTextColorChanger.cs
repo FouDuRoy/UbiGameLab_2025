@@ -14,7 +14,6 @@ public class ButtonTextColorChanger : MonoBehaviour, IPointerEnterHandler, IPoin
     public Color selectedColor = Color.cyan;
     public Color pressedColor = Color.red;
 
-    private Coroutine revertCoroutine;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -49,15 +48,12 @@ public class ButtonTextColorChanger : MonoBehaviour, IPointerEnterHandler, IPoin
     private void SetPressedColor()
     {
         targetText.color = pressedColor;
-        print("Pressed Color");
         StartCoroutine(RevertToSelectedColor());
     }
 
     private IEnumerator RevertToSelectedColor()
     {
-        print(">>> coroutine START");
-        yield return new WaitForSeconds(0.5f);
-        print(">>> coroutine END");
+        yield return new WaitForSeconds(0.1f);
         targetText.color = selectedColor;
     }
 }
