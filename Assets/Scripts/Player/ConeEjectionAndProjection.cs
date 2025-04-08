@@ -30,7 +30,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] int maxBlocs = 5;
     [SerializeField] float displaceTimeBloc = 0.1f;
     [SerializeField] float assitedTrajectoryAngle = 10f;
-    [SerializeField] float driftAssisted = 0.5f;
+    [SerializeField] float assistedTime = 0.5f;
+    [SerializeField] float minimalAssitedDistance = 4f;
+
+
     [SerializeField] float handHeight = 1.2f;
     [SerializeField] float fowardDistance = 2.4f;
     int nbBlocsSelect;
@@ -492,7 +495,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
         cubeBloc.ownerTranform.GetComponent<PlayerObjects>().finishEjection(cube);
         if (assitedAim)
         {
-            StartCoroutine(AssistedAim(cube, rightDrift, enemy, golem.right));
+            Vector3 centerCube = GetComponent<PlayerObjects>().cubeRb.position + fowardDistance * golem.forward;
+            Vector3 dire = new Vector3((cube.transform.position - centerCube).x,0, (cube.transform.position - centerCube).z);
+            StartCoroutine(AssistedAim(cube, enemy, dire));
 
         }
 
@@ -573,22 +578,28 @@ public class ConeEjectionAndProjection : MonoBehaviour
         }
         handTimer = 0;
     }
-    IEnumerator AssistedAim(GameObject cube,float rightDrift,GameObject enemy,Vector3 right)
+    IEnumerator AssistedAim(GameObject cube,GameObject enemy,Vector3 pos)
     {
         float time = 0;
         float t = 0;
-        float assitedTime = 0.2f;
+        
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
         float dragAfter = cube.GetComponent<DragAfterImpact>().dragAfterImpact;
-        while (t< assitedTime && cubeRb.drag != dragAfter)
+        float dist = 100;
+        while (t< assistedTime && cubeRb.drag != dragAfter && dist> minimalAssitedDistance)
         {
             yield return new WaitForSeconds(Time.fixedDeltaTime);
             time += Time.fixedDeltaTime;
-            t = time / assitedTime;
-            float velocityMag = cubeRb.velocity.magnitude;
-            cubeRb.velocity = (enemy.transform.position - cubeRb.position).normalized * (velocityMag) + (right)*  Random.Range(-5,5);
+            t = time / assistedTime;
+            dist = (enemy.transform.position - cubeRb.position + pos).magnitude;
+            if (t > 0.05f)
+            {
+                float velocityMag = cubeRb.velocity.magnitude;
+                if((enemy.transform.position - cubeRb.position + pos != Vector3.zero)){
+                    cubeRb.velocity = (enemy.transform.position - cubeRb.position + pos).normalized * (velocityMag);
+                }
+            }
         }
-        Debug.Log("out!");
     }
 }
 
