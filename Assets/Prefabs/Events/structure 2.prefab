@@ -178,9 +178,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2499672161292230887}
   cubeRb: {fileID: 2847098653312950819}
+  magneticCube: {fileID: 0}
   passiveCube: {fileID: 2499672161292230887}
   magnetTimer: 1
-  blocNonMagnetic: {fileID: 0}
+  projectionTimer: 0.1
   golem: {fileID: 0}
   weight: 1.01
 --- !u!114 &4869901440210779179
@@ -199,6 +200,7 @@ MonoBehaviour:
   saveGrid: 0
   restoreGrid: 1
   playerMat: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  detachedSpeed: 10
   keyValuePairs:
   - key: {x: 0, y: 0, z: 0}
     value: {fileID: 2499672161292230887}
@@ -211,6 +213,8 @@ MonoBehaviour:
   cubeSize: 1.2
   materials:
   - {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  maxDimension: 3
+  negativeY: 0
 --- !u!114 &3130595416584281785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +235,8 @@ MonoBehaviour:
   owner: Neutral
   state: 3
   ownerTranform: {fileID: 4763928909409374464}
+  objectToChangeMesh: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &3884514679130156919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!114 &4450068663195061704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,10 +269,8 @@ MonoBehaviour:
   upEjectionMin: 0.8
   upEjectionMax: 1
   ejectionFactor: 6
+  ejectedFactor: 0.75
   maxAngle: 10
-  springBreakForce: 500
-  range: 2
-  pushFactor: 35
 --- !u!114 &6215833962939839974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acc957430336548b3526eca6a819ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
   maxSpeed: 10
   error: 0.4
   AngleError: 8
@@ -423,15 +427,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.945957
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.20159239
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -469,6 +472,8 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 4763928909409374464}
+  objectToChangeMesh: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &924266633568645157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,10 +492,8 @@ MonoBehaviour:
   upEjectionMin: 0.8
   upEjectionMax: 1
   ejectionFactor: 6
+  ejectedFactor: 0.75
   maxAngle: 10
-  springBreakForce: 500
-  range: 2
-  pushFactor: 35
 --- !u!114 &4301659089388503063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!135 &2210001922009874721
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -652,15 +656,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.412397
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.19894746
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -698,6 +701,8 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 4763928909409374464}
+  objectToChangeMesh: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &261625193313159312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,10 +721,8 @@ MonoBehaviour:
   upEjectionMin: 0.8
   upEjectionMax: 1
   ejectionFactor: 6
+  ejectedFactor: 0.75
   maxAngle: 10
-  springBreakForce: 500
-  range: 2
-  pushFactor: 35
 --- !u!114 &8249783434774172381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,6 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!135 &1720673295804741786
 SphereCollider:
   m_ObjectHideFlags: 0
