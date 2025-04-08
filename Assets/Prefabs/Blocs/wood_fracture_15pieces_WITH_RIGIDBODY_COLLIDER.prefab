@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ecdcd0e095d23bc488a2910bc9514818, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ecdcd0e095d23bc488a2910bc9514818, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ecdcd0e095d23bc488a2910bc9514818, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ecdcd0e095d23bc488a2910bc9514818, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -50,12 +62,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecdcd0e095d23bc488a2910bc9514818, type: 3}
       propertyPath: m_Name
-      value: wood_fracture_15pieces
+      value: wood_fracture_15pieces_WITH_RIGIDBODY_COLLIDER
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ecdcd0e095d23bc488a2910bc9514818, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5129405678680081783}
     - targetCorrespondingSourceObject: {fileID: -1179391833525824121, guid: ecdcd0e095d23bc488a2910bc9514818, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5585080184745555115}
@@ -255,6 +270,26 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3676380196665860918, guid: ecdcd0e095d23bc488a2910bc9514818, type: 3}
+--- !u!1 &3024827564969346730 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ecdcd0e095d23bc488a2910bc9514818, type: 3}
+  m_PrefabInstance: {fileID: 2682792381623041019}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5129405678680081783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3024827564969346730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74b03f43e3d3724cb9d106ca2afeae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayBeforeCleanup: 1
+  escapeDirection: {x: 0, y: -100, z: 0}
+  moveSpeed: 5
 --- !u!1 &3073659633924768275 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8098346980754261528, guid: ecdcd0e095d23bc488a2910bc9514818, type: 3}

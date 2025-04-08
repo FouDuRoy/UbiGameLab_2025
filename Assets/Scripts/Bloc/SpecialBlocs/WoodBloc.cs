@@ -4,11 +4,17 @@ public class WoodBloc : MonoBehaviour
 {
     [Header("Wood Block Properties")]
     public float resistance = 5f;
+    public GameObject replacementPrefab;
+
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > resistance)
         {
+            // Instancie le nouveau prefab à la même position/rotation
+            Instantiate(replacementPrefab, transform.position, transform.rotation);
+
+            // Détruit l’objet courant
             Destroy(gameObject);
         }
     }
