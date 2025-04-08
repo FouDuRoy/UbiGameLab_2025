@@ -220,15 +220,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 27.342327
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.19243374
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -266,6 +265,8 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 3789515738356328166}
+  objectToChangeMesh: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &2893566070753605604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,10 +285,8 @@ MonoBehaviour:
   upEjectionMin: 0.8
   upEjectionMax: 1
   ejectionFactor: 6
+  ejectedFactor: 0.75
   maxAngle: 10
-  springBreakForce: 500
-  range: 2
-  pushFactor: 35
 --- !u!114 &2362491023929152679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!135 &5944928519951705694
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -449,15 +449,14 @@ MonoBehaviour:
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.411007
+  maxSpeedVariation: 3
   error: 0.5
   AngleError: 12
-  spacingBetweenCubes: 0.2
   moveTime: 0.1
   maxForceAttraction: 10
   lerpingDistance: 20
   timeBeforeSwitching: 0.20371377
   timeBeforeSwitchingVariation: 0.05
-  maxSpeedVariation: 3
   springTorqueBreak: 50000
   springForceBreak: 50000
   lerpingMass: 0.001
@@ -495,6 +494,8 @@ MonoBehaviour:
   owner: MagneticCube 1 (1)
   state: 1
   ownerTranform: {fileID: 3789515738356328166}
+  objectToChangeMesh: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &6666066900580297648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,10 +514,8 @@ MonoBehaviour:
   upEjectionMin: 0.8
   upEjectionMax: 1
   ejectionFactor: 6
+  ejectedFactor: 0.75
   maxAngle: 10
-  springBreakForce: 500
-  range: 2
-  pushFactor: 35
 --- !u!114 &3357151625743457517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,6 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!135 &1467990135253790224
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -729,9 +729,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 8366753291445926447}
   cubeRb: {fileID: 3483153232973213317}
+  magneticCube: {fileID: 0}
   passiveCube: {fileID: 8366753291445926447}
   magnetTimer: 1
-  blocNonMagnetic: {fileID: 0}
+  projectionTimer: 0.1
   golem: {fileID: 0}
   weight: 1.01
 --- !u!114 &3746095541765312164
@@ -750,6 +751,7 @@ MonoBehaviour:
   saveGrid: 0
   restoreGrid: 0
   playerMat: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  detachedSpeed: 10
   keyValuePairs:
   - key: {x: 0, y: 0, z: 0}
     value: {fileID: 8366753291445926447}
@@ -762,6 +764,8 @@ MonoBehaviour:
   cubeSize: 1.2
   materials:
   - {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  maxDimension: 3
+  negativeY: 0
 --- !u!114 &8256248262071179677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,6 +786,8 @@ MonoBehaviour:
   owner: Neutral
   state: 3
   ownerTranform: {fileID: 3789515738356328166}
+  objectToChangeMesh: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &6046500287234781838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,6 +801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!114 &7537758728332980127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,10 +820,8 @@ MonoBehaviour:
   upEjectionMin: 0.8
   upEjectionMax: 1
   ejectionFactor: 6
+  ejectedFactor: 0.75
   maxAngle: 10
-  springBreakForce: 500
-  range: 2
-  pushFactor: 35
 --- !u!114 &8416567213408358940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,7 +834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acc957430336548b3526eca6a819ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
   maxSpeed: 10
   error: 0.4
   AngleError: 8

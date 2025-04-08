@@ -329,10 +329,12 @@ public class DynamicCamera : MonoBehaviour
             if (Vector3.Distance(cam1.transform.position,Vector3.zero) < Vector3.Distance(cam2.transform.position, Vector3.zero))
             {
                 chosenCam = cam1;
+                transform.eulerAngles=new Vector3 (0f,300f,0f);
             }
             else
             {
                 chosenCam = cam2;
+                transform.eulerAngles = new Vector3(0f, 120f, 0f);
             }
             mainCam.orthographicSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor1, minDistance1, maxDistance1);
             mainCam.transform.localPosition=chosenCam.transform.localPosition;
