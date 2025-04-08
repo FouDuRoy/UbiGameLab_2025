@@ -106,7 +106,7 @@ MonoBehaviour:
   impulsionWhenHitMelee: 200
   impulsionWhenHitRanged: 100
   invincibilityDelay: 3
-  hitStopDelay: 0.4
+  hitStopDelay: 0.5
   MaxhealthValue: 300
   waitDelayAfterPlayerDeath: 1.5
   timeScaleFactor: 0.1
@@ -272,11 +272,14 @@ MonoBehaviour:
   blocDiffY: 0.1
   secondsForMaxCharging: 0.2
   distance: 22
-  secondsForMaxChargingEjectionLength: 2
+  secondsForMaxChargingEjectionLength: 1.5
   ejectionSpeed: 140
   colorChangeIntensity: 3
-  maxBlocs: 5
+  maxBlocs: 7
   displaceTimeBloc: 0.1
+  assitedTrajectoryAngle: 10
+  assistedTime: 0.5
+  minimalAssitedDistance: 4
   handHeight: 1.2
   fowardDistance: 2.4
   leftHandTransform: {fileID: 2077689765914109713}
@@ -461,6 +464,8 @@ MonoBehaviour:
   victoryConditionSpeedRange: 10
   victoryConditionSpeedMelee: 15
   Ennemy: {fileID: 0}
+  rangeDamageFactor: 1
+  meleeDamageFactor: 1
 --- !u!114 &8481011708396636658
 MonoBehaviour:
   m_ObjectHideFlags: 0
