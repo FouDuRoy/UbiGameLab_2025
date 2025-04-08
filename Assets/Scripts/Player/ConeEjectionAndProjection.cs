@@ -586,7 +586,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
         float dragAfter = cube.GetComponent<DragAfterImpact>().dragAfterImpact;
         float dist = 100;
-        while (t< assistedTime && cubeRb.drag != dragAfter && dist> minimalAssitedDistance)
+        while (t< assistedTime && cubeRb.drag != dragAfter && dist> minimalAssitedDistance && cube != null)
         {
             yield return new WaitForSeconds(Time.fixedDeltaTime);
             time += Time.fixedDeltaTime;
