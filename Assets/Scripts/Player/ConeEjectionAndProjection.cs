@@ -27,6 +27,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float colorChangeIntensity = 3f;
     [SerializeField] int maxBlocs = 5;
     [SerializeField] float displaceTimeBloc = 0.1f;
+    [SerializeField] float assitedTrajectoryAngle = 10f;
 
     [SerializeField] float handHeight = 1.2f;
     [SerializeField] float fowardDistance = 2.4f;
@@ -472,7 +473,16 @@ public class ConeEjectionAndProjection : MonoBehaviour
         cubeRb.interpolation = RigidbodyInterpolation.Interpolate;
         animator.SetTrigger("IsEjecting");
         print("IsEjecting");
-        cubeRb.AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
+
+        GameObject enemy = GetComponent<PlayerObjects>().cubeRb.GetComponent<WinCondition>().Ennemy;
+        Vector3 enemyDirection = (enemy.transform.position - cube.transform.position);
+        float enemyAngle = Vector3.Angle(golem.forward, enemyDirection);
+        Vector3 ejectionDirection = golem.forward;
+        if(enemyAngle < assitedTrajectoryAngle) {
+            ejectionDirection = enemyDirection.normalized;
+            Debug.Log("assisted!");
+        }
+        cubeRb.AddForce((ejectionDirection + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
         cubeBloc.state = BlocState.projectile;
         cube.GetComponent<DragAfterImpact>().ejected = true;
         cubeBloc.ownerTranform.GetComponent<PlayerObjects>().finishEjection(cube);

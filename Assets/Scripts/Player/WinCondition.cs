@@ -5,7 +5,7 @@ public class WinCondition : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] float victoryConditionSpeedRange = 10f;
     [SerializeField] float victoryConditionSpeedMelee = 15f;
-    [SerializeField] GameObject Ennemy;
+    [SerializeField] public GameObject Ennemy;
     [SerializeField] float rangeDamageFactor = 1f;
     [SerializeField] float meleeDamageFactor= 1f;
 
