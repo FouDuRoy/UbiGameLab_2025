@@ -295,7 +295,10 @@ public class PlayerObjects : MonoBehaviour
       IEnumerator blockEjection(GameObject block)
     {
         yield return new WaitForSeconds(projectionTimer);
-        block.layer = 0;
+        if (block != null)
+        {
+            block.layer = 0;
+        }
         yield return new WaitForSeconds(magnetTimer-projectionTimer);
         if (block != null)
         {

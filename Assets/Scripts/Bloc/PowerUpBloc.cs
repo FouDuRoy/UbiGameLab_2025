@@ -11,6 +11,7 @@ public class PowerUpBloc : MonoBehaviour
     public float attractionOmniscienteTimer = 10f;
     public float HyperViteTimer = 10f;
     bool alive = true;
+    public bool active = true;
     string ownerName;
     Transform ownerTransform;
     private List<IEnumerator> powerUps = new List<IEnumerator>();
@@ -24,7 +25,7 @@ public class PowerUpBloc : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (alive)
+        if (alive && active)
         {
             GameObject cube = gameObject;
             Bloc blocComp = cube.GetComponent<Bloc>();
@@ -35,28 +36,29 @@ public class PowerUpBloc : MonoBehaviour
             ownerName = blocComp.owner;
             if (ownerName.Contains("Player") && collision.collider.tag != "ground")
             {
-
                 if (collision.relativeVelocity.magnitude > resistance)
                 {
-                    alive = false;
-                    Debug.Log("Collided:" + collision.collider + "speed:" + collision.relativeVelocity.magnitude);
-                    Bloc myBloc = GetComponent<Bloc>();
-                    ownerTransform = myBloc.ownerTranform;
-                    if (myBloc.state == BlocState.structure)
-                    {
-                        ownerTransform.GetComponent<GridSystem>().DetachBlock(gameObject);
-                    }
-                    // Give power up to owner
-                    int powerUpIndex = Random.Range(0, powerUps.Count);
-                    Debug.Log(powerUpIndex);
-                    DisablePowerBLoc();
-                    StartCoroutine(powerUps[powerUpIndex]);
+                    explode();
                 }
             }
         }
     }
 
-
+    public void explode()
+    {
+        alive = false;
+        Bloc myBloc = GetComponent<Bloc>();
+        ownerTransform = myBloc.ownerTranform;
+        if (myBloc.state == BlocState.structure)
+        {
+            ownerTransform.GetComponent<GridSystem>().DetachBlock(gameObject);
+        }
+        // Give power up to owner
+        int powerUpIndex = Random.Range(0, powerUps.Count);
+        Debug.Log(powerUpIndex);
+        DisablePowerBLoc();
+        StartCoroutine(powerUps[powerUpIndex]);
+    }
 
     IEnumerator GigaRepulsion()
     {
