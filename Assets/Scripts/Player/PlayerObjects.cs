@@ -247,7 +247,6 @@ public class PlayerObjects : MonoBehaviour
     }
     IEnumerator blockNeutral(GameObject block)
     {
-      
         yield return new WaitForSeconds(magnetTimer);
         if (block != null)
         {

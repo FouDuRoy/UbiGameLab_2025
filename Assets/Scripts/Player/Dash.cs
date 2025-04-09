@@ -20,7 +20,7 @@ public class Dash : MonoBehaviour
     private PlayerInfo playerInfo;
     private float lastDashTime;
     private bool isDashing = false;
-
+    private List<GameObject> blocsToDestroy = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +75,7 @@ public class Dash : MonoBehaviour
     {
         if (isDashing)
         {
+            
             Bloc blocHit = collision.collider.gameObject.GetComponent<Bloc>();
             if (blocHit != null && blocHit.ownerTranform!= null)
             {
@@ -88,16 +89,34 @@ public class Dash : MonoBehaviour
                         foreach(var item in grid.grid)
                         {
                             GameObject bloc = item.Value;
-                            grid.DetachBlock(bloc);
+                            blocsToDestroy.Add(bloc);
                             bloc.GetComponent<Bloc>().state = BlocState.projectile;
 
-                            if (tutoDash)
-                            {
-                                GameObject blocToDestroy = grid.gameObject;
-                                blocToDestroy.GetComponent<Rigidbody>().AddForce(new Vector3(0,3000000f,0),ForceMode.Acceleration);
-                                Destroy(blocToDestroy, 2);
-                            }
+                         
                         }
+                        if (tutoDash)
+                        {
+                            
+                            blocsToDestroy.ForEach(bloc => { 
+                                grid.DetachBlocSingle(bloc);
+                                bloc.GetComponent<Rigidbody>().AddForce((bloc.transform.position-GetComponent<Rigidbody>().position).normalized*150f,ForceMode.VelocityChange);
+                                if(bloc.tag == "magneticCube")
+                                {
+                                    Destroy(bloc.gameObject.GetComponentInChildren<TutoUI>().gameObject);
+                                    bloc.GetComponent<BoxCollider>().enabled = false;
+                                    bloc.transform.Find("SM_MagnetCube_02_centered").gameObject.SetActive(false);
+                                    StartCoroutine(WaitToDestroy(4f, bloc));
+                                }
+                                
+                            });
+                            blocsToDestroy.Clear();
+                        }
+                        else
+                        {
+                            blocsToDestroy.ForEach(bloc => grid.DetachBlocSingle(bloc));
+                            blocsToDestroy.Clear();
+                        }
+                  
                     }
                     else
                     {
@@ -106,7 +125,17 @@ public class Dash : MonoBehaviour
                     }                    
                 }
             }
+           
         }
         
     }
+    IEnumerator WaitToDestroy(float time,GameObject cube)
+    {
+        
+        yield return new WaitForSeconds(time);
+        Destroy(cube);
+
+    }
+
+        
 }

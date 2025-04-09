@@ -120,7 +120,6 @@ public class PlayerMouvement : MonoBehaviour
        // dashMove.Enable();
       //  ejectCubes.Enable();    
         //attractCubes.Enable();
-        Debug.Log(moveAction.actionMap);
         pauseMenu.SetActive(false); // Hide canvas at start
         pauseAction = playerInput.actions.FindAction("Pause");
         gridPlayer = GetComponent<GridSystem>();
