@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 7908459055162129070}
   - component: {fileID: 9014884664581853237}
   m_Layer: 10
-  m_Name: MagneticCube 1
+  m_Name: Magnetic_Bloc
   m_TagString: magneticCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,9 @@ MonoBehaviour:
   magnetTimer: 1
   projectionTimer: 0.5
   golem: {fileID: 0}
+  ejectionWeight: 4
   weight: 1
+  availablePowerUps: 
 --- !u!114 &3659590908044369442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +156,7 @@ MonoBehaviour:
   playerObj: {fileID: 0}
   cubeSize: 1.2
   materials: []
+  maxDimension: 3
   negativeY: 1
 --- !u!114 &601833731030724977
 MonoBehaviour:
@@ -209,10 +212,8 @@ MonoBehaviour:
   upEjectionMin: 0.8
   upEjectionMax: 1
   ejectionFactor: 6
+  ejectedFactor: 0.75
   maxAngle: 10
-  springBreakForce: 500
-  range: 2
-  pushFactor: 35
 --- !u!114 &7908459055162129070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47acc957430336548b3526eca6a819ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
   maxSpeed: 2
   error: 0.4
   AngleError: 15
