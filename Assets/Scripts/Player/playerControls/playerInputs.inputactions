@@ -24,15 +24,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ThrowCubes",
-                    "type": "Button",
-                    "id": "4db83855-e97a-4b1f-9ec6-2d91433e956d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "RotateX",
                     "type": "Value",
                     "id": "18adef12-b7fb-46e3-bc60-35eecac0681f",
@@ -87,9 +78,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "RightShoulder",
+                    "name": "Dash",
                     "type": "Button",
-                    "id": "62453619-0255-4c19-8fdd-78ff74a2308e",
+                    "id": "7d4fc501-97c2-4c0a-9464-2d033898018c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -395,28 +386,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "2453c895-c7c8-406c-ab3b-8179cd276ed2",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad;Player1;Player2",
-                    "action": "ThrowCubes",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "14d1c39c-15f4-4f1f-960a-7285d07e2adc",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "ThrowCubes",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "1D Axis",
                     "id": "892e11e0-8a21-4b01-ad21-28f06f9205ff",
                     "path": "1DAxis",
@@ -627,23 +596,12 @@
                 },
                 {
                     "name": "",
-                    "id": "393fbdbe-e89a-4dc2-95a4-0baedb3fa143",
-                    "path": "<Gamepad>/rightShoulder",
+                    "id": "f06f1d53-99bb-4d5d-b75b-b38ba4f6d73d",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Player1;Player2;Gamepad",
-                    "action": "RightShoulder",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "775965e3-3292-4480-9ddb-98dd2445e9a3",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "RightShoulder",
+                    "groups": "Player1;Player2",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
