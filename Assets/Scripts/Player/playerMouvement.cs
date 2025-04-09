@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -25,6 +26,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] float rotationSpeedPowerUp = 1000f;
     public GameObject pauseMenu; // Assign in Inspector
     public GameObject selectedGUI; // Assign in Inspector
+    public GameObject inputUI;
     bool isPaused = false;
 
     PlayerInput playerInput;
@@ -121,14 +123,14 @@ public class PlayerMouvement : MonoBehaviour
       //  ejectCubes.Enable();    
         //attractCubes.Enable();
         pauseMenu.SetActive(false); // Hide canvas at start
-        pauseAction = playerInput.actions.FindAction("Pause");
+        pauseAction = playerInput.currentActionMap.FindAction("Pause");
+        pauseAction.Enable();
         gridPlayer = GetComponent<GridSystem>();
         rb = GetComponent<PlayerObjects>().cubeRb;
         golem = GetComponent<PlayerObjects>().golem.transform;
         feedback = GetComponent<HapticFeedbackController>();
         dash = GetComponentInChildren<Dash>();
         pauseAction.performed += OnPause;
-        pauseAction.Enable();
         dashMove.performed += _ =>
         {
             Ejection();
@@ -166,20 +168,23 @@ public class PlayerMouvement : MonoBehaviour
    
     public void OnPause(InputAction.CallbackContext context)
     {
+        Debug.Log("!!!  ");
         TogglePause();
     }
 
     public void TogglePause()
     {
-        if (isPaused)
+        if (!isPaused)
         {
             Time.timeScale = 0f;
             pauseMenu.SetActive(true);
+            inputUI.SetActive(false);
             EventSystem.current.SetSelectedGameObject(selectedGUI);
         }
         else
         {
             Time.timeScale = 1f;
+            inputUI.SetActive(true);
             pauseMenu.SetActive(false);
         }
         isPaused = !isPaused;
