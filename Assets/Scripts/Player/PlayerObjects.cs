@@ -85,6 +85,25 @@ public class PlayerObjects : MonoBehaviour
             StartCoroutine(blockCollisionRanged(cube));
         }
     }
+    public void removeCubeCollisionMelee(GameObject cube)
+    {
+        if (cube != null)
+        {
+            string ownerName = cube.GetComponent<Bloc>().owner;
+            if (ownerName.Contains("Player1"))
+            {
+                cube.layer = LayerMask.NameToLayer("ejectionMelee1");
+            }
+            else
+            {
+                cube.layer = LayerMask.NameToLayer("ejectionMelee2");
+            }
+            removeJoint(cube);
+            Destroy(cube.GetComponent<SphereCollider>());
+            resetRb(cube);
+            StartCoroutine(blockCollisionRanged(cube));
+        }
+    }
 
     private void removeJoint(GameObject cube)
     {

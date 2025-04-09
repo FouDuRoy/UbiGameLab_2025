@@ -234,6 +234,17 @@ public class GridSystem : MonoBehaviour
 
         }
     }
+    public void DetachBlocSingleCollisionMelee(GameObject bloc)
+    {
+        Vector3Int detachedGridPos = findFirstKey(bloc);
+        if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
+        {
+            playerObj.removeCubeCollisionMelee(grid[detachedGridPos]);
+            grid.Remove(detachedGridPos);
+            playerObj.weight -= bloc.GetComponent<Bloc>().weight;
+
+        }
+    }
     public void CheckAndDetachDisconnectedBlocks()
     {
         HashSet<Vector3Int> safeBlocks = new HashSet<Vector3Int>();
