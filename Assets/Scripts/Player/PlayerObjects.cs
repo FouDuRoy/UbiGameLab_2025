@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
+using UnityEngine.Rendering;
 //Federico Barallobres
 public class PlayerObjects : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] private float magnetTimer = 3f;
     [SerializeField] private float projectionTimer = 0.1f;
     [SerializeField] public GameObject golem;
+    public float ejectionWeight = 4f;
     Rigidbody magneticCubeRb;
     MouvementType moveType;
     protected GridSystem gridSystem;
@@ -266,7 +268,7 @@ public class PlayerObjects : MonoBehaviour
     {
         Destroy(cube.GetComponent<SphereCollider>());
         resetRb(cube);
-        cube.GetComponent<Rigidbody>().mass=10f;
+        cube.GetComponent<Rigidbody>().mass= ejectionWeight;
         StartCoroutine(blockEjection(cube));
     }
  
