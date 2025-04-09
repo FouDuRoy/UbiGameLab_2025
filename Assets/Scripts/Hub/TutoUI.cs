@@ -87,7 +87,7 @@ public class TutoUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        NextTuto();
+        //NextTuto();
     }
 
     private void FixedUpdate()
