@@ -12,9 +12,11 @@ public class PlayerInputAssigner : MonoBehaviour
     public GameObject dynamicCamera;
     void Awake()
     {
-        foreach (Camera cam in Camera.allCameras)
-        {
-            cam.enabled = false;
+        if(dynamicCamera != null) {
+            foreach (Camera cam in Camera.allCameras)
+            {
+                cam.enabled = false;
+            }
         }
         var gamepads = Gamepad.all;
         if (gamepads.Count >= 2)
@@ -48,9 +50,12 @@ public class PlayerInputAssigner : MonoBehaviour
             player2Input.GetComponent<PlayerMouvement>().enabled = true;
             player2Input.GetComponent<ConeEjectionAndProjection>().enabled = true;
             player2Input.GetComponent<HapticFeedbackController>().enabled = true;
-        
 
-            StartCoroutine(WaitForSceneToLoad(1));
+
+            if (dynamicCamera != null)
+            {
+                StartCoroutine(WaitForSceneToLoad(1));
+            }
         }
         else
         {
