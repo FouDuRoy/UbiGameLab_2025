@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 2128704170243825558}
   - component: {fileID: 3748869350444769452}
   m_Layer: 6
-  m_Name: MC_Spring
+  m_Name: Metal_Bloc
   m_TagString: magnetic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,16 +195,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocityTreshold: 50
-  velocityTresholdMelee: 10
+  velocityTresholdMelee: 35
   upEjectionMinRanged: 0.5
-  upEjectionMaxRanged: 0.8
+  upEjectionMaxRanged: 0.6
   minRangedEjectionForce: 80
   maxRangedEjectionForce: 100
-  minMeleeEjectionForce: 70
-  maxMeleeEjectionForce: 90
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
   upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &2128704170243825558
 MonoBehaviour:
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 5
+  dragAfterImpact: 3
 --- !u!1001 &9146838545179393729
 PrefabInstance:
   m_ObjectHideFlags: 0

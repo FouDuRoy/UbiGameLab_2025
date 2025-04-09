@@ -75,7 +75,7 @@ public class EventsManager : MonoBehaviour
         }
 
         Destroy(beaconInstance);
-
+        yield return new WaitForEndOfFrame();
         Instantiate(eventToSummon,loc,rot);
     }
 }

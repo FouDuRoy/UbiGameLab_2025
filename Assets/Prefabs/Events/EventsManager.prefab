@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4317154141657856346}
   - component: {fileID: 4338772826088787368}
+  - component: {fileID: 4984591072968701429}
   m_Layer: 0
   m_Name: EventsManager
   m_TagString: Untagged
@@ -87,9 +88,9 @@ MonoBehaviour:
   - {fileID: 6727362545004941349, guid: 21e4d59863ed96744a981a9108b7aad6, type: 3}
   - {fileID: 6727362545004941349, guid: 21e4d59863ed96744a981a9108b7aad6, type: 3}
   - {fileID: 6727362545004941349, guid: 21e4d59863ed96744a981a9108b7aad6, type: 3}
-  - {fileID: 6727362545004941349, guid: 99c536ddd437ffc4daecae0459a08b0e, type: 3}
-  - {fileID: 6727362545004941349, guid: 6abd337bf980f794a8f1967e8538bb60, type: 3}
-  - {fileID: 6727362545004941349, guid: 6abd337bf980f794a8f1967e8538bb60, type: 3}
+  - {fileID: 6727362545004941349, guid: e533b1205d8e76e4c98493e713c2c0b7, type: 3}
+  - {fileID: 6727362545004941349, guid: e533b1205d8e76e4c98493e713c2c0b7, type: 3}
+  - {fileID: 6727362545004941349, guid: e533b1205d8e76e4c98493e713c2c0b7, type: 3}
   - {fileID: 6727362545004941349, guid: f502df73f5575d049806deff013ac9f1, type: 3}
   - {fileID: 6727362545004941349, guid: 697249473be49f5499f5341ee1671981, type: 3}
   - {fileID: 6727362545004941349, guid: 2d591fcb54ff5814eb015e8964357afb, type: 3}
@@ -98,13 +99,35 @@ MonoBehaviour:
   - {fileID: 94147775984215442, guid: 6d2ae5355ddcafa4d951fab04c1ff104, type: 3}
   - {fileID: 94147775984215442, guid: 6d2ae5355ddcafa4d951fab04c1ff104, type: 3}
   - {fileID: 6727362545004941349, guid: 1e112261316526f4fb23b39f11829c07, type: 3}
-  delayBeforeFirstEvent: 1
-  timeBetweenEvents: 5
-  chancesForEachSpawnpointToSpawnAPrefab: 0.4
+  - {fileID: 6727362545004941349, guid: 6abd337bf980f794a8f1967e8538bb60, type: 3}
+  - {fileID: 6835278342984715302, guid: 2bd7fa3f51ae4674caec6e745ec22460, type: 3}
+  - {fileID: 1126018156284151466, guid: 72772d260839ea645b539ac65baf2460, type: 3}
+  - {fileID: 336727939696648192, guid: eae1c89a17883d7439514b010341b9a6, type: 3}
+  - {fileID: 5694876674060920943, guid: 11937bc148449df4fa5ed34f3c0d2ec6, type: 3}
+  delayBeforeFirstEvent: 5
+  timeBetweenEvents: 10
+  chancesForEachSpawnpointToSpawnAPrefab: 0.3
   spawnBeacon: {fileID: 2122797384517485039, guid: 85492a36700258749bc0f6f13d279e9c, type: 3}
   beaconMaxIntensity: 600
+  beaconMaxRange: 12
   beaconDurationBeforePrefabSpawn: 3
-  beaconEndScale: {x: 15, y: 25, z: 15}
+  beaconEndScale: {x: 12, y: 25, z: 12}
+--- !u!114 &4984591072968701429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3715524003834981654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2eadb9a6bc2b54d9fd8a02010c9881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  map1: {fileID: -944628639613478452, guid: 2c6a7bc590f73634dbb4528bf451110d, type: 3}
+  map2: {fileID: -944628639613478452, guid: a6642188d413b9643980f11f89db2b8c, type: 3}
 --- !u!1 &3720374702768830787
 GameObject:
   m_ObjectHideFlags: 0
