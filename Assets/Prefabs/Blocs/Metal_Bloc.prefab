@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 2128704170243825558}
   - component: {fileID: 3748869350444769452}
   m_Layer: 6
-  m_Name: Metal_Bloc
+  m_Name: MC_Spring
   m_TagString: magnetic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +90,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3745680985456743881
 Rigidbody:
@@ -194,14 +194,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 10
-  velocityTresholdMelee: 25
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 1
+  velocityTreshold: 50
+  velocityTresholdMelee: 10
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.8
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 70
+  maxMeleeEjectionForce: 90
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2128704170243825558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 5
 --- !u!1001 &9146838545179393729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -278,34 +282,6 @@ PrefabInstance:
     - target: {fileID: 2512081427600228137, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042140616629865352, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 51
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042140616629865352, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 51
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042140616629865352, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 51
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042140616629865352, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.451
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042140616629865352, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.475
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042140616629865352, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.449
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042140616629865352, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6932353044484584577, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
       propertyPath: m_Name
