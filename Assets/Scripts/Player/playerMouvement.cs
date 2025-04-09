@@ -31,10 +31,7 @@ public class PlayerMouvement : MonoBehaviour
     InputAction moveAction;
     InputAction rotateAction;
     InputAction dashMove;
-    InputAction rotateActionZ;
-    InputAction rotateActionX;
     InputAction pauseAction;
-    InputAction rotateTwinStick;
 
     InputAction ejectCubes;
     InputAction attractCubes;
@@ -60,23 +57,9 @@ public class PlayerMouvement : MonoBehaviour
     GridSystem gridPlayer;
     private Animator animator;
 
-    void Awake()
+    void Start()
     {
-        animator = GetComponentInChildren<Animator>();
-        playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions.FindAction("Move");
-        rotateAction = playerInput.actions.FindAction("Rotate");
-        dashMove = playerInput.actions.FindAction("dash");
-        rotateActionZ = playerInput.actions.FindAction("RotateZ");
-        rotateActionX = playerInput.actions.FindAction("RotateX");
-        rotateTwinStick = playerInput.actions.FindAction("RotateTwinStick");
-        ejectCubes = playerInput.actions.FindAction("BlocEjection");
-        attractCubes = playerInput.actions.FindAction("AttractCubes");
-        pauseMenu.SetActive(false); // Hide canvas at start
-        pauseAction = playerInput.actions.FindAction("Pause");
-        gridPlayer = GetComponent<GridSystem>();
-        rb = GetComponent<PlayerObjects>().cubeRb;
-        golem = GetComponent<PlayerObjects>().golem.transform;
+       
     }
 
     // Update is called once per frame
@@ -100,11 +83,7 @@ public class PlayerMouvement : MonoBehaviour
 
             Vector3 direction = direction2.x * right + direction2.y * forward;
 
-            Vector3 directionTwin2 = rotateTwinStick.ReadValue<Vector3>();
-            Vector3 directionTwin = new Vector3(directionTwin2.x, 0, directionTwin2.y);
             float rotationY = rotateAction.ReadValue<float>();
-            float rotationZ = rotateActionZ.ReadValue<float>();
-            float rotationX = rotateActionX.ReadValue<float>();
 
             leftTrigger = attractCubes.ReadValue<float>();
             rightTrigger = ejectCubes.ReadValue<float>();
@@ -128,6 +107,25 @@ public class PlayerMouvement : MonoBehaviour
 
     private void OnEnable()
     {
+        animator = GetComponentInChildren<Animator>();
+        playerInput = GetComponent<PlayerInput>();
+        moveAction = playerInput.currentActionMap.FindAction("Move");
+        rotateAction = playerInput.currentActionMap.FindAction("Rotate");
+        dashMove =playerInput.currentActionMap.FindAction("dash");
+        ejectCubes = playerInput.actions.FindAction("BlocEjection");
+        attractCubes =playerInput.currentActionMap.FindAction("AttractCubes");
+
+       // moveAction.Enable();
+       // rotateAction.Enable();
+       // dashMove.Enable();
+      //  ejectCubes.Enable();    
+        //attractCubes.Enable();
+        Debug.Log(moveAction.actionMap);
+        pauseMenu.SetActive(false); // Hide canvas at start
+        pauseAction = playerInput.actions.FindAction("Pause");
+        gridPlayer = GetComponent<GridSystem>();
+        rb = GetComponent<PlayerObjects>().cubeRb;
+        golem = GetComponent<PlayerObjects>().golem.transform;
         feedback = GetComponent<HapticFeedbackController>();
         dash = GetComponentInChildren<Dash>();
         pauseAction.performed += OnPause;

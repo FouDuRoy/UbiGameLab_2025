@@ -85,11 +85,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
     List<GameObject> blocsToEject = new List<GameObject>();
     List<GameObject> potentialBlocs = new List<GameObject>();
     bool readyToEject = false;
-    void Start()
-    {
-
-    }
-    void Awake()
+  
+    void OnEnable()
 
     {
         animator = GetComponentInChildren<Animator>();
@@ -103,8 +100,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         playerGrid = GetComponent<GridSystem>();
         playerInput = GetComponent<PlayerInput>();
-        ejectCubes = playerInput.actions.FindAction("BlocEjection");
-        AttractCubes = playerInput.actions.FindAction("AttractCubes");
+        ejectCubes =playerInput.currentActionMap.FindAction("BlocEjection");
+        AttractCubes =playerInput.currentActionMap.FindAction("AttractCubes");
         feedback = this.GetComponent<HapticFeedbackController>();
         mainCubeRb = this.GetComponent<PlayerObjects>().cubeRb;
         golem = this.GetComponent<PlayerObjects>().golem.transform;

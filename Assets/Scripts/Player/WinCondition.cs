@@ -24,7 +24,7 @@ public class WinCondition : MonoBehaviour
         Bloc hitterComponent = hitter.GetComponent<Bloc>();
 
         if (hitterComponent != null && 
-           hitterComponent.ownerTranform != null && hitterComponent.ownerTranform.tag != "magneticStructure"
+           hitterComponent.ownerTranform != null && hitterComponent.ownerTranform.tag != "magneticCube"
             )
         {
             string ownerHitter = hitterComponent.owner;

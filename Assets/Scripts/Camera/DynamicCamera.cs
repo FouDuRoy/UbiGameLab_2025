@@ -74,7 +74,7 @@ public class DynamicCamera : MonoBehaviour
     private bool shouldFollowPlayers;
     private int chosenRotation = 1;
 
-    private void Start()
+    private void OnEnable()
     {
    // QualitySettings.vSyncCount = 1;
 	//Application.targetFrameRate = 120;
@@ -338,6 +338,18 @@ public class DynamicCamera : MonoBehaviour
     }
 
     private IEnumerator CamerasChangePattern(float duration)
+    {
+        mainCam.enabled = false;
+        cam1.enabled = true;
+        cam2.enabled = false;
+
+        yield return new WaitForSeconds(duration);
+
+        mainCam.enabled = true;
+        cam1.enabled = false;
+        cam2.enabled = false;
+    }
+    private IEnumerator waitForInputs(float duration)
     {
         mainCam.enabled = false;
         cam1.enabled = true;
