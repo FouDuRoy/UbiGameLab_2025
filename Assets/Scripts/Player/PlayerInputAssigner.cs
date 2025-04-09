@@ -8,8 +8,8 @@ public class PlayerInputAssigner : MonoBehaviour
 {
     [SerializeField] GameObject player1;
     [SerializeField] GameObject player2;
-    public InputActionAsset map;
-    public GameObject dynamicCamera;
+    public InputActionAsset map1;
+    public InputActionAsset map2;
     void Awake()
     {
       
@@ -17,8 +17,8 @@ public class PlayerInputAssigner : MonoBehaviour
         if (gamepads.Count >= 2)
         {
 
-            PlayerInput player1Input = player1.AddComponent<PlayerInput>();
-            player1Input.actions = map;
+            PlayerInput player1Input = player1.GetComponent<PlayerInput>();
+            player1Input.actions = map1;
             player1Input.SwitchCurrentActionMap("Mouvement");
             player1Input.neverAutoSwitchControlSchemes = true;
             player1Input.SwitchCurrentControlScheme("Player1", gamepads[0]);
@@ -27,13 +27,11 @@ public class PlayerInputAssigner : MonoBehaviour
             player1Input.actions.FindActionMap("Mouvement").Enable();
 
 
-            player1Input.GetComponent<PlayerMouvement>().enabled = true;
-            player1Input.GetComponent<ConeEjectionAndProjection>().enabled = true;
-            player1Input.GetComponent<HapticFeedbackController>().enabled = true;
+        
 
 
-            PlayerInput player2Input = player2.AddComponent<PlayerInput>();
-            player2Input.actions = Instantiate(map);
+            PlayerInput player2Input = player2.GetComponent<PlayerInput>();
+            player2Input.actions = map2;
             player2Input.SwitchCurrentActionMap("Mouvement1");
             player2Input.neverAutoSwitchControlSchemes = true;
             player2Input.SwitchCurrentControlScheme("Player2", gamepads[1]);
@@ -41,9 +39,7 @@ public class PlayerInputAssigner : MonoBehaviour
             player2Input.actions.FindActionMap("Mouvement1").Enable();
 
 
-            player2Input.GetComponent<PlayerMouvement>().enabled = true;
-            player2Input.GetComponent<ConeEjectionAndProjection>().enabled = true;
-            player2Input.GetComponent<HapticFeedbackController>().enabled = true;
+    
 
           
         }
@@ -52,21 +48,7 @@ public class PlayerInputAssigner : MonoBehaviour
             Debug.LogWarning("Pas assez de manettes connectées !");
         }
     }
-    IEnumerator WaitForSceneToLoad(int time,PlayerInput player1Input,PlayerInput player2Input)
-    {
-      
-        yield return new WaitForSeconds(time);
-        if (dynamicCamera != null)
-        {
-            dynamicCamera.SetActive(true);
-        }
-        foreach (Camera cam in Camera.allCameras)
-        {
-            cam.enabled = true;
-        }
-        player1Input.GetComponent<PlayerInfo>().enabled = true;
-        player2Input.GetComponent<PlayerInfo>().enabled = true;
-    }
+   
 }
  
 

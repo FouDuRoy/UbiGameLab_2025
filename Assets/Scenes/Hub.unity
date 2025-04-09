@@ -13293,6 +13293,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   m_PrefabInstance: {fileID: 510880616}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &512646976 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8556168798073143549, guid: 33399bd148d66b24fad5e4810c30d40b, type: 3}
+  m_PrefabInstance: {fileID: 1464616724}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &512646980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512646976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2eadb9a6bc2b54d9fd8a02010c9881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 1464480427}
+  player2: {fileID: 1865095217}
+  map1: {fileID: -944628639613478452, guid: 2c6a7bc590f73634dbb4528bf451110d, type: 3}
+  map2: {fileID: -944628639613478452, guid: a6642188d413b9643980f11f89db2b8c, type: 3}
 --- !u!1001 &516813222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14137,7 +14158,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 722059939}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464480427}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
@@ -16780,6 +16801,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1 Spring TEST
       objectReference: {fileID: 0}
+    - target: {fileID: 1662070221946770721, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846468097935250436, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: attackerText
       value: 
@@ -16833,6 +16866,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 806835385}
     - target: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 192581511}
@@ -16847,7 +16884,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 134994841213693252, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1464480434}
   m_SourcePrefab: {fileID: 100100000, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
 --- !u!1 &722238956
 GameObject:
@@ -24167,6 +24207,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Player2 Spring TEST '
       objectReference: {fileID: 0}
+    - target: {fileID: 1662070221946770721, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846468097935250436, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: attackerText
       value: 
@@ -24220,6 +24272,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 46163654}
     - target: {fileID: 7850894500233854463, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850894500233854463, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 192581511}
@@ -24234,7 +24290,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 134994841213693252, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1875291051}
   m_SourcePrefab: {fileID: 100100000, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
 --- !u!4 &1216625543 stripped
 Transform:
@@ -27867,6 +27926,36 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 134994841213693252, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
   m_PrefabInstance: {fileID: 722059939}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1464480434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464480427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 2c6a7bc590f73634dbb4528bf451110d, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Player1
+  m_DefaultActionMap: Mouvement
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1464616724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27925,7 +28014,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8556168798073143549, guid: 33399bd148d66b24fad5e4810c30d40b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1852766643}
+      addedObject: {fileID: 512646980}
   m_SourcePrefab: {fileID: 100100000, guid: 33399bd148d66b24fad5e4810c30d40b, type: 3}
 --- !u!1 &1468998491
 GameObject:
@@ -33038,27 +33127,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
---- !u!1 &1852766639 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8556168798073143549, guid: 33399bd148d66b24fad5e4810c30d40b, type: 3}
-  m_PrefabInstance: {fileID: 1464616724}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1852766643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852766639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a2eadb9a6bc2b54d9fd8a02010c9881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player1: {fileID: 1464480427}
-  player2: {fileID: 1865095217}
-  map: {fileID: -944628639613478452, guid: 2c6a7bc590f73634dbb4528bf451110d, type: 3}
-  dynamicCamera: {fileID: 0}
 --- !u!1 &1853862846
 GameObject:
   m_ObjectHideFlags: 0
@@ -38979,11 +39047,41 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1212371146}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865095217}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1875291051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865095217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: a6642188d413b9643980f11f89db2b8c, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Player2
+  m_DefaultActionMap: Mouvement1
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1878244761
 GameObject:
   m_ObjectHideFlags: 0

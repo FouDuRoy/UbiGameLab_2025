@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -1607963941705366508}
   - component: {fileID: 1846468097935250436}
   - component: {fileID: 1662070221946770721}
+  - component: {fileID: 3536624841391310724}
   m_Layer: 0
   m_Name: 'Player2 Spring TEST '
   m_TagString: Untagged
@@ -69,7 +70,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134994841213693252}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ac149d4145dcdc43876fa51bfa25c64, type: 3}
   m_Name: 
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134994841213693252}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60be84a4f442e994f967251cc6241ca2, type: 3}
   m_Name: 
@@ -190,13 +191,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134994841213693252}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e37e11737801404ab826afec355bb28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rightDriftProportion: 0.02
-  attractionForce: 500
+  attractionForce: 400
   cancelEjectionShoot: 0
   initialAngle: 15
   angleRepulsion: 60
@@ -205,7 +206,7 @@ MonoBehaviour:
   secondsForMaxCharging: 0.2
   distance: 22
   secondsForMaxChargingEjectionLength: 1.3
-  ejectionSpeed: 140
+  ejectionSpeed: 100
   colorChangeIntensity: 3
   maxBlocs: 5
   displaceTimeBloc: 0.1
@@ -222,6 +223,36 @@ MonoBehaviour:
   distanceCone: 5
   resolution: 20
   visionMaterial: {fileID: 2100000, guid: b23c39ceb913006449663ef0f0b80157, type: 2}
+--- !u!114 &3536624841391310724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134994841213693252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: a6642188d413b9643980f11f89db2b8c, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Player2
+  m_DefaultActionMap: Mouvement1
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &3131990571156717056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2802,15 +2833,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2818,11 +2849,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2812922978196185059, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_AnchorMax.y

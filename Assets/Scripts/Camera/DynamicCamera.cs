@@ -74,7 +74,7 @@ public class DynamicCamera : MonoBehaviour
     private bool shouldFollowPlayers;
     private int chosenRotation = 1;
 
-    private void OnEnable()
+    private void Awake()
     {
    // QualitySettings.vSyncCount = 1;
 	//Application.targetFrameRate = 120;
