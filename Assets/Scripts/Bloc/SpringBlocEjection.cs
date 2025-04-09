@@ -120,33 +120,7 @@ public class SpringBlocEjection : MonoBehaviour
 
             bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
             bool playerHittedByotherPlayer = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.projectile;
-            bool playerHittedByOwnBlock = ownerHitter == ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.detached;
 
-            if ((playerHittedByOwnBlock) && areOwnedByPlayers)
-            {
-                
-                gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
-                playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
-                upEjectionMax = Mathf.Clamp01(upEjectionMax);
-                mainCubeRb = playerObjects.cubeRb;
-                moveType = hittedComponent.ownerTranform.GetComponent<PlayerMouvement>().moveType;
-
-
-                Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<Rigidbody>().velocity;
-                if (hitterVelocityBeforeImpact.magnitude > velocityTreshold)
-                {
-                    gridSystem.DetachBlock(hitted);
-                    hittedComponent.state = BlocState.detached;
-                    Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
-                    float ejectionMag = ejectionVeolcity.magnitude;
-                    float randomHeightFactor = Random.Range(0, upEjectionMax);
-
-                    Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
-                    Quaternion randomDeviation = Quaternion.AngleAxis(Random.Range(-maxAngle, maxAngle), Vector3.up);
-                    hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
-                    hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity*ejectedFactor);
-                }
-            }
 
             if ((playerHittedByotherPlayer) && areOwnedByPlayers)
             {
