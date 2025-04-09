@@ -52,7 +52,6 @@ public class SpringBlocEjection : MonoBehaviour
             BlocState stateHitted = hittedComponent.state;
 
             bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
-            bool playerHittedByownMelee = ownerHitter == ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.melee;
             bool playerHittedByotherPlayerStructure = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.structure;
 
             if (playerHittedByotherPlayerStructure && areOwnedByPlayers)
@@ -81,33 +80,7 @@ public class SpringBlocEjection : MonoBehaviour
 
                 }
             }
-            if (playerHittedByownMelee && areOwnedByPlayers)
-            {
-
-                gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
-                playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
-                upEjectionMax = Mathf.Clamp01(upEjectionMax);
-                mainCubeRb = playerObjects.cubeRb;
-                moveType = hittedComponent.ownerTranform.GetComponent<PlayerMouvement>().moveType;
-
-
-                float hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
-                float hittedVelocityMag = hitted.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
-                Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
-
-                if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
-                {
-                    // Calculate normal average
-                    gridSystem.DetachBlock(hitted);
-                    hittedComponent.state = BlocState.melee;
-                    Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
-                    float ejectionMag = ejectionVeolcity.magnitude;
-                    Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
-                    hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
-
-                }
-            }
-        
+         
     }
 
     private void checkCollisionBetweenPlayerAndBlock(Collision collision, GameObject hitter, GameObject hitted, Bloc hitterComponent, Bloc hittedComponent)
