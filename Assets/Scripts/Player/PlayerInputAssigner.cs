@@ -12,6 +12,12 @@ public class PlayerInputAssigner : MonoBehaviour
     public GameObject dynamicCamera;
     void Awake()
     {
+        if(dynamicCamera != null) {
+            foreach (Camera cam in Camera.allCameras)
+            {
+                cam.enabled = false;
+            }
+        }
         var gamepads = Gamepad.all;
         if (gamepads.Count >= 2)
         {
@@ -44,14 +50,29 @@ public class PlayerInputAssigner : MonoBehaviour
             player2Input.GetComponent<PlayerMouvement>().enabled = true;
             player2Input.GetComponent<ConeEjectionAndProjection>().enabled = true;
             player2Input.GetComponent<HapticFeedbackController>().enabled = true;
-            if(dynamicCamera != null)
+
+
+            if (dynamicCamera != null)
             {
-                dynamicCamera.SetActive(true);
+                StartCoroutine(WaitForSceneToLoad(1));
             }
         }
         else
         {
             Debug.LogWarning("Pas assez de manettes connectées !");
+        }
+    }
+    IEnumerator WaitForSceneToLoad(int time)
+    {
+      
+        yield return new WaitForSeconds(time);
+        if (dynamicCamera != null)
+        {
+            dynamicCamera.SetActive(true);
+        }
+        foreach (Camera cam in Camera.allCameras)
+        {
+            cam.enabled = true;
         }
     }
 }
