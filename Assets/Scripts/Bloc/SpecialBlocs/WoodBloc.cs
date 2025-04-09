@@ -11,7 +11,6 @@ public class WoodBloc : MonoBehaviour
     {
         if (collision.relativeVelocity.magnitude > resistance)
         {
-            print("cac");
             // Instancie le nouveau prefab à la même position/rotation
             Instantiate(replacementPrefab, transform.position, transform.rotation);
 
