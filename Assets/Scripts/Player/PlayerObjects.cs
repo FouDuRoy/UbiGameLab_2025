@@ -140,11 +140,11 @@ public class PlayerObjects : MonoBehaviour
         {
             cube.transform.Find("Orientation").rotation = cube.transform.rotation;
             StartCoroutine(magenticStructure(cube));
-            cube.layer = 0;
+            cube.layer = 13;
         }
         else
         {
-            cube.layer = 0;
+            cube.layer = 13;
             Destroy(cube.GetComponent<SphereCollider>());
             StartCoroutine(blockNeutral(cube));
 
@@ -292,7 +292,8 @@ public class PlayerObjects : MonoBehaviour
     }
     IEnumerator blockNeutral(GameObject block)
     {
-
+        yield return new WaitForSeconds(projectionTimer);
+        block.layer = 0;
         yield return new WaitForSeconds(magnetTimer);
         if (block != null)
         {
