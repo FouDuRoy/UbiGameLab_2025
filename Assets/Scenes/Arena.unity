@@ -1288,7 +1288,7 @@ PrefabInstance:
     - target: {fileID: 929553229702998411, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: Ennemy
       value: 
-      objectReference: {fileID: 1473744056}
+      objectReference: {fileID: 0}
     - target: {fileID: 1049765132859975165, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -30.4
@@ -3443,7 +3443,7 @@ PrefabInstance:
     - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: Player1
       value: 
-      objectReference: {fileID: 1473744056}
+      objectReference: {fileID: 0}
     - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: Player2
       value: 
@@ -13246,11 +13246,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9004300913510534856, guid: 9113259329698814297571bf21c84310, type: 3}
   m_PrefabInstance: {fileID: 1467275410}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1473744056 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8901402362335876582, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
-  m_PrefabInstance: {fileID: 1709085650}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1492130889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14347,6 +14342,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6819916243938860178, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819916243938860178, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819916243938860178, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819916243938860178, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819916243938860178, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6839929964872536719, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: Ennemy
       value: 
@@ -14416,6 +14431,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+--- !u!1 &1709085651 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 134994841213693252, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+  m_PrefabInstance: {fileID: 1709085650}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1714442700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17086,7 +17106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2eadb9a6bc2b54d9fd8a02010c9881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 1473744056}
+  player1: {fileID: 1709085651}
   player2: {fileID: 1949169868}
   map1: {fileID: -944628639613478452, guid: 2c6a7bc590f73634dbb4528bf451110d, type: 3}
   map2: {fileID: -944628639613478452, guid: a6642188d413b9643980f11f89db2b8c, type: 3}
