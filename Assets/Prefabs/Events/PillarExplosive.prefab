@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6727362545004941349}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 5466943026965734907}
   - {fileID: 8548226921798115985}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1001 &744453901619588185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111,9 +111,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 811220687696822283}
     m_Modifications:
+    - target: {fileID: 4438565362284313240, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5056192
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438565362284313240, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5380425
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438565362284313240, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.50996923
+      objectReference: {fileID: 0}
     - target: {fileID: 5694876674060920943, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
       propertyPath: m_Name
       value: Explosive_Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274377996202027886, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.48949534
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274377996202027886, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5705091
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274377996202027886, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.9703277
       objectReference: {fileID: 0}
     - target: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
       propertyPath: m_LocalPosition.x
@@ -158,13 +182,62 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5694876674060920943, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4717727517770727451}
   m_SourcePrefab: {fileID: 100100000, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
 --- !u!4 &6200197459220162496 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9004300913510534856, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
   m_PrefabInstance: {fileID: 3097972161707354376}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7347184558884946279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5694876674060920943, guid: 35dab51ecc8a828468a6dc89e082c354, type: 3}
+  m_PrefabInstance: {fileID: 3097972161707354376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4717727517770727451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7347184558884946279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveRadius: 1
+  activeRadius: 1.5
+  charge: 1
+  maxSpeed: 30
+  maxSpeedVariation: 3
+  error: 0.5
+  AngleError: 12
+  moveTime: 0.1
+  maxForceAttraction: 10
+  lerpingDistance: 2
+  timeBeforeSwitching: 0.2
+  timeBeforeSwitchingVariation: 0.05
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
+  lerpingMass: 0.001
+  structureMass: 0.01
+  structureDrag: 5
+  structureAngularDrag: 5
+  springType: 1
+  lerpingType: 0
+  xLimit: 0.01
+  AngleLimit: 1
+  mainLinearDrive: 5000
+  mainLinearDamp: 10
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 10
+  angularDrive: 100000
+  angularDamp: 100
+  projection: 0
 --- !u!1001 &3630339851007009905
 PrefabInstance:
   m_ObjectHideFlags: 0

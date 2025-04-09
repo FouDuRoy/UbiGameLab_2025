@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8116176845766098949}
   - component: {fileID: 6691133210658326815}
   - component: {fileID: 5355365516190511092}
-  - component: {fileID: 6205908960855129542}
   - component: {fileID: -4726244708395997180}
   - component: {fileID: 2525441135307876409}
   - component: {fileID: 1143426935521263120}
@@ -21,6 +20,7 @@ GameObject:
   - component: {fileID: 5615064793267745248}
   - component: {fileID: 1322309207985019544}
   - component: {fileID: 28778441189886114}
+  - component: {fileID: 3245644564932838310}
   m_Layer: 0
   m_Name: Explosive_Bloc
   m_TagString: explosive
@@ -144,47 +144,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6205908960855129542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5694876674060920943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  passiveRadius: 0.7
-  activeRadius: 2
-  charge: 0.006
-  maxSpeed: 10
-  maxSpeedVariation: 3
-  error: 0.2
-  AngleError: 8
-  moveTime: 0.05
-  maxForceAttraction: 10
-  lerpingDistance: 50
-  timeBeforeSwitching: 0.2
-  timeBeforeSwitchingVariation: 0.05
-  springTorqueBreak: 10000
-  springForceBreak: 1000
-  lerpingMass: 0.001
-  structureMass: 0.01
-  structureDrag: 5
-  structureAngularDrag: 5
-  springType: 1
-  lerpingType: 0
-  xLimit: 0.01
-  AngleLimit: 8
-  mainLinearDrive: 5000
-  mainLinearDamp: 10
-  secondaryLinearDrive: 5000
-  secondaryLinearDamp: 10
-  angularDrive: 100000
-  angularDamp: 100
-  projection: 0
 --- !u!114 &-4726244708395997180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +265,47 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 12
+--- !u!114 &3245644564932838310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694876674060920943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveRadius: 1
+  activeRadius: 1.5
+  charge: 1
+  maxSpeed: 30
+  maxSpeedVariation: 3
+  error: 0.5
+  AngleError: 12
+  moveTime: 0.1
+  maxForceAttraction: 10
+  lerpingDistance: 2
+  timeBeforeSwitching: 0.2
+  timeBeforeSwitchingVariation: 0.05
+  springTorqueBreak: Infinity
+  springForceBreak: Infinity
+  lerpingMass: 0.001
+  structureMass: 0.01
+  structureDrag: 5
+  structureAngularDrag: 5
+  springType: 1
+  lerpingType: 0
+  xLimit: 0.01
+  AngleLimit: 1
+  mainLinearDrive: 5000
+  mainLinearDamp: 10
+  secondaryLinearDrive: 5000
+  secondaryLinearDamp: 10
+  angularDrive: 100000
+  angularDamp: 100
+  projection: 0
 --- !u!1 &8239625925558140238
 GameObject:
   m_ObjectHideFlags: 0

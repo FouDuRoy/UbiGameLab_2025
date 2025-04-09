@@ -20,7 +20,6 @@ public class AutoCleanupBlock : MonoBehaviour
         // Supprime tous les Rigidbodies et Colliders dans les enfants
         foreach (var rb in GetComponentsInChildren<Rigidbody>())
         {
-            print(rb.name);
             Destroy(rb);
         }
 
