@@ -32,7 +32,7 @@ public class PlayerInfo : MonoBehaviour
 
     private DynamicCamera dynamicCamera;
 
-    void Start()
+    void OnEnable()
     {
         animator = GetComponentInChildren<Animator>();
         healthValue = MaxhealthValue;
