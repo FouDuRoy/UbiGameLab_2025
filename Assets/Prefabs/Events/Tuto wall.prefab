@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 6840857839777943862}
   - component: {fileID: 243779530873396352}
   - component: {fileID: 8085339128606688730}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (16)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -221,12 +221,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &6840857839777943862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3828874530098368018}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2463782862154579957}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +442,7 @@ GameObject:
   - component: {fileID: 2072886782444042054}
   - component: {fileID: 8490394770928676380}
   - component: {fileID: 1513919276049357953}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (13)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -560,12 +564,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2072886782444042054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,7 +723,7 @@ GameObject:
   - component: {fileID: 5019743208910779019}
   - component: {fileID: 6654221877250120252}
   - component: {fileID: 3947540094529873971}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (4)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -837,12 +845,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &5019743208910779019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,7 +1029,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1922551326467849815}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1080,7 +1092,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1567726475909295079}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1284,7 +1296,7 @@ GameObject:
   - component: {fileID: 1780486881108245787}
   - component: {fileID: 2231841783319320104}
   - component: {fileID: 308913688907181228}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (5)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -1406,12 +1418,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &1780486881108245787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1510,7 +1526,7 @@ GameObject:
   - component: {fileID: 8344176302642010184}
   - component: {fileID: 2282390240370698168}
   - component: {fileID: 3243715962931435039}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (17)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -1632,12 +1648,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &8344176302642010184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1895,7 +1915,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8584323679758774722}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1933,7 +1953,7 @@ GameObject:
   - component: {fileID: 9093030109759651931}
   - component: {fileID: 7887813641821310489}
   - component: {fileID: 6940910162476516793}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring(Clone) (1)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -2055,12 +2075,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &9093030109759651931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2127,7 +2151,7 @@ GameObject:
   - component: {fileID: 5084727515476441626}
   - component: {fileID: 5309697021037981769}
   - component: {fileID: 2815920388186697585}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -2249,12 +2273,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &5084727515476441626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2321,7 +2349,7 @@ GameObject:
   - component: {fileID: 5530125653738363113}
   - component: {fileID: 3576502997548441340}
   - component: {fileID: 8395345129927596063}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -2443,12 +2471,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &5530125653738363113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2515,7 +2547,7 @@ GameObject:
   - component: {fileID: 4544104754378777009}
   - component: {fileID: 3529849529374718659}
   - component: {fileID: 8822335365920931344}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -2637,12 +2669,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &4544104754378777009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2709,7 +2745,7 @@ GameObject:
   - component: {fileID: 8389617132820672935}
   - component: {fileID: 6568247226622701549}
   - component: {fileID: 7171775766383570345}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (6)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -2831,12 +2867,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &8389617132820672935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3094,7 +3134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5439533973949599783}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3125,7 +3165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7302923507755506640}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3163,7 +3203,7 @@ GameObject:
   - component: {fileID: 9088935443642648590}
   - component: {fileID: 1902456605716551706}
   - component: {fileID: 3976773972764873745}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (10)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -3285,12 +3325,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &9088935443642648590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3478,7 +3522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9022080724504075166}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3509,7 +3553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4710330552662255375}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3777,7 +3821,7 @@ GameObject:
   - component: {fileID: 9156685269451080313}
   - component: {fileID: 4102336025889617752}
   - component: {fileID: 3468444939884279170}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (2)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -3899,12 +3943,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &9156685269451080313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3964,7 +4012,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8905621004994576653}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3995,7 +4043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3795867577878077625}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4026,7 +4074,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8220700707156476072}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4153,7 +4201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1596760819023169432}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4184,7 +4232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4922477398262035229}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4222,7 +4270,7 @@ GameObject:
   - component: {fileID: 4034289016643697204}
   - component: {fileID: 4982445681817845196}
   - component: {fileID: 6633356454818187564}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (26)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -4344,12 +4392,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &4034289016643697204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4441,7 +4493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2293606113462308583}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4479,7 +4531,7 @@ GameObject:
   - component: {fileID: 3376371156154152789}
   - component: {fileID: 2978210484376408020}
   - component: {fileID: 8534742919176880429}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -4601,12 +4653,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &3376371156154152789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4698,7 +4754,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5077065315171445247}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4819,7 +4875,7 @@ GameObject:
   - component: {fileID: 8390455416880599919}
   - component: {fileID: 9186885997536066029}
   - component: {fileID: 4078623868026771051}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (29)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -4941,12 +4997,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &8390455416880599919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5006,7 +5066,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3232649560901469146}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5242,7 +5302,7 @@ GameObject:
   - component: {fileID: 8654028010056408644}
   - component: {fileID: 4331876510735217353}
   - component: {fileID: 4108901992180597627}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (11)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -5364,12 +5424,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &8654028010056408644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5429,7 +5493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 96342582203628523}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5460,7 +5524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5251413387368455306}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5574,7 +5638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3778867360544567432}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5612,7 +5676,7 @@ GameObject:
   - component: {fileID: 1793532484312425016}
   - component: {fileID: 3939930926743615586}
   - component: {fileID: 8651318894639124541}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (28)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -5734,12 +5798,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &1793532484312425016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5799,7 +5867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 90553851545165353}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5830,7 +5898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1487517879174455466}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5868,7 +5936,7 @@ GameObject:
   - component: {fileID: 7623245404803334066}
   - component: {fileID: 2931725471427606108}
   - component: {fileID: 5693585043551023295}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (24)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -5990,12 +6058,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &7623245404803334066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6055,7 +6127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6057727918398644850}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6125,7 +6197,7 @@ GameObject:
   - component: {fileID: 6453052298412184060}
   - component: {fileID: 5523658814320571197}
   - component: {fileID: 7741899533176020117}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (7)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -6247,12 +6319,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &6453052298412184060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6581,7 +6657,7 @@ GameObject:
   - component: {fileID: 2838757609210396781}
   - component: {fileID: 4117166794150265293}
   - component: {fileID: 5051604535502878456}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (15)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -6703,12 +6779,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2838757609210396781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6890,7 +6970,7 @@ GameObject:
   - component: {fileID: 8321974979783382323}
   - component: {fileID: 5737292121676928979}
   - component: {fileID: 4591639246774324462}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (20)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -7012,12 +7092,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &8321974979783382323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7077,7 +7161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5234678383651528842}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7198,7 +7282,7 @@ GameObject:
   - component: {fileID: 2136207975888806965}
   - component: {fileID: 6233183499360299486}
   - component: {fileID: 2571721484313654411}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (25)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -7320,12 +7404,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2136207975888806965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7641,7 +7729,7 @@ GameObject:
   - component: {fileID: 843736989737138923}
   - component: {fileID: 56042794435832554}
   - component: {fileID: 6134998196373112747}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (12)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -7763,12 +7851,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &843736989737138923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7867,7 +7959,7 @@ GameObject:
   - component: {fileID: 5330060871414494568}
   - component: {fileID: 7177070003846836230}
   - component: {fileID: 1393741970648064200}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (19)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -7989,12 +8081,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &5330060871414494568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8201,7 +8297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1729674802992590403}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8240,9 +8336,8 @@ GameObject:
   - component: {fileID: 5573059883904997185}
   - component: {fileID: 7176562177749216127}
   - component: {fileID: 7492961958226416530}
-  - component: {fileID: 4182172638791692022}
   - component: {fileID: 6429330014539992163}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Tuto wall
   m_TagString: magneticCube
   m_Icon: {fileID: 0}
@@ -8257,7 +8352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6533449270080942341}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00032232664, y: 0.0012562519, z: -0.00000047178764, w: 0.9999992}
+  m_LocalRotation: {x: 0.00032291844, y: 0.001256658, z: -0.00000040579835, w: 0.99999917}
   m_LocalPosition: {x: -39.988327, y: 2.8018694, z: -24.45321}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -8297,8 +8392,10 @@ Transform:
   - {fileID: 6342885547107082794}
   - {fileID: 4222739517652732543}
   - {fileID: 5172622821456116012}
+  - {fileID: 1476918978168785413}
+  - {fileID: 4630537892379996272}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.037, y: 0.144, z: 0}
 --- !u!65 &699669334270712871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8386,8 +8483,11 @@ MonoBehaviour:
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   magnetTimer: 1
   projectionTimer: 0.5
+  rangedTimer: 0.1
   golem: {fileID: 0}
+  ejectionWeight: 4
   weight: 1.01
+  availablePowerUps: 
 --- !u!114 &8948496814233980589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8532,41 +8632,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.4
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 6
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 10
---- !u!114 &4182172638791692022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6533449270080942341}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47acc957430336548b3526eca6a819ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 2
-  error: 0.4
-  AngleError: 15
-  moveTime: 0.2
-  lerpingDistance: 0.5
-  timeBeforeSwitching: 1
-  xLimit: 0.01
-  AngleLimit: 1
-  mainLinearDrive: 5000
-  mainLinearDamp: 10
-  secondaryLinearDrive: 5000
-  secondaryLinearDamp: 10
-  angularDrive: 100000
-  angularDamp: 100
-  projection: 0
-  springTorqueBreak: Infinity
-  springForceBreak: Infinity
+  passivedDetachedForce: 5
 --- !u!114 &6429330014539992163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8707,7 +8782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3925633576487129771}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8828,7 +8903,7 @@ GameObject:
   - component: {fileID: 2965769642272823022}
   - component: {fileID: 8585353142834749774}
   - component: {fileID: 6223511212953766775}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (22)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -8950,12 +9025,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2965769642272823022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9047,7 +9126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 680878685148562607}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9078,7 +9157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 150015527203255987}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9116,7 +9195,7 @@ GameObject:
   - component: {fileID: 4977160920056691874}
   - component: {fileID: 5871570191650715927}
   - component: {fileID: 7195645525717138536}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -9238,12 +9317,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &4977160920056691874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9393,7 +9476,7 @@ GameObject:
   - component: {fileID: 2115159894511029566}
   - component: {fileID: 613328994636377706}
   - component: {fileID: 2523831390669964836}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (9)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -9515,12 +9598,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2115159894511029566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9580,7 +9667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 581816212056165267}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9757,7 +9844,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8455453358457774663}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9795,7 +9882,7 @@ GameObject:
   - component: {fileID: 742914129986815577}
   - component: {fileID: 2265120712754780327}
   - component: {fileID: 6276313631461486879}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (14)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -9917,12 +10004,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &742914129986815577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9989,7 +10080,7 @@ GameObject:
   - component: {fileID: 2511406662833569578}
   - component: {fileID: 2471933522287482927}
   - component: {fileID: 1986562242525221895}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (3)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -10111,12 +10202,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2511406662833569578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10325,7 +10420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6406775940072570527}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10356,7 +10451,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 532310888578048425}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10560,7 +10655,7 @@ GameObject:
   - component: {fileID: 4265709452744817841}
   - component: {fileID: 2380601784635879691}
   - component: {fileID: 1831066206101927237}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (1)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -10682,12 +10777,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &4265709452744817841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10945,7 +11044,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8126227130405027430}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11181,7 +11280,7 @@ GameObject:
   - component: {fileID: 3205240258955350087}
   - component: {fileID: 6824668728995894146}
   - component: {fileID: 4934506833666220794}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (21)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -11303,12 +11402,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &3205240258955350087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11522,7 +11625,7 @@ GameObject:
   - component: {fileID: 187490641104237160}
   - component: {fileID: 6921319355222555290}
   - component: {fileID: 7177374934558600742}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (8)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -11644,12 +11747,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &187490641104237160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11716,7 +11823,7 @@ GameObject:
   - component: {fileID: 1306704290780376446}
   - component: {fileID: 3871913184599685904}
   - component: {fileID: 2886303490767515829}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MC_Spring (23)
   m_TagString: magnetic
   m_Icon: {fileID: 0}
@@ -11838,12 +11945,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &1306704290780376446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11894,3 +12005,479 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!1001 &3012562483226023168
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2950239591553323360}
+    m_Modifications:
+    - target: {fileID: 537601073901146340, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Name
+      value: Tuto Dash Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 537601073901146340, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664349987024380658, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664349987024380658, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664349987024380658, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664349987024380658, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664349987024380658, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184147075252892046, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: tutoType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184147075252892046, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: playerColor.b
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184147075252892046, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: playerColor.g
+      value: 0.24313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184147075252892046, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: playerColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377870709145327513, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972271411646961583, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972271411646961583, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972271411646961583, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972271411646961583, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972271411646961583, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4050419532996092078, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241339422425206063, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241339422425206063, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241339422425206063, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241339422425206063, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241339422425206063, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.050000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.050000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9413087
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.33754706
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.1492267
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954075672186147632, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886101214587935348, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_text
+      value: Propulsion
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 88b70dab8a808b241abe8f720dd302d3, type: 2}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8084702778214620923, guid: 88b70dab8a808b241abe8f720dd302d3, type: 2}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+--- !u!224 &1476918978168785413 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+  m_PrefabInstance: {fileID: 3012562483226023168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9075648044281114485
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2950239591553323360}
+    m_Modifications:
+    - target: {fileID: 537601073901146340, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Name
+      value: Tuto Dash Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 537601073901146340, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664349987024380658, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664349987024380658, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664349987024380658, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664349987024380658, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664349987024380658, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184147075252892046, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: tutoType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184147075252892046, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: playerColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184147075252892046, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: playerColor.g
+      value: 0.7294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184147075252892046, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: playerColor.r
+      value: 0.11372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 2377870709145327513, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972271411646961583, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972271411646961583, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972271411646961583, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972271411646961583, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972271411646961583, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4050419532996092078, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241339422425206063, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241339422425206063, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241339422425206063, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241339422425206063, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241339422425206063, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.050000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.050000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9413087
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.33754706
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.1492267
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954075672186147632, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886101214587935348, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_text
+      value: Propulsion
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 88b70dab8a808b241abe8f720dd302d3, type: 2}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8084702778214620923, guid: 88b70dab8a808b241abe8f720dd302d3, type: 2}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076842895676143099, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+--- !u!224 &4630537892379996272 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4445567825831239429, guid: 057312af7968947498d6b6c2336e4b84, type: 3}
+  m_PrefabInstance: {fileID: 9075648044281114485}
+  m_PrefabAsset: {fileID: 0}
