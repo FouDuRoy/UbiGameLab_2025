@@ -40,19 +40,14 @@ public class PowerUpBloc : MonoBehaviour
             ownerName = blocCompCollided.owner;
             string hitterName = blocCompCollider.owner;
 
-            bool conditionProjectile = ownerName.Contains("Player") && collision.collider.tag != "ground" && blocCompCollided.state == BlocState.projectile;
             bool conditionHitted = hitterName.Contains("Player");
-            if (conditionProjectile || conditionHitted )
+            if (conditionHitted)
             {
                 if (collision.relativeVelocity.magnitude > resistance)
                 {
-                    if (conditionProjectile)
-                    {
-                        explode(blocCompCollided);
-
-                    }else {
+                    
                         explode(blocCompCollider);
-                    }
+                    
                 }
             }
         }
