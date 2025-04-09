@@ -54,9 +54,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3131990571156717056}
   cubeRb: {fileID: 3070630633163488715}
+  magneticCube: {fileID: 0}
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   magnetTimer: 1
-  blocNonMagnetic: {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  projectionTimer: 0.1
   golem: {fileID: 3778425522630594655}
   weight: 1
 --- !u!114 &7850894500233854463
@@ -73,6 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionForce: 140
   mouvementSpeed: 110
+  deadZone: 0.9
   mouvementReductionFactor: 1
   pivotSpeed: 200
   rotationSpeed: 50
@@ -81,6 +83,7 @@ MonoBehaviour:
   weightMouvementFactor: 0.95
   weightRotationFactor: 1
   moveType: 6
+  cameraOrientationReference: {fileID: 0}
   pauseMenu: {fileID: 0}
   selectedGUI: {fileID: 0}
 --- !u!114 &4658591005558201665
@@ -99,12 +102,15 @@ MonoBehaviour:
   attackerText: {fileID: 0}
   restartButton: {fileID: 0}
   maxDamage: 200
-  impulsionWhenHit: 100
+  impulsionWhenHitMelee: 30
+  impulsionWhenHitRanged: 30
   invincibilityDelay: 3
   hitStopDelay: 0.4
   MaxhealthValue: 300
   waitDelayAfterPlayerDeath: 1.5
   timeScaleFactor: 0.1
+  invun: 0
+  recovering: 0
   healthValue: 300
   playerLife: {fileID: 4000077683436356578}
   isInvincible: 0
@@ -194,11 +200,14 @@ MonoBehaviour:
   saveGrid: 0
   restoreGrid: 0
   playerMat: {fileID: 2100000, guid: 5de4fbdbb1ac55345a979f6a4e9c97fe, type: 2}
+  detachedSpeed: 10
   keyValuePairs: []
   kernel: {fileID: 3131990571156717056}
   playerObj: {fileID: 0}
   cubeSize: 1.2
   materials: []
+  maxDimension: 3
+  negativeY: 0
 --- !u!114 &1846468097935250436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,25 +226,19 @@ MonoBehaviour:
     rightMotorMax: 0.5
     rightMidTime: 0.02
     totalDuration: 0.06
-  attraction:
-    leftMotorMin: 0.1
-    leftMotorMax: 0
-    rightMotorMin: 0
-    rightMotorMax: 0
-    duration: 0.1
   repulsionCharge:
-    leftMotorMin: 0
     leftMotorMax: 0
-    rightMotorMin: 0
+    leftMidTime: 0.05
     rightMotorMax: 0.05
-    duration: 1
+    rightMidTime: 0
+    totalDuration: 0.1
   repulsionShoot:
     leftMotorMax: 5
     leftMidTime: 0
     rightMotorMax: 0.05
     rightMidTime: 0
     totalDuration: 0.2
-  ejectionShoot:
+  dash:
     leftMotorMax: 0.5
     leftMidTime: 0
     rightMotorMax: 0.5
@@ -261,13 +264,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightDriftProportion: 0.1
   attractionForce: 100
+  cancelEjectionShoot: 0
   initialAngle: 15
-  maxAngleRepulsion: 90
+  angleRepulsion: 90
+  blocHeight: 1
+  blocDiffY: 0.1
   secondsForMaxCharging: 0.2
   distance: 19
-  secondsForMaxChargingEjection: 1
+  secondsForMaxChargingEjectionLength: 10
   ejectionSpeed: 60
   colorChangeIntensity: 3
+  maxBlocs: 5
+  displaceTimeBloc: 0.1
+  assitedTrajectoryAngle: 10
+  assistedTime: 0.5
+  minimalAssitedDistance: 4
+  handHeight: 1.2
+  fowardDistance: 2.4
+  leftHandTransform: {fileID: 0}
+  rightHandTransform: {fileID: 0}
   lineMat: {fileID: 2100000, guid: 5de4fbdbb1ac55345a979f6a4e9c97fe, type: 2}
   maxAngle: 15
   visionConeObject: {fileID: 0}
@@ -449,6 +464,8 @@ MonoBehaviour:
   victoryConditionSpeedRange: 10
   victoryConditionSpeedMelee: 15
   Ennemy: {fileID: 0}
+  rangeDamageFactor: 1
+  meleeDamageFactor: 1
 --- !u!1 &7131289492177703505
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +780,26 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542838739161700500, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4147786400664782858, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: playerInfo
       value: 
@@ -845,6 +882,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4265178547906781839, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161098740828680816, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161098740828680816, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161098740828680816, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161098740828680816, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161098740828680816, guid: 6659231d97724e24c9161084900dc680, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5310062670897909723, guid: 6659231d97724e24c9161084900dc680, type: 3}

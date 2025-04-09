@@ -38,6 +38,7 @@ public class ExplosiveBloc : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (!canExplode) return;
+        if (collision.collider.tag == "ground" && GetComponent<Bloc>().state == BlocState.projectile) return;
         if (collision.relativeVelocity.magnitude > resistance)
         {
             Explode();

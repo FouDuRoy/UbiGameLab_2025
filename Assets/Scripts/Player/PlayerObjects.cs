@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 //Federico Barallobres
@@ -15,11 +16,16 @@ public class PlayerObjects : MonoBehaviour
     MouvementType moveType;
     protected GridSystem gridSystem;
     public float weight = 1;
+    public List<int> availablePowerUps = new List<int>(); 
     void Start()
     {
         gridSystem = this.GetComponent<GridSystem>();
         magneticCubeRb = magneticCube.GetComponent<Rigidbody>();
         weight = 1;
+        availablePowerUps.Add(0);
+        availablePowerUps.Add(1);
+        availablePowerUps.Add(2);
+        availablePowerUps.Add(3);
     }
 
     public void removeCube(GameObject cube)
@@ -295,7 +301,10 @@ public class PlayerObjects : MonoBehaviour
       IEnumerator blockEjection(GameObject block)
     {
         yield return new WaitForSeconds(projectionTimer);
-        block.layer = 0;
+        if (block != null)
+        {
+            block.layer = 0;
+        }
         yield return new WaitForSeconds(magnetTimer-projectionTimer);
         if (block != null)
         {

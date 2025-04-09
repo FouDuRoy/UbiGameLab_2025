@@ -11,6 +11,7 @@ public class PowerUpBloc : MonoBehaviour
     public float attractionOmniscienteTimer = 10f;
     public float HyperViteTimer = 10f;
     bool alive = true;
+    public bool active = true;
     string ownerName;
     Transform ownerTransform;
     private List<IEnumerator> powerUps = new List<IEnumerator>();
@@ -24,39 +25,62 @@ public class PowerUpBloc : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (alive)
+        if (alive && active)
         {
-            GameObject cube = gameObject;
-            Bloc blocComp = cube.GetComponent<Bloc>();
-            if (blocComp == null)
+            GameObject cubeCollided = gameObject;
+            GameObject cubeCollider = collision.gameObject;
+            
+            Bloc blocCompCollided = cubeCollided.GetComponent<Bloc>();
+            Bloc blocCompCollider = cubeCollider.GetComponent<Bloc>();
+
+            if (blocCompCollided == null || blocCompCollider == null)
             {
                 return;
             }
-            ownerName = blocComp.owner;
-            if (ownerName.Contains("Player") && collision.collider.tag != "ground")
-            {
+            ownerName = blocCompCollided.owner;
+            string hitterName = blocCompCollider.owner;
 
+            bool conditionProjectile = ownerName.Contains("Player") && collision.collider.tag != "ground" && blocCompCollided.state == BlocState.projectile;
+            bool conditionHitted = hitterName.Contains("Player");
+            if (conditionProjectile || conditionHitted )
+            {
                 if (collision.relativeVelocity.magnitude > resistance)
                 {
-                    alive = false;
-                    Debug.Log("Collided:" + collision.collider + "speed:" + collision.relativeVelocity.magnitude);
-                    Bloc myBloc = GetComponent<Bloc>();
-                    ownerTransform = myBloc.ownerTranform;
-                    if (myBloc.state == BlocState.structure)
+                    if (conditionProjectile)
                     {
-                        ownerTransform.GetComponent<GridSystem>().DetachBlock(gameObject);
+                        explode(blocCompCollided);
+
+                    }else {
+                        explode(blocCompCollider);
                     }
-                    // Give power up to owner
-                    int powerUpIndex = Random.Range(0, powerUps.Count);
-                    Debug.Log(powerUpIndex);
-                    DisablePowerBLoc();
-                    StartCoroutine(powerUps[powerUpIndex]);
                 }
             }
         }
     }
 
-
+    public void explode(Bloc myBloc)
+    {
+        alive = false;
+        ownerTransform = myBloc.ownerTranform;
+        if (GetComponent<Bloc>().state == BlocState.structure)
+        {
+            ownerTransform.GetComponent<GridSystem>().DetachBlock(gameObject);
+        }
+        // Give power up to owner
+        List<int> playerPowers = ownerTransform.GetComponent<PlayerObjects>().availablePowerUps;
+        if(playerPowers.Count > 0)
+        {
+            int powerUpIndex = Random.Range(0, playerPowers.Count);
+            Debug.Log(powerUps[playerPowers[powerUpIndex]]);
+            StartCoroutine(powerUps[playerPowers[powerUpIndex]]);
+            playerPowers.RemoveAt(powerUpIndex);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DisablePowerBLoc();
+    }
 
     IEnumerator GigaRepulsion()
     {

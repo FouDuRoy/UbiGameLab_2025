@@ -143,6 +143,18 @@ public class ConeEjectionAndProjection : MonoBehaviour
             if (leftTriggerHeld == false)
             {
                 feedback.AttractionVibrationStart();
+                if(initialAngle == 360)
+                {
+                    GenerateMesh(180);
+
+                }
+                else
+                {
+                    GenerateMesh(initialAngle);
+
+                }
+                animator.SetBool("IsPulling", true);
+                visionConeObject.SetActive(true);
 
             }
 
@@ -157,10 +169,23 @@ public class ConeEjectionAndProjection : MonoBehaviour
             float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
             float radius = radiusInBlocs * blocSizeWorld;
             float maxDistance = MaxDistanceForDirection((golem.forward).normalized, radius);
-            leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
-            rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
-            Vector3 restHandPositionLeft = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
-            Vector3 restHandPositionRight = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+            Vector3 restHandPositionLeft;
+            Vector3 restHandPositionRight;
+            if (initialAngle == 360)
+            {
+                leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-90, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+                rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+90, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+                restHandPositionLeft = golem.position + Quaternion.AngleAxis(-90, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+                restHandPositionRight = golem.position + Quaternion.AngleAxis(+90, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+            }
+            else
+            {
+                leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+                rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+                 restHandPositionLeft = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+                 restHandPositionRight = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+            }
+         
             if (handTimer <= 1f / 2)
             {
 
@@ -178,10 +203,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
             handTimer += Time.deltaTime;
             handTimer = handTimer % 1;
+            visionConeObject.transform.position = golem.position + new Vector3(0f, -0.5f, 0f);
+            visionConeObject.transform.rotation = Quaternion.LookRotation(golem.forward);
             coneAttraction(golem, attractionForce, initialAngle, distance, 1);
             leftTriggerHeld = true;
-
-
+       
         }
         else if (leftTriggerHeld)
         {
@@ -263,7 +289,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         magnetic = magnetic.FindAll(cube =>
         {
             //If the cube is used by a player dont pull
-            if (cube.transform.root.GetComponent<PlayerObjects>() != null || (cube.transform.tag != "magnetic" && cube.transform.tag != "explosive") || cube.GetComponent<Bloc>().owner != "Neutral")
+            if (cube.transform.root.GetComponent<PlayerObjects>() != null || (cube.transform.tag != "magnetic" && cube.transform.tag != "explosive" ) || cube.GetComponent<Bloc>().owner != "Neutral")
             {
                 return false;
             }
@@ -300,17 +326,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Vector3 rightDir = Quaternion.AngleAxis(angle, Vector3.up) * golem.forward;
         Vector3 leftDir = Quaternion.AngleAxis(-angle, Vector3.up) * golem.forward;
 
-        animator.SetBool("IsPulling", true);
-        visionConeObject.SetActive(true);
-        visionConeObject.transform.position = player.position + new Vector3(0f, -0.5f, 0f);
-        visionConeObject.transform.rotation = Quaternion.LookRotation(player.forward);
-        GenerateMesh(maxAngle);
 
-        /*rightRay.SetPosition(0, origin);
-        rightRay.SetPosition(1, origin + rightDir * distance);
-
-        leftRay.SetPosition(0, origin);
-        leftRay.SetPosition(1, origin + leftDir * distance);*/
 
         magneticLast = magnetic;
     }
@@ -405,6 +421,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         if (blocsToEject.Count < nbBlocsSelect && potentialBlocs.Count > 0)
         {
+            if (potentialBlocs.First().tag == "powerUp")
+            {
+                potentialBlocs.First().GetComponent<PowerUpBloc>().active = false ;
+            }
             feedback.RepulsionVibrationSelect();
             placeBolcAtPosition(potentialBlocs.First(), blocsToEject.Count);
             blocsToEject.Add(potentialBlocs.First());
@@ -491,6 +511,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
         cubeBloc.state = BlocState.projectile;
         cube.GetComponent<DragAfterImpact>().ejected = true;
         cubeBloc.ownerTranform.GetComponent<PlayerObjects>().finishEjection(cube);
+        if (cube.tag == "powerUp")
+        {
+            cube.GetComponent<PowerUpBloc>().active = true;
+        }
         if (assitedAim)
         {
             Vector3 centerCube = GetComponent<PlayerObjects>().cubeRb.position + fowardDistance * golem.forward;
@@ -504,6 +528,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
     {
         readyToEject = true;
         Bloc cubeBloc = cube.GetComponent<Bloc>();
+        if (cube.tag == "powerUp")
+        {
+            cube.GetComponent<PowerUpBloc>().active = true;
+        }
         cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
         cubeBloc.ownerTranform.GetComponent<PlayerObjects>().resetEjection(cube);
     }
@@ -584,9 +612,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
         float dragAfter = cube.GetComponent<DragAfterImpact>().dragAfterImpact;
         float dist = 100;
-        while (t< 1 && cubeRb.drag != dragAfter && dist> minimalAssitedDistance && cube != null)
+        while (cube != null && t < 1 && cubeRb.drag != dragAfter && dist> minimalAssitedDistance )
         {
-            yield return new WaitForSeconds(Time.fixedDeltaTime);
             time += Time.fixedDeltaTime;
             t = time / assistedTime;
             dist = (enemy.transform.position - cubeRb.position + pos).magnitude;
@@ -597,8 +624,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
                     cubeRb.velocity = (enemy.transform.position - cubeRb.position + pos).normalized * (velocityMag);
                 }
             }
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
         }
-        if(cubeRb.drag == dragAfter)
+        if (cube != null && cubeRb.drag == dragAfter)
         {
             cubeRb.velocity = -cubeRb.velocity;
         }

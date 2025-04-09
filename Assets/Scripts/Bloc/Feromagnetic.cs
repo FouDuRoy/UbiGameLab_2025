@@ -109,6 +109,11 @@ public class Feromagnetic : MonoBehaviour
             ResetObject();
         }
 
+        if(lerping && cubeAttractedToTransform == null)
+        {
+            ResetObject() ;
+        }
+
         // Set the position of the block and look for all magnetic blocs in range
         if (!lerping)
         {
