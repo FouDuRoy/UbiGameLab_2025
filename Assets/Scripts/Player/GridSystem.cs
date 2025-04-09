@@ -223,7 +223,17 @@ public class GridSystem : MonoBehaviour
 
         }
     }
+    public void DetachBlocSingleCollisionRanged(GameObject bloc)
+    {
+        Vector3Int detachedGridPos = findFirstKey(bloc);
+        if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
+        {
+            playerObj.removeCubeCollisionRanged(grid[detachedGridPos]);
+            grid.Remove(detachedGridPos);
+            playerObj.weight -= bloc.GetComponent<Bloc>().weight;
 
+        }
+    }
     public void CheckAndDetachDisconnectedBlocks()
     {
         HashSet<Vector3Int> safeBlocks = new HashSet<Vector3Int>();
@@ -517,32 +527,7 @@ public class GridSystem : MonoBehaviour
         float maxY = grid.Keys.Max(x => x.y);
         return new Vector3(maxX, minX, maxY);
     }
-    public void coneEjectRest(float ejectionSpeed, float rightDriftProportion)
-    {
-        List<Vector3Int> keys = new List<Vector3Int>();
-        foreach (var gridBloc in grid)
-        {
-            if (!IsBlockConnected(gridBloc.Value))
-            {
-                GameObject cube = gridBloc.Value;
-                playerObj.removeCube(gridBloc.Value);
-                keys.Add(gridBloc.Key);
-                gridBloc.Value.GetComponent<Bloc>().state = BlocState.projectile;
-                playerObj.weight -= gridBloc.Value.GetComponent<Bloc>().weight;
 
-                Transform golem = GetComponent<PlayerObjects>().golem.transform;
-                float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
-                cube.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-                cube.GetComponent<Rigidbody>().AddForce((golem.forward + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
-
-            }
-
-        }
-        foreach (Vector3Int key in keys)
-        {
-            grid.Remove(key);
-        }
-    }
     public void ejectRest(float ejectionSpeed)
     {
         List<Vector3Int> keys = new List<Vector3Int>();

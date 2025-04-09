@@ -8,12 +8,18 @@ public class SpringBlocEjection : MonoBehaviour
 {
     [SerializeField] float velocityTreshold = 10f;
     [SerializeField] float velocityTresholdMelee = 10f;
-    [SerializeField] float energyLoss = 0.8f;
-    [SerializeField] float upEjectionMin = .2f;
-    [SerializeField] float upEjectionMax = 1f;
-    [SerializeField] float ejectionFactor = 1f;
-    [SerializeField] float ejectedFactor = 0.75f;
+
+    [SerializeField] float upEjectionMinRanged = .2f;
+    [SerializeField] float upEjectionMaxRanged = 1f;
+    [SerializeField] float minRangedEjectionForce = 20f;
+    [SerializeField] float maxRangedEjectionForce = 20f;
+
+    [SerializeField] float minMeleeEjectionForce = 20f;
+    [SerializeField] float maxMeleeEjectionForce = 20f;
+    [SerializeField] float upEjectionMinMelee = .2f;
+    [SerializeField] float upEjectionMaxMelee = 1f;
     [SerializeField] float maxAngle = 5f;
+    [SerializeField] float passivedDetachedForce = 5f;
     private GridSystem gridSystem;
     private PlayerObjects playerObjects;
     MouvementType moveType;
@@ -32,14 +38,14 @@ public class SpringBlocEjection : MonoBehaviour
         GameObject hitted = gameObject;
         Bloc hitterComponent = hitter.GetComponent<Bloc>();
         Bloc hittedComponent = hitted.GetComponent<Bloc>();
-        float randomHeightFactor = Random.Range(upEjectionMin, upEjectionMax);
+        float randomHeightFactorMelee = Random.Range(upEjectionMinMelee, upEjectionMaxMelee);
        
         if(hitterComponent != null && hittedComponent != null && 
             hitterComponent.ownerTranform !=null && hittedComponent.ownerTranform!=null && hitterComponent.ownerTranform.tag != "magneticStructure"
              && hittedComponent.ownerTranform.tag != "magneticStructure")
         {
             checkCollisionBetweenPlayerAndBlock(collision, hitter, hitted, hitterComponent, hittedComponent);
-            checkCollisionMelee(hitter, hitted, hitterComponent, hittedComponent, randomHeightFactor);
+            checkCollisionMelee(hitter, hitted, hitterComponent, hittedComponent, randomHeightFactorMelee);
         }
     }
 
@@ -58,7 +64,6 @@ public class SpringBlocEjection : MonoBehaviour
             {
                 gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
                 playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
-                upEjectionMax = Mathf.Clamp01(upEjectionMax);
                 mainCubeRb = playerObjects.cubeRb;
                 moveType = hittedComponent.ownerTranform.GetComponent<PlayerMouvement>().moveType;
 
@@ -73,10 +78,10 @@ public class SpringBlocEjection : MonoBehaviour
                 {
                     gridSystem.DetachBlock(hitted);
                     hittedComponent.state = BlocState.detached;
-                    Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
+                    Vector3 ejectionVeolcity = Random.Range(minMeleeEjectionForce, maxMeleeEjectionForce) * hitterVelocityBeforeImpact.normalized;
                     float ejectionMag = ejectionVeolcity.magnitude;
                     Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
-                    hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
+                    hitted.GetComponent<Rigidbody>().velocity = hittedVelocity;
 
                 }
             }
@@ -100,23 +105,25 @@ public class SpringBlocEjection : MonoBehaviour
 
                 gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
                 playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
-                upEjectionMax = Mathf.Clamp01(upEjectionMax);
                 mainCubeRb = playerObjects.cubeRb;
                 moveType = hittedComponent.ownerTranform.GetComponent<PlayerMouvement>().moveType;
 
                 Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
                 if (hitterVelocityBeforeImpact.magnitude > velocityTreshold)
                 {
-                    gridSystem.DetachBlock(hitted);
+                    gridSystem.DetachBlocSingleCollisionRanged(hitted);
+                    gridSystem.ejectRest(passivedDetachedForce);
                     hittedComponent.state = BlocState.detached;
-                    Vector3 ejectionVeolcity = hitterVelocityBeforeImpact * energyLoss;
-                    float ejectionMag = ejectionVeolcity.magnitude;
-                    float randomHeightFactor = Random.Range(0, upEjectionMax);
 
-                    Vector3 hittedVelocity = (ejectionVeolcity.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor) * ejectionMag;
+                    Vector3 veolcityHitted = hitterVelocityBeforeImpact.normalized*Random.Range(minRangedEjectionForce, maxRangedEjectionForce);
+                    float energyLoss = Mathf.Sqrt(Mathf.Abs((mainCubeRb.position - hitterComponent.ownerTranform.GetComponent<PlayerObjects>().cubeRb.position).magnitude))/8f;
+                    Vector3 veolcityHitter = -veolcityHitted * energyLoss;
+                     float randomHeightFactor = Random.Range(upEjectionMinRanged, upEjectionMaxRanged);
+
+                    Vector3 hittedVelocity = veolcityHitted.magnitude*(veolcityHitted.normalized * (1 - randomHeightFactor) + Vector3.up * randomHeightFactor);
                     Quaternion randomDeviation = Quaternion.AngleAxis(Random.Range(-maxAngle, maxAngle), Vector3.up);
-                    hitted.GetComponent<Rigidbody>().velocity = hittedVelocity * ejectionFactor;
-                    hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (-ejectionVeolcity* ejectedFactor);
+                    hitted.GetComponent<Rigidbody>().velocity = hittedVelocity;
+                    hitter.GetComponent<Rigidbody>().velocity = randomDeviation * (veolcityHitter);
                 }
             }
         

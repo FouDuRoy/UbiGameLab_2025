@@ -59,6 +59,7 @@ MonoBehaviour:
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   magnetTimer: 1
   projectionTimer: 0.1
+  rangedTimer: 0.1
   golem: {fileID: 7406773669950310810}
   ejectionWeight: 4
   weight: 1
@@ -153,10 +154,6 @@ MonoBehaviour:
     m_ActionName: Mouvement/Rotate[/XInputControllerWindows/rightStick/left,/XInputControllerWindows/rightStick/right,/Keyboard/e,/Keyboard/q,/XInputControllerWindows/buttonWest,/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 4db83855-e97a-4b1f-9ec6-2d91433e956d
-    m_ActionName: Mouvement/ThrowCubes[/XInputControllerWindows/leftShoulder,/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 18adef12-b7fb-46e3-bc60-35eecac0681f
     m_ActionName: Mouvement/RotateX[/XInputControllerWindows/rightStick/down,/XInputControllerWindows/rightStick/up]
   - m_PersistentCalls:
@@ -181,8 +178,8 @@ MonoBehaviour:
     m_ActionName: Mouvement/RotateTwinStick[/XInputControllerWindows/rightStick/up,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/rightStick/right]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 62453619-0255-4c19-8fdd-78ff74a2308e
-    m_ActionName: Mouvement/RightShoulder[/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder]
+    m_ActionId: 7d4fc501-97c2-4c0a-9464-2d033898018c
+    m_ActionName: Mouvement/Dash[/DualSenseGamepadHID/buttonSouth,/DualSenseGamepadHID1/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Player2
   m_DefaultActionMap: Mouvement
@@ -275,10 +272,10 @@ MonoBehaviour:
   blocDiffY: 0.1
   secondsForMaxCharging: 0.2
   distance: 22
-  secondsForMaxChargingEjectionLength: 1.5
-  ejectionSpeed: 140
+  secondsForMaxChargingEjectionLength: 1.3
+  ejectionSpeed: 80
   colorChangeIntensity: 3
-  maxBlocs: 7
+  maxBlocs: 5
   displaceTimeBloc: 0.1
   assitedTrajectoryAngle: 10
   assistedTime: 0.5
@@ -2945,7 +2942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4265178547906781839, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4265178547906781839, guid: 6659231d97724e24c9161084900dc680, type: 3}
       propertyPath: m_LocalPosition.x

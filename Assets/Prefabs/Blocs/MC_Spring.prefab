@@ -196,12 +196,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 1.3
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 1
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.8
+  minRangedEjectionForce: 100
+  maxRangedEjectionForce: 150
+  EnergyRangedHitter: 0.8
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2128704170243825558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 5
 --- !u!1001 &9146838545179393729
 PrefabInstance:
   m_ObjectHideFlags: 0
