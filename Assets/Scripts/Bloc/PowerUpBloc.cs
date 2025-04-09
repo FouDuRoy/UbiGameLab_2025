@@ -46,18 +46,19 @@ public class PowerUpBloc : MonoBehaviour
                 if (collision.relativeVelocity.magnitude > resistance)
                 {
                     
-                        explode(blocCompCollider);
+                        explode(blocCompCollider,blocCompCollided);
                     
                 }
             }
         }
     }
 
-    public void explode(Bloc myBloc)
+    public void explode(Bloc colliderBloc,Bloc collidedBloc)
     {
         alive = false;
-        ownerTransform = myBloc.ownerTranform;
-        if (GetComponent<Bloc>().state == BlocState.structure)
+        ownerTransform = colliderBloc.ownerTranform;
+        Transform blocTransform = collidedBloc.transform;
+        if (blocTransform != null)
         {
             ownerTransform.GetComponent<GridSystem>().DetachBlock(gameObject);
         }
