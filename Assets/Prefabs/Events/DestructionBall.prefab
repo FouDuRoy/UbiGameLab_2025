@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3903787546730607055}
   - component: {fileID: 5848396592042279435}
   - component: {fileID: 6375353276739441429}
+  - component: {fileID: 8157517144459430296}
   m_Layer: 10
   m_Name: MC_Spring (55)
   m_TagString: magnetic
@@ -138,12 +139,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &3903787546730607055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +199,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &8157517144459430296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113273580503569369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &135521734090989919
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,6 +228,7 @@ GameObject:
   - component: {fileID: 3904886583417552809}
   - component: {fileID: 2435026070285473071}
   - component: {fileID: 1061835651257375474}
+  - component: {fileID: 445055621994425024}
   m_Layer: 10
   m_Name: MC_Spring (68)
   m_TagString: magnetic
@@ -332,12 +351,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &3904886583417552809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +411,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &445055621994425024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135521734090989919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &149338037299407651
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +502,7 @@ GameObject:
   - component: {fileID: 6648891956128629449}
   - component: {fileID: 5750962812685186741}
   - component: {fileID: 5664985740710969079}
+  - component: {fileID: 3991752490344194401}
   m_Layer: 10
   m_Name: MC_Spring (59)
   m_TagString: magnetic
@@ -588,12 +625,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &6648891956128629449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,6 +685,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &3991752490344194401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467298265730753799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &496892117103000524
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,6 +714,7 @@ GameObject:
   - component: {fileID: 6209751099370141981}
   - component: {fileID: 3113521375109136791}
   - component: {fileID: 2740472700502713345}
+  - component: {fileID: 7747835397846321734}
   m_Layer: 10
   m_Name: MC_Spring (38)
   m_TagString: magnetic
@@ -782,12 +837,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &6209751099370141981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,6 +897,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &7747835397846321734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496892117103000524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &521606164000382664
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,6 +926,7 @@ GameObject:
   - component: {fileID: 1036251275767558344}
   - component: {fileID: 4234697377246007489}
   - component: {fileID: 4946376842321033720}
+  - component: {fileID: 2131748952622320001}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -976,12 +1049,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &1036251275767558344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,6 +1109,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &2131748952622320001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521606164000382664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &672246882683408010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1138,7 @@ GameObject:
   - component: {fileID: 666319953636660595}
   - component: {fileID: 5084897608438539231}
   - component: {fileID: 2934824465442386227}
+  - component: {fileID: 3984703068726423184}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -1170,12 +1261,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &666319953636660595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1226,6 +1321,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &3984703068726423184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672246882683408010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &786945945346181753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,6 +1350,7 @@ GameObject:
   - component: {fileID: 6881195995777478792}
   - component: {fileID: 3523988271492062414}
   - component: {fileID: 5764971711760932820}
+  - component: {fileID: 4695515163600496285}
   m_Layer: 10
   m_Name: MC_Spring (27)
   m_TagString: magnetic
@@ -1364,12 +1473,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &6881195995777478792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1420,6 +1533,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &4695515163600496285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786945945346181753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &897378447726292805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1593,7 @@ GameObject:
   - component: {fileID: 7754151760644223892}
   - component: {fileID: 4362365130994780432}
   - component: {fileID: 1726737991694426844}
+  - component: {fileID: 6400085617585254411}
   m_Layer: 10
   m_Name: MC_Spring (73)
   m_TagString: magnetic
@@ -1589,12 +1716,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &7754151760644223892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1645,6 +1776,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &6400085617585254411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911205924433029032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &1069914916373825618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,8 +2027,11 @@ MonoBehaviour:
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   magnetTimer: 1
   projectionTimer: 0.1
+  rangedTimer: 0.1
   golem: {fileID: 0}
+  ejectionWeight: 4
   weight: 1.1799998
+  availablePowerUps: 
 --- !u!114 &5877665383290575578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2034,12 +2181,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &7239219711754429987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2145,6 +2296,7 @@ GameObject:
   - component: {fileID: 8968557250450845400}
   - component: {fileID: 2321625305180805677}
   - component: {fileID: 6872777137714701293}
+  - component: {fileID: 4949006004673994543}
   m_Layer: 10
   m_Name: MC_Spring (43)
   m_TagString: magnetic
@@ -2267,12 +2419,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &8968557250450845400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2323,6 +2479,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &4949006004673994543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476588217660518452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &1891846250702194089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2463,6 +2632,7 @@ GameObject:
   - component: {fileID: 3426971754909987070}
   - component: {fileID: 2012886068058090564}
   - component: {fileID: 7716131426303870500}
+  - component: {fileID: 142512363018108629}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -2585,12 +2755,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &3426971754909987070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2641,6 +2815,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &142512363018108629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2211729487924977526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &2222390859594430518
 GameObject:
   m_ObjectHideFlags: 0
@@ -2689,6 +2876,7 @@ GameObject:
   - component: {fileID: 2989684935122886518}
   - component: {fileID: 7421081252741759641}
   - component: {fileID: 5092674288806776307}
+  - component: {fileID: 8521201732574519661}
   m_Layer: 10
   m_Name: MC_Spring (61)
   m_TagString: magnetic
@@ -2811,12 +2999,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2989684935122886518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2867,6 +3059,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &8521201732574519661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2450466335976579857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &2451949371301694405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,6 +3119,7 @@ GameObject:
   - component: {fileID: 6576639818831791957}
   - component: {fileID: 5866513975578982137}
   - component: {fileID: 3697091345514981976}
+  - component: {fileID: 1591489501891728507}
   m_Layer: 10
   m_Name: MC_Spring (69)
   m_TagString: magnetic
@@ -3036,12 +3242,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &6576639818831791957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3092,6 +3302,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &1591489501891728507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2590399896147032633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &2904728619941865741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,6 +3393,7 @@ GameObject:
   - component: {fileID: 604878228967943564}
   - component: {fileID: 4173212860671439442}
   - component: {fileID: 9038418462505404163}
+  - component: {fileID: 7405822257029646908}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -3292,12 +3516,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &604878228967943564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3348,6 +3576,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &7405822257029646908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183518205370559754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &3194849118945649003
 GameObject:
   m_ObjectHideFlags: 0
@@ -3364,6 +3605,7 @@ GameObject:
   - component: {fileID: 8508901967382764636}
   - component: {fileID: 9096908367046483156}
   - component: {fileID: 1542190484477594574}
+  - component: {fileID: 5625856996039902086}
   m_Layer: 10
   m_Name: MC_Spring (64)
   m_TagString: magnetic
@@ -3486,12 +3728,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &8508901967382764636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3542,6 +3788,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &5625856996039902086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194849118945649003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &3294257604633529084
 GameObject:
   m_ObjectHideFlags: 0
@@ -3589,6 +3848,7 @@ GameObject:
   - component: {fileID: 4634490998454380816}
   - component: {fileID: 3185133998339227334}
   - component: {fileID: 887633961875477717}
+  - component: {fileID: 1182926397664705446}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -3711,12 +3971,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &4634490998454380816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3767,6 +4031,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &1182926397664705446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546491849112392092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &3575769758487797155
 GameObject:
   m_ObjectHideFlags: 0
@@ -3845,6 +4122,7 @@ GameObject:
   - component: {fileID: 8577445789826926940}
   - component: {fileID: 8957505111864196153}
   - component: {fileID: 3254511443280121826}
+  - component: {fileID: 1596288569408904839}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -3967,12 +4245,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &8577445789826926940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4023,6 +4305,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &1596288569408904839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3692319529902057963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &3715689099567362474
 GameObject:
   m_ObjectHideFlags: 0
@@ -4039,6 +4334,7 @@ GameObject:
   - component: {fileID: 5504813113633306461}
   - component: {fileID: 8214618947600640359}
   - component: {fileID: 7288279068968245348}
+  - component: {fileID: 5237203126845979612}
   m_Layer: 10
   m_Name: MC_Spring (67)
   m_TagString: magnetic
@@ -4161,12 +4457,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &5504813113633306461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4217,6 +4517,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &5237203126845979612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3715689099567362474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &3917414404435014058
 GameObject:
   m_ObjectHideFlags: 0
@@ -4357,6 +4670,7 @@ GameObject:
   - component: {fileID: 3271946649283803354}
   - component: {fileID: 1921032323343576587}
   - component: {fileID: 1702528246425646467}
+  - component: {fileID: 7406511818242659999}
   m_Layer: 10
   m_Name: MC_Spring (65)
   m_TagString: magnetic
@@ -4479,12 +4793,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &3271946649283803354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4535,6 +4853,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &7406511818242659999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228119951637211727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &4341163654609892464
 GameObject:
   m_ObjectHideFlags: 0
@@ -4551,6 +4882,7 @@ GameObject:
   - component: {fileID: 5485768896755031923}
   - component: {fileID: 8770404946571688600}
   - component: {fileID: 4619831065961845410}
+  - component: {fileID: 2768783308902430130}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -4673,12 +5005,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &5485768896755031923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4729,6 +5065,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &2768783308902430130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4341163654609892464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &4479566574786388904
 GameObject:
   m_ObjectHideFlags: 0
@@ -4776,6 +5125,7 @@ GameObject:
   - component: {fileID: 195662106682784024}
   - component: {fileID: 6296538357973204190}
   - component: {fileID: 4288558816790260735}
+  - component: {fileID: 4786267437756932260}
   m_Layer: 10
   m_Name: MC_Spring (56)
   m_TagString: magnetic
@@ -4898,12 +5248,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &195662106682784024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4954,6 +5308,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &4786267437756932260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538123974247365675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &4609681368066472135
 GameObject:
   m_ObjectHideFlags: 0
@@ -4970,6 +5337,7 @@ GameObject:
   - component: {fileID: 5731327230294403147}
   - component: {fileID: 639000401413575686}
   - component: {fileID: 7322388890236556745}
+  - component: {fileID: 636396355533777617}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -5092,12 +5460,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &5731327230294403147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5148,6 +5520,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &636396355533777617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609681368066472135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &4794010070072391749
 GameObject:
   m_ObjectHideFlags: 0
@@ -5164,6 +5549,7 @@ GameObject:
   - component: {fileID: 52297773683648422}
   - component: {fileID: 3113996498996672803}
   - component: {fileID: 3894723618398919523}
+  - component: {fileID: 3668498822593633733}
   m_Layer: 10
   m_Name: MC_Spring (57)
   m_TagString: magnetic
@@ -5286,12 +5672,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &52297773683648422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5342,6 +5732,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &3668498822593633733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794010070072391749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &4903598515703813254
 GameObject:
   m_ObjectHideFlags: 0
@@ -5358,6 +5761,7 @@ GameObject:
   - component: {fileID: 5855278221681863421}
   - component: {fileID: 3630339043268036671}
   - component: {fileID: 272733303752871073}
+  - component: {fileID: 232023696003800593}
   m_Layer: 10
   m_Name: MC_Spring (63)
   m_TagString: magnetic
@@ -5480,12 +5884,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &5855278221681863421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5536,6 +5944,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &232023696003800593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4903598515703813254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &5005334737706512067
 GameObject:
   m_ObjectHideFlags: 0
@@ -5707,6 +6128,7 @@ GameObject:
   - component: {fileID: 3410849908654584669}
   - component: {fileID: 8435225787249149264}
   - component: {fileID: 1698708552023346990}
+  - component: {fileID: 2312046509576225606}
   m_Layer: 10
   m_Name: MC_Spring (36)
   m_TagString: magnetic
@@ -5829,12 +6251,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &3410849908654584669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5885,6 +6311,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &2312046509576225606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481994381510179789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &5715948070708928159
 GameObject:
   m_ObjectHideFlags: 0
@@ -5901,6 +6340,7 @@ GameObject:
   - component: {fileID: 6303646159914229956}
   - component: {fileID: 8280056407396784484}
   - component: {fileID: 787956001967326055}
+  - component: {fileID: 3277490570172636309}
   m_Layer: 10
   m_Name: MC_Spring (45)
   m_TagString: magnetic
@@ -6023,12 +6463,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &6303646159914229956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6079,6 +6523,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &3277490570172636309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715948070708928159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &5965672133186266835
 GameObject:
   m_ObjectHideFlags: 0
@@ -6281,6 +6738,7 @@ GameObject:
   - component: {fileID: 134554075541351086}
   - component: {fileID: 8428960427297486639}
   - component: {fileID: 4571053778690867242}
+  - component: {fileID: 8422643375975132362}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -6403,12 +6861,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &134554075541351086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6459,6 +6921,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &8422643375975132362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6688371976780843226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &6809172993118039241
 GameObject:
   m_ObjectHideFlags: 0
@@ -6630,6 +7105,7 @@ GameObject:
   - component: {fileID: 4680217955757579588}
   - component: {fileID: 3677660683344805212}
   - component: {fileID: 3612574649502949871}
+  - component: {fileID: 1878470118704088381}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -6752,12 +7228,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &4680217955757579588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6808,6 +7288,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &1878470118704088381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7257539494891744477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &7433800202558695203
 GameObject:
   m_ObjectHideFlags: 0
@@ -6824,6 +7317,7 @@ GameObject:
   - component: {fileID: 4330271473044627078}
   - component: {fileID: 3630308140890927508}
   - component: {fileID: 1127164465362154993}
+  - component: {fileID: 4511655252958535804}
   m_Layer: 10
   m_Name: MC_Spring (71)
   m_TagString: magnetic
@@ -6946,12 +7440,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &4330271473044627078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7002,6 +7500,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &4511655252958535804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7433800202558695203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &7560705033968888222
 GameObject:
   m_ObjectHideFlags: 0
@@ -7018,6 +7529,7 @@ GameObject:
   - component: {fileID: 7817420772855900491}
   - component: {fileID: 3977214574125733360}
   - component: {fileID: 9080721670715948797}
+  - component: {fileID: 3474311448658839071}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -7140,12 +7652,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &7817420772855900491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7196,6 +7712,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &3474311448658839071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560705033968888222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &7775267030319166986
 GameObject:
   m_ObjectHideFlags: 0
@@ -7212,6 +7741,7 @@ GameObject:
   - component: {fileID: 2671538048060803829}
   - component: {fileID: 6519519388218694755}
   - component: {fileID: 5402457807224850337}
+  - component: {fileID: 2349529291746519727}
   m_Layer: 10
   m_Name: MC_Spring (60)
   m_TagString: magnetic
@@ -7334,12 +7864,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2671538048060803829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7390,6 +7924,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &2349529291746519727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775267030319166986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &8007624943928205815
 GameObject:
   m_ObjectHideFlags: 0
@@ -7406,6 +7953,7 @@ GameObject:
   - component: {fileID: 8732411308014716786}
   - component: {fileID: 4263729820406048408}
   - component: {fileID: 590512769353760363}
+  - component: {fileID: 6347618503843319314}
   m_Layer: 10
   m_Name: MC_Spring (72)
   m_TagString: magnetic
@@ -7528,12 +8076,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &8732411308014716786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7584,6 +8136,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &6347618503843319314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8007624943928205815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &8083149153619965047
 GameObject:
   m_ObjectHideFlags: 0
@@ -7600,6 +8165,7 @@ GameObject:
   - component: {fileID: 6686866454724896644}
   - component: {fileID: 7593035632654141527}
   - component: {fileID: 878633048996608328}
+  - component: {fileID: 8567013729581741209}
   m_Layer: 10
   m_Name: MC_Spring (62)
   m_TagString: magnetic
@@ -7722,12 +8288,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &6686866454724896644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7778,6 +8348,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &8567013729581741209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8083149153619965047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &8280584110510933017
 GameObject:
   m_ObjectHideFlags: 0
@@ -7794,6 +8377,7 @@ GameObject:
   - component: {fileID: 6040364415633776028}
   - component: {fileID: 5059982796013442156}
   - component: {fileID: 7859708642301413394}
+  - component: {fileID: 7088765305542323405}
   m_Layer: 10
   m_Name: MC_Spring (58)
   m_TagString: magnetic
@@ -7916,12 +8500,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &6040364415633776028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7972,6 +8560,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &7088765305542323405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280584110510933017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &8282696298555203780
 GameObject:
   m_ObjectHideFlags: 0
@@ -7988,6 +8589,7 @@ GameObject:
   - component: {fileID: 1806633708714751187}
   - component: {fileID: 7379033201199828991}
   - component: {fileID: 3223036845920113792}
+  - component: {fileID: 1677524436785195284}
   m_Layer: 10
   m_Name: MC_Spring (66)
   m_TagString: magnetic
@@ -8110,12 +8712,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &1806633708714751187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8166,6 +8772,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &1677524436785195284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8282696298555203780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &8514286087035283796
 GameObject:
   m_ObjectHideFlags: 0
@@ -8182,6 +8801,7 @@ GameObject:
   - component: {fileID: 5444199810251846563}
   - component: {fileID: 769311986406689330}
   - component: {fileID: 9083187511030076838}
+  - component: {fileID: 2287897638548575411}
   m_Layer: 10
   m_Name: MC_Spring (70)
   m_TagString: magnetic
@@ -8304,12 +8924,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &5444199810251846563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8360,6 +8984,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &2287897638548575411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8514286087035283796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1 &8695755590078913086
 GameObject:
   m_ObjectHideFlags: 0
@@ -8376,6 +9013,7 @@ GameObject:
   - component: {fileID: 2921602360592335524}
   - component: {fileID: 7638326018928181384}
   - component: {fileID: 8318788316369549596}
+  - component: {fileID: 9009649475117985316}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -8498,12 +9136,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2921602360592335524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8554,6 +9196,19 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!114 &9009649475117985316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8695755590078913086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1001 &167835647225151073
 PrefabInstance:
   m_ObjectHideFlags: 0

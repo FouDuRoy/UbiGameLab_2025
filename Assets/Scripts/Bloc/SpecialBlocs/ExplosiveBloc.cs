@@ -12,7 +12,7 @@ public class ExplosiveBloc : MonoBehaviour
     public float repulsionDistanceFactor = 1.2f;
     public float timeBeforeExplosionEnabled = 1f;
     private float gameStartTime;
-    private bool canExplode = false;
+    public bool canExplode = false;
     ParticleSystem ps;
     public GameObject[] players;
 
