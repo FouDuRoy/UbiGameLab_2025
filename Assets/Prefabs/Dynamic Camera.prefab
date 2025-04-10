@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: 2574314334607946735}
   - component: {fileID: 5407665507844166797}
   - component: {fileID: 6266391422150885637}
+  - component: {fileID: 91885552290186841}
   m_Layer: 0
   m_Name: Dynamic Camera
   m_TagString: Untagged
@@ -499,7 +500,9 @@ MonoBehaviour:
   cam1: {fileID: 4914452666355908654}
   cam2: {fileID: 1495345319147711695}
   Player1: {fileID: 0}
+  redColor: {r: 1, g: 0.24313726, b: 0.33333334, a: 1}
   Player2: {fileID: 0}
+  blueColor: {r: 0.11372549, g: 0.7294118, b: 1, a: 1}
   ArenaCenter: {fileID: 0}
   PlayersCenter: {fileID: 1561708471045058120}
   isOrthographic: 1
@@ -515,10 +518,10 @@ MonoBehaviour:
   minDistance: 14
   maxDistance: 24
   localInterptime: 0.2
-  distanceFromPlayersFactor1: 0.55
-  minDistance1: 8
+  distanceFromPlayersFactor1: 0.6
+  minDistance1: 10
   maxDistance1: 24
-  playIntroAnimation: 1
+  playIntroAnimation: 0
 --- !u!95 &6266391422150885637
 Animator:
   serializedVersion: 5
@@ -540,6 +543,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &91885552290186841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7513625886291757825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 100
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: bcaef09ed3ffef745aadf3c64af298e8, type: 2}
 --- !u!1 &7554353578654390162
 GameObject:
   m_ObjectHideFlags: 0

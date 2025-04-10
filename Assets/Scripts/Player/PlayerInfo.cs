@@ -60,19 +60,22 @@ public class PlayerInfo : MonoBehaviour
                 float damage = Mathf.Clamp(impactForce.magnitude, 10, maxDamage);
                 healthValue -= damage;
                 animator.SetTrigger("IsHit");
+
+                Rigidbody cubeRb = GetComponent<PlayerObjects>().cubeRb;
+
                 if (healthValue > 0)
                 {
                     invun = true;
                     this.GetComponent<ColorFlicker>().SetFlickerEnabled(true);
                     StartCoroutine(DoHitStop(hitStopDelay));
 
-                    dynamicCamera.LoopBetweenCameras(hitStopDelay);
+                    dynamicCamera.HitEffect(hitStopDelay, cubeRb);
 
                     if(melee){
-                        this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHitMelee, ForceMode.VelocityChange);
+                        cubeRb.AddForce(impactForce.normalized * impulsionWhenHitMelee, ForceMode.VelocityChange);
                         
                     }else{
-                        this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHitRanged, ForceMode.VelocityChange);
+                        cubeRb.AddForce(impactForce.normalized * impulsionWhenHitRanged, ForceMode.VelocityChange);
                     }
                     StartCoroutine(invunerable());
 
@@ -83,10 +86,10 @@ public class PlayerInfo : MonoBehaviour
                     StartCoroutine(DoHitStop(hitStopDelay));
                     this.GetComponent<PlayerInput>().enabled = false;
                      if(melee){
-                        this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHitMelee*1.5f, ForceMode.VelocityChange);
+                        cubeRb.AddForce(impactForce.normalized * impulsionWhenHitMelee*1.5f, ForceMode.VelocityChange);
                         
                     }else{
-                        this.GetComponent<PlayerObjects>().cubeRb.AddForce(impactForce.normalized * impulsionWhenHitRanged*1.5f, ForceMode.VelocityChange);
+                        cubeRb.AddForce(impactForce.normalized * impulsionWhenHitRanged*1.5f, ForceMode.VelocityChange);
                     }
                     deathRotation(attackerName);
                     //StartCoroutine(gameOver(attackerName));

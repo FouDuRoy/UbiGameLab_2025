@@ -1,13 +1,8 @@
-using Cinemachine.Utility;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Reflection;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
-using UnityEngine.ProBuilder;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class DynamicCamera : MonoBehaviour
 {
@@ -19,9 +14,12 @@ public class DynamicCamera : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private GameObject Player1;
+    [SerializeField] private Color redColor;
     [SerializeField] private GameObject Player2;
+    [SerializeField] private Color blueColor;
     [SerializeField] private GameObject ArenaCenter;
     [SerializeField] private Transform PlayersCenter;
+    [SerializeField] private GameObject FloorToHide;
 
     [Header("Parameters")]
     [Header("Global")]
@@ -65,6 +63,8 @@ public class DynamicCamera : MonoBehaviour
     private Vector3 targetEuler;
     private Vector3 localMainCamPos;
     private Vector3 localMainCamRot;
+    private Volume hitVolume;
+    private Vignette vignette;
 
     private Animator animator;
     private Animator animatorPlayer1;
@@ -85,7 +85,13 @@ public class DynamicCamera : MonoBehaviour
         playerOneInputs=Player1.GetComponentInParent<PlayerInput>();
         playerTwoInputs=Player2.GetComponentInParent<PlayerInput>();
 
-        if(!playIntroAnimation)
+        hitVolume = GetComponent<Volume>();
+        if (!hitVolume.profile.TryGet(out vignette))
+        {
+            Debug.LogWarning("Vignette not found in volume profile.");
+        }
+
+        if (!playIntroAnimation)
         {
             IntroFinished();
         }
@@ -207,7 +213,6 @@ public class DynamicCamera : MonoBehaviour
 
     public void IntroFinished()
     {
-
         animator.enabled = false;
         playerOneInputs.ActivateInput();
         playerTwoInputs.ActivateInput();
@@ -230,20 +235,28 @@ public class DynamicCamera : MonoBehaviour
             winner = Player2;
             animatorPlayer2.SetTrigger("PlayWinning");
         }
-
+        /*
         shouldFollowPlayers = false;
-        
-        StartCoroutine(SmoothTransitionToPodium(1.5f, new Vector3(1, 1.2f, -3f), -5, .5f, .2f, winner));
+
+        ClearingSphere(20, new string[] { "wood", "magnetic", "explosive" });
+
+        winner.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        winner.GetComponent<Rigidbody>().isKinematic = true;
+
+        winner.transform.position = new Vector3(0, 0.6f, 0);
+        winner.transform.eulerAngles = new Vector3(0, 170, 0);
+        Physics.SyncTransforms();
+
+        Camera winnerCam = winner.GetComponentInChildren<Camera>();
+        winnerCam.enabled = true;
+        mainCam.enabled = false;
+        cam1.enabled = false;
+        cam2.enabled = false;*/
     }
 
-    private IEnumerator SmoothTransitionToPodium(float desiredOrthoSize, Vector3 desiredPosition, float localXRot, float transitionTime, float teleportTime, GameObject winner)
+    private IEnumerator SmoothTransitionToPodium(float transitionTime, float teleportTime, GameObject winner)
     {
         float elapsedTime = 0f;
-        Vector3 startPosition = mainCam.transform.position;
-        float startOrthoSize = mainCam.orthographicSize;
-        Vector3 startLocalPosition = mainCam.transform.localPosition;
-        float startXRot = mainCam.transform.localEulerAngles.x;
-
         bool functionCalled = false;
 
         while (elapsedTime < transitionTime)
@@ -251,16 +264,6 @@ public class DynamicCamera : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / transitionTime;
             t = Mathf.SmoothStep(0f, 1f, t);
-
-            // Interpolation de la position de la caméra
-            mainCam.transform.position = Vector3.Lerp(startPosition, desiredPosition, t);
-
-            // Interpolation de la taille orthographique
-            mainCam.orthographicSize = Mathf.Lerp(startOrthoSize, desiredOrthoSize, t);
-            mainCamUI.orthographicSize=mainCam.orthographicSize;
-
-            // Rotation de la caméra
-            mainCam.transform.localEulerAngles = new Vector3(Mathf.Lerp(startXRot, localXRot, t), mainCam.transform.localEulerAngles.y, mainCam.transform.localEulerAngles.z);
 
             if(elapsedTime >= teleportTime && !functionCalled)
             {
@@ -280,12 +283,6 @@ public class DynamicCamera : MonoBehaviour
 
             yield return null;
         }
-
-        // S'assurer que les valeurs finales sont bien atteintes
-        mainCam.transform.position = desiredPosition;
-        mainCam.orthographicSize = desiredOrthoSize;
-        mainCamUI.orthographicSize = desiredOrthoSize;
-        mainCam.transform.localEulerAngles = new Vector3(localXRot, mainCam.transform.localEulerAngles.y, mainCam.transform.localEulerAngles.z);
     }
 
     private void ClearingSphere(float radius, string[] tags)
@@ -314,7 +311,7 @@ public class DynamicCamera : MonoBehaviour
         }
     }
 
-    public void LoopBetweenCameras(float duration)
+    public void HitEffect(float duration, Rigidbody hitPlayer)
     {
         if (!simpleCamera)
         {
@@ -324,41 +321,77 @@ public class DynamicCamera : MonoBehaviour
             if (Vector3.Distance(cam1.transform.position,Vector3.zero) < Vector3.Distance(cam2.transform.position, Vector3.zero))
             {
                 chosenCam = cam1;
-                transform.eulerAngles=new Vector3 (0f,300f,0f);
             }
             else
             {
                 chosenCam = cam2;
-                transform.eulerAngles = new Vector3(0f, 120f, 0f);
             }
+            print(transform.eulerAngles);
+            transform.eulerAngles=new Vector3(0f,transform.eulerAngles.y+chosenCam.transform.localEulerAngles.y,0f);
+            print(transform.eulerAngles);
             mainCam.orthographicSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor1, minDistance1, maxDistance1);
             mainCam.transform.localPosition=chosenCam.transform.localPosition;
             mainCam.transform.localEulerAngles = chosenCam.transform.localEulerAngles;
+        }   
+        StartCoroutine(HitEffectRoutine(hitVolume,duration,hitPlayer));
+    }
+
+    private IEnumerator HitEffectRoutine(Volume volume, float duration, Rigidbody hitTarget)
+    {
+        volume.weight = 1;
+        float elapsed = 0f;
+        print(hitTarget.name);
+        if (hitTarget.gameObject.name.Contains("rouge", System.StringComparison.InvariantCultureIgnoreCase))
+        {
+            vignette.color.overrideState = true;
+            vignette.color.value = blueColor;
         }
+        else
+        {
+            vignette.color.overrideState = true;
+            vignette.color.value = redColor;
+        }
+        yield return null;
+        Debug.Log($"Vignette color set to: {vignette.color.value}");
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            volume.weight = Mathf.Lerp(1, 0f, t);
+
+            if (hitTarget != null)
+            {
+                // Convertir position monde -> écran normalisée (0-1)
+                Vector3 screenPos = mainCam.WorldToScreenPoint(hitTarget.position);
+
+                // Si la cible est devant la caméra
+                if (screenPos.z > 0)
+                {
+                    Vector2 normalizedPos = new Vector2(
+                        screenPos.x / Screen.width,
+                        screenPos.y / Screen.height
+                    );
+
+                    vignette.center.value = normalizedPos;
+                }
+            }
+
+            yield return null;
+        }
+
+        volume.weight = 0f;
     }
 
-    private IEnumerator CamerasChangePattern(float duration)
+    public void HideFloorTiles(int hidden)
     {
-        mainCam.enabled = false;
-        cam1.enabled = true;
-        cam2.enabled = false;
-
-        yield return new WaitForSeconds(duration);
-
-        mainCam.enabled = true;
-        cam1.enabled = false;
-        cam2.enabled = false;
-    }
-    private IEnumerator waitForInputs(float duration)
-    {
-        mainCam.enabled = false;
-        cam1.enabled = true;
-        cam2.enabled = false;
-
-        yield return new WaitForSeconds(duration);
-
-        mainCam.enabled = true;
-        cam1.enabled = false;
-        cam2.enabled = false;
+        if (hidden == 1)
+        {
+            FloorToHide.SetActive(false);
+        }
+        else
+        {
+            FloorToHide.SetActive(true);
+        }
     }
 }
