@@ -426,7 +426,14 @@ public class ConeEjectionAndProjection : MonoBehaviour
             placeBolcAtPosition(potentialBlocs.First(), blocsToEject.Count);
             blocsToEject.Add(potentialBlocs.First());
             if (potentialBlocs.First().tag != "explosive")
+            {
                 potentialBlocs.First().gameObject.GetComponent<Bloc>().changeMeshMaterialColor(chargedColor);
+
+            }
+            else
+            {
+                potentialBlocs.First().GetComponent<ExplosiveBloc>().canExplode = false;
+            }
         }
 
     }
@@ -446,11 +453,15 @@ public class ConeEjectionAndProjection : MonoBehaviour
         // travel to position
         StartCoroutine(displaceBloc(bloc, number));
     }
-
+    
     private IEnumerator displaceBloc(GameObject bloc, int number)
     {
+        if(bloc == null)
+        {
+            blocsToEject.Remove(bloc);
+            yield break;
+        }
         int sign;
-
         if (number % 2 == 0)
         {
             sign = -1;
@@ -474,6 +485,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
         while (!readyToEject)
         {
             yield return new WaitForSeconds(Time.deltaTime);
+            if (bloc == null)
+            {
+                blocsToEject.Remove(bloc);
+                yield break;
+            }
             time += Time.deltaTime;
             t = time / displaceTimeBloc;
             destination = golem.position + golem.forward * 2 * (1.2f - right * blocDiffY) + golem.right * 1.4f * right * sign + golem.up * 1.2f * blocHeight;
@@ -511,6 +527,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
         if (cube.tag == "powerUp")
         {
             cube.GetComponent<PowerUpBloc>().active = true;
+        }
+        if(cube.tag == "explosive")
+        {
+            cube.GetComponent<ExplosiveBloc>().canExplode = true;
         }
         if (assitedAim)
         {
