@@ -643,7 +643,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
             }
             yield return new WaitForSeconds(Time.fixedDeltaTime);
         }
-        Debug.Log("Stop assisted aim:" + hasCollided);
         cube.GetComponent<CheckCollision>().hasCollided = false;
     }
 }

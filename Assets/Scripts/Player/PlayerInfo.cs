@@ -63,6 +63,7 @@ public class PlayerInfo : MonoBehaviour
                 if (healthValue > 0)
                 {
                     invun = true;
+                    this.GetComponent<ColorFlicker>().SetFlickerEnabled(true);
                     StartCoroutine(DoHitStop(hitStopDelay));
 
                     dynamicCamera.LoopBetweenCameras(hitStopDelay);
@@ -121,6 +122,7 @@ public class PlayerInfo : MonoBehaviour
         yield return new WaitForSeconds(invincibilityDelay);
         recovering = false;
         invun = false;
+        this.GetComponent<ColorFlicker>().SetFlickerEnabled(false);
     }
     IEnumerator gameOver(string attackerName)
     {

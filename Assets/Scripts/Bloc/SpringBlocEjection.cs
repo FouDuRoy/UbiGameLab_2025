@@ -98,7 +98,6 @@ public class SpringBlocEjection : MonoBehaviour
 
         bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
         bool playerHittedByotherPlayer = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.projectile;
-        Debug.Log(areOwnedByPlayers + " and " + playerHittedByotherPlayer);
 
         if ((playerHittedByotherPlayer) && areOwnedByPlayers)
         {

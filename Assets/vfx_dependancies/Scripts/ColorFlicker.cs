@@ -1,9 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ColorFlicker : MonoBehaviour
 {
     [Header("Flicker Settings")]
-    public bool flickerEnabled = true;
+    public bool flickerEnabled = false;
     public AnimationCurve speedOverTime = AnimationCurve.Constant(0, 1, 5f);
     public float speedMultiplier = 1f;
     public float loopTime = 1f;
@@ -15,7 +17,7 @@ public class ColorFlicker : MonoBehaviour
     [Header("Renderer Settings")]
     public bool affectChildren = true;
 
-    private Renderer[] targetRenderers;
+    public List<Renderer> targetRenderers;
     private Color[] originalColors;
     private Material[] materialInstances;
     private float flickerTime;
@@ -36,14 +38,15 @@ public class ColorFlicker : MonoBehaviour
 
     private void CacheRenderersAndMaterials()
     {
-        targetRenderers = affectChildren
-            ? GetComponentsInChildren<Renderer>()
-            : new Renderer[] { GetComponent<Renderer>() };
+        targetRenderers = GetComponentsInChildren<Renderer>().ToList();
+        targetRenderers.RemoveAll(x =>
+        {
+            return x.gameObject.GetComponent<Bloc>() != null || x.gameObject.name.Contains("ConeView");
+        });
+        originalColors = new Color[targetRenderers.Count];
+        materialInstances = new Material[targetRenderers.Count];
 
-        originalColors = new Color[targetRenderers.Length];
-        materialInstances = new Material[targetRenderers.Length];
-
-        for (int i = 0; i < targetRenderers.Length; i++)
+        for (int i = 0; i < targetRenderers.Count; i++)
         {
             if (targetRenderers[i] != null && targetRenderers[i].material.HasProperty("_Color"))
             {
@@ -67,7 +70,7 @@ public class ColorFlicker : MonoBehaviour
         float curveValue = flickerPattern.Evaluate(flickerProgression);
         float lerpValue = Mathf.SmoothStep(0f, 1f, curveValue);
 
-        for (int i = 0; i < targetRenderers.Length; i++)
+        for (int i = 0; i < targetRenderers.Count; i++)
         {
             if (targetRenderers[i] == null || materialInstances[i] == null) continue;
 
@@ -97,7 +100,7 @@ public class ColorFlicker : MonoBehaviour
 
     private void ResetToOriginalColors()
     {
-        for (int i = 0; i < targetRenderers.Length; i++)
+        for (int i = 0; i < targetRenderers.Count; i++)
         {
             if (targetRenderers[i] != null && materialInstances[i] != null)
             {
