@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 67950864b84c5db4f9eee7ca51c85571, type: 2}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -756,6 +756,54 @@ PrefabInstance:
     - target: {fileID: 1266870720375664522, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: loopTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: flickerSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: flickerColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: flickerColor.g
+      value: 0.8687168
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: flickerColor.r
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: flickerEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: speedMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: speedOverTime.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: speedOverTime.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: speedOverTime.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: speedOverTime.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903804796636631468, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: speedOverTime.m_Curve.Array.data[1].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 3752311845578425977, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_Name
@@ -1960,7 +2008,7 @@ PrefabInstance:
       objectReference: {fileID: 1340052419}
     - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: playIntroAnimation
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7513625886291757825, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: m_Name
@@ -8198,6 +8246,54 @@ PrefabInstance:
     - target: {fileID: 1751584905052372622, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: loopTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: flickerSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: flickerColor.b
+      value: 0.6212436
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: flickerColor.g
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: flickerColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: flickerEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: speedMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: speedOverTime.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: speedOverTime.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: speedOverTime.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: speedOverTime.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302310080589189270, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: speedOverTime.m_Curve.Array.data[1].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 4395782999755714880, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_AnchorMax.y
