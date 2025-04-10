@@ -167,11 +167,8 @@ public class PowerUpBloc : MonoBehaviour
     private void DisablePowerBLoc()
     {
        GetComponent<BoxCollider>().enabled = false;
-       GetComponent<Feromagnetic>().enabled = false;
        GetComponent<Bloc>().enabled = false;
-       GetComponent<SpringBlocEjection>().enabled = false;
        GetComponent<StoredVelocity>().enabled = false;
-        GetComponent<DragAfterImpact>().enabled = false;
     }
 }
 

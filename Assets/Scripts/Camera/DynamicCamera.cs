@@ -315,7 +315,7 @@ public class DynamicCamera : MonoBehaviour
     }
 
     public void LoopBetweenCameras(float duration)
-    {/*
+    {
         if (!simpleCamera)
         {
             Camera chosenCam;
@@ -334,7 +334,7 @@ public class DynamicCamera : MonoBehaviour
             mainCam.orthographicSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor1, minDistance1, maxDistance1);
             mainCam.transform.localPosition=chosenCam.transform.localPosition;
             mainCam.transform.localEulerAngles = chosenCam.transform.localEulerAngles;
-        }*/
+        }
     }
 
     private IEnumerator CamerasChangePattern(float duration)
