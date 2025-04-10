@@ -130,6 +130,7 @@ MonoBehaviour:
   passiveCube: {fileID: 2877455228711921279}
   magnetTimer: 1
   projectionTimer: 0.5
+  rangedTimer: 0.1
   golem: {fileID: 0}
   ejectionWeight: 4
   weight: 1
@@ -208,12 +209,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.4
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 6
-  ejectedFactor: 0.75
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 10
+  passivedDetachedForce: 5
 --- !u!114 &7908459055162129070
 MonoBehaviour:
   m_ObjectHideFlags: 0

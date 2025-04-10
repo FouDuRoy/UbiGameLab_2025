@@ -627,9 +627,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float t = 0;
         
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
-        float dragAfter = cube.GetComponent<DragAfterImpact>().dragAfterImpact;
+        bool hasCollided = cube.GetComponent<CheckCollision>().hasCollided;
         float dist = 100;
-        while (cube != null && t < 1 && cubeRb.drag != dragAfter && dist> minimalAssitedDistance )
+        while (cube != null && t < 1 && hasCollided && dist> minimalAssitedDistance )
         {
             time += Time.fixedDeltaTime;
             t = time / assistedTime;
@@ -643,11 +643,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
             }
             yield return new WaitForSeconds(Time.fixedDeltaTime);
         }
-        if (cube != null && cubeRb.drag == dragAfter)
-        {
-            cubeRb.velocity = -cubeRb.velocity;
-        }
-
+        Debug.Log("Stop assisted aim:" + hasCollided);
+        cube.GetComponent<CheckCollision>().hasCollided = false;
     }
 }
 

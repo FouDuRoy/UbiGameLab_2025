@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 2128704170243825558}
   - component: {fileID: 3748869350444769452}
   - component: {fileID: -9221340577005251470}
+  - component: {fileID: -1407499160579709523}
   m_Layer: 6
   m_Name: PowerUp_Bloc
   m_TagString: powerUp
@@ -197,12 +198,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTreshold: 6
   velocityTresholdMelee: 2
-  energyLoss: 0.8
-  upEjectionMin: 0.8
-  upEjectionMax: 1
-  ejectionFactor: 1
-  ejectedFactor: 1
+  upEjectionMinRanged: 0.2
+  upEjectionMaxRanged: 1
+  minRangedEjectionForce: 20
+  maxRangedEjectionForce: 20
+  minMeleeEjectionForce: 20
+  maxMeleeEjectionForce: 20
+  upEjectionMinMelee: 0.2
+  upEjectionMaxMelee: 1
   maxAngle: 1
+  passivedDetachedForce: 5
 --- !u!114 &2128704170243825558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +256,19 @@ MonoBehaviour:
   attractionOmniscienteTimer: Infinity
   HyperViteTimer: Infinity
   active: 1
+--- !u!114 &-1407499160579709523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515478394461614388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f44d920eed48a409193621db5c932c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasCollided: 0
 --- !u!1001 &9146838545179393729
 PrefabInstance:
   m_ObjectHideFlags: 0
