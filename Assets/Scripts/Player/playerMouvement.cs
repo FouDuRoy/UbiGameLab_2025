@@ -124,13 +124,12 @@ public class PlayerMouvement : MonoBehaviour
         //attractCubes.Enable();
         pauseMenu.SetActive(false); // Hide canvas at start
         pauseAction = playerInput.currentActionMap.FindAction("Pause");
-        pauseAction.Enable();
         gridPlayer = GetComponent<GridSystem>();
         rb = GetComponent<PlayerObjects>().cubeRb;
         golem = GetComponent<PlayerObjects>().golem.transform;
         feedback = GetComponent<HapticFeedbackController>();
         dash = GetComponentInChildren<Dash>();
-        pauseAction.performed += OnPause;
+        pauseAction.performed += DoPause;
         dashMove.performed += _ =>
         {
             Ejection();
@@ -166,9 +165,8 @@ public class PlayerMouvement : MonoBehaviour
     }
 
    
-    public void OnPause(InputAction.CallbackContext context)
+    public void DoPause(InputAction.CallbackContext context)
     {
-        Debug.Log("!!!  ");
         TogglePause();
     }
 

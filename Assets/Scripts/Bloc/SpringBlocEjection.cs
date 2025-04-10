@@ -22,7 +22,6 @@ public class SpringBlocEjection : MonoBehaviour
     [SerializeField] float passivedDetachedForce = 5f;
     private GridSystem gridSystem;
     private PlayerObjects playerObjects;
-    MouvementType moveType;
     Rigidbody mainCubeRb;
 
     private void Start()
@@ -65,7 +64,6 @@ public class SpringBlocEjection : MonoBehaviour
             gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
             playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
             mainCubeRb = playerObjects.cubeRb;
-            moveType = hittedComponent.ownerTranform.GetComponent<PlayerMouvement>().moveType;
 
             Rigidbody hitterRB = hittedComponent.ownerTranform.GetComponent<PlayerObjects>().cubeRb;
             Rigidbody hittedRB = mainCubeRb;
@@ -100,7 +98,7 @@ public class SpringBlocEjection : MonoBehaviour
 
         bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
         bool playerHittedByotherPlayer = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.projectile;
-
+        Debug.Log(areOwnedByPlayers + " and " + playerHittedByotherPlayer);
 
         if ((playerHittedByotherPlayer) && areOwnedByPlayers)
         {
@@ -108,7 +106,6 @@ public class SpringBlocEjection : MonoBehaviour
             gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
             playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
             mainCubeRb = playerObjects.cubeRb;
-            moveType = hittedComponent.ownerTranform.GetComponent<PlayerMouvement>().moveType;
 
             Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
             if (hitterVelocityBeforeImpact.magnitude > velocityTreshold)

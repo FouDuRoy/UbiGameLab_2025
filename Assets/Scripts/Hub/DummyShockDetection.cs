@@ -35,12 +35,11 @@ public class DummyShockDetection : MonoBehaviour
             string ownerHitted = transform.parent.name;
             BlocState stateHitter = hitterComponent.state;
             bool projectileFromOtherPlayer = stateHitter == BlocState.projectile && (ownerHitter != ownerHitted);
-            string player = this.gameObject.transform.parent.name;
 
             if (projectileFromOtherPlayer)
             {
                 Vector3 hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
-                Vector3 projectileVelocity = projectileVelocity = hitterVelocity;
+                Vector3 projectileVelocity  = hitterVelocity;
 
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
@@ -61,7 +60,7 @@ public class DummyShockDetection : MonoBehaviour
             if (meleeFromOtherPlayer)
             {
                 Vector3 hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
-                Vector3 projectileVelocity = projectileVelocity = hitterVelocity;
+                Vector3 projectileVelocity = hitterVelocity;
 
                 if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                 {
