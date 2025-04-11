@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 4879626687806361981}
   - component: {fileID: 9188114102539986009}
   - component: {fileID: 2903804796636631468}
+  - component: {fileID: 3684818022968393403}
   m_Layer: 0
   m_Name: 'Player2 Spring TEST '
   m_TagString: Untagged
@@ -409,6 +410,21 @@ MonoBehaviour:
     m_RotationOrder: 4
   affectChildren: 1
   targetRenderers: []
+--- !u!114 &3684818022968393403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3752311845578425977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315cae306757d440bf046e7060d1941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vortex: {fileID: 4313016818357375316}
+  fadeInTime: 0.1
+  fadeOutTime: 0.3
 --- !u!1 &6372226836157655904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,7 +1799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9139865310352743980, guid: d3e44fbe317a9b44aa299314c148d0bc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1808,6 +1824,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1796452612003377754}
     m_Modifications:
+    - target: {fileID: -8744666883889611541, guid: 996edf6a353526344b086f31a2c203de, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -2748981447920606575, guid: 996edf6a353526344b086f31a2c203de, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035616581401964078, guid: 996edf6a353526344b086f31a2c203de, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -8744666883889611541, guid: 163433122f55b1743ba5d7b2307a4f74, type: 3}
       propertyPath: m_Layer
       value: 21
@@ -1871,18 +1899,6 @@ PrefabInstance:
     - target: {fileID: 4035616581401964078, guid: 163433122f55b1743ba5d7b2307a4f74, type: 3}
       propertyPath: m_Layer
       value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: -8744666883889611541, guid: 996edf6a353526344b086f31a2c203de, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -2748981447920606575, guid: 996edf6a353526344b086f31a2c203de, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035616581401964078, guid: 996edf6a353526344b086f31a2c203de, type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

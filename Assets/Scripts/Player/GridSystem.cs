@@ -70,24 +70,7 @@ public class GridSystem : MonoBehaviour
             convertArrayToDict();
             restoreGrid = false;
         }
-        float seuil = GetComponentInChildren<WinCondition>().victoryConditionSpeedMelee;
-
-        foreach (var v in grid)
-        {
-            if(grid.Count > 1)
-            {
-                Rigidbody rb = v.Value.GetComponent<Rigidbody>();
-                if (rb != null && rb.velocity.magnitude >= seuil)
-                {
-                    vortex.SetActive(true);
-                    return; // On quitte dès qu’on l’a activé
-                }
-            }
-        }
-
-        // Si aucun n’a rempli la condition
-        if (vortex.activeSelf)
-            vortex.SetActive(false);
+       
     }
     public void convertDictToArray()
     {
