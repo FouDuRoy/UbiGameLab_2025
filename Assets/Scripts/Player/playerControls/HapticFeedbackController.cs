@@ -352,6 +352,16 @@ public class HapticFeedbackController : MonoBehaviour
         }
     }
 
+    public void MeleeSpeedVibrationStart()
+    {
+
+    }
+
+    public void MeleeSpeedVibrationEnd()
+    {
+
+    }
+
     public void StopVibrations()
     {
         playerGamepad.SetMotorSpeeds(0, 0);

@@ -194,7 +194,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: -100
   far clip plane: 5000
   field of view: 60
   orthographic: 1
@@ -322,7 +322,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: -100
   far clip plane: 5000
   field of view: 60
   orthographic: 1
@@ -499,12 +499,16 @@ MonoBehaviour:
   mainCamUI: {fileID: 6343833617577395780}
   cam1: {fileID: 4914452666355908654}
   cam2: {fileID: 1495345319147711695}
+  redCam: {fileID: 0}
+  blueCam: {fileID: 0}
   Player1: {fileID: 0}
   redColor: {r: 1, g: 0.24313726, b: 0.33333334, a: 1}
   Player2: {fileID: 0}
   blueColor: {r: 0.11372549, g: 0.7294118, b: 1, a: 1}
   ArenaCenter: {fileID: 0}
   PlayersCenter: {fileID: 1561708471045058120}
+  FloorToHide: {fileID: 0}
+  eventsManager: {fileID: 0}
   isOrthographic: 1
   simpleCamera: 0
   maxSpeed: Infinity
@@ -518,10 +522,13 @@ MonoBehaviour:
   minDistance: 14
   maxDistance: 24
   localInterptime: 0.2
-  distanceFromPlayersFactor1: 0.6
+  distanceFromPlayersFactor1: 0.55
   minDistance1: 10
   maxDistance1: 24
-  playIntroAnimation: 0
+  playIntroAnimation: 1
+  looserCamTime: 0.15
+  middleCamTime: 0.3
+  transitionToPodiumDuration: 1
 --- !u!95 &6266391422150885637
 Animator:
   serializedVersion: 5
