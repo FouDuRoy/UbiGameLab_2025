@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 6840857839777943862}
   - component: {fileID: 243779530873396352}
   - component: {fileID: 8085339128606688730}
+  - component: {fileID: 9098307713642619045}
   m_Layer: 0
   m_Name: MC_Spring (16)
   m_TagString: magnetic
@@ -207,6 +208,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 6106836052434695723}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7400531507408456921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +284,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &9098307713642619045
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163384493359950016}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &225586353975334720
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +472,7 @@ GameObject:
   - component: {fileID: 2072886782444042054}
   - component: {fileID: 8490394770928676380}
   - component: {fileID: 1513919276049357953}
+  - component: {fileID: 3045528754657045593}
   m_Layer: 0
   m_Name: MC_Spring (13)
   m_TagString: magnetic
@@ -550,6 +581,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 6840594301374677387}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &8024186376148353587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,6 +657,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &3045528754657045593
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327874577884683570}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &382803662736995389
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,6 +783,7 @@ GameObject:
   - component: {fileID: 5019743208910779019}
   - component: {fileID: 6654221877250120252}
   - component: {fileID: 3947540094529873971}
+  - component: {fileID: 4518232595040385725}
   m_Layer: 0
   m_Name: MC_Spring (4)
   m_TagString: magnetic
@@ -831,6 +892,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 273149023504799913}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1882808849270162545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,6 +968,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &4518232595040385725
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388723736672904242}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &468175973200575676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,6 +1386,7 @@ GameObject:
   - component: {fileID: 1780486881108245787}
   - component: {fileID: 2231841783319320104}
   - component: {fileID: 308913688907181228}
+  - component: {fileID: 2082977152543634673}
   m_Layer: 0
   m_Name: MC_Spring (5)
   m_TagString: magnetic
@@ -1404,6 +1495,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 881200170444452582}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1910066930017528949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,6 +1571,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &2082977152543634673
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943280740331785154}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &946208518391515911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,6 +1646,7 @@ GameObject:
   - component: {fileID: 8344176302642010184}
   - component: {fileID: 2282390240370698168}
   - component: {fileID: 3243715962931435039}
+  - component: {fileID: 7318045877505823874}
   m_Layer: 0
   m_Name: MC_Spring (17)
   m_TagString: magnetic
@@ -1634,6 +1755,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 8267234324062225678}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1830999320582593426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1708,6 +1831,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &7318045877505823874
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062834558316393162}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1228223485743024812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,6 +2103,7 @@ GameObject:
   - component: {fileID: 9093030109759651931}
   - component: {fileID: 7887813641821310489}
   - component: {fileID: 6940910162476516793}
+  - component: {fileID: 4511986800463308293}
   m_Layer: 0
   m_Name: MC_Spring(Clone) (1)
   m_TagString: magnetic
@@ -2061,6 +2212,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 5481569259637107780}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &6715173322522859503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2135,6 +2288,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &4511986800463308293
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434045486337648484}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1455290368542677879
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,6 +2331,7 @@ GameObject:
   - component: {fileID: 5084727515476441626}
   - component: {fileID: 5309697021037981769}
   - component: {fileID: 2815920388186697585}
+  - component: {fileID: 7112350664463904912}
   m_Layer: 0
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -2259,6 +2440,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 4347299507163476343}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &6328882613609589457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2333,6 +2516,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &7112350664463904912
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455290368542677879}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1456659172233354756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,6 +2559,7 @@ GameObject:
   - component: {fileID: 5530125653738363113}
   - component: {fileID: 3576502997548441340}
   - component: {fileID: 8395345129927596063}
+  - component: {fileID: 3913968824785407133}
   m_Layer: 0
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -2457,6 +2668,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 869731434516070976}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &3755690656202442131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2531,6 +2744,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &3913968824785407133
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456659172233354756}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1554069896802827303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +2787,7 @@ GameObject:
   - component: {fileID: 4544104754378777009}
   - component: {fileID: 3529849529374718659}
   - component: {fileID: 8822335365920931344}
+  - component: {fileID: 2030508928450410693}
   m_Layer: 0
   m_Name: MC_Spring
   m_TagString: magnetic
@@ -2655,6 +2896,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 8314699747656300939}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1499087627696179935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2729,6 +2972,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &2030508928450410693
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554069896802827303}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1657403129123694917
 GameObject:
   m_ObjectHideFlags: 0
@@ -2745,6 +3015,7 @@ GameObject:
   - component: {fileID: 8389617132820672935}
   - component: {fileID: 6568247226622701549}
   - component: {fileID: 7171775766383570345}
+  - component: {fileID: 3151074075993842706}
   m_Layer: 0
   m_Name: MC_Spring (6)
   m_TagString: magnetic
@@ -2853,6 +3124,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 150227318760458088}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &5234048429656392511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2927,6 +3200,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &3151074075993842706
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657403129123694917}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1697938895345455232
 GameObject:
   m_ObjectHideFlags: 0
@@ -3203,6 +3503,7 @@ GameObject:
   - component: {fileID: 9088935443642648590}
   - component: {fileID: 1902456605716551706}
   - component: {fileID: 3976773972764873745}
+  - component: {fileID: 2762272049478917972}
   m_Layer: 0
   m_Name: MC_Spring (10)
   m_TagString: magnetic
@@ -3311,6 +3612,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 382803662736995389}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &8859431507797311803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3385,6 +3688,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &2762272049478917972
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2253273806040927298}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &2358675708812228978
 GameObject:
   m_ObjectHideFlags: 0
@@ -3821,6 +4151,7 @@ GameObject:
   - component: {fileID: 9156685269451080313}
   - component: {fileID: 4102336025889617752}
   - component: {fileID: 3468444939884279170}
+  - component: {fileID: 3368635889547993602}
   m_Layer: 0
   m_Name: MC_Spring (2)
   m_TagString: magnetic
@@ -3929,6 +4260,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 2868814933115348240}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &5921646644699549242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4003,6 +4336,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &3368635889547993602
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3164556141270823519}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &3171631556295175808
 GameObject:
   m_ObjectHideFlags: 0
@@ -4270,6 +4630,7 @@ GameObject:
   - component: {fileID: 4034289016643697204}
   - component: {fileID: 4982445681817845196}
   - component: {fileID: 6633356454818187564}
+  - component: {fileID: 7405337611166462043}
   m_Layer: 0
   m_Name: MC_Spring (26)
   m_TagString: magnetic
@@ -4378,6 +4739,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 5843193738623076265}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &2298688258853390786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4452,6 +4815,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &7405337611166462043
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4045567294462082232}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &4149019401270614561
 GameObject:
   m_ObjectHideFlags: 0
@@ -4531,6 +4921,7 @@ GameObject:
   - component: {fileID: 3376371156154152789}
   - component: {fileID: 2978210484376408020}
   - component: {fileID: 8534742919176880429}
+  - component: {fileID: 7592200126067764280}
   m_Layer: 0
   m_Name: MC_Spring
   m_TagString: magnetic
@@ -4639,6 +5030,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 7398515583555745219}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &506022886333468433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4713,6 +5106,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &7592200126067764280
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245651344271995677}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &4249027760714708871
 GameObject:
   m_ObjectHideFlags: 0
@@ -4875,6 +5295,7 @@ GameObject:
   - component: {fileID: 8390455416880599919}
   - component: {fileID: 9186885997536066029}
   - component: {fileID: 4078623868026771051}
+  - component: {fileID: 5261282858150526473}
   m_Layer: 0
   m_Name: MC_Spring (29)
   m_TagString: magnetic
@@ -4983,6 +5404,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 4501686823124983233}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &808048423676828088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5057,6 +5480,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &5261282858150526473
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4304147758075401164}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &4317871515005970812
 GameObject:
   m_ObjectHideFlags: 0
@@ -5302,6 +5752,7 @@ GameObject:
   - component: {fileID: 8654028010056408644}
   - component: {fileID: 4331876510735217353}
   - component: {fileID: 4108901992180597627}
+  - component: {fileID: 4549600222273892366}
   m_Layer: 0
   m_Name: MC_Spring (11)
   m_TagString: magnetic
@@ -5410,6 +5861,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 468175973200575676}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4163670167643204618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5484,6 +5937,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &4549600222273892366
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673093527299986522}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &4715743200705093971
 GameObject:
   m_ObjectHideFlags: 0
@@ -5676,6 +6156,7 @@ GameObject:
   - component: {fileID: 1793532484312425016}
   - component: {fileID: 3939930926743615586}
   - component: {fileID: 8651318894639124541}
+  - component: {fileID: 2937944695877810517}
   m_Layer: 0
   m_Name: MC_Spring (28)
   m_TagString: magnetic
@@ -5784,6 +6265,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 8744071222923642739}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &500331493061623661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5858,6 +6341,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &2937944695877810517
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5000352643051551151}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &5036460235387875236
 GameObject:
   m_ObjectHideFlags: 0
@@ -5936,6 +6446,7 @@ GameObject:
   - component: {fileID: 7623245404803334066}
   - component: {fileID: 2931725471427606108}
   - component: {fileID: 5693585043551023295}
+  - component: {fileID: 4007194379995145083}
   m_Layer: 0
   m_Name: MC_Spring (24)
   m_TagString: magnetic
@@ -6044,6 +6555,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 2865002197903328513}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &2025498584842157902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6118,6 +6631,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &4007194379995145083
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5232483745061402069}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &5288504093114158438
 GameObject:
   m_ObjectHideFlags: 0
@@ -6197,6 +6737,7 @@ GameObject:
   - component: {fileID: 6453052298412184060}
   - component: {fileID: 5523658814320571197}
   - component: {fileID: 7741899533176020117}
+  - component: {fileID: 2722881118211192132}
   m_Layer: 0
   m_Name: MC_Spring (7)
   m_TagString: magnetic
@@ -6305,6 +6846,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 5726817379962950047}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &8904626240903629751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6379,6 +6922,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &2722881118211192132
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5441292403781410823}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &5481569259637107780
 GameObject:
   m_ObjectHideFlags: 0
@@ -6657,6 +7227,7 @@ GameObject:
   - component: {fileID: 2838757609210396781}
   - component: {fileID: 4117166794150265293}
   - component: {fileID: 5051604535502878456}
+  - component: {fileID: 3430589300753095046}
   m_Layer: 0
   m_Name: MC_Spring (15)
   m_TagString: magnetic
@@ -6765,6 +7336,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 8234655004754724500}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &2866907812950031280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6839,6 +7412,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &3430589300753095046
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5710805348369471062}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &5726817379962950047
 GameObject:
   m_ObjectHideFlags: 0
@@ -6970,6 +7570,7 @@ GameObject:
   - component: {fileID: 8321974979783382323}
   - component: {fileID: 5737292121676928979}
   - component: {fileID: 4591639246774324462}
+  - component: {fileID: 6616884695335323309}
   m_Layer: 0
   m_Name: MC_Spring (20)
   m_TagString: magnetic
@@ -7078,6 +7679,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 6112174678512145492}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &2795985852731157796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7152,6 +7755,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &6616884695335323309
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753726407647008958}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &5803248216731603736
 GameObject:
   m_ObjectHideFlags: 0
@@ -7282,6 +7912,7 @@ GameObject:
   - component: {fileID: 2136207975888806965}
   - component: {fileID: 6233183499360299486}
   - component: {fileID: 2571721484313654411}
+  - component: {fileID: 2906113323518909477}
   m_Layer: 0
   m_Name: MC_Spring (25)
   m_TagString: magnetic
@@ -7390,6 +8021,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 6311586180791430591}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1831225057630045003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7464,6 +8097,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &2906113323518909477
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5981820156604778543}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &6106836052434695723
 GameObject:
   m_ObjectHideFlags: 0
@@ -7729,6 +8389,7 @@ GameObject:
   - component: {fileID: 843736989737138923}
   - component: {fileID: 56042794435832554}
   - component: {fileID: 6134998196373112747}
+  - component: {fileID: 7303303141599839125}
   m_Layer: 0
   m_Name: MC_Spring (12)
   m_TagString: magnetic
@@ -7837,6 +8498,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 4303453150865310267}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &3975066028239599677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7911,6 +8574,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &7303303141599839125
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6338968544645658772}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &6352503527625782815
 GameObject:
   m_ObjectHideFlags: 0
@@ -7959,6 +8649,7 @@ GameObject:
   - component: {fileID: 5330060871414494568}
   - component: {fileID: 7177070003846836230}
   - component: {fileID: 1393741970648064200}
+  - component: {fileID: 743794550251866618}
   m_Layer: 0
   m_Name: MC_Spring (19)
   m_TagString: magnetic
@@ -8067,6 +8758,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 4746112625181239858}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &3519144044624984890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8141,6 +8834,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &743794550251866618
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6376350677878140098}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &6391495483295805100
 GameObject:
   m_ObjectHideFlags: 0
@@ -8329,7 +9049,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2950239591553323360}
   - component: {fileID: 699669334270712871}
-  - component: {fileID: 6051107463188237923}
   - component: {fileID: 6760300093912729383}
   - component: {fileID: 3855319523584407467}
   - component: {fileID: 8948496814233980589}
@@ -8337,6 +9056,7 @@ GameObject:
   - component: {fileID: 7176562177749216127}
   - component: {fileID: 7492961958226416530}
   - component: {fileID: 6429330014539992163}
+  - component: {fileID: 7321513944490888197}
   m_Layer: 0
   m_Name: Tuto wall
   m_TagString: magneticCube
@@ -8417,33 +9137,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &6051107463188237923
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6533449270080942341}
-  serializedVersion: 4
-  m_Mass: 10
-  m_Drag: 5
-  m_AngularDrag: 5
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 80
-  m_CollisionDetection: 2
 --- !u!135 &6760300093912729383
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8478,7 +9171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6533449270080942341}
-  cubeRb: {fileID: 6051107463188237923}
+  cubeRb: {fileID: 7321513944490888197}
   magneticCube: {fileID: 6533449270080942341}
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   magnetTimer: 1
@@ -8603,7 +9296,9 @@ MonoBehaviour:
   state: 3
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 7953040141427348823}
-  rb: {fileID: 6051107463188237923}
+  rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7176562177749216127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8617,7 +9312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
-  rb: {fileID: 6051107463188237923}
+  rb: {fileID: 0}
 --- !u!114 &7492961958226416530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8655,7 +9350,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastTickVelocity: {x: 0, y: 0, z: 0}
-  rb: {fileID: 6051107463188237923}
+  rb: {fileID: 0}
+--- !u!54 &7321513944490888197
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533449270080942341}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &6579548826131958465
 GameObject:
   m_ObjectHideFlags: 0
@@ -8903,6 +9625,7 @@ GameObject:
   - component: {fileID: 2965769642272823022}
   - component: {fileID: 8585353142834749774}
   - component: {fileID: 6223511212953766775}
+  - component: {fileID: 7965847908355079573}
   m_Layer: 0
   m_Name: MC_Spring (22)
   m_TagString: magnetic
@@ -9011,6 +9734,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 5547562728224177755}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7747357499784693671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9085,6 +9810,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &7965847908355079573
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6892639014506716859}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &6900975042969870434
 GameObject:
   m_ObjectHideFlags: 0
@@ -9195,6 +9947,7 @@ GameObject:
   - component: {fileID: 4977160920056691874}
   - component: {fileID: 5871570191650715927}
   - component: {fileID: 7195645525717138536}
+  - component: {fileID: 3344983352031950092}
   m_Layer: 0
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -9303,6 +10056,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 6507662927131929726}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7950349079258200170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9377,6 +10132,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &3344983352031950092
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7050519971978072429}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &7057609310537543998
 GameObject:
   m_ObjectHideFlags: 0
@@ -9476,6 +10258,7 @@ GameObject:
   - component: {fileID: 2115159894511029566}
   - component: {fileID: 613328994636377706}
   - component: {fileID: 2523831390669964836}
+  - component: {fileID: 6287874679535431731}
   m_Layer: 0
   m_Name: MC_Spring (9)
   m_TagString: magnetic
@@ -9584,6 +10367,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 7057609310537543998}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &3932408903909070580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9658,6 +10443,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &6287874679535431731
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7206970896588465030}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &7318002892173551388
 GameObject:
   m_ObjectHideFlags: 0
@@ -9882,6 +10694,7 @@ GameObject:
   - component: {fileID: 742914129986815577}
   - component: {fileID: 2265120712754780327}
   - component: {fileID: 6276313631461486879}
+  - component: {fileID: 1054513995627920235}
   m_Layer: 0
   m_Name: MC_Spring (14)
   m_TagString: magnetic
@@ -9990,6 +10803,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 8563577287534637779}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4700021142887307722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10064,6 +10879,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &1054513995627920235
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535396100330777534}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &7710781662988859512
 GameObject:
   m_ObjectHideFlags: 0
@@ -10080,6 +10922,7 @@ GameObject:
   - component: {fileID: 2511406662833569578}
   - component: {fileID: 2471933522287482927}
   - component: {fileID: 1986562242525221895}
+  - component: {fileID: 4274904687427125518}
   m_Layer: 0
   m_Name: MC_Spring (3)
   m_TagString: magnetic
@@ -10188,6 +11031,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 1228223485743024812}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1544733171979960806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10262,6 +11107,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &4274904687427125518
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710781662988859512}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &7786605853130082615
 GameObject:
   m_ObjectHideFlags: 0
@@ -10655,6 +11527,7 @@ GameObject:
   - component: {fileID: 4265709452744817841}
   - component: {fileID: 2380601784635879691}
   - component: {fileID: 1831066206101927237}
+  - component: {fileID: 6923356031090518493}
   m_Layer: 0
   m_Name: MC_Spring (1)
   m_TagString: magnetic
@@ -10763,6 +11636,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 8864443756982630035}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7280130921586933863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10837,6 +11712,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &6923356031090518493
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303108933742125936}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &8314699747656300939
 GameObject:
   m_ObjectHideFlags: 0
@@ -11280,6 +12182,7 @@ GameObject:
   - component: {fileID: 3205240258955350087}
   - component: {fileID: 6824668728995894146}
   - component: {fileID: 4934506833666220794}
+  - component: {fileID: 3593973311597778754}
   m_Layer: 0
   m_Name: MC_Spring (21)
   m_TagString: magnetic
@@ -11388,6 +12291,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 1299784892256086097}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1030162949362499985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11462,6 +12367,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &3593973311597778754
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8833385768137915437}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &8864443756982630035
 GameObject:
   m_ObjectHideFlags: 0
@@ -11625,6 +12557,7 @@ GameObject:
   - component: {fileID: 187490641104237160}
   - component: {fileID: 6921319355222555290}
   - component: {fileID: 7177374934558600742}
+  - component: {fileID: 3270018216755351938}
   m_Layer: 0
   m_Name: MC_Spring (8)
   m_TagString: magnetic
@@ -11733,6 +12666,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 8648589711601601270}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &3129372768846560965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11807,6 +12742,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &3270018216755351938
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089421636031332105}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &9190071396648547754
 GameObject:
   m_ObjectHideFlags: 0
@@ -11823,6 +12785,7 @@ GameObject:
   - component: {fileID: 1306704290780376446}
   - component: {fileID: 3871913184599685904}
   - component: {fileID: 2886303490767515829}
+  - component: {fileID: 2566829496880374093}
   m_Layer: 0
   m_Name: MC_Spring (23)
   m_TagString: magnetic
@@ -11931,6 +12894,8 @@ MonoBehaviour:
   ownerTranform: {fileID: 2950239591553323360}
   objectToChangeMesh: {fileID: 1912829952711352364}
   rb: {fileID: 0}
+  victoryConditionSpeedRange: 10
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &8555337895580563864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12005,6 +12970,33 @@ MonoBehaviour:
   ejected: 0
   colided: 0
   dragAfterImpact: 9
+--- !u!54 &2566829496880374093
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9190071396648547754}
+  serializedVersion: 4
+  m_Mass: 1.5
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1001 &3012562483226023168
 PrefabInstance:
   m_ObjectHideFlags: 0
