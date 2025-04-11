@@ -194,6 +194,7 @@ MonoBehaviour:
   gizmoDuration: 1
   hasExploded: 0
   explode: 0
+  explosionSfx: {fileID: 8241642422888662562, guid: 2a497d60a84e5c14499d0b206798305e, type: 3}
 --- !u!114 &1143426935521263120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,6 +328,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &8239625925558140238
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,6 +36,10 @@ public class PlayerInfo : MonoBehaviour
 
     private DynamicCamera dynamicCamera;
 
+    [Header("SFX")]
+    public GameObject takeDamangeSfx;
+    public GameObject dieSfx;
+
     void OnEnable()
     {
         animator = GetComponentInChildren<Animator>();
@@ -71,6 +75,10 @@ public class PlayerInfo : MonoBehaviour
                 if (healthValue > 0)
                 {
                     invun = true;
+                    if (takeDamangeSfx != null)
+                    {
+                        takeDamangeSfx.GetComponent<AudioSource>().Play();
+                    }
                     this.GetComponent<ColorFlicker>().SetFlickerEnabled(true);
                     StartCoroutine(DoHitStop(hitStopDelay));
 
@@ -88,6 +96,14 @@ public class PlayerInfo : MonoBehaviour
                 else
                 {
                     invun = true;
+                    if (takeDamangeSfx != null)
+                    {
+                        takeDamangeSfx.GetComponent<AudioSource>().Play();
+                    }
+                    if (dieSfx != null)
+                    {
+                        dieSfx.GetComponent<AudioSource>().Play();
+                    }
                     StartCoroutine(DoHitStop(deathHitStopDelay));
                     this.GetComponent<PlayerInput>().enabled = false;
                      if(melee){
