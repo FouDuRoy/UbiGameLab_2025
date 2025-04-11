@@ -177,6 +177,7 @@ MonoBehaviour:
   minimalSpeed: 0.5
   magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 1e+22
+  fadeDuration: 0.5
   contactOffset: 0.03
   weight: 0.01
   owner: Neutral
@@ -184,7 +185,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 0}
   objectToChangeMesh: {fileID: 5594412901748322291}
   rb: {fileID: 3745680985456743881}
-  victoryConditionSpeedRange: 35
   trail: {fileID: 7839485708418220497}
 --- !u!114 &4853838727377016838
 MonoBehaviour:
@@ -262,13 +262,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6399118882087969636}
     m_Modifications:
+    - target: {fileID: 321039995554978962, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_Name
       value: Trail
       objectReference: {fileID: 0}
     - target: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3500101582806400766, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -308,6 +324,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3500101582806400766, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime0
+      value: 193
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

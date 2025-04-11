@@ -2,6 +2,7 @@ using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 //Federico Barallobres
 public class Bloc : MonoBehaviour
@@ -9,7 +10,8 @@ public class Bloc : MonoBehaviour
     [SerializeField] float minimalSpeed = 0.5f;
     [SerializeField] Material magneticMaterial;
     [SerializeField] float maxSpeed = 1000f;
-    [SerializeField] private float fadeDuration = 0.5f;
+    [SerializeField] private float fadeDurationLong = 0.2f;
+    [SerializeField] private float fadeDurationShort = 0.2f;
     public float contactOffset = 0.1f;
     public float weight;
     public string owner; 
@@ -20,11 +22,19 @@ public class Bloc : MonoBehaviour
     MeshRenderer meshToChange; 
     private Vector3Int gridPosition;
     public Rigidbody rb;
+
     public GameObject trail;
     private WinCondition winCon;
-    private TrailRenderer trailRend;
-    private Gradient trailGradientOrigin;
-    private Gradient fadeGradient;
+
+    private TrailRenderer trailRendShort;
+    private Material trailRendShortMaterial;
+    private Gradient trailGradientOriginShort;
+    private Gradient fadeGradientShort;
+
+    private TrailRenderer trailRendLong;
+    private Material trailRendLongMaterial;
+    private Gradient trailGradientOriginLong;
+    private Gradient fadeGradientLong;
     private void Start()
     {
         winCon = FindObjectOfType<WinCondition>();
@@ -34,9 +44,28 @@ public class Bloc : MonoBehaviour
         if(objectToChangeMesh != null){
          meshToChange = objectToChangeMesh.GetComponent<MeshRenderer>();
         }
-        trailRend = trail.GetComponent<TrailRenderer>();
-        trailGradientOrigin = trailRend.colorGradient;
-        fadeGradient  = new Gradient();
+     
+
+        trailRendShort = trail.GetComponent<TrailRenderer>();
+        trailRendShortMaterial = trailRendShort.material;
+        Debug.Log(trailRendShortMaterial);
+        trailGradientOriginShort = trailRendShort.colorGradient;
+        fadeGradientShort = new Gradient();
+
+        trailRendShortMaterial.SetFloat("_Alpha", 0);
+        trailRendShort.time = 0.01f;
+        trailRendShort.emitting = false;
+        trailRendShort.Clear();
+
+        trailRendLong = trail.transform.Find("second_longer_trail").GetComponent<TrailRenderer>();
+        trailRendLongMaterial = trailRendLong.material;
+        trailGradientOriginLong = trailRendLong.colorGradient;
+        fadeGradientLong = new Gradient();
+
+        trailRendLongMaterial.SetFloat("_Alpha", 0);
+        trailRendLong.time = 0.01f;
+        trailRendLong.emitting = false;
+        trailRendLong.Clear();
     }
 
     public Vector3Int GetGridPosition()
@@ -48,10 +77,15 @@ public class Bloc : MonoBehaviour
     {
         if (state != BlocState.structure && owner != "Neutral" && state != BlocState.projectileAnimation)
         {
-            FadeIn();
-
-       
-
+            if (state == BlocState.projectile && rb.velocity.magnitude >= winCon.victoryConditionSpeedRange)
+            {
+                Debug.Log("here");
+                FadeIn();
+            }
+            else
+            {
+                FadeOut();
+            }           
             float speed = rb.velocity.magnitude;
 
             //If speed is small enough we enable script
@@ -100,14 +134,24 @@ public class Bloc : MonoBehaviour
     }
     public void FadeIn()
     {
-        StartCoroutine(UpdateTrailAlpha(0f, 1f));
+        trailRendShort.time = 1f;
+        trailRendShort.emitting = true;
+        trailRendShort.enabled = true;
+
+        trailRendLong.time = 1f;
+        trailRendLong.emitting = true;
+        trailRendLong.enabled = true;
+
+        StartCoroutine(UpdateTrailAlpha(0f, 1f,trailGradientOriginLong, fadeGradientLong, trailRendLong,fadeDurationLong, trailRendShortMaterial));
+        StartCoroutine(UpdateTrailAlpha(0f, 1f, trailGradientOriginShort, fadeGradientShort, trailRendShort,fadeDurationShort, trailRendShortMaterial));
     }
 
     public void FadeOut()
     {
-        StartCoroutine(UpdateTrailAlpha(1f, 0f));
+        StartCoroutine(UpdateTrailAlpha(1f, 0f, trailGradientOriginLong, fadeGradientLong, trailRendLong,fadeDurationLong, trailRendLongMaterial));
+        StartCoroutine(UpdateTrailAlpha(1f, 0f, trailGradientOriginShort, fadeGradientShort, trailRendShort,fadeDurationShort, trailRendShortMaterial));
     }
-    IEnumerator UpdateTrailAlpha(float startAlpha, float targetAlpha)
+    IEnumerator UpdateTrailAlpha(float startAlpha, float targetAlpha, Gradient trailGradientOrigin, Gradient fadeGradient,TrailRenderer trailRend,float fadeDuration,Material trailMaterial)
     {
         float elapsed = 0f;
 
@@ -116,21 +160,34 @@ public class Bloc : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / fadeDuration);
             float currentAlpha = Mathf.Lerp(startAlpha, targetAlpha, t);
-
+            trailMaterial.SetFloat("_Alpha", currentAlpha);
             // Update gradient alpha keys
-            GradientAlphaKey[] alphaKeys = originalGradient.alphaKeys;
+            GradientAlphaKey[] alphaKeys = trailGradientOrigin.alphaKeys;
             for (int i = 0; i < alphaKeys.Length; i++)
             {
-                alphaKeys[i].alpha *= currentAlpha;
+                alphaKeys[i].alpha = currentAlpha;
             }
 
             fadeGradient.SetKeys(
-                originalGradient.colorKeys,
+                trailGradientOrigin.colorKeys,
                 alphaKeys
             );
 
-            trail.colorGradient = fadeGradient;
+            trailRend.colorGradient = fadeGradient;
+            Debug.Log(trailRend.gameObject + "grad:" + trailRend.colorGradient.alphaKeys[0].alpha);
             yield return null;
+
+            if(targetAlpha == 0)
+            {
+                trailRend.Clear();
+                trailRend.emitting = false;
+
+                trailRend.material.SetFloat("_Alpha", 0);
+                trailRend.material.SetFloat("_Cutoff", 0.999f);
+
+                trailRend.enabled = false;
+            }
+           
         }
     }
 }
