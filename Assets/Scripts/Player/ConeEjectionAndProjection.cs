@@ -29,7 +29,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float colorChangeIntensity = 3f;
     [SerializeField] public int maxBlocs = 5;
     [SerializeField] float displaceTimeBloc = 0.1f;
-    [SerializeField] float assitedTrajectoryAngle = 10f;
+    [SerializeField] float assitedTrajectoryAngleMin = 10f;
+    [SerializeField] float assitedTrajectoryAngleMax = 20f;
+    [SerializeField] float maxAngleTimeCharge = 10f;
     [SerializeField] float assistedTime = 0.5f;
     [SerializeField] float minimalAssitedDistance = 4f;
 
@@ -518,6 +520,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float enemyAngle = Vector3.Angle(golem.forward, enemyDirection);
         Vector3 ejectionDirection = golem.forward;
         bool assitedAim = false;
+        float assitedTrajectoryAngle= Mathf.Lerp(assitedTrajectoryAngleMin, assitedTrajectoryAngleMax, timeHeld / maxAngleTimeCharge);
         if(enemyAngle < assitedTrajectoryAngle) {
             ejectionDirection = enemyDirection.normalized;
             assitedAim = true;
