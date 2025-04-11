@@ -428,8 +428,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vortex: {fileID: 4313016818357375316}
-  fadeInTime: 0.1
-  fadeOutTime: 0.3
+  fadeInTime: 0.05
+  fadeOutTime: 0.05
 --- !u!1 &6372226836157655904
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 4685598554820495083}
   - component: {fileID: 929553229702998411}
   - component: {fileID: 4398012851835201463}
+  - component: {fileID: 4777839957108034706}
   m_Layer: 9
   m_Name: Golem Bleu
   m_TagString: Player
@@ -759,6 +760,20 @@ MonoBehaviour:
   superDash: 0
   tutoDash: 0
   canDash: 1
+--- !u!114 &4777839957108034706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748528087318665932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9d2e8bbe5afa04da47682374207ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!1001 &49610902842654709
 PrefabInstance:
   m_ObjectHideFlags: 0

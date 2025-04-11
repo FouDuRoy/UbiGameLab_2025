@@ -348,8 +348,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vortex: {fileID: 6468685672756848065}
-  fadeInTime: 0.1
-  fadeOutTime: 0.3
+  fadeInTime: 0.05
+  fadeOutTime: 0.05
 --- !u!1 &581460498392983007
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +631,7 @@ GameObject:
   - component: {fileID: 4536375940292766682}
   - component: {fileID: 6839929964872536719}
   - component: {fileID: 567634103144108437}
+  - component: {fileID: 1814505569673876761}
   m_Layer: 3
   m_Name: Golem Rouge
   m_TagString: Player
@@ -817,6 +818,20 @@ MonoBehaviour:
   superDash: 0
   tutoDash: 0
   canDash: 1
+--- !u!114 &1814505569673876761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3131990571156717056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9d2e8bbe5afa04da47682374207ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!1 &7131289492177703505
 GameObject:
   m_ObjectHideFlags: 0

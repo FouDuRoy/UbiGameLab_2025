@@ -56,6 +56,9 @@ public class SpringBlocEjection : MonoBehaviour
         BlocState stateHitter = hitterComponent.state;
         BlocState stateHitted = hittedComponent.state;
 
+        Rigidbody hitterMainRb = hitterComponent.ownerTranform.GetComponent<PlayerObjects>().cubeRb;
+        Rigidbody hittedMainRb = hittedComponent.ownerTranform.GetComponent<PlayerObjects>().cubeRb;
+
         bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
         bool playerHittedByotherPlayerStructure = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.structure;
 
@@ -68,9 +71,13 @@ public class SpringBlocEjection : MonoBehaviour
             Rigidbody hitterRB = hittedComponent.ownerTranform.GetComponent<PlayerObjects>().cubeRb;
             Rigidbody hittedRB = mainCubeRb;
 
-            float hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
-            float hittedVelocityMag = hitted.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
-            Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
+            //float hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
+            // float hittedVelocityMag = hitted.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
+            // Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
+
+            Vector3 hitterVelocityBeforeImpact = (hitterMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitter.transform.position - hitterMainRb.position), hitterMainRb.angularVelocity));
+            float hitterVelocity = (hitterMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitter.transform.position - hitterMainRb.position), hitterMainRb.angularVelocity)).magnitude;
+            float hittedVelocityMag = (hittedMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitted.transform.position - hittedMainRb.position), hittedMainRb.angularVelocity)).magnitude;
 
             if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
             {

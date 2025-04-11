@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class VortexAnimation : MonoBehaviour
 {
@@ -32,7 +33,12 @@ public class VortexAnimation : MonoBehaviour
             if (gridPlayer.grid.Count > 1)
             {
                 Rigidbody rb = v.Value.GetComponent<Rigidbody>();
-                if (rb != null && rb.velocity.magnitude >= seuil)
+
+                float cubeVeolcityMag = (gridPlayer.kernel.GetComponent<StoredVelocity>().lastTickVelocity 
+                    + Vector3.Cross((v.Value.transform.position - gridPlayer.kernel.transform.position), gridPlayer.kernel.GetComponent<Rigidbody>().angularVelocity)).magnitude;
+
+                //Debug.Log("CubeVelMag:" + cubeVeolcityMag);
+                if (rb != null && cubeVeolcityMag >= seuil)
                 {
                     if (!isActive)
                     {
@@ -52,8 +58,8 @@ public class VortexAnimation : MonoBehaviour
     IEnumerator FadeIn()
     {
         float timer = 0f;
-        float alpha;
-        while (timer <= 1)
+        float alpha=0;
+        while (alpha < 1)
         {
             alpha = Mathf.Clamp01(timer / fadeInTime);
             var color = mainModule.startColor;
@@ -61,6 +67,7 @@ public class VortexAnimation : MonoBehaviour
             mainModule.startColor = color;
             yield return new WaitForSeconds(Time.deltaTime);
             timer += Time.deltaTime;
+            
         }
 
 
@@ -68,8 +75,8 @@ public class VortexAnimation : MonoBehaviour
     IEnumerator FadeOut()
     {
         float timer = 0f;
-        float alpha;
-        while (timer <= 1)
+        float alpha=1;
+        while (alpha > 0)
         {
             alpha = 1f - Mathf.Clamp01(timer / fadeOutTime);
             var color = mainModule.startColor;
