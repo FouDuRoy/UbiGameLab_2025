@@ -9,7 +9,6 @@ public class EventsManager : MonoBehaviour
     [SerializeField] private float timeBetweenEvents;
     [SerializeField] private float chancesForEachSpawnpointToSpawnAPrefab;
     [SerializeField] private GameObject spawnBeacon;
-    [SerializeField] private float beaconMaxIntensity = 600f;
     [SerializeField] private float beaconMaxRange = 100f;
     [SerializeField] private float beaconDurationBeforePrefabSpawn = 3f;
     [SerializeField] private Vector3 beaconEndScale = new Vector3(15f, 15f, 15f);
@@ -65,13 +64,11 @@ public class EventsManager : MonoBehaviour
 
         if (beaconLight)
         {
-            //beaconLight.intensity = 100f;
             beaconLight.range = 0f;
 
             while (elapsedTime < beaconDurationBeforePrefabSpawn)
             {
                 elapsedTime += Time.deltaTime;
-                //beaconLight.intensity = Mathf.Lerp(100f, beaconMaxIntensity, elapsedTime / beaconDurationBeforePrefabSpawn);
                 beaconLight.range = Mathf.Lerp(0f, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
                 sphere.GetComponent<SphereCollider>().radius = Mathf.Lerp(0, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
                 yield return new WaitForSeconds(Time.deltaTime);

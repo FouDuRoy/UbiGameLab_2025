@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 2877455228711921279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.080484, y: 0.6792145, z: -5.1720743}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -132,6 +132,7 @@ MonoBehaviour:
   projectionTimer: 0.5
   rangedTimer: 0.1
   golem: {fileID: 0}
+  healthBar: {fileID: 0}
   ejectionWeight: 4
   weight: 1
   availablePowerUps: 
@@ -159,6 +160,8 @@ MonoBehaviour:
   materials: []
   maxDimension: 3
   negativeY: 1
+  vortex: {fileID: 0}
+  attachBlocSound: {fileID: 0}
 --- !u!114 &601833731030724977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +184,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 8402648714665336278}
   objectToChangeMesh: {fileID: 8861807547335415058}
   rb: {fileID: 6116836137923090788}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4141580320307584352
 MonoBehaviour:
