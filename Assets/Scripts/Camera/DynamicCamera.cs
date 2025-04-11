@@ -377,7 +377,7 @@ public class DynamicCamera : MonoBehaviour
     {
         volume.weight = 1;
         float elapsed = 0f;
-        print(hitTarget.name);
+
         if (hitTarget.gameObject.name.Contains("rouge", System.StringComparison.InvariantCultureIgnoreCase))
         {
             vignette.color.overrideState = true;
@@ -389,7 +389,6 @@ public class DynamicCamera : MonoBehaviour
             vignette.color.value = redColor;
         }
         yield return null;
-        Debug.Log($"Vignette color set to: {vignette.color.value}");
 
         while (elapsed < duration)
         {
