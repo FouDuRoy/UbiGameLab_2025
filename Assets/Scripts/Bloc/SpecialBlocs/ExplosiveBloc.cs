@@ -102,7 +102,7 @@ public class ExplosiveBloc : MonoBehaviour
     {
         if (bloc.CompareTag("wood"))
         {
-            Destroy(bloc);
+            bloc.GetComponent<WoodBloc>().DestroyAnimation();
         }
         else if (bloc.CompareTag("explosive") && bloc != gameObject && !bloc.GetComponent<ExplosiveBloc>().hasExploded)
         {

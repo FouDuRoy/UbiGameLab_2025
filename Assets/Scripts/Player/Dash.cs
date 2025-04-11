@@ -29,13 +29,14 @@ public class Dash : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void TryToDash(Rigidbody playerRb, Transform playerGolem, PlayerMouvement playerMouvement)
+    public void TryToDash(Rigidbody playerRb, Transform playerGolem, PlayerMouvement playerMouvement, Animator animator)
     {
         if (Time.time > lastDashTime+cooldown && canDash)
         {
             StartCoroutine(dashCoroutine(playerRb, playerGolem, playerInfo));
             playerMouvement.ThrowCubes();
             lastDashTime = Time.time;
+            animator.SetTrigger("IsEjecting");
         }
     }
 

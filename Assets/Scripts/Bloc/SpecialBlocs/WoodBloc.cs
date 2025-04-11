@@ -11,6 +11,13 @@ public class WoodBloc : MonoBehaviour
     {
         if (collision.relativeVelocity.magnitude > resistance)
         {
+            DestroyAnimation();
+        }
+    }
+
+    public void DestroyAnimation()
+    {
+
             // Instancie le nouveau prefab à la même position/rotation
             Instantiate(replacementPrefab, transform.position, transform.rotation);
 
@@ -18,5 +25,4 @@ public class WoodBloc : MonoBehaviour
             gameObject.transform.parent.gameObject.SetActive(false);
             Destroy(gameObject.transform.parent.gameObject);
         }
-    }
 }

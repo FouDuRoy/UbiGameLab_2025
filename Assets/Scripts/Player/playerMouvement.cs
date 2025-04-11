@@ -140,8 +140,7 @@ public class PlayerMouvement : MonoBehaviour
     {
             if(dash!= null)
             {
-                animator.SetTrigger("IsEjecting");
-                dash.TryToDash(rb, golem, this);
+                dash.TryToDash(rb, golem, this , animator);
             }
 
     }
