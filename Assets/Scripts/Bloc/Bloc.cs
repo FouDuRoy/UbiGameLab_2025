@@ -14,43 +14,27 @@ public class Bloc : MonoBehaviour
     [SerializeField] private float fadeDurationShort = 0.2f;
     public float contactOffset = 0.1f;
     public float weight;
-    public string owner; 
+    public string owner;
     public BlocState state;
     public Transform ownerTranform;
 
     public GameObject objectToChangeMesh;
-    MeshRenderer meshToChange; 
+    MeshRenderer meshToChange;
     private Vector3Int gridPosition;
     public Rigidbody rb;
 
-    GameObject trail;
-    private WinCondition winCon;
 
-    private TrailRenderer trailRendShort;
-    private Material trailRendShortMaterial;
-    private Gradient trailGradientOriginShort;
-    private Gradient fadeGradientShort;
 
-    private TrailRenderer trailRendLong;
-    private Material trailRendLongMaterial;
-    private Gradient trailGradientOriginLong;
-    private Gradient fadeGradientLong;
     private void Start()
     {
-        winCon = FindObjectOfType<WinCondition>();
-
         rb = GetComponent<Rigidbody>();
         this.GetComponent<BoxCollider>().contactOffset = contactOffset;
-        if(objectToChangeMesh != null){
-         meshToChange = objectToChangeMesh.GetComponent<MeshRenderer>();
+        if (objectToChangeMesh != null)
+        {
+            meshToChange = objectToChangeMesh.GetComponent<MeshRenderer>();
         }
 
-        trail = transform.Find("Trail").gameObject;
-        trailRendShort = trail.GetComponent<TrailRenderer>();
-        trailRendShort.emitting = false;
 
-        trailRendLong = trail.transform.Find("second_longer_trail").GetComponent<TrailRenderer>();
-        trailRendLong.emitting = false;
     }
 
     public Vector3Int GetGridPosition()
@@ -62,44 +46,37 @@ public class Bloc : MonoBehaviour
     {
         if (state != BlocState.structure && owner != "Neutral" && state != BlocState.projectileAnimation)
         {
-            if (state == BlocState.projectile && rb.velocity.magnitude >= winCon.victoryConditionSpeedRange)
-            {
-                FadeIn();
-            }
-            else
-            {
-                FadeOut();
-            }           
-            float speed = rb.velocity.magnitude;
 
+            float speed = rb.velocity.magnitude;
             //If speed is small enough we enable script
-            if (speed < minimalSpeed && state == BlocState.magnetic )
+            if (speed < minimalSpeed && state == BlocState.magnetic)
             {
-                if( this.GetComponent<Feromagnetic>() != null)
+                if (this.GetComponent<Feromagnetic>() != null)
                 {
                     this.GetComponent<Feromagnetic>().enabled = true;
-                  
+
                 }
-                if(tag!="explosive"){
+                if (tag != "explosive")
+                {
                     changeMeshMaterial(magneticMaterial);
                 }
                 owner = "Neutral";
                 ownerTranform = null;
             }
-            
-            
+
+
         }
-        
+
 
     }
     void FixedUpdate()
     {
-        if(rb != null)
+        if (rb != null)
         {
             rb.maxLinearVelocity = maxSpeed;
 
         }
-        
+
     }
     public void setOwner(string owner)
     {
@@ -110,34 +87,12 @@ public class Bloc : MonoBehaviour
         this.state = state;
     }
 
-    public void changeMeshMaterial(Material mat){
+    public void changeMeshMaterial(Material mat)
+    {
         meshToChange.material = mat;
     }
-     public void changeMeshMaterialColor(Color color){
+    public void changeMeshMaterialColor(Color color)
+    {
         meshToChange.material.color = color;
-    }
-    public void FadeIn()
-    {
-
-        StartCoroutine(startEmiting(fadeDurationLong, trailRendLong));
-        StartCoroutine(startEmiting(fadeDurationShort, trailRendShort));
-
-    }
-
-    public void FadeOut()
-    {
-        StartCoroutine(stopEmiting(0, trailRendLong));
-        StartCoroutine( stopEmiting(0, trailRendShort));
-    }
-    IEnumerator startEmiting(float time,TrailRenderer trail)
-    {
-        yield return new WaitForSeconds(time);
-        trail.emitting = true;
-    }
-
-    IEnumerator stopEmiting(float time, TrailRenderer trail)
-    {
-        yield return new WaitForSeconds(time);
-        trail.emitting = false;
     }
 }
