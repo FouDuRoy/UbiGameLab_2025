@@ -22,7 +22,8 @@ public class PlayerInfo : MonoBehaviour
     public float MaxhealthValue = 100f;
     public float waitDelayAfterPlayerDeath = 1.5f;
     public float timeScaleFactor = 0.1f;
-    public float transitionTime = 0.1f;
+    public float transitionTimeBegin = 0.05f;
+    public float transitionTimeEnd = 0.1f;
     public bool invun = false;
     public bool recovering = false;
     public float healthValue;
@@ -73,7 +74,7 @@ public class PlayerInfo : MonoBehaviour
                     this.GetComponent<ColorFlicker>().SetFlickerEnabled(true);
                     StartCoroutine(DoHitStop(hitStopDelay));
 
-                    dynamicCamera.HitEffect(hitStopDelay, cubeRb);
+                    dynamicCamera.HitEffect(transitionTimeBegin+hitStopDelay+transitionTimeEnd, cubeRb);
 
                     if(melee){
                         cubeRb.AddForce(impactForce.normalized * impulsionWhenHitMelee, ForceMode.VelocityChange);
@@ -146,7 +147,7 @@ public class PlayerInfo : MonoBehaviour
         float t=0;
         while (t <= 1)
         {
-            t = time / transitionTime;
+            t = time / transitionTimeBegin;
             Time.timeScale = Mathf.Lerp(1, timeScaleFactor, t);
             yield return new WaitForSeconds(Time.deltaTime);
             time += Time.deltaTime;
@@ -157,7 +158,7 @@ public class PlayerInfo : MonoBehaviour
         t = 0;
         while (t <= 1)
         {
-            t = time / transitionTime;
+            t = time / transitionTimeEnd;
             Time.timeScale = Mathf.Lerp(timeScaleFactor, 1, t);
             yield return new WaitForSeconds(Time.deltaTime);
             time += Time.deltaTime;
