@@ -112,9 +112,10 @@ MonoBehaviour:
   invincibilityDelay: 3
   hitStopDelay: 0.5
   deathHitStopDelay: 4.5
-  MaxhealthValue: 1
+  MaxhealthValue: 400
   waitDelayAfterPlayerDeath: 0.5
   timeScaleFactor: 0.1
+  transitionTime: 0.1
   invun: 0
   recovering: 0
   healthValue: 400
@@ -213,7 +214,8 @@ MonoBehaviour:
   colorChangeIntensity: 3
   maxBlocs: 5
   displaceTimeBloc: 0.1
-  assitedTrajectoryAngle: 12
+  assitedTrajectoryAngleMin: 10
+  assitedTrajectoryAngleMax: 20
   assistedTime: 0.5
   minimalAssitedDistance: 4
   handHeight: 1.2
