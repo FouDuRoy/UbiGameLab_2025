@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class LevelLoader : MonoBehaviour
     public void AddPlayerReady(WinCondition player, int nPlayer)
     {
         playersReady.Add(player.gameObject);
+        player.GetComponentInParent<HapticFeedbackController>().StopVibrations();
         player.GetComponentInParent<PlayerInfo>().gameObject.SetActive(false);
 
         if (nPlayer==1) { j1Ready.enabled = true; }
