@@ -42,6 +42,10 @@ public class GridSystem : MonoBehaviour
             new Vector3Int(0, 0, 1),
             new Vector3Int(0, 0, -1)
         };
+
+    [Header("SFX")]
+    public GameObject attachBlocSound;
+
     private void Start()
     {
         kernel = transform.GetComponent<PlayerObjects>().cubeRb.gameObject;
@@ -139,6 +143,16 @@ public class GridSystem : MonoBehaviour
         {
             feedback.BlocAttachedVibration();
         }
+
+        //Déclenche le son d'attache à chaque bloc qui s'attache
+        if (attachBlocSound != null)
+        {
+            GameObject sound = Instantiate(attachBlocSound, transform.position, Quaternion.identity);
+            sound.transform.parent = null;
+            sound.GetComponent<AudioSource>().Play();
+            Destroy(sound, 2f); // Détruit le son après 2 secondes
+        }
+
         return attach;
     }
     public void AttachGrid(GridSystem gridToAttach, GameObject attachedBloc, GameObject blocToAttach, Vector3 closestFace)
