@@ -11,7 +11,7 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] public GameObject magneticCube;
     [SerializeField] public GameObject passiveCube;
     [SerializeField] private float magnetTimer = 3f;
-    [SerializeField] private float projectionTimer = 0.1f;
+    [SerializeField] private float projectionTimer = 0.5f;
     [SerializeField] private float rangedTimer = 0.1f;
     [SerializeField] public GameObject golem;
     public float ejectionWeight = 4f;
@@ -277,12 +277,13 @@ public class PlayerObjects : MonoBehaviour
         yield return new WaitForSeconds(rangedTimer);
         if (block != null)
         {
-            block.layer = 0;
+            block.layer = LayerMask.NameToLayer("projectile");
         }
         yield return new WaitForSeconds(magnetTimer - rangedTimer);
         if (block != null)
         {
             block.GetComponent<Bloc>().state = BlocState.magnetic;
+            block.layer = 0;
 
         }
 

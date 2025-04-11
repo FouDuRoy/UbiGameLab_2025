@@ -519,11 +519,13 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float enemyAngle = Vector3.Angle(golem.forward, enemyDirection);
         Vector3 ejectionDirection = golem.forward;
         bool assitedAim = false;
+
         float assitedTrajectoryAngle= Mathf.Lerp(assitedTrajectoryAngleMin, assitedTrajectoryAngleMax, timeHeld / secondsForMaxChargingEjectionLength);
         if(enemyAngle < assitedTrajectoryAngle) {
             ejectionDirection = enemyDirection.normalized;
             assitedAim = true;
         }
+
         cubeRb.AddForce((ejectionDirection + golem.right * rightDrift * rightDriftProportion) * ejectionSpeed, ForceMode.VelocityChange);
         cubeBloc.state = BlocState.projectile;
         cube.GetComponent<DragAfterImpact>().ejected = true;
