@@ -76,8 +76,7 @@ public class DynamicCamera : MonoBehaviour
 
     private void Awake()
     {
-     QualitySettings.vSyncCount = 1;
-	 Application.targetFrameRate = 144;
+     
         animator = GetComponent<Animator>();
         animatorPlayer1 = Player1.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
         animatorPlayer2 = Player2.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
