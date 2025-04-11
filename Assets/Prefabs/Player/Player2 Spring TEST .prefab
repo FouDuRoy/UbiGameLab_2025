@@ -258,6 +258,7 @@ MonoBehaviour:
   materials: []
   maxDimension: 10
   negativeY: 0
+  vortex: {fileID: 4313016818357375316}
 --- !u!114 &4879626687806361981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,6 +732,9 @@ MonoBehaviour:
   cooldown: 1
   dashStopTime: 0.05
   magneticRecoveryTime: 0.15
+  ejectionForceSuperDash: 50
+  radiusEffect: 50
+  upwardEffect: 25
   superDash: 0
   tutoDash: 0
   canDash: 1
@@ -1786,6 +1790,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3e44fbe317a9b44aa299314c148d0bc, type: 3}
+--- !u!1 &4313016818357375316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9139865310352743980, guid: d3e44fbe317a9b44aa299314c148d0bc, type: 3}
+  m_PrefabInstance: {fileID: 4975838647267331960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8581271070311754462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3610609751240680870, guid: d3e44fbe317a9b44aa299314c148d0bc, type: 3}

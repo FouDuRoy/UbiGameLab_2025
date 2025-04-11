@@ -32,6 +32,7 @@ public class GridSystem : MonoBehaviour
     Vector3Int headPosition = Vector3Int.up;
     public bool negativeY = false;
     HapticFeedbackController feedback;
+    public GameObject vortex;
     List<Vector3Int> neighborsList = new List<Vector3Int>
     {
              Vector3Int.right,
@@ -56,10 +57,6 @@ public class GridSystem : MonoBehaviour
     {
         if (checkGrid)
         {
-            foreach (var v in grid)
-            {
-                Debug.Log(v.Key);
-            }
             checkGrid = false;
         }
         if (saveGrid)
@@ -73,6 +70,24 @@ public class GridSystem : MonoBehaviour
             convertArrayToDict();
             restoreGrid = false;
         }
+        float seuil = GetComponentInChildren<WinCondition>().victoryConditionSpeedMelee;
+
+        foreach (var v in grid)
+        {
+            if(grid.Count > 1)
+            {
+                Rigidbody rb = v.Value.GetComponent<Rigidbody>();
+                if (rb != null && rb.velocity.magnitude >= seuil)
+                {
+                    vortex.SetActive(true);
+                    return; // On quitte dès qu’on l’a activé
+                }
+            }
+        }
+
+        // Si aucun n’a rempli la condition
+        if (vortex.activeSelf)
+            vortex.SetActive(false);
     }
     public void convertDictToArray()
     {
