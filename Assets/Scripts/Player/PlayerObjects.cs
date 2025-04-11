@@ -90,6 +90,7 @@ public class PlayerObjects : MonoBehaviour
     {
         if (cube != null)
         {
+
             string ownerName = cube.GetComponent<Bloc>().owner;
             if (ownerName.Contains("Player1"))
             {

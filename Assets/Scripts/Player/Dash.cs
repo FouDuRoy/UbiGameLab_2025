@@ -94,7 +94,7 @@ public class Dash : MonoBehaviour
                             {
                                 GameObject bloc = item.Value;
                                 blocsToDestroy.Add(bloc);
-                                bloc.GetComponent<Bloc>().state = BlocState.detached;
+                                
                             }
                         }
                         if (tutoDash)
@@ -102,7 +102,8 @@ public class Dash : MonoBehaviour
 
                             blocsToDestroy.ForEach(bloc =>
                             {
-                                grid.DetachBlocSingleCollisionMelee(bloc);
+                                grid.DetachBlocSingle(bloc);
+                                bloc.GetComponent<Bloc>().state = BlocState.detached;
                                 bloc.GetComponent<Rigidbody>().AddForce((bloc.transform.position - GetComponent<Rigidbody>().position).normalized * 150f, ForceMode.VelocityChange);
                                 if (bloc.tag == "magneticCube")
                                 {
@@ -114,7 +115,7 @@ public class Dash : MonoBehaviour
 
                             });
                             blocsToDestroy.Clear();
-                            //tutoDash = false;
+                            tutoDash = false;
                         }
                         else
                         {
@@ -123,6 +124,7 @@ public class Dash : MonoBehaviour
                                 if (bloc != null)
                                 {
                                     grid.DetachBlocSingle(bloc);
+                                    bloc.GetComponent<Bloc>().state = BlocState.detached;
                                     Transform blocOwner = bloc.GetComponent<Bloc>().ownerTranform;
                                     bloc.GetComponent<Rigidbody>().AddExplosionForce(ejectionForceSuperDash,gameObject.transform.position, radiusEffect, upwardEffect, ForceMode.VelocityChange);
                                 }
