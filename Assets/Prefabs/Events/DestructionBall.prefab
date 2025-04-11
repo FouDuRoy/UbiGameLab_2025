@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -125,7 +125,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 2672381286754525410}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &8671896929669056706
 MonoBehaviour:
@@ -214,6 +213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &135521734090989919
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -339,7 +340,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 874500563001603190}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4295041717333956460
 MonoBehaviour:
@@ -428,6 +428,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &149338037299407651
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -615,7 +617,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 4047771192356620183}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1893263398037135690
 MonoBehaviour:
@@ -704,6 +705,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &496892117103000524
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -829,7 +832,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 8361654901382309294}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4650554710926360405
 MonoBehaviour:
@@ -918,6 +920,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &521606164000382664
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,7 +1038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -1043,7 +1047,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3937305225284055916}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &643274443331772894
 MonoBehaviour:
@@ -1132,6 +1135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &672246882683408010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,7 +1253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -1257,7 +1262,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6669508276914387392}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1879597902945937857
 MonoBehaviour:
@@ -1346,6 +1350,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &786945945346181753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,7 +1468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -1471,7 +1477,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 142597604390185060}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &3188978953869473993
 MonoBehaviour:
@@ -1560,6 +1565,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &897378447726292805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,7 +1714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -1716,7 +1723,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6793533576737690590}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &6114670969215988424
 MonoBehaviour:
@@ -1805,6 +1811,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &1069914916373825618
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,6 +2053,7 @@ MonoBehaviour:
   projectionTimer: 0.1
   rangedTimer: 0.1
   golem: {fileID: 0}
+  healthBar: {fileID: 0}
   ejectionWeight: 4
   weight: 1.1799998
   availablePowerUps: 
@@ -2147,6 +2156,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 6f926dd7c27bd844388757ffb268b2ec, type: 2}
   maxDimension: 3
   negativeY: 1
+  vortex: {fileID: 0}
 --- !u!114 &5246163152718296179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2169,7 +2179,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 728893575385921413}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &941530745196943177
 MonoBehaviour:
@@ -2414,7 +2423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -2423,7 +2432,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3956001982046345191}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1573414709195825467
 MonoBehaviour:
@@ -2512,6 +2520,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &1891846250702194089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2752,7 +2762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -2761,7 +2771,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 1592831109638184685}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7154961265429588109
 MonoBehaviour:
@@ -2850,6 +2859,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &2222390859594430518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3012,7 +3023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -3021,7 +3032,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 7972370085464863851}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7823344295247798713
 MonoBehaviour:
@@ -3110,6 +3120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &2451949371301694405
 GameObject:
   m_ObjectHideFlags: 0
@@ -3257,7 +3269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -3266,7 +3278,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 941516383878278674}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1409813771482691895
 MonoBehaviour:
@@ -3355,6 +3366,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &2904728619941865741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3533,7 +3546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -3542,7 +3555,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 7928469800783560060}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &617482880444306258
 MonoBehaviour:
@@ -3631,6 +3643,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &3194849118945649003
 GameObject:
   m_ObjectHideFlags: 0
@@ -3747,7 +3761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -3756,7 +3770,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 620935244379728861}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &5176817161015082314
 MonoBehaviour:
@@ -3845,6 +3858,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &3294257604633529084
 GameObject:
   m_ObjectHideFlags: 0
@@ -3992,7 +4007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -4001,7 +4016,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 518375031222530078}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4281939670648666870
 MonoBehaviour:
@@ -4090,6 +4104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &3575769758487797155
 GameObject:
   m_ObjectHideFlags: 0
@@ -4268,7 +4284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -4277,7 +4293,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 7982830083369509884}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &6330505412880098016
 MonoBehaviour:
@@ -4366,6 +4381,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &3715689099567362474
 GameObject:
   m_ObjectHideFlags: 0
@@ -4482,7 +4499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -4491,7 +4508,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 9100290425980518088}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &8166577996349068007
 MonoBehaviour:
@@ -4580,6 +4596,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &3917414404435014058
 GameObject:
   m_ObjectHideFlags: 0
@@ -4820,7 +4838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -4829,7 +4847,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 900459303796669172}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &8137383503338430564
 MonoBehaviour:
@@ -4918,6 +4935,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &4341163654609892464
 GameObject:
   m_ObjectHideFlags: 0
@@ -5034,7 +5053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -5043,7 +5062,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 8846571409023410603}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1653776203297593111
 MonoBehaviour:
@@ -5132,6 +5150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &4479566574786388904
 GameObject:
   m_ObjectHideFlags: 0
@@ -5279,7 +5299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -5288,7 +5308,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3035597631240940154}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &6398958775790923416
 MonoBehaviour:
@@ -5377,6 +5396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &4609681368066472135
 GameObject:
   m_ObjectHideFlags: 0
@@ -5493,7 +5514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -5502,7 +5523,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3104177972787544586}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &2773860890386860364
 MonoBehaviour:
@@ -5591,6 +5611,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &4794010070072391749
 GameObject:
   m_ObjectHideFlags: 0
@@ -5707,7 +5729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -5716,7 +5738,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 5373356900928368178}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1352545749235815076
 MonoBehaviour:
@@ -5805,6 +5826,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &4903598515703813254
 GameObject:
   m_ObjectHideFlags: 0
@@ -5921,7 +5944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -5930,7 +5953,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 2313994083675266423}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1592948104441516169
 MonoBehaviour:
@@ -6019,6 +6041,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &5005334737706512067
 GameObject:
   m_ObjectHideFlags: 0
@@ -6290,7 +6314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -6299,7 +6323,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6195770639756903256}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7740684172107372626
 MonoBehaviour:
@@ -6388,6 +6411,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &5715948070708928159
 GameObject:
   m_ObjectHideFlags: 0
@@ -6504,7 +6529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -6513,7 +6538,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6077763850700595970}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &8242467520080579239
 MonoBehaviour:
@@ -6602,6 +6626,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &5965672133186266835
 GameObject:
   m_ObjectHideFlags: 0
@@ -6904,7 +6930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -6913,7 +6939,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 111760177244856521}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7500794115290266137
 MonoBehaviour:
@@ -7002,6 +7027,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &6809172993118039241
 GameObject:
   m_ObjectHideFlags: 0
@@ -7273,7 +7300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -7282,7 +7309,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 8425971402371534497}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &2183400967428827932
 MonoBehaviour:
@@ -7371,6 +7397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &7433800202558695203
 GameObject:
   m_ObjectHideFlags: 0
@@ -7487,7 +7515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -7496,7 +7524,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 4230377801375303581}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4953227771997177027
 MonoBehaviour:
@@ -7585,6 +7612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &7560705033968888222
 GameObject:
   m_ObjectHideFlags: 0
@@ -7701,7 +7730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -7710,7 +7739,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6037593079401254081}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1497327864724577226
 MonoBehaviour:
@@ -7799,6 +7827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &7775267030319166986
 GameObject:
   m_ObjectHideFlags: 0
@@ -7915,7 +7945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -7924,7 +7954,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 273173940378218607}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7207103019144236870
 MonoBehaviour:
@@ -8013,6 +8042,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &8007624943928205815
 GameObject:
   m_ObjectHideFlags: 0
@@ -8129,7 +8160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -8138,7 +8169,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6428424304856879552}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &2690852465268831620
 MonoBehaviour:
@@ -8227,6 +8257,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &8083149153619965047
 GameObject:
   m_ObjectHideFlags: 0
@@ -8343,7 +8375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -8352,7 +8384,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 2336014094926733444}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &8646293916233760843
 MonoBehaviour:
@@ -8441,6 +8472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &8280584110510933017
 GameObject:
   m_ObjectHideFlags: 0
@@ -8557,7 +8590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -8566,7 +8599,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 487665665450567959}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7351747359105189444
 MonoBehaviour:
@@ -8655,6 +8687,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &8282696298555203780
 GameObject:
   m_ObjectHideFlags: 0
@@ -8771,7 +8805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -8780,7 +8814,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3532797332671573843}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &8191728262991672572
 MonoBehaviour:
@@ -8869,6 +8902,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &8514286087035283796
 GameObject:
   m_ObjectHideFlags: 0
@@ -8985,7 +9020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -8994,7 +9029,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3227789629482607113}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &3166023434913770509
 MonoBehaviour:
@@ -9083,6 +9117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &8695755590078913086
 GameObject:
   m_ObjectHideFlags: 0
@@ -9199,7 +9235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalSpeed: 0.5
-  magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
+  magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 2e+22
   contactOffset: 0.03
   weight: 0.005
@@ -9208,7 +9244,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 1659608159964194751}
   rb: {fileID: 0}
-  victoryConditionSpeedRange: 10
   trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7784691222633938503
 MonoBehaviour:
@@ -9297,6 +9332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1001 &167835647225151073
 PrefabInstance:
   m_ObjectHideFlags: 0
