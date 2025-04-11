@@ -64,7 +64,7 @@ Transform:
   m_GameObject: {fileID: 6515478394461614388}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.47, y: 0.4, z: -1.508}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -92,7 +92,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9, y: 0.9, z: 0.9}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3745680985456743881
 Rigidbody:
@@ -184,7 +184,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 0}
   objectToChangeMesh: {fileID: 5594412901748322291}
   rb: {fileID: 3745680985456743881}
-  victoryConditionSpeedRange: 35
   trail: {fileID: 7839485708418220497}
 --- !u!114 &4853838727377016838
 MonoBehaviour:
@@ -335,15 +334,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2512081427600228137, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.0064567626
       objectReference: {fileID: 0}
     - target: {fileID: 2512081427600228137, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.032288313
       objectReference: {fileID: 0}
     - target: {fileID: 2512081427600228137, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.012436077
       objectReference: {fileID: 0}
     - target: {fileID: 2512081427600228137, guid: 917711a54ad730f4fa4e3db9bbccf9f5, type: 3}
       propertyPath: m_LocalRotation.w
