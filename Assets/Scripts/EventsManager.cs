@@ -68,14 +68,18 @@ public class EventsManager : MonoBehaviour
             {
                 elapsedTime += Time.deltaTime;
                 //beaconLight.intensity = Mathf.Lerp(100f, beaconMaxIntensity, elapsedTime / beaconDurationBeforePrefabSpawn);
-                beaconLight.range = Mathf.Lerp(0f, beaconMaxRange, elapsedTime / beaconDurationBeforePrefabSpawn);
-                sphere.transform.localScale = Vector3.Lerp(Vector3.zero, beaconEndScale, elapsedTime / beaconDurationBeforePrefabSpawn);
-                yield return null;
+                beaconLight.range = Mathf.Lerp(0f, eventToSummon.GetComponent<Diametre>().diametre/2f, elapsedTime / beaconDurationBeforePrefabSpawn);
+                sphere.GetComponent<SphereCollider>().radius = Mathf.Lerp(0, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
+                yield return new WaitForSeconds(Time.deltaTime);
             }
         }
 
-        Destroy(beaconInstance);
+        beaconInstance.SetActive(false);
+     
         yield return new WaitForEndOfFrame();
-        Instantiate(eventToSummon,loc,rot);
+        eventToSummon.transform.position = beaconInstance.transform.position;
+        eventToSummon.transform.rotation = Quaternion.identity;
+        eventToSummon.SetActive(true);
+        Destroy(beaconInstance);
     }
 }
