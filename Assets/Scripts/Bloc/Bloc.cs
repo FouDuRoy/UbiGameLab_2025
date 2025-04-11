@@ -18,9 +18,12 @@ public class Bloc : MonoBehaviour
     MeshRenderer meshToChange; 
     private Vector3Int gridPosition;
     public Rigidbody rb;
+    public float victoryConditionSpeedRange = 10f;
+    public GameObject trail;
 
     private void Start()
     {
+
         rb = GetComponent<Rigidbody>();
         this.GetComponent<BoxCollider>().contactOffset = contactOffset;
         if(objectToChangeMesh != null){
@@ -35,9 +38,9 @@ public class Bloc : MonoBehaviour
 
     void Update()
     {
-      
         if (state != BlocState.structure && owner != "Neutral" && state != BlocState.projectileAnimation)
         {
+            trail.SetActive(rb.velocity.magnitude > victoryConditionSpeedRange);
             float speed = rb.velocity.magnitude;
             //If speed is small enough we enable script
             if (speed < minimalSpeed && state == BlocState.magnetic )
