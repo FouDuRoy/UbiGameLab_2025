@@ -40,6 +40,8 @@ Transform:
   - {fileID: 8753685302025833666}
   - {fileID: 7847107767003649144}
   - {fileID: 1515819971142884939}
+  - {fileID: 4052788770736039986}
+  - {fileID: 3347183238001038691}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6905163406376771707
@@ -125,6 +127,8 @@ MonoBehaviour:
   waitTimeBeforeVictoryCanvas: 3
   playerLife: {fileID: 2909542865704372724}
   isInvincible: 0
+  takeDamangeSfx: {fileID: 7106303523884485807}
+  dieSfx: {fileID: 2802972023144057683}
 --- !u!114 &-1607963941705366508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +153,7 @@ MonoBehaviour:
   materials: []
   maxDimension: 10
   negativeY: 0
+  attachBlocSound: {fileID: 6970994836027653264, guid: d6f6f04ac22395342ae554c95ef063c5, type: 3}
 --- !u!114 &1846468097935250436
 MonoBehaviour:
   m_ObjectHideFlags: 0
