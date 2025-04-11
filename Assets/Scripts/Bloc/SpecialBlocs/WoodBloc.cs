@@ -5,6 +5,7 @@ public class WoodBloc : MonoBehaviour
     [Header("Wood Block Properties")]
     public float resistance = 5f;
     public GameObject replacementPrefab;
+    public GameObject woodSfx;
 
 
     private void OnCollisionEnter(Collision collision)
@@ -17,11 +18,16 @@ public class WoodBloc : MonoBehaviour
 
     public void DestroyAnimation()
     {
+            // Instancie le son de bois
+            GameObject woodSound = Instantiate(woodSfx, transform.position, Quaternion.identity);
+            woodSound.transform.parent = null;
+            woodSound.GetComponent<AudioSource>().Play();
+            Destroy(woodSound, 2f); // Dï¿½truit le son aprï¿½s 2 secondes
 
-            // Instancie le nouveau prefab à la même position/rotation
+            // Instancie le nouveau prefab ï¿½ la mï¿½me position/rotation
             Instantiate(replacementPrefab, transform.position, transform.rotation);
 
-            // Détruit l’objet courant
+            // Dï¿½truit lï¿½objet courant
             gameObject.transform.parent.gameObject.SetActive(false);
             Destroy(gameObject.transform.parent.gameObject);
         }

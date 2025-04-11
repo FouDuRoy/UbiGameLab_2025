@@ -22,6 +22,8 @@ public class ExplosiveBloc : MonoBehaviour
     public bool hasExploded = false;
     [SerializeField] bool explode = false;
 
+    public GameObject explosionSfx;
+
     private void Start()
     {
         gameStartTime = Time.time;
@@ -93,6 +95,13 @@ public class ExplosiveBloc : MonoBehaviour
         ps.transform.parent = null;
         ps.transform.position = transform.position;
         ps.Play();
+
+        // Instantiate the explosion sound prefab
+        GameObject explosionSound = Instantiate(explosionSfx, transform.position, Quaternion.identity);
+        explosionSound.transform.parent = null;
+        explosionSound.GetComponent<AudioSource>().Play();
+        Destroy(explosionSound, 2f); // Destroy the sound after 2 seconds
+
         gameObject.GetComponent<Feromagnetic>().enabled = false;
         gameObject.SetActive(false);
         Destroy(gameObject, gizmoDuration);
