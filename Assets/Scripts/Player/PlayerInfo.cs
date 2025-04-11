@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
-
+    
     [Header("Info joueur")]
     public GameObject gameOverCanvas; // Assign in Inspector
     public Button restartButton;
@@ -20,6 +21,7 @@ public class PlayerInfo : MonoBehaviour
     public float MaxhealthValue = 100f;
     public float waitDelayAfterPlayerDeath = 1.5f;
     public float timeScaleFactor = 0.2f;
+    public float transitionTime = 0.1f;
     public bool invun = false;
     public bool recovering = false;
     public float healthValue;
@@ -138,8 +140,26 @@ public class PlayerInfo : MonoBehaviour
     }
      IEnumerator DoHitStop(float duration)
     {
+        float time = 0;
+        float t=0;
+        while (t <= 1)
+        {
+            t = time / transitionTime;
+            Time.timeScale = Mathf.Lerp(1, timeScaleFactor, t);
+            yield return new WaitForSeconds(Time.deltaTime);
+            time += Time.deltaTime;
+        }
         Time.timeScale = timeScaleFactor; 
-        yield return new WaitForSecondsRealtime(duration); 
+        yield return new WaitForSecondsRealtime(duration);
+        time = 0;
+        t = 0;
+        while (t <= 1)
+        {
+            t = time / transitionTime;
+            Time.timeScale = Mathf.Lerp(timeScaleFactor, 1, t);
+            yield return new WaitForSeconds(Time.deltaTime);
+            time += Time.deltaTime;
+        }
         Time.timeScale = 1f; 
     }
 }
