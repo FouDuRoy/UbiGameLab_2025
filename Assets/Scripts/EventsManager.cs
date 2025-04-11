@@ -54,7 +54,6 @@ public class EventsManager : MonoBehaviour
     {
         GameObject beaconInstance = Instantiate(spawnBeacon, loc, rot);
         Rigidbody sphere = beaconInstance.GetComponentInChildren<Rigidbody>();
-        beaconInstance.transform.position += new Vector3(Random.Range(2, 5), 0, Random.Range(2, 5)); // Décale le collider pour éviter de soulever les objets
 
         Light beaconLight = beaconInstance.GetComponentInChildren<Light>();
         float elapsedTime = 0f;
