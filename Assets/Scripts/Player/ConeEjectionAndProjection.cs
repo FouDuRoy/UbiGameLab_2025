@@ -85,6 +85,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
     List<GameObject> blocsToEject = new List<GameObject>();
     List<GameObject> potentialBlocs = new List<GameObject>();
     bool readyToEject = false;
+    public float cadanceDeTire = 0.2f;
+    bool tireDisponible = true;
   
     void OnEnable()
 
@@ -222,7 +224,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     private void EjectionAlgo(float rightTrigger)
     {
-        if (rightTrigger > 0 && lastHold == "right")
+        if (rightTrigger > 0 && lastHold == "right" && tireDisponible)
         {
             animator.SetTrigger("IsChargingLaunch");
             leftRay.gameObject.SetActive(true);
@@ -539,7 +541,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             StartCoroutine(AssistedAim(cube, enemy, dire));
 
         }
-
+        StartCoroutine(ejectionTimer());
     }
     private void resetBloc(GameObject cube, Transform golem)
     {
@@ -620,6 +622,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
             rightHandTransform.position = Vector3.Lerp(rightHandTransform.position, restHandPositionRight, t);
         }
         handTimer = 0;
+    }
+    IEnumerator ejectionTimer()
+    {
+        tireDisponible = false;
+        yield return new WaitForSeconds(cadanceDeTire);
+        tireDisponible = true;
     }
     IEnumerator AssistedAim(GameObject cube,GameObject enemy,Vector3 pos)
     {
