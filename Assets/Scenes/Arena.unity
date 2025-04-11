@@ -958,6 +958,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9188114102539986009, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: cadanceDeTire
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2001,6 +2005,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   m_PrefabInstance: {fileID: 443418521}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &443754892 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
+  m_PrefabInstance: {fileID: 4430064122159765847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef95d7248fd49248aff9d6db4d849f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &472420156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2050,6 +2065,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
+      propertyPath: redCam
+      value: 
+      objectReference: {fileID: 1640634573}
+    - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: Player1
       value: 
       objectReference: {fileID: 921227073}
@@ -2058,6 +2077,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 961738301}
     - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
+      propertyPath: blueCam
+      value: 
+      objectReference: {fileID: 1233979608}
+    - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: ArenaCenter
       value: 
       objectReference: {fileID: 1358112523}
@@ -2065,6 +2088,10 @@ PrefabInstance:
       propertyPath: FloorToHide
       value: 
       objectReference: {fileID: 1340052419}
+    - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
+      propertyPath: eventsManager
+      value: 
+      objectReference: {fileID: 443754892}
     - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: playIntroAnimation
       value: 0
@@ -3551,6 +3578,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   m_PrefabInstance: {fileID: 1231516880}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1233979608 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8893268865523216524, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+  m_PrefabInstance: {fileID: 111579645}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1235379808
 PrefabInstance:
@@ -8334,6 +8366,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   m_PrefabInstance: {fileID: 1152855644}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1620784207 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6343833617577395780, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
+  m_PrefabInstance: {fileID: 472420156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1640634573 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4046866971284314774, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+  m_PrefabInstance: {fileID: 1709085650}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1660080908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6399118882087969636, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
@@ -9878,6 +9920,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7058967895733435024, guid: e3198ff1a00271d4daf662a36635bb76, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1620784207}
     - target: {fileID: 8287548578018952549, guid: e3198ff1a00271d4daf662a36635bb76, type: 3}
       propertyPath: m_Name
       value: Inputs Canvas
