@@ -259,7 +259,7 @@ public class PlayerObjects : MonoBehaviour
         yield return new WaitForSeconds(projectionTimer);
         if (block != null)
         {
-            block.layer = 0;
+            block.layer = LayerMask.NameToLayer("projectile");
         }
         yield return new WaitForSeconds(magnetTimer-projectionTimer);
         if (block != null)
@@ -268,6 +268,7 @@ public class PlayerObjects : MonoBehaviour
             block.GetComponent<Bloc>().state = BlocState.magnetic;
             block.GetComponent<DragAfterImpact>().ejected = false;
             block.GetComponent<DragAfterImpact>().colided = false;
+            block.layer = 0;
 
         }
 
@@ -277,13 +278,12 @@ public class PlayerObjects : MonoBehaviour
         yield return new WaitForSeconds(rangedTimer);
         if (block != null)
         {
-            block.layer = LayerMask.NameToLayer("projectile");
+            block.layer = 0;
         }
         yield return new WaitForSeconds(magnetTimer - rangedTimer);
         if (block != null)
         {
             block.GetComponent<Bloc>().state = BlocState.magnetic;
-            block.layer = 0;
 
         }
 
