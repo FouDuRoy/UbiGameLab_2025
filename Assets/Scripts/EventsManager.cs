@@ -12,11 +12,12 @@ public class EventsManager : MonoBehaviour
     [SerializeField] private float beaconMaxIntensity = 600f;
     [SerializeField] private float beaconMaxRange = 100f;
     [SerializeField] private float beaconDurationBeforePrefabSpawn = 3f;
-    [SerializeField] private Vector3 beaconEndScale = new Vector3(15f,15f,15f);
-
+    [SerializeField] private Vector3 beaconEndScale = new Vector3(15f, 15f, 15f);
+    [SerializeField] private float[] probArray;
     private List<GameObject> spawnpoints = new List<GameObject>();
     private float nextEventTime;
     private GameObject selectedEvent;
+    private SpawnChanceDistribution spawnChancesDist;
 
     void Start()
     {
@@ -24,8 +25,8 @@ public class EventsManager : MonoBehaviour
         {
             spawnpoints.Add(child.gameObject);
         }
-
         nextEventTime = Time.time + delayBeforeFirstEvent;
+        spawnChancesDist = new SpawnChanceDistribution(probArray);
     }
 
     void Update()
@@ -34,14 +35,18 @@ public class EventsManager : MonoBehaviour
         {
             nextEventTime = Time.time + timeBetweenEvents;
 
-            foreach (GameObject spawnpoint in spawnpoints) // On parcourt tous les points de spawn, et on tire aléatoirement ceux qui spawnent une structure
+            int numberOfSpawns = spawnChancesDist.sampleDistribution();
+            List<GameObject> spawnAvailable = AvailableSpawns();
+            numberOfSpawns = Mathf.Min(numberOfSpawns, spawnAvailable.Count);
+
+            for (int i = 0; i < numberOfSpawns; i++) // On parcourt tous les points de spawn, et on tire aléatoirement ceux qui spawnent une structure
             {
-                if (Random.Range(0f, 1f) <= chancesForEachSpawnpointToSpawnAPrefab)
-                {
-                    selectedEvent = eventsToSummon[Random.Range(0, eventsToSummon.Count)];
-                    StartCoroutine(SummonEvent(selectedEvent, spawnpoint.transform.position, spawnpoint.transform.rotation));
-                    eventsToSummon.Remove(selectedEvent);
-                }
+                GameObject selectedSpawn = spawnAvailable[Random.Range(0, spawnAvailable.Count)];
+                selectedEvent = eventsToSummon[Random.Range(0, eventsToSummon.Count)];
+                StartCoroutine(SummonEvent(selectedEvent, selectedSpawn.transform.position, selectedSpawn.transform.rotation));
+                eventsToSummon.Remove(selectedEvent);
+                spawnAvailable.Remove(selectedSpawn);
+
             }
         }
         else if (eventsToSummon.Count <= 0)
@@ -67,18 +72,34 @@ public class EventsManager : MonoBehaviour
             {
                 elapsedTime += Time.deltaTime;
                 //beaconLight.intensity = Mathf.Lerp(100f, beaconMaxIntensity, elapsedTime / beaconDurationBeforePrefabSpawn);
-                beaconLight.range = Mathf.Lerp(0f, eventToSummon.GetComponent<Diametre>().diametre/2f, elapsedTime / beaconDurationBeforePrefabSpawn);
+                beaconLight.range = Mathf.Lerp(0f, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
                 sphere.GetComponent<SphereCollider>().radius = Mathf.Lerp(0, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
                 yield return new WaitForSeconds(Time.deltaTime);
             }
         }
 
         beaconInstance.SetActive(false);
-     
+
         yield return new WaitForEndOfFrame();
         eventToSummon.transform.position = beaconInstance.transform.position;
         eventToSummon.transform.rotation = Quaternion.identity;
         eventToSummon.SetActive(true);
         Destroy(beaconInstance);
+    }
+
+    private List<GameObject> AvailableSpawns()
+    {
+        List<GameObject> availableSpawns = new List<GameObject>();
+        int layerMask = ~LayerMask.GetMask("ground");
+        foreach (GameObject spawn in spawnpoints)
+        {
+            spawn.layer = LayerMask.NameToLayer("ground");
+            if (Physics.OverlapSphere(spawn.transform.position, 1, layerMask).Length == 0)
+            {
+                availableSpawns.Add(spawn);
+            }
+            spawn.layer = 0;
+        }
+        return availableSpawns;
     }
 }
