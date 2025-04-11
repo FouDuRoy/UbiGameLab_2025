@@ -187,6 +187,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 721376596441694192}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7473480458474772614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &224290113254498596
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +424,7 @@ MonoBehaviour:
   projectionTimer: 0.1
   rangedTimer: 0.1
   golem: {fileID: 0}
+  healthBar: {fileID: 0}
   ejectionWeight: 4
   weight: 1.0749999
   availablePowerUps: 
@@ -502,7 +506,8 @@ MonoBehaviour:
   state: 3
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 4605373548706608528}
-  rb: {fileID: 0}
+  rb: {fileID: 1551607073931931503}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4082196180373768087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,6 +777,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 4796583860442106933}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7167449754203334338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,6 +865,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &1165207833010515751
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,6 +992,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 1634907574144964437}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1916461959242891783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1071,6 +1080,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &1244400493265154067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1269,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 8785879172106238086}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4073306999794091603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1345,6 +1357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &2220877389831125982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,6 +1577,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 722517388919817165}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7371295774311851791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1650,6 +1665,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &2909418809670101446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,6 +1823,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 1807414528479042530}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &6474025459014331224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1893,6 +1911,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &3522093095963710034
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,6 +2038,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 8775156207568958611}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1572598074340108079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2105,6 +2126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &4491203610748852018
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,6 +2284,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 7169419752709057722}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &6326170170883612504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2348,6 +2372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &5787582244828735883
 GameObject:
   m_ObjectHideFlags: 0
@@ -2504,6 +2530,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 487017850602678224}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4743426963594787999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2591,6 +2618,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &6316108021311202563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,6 +2807,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 5955048542235530137}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &9080398438223428222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2865,6 +2895,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &6810194231305959868
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,6 +3022,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 7159990422016016029}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &5940759033216451958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3077,6 +3110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &7145412622405051867
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,6 +3237,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 503824048896351337}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &1553530340753046159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3289,6 +3325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &7359928974431932098
 GameObject:
   m_ObjectHideFlags: 0
@@ -3414,6 +3452,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 1729237735278276006}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &5631203264832740266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3501,6 +3540,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &7699379756362127037
 GameObject:
   m_ObjectHideFlags: 0
@@ -3626,6 +3667,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 3342048527403119737}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &6859530812794912769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3713,6 +3755,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &7736398410219008159
 GameObject:
   m_ObjectHideFlags: 0
@@ -3869,6 +3913,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 7895440960748858278}
   objectToChangeMesh: {fileID: 4497841708576915596}
   rb: {fileID: 0}
+  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &7248085284138010886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3956,6 +4001,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &8996069413081064897
 GameObject:
   m_ObjectHideFlags: 0
