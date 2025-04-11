@@ -7,7 +7,7 @@ public class SpawnChanceDistribution
 {
 
     float[] probabilityArray;
-    List<int> distributionArray = new List<int>();
+   public List<int> distributionArray = new List<int>();
 
     public SpawnChanceDistribution(float[] probabilityArray)
     {

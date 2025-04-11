@@ -5,6 +5,8 @@ using UnityEngine;
 public class CheckCollision : MonoBehaviour
 {
     public bool hasCollided = false;
+    public GameObject collided;
+    public bool checkCollision = false;
     void Start()
     {
         
@@ -13,10 +15,33 @@ public class CheckCollision : MonoBehaviour
     // Update is called once per frame
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject collider = collision.collider.gameObject;
-        if (collider.tag != "ground")
+        if (checkCollision)
         {
-            hasCollided = true;
+            GameObject collider = collision.collider.gameObject;
+            Bloc bloc = GetComponent<Bloc>();
+            Transform ownerTransform = bloc.ownerTranform;
+            if (bloc != null && collider.tag != "ground" && bloc.state == BlocState.projectile)
+            {
+                if (ownerTransform.name.Contains("Player"))
+                {
+                    if (collider.GetComponent<Bloc>() == null)
+                    {
+                        hasCollided = true;
+                        collided = collider;
+                    }
+                    else if (collider.GetComponent<Bloc>().owner != bloc.owner)
+                    {
+                        hasCollided = true;
+                        collided = collider;
+                    }
+
+                }
+                else
+                {
+                    hasCollided = true;
+                    collided = collider;
+                }
+            }
         }
     }
 }

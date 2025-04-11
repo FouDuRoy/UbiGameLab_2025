@@ -639,9 +639,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float t = 0;
         
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
+        cube.GetComponent<CheckCollision>().checkCollision = true;
         bool hasCollided = cube.GetComponent<CheckCollision>().hasCollided;
         float dist = 100;
-        while (cube != null && t < 1 && hasCollided && dist> minimalAssitedDistance )
+        while (cube != null && t < 1 && !hasCollided && dist> minimalAssitedDistance )
         {
             time += Time.fixedDeltaTime;
             t = time / assistedTime;
@@ -654,8 +655,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
                 }
             }
             yield return new WaitForSeconds(Time.fixedDeltaTime);
+            hasCollided = cube.GetComponent<CheckCollision>().hasCollided;
+
         }
         cube.GetComponent<CheckCollision>().hasCollided = false;
+        cube.GetComponent<CheckCollision>().checkCollision = false;
     }
 }
 
