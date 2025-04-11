@@ -61,6 +61,7 @@ MonoBehaviour:
   projectionTimer: 0.1
   rangedTimer: 0.1
   golem: {fileID: 1597069548048436721}
+  healthBar: {fileID: 2909542865704372724}
   ejectionWeight: 4
   weight: 1
   availablePowerUps: 
@@ -115,7 +116,8 @@ MonoBehaviour:
   MaxhealthValue: 400
   waitDelayAfterPlayerDeath: 0.5
   timeScaleFactor: 0.1
-  transitionTime: 0.1
+  transitionTimeBegin: 0.05
+  transitionTimeEnd: 0.1
   invun: 0
   recovering: 0
   healthValue: 400

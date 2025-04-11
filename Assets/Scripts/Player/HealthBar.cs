@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,12 +7,12 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private PlayerInfo playerInfo;
     [SerializeField] private Image mainBar;
     [SerializeField] private Image secondBar;
-    
+
     [SerializeField] private GameObject GigaRepulsion;
     [SerializeField] private GameObject SuperDash;
     [SerializeField] private GameObject AttractionOmnisciente;
     [SerializeField] private GameObject HyperVitesse;
-    
+
     [SerializeField] private float mainLoweringSpeed = .5f;
     [SerializeField] private float secondLoweringSpeed = 1f;
     [SerializeField] private float referenceOrthoSize = 14f;
@@ -21,7 +22,13 @@ public class HealthBar : MonoBehaviour
     private Camera mainCamera;
     private float currentVelocityMain;
     private float currentVelocitySecond;
-
+    private void Awake()
+    {
+        SetVisible(false, GigaRepulsion);
+        SetVisible(false, SuperDash);
+        SetVisible(false, AttractionOmnisciente);
+        SetVisible(false, HyperVitesse);
+    }
     void Start()
     {
         mainCamera = Camera.main;
@@ -46,10 +53,18 @@ public class HealthBar : MonoBehaviour
     {
         switch (powerupName)
         {
-            case ("GigaRepulsion"): GigaRepulsion.SetActive(true); break;
-            case ("SuperDash"): SuperDash.SetActive(true); break;
-            case ("AttractionOmnisciente"): AttractionOmnisciente.SetActive(true); break;
-            case ("HyperVitesse"): HyperVitesse.SetActive(true); break;
+            case ("GigaRepulsion"): SetVisible(true, GigaRepulsion); break;
+            case ("SuperDash"): SetVisible(true, SuperDash); break;
+            case ("AttractionOmnisciente"): SetVisible(true, AttractionOmnisciente); break;
+            case ("HyperVitesse"): SetVisible(true, HyperVitesse); break;
         }
+    }
+    public void SetVisible(bool visible, GameObject text)
+    {
+        TextMeshProUGUI tmpText = text.GetComponent<TextMeshProUGUI>();
+        Color color = tmpText.color;
+        color.a = visible ? 1 : 0;
+        tmpText.color = color;
+        tmpText.raycastTarget = visible;
     }
 }

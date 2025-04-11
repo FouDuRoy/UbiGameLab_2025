@@ -110,6 +110,7 @@ public class Dash : MonoBehaviour
                                 
                             });
                             blocsToDestroy.Clear();
+                            //tutoDash = false;
                         }
                         else
                         {

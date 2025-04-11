@@ -14,6 +14,7 @@ public class PlayerObjects : MonoBehaviour
     [SerializeField] private float projectionTimer = 0.5f;
     [SerializeField] private float rangedTimer = 0.1f;
     [SerializeField] public GameObject golem;
+    [SerializeField] public GameObject healthBar;
     public float ejectionWeight = 4f;
     Rigidbody magneticCubeRb;
     MouvementType moveType;
