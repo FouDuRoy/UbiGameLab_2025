@@ -12,7 +12,8 @@ public class PlayerInputAssigner : MonoBehaviour
     public InputActionAsset map2;
     void Awake()
     {
-      
+        QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 144;
         var gamepads = Gamepad.all;
         if (gamepads.Count >= 2)
         {
