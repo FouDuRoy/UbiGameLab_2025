@@ -17,14 +17,16 @@ public class PlayerInfo : MonoBehaviour
     public float impulsionWhenHitMelee = 30f;
     public float impulsionWhenHitRanged = 30f;
     public float invincibilityDelay=1f;
-    public float hitStopDelay=0.5f;
+    public float hitStopDelay = 0.5f;
+    public float deathHitStopDelay = 5f;
     public float MaxhealthValue = 100f;
     public float waitDelayAfterPlayerDeath = 1.5f;
-    public float timeScaleFactor = 0.2f;
+    public float timeScaleFactor = 0.1f;
     public float transitionTime = 0.1f;
     public bool invun = false;
     public bool recovering = false;
     public float healthValue;
+    public float waitTimeBeforeVictoryCanvas = 3f;
     private Animator animator;
 
     [Header("D�bogage")]
@@ -85,7 +87,7 @@ public class PlayerInfo : MonoBehaviour
                 else
                 {
                     invun = true;
-                    StartCoroutine(DoHitStop(hitStopDelay));
+                    StartCoroutine(DoHitStop(deathHitStopDelay));
                     this.GetComponent<PlayerInput>().enabled = false;
                      if(melee){
                         cubeRb.AddForce(impactForce.normalized * impulsionWhenHitMelee*1.5f, ForceMode.VelocityChange);
@@ -132,7 +134,7 @@ public class PlayerInfo : MonoBehaviour
     IEnumerator gameOver(string attackerName)
     {
         dynamicCamera.PlayVictoryAnimation(attackerName);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(waitTimeBeforeVictoryCanvas);
         //Time.timeScale = 0;
         gameOverCanvas.SetActive(true); // Show UI
         EventSystem.current.SetSelectedGameObject(restartButton.gameObject);

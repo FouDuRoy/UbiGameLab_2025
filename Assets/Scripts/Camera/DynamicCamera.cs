@@ -11,6 +11,8 @@ public class DynamicCamera : MonoBehaviour
     [SerializeField] private Camera mainCamUI;
     [SerializeField] private Camera cam1;
     [SerializeField] private Camera cam2;
+    [SerializeField] private Camera redCam;
+    [SerializeField] private Camera blueCam;
 
     [Header("References")]
     [SerializeField] private GameObject Player1;
@@ -20,6 +22,7 @@ public class DynamicCamera : MonoBehaviour
     [SerializeField] private GameObject ArenaCenter;
     [SerializeField] private Transform PlayersCenter;
     [SerializeField] private GameObject FloorToHide;
+    [SerializeField] private EventsManager eventsManager;
 
     [Header("Parameters")]
     [Header("Global")]
@@ -44,6 +47,9 @@ public class DynamicCamera : MonoBehaviour
 
     [Header("Animation Settings")]
     [SerializeField] private bool playIntroAnimation=true;
+    [SerializeField] private float looserCamTime;
+    [SerializeField] private float middleCamTime;
+    [SerializeField] private float transitionToPodiumDuration;
 
     private Vector3 currentHorizontalVelocity = Vector3.zero;
     private Vector3 currentDistanceVelocity = Vector3.zero;
@@ -52,6 +58,7 @@ public class DynamicCamera : MonoBehaviour
     private Vector3 currentLocalMainCamPosVelocity= Vector3.zero;
     private Vector3 currentLocalMainCamRotVelocity= Vector3.zero;
     private float currentOrthoSizeVelocity;
+    private float currentOrthoSizeVelocity1;
     private Vector3 playerOnePlanePos;
     private Vector3 playerTwoPlanePos;
     private Vector3 arenaCenterPlanePos;
@@ -223,65 +230,116 @@ public class DynamicCamera : MonoBehaviour
     public void PlayVictoryAnimation(string winnerName)
     {
         GameObject winner;
+        Camera winnerCam;
+        Camera looserCam;
 
         if (Player1.name == winnerName)
         {
             winner = Player1;
-            animatorPlayer1.SetTrigger("PlayWinning");
+            winnerCam = redCam;
+            looserCam = blueCam;
         }
         else
         {
             winner = Player2;
-            animatorPlayer2.SetTrigger("PlayWinning");
+            winnerCam = blueCam;
+            looserCam=redCam;
         }
-        /*
-        shouldFollowPlayers = false;
 
+        mainCamUI.enabled = false;
+
+        eventsManager.gameObject.SetActive(false);
+        StartCoroutine(SmoothTransitionToPodium(winner, winnerCam, looserCam, looserCamTime, middleCamTime, transitionToPodiumDuration));
+    }
+
+    private IEnumerator SmoothTransitionToPodium(GameObject winner, Camera winnerCam, Camera looserCam, float looserCamTime, float middleCamTime, float finalTransitionDuration)
+    {
+        // LOOSER CAM
+
+        looserCam.enabled = true;
+        mainCam.enabled = false;
+
+        yield return new WaitForSeconds(looserCamTime);
+
+        // MIDDLE CAM
+
+        Camera chosenCam;
+
+        // Choose camera closest to arena center
+        if (Vector3.Distance(cam1.transform.position, Vector3.zero) < Vector3.Distance(cam2.transform.position, Vector3.zero))
+        {
+            chosenCam = cam1;
+        }
+        else
+        {
+            chosenCam = cam2;
+        }
+
+        chosenCam.enabled = true;
+        looserCam.enabled = false;
+
+        float startSize = chosenCam.orthographicSize;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < middleCamTime)
+        {
+            float t = elapsedTime / middleCamTime;
+
+            float middleCamOrthoSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor1, minDistance1, maxDistance1);
+            chosenCam.orthographicSize = Mathf.Lerp(startSize, middleCamOrthoSize, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        chosenCam.orthographicSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor1, minDistance1, maxDistance1);
+        
+        // MAIN CAM
+
+
+
+        shouldFollowPlayers=false;
         ClearingSphere(20, new string[] { "wood", "magnetic", "explosive" });
-
-        winner.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        winner.GetComponent<Rigidbody>().isKinematic = true;
-
         winner.transform.position = new Vector3(0, 0.6f, 0);
         winner.transform.eulerAngles = new Vector3(0, 170, 0);
         Physics.SyncTransforms();
 
-        Camera winnerCam = winner.GetComponentInChildren<Camera>();
-        winnerCam.enabled = true;
-        mainCam.enabled = false;
-        cam1.enabled = false;
-        cam2.enabled = false;*/
-    }
+        /*mainCam.enabled = true;
+        chosenCam.enabled=false;*/
 
-    private IEnumerator SmoothTransitionToPodium(float transitionTime, float teleportTime, GameObject winner)
-    {
-        float elapsedTime = 0f;
-        bool functionCalled = false;
+        // Initial states
+        Vector3 startPos = chosenCam.transform.position;
+        Quaternion startRot = chosenCam.transform.rotation;
+        float startNearClip = chosenCam.nearClipPlane;
+        float startOrthoSize = chosenCam.orthographicSize;
 
-        while (elapsedTime < transitionTime)
+        if (winner == Player1)
         {
+            animatorPlayer1.SetTrigger("PlayWinning");
+        }
+        else
+        {
+            animatorPlayer2.SetTrigger("PlayWinning");
+        }
+
+        elapsedTime = 0;
+
+        while (elapsedTime < finalTransitionDuration)
+        {
+            float t = elapsedTime / finalTransitionDuration;
+
+            chosenCam.transform.position = Vector3.Lerp(startPos, winnerCam.transform.position, t);
+            chosenCam.transform.rotation = Quaternion.Slerp(startRot, winnerCam.transform.rotation, t);
+            chosenCam.nearClipPlane = Mathf.Lerp(startNearClip, winnerCam.nearClipPlane, t);
+            chosenCam.orthographicSize = Mathf.Lerp(startOrthoSize, winnerCam.orthographicSize, t);
+
             elapsedTime += Time.deltaTime;
-            float t = elapsedTime / transitionTime;
-            t = Mathf.SmoothStep(0f, 1f, t);
-
-            if(elapsedTime >= teleportTime && !functionCalled)
-            {
-                functionCalled = true;
-                
-                ClearingSphere(20, new string[] { "wood", "magnetic", "explosive" });
-
-                winner.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                winner.GetComponent<Rigidbody>().isKinematic = true;
-
-                winner.transform.position = new Vector3(0, 0.6f, 0);
-                winner.transform.eulerAngles = new Vector3(0, 170, 0);
-                Physics.SyncTransforms();
-
-                mainCamUI.enabled = false;
-            }
-
             yield return null;
         }
+
+        chosenCam.transform.position = winnerCam.transform.position;
+        chosenCam.transform.rotation = winnerCam.transform.rotation;
+        chosenCam.nearClipPlane = winnerCam.nearClipPlane;
+        chosenCam.orthographicSize = winnerCam.orthographicSize;
     }
 
     private void ClearingSphere(float radius, string[] tags)
@@ -312,26 +370,6 @@ public class DynamicCamera : MonoBehaviour
 
     public void HitEffect(float duration, Rigidbody hitPlayer)
     {
-        if (!simpleCamera)
-        {
-            Camera chosenCam;
-
-            // Choose camera closest to arena center
-            if (Vector3.Distance(cam1.transform.position,Vector3.zero) < Vector3.Distance(cam2.transform.position, Vector3.zero))
-            {
-                chosenCam = cam1;
-            }
-            else
-            {
-                chosenCam = cam2;
-            }
-            print(transform.eulerAngles);
-            transform.eulerAngles=new Vector3(0f,transform.eulerAngles.y+chosenCam.transform.localEulerAngles.y,0f);
-            print(transform.eulerAngles);
-            mainCam.orthographicSize = Mathf.Clamp(distanceBetweenPlayers * distanceFromPlayersFactor1, minDistance1, maxDistance1);
-            mainCam.transform.localPosition=chosenCam.transform.localPosition;
-            mainCam.transform.localEulerAngles = chosenCam.transform.localEulerAngles;
-        }   
         StartCoroutine(HitEffectRoutine(hitVolume,duration,hitPlayer));
     }
 
