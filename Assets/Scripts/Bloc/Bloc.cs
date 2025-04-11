@@ -23,7 +23,7 @@ public class Bloc : MonoBehaviour
     private Vector3Int gridPosition;
     public Rigidbody rb;
 
-    public GameObject trail;
+    GameObject trail;
     private WinCondition winCon;
 
     private TrailRenderer trailRendShort;
@@ -44,28 +44,13 @@ public class Bloc : MonoBehaviour
         if(objectToChangeMesh != null){
          meshToChange = objectToChangeMesh.GetComponent<MeshRenderer>();
         }
-     
 
+        trail = transform.Find("Trail").gameObject;
         trailRendShort = trail.GetComponent<TrailRenderer>();
-        trailRendShortMaterial = trailRendShort.material;
-        Debug.Log(trailRendShortMaterial);
-        trailGradientOriginShort = trailRendShort.colorGradient;
-        fadeGradientShort = new Gradient();
-
-        trailRendShortMaterial.SetFloat("_Alpha", 0);
-        trailRendShort.time = 0.01f;
         trailRendShort.emitting = false;
-        trailRendShort.Clear();
 
         trailRendLong = trail.transform.Find("second_longer_trail").GetComponent<TrailRenderer>();
-        trailRendLongMaterial = trailRendLong.material;
-        trailGradientOriginLong = trailRendLong.colorGradient;
-        fadeGradientLong = new Gradient();
-
-        trailRendLongMaterial.SetFloat("_Alpha", 0);
-        trailRendLong.time = 0.01f;
         trailRendLong.emitting = false;
-        trailRendLong.Clear();
     }
 
     public Vector3Int GetGridPosition()
@@ -79,7 +64,6 @@ public class Bloc : MonoBehaviour
         {
             if (state == BlocState.projectile && rb.velocity.magnitude >= winCon.victoryConditionSpeedRange)
             {
-                Debug.Log("here");
                 FadeIn();
             }
             else
@@ -134,60 +118,26 @@ public class Bloc : MonoBehaviour
     }
     public void FadeIn()
     {
-        trailRendShort.time = 1f;
-        trailRendShort.emitting = true;
-        trailRendShort.enabled = true;
 
-        trailRendLong.time = 1f;
-        trailRendLong.emitting = true;
-        trailRendLong.enabled = true;
+        StartCoroutine(startEmiting(fadeDurationLong, trailRendLong));
+        StartCoroutine(startEmiting(fadeDurationShort, trailRendShort));
 
-        StartCoroutine(UpdateTrailAlpha(0f, 1f,trailGradientOriginLong, fadeGradientLong, trailRendLong,fadeDurationLong, trailRendShortMaterial));
-        StartCoroutine(UpdateTrailAlpha(0f, 1f, trailGradientOriginShort, fadeGradientShort, trailRendShort,fadeDurationShort, trailRendShortMaterial));
     }
 
     public void FadeOut()
     {
-        StartCoroutine(UpdateTrailAlpha(1f, 0f, trailGradientOriginLong, fadeGradientLong, trailRendLong,fadeDurationLong, trailRendLongMaterial));
-        StartCoroutine(UpdateTrailAlpha(1f, 0f, trailGradientOriginShort, fadeGradientShort, trailRendShort,fadeDurationShort, trailRendShortMaterial));
+        StartCoroutine(stopEmiting(0, trailRendLong));
+        StartCoroutine( stopEmiting(0, trailRendShort));
     }
-    IEnumerator UpdateTrailAlpha(float startAlpha, float targetAlpha, Gradient trailGradientOrigin, Gradient fadeGradient,TrailRenderer trailRend,float fadeDuration,Material trailMaterial)
+    IEnumerator startEmiting(float time,TrailRenderer trail)
     {
-        float elapsed = 0f;
+        yield return new WaitForSeconds(time);
+        trail.emitting = true;
+    }
 
-        while (elapsed < fadeDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / fadeDuration);
-            float currentAlpha = Mathf.Lerp(startAlpha, targetAlpha, t);
-            trailMaterial.SetFloat("_Alpha", currentAlpha);
-            // Update gradient alpha keys
-            GradientAlphaKey[] alphaKeys = trailGradientOrigin.alphaKeys;
-            for (int i = 0; i < alphaKeys.Length; i++)
-            {
-                alphaKeys[i].alpha = currentAlpha;
-            }
-
-            fadeGradient.SetKeys(
-                trailGradientOrigin.colorKeys,
-                alphaKeys
-            );
-
-            trailRend.colorGradient = fadeGradient;
-            Debug.Log(trailRend.gameObject + "grad:" + trailRend.colorGradient.alphaKeys[0].alpha);
-            yield return null;
-
-            if(targetAlpha == 0)
-            {
-                trailRend.Clear();
-                trailRend.emitting = false;
-
-                trailRend.material.SetFloat("_Alpha", 0);
-                trailRend.material.SetFloat("_Cutoff", 0.999f);
-
-                trailRend.enabled = false;
-            }
-           
-        }
+    IEnumerator stopEmiting(float time, TrailRenderer trail)
+    {
+        yield return new WaitForSeconds(time);
+        trail.emitting = false;
     }
 }

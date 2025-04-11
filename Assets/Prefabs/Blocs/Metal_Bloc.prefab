@@ -177,7 +177,8 @@ MonoBehaviour:
   minimalSpeed: 0.5
   magneticMaterial: {fileID: 2100000, guid: ba1772a9da608d046945874fe90c4e3f, type: 2}
   maxSpeed: 1e+22
-  fadeDuration: 0.5
+  fadeDurationLong: 0.1
+  fadeDurationShort: 0.05
   contactOffset: 0.03
   weight: 0.01
   owner: Neutral
@@ -185,7 +186,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 0}
   objectToChangeMesh: {fileID: 5594412901748322291}
   rb: {fileID: 3745680985456743881}
-  trail: {fileID: 7839485708418220497}
 --- !u!114 &4853838727377016838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,16 +267,64 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Time
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_Parameters.colorGradient.m_ColorSpace
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
+      value: 0.5311889
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.005570531
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.9433224
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].inSlope
+      value: 1.0466975
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].outSlope
+      value: 1.0466975
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552299351414326188, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_Name
@@ -332,26 +380,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
       propertyPath: m_Parameters.colorGradient.m_ColorSpace
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.047222137
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932283814371741933, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
---- !u!1 &7839485708418220497 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
-  m_PrefabInstance: {fileID: 4845911161833665351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8346007243854384569 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3500101582806400766, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
