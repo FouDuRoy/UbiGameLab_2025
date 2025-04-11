@@ -82,7 +82,7 @@ public class PowerUpBloc : MonoBehaviour
     {
         int oldNumberBlocs = ownerTransform.GetComponent<ConeEjectionAndProjection>().maxBlocs;
         ownerTransform.GetComponent<ConeEjectionAndProjection>().maxBlocs = gigaRepulsionNbBlocs;
-        ownerTransform.GetComponent<PlayerObjects>().healthBar.GetComponent<HealthBar>().AddPowerup("GigaRepulsion",gigaRepulsionTimer);
+        ownerTransform.GetComponent<PlayerObjects>().healthBar.GetComponent<HealthBar>().AddPowerup("GigaRepulsion", gigaRepulsionTimer);
         float time = 0;
         if (gigaRepulsionTimer == float.PositiveInfinity)
         {
@@ -104,7 +104,7 @@ public class PowerUpBloc : MonoBehaviour
     IEnumerator SuperDash()
     {
         ownerTransform.GetComponent<PlayerObjects>().cubeRb.GetComponent<Dash>().superDash = true;
-        ownerTransform.GetComponent<PlayerObjects>().healthBar.GetComponent<HealthBar>().AddPowerup("SuperDash", gigaRepulsionTimer);
+        ownerTransform.GetComponent<PlayerObjects>().healthBar.GetComponent<HealthBar>().AddPowerup("SuperDash", superDashTime);
         float time = 0;
         if (superDashTime == float.PositiveInfinity)
         {
@@ -127,7 +127,7 @@ public class PowerUpBloc : MonoBehaviour
     {
         float oldAngle = ownerTransform.GetComponent<ConeEjectionAndProjection>().initialAngle;
         ownerTransform.GetComponent<ConeEjectionAndProjection>().initialAngle = 360;
-        ownerTransform.GetComponent<PlayerObjects>().healthBar.GetComponent<HealthBar>().AddPowerup("AttractionOmni", gigaRepulsionTimer);
+        ownerTransform.GetComponent<PlayerObjects>().healthBar.GetComponent<HealthBar>().AddPowerup("AttractionOmnisciente", attractionOmniscienteTimer);
         float time = 0;
         if (attractionOmniscienteTimer == float.PositiveInfinity)
         {
@@ -147,7 +147,7 @@ public class PowerUpBloc : MonoBehaviour
     IEnumerator HyperVite()
     {
         ownerTransform.GetComponent<PlayerMouvement>().moveType = MouvementType.HyperVite;
-        ownerTransform.GetComponent<PlayerObjects>().healthBar.GetComponent<HealthBar>().AddPowerup("HyperVite", gigaRepulsionTimer);
+        ownerTransform.GetComponent<PlayerObjects>().healthBar.GetComponent<HealthBar>().AddPowerup("HyperVitesse", HyperViteTimer);
         float time = 0;
         if(HyperViteTimer == float.PositiveInfinity)
         {

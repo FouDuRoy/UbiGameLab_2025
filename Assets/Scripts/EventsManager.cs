@@ -18,7 +18,6 @@ public class EventsManager : MonoBehaviour
     private float nextEventTime;
     private GameObject selectedEvent;
     private SpawnChanceDistribution spawnChancesDist;
-    public bool lookDist = false;
 
     void Start()
     {
@@ -32,13 +31,6 @@ public class EventsManager : MonoBehaviour
 
     void Update()
     {
-        if (lookDist)
-        {
-            foreach( float number in spawnChancesDist.distributionArray)
-            {
-                Debug.Log(number);
-            }
-        }
         if (eventsToSummon.Count > 0 && Time.time >= nextEventTime)
         {
             nextEventTime = Time.time + timeBetweenEvents;

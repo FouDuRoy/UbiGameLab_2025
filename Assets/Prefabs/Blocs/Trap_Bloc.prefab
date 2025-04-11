@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 2525441135307876409}
   - component: {fileID: 1143426935521263120}
   - component: {fileID: 7479162396638217673}
-  - component: {fileID: 5615064793267745248}
   - component: {fileID: 1322309207985019544}
   - component: {fileID: 28778441189886114}
   - component: {fileID: 7902813848691840068}
@@ -167,6 +166,7 @@ MonoBehaviour:
   ownerTranform: {fileID: 0}
   objectToChangeMesh: {fileID: 8597392559428020320}
   rb: {fileID: 5355365516190511092}
+  trail: {fileID: 0}
 --- !u!114 &2525441135307876409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,20 +228,6 @@ MonoBehaviour:
   upEjectionMaxMelee: 1
   maxAngle: 10
   passivedDetachedForce: 5
---- !u!114 &5615064793267745248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5694876674060920943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd9d2e8bbe5afa04da47682374207ffd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastTickVelocity: {x: 0, y: 0, z: 0}
-  rb: {fileID: 0}
 --- !u!114 &1322309207985019544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
+  collided: {fileID: 0}
+  checkCollision: 0
 --- !u!1 &8339096798682944052
 GameObject:
   m_ObjectHideFlags: 0

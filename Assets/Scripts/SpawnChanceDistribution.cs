@@ -5,8 +5,8 @@ using UnityEngine;
 public class SpawnChanceDistribution
 {
 
-    float[] probabilityArray;
-   public List<int> distributionArray = new List<int>();
+   float[] probabilityArray;
+ 
 
     public SpawnChanceDistribution(float[] probabilityArray)
     {
@@ -23,19 +23,28 @@ public class SpawnChanceDistribution
         {
             throw new System.Exception("Somme des probabilités ne donne pas 1");
         }
-
-        for (int i = 0; i < probabilityArray.Length; i++)
-        {
-            int numberOfValues = (int)(100 * probabilityArray[i]);
-            for (int j = 0; j < numberOfValues; j++)
-            {
-                distributionArray.Add(i);
-            }
-        }
     }
     public int sampleDistribution()
     {
-        return distributionArray[Random.Range(0, distributionArray.Count)];
+        float uniformValue = Random.Range(0f, 1f);
+        for(int i = 0; i < probabilityArray.Length; i++)
+        {
+           
+                if (partitionFunction(i-1) <= uniformValue  && uniformValue <= partitionFunction(i))
+                {
+                    return i;
+                }
+          
+        }
+        return 0;
+    }
+    public float partitionFunction(int i) {
+        float value = 0;
+        for(int j=0; j<=i; j++)
+        {
+            value+= probabilityArray[j];
+        }
+        return value;
     }
 
 }
