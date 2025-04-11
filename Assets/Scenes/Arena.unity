@@ -918,6 +918,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4313016818357375316, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4769959655328685130, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -963,9 +967,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: healthValue
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: restartButton
       value: 
       objectReference: {fileID: 1223009364796463342}
+    - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: MaxhealthValue
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: gameOverCanvas
       value: 
@@ -1053,6 +1065,18 @@ PrefabInstance:
     - target: {fileID: 6397921076587179546, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648738240896521301, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648738240896521301, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.8687168
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648738240896521301, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.57
       objectReference: {fileID: 0}
     - target: {fileID: 6799288727357629610, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_IsActive
@@ -8716,6 +8740,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4493073578381533376, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.6212436
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493073578381533376, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493073578381533376, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4604285209920909105, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8737,9 +8773,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: healthValue
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: restartButton
       value: 
       objectReference: {fileID: 1416809245861774915}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: MaxhealthValue
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: gameOverCanvas
       value: 
@@ -8865,6 +8909,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6305558548146861486, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468685672756848065, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -9987,6 +10035,10 @@ PrefabInstance:
     - target: {fileID: 3715524003834981654, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
       propertyPath: m_Name
       value: EventsManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3715524003834981654, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4317154141657856346, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
       propertyPath: m_LocalPosition.x
