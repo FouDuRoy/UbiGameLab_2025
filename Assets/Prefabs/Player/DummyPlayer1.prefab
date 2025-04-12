@@ -234,7 +234,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 50
   m_Drag: 5
-  m_AngularDrag: 10
+  m_AngularDrag: 10000
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -349,6 +349,7 @@ MonoBehaviour:
   projectionTimer: 0.1
   rangedTimer: 0.1
   golem: {fileID: 0}
+  healthBar: {fileID: 0}
   ejectionWeight: 4
   weight: 1
   availablePowerUps: 00000000010000000200000003000000
@@ -371,14 +372,20 @@ MonoBehaviour:
   impulsionWhenHitRanged: 100
   invincibilityDelay: 3
   hitStopDelay: 0.5
+  deathHitStopDelay: 5
   MaxhealthValue: 400
   waitDelayAfterPlayerDeath: 1.5
   timeScaleFactor: 0.1
+  transitionTimeBegin: 0.05
+  transitionTimeEnd: 0.1
   invun: 0
   recovering: 0
   healthValue: 400
+  waitTimeBeforeVictoryCanvas: 3
   playerLife: {fileID: 0}
   isInvincible: 0
+  takeDamangeSfx: {fileID: 0}
+  dieSfx: {fileID: 0}
 --- !u!114 &8236555362184887945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +411,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ee7f85b04e41b7e4691b855f2795b6e0, type: 2}
   maxDimension: 10
   negativeY: 0
+  vortex: {fileID: 0}
+  attachBlocSound: {fileID: 0}
 --- !u!1 &5562197789511605831
 GameObject:
   m_ObjectHideFlags: 0
