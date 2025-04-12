@@ -35,6 +35,7 @@ public class DummyShockDetection : MonoBehaviour
         {
             dashCompleted = true;
             dashTutoUI.NextTuto();
+            print("caca");
         }
     }
     private void OnCollisionEnter(Collision collision)
