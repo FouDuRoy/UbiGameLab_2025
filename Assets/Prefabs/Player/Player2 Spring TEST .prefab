@@ -283,6 +283,12 @@ MonoBehaviour:
     rightMotorMax: 0.4
     rightMidTime: 0.02
     totalDuration: 0.06
+  meleMove:
+    leftMotorMax: 0.5
+    leftMidTime: 0
+    rightMotorMax: 0.5
+    rightMidTime: 0.02
+    totalDuration: 0.06
   repulsionCharge:
     leftMotorMax: 0.3
     leftMidTime: 0.08
@@ -759,7 +765,6 @@ MonoBehaviour:
   radiusEffect: 50
   upwardEffect: 25
   superDash: 0
-  tutoDash: 0
   canDash: 1
 --- !u!114 &4777839957108034706
 MonoBehaviour:
@@ -1991,6 +1996,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1796452612003377754}
     m_Modifications:
+    - target: {fileID: -8744666883889611541, guid: 996edf6a353526344b086f31a2c203de, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -2748981447920606575, guid: 996edf6a353526344b086f31a2c203de, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035616581401964078, guid: 996edf6a353526344b086f31a2c203de, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -8744666883889611541, guid: 163433122f55b1743ba5d7b2307a4f74, type: 3}
       propertyPath: m_Layer
       value: 21
@@ -2054,18 +2071,6 @@ PrefabInstance:
     - target: {fileID: 4035616581401964078, guid: 163433122f55b1743ba5d7b2307a4f74, type: 3}
       propertyPath: m_Layer
       value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: -8744666883889611541, guid: 996edf6a353526344b086f31a2c203de, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -2748981447920606575, guid: 996edf6a353526344b086f31a2c203de, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035616581401964078, guid: 996edf6a353526344b086f31a2c203de, type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
