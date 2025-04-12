@@ -78,10 +78,10 @@ public class SpringBlocEjection : MonoBehaviour
             Vector3 hitterVelocityBeforeImpact = (hitterMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitter.transform.position - hitterMainRb.position), hitterMainRb.angularVelocity));
             float hitterVelocity = (hitterMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitter.transform.position - hitterMainRb.position), hitterMainRb.angularVelocity)).magnitude;
             float hittedVelocityMag = (hittedMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitted.transform.position - hittedMainRb.position), hittedMainRb.angularVelocity)).magnitude;
-            Debug.Log(hitterVelocity + " " + hittedVelocityMag);
             if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
             {
-
+                Physics.IgnoreCollision(hitter.GetComponent<BoxCollider>(), GetComponent<BoxCollider>(), true);
+                StartCoroutine(ReEnableCollision(hitter.GetComponent<BoxCollider>()));
                 gridSystem.DetachBlocSingleCollisionRanged(hitted);
                 gridSystem.ejectRest(passivedDetachedForce);
                 hittedComponent.state = BlocState.detached;
@@ -157,5 +157,11 @@ public class SpringBlocEjection : MonoBehaviour
                 joint.breakForce = this.GetComponent<Feromagnetic>().springForceBreak;
             }
         }
+    }
+    IEnumerator ReEnableCollision(Collider otherCollider)
+    {
+        Debug.Log("here");
+        yield return new WaitForSeconds(0.5f); // Adjust delay as needed
+        Physics.IgnoreCollision(otherCollider, GetComponent<BoxCollider>(), false);
     }
 }
