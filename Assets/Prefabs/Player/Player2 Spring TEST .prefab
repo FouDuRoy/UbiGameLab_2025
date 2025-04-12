@@ -337,6 +337,7 @@ MonoBehaviour:
   assitedTrajectoryAngleMax: 20
   assistedTime: 0.5
   minimalAssitedDistance: 4
+  attractionCubeMass: 0.01
   handHeight: 1.2
   fowardDistance: 2.4
   leftHandTransform: {fileID: 8990318340437991733}
@@ -1990,18 +1991,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1796452612003377754}
     m_Modifications:
-    - target: {fileID: -8744666883889611541, guid: 996edf6a353526344b086f31a2c203de, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -2748981447920606575, guid: 996edf6a353526344b086f31a2c203de, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4035616581401964078, guid: 996edf6a353526344b086f31a2c203de, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: -8744666883889611541, guid: 163433122f55b1743ba5d7b2307a4f74, type: 3}
       propertyPath: m_Layer
       value: 21
@@ -2065,6 +2054,18 @@ PrefabInstance:
     - target: {fileID: 4035616581401964078, guid: 163433122f55b1743ba5d7b2307a4f74, type: 3}
       propertyPath: m_Layer
       value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: -8744666883889611541, guid: 996edf6a353526344b086f31a2c203de, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -2748981447920606575, guid: 996edf6a353526344b086f31a2c203de, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035616581401964078, guid: 996edf6a353526344b086f31a2c203de, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

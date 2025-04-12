@@ -17,13 +17,14 @@ public class TutoUI : MonoBehaviour
 {
     [SerializeField] private PlayerMouvement playerMouvement;
     [SerializeField] private Color playerColor;
-    [SerializeField] private TutoType tutoType;
+    [SerializeField] public TutoType tutoType;
     [SerializeField] private TutoUI nextTuto;
 
     [SerializeField] private Sprite attractionInput;
     [SerializeField] private Sprite foncerInput;
     [SerializeField] private Sprite shootInput;
     [SerializeField] private Sprite cacInput;
+    [SerializeField] private GridSystem dummyGrid;
 
     private Image inputImage;
     private TMP_Text tutoText;
@@ -31,11 +32,24 @@ public class TutoUI : MonoBehaviour
     private GridSystem playerGrid;
     private Dash playerDash;
     private float normalPlayerSpeed;
-    private
+    int lastGridCount=0;
 
     // Start is called before the first frame update
+    private void Update()
+    {
+        if (tutoType == TutoType.Dash)
+        {
+            if (dummyGrid.grid.Count< lastGridCount)
+            {
+                Debug.Log("here");
+                NextTuto();
+            }
+        }
+        lastGridCount = dummyGrid.grid.Count;
+    }
     void Start()
     {
+        
         foreach (Image img in GetComponentsInChildren<Image>())
         {
             if (img.name == "TutoImage")
@@ -117,5 +131,13 @@ public class TutoUI : MonoBehaviour
             nextTuto.gameObject.SetActive(true);
         }
         gameObject.SetActive(false);
+    }
+
+    IEnumerator waitForCubesToConnect()
+    {
+        Debug.Log(lastGridCount);
+        yield return new WaitForSeconds(2f);
+        lastGridCount = dummyGrid.grid.Count;
+        Debug.Log(lastGridCount);
     }
 }
