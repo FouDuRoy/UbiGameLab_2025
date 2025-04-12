@@ -21,13 +21,14 @@ GameObject:
   - component: {fileID: 28778441189886114}
   - component: {fileID: 7902813848691840068}
   - component: {fileID: 6246554414657267929}
+  - component: {fileID: 7864647864804097144}
   m_Layer: 0
   m_Name: Trap_Bloc
   m_TagString: explosive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9004300913510534856
 Transform:
   m_ObjectHideFlags: 0
@@ -316,6 +317,19 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &7864647864804097144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694876674060920943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643f3a7f13e34014f9fd86804dff2cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diametre: 4
 --- !u!1 &8339096798682944052
 GameObject:
   m_ObjectHideFlags: 0
