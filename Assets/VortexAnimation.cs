@@ -99,14 +99,14 @@ public class VortexAnimation : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         Vector3 newFoward  = golem.transform.forward;
         var vortexModule = vortexParticle.velocityOverLifetime;
-        float angle = Vector3.Angle(lastFoward, newFoward);
+        float angle = Vector3.SignedAngle(lastFoward, newFoward,Vector3.up);
         if(angle > 0)
         {
-            vortexModule.orbitalZ = new ParticleSystem.MinMaxCurve(10);
+            vortexModule.orbitalZ = new ParticleSystem.MinMaxCurve(0,10);
         }
         else
         {
-            vortexModule.orbitalZ = new ParticleSystem.MinMaxCurve(-10);
+            vortexModule.orbitalZ = new ParticleSystem.MinMaxCurve(0,-10);
         }
     }
 }
