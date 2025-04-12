@@ -29,10 +29,12 @@ public class WoodBloc : MonoBehaviour
             woodSound.GetComponent<AudioSource>().Play();
             Destroy(woodSound, 2f); // D�truit le son apr�s 2 secondes
 
-            // Instancie le nouveau prefab � la m�me position/rotation
-            GameObject shardsBloc = Instantiate(replacementPrefab, transform.position, transform.rotation);
+        // Instancie le nouveau prefab � la m�me position/rotation
+             replacementPrefab.transform.position = this.transform.position;
+            replacementPrefab.SetActive(true);
             Vector3 centerOfBloc =  gameObject.transform.position;
-            foreach(Rigidbody rb in shardsBloc.GetComponentsInChildren<Rigidbody>())
+            replacementPrefab.transform.parent = null;
+            foreach(Rigidbody rb in replacementPrefab.GetComponentsInChildren<Rigidbody>())
         {
             rb.AddForce((rb.position-centerOfBloc).normalized*explosionForce,ForceMode.VelocityChange);
         }
