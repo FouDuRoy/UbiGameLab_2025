@@ -51,7 +51,6 @@ public class TutoUI : MonoBehaviour
     }
     void Start()
     {
-        
         foreach (Image img in GetComponentsInChildren<Image>())
         {
             if (img.name == "TutoImage")

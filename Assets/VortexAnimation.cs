@@ -12,6 +12,7 @@ public class VortexAnimation : MonoBehaviour
     public float fadeOutTime = 1f;
     private ParticleSystem.MainModule mainModule;
     bool isActive = false;
+    HapticFeedbackController feedback;
     Transform golem;
     void Start()
     {
@@ -19,7 +20,7 @@ public class VortexAnimation : MonoBehaviour
         seuil = GetComponentInChildren<PlayerObjects>().cubeRb.gameObject.GetComponent<WinCondition>().victoryConditionSpeedMelee;
         gridPlayer = GetComponent<GridSystem>();
         vortexParticle = vortex.GetComponent<ParticleSystem>();
-
+        feedback = GetComponent<HapticFeedbackController>();
         mainModule = vortexParticle.main;
         var color = mainModule.startColor;
         color.color = new Color(color.color.r, color.color.g, color.color.b, 0);
@@ -47,6 +48,9 @@ public class VortexAnimation : MonoBehaviour
                 StartCoroutine(RotationDirecton());
                 if (rb != null && cubeVeolcityMag >= seuil)
                 {
+                    //active rumble feedback
+                    feedback.MeleeSpeedVibrationStart();
+
                     if (!isActive)
                     {
                         isActive = true;
