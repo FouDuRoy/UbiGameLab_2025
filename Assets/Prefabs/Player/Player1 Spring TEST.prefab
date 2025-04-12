@@ -173,6 +173,12 @@ MonoBehaviour:
     rightMotorMax: 0.4
     rightMidTime: 0.02
     totalDuration: 0.06
+  meleMove:
+    leftMotorMax: 0.5
+    leftMidTime: 0
+    rightMotorMax: 0.5
+    rightMidTime: 0.02
+    totalDuration: 0.06
   repulsionCharge:
     leftMotorMax: 0.3
     leftMidTime: 0.08
@@ -817,7 +823,6 @@ MonoBehaviour:
   radiusEffect: 50
   upwardEffect: 25
   superDash: 0
-  tutoDash: 0
   canDash: 1
 --- !u!114 &1814505569673876761
 MonoBehaviour:
