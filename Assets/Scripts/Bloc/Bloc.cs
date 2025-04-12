@@ -56,7 +56,7 @@ public class Bloc : MonoBehaviour
                     this.GetComponent<Feromagnetic>().enabled = true;
 
                 }
-                if (tag != "explosive")
+                if (tag != "explosive" && tag!= "magneticCube")
                 {
                     changeMeshMaterial(magneticMaterial);
                 }
