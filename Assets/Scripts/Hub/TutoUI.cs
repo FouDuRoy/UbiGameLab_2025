@@ -28,6 +28,7 @@ public class TutoUI : MonoBehaviour
 
     private Image inputImage;
     private TMP_Text tutoText;
+    private TMP_Text countText;
     private Camera mainCamera;
     private GridSystem playerGrid;
     private Dash playerDash;
@@ -61,9 +62,17 @@ public class TutoUI : MonoBehaviour
                 img.color = playerColor;
             }
         }
-        /*
-        tutoText = GetComponentInChildren<TMP_Text>();
-        tutoText.color = playerColor;*/
+        
+        foreach(TMP_Text txt in GetComponentsInChildren<TMP_Text>())
+        {
+            if(txt.name == "TutoCount")
+            {
+                countText = txt;
+                countText.color = playerColor;
+            }
+        }
+
+        
 
         mainCamera = Camera.main;
         playerGrid = playerMouvement.GetComponent<GridSystem>();
@@ -73,10 +82,12 @@ public class TutoUI : MonoBehaviour
         {
             case TutoType.Attraction:
                 inputImage.sprite = attractionInput;
+                countText.enabled = false;
                 break;
 
             case TutoType.Dash:
                 inputImage.sprite = foncerInput;
+                countText.enabled = false;
                 break;
 
             case TutoType.Repulsion:
@@ -84,7 +95,7 @@ public class TutoUI : MonoBehaviour
                 break;
 
             case TutoType.Cac: inputImage.sprite = cacInput; break;
-            case TutoType.Arene:inputImage.enabled = false;break;
+            case TutoType.Arene:inputImage.enabled = false; countText.enabled = false; break;
         }
 
         if (tutoType != TutoType.Attraction)
@@ -131,6 +142,11 @@ public class TutoUI : MonoBehaviour
             nextTuto.gameObject.SetActive(true);
         }
         gameObject.SetActive(false);
+    }
+
+    public void SetTutoCount(int actuelCount, int maxCount)
+    {
+        countText.text = actuelCount.ToString()+" / "+maxCount.ToString();
     }
 
     IEnumerator waitForCubesToConnect()

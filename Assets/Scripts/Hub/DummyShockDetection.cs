@@ -10,13 +10,14 @@ public class DummyShockDetection : MonoBehaviour
     [SerializeField] private TutoUI dashTutoUI;
     [SerializeField] private TutoUI cacTutoUI;
     [SerializeField] private TutoUI shootTutoUI;
-    [SerializeField] private int nShootHits = 2;
-    [SerializeField] private int nCacHits = 2;
+    [SerializeField] private int neededShootHits = 2;
+    [SerializeField] private int neededCacHits = 2;
 
     private Rigidbody rb;
     private GridSystem grid;
     private int OG_gridSize;
-    private int nHits = 0;
+    private int nShootHits = 0;
+    private int nCacHits = 0;
     private bool dashCompleted = false;
     private bool shootCompleted = false;
     bool canTrigger = true;
@@ -59,10 +60,12 @@ public class DummyShockDetection : MonoBehaviour
                     {
                         DoRotation();
 
-                        if (shootTutoUI.isActiveAndEnabled && dashCompleted)
+                        if (shootTutoUI.isActiveAndEnabled)
                         {
-                            nHits++;
-                            if (nHits >= nShootHits)
+                            nShootHits++;
+                            print(nShootHits);
+                            shootTutoUI.SetTutoCount(nShootHits, neededShootHits);
+                            if (nShootHits >= neededShootHits)
                             {
                                 shootCompleted = true;
                                 shootTutoUI.NextTuto();
@@ -83,8 +86,9 @@ public class DummyShockDetection : MonoBehaviour
 
                         if (cacTutoUI.isActiveAndEnabled &&  shootCompleted)
                         {
-                            nHits++;
-                            if (nHits >= nCacHits)
+                            nCacHits++;
+                            cacTutoUI.SetTutoCount(nCacHits, neededCacHits);
+                            if (nCacHits >= neededCacHits)
                             {
                                 cacTutoUI.NextTuto();
                             }
