@@ -33,7 +33,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     [SerializeField] float assitedTrajectoryAngleMax = 20f;
     [SerializeField] float assistedTime = 0.5f;
     [SerializeField] float minimalAssitedDistance = 4f;
-
+    [SerializeField] float attractionCubeMass = 0.1f;
 
     [SerializeField] float handHeight = 1.2f;
     [SerializeField] float fowardDistance = 2.4f;
@@ -310,6 +310,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             fero.ResetObject();
             fero.enabled = false;
             cubeRB.useGravity = false;
+            cubeRB.mass = attractionCubeMass;
 
         });
         //Remagnetize those that are not in range anymore
@@ -318,6 +319,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             cube.GetComponent<Feromagnetic>().enabled = true;
             cube.GetComponent<Rigidbody>().useGravity = true;
+            cube.GetComponent<Rigidbody>().mass = this.GetComponent<PlayerObjects>().passiveCube.GetComponent<Rigidbody>().mass;
+           
         });
 
         //Draw Rays in Build 
@@ -337,6 +340,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             cube.GetComponent<Feromagnetic>().enabled = true;
             cube.GetComponent<Rigidbody>().useGravity = true;
+            cube.GetComponent<Rigidbody>().mass = this.GetComponent<PlayerObjects>().passiveCube.GetComponent<Rigidbody>().mass;
         });
         magneticLast.Clear();
     }

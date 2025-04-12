@@ -160,8 +160,7 @@ public class SpringBlocEjection : MonoBehaviour
     }
     IEnumerator ReEnableCollision(Collider otherCollider)
     {
-        Debug.Log("here");
-        yield return new WaitForSeconds(0.5f); // Adjust delay as needed
+        yield return new WaitForSeconds(0.25f); // Adjust delay as needed
         Physics.IgnoreCollision(otherCollider, GetComponent<BoxCollider>(), false);
     }
 }
