@@ -107,7 +107,13 @@ public class Dash : MonoBehaviour
                                 bloc.GetComponent<Rigidbody>().AddForce((bloc.transform.position - GetComponent<Rigidbody>().position).normalized * 150f, ForceMode.VelocityChange);
                                 if (bloc.tag == "magneticCube")
                                 {
-                                    Destroy(bloc.gameObject.GetComponentInChildren<TutoUI>().gameObject);
+                                    TutoUI tuto= bloc.GetComponentInChildren<TutoUI>();
+
+                                    if (tuto!=null)
+                                    {
+                                        Destroy(tuto.gameObject);
+                                    }
+                                    
                                     bloc.GetComponent<BoxCollider>().enabled = false;
                                     bloc.transform.Find("SM_MagnetCube_02_centered").gameObject.SetActive(false);
                                     StartCoroutine(WaitToDestroy(4f, bloc));
