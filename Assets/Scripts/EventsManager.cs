@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class EventsManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> eventsToSummonStructure = new List<GameObject>();
-    [SerializeField] private List<GameObject> eventsToSummonPowerUp = new List<GameObject>();
-    [SerializeField] private List<GameObject> eventsToSummonOther = new List<GameObject>();
+    [SerializeField] private List<GameObject> eventsToSummon = new List<GameObject>();
     [SerializeField] private float delayBeforeFirstEvent;
     [SerializeField] private float timeBetweenEvents;
     [SerializeField] private float chancesForEachSpawnpointToSpawnAPrefab;
@@ -32,8 +30,7 @@ public class EventsManager : MonoBehaviour
 
     void Update()
     {
-        int totalEventsCount = eventsToSummonOther.Count+eventsToSummonPowerUp.Count+ eventsToSummonStructure.Count;
-        if (totalEventsCount > 0 && Time.time >= nextEventTime)
+        if (eventsToSummon.Count > 0 && Time.time >= nextEventTime)
         {
             nextEventTime = Time.time + timeBetweenEvents;
 
@@ -43,73 +40,15 @@ public class EventsManager : MonoBehaviour
 
             for (int i = 0; i < numberOfSpawns; i++) // On parcourt tous les points de spawn, et on tire aléatoirement ceux qui spawnent une structure
             {
-                if (i % 3 == 0)
-                {
-                    if (eventsToSummonStructure.Count > 0)
-                    {
-
-                        GameObject item = eventsToSummonStructure[Random.Range(0, eventsToSummonStructure.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position,Quaternion.identity));
-                        eventsToSummonStructure.Remove(item);
-                    }
-                    else if (eventsToSummonPowerUp.Count > 0)
-                    {
-                        GameObject item = eventsToSummonPowerUp[Random.Range(0, eventsToSummonPowerUp.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonPowerUp.Remove(item);
-                    }
-                    else if(eventsToSummonOther.Count > 0)
-                    {
-                        GameObject item = eventsToSummonOther[Random.Range(0, eventsToSummonOther.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonOther.Remove(item);
-                    }
-                }else if(i%3 == 1)
-                {
-                    if (eventsToSummonPowerUp.Count > 0)
-                    {
-                        GameObject item = eventsToSummonPowerUp[Random.Range(0, eventsToSummonPowerUp.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonPowerUp.Remove(item);
-                    }
-                    else if (eventsToSummonOther.Count > 0)
-                    {
-                        GameObject item = eventsToSummonOther[Random.Range(0, eventsToSummonOther.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonOther.Remove(item);
-                    }
-                    else if (eventsToSummonStructure.Count > 0)
-                    {
-                        GameObject item = eventsToSummonStructure[Random.Range(0, eventsToSummonStructure.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonStructure.Remove(item);
-                    }
-                }
-                else
-                {
-                    if (eventsToSummonOther.Count > 0)
-                    {
-                        GameObject item = eventsToSummonOther[Random.Range(0, eventsToSummonOther.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonOther.Remove(item);
-                    }
-                    else if (eventsToSummonPowerUp.Count > 0)
-                    {
-                        GameObject item = eventsToSummonPowerUp[Random.Range(0, eventsToSummonPowerUp.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonPowerUp.Remove(item);
-                    }
-                    else if (eventsToSummonStructure.Count > 0)
-                    {
-                        GameObject item = eventsToSummonStructure[Random.Range(0, eventsToSummonStructure.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonStructure.Remove(item);
-                    }
-                }
+                GameObject selectedSpawn = spawnAvailable[Random.Range(0, spawnAvailable.Count)];
+                selectedEvent = eventsToSummon[Random.Range(0, eventsToSummon.Count)];
+                StartCoroutine(SummonEvent(selectedEvent, selectedSpawn.transform.position, selectedSpawn.transform.rotation));
+                eventsToSummon.Remove(selectedEvent);
+                spawnAvailable.Remove(selectedSpawn);
 
             }
         }
-        else if (totalEventsCount <= 0)
+        else if (eventsToSummon.Count <= 0)
         {
             enabled = false;
         }
@@ -131,7 +70,7 @@ public class EventsManager : MonoBehaviour
             {
                 elapsedTime += Time.deltaTime;
                 beaconLight.range = Mathf.Lerp(0f, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
-                sphere.GetComponent<CapsuleCollider>().radius = Mathf.Lerp(0, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
+                sphere.GetComponent<SphereCollider>().radius = Mathf.Lerp(0, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
                 yield return new WaitForSeconds(Time.deltaTime);
             }
         }
