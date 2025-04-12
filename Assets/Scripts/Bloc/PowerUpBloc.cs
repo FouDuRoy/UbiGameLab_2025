@@ -33,6 +33,14 @@ public class PowerUpBloc : MonoBehaviour
             Bloc blocCompCollided = cubeCollided.GetComponent<Bloc>();
             Bloc blocCompCollider = cubeCollider.GetComponent<Bloc>();
 
+            if(cubeCollider.name == "Golem Rouge")
+            {
+                explode(cubeCollider);
+            }
+            if(cubeCollider.name =="Golem Bleu")
+            {
+                explode(cubeCollider);
+            }
             if (blocCompCollided == null || blocCompCollider == null)
             {
                 return;
@@ -46,25 +54,40 @@ public class PowerUpBloc : MonoBehaviour
                 if (collision.relativeVelocity.magnitude > resistance)
                 {
                     
-                        explode(blocCompCollider,blocCompCollided);
+                        explode(blocCompCollider);
                     
                 }
             }
         }
     }
 
-    public void explode(Bloc colliderBloc,Bloc collidedBloc)
+    public void explode(Bloc colliderBloc)
     {
         alive = false;
         ownerTransform = colliderBloc.ownerTranform;
-        Transform blocTransform = collidedBloc.transform;
-        if (blocTransform != null)
-        {
-            ownerTransform.GetComponent<GridSystem>().DetachBlock(gameObject);
-        }
+   
         // Give power up to owner
         List<int> playerPowers = ownerTransform.GetComponent<PlayerObjects>().availablePowerUps;
         if(playerPowers.Count > 0)
+        {
+            int powerUpIndex = Random.Range(0, playerPowers.Count);
+            Debug.Log(powerUps[playerPowers[powerUpIndex]]);
+            StartCoroutine(powerUps[playerPowers[powerUpIndex]]);
+            playerPowers.RemoveAt(powerUpIndex);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DisablePowerBLoc();
+    }
+    public void explode(GameObject colliderBloc)
+    {
+        alive = false;
+        ownerTransform = colliderBloc.transform.parent;
+        // Give power up to owner
+        List<int> playerPowers = ownerTransform.GetComponent<PlayerObjects>().availablePowerUps;
+        if (playerPowers.Count > 0)
         {
             int powerUpIndex = Random.Range(0, playerPowers.Count);
             Debug.Log(powerUps[playerPowers[powerUpIndex]]);

@@ -205,8 +205,7 @@ public class PlayerMouvement : MonoBehaviour
             golem.GetComponent<Synchro2>().rotationFixed = false;
 
             if(direction.magnitude > deadZone ){
-//                animator.SetBool("IsMoving", true);
-                rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+                rb.AddForce(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, ForceMode.Acceleration);
             }
             
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
@@ -222,7 +221,7 @@ public class PlayerMouvement : MonoBehaviour
         {
             golem.GetComponent<Synchro2>().rotationFixed = true;
 
-            rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            rb.AddForce(direction * mouvementSpeed / weightTranslation, ForceMode.Acceleration);
             rotatingRight = false;
             rotateAndDirection5(direction);
         }
@@ -243,14 +242,14 @@ public class PlayerMouvement : MonoBehaviour
         {
             if (direction.magnitude > deadZone)
             {
-                rb.AddForceAtPosition(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+                rb.AddForce(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, ForceMode.Acceleration);
             }
 
         }
 
         else
         {
-            rb.AddForceAtPosition(direction * mouvementSpeed / weightTranslation, CalculateCenterMass(), ForceMode.Acceleration);
+            rb.AddForce(direction * mouvementSpeed / weightTranslation, ForceMode.Acceleration);
         }
         if(direction.magnitude > deadZone)
         {

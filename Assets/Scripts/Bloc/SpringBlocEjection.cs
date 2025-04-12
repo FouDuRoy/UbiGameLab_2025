@@ -56,11 +56,14 @@ public class SpringBlocEjection : MonoBehaviour
         BlocState stateHitter = hitterComponent.state;
         BlocState stateHitted = hittedComponent.state;
 
+        Rigidbody hitterMainRb = hitterComponent.ownerTranform.GetComponent<PlayerObjects>().cubeRb;
+        Rigidbody hittedMainRb = hittedComponent.ownerTranform.GetComponent<PlayerObjects>().cubeRb;
+
         bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
         bool playerHittedByotherPlayerStructure = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.structure;
-
         if (playerHittedByotherPlayerStructure && areOwnedByPlayers)
         {
+            
             gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
             playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
             mainCubeRb = playerObjects.cubeRb;
@@ -68,13 +71,17 @@ public class SpringBlocEjection : MonoBehaviour
             Rigidbody hitterRB = hittedComponent.ownerTranform.GetComponent<PlayerObjects>().cubeRb;
             Rigidbody hittedRB = mainCubeRb;
 
-            float hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
-            float hittedVelocityMag = hitted.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
-            Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
+            //float hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
+            // float hittedVelocityMag = hitted.GetComponent<StoredVelocity>().lastTickVelocity.magnitude;
+            // Vector3 hitterVelocityBeforeImpact = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
 
+            Vector3 hitterVelocityBeforeImpact = (hitterMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitter.transform.position - hitterMainRb.position), hitterMainRb.angularVelocity));
+            float hitterVelocity = (hitterMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitter.transform.position - hitterMainRb.position), hitterMainRb.angularVelocity)).magnitude;
+            float hittedVelocityMag = (hittedMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitted.transform.position - hittedMainRb.position), hittedMainRb.angularVelocity)).magnitude;
             if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
             {
-
+                Physics.IgnoreCollision(hitter.GetComponent<BoxCollider>(), GetComponent<BoxCollider>(), true);
+                StartCoroutine(ReEnableCollision(hitter.GetComponent<BoxCollider>()));
                 gridSystem.DetachBlocSingleCollisionRanged(hitted);
                 gridSystem.ejectRest(passivedDetachedForce);
                 hittedComponent.state = BlocState.detached;
@@ -150,5 +157,10 @@ public class SpringBlocEjection : MonoBehaviour
                 joint.breakForce = this.GetComponent<Feromagnetic>().springForceBreak;
             }
         }
+    }
+    IEnumerator ReEnableCollision(Collider otherCollider)
+    {
+        yield return new WaitForSeconds(0.25f); // Adjust delay as needed
+        Physics.IgnoreCollision(otherCollider, GetComponent<BoxCollider>(), false);
     }
 }

@@ -1,6 +1,8 @@
 using System.Buffers;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 //Federico Barallobres
 public class Bloc : MonoBehaviour
@@ -8,28 +10,31 @@ public class Bloc : MonoBehaviour
     [SerializeField] float minimalSpeed = 0.5f;
     [SerializeField] Material magneticMaterial;
     [SerializeField] float maxSpeed = 1000f;
+    [SerializeField] private float fadeDurationLong = 0.2f;
+    [SerializeField] private float fadeDurationShort = 0.2f;
     public float contactOffset = 0.1f;
     public float weight;
-    public string owner; 
+    public string owner;
     public BlocState state;
     public Transform ownerTranform;
 
     public GameObject objectToChangeMesh;
-    MeshRenderer meshToChange; 
+    MeshRenderer meshToChange;
     private Vector3Int gridPosition;
     public Rigidbody rb;
-    public GameObject trail;
-    private WinCondition winCon;
+
+
 
     private void Start()
     {
-        winCon = FindObjectOfType<WinCondition>();
-
         rb = GetComponent<Rigidbody>();
         this.GetComponent<BoxCollider>().contactOffset = contactOffset;
-        if(objectToChangeMesh != null){
-         meshToChange = objectToChangeMesh.GetComponent<MeshRenderer>();
+        if (objectToChangeMesh != null)
+        {
+            meshToChange = objectToChangeMesh.GetComponent<MeshRenderer>();
         }
+
+
     }
 
     public Vector3Int GetGridPosition()
@@ -41,36 +46,37 @@ public class Bloc : MonoBehaviour
     {
         if (state != BlocState.structure && owner != "Neutral" && state != BlocState.projectileAnimation)
         {
-            trail.SetActive(rb.velocity.magnitude >= winCon.victoryConditionSpeedRange);
+
             float speed = rb.velocity.magnitude;
             //If speed is small enough we enable script
-            if (speed < minimalSpeed && state == BlocState.magnetic )
+            if (speed < minimalSpeed && state == BlocState.magnetic)
             {
-                if( this.GetComponent<Feromagnetic>() != null)
+                if (this.GetComponent<Feromagnetic>() != null)
                 {
                     this.GetComponent<Feromagnetic>().enabled = true;
-                  
+
                 }
-                if(tag!="explosive"){
+                if (tag != "explosive")
+                {
                     changeMeshMaterial(magneticMaterial);
                 }
                 owner = "Neutral";
                 ownerTranform = null;
             }
-            
-            
+
+
         }
-        
+
 
     }
     void FixedUpdate()
     {
-        if(rb != null)
+        if (rb != null)
         {
             rb.maxLinearVelocity = maxSpeed;
 
         }
-        
+
     }
     public void setOwner(string owner)
     {
@@ -81,10 +87,12 @@ public class Bloc : MonoBehaviour
         this.state = state;
     }
 
-    public void changeMeshMaterial(Material mat){
+    public void changeMeshMaterial(Material mat)
+    {
         meshToChange.material = mat;
     }
-     public void changeMeshMaterialColor(Color color){
+    public void changeMeshMaterialColor(Color color)
+    {
         meshToChange.material.color = color;
     }
 }

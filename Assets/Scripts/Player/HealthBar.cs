@@ -61,10 +61,14 @@ public class HealthBar : MonoBehaviour
     }
     public void SetVisible(bool visible, GameObject text)
     {
+        text.SetActive(visible);
+
+        /*
         TextMeshProUGUI tmpText = text.GetComponent<TextMeshProUGUI>();
         Color color = tmpText.color;
         color.a = visible ? 1 : 0;
         tmpText.color = color;
         tmpText.raycastTarget = visible;
+        */
     }
 }

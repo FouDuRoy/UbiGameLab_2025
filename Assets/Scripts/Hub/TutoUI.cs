@@ -7,9 +7,9 @@ using TMPro;
 public enum TutoType
 {
     Attraction,
-    Foncer,
-    Shoot,
+    Repulsion,
     Cac,
+    Dash,
     Arene
 }
 
@@ -17,25 +17,41 @@ public class TutoUI : MonoBehaviour
 {
     [SerializeField] private PlayerMouvement playerMouvement;
     [SerializeField] private Color playerColor;
-    [SerializeField] private TutoType tutoType;
+    [SerializeField] public TutoType tutoType;
     [SerializeField] private TutoUI nextTuto;
 
     [SerializeField] private Sprite attractionInput;
     [SerializeField] private Sprite foncerInput;
     [SerializeField] private Sprite shootInput;
     [SerializeField] private Sprite cacInput;
+    [SerializeField] private GridSystem dummyGrid;
+    [SerializeField] private GameObject doorBarriere;
 
     private Image inputImage;
     private TMP_Text tutoText;
+    private TMP_Text countText;
     private Camera mainCamera;
     private GridSystem playerGrid;
     private Dash playerDash;
     private float normalPlayerSpeed;
-    private
+    int lastGridCount=0;
 
     // Start is called before the first frame update
+    private void Update()
+    {
+        if (tutoType == TutoType.Dash)
+        {
+            if (dummyGrid.grid.Count< lastGridCount)
+            {
+                Debug.Log("here");
+                NextTuto();
+            }
+        }
+        lastGridCount = dummyGrid.grid.Count;
+    }
     void Start()
     {
+        
         foreach (Image img in GetComponentsInChildren<Image>())
         {
             if (img.name == "TutoImage")
@@ -47,9 +63,17 @@ public class TutoUI : MonoBehaviour
                 img.color = playerColor;
             }
         }
+        
+        foreach(TMP_Text txt in GetComponentsInChildren<TMP_Text>())
+        {
+            if(txt.name == "TutoCount")
+            {
+                countText = txt;
+                countText.color = playerColor;
+            }
+        }
 
-        tutoText = GetComponentInChildren<TMP_Text>();
-        tutoText.color = playerColor;
+        
 
         mainCamera = Camera.main;
         playerGrid = playerMouvement.GetComponent<GridSystem>();
@@ -59,18 +83,20 @@ public class TutoUI : MonoBehaviour
         {
             case TutoType.Attraction:
                 inputImage.sprite = attractionInput;
+                countText.gameObject.SetActive(false);
                 break;
 
-            case TutoType.Foncer:
+            case TutoType.Dash:
                 inputImage.sprite = foncerInput;
+                countText.gameObject.SetActive(false);
                 break;
 
-            case TutoType.Shoot:
+            case TutoType.Repulsion:
                 inputImage.sprite = shootInput;
                 break;
 
             case TutoType.Cac: inputImage.sprite = cacInput; break;
-            case TutoType.Arene:inputImage.enabled = false;break;
+            case TutoType.Arene:inputImage.enabled = false; countText.gameObject.SetActive(false);  break;
         }
 
         if (tutoType != TutoType.Attraction)
@@ -111,12 +137,29 @@ public class TutoUI : MonoBehaviour
 
     public void NextTuto()
     {
-        //Debug.Log(name + " skips to next tuto : " + nextTuto.name);
 
         if (nextTuto != null)
         {
             nextTuto.gameObject.SetActive(true);
         }
-        gameObject.SetActive(false);
+        if (tutoType == TutoType.Cac)
+        {
+            doorBarriere.SetActive(false);
+        }
+
+            gameObject.SetActive(false);
+    }
+
+    public void SetTutoCount(int actuelCount, int maxCount)
+    {
+        countText.text = actuelCount.ToString()+" / "+maxCount.ToString();
+    }
+
+    IEnumerator waitForCubesToConnect()
+    {
+        Debug.Log(lastGridCount);
+        yield return new WaitForSeconds(2f);
+        lastGridCount = dummyGrid.grid.Count;
+        Debug.Log(lastGridCount);
     }
 }

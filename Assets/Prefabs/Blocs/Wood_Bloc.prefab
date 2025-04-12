@@ -29,6 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2162712103889023105}
   - {fileID: 7794079857323384312}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128,8 +129,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resistance: 20
-  replacementPrefab: {fileID: 3024827564969346730, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+  replacementPrefab: {fileID: 1533668773591935547}
   woodSfx: {fileID: 958527476995272887, guid: b52fd2f3ce6feb34d8219a3225b0f8ac, type: 3}
+  explosionForce: 15
+--- !u!1001 &4373830022276885649
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9004300913510534856}
+    m_Modifications:
+    - target: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.399
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.339
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.425
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024827564969346730, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_Name
+      value: wood_fracture_15pieces_WITH_RIGIDBODY_COLLIDER
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024827564969346730, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+--- !u!1 &1533668773591935547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3024827564969346730, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+  m_PrefabInstance: {fileID: 4373830022276885649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2162712103889023105 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2499928838230678544, guid: 65702a8b95d78f248bc6bc4933c03d34, type: 3}
+  m_PrefabInstance: {fileID: 4373830022276885649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7519626043897393705
 PrefabInstance:
   m_ObjectHideFlags: 0
