@@ -83,13 +83,14 @@ public class DynamicCamera : MonoBehaviour
 
     private void Awake()
     {
-     
         animator = GetComponent<Animator>();
         animatorPlayer1 = Player1.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
         animatorPlayer2 = Player2.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
 
         playerOneInputs=Player1.GetComponentInParent<PlayerInput>();
         playerTwoInputs=Player2.GetComponentInParent<PlayerInput>();
+
+        eventsManager.gameObject.SetActive(false);
 
         hitVolume = GetComponent<Volume>();
         if (!hitVolume.profile.TryGet(out vignette))
@@ -223,6 +224,7 @@ public class DynamicCamera : MonoBehaviour
         playerOneInputs.ActivateInput();
         playerTwoInputs.ActivateInput();
         mainCamUI.enabled = true;
+        eventsManager.gameObject.SetActive(true);
 
         shouldFollowPlayers = true;
     }
