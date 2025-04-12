@@ -175,7 +175,7 @@ public class EventsManager : MonoBehaviour
             while (elapsedTime < beaconDurationBeforePrefabSpawn)
             {
                 elapsedTime += Time.deltaTime;
-                beaconLight.range = Mathf.Lerp(0f, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
+                beaconLight.range = Mathf.Lerp(2f, 1.25f*eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
                 sphere.GetComponent<CapsuleCollider>().radius = Mathf.Lerp(0, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
                 yield return new WaitForSeconds(Time.deltaTime);
             }
@@ -197,7 +197,7 @@ public class EventsManager : MonoBehaviour
         foreach (GameObject spawn in spawnpoints)
         {
             spawn.layer = LayerMask.NameToLayer("ground");
-            if (Physics.OverlapSphere(spawn.transform.position, 1, layerMask).Length == 0)
+            if (Physics.OverlapSphere(spawn.transform.position, 2, layerMask).Length == 0)
             {
                 availableSpawns.Add(spawn);
             }
