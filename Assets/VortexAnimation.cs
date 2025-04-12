@@ -37,6 +37,15 @@ public class VortexAnimation : MonoBehaviour
                 float cubeVeolcityMag = (gridPlayer.kernel.GetComponent<StoredVelocity>().lastTickVelocity 
                     + Vector3.Cross((v.Value.transform.position - gridPlayer.kernel.transform.position), gridPlayer.kernel.GetComponent<Rigidbody>().angularVelocity)).magnitude;
 
+
+                var vortexModule = vortexParticle.velocityOverLifetime;
+
+                // Fait tourner le vortex selon la rotation Y du joueur (pour l'effet visuel)
+                float rotationY = gridPlayer.kernel.transform.eulerAngles.z;
+                float dynamicValue = Mathf.Sin(rotationY * Mathf.Deg2Rad) * 10f;
+
+                vortexModule.orbitalZ = new ParticleSystem.MinMaxCurve(dynamicValue);
+
                 //Debug.Log("CubeVelMag:" + cubeVeolcityMag);
                 if (rb != null && cubeVeolcityMag >= seuil)
                 {
