@@ -14,7 +14,6 @@ public class Dash : MonoBehaviour
     [SerializeField] private float radiusEffect = 50f;
     [SerializeField] private float upwardEffect = 25f;
     public bool superDash = false;
-    public bool tutoDash = false;
     public bool canDash = true;
 
     private PlayerInfo playerInfo;
@@ -86,59 +85,36 @@ public class Dash : MonoBehaviour
 
                 if (blocHit.state == BlocState.structure && grid != null)
                 {
-                    if (superDash || tutoDash)
+                    if (superDash || blocHit.gameObject.layer == LayerMask.NameToLayer("magneticStructure"))
                     {
                         foreach (var item in grid.grid)
                         {
-                            if (tutoDash || item.Value != grid.kernel)
+                            if (  item.Value != grid.kernel)
                             {
                                 GameObject bloc = item.Value;
                                 blocsToDestroy.Add(bloc);
-                                
+
                             }
                         }
-                        if (tutoDash)
-                        {
-
-                            blocsToDestroy.ForEach(bloc =>
-                            {
-                                grid.DetachBlocSingle(bloc);
-                                bloc.GetComponent<Bloc>().state = BlocState.detached;
-                                bloc.GetComponent<Rigidbody>().AddForce((bloc.transform.position - GetComponent<Rigidbody>().position).normalized * 150f, ForceMode.VelocityChange);
-                                if (bloc.tag == "magneticCube")
-                                {
-                                    TutoUI tuto= bloc.GetComponentInChildren<TutoUI>();
-
-                                    if (tuto!=null)
-                                    {
-                                        Destroy(tuto.gameObject);
-                                    }
-                                    
-                                    bloc.GetComponent<BoxCollider>().enabled = false;
-                                    bloc.transform.Find("SM_MagnetCube_02_centered").gameObject.SetActive(false);
-                                    StartCoroutine(WaitToDestroy(4f, bloc));
-                                }
-
-                            });
-                            blocsToDestroy.Clear();
-                            tutoDash = false;
-                        }
-                        else
-                        {
-                            blocsToDestroy.ForEach(bloc =>
-                            {
-                                if (bloc != null)
-                                {
-                                    grid.DetachBlocSingle(bloc);
-                                    bloc.GetComponent<Bloc>().state = BlocState.detached;
-                                    Transform blocOwner = bloc.GetComponent<Bloc>().ownerTranform;
-                                    bloc.GetComponent<Rigidbody>().AddExplosionForce(ejectionForceSuperDash,gameObject.transform.position, radiusEffect, upwardEffect, ForceMode.VelocityChange);
-                                }
-                            }
-                                );
-                            blocsToDestroy.Clear();
-                        }
-
+                        blocsToDestroy.ForEach(bloc =>
+                          {
+                              if (bloc != null)
+                              {
+                                  grid.DetachBlocSingle(bloc);
+                                  bloc.GetComponent<Bloc>().state = BlocState.detached;
+                                  Transform blocOwner = bloc.GetComponent<Bloc>().ownerTranform;
+                                  if(blocHit.gameObject.layer == LayerMask.NameToLayer("magneticStructure"))
+                                  {
+                                      bloc.GetComponent<Rigidbody>().AddExplosionForce(10f, gameObject.transform.position, radiusEffect, upwardEffect, ForceMode.VelocityChange);
+                                  }
+                                  else
+                                  {
+                                      bloc.GetComponent<Rigidbody>().AddExplosionForce(ejectionForceSuperDash, gameObject.transform.position, radiusEffect, upwardEffect, ForceMode.VelocityChange);
+                                  }
+                              }
+                          }
+                              );
+                        blocsToDestroy.Clear();
                     }
                     else
                     {
@@ -151,13 +127,4 @@ public class Dash : MonoBehaviour
         }
 
     }
-    IEnumerator WaitToDestroy(float time, GameObject cube)
-    {
-
-        yield return new WaitForSeconds(time);
-        Destroy(cube);
-
-    }
-
-
 }
