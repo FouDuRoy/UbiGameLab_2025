@@ -25,6 +25,7 @@ public class TutoUI : MonoBehaviour
     [SerializeField] private Sprite shootInput;
     [SerializeField] private Sprite cacInput;
     [SerializeField] private GridSystem dummyGrid;
+    [SerializeField] private GameObject doorBarriere;
 
     private Image inputImage;
     private TMP_Text tutoText;
@@ -82,12 +83,12 @@ public class TutoUI : MonoBehaviour
         {
             case TutoType.Attraction:
                 inputImage.sprite = attractionInput;
-                countText.enabled = false;
+                countText.gameObject.SetActive(false);
                 break;
 
             case TutoType.Dash:
                 inputImage.sprite = foncerInput;
-                countText.enabled = false;
+                countText.gameObject.SetActive(false);
                 break;
 
             case TutoType.Repulsion:
@@ -95,7 +96,7 @@ public class TutoUI : MonoBehaviour
                 break;
 
             case TutoType.Cac: inputImage.sprite = cacInput; break;
-            case TutoType.Arene:inputImage.enabled = false; countText.enabled = false; break;
+            case TutoType.Arene:inputImage.enabled = false; countText.gameObject.SetActive(false);  break;
         }
 
         if (tutoType != TutoType.Attraction)
@@ -141,7 +142,12 @@ public class TutoUI : MonoBehaviour
         {
             nextTuto.gameObject.SetActive(true);
         }
-        gameObject.SetActive(false);
+        if (tutoType == TutoType.Cac)
+        {
+            doorBarriere.SetActive(false);
+        }
+
+            gameObject.SetActive(false);
     }
 
     public void SetTutoCount(int actuelCount, int maxCount)
