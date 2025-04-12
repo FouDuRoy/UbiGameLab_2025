@@ -82,12 +82,12 @@ public class TutoUI : MonoBehaviour
         {
             case TutoType.Attraction:
                 inputImage.sprite = attractionInput;
-                countText.enabled = false;
+                countText.gameObject.SetActive(false);
                 break;
 
             case TutoType.Dash:
                 inputImage.sprite = foncerInput;
-                countText.enabled = false;
+                countText.gameObject.SetActive(false);
                 break;
 
             case TutoType.Repulsion:
@@ -95,7 +95,7 @@ public class TutoUI : MonoBehaviour
                 break;
 
             case TutoType.Cac: inputImage.sprite = cacInput; break;
-            case TutoType.Arene:inputImage.enabled = false; countText.enabled = false; break;
+            case TutoType.Arene:inputImage.enabled = false; countText.gameObject.SetActive(false); break;
         }
 
         if (tutoType != TutoType.Attraction)
