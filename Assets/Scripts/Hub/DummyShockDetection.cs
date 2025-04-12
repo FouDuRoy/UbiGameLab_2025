@@ -12,6 +12,7 @@ public class DummyShockDetection : MonoBehaviour
     [SerializeField] private TutoUI shootTutoUI;
     [SerializeField] private int neededShootHits = 2;
     [SerializeField] private int neededCacHits = 2;
+    [SerializeField] private float delayBewtweenShockDetections;
 
     private Rigidbody rb;
     private GridSystem grid;
@@ -21,6 +22,7 @@ public class DummyShockDetection : MonoBehaviour
     private bool dashCompleted = false;
     private bool shootCompleted = false;
     bool canTrigger = true;
+    float lastDetectionTime;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -35,7 +37,6 @@ public class DummyShockDetection : MonoBehaviour
         {
             dashCompleted = true;
             dashTutoUI.NextTuto();
-            print("caca");
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -61,10 +62,11 @@ public class DummyShockDetection : MonoBehaviour
                     {
                         DoRotation();
 
-                        if (shootTutoUI.isActiveAndEnabled)
+                        if (shootTutoUI.isActiveAndEnabled && Time.time>lastDetectionTime+delayBewtweenShockDetections)
                         {
                             nShootHits++;
-                            print(nShootHits);
+                            lastDetectionTime = Time.time;
+
                             shootTutoUI.SetTutoCount(nShootHits, neededShootHits);
                             if (nShootHits >= neededShootHits)
                             {
@@ -85,9 +87,11 @@ public class DummyShockDetection : MonoBehaviour
                     {
                         DoRotation();
 
-                        if (cacTutoUI.isActiveAndEnabled &&  shootCompleted)
+                        if (cacTutoUI.isActiveAndEnabled &&  shootCompleted && Time.time > lastDetectionTime + delayBewtweenShockDetections)
                         {
                             nCacHits++;
+                            lastDetectionTime = Time.time;
+
                             cacTutoUI.SetTutoCount(nCacHits, neededCacHits);
                             if (nCacHits >= neededCacHits)
                             {
