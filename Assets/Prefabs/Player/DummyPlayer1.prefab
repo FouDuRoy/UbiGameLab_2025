@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 788134016608843591}
   - component: {fileID: 5551715925698698517}
   - component: {fileID: 6287316125869078548}
-  m_Layer: 21
+  m_Layer: 0
   m_Name: Core_bottom_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e16f254d7fac92d4ab8bf7ba992a261a, type: 2}
+  - {fileID: 2100000, guid: 02b46d2b58057cd48bc7cbc03c94d4f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,8 +129,9 @@ GameObject:
   - component: {fileID: 4746141753068738608}
   - component: {fileID: 7547811594393162990}
   - component: {fileID: 2298594838983735879}
+  - component: {fileID: 404960516821526980}
   m_Layer: 9
-  m_Name: Golem Bleu
+  m_Name: DummyRed
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,6 +293,20 @@ MonoBehaviour:
   shootTutoUI: {fileID: 6560366963746071513}
   nShootHits: 2
   nCacHits: 2
+--- !u!114 &404960516821526980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2659568910431453305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9d2e8bbe5afa04da47682374207ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastTickVelocity: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
 --- !u!1 &4630033262880337474
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +423,7 @@ MonoBehaviour:
   playerObj: {fileID: 7528156208700820188}
   cubeSize: 1.2
   materials:
-  - {fileID: 2100000, guid: fdb3a3b5d4cfe764cb515ce4e97a7c22, type: 2}
+  - {fileID: 2100000, guid: 6f926dd7c27bd844388757ffb268b2ec, type: 2}
   maxDimension: 10
   negativeY: 0
   vortex: {fileID: 0}
@@ -422,7 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411982353048129376}
-  m_Layer: 21
+  m_Layer: 0
   m_Name: Core_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +473,7 @@ GameObject:
   - component: {fileID: 384037497587833847}
   - component: {fileID: 6560174877782323261}
   - component: {fileID: 6943006984502952782}
-  m_Layer: 21
+  m_Layer: 0
   m_Name: Core_top_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +523,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e16f254d7fac92d4ab8bf7ba992a261a, type: 2}
+  - {fileID: 2100000, guid: 02b46d2b58057cd48bc7cbc03c94d4f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -541,7 +556,7 @@ GameObject:
   - component: {fileID: 5882350289985920532}
   - component: {fileID: 1178350340894866139}
   - component: {fileID: 1327805039856240001}
-  m_Layer: 21
+  m_Layer: 0
   m_Name: Core_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,7 +572,7 @@ Transform:
   m_GameObject: {fileID: 7050618745000686527}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1998308, y: -0.20177902, z: 0.2006232}
+  m_LocalPosition: {x: -0.1998308, y: -0.232, z: 0.2006232}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -591,7 +606,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e16f254d7fac92d4ab8bf7ba992a261a, type: 2}
+  - {fileID: 2100000, guid: 6f926dd7c27bd844388757ffb268b2ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -661,12 +676,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5209790665291010153, guid: 3362aeb86bc93d345bc1cfd3e96695d1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 02b46d2b58057cd48bc7cbc03c94d4f9, type: 2}
+    - target: {fileID: -2718719665989499673, guid: 3362aeb86bc93d345bc1cfd3e96695d1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 02b46d2b58057cd48bc7cbc03c94d4f9, type: 2}
+    - target: {fileID: -470595213996849268, guid: 3362aeb86bc93d345bc1cfd3e96695d1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 02b46d2b58057cd48bc7cbc03c94d4f9, type: 2}
     - target: {fileID: 919132149155446097, guid: 3362aeb86bc93d345bc1cfd3e96695d1, type: 3}
       propertyPath: m_Name
       value: GolemChar_Full
       objectReference: {fileID: 0}
+    - target: {fileID: 4433982320914306844, guid: 3362aeb86bc93d345bc1cfd3e96695d1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 02b46d2b58057cd48bc7cbc03c94d4f9, type: 2}
+    - target: {fileID: 6141313526594771678, guid: 3362aeb86bc93d345bc1cfd3e96695d1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 02b46d2b58057cd48bc7cbc03c94d4f9, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 155372413362799289, guid: 3362aeb86bc93d345bc1cfd3e96695d1, type: 3}
+    - {fileID: -7949639541066984703, guid: 3362aeb86bc93d345bc1cfd3e96695d1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3362aeb86bc93d345bc1cfd3e96695d1, type: 3}

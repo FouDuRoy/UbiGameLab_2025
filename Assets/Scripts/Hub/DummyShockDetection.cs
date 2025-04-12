@@ -14,6 +14,7 @@ public class DummyShockDetection : MonoBehaviour
 
     private Rigidbody rb;
     private int nHits = 0;
+    private bool shootCompleted = false;
     bool canTrigger = true;
     void Start()
     {
@@ -53,6 +54,7 @@ public class DummyShockDetection : MonoBehaviour
                             nHits++;
                             if (nHits >= nShootHits)
                             {
+                                shootCompleted = true;
                                 shootTutoUI.NextTuto();
                             }
                         }
@@ -69,7 +71,7 @@ public class DummyShockDetection : MonoBehaviour
                     {
                         DoRotation();
 
-                        if (cacTutoUI.isActiveAndEnabled)
+                        if (cacTutoUI.isActiveAndEnabled &&  shootCompleted)
                         {
                             nHits++;
                             if (nHits >= nCacHits)

@@ -47,9 +47,9 @@ public class TutoUI : MonoBehaviour
                 img.color = playerColor;
             }
         }
-
+        /*
         tutoText = GetComponentInChildren<TMP_Text>();
-        tutoText.color = playerColor;
+        tutoText.color = playerColor;*/
 
         mainCamera = Camera.main;
         playerGrid = playerMouvement.GetComponent<GridSystem>();
