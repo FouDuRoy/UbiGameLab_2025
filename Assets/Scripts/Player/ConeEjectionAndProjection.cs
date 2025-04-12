@@ -153,6 +153,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
                     GenerateMesh(initialAngle);
 
                 }
+                Debug.Log("here");
                 animator.SetBool("IsPulling", true);
                 visionConeObject.SetActive(true);
 
@@ -255,7 +256,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
             animator.SetTrigger("IsLaunching");
             animator.ResetTrigger("IsChargingLaunch");
 
-            visionConeObject.SetActive(false);
             leftRay.gameObject.SetActive(false);
             rightRay.gameObject.SetActive(false);
             rightTriggerHeld = false;
