@@ -89,7 +89,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!135 &9061322104497783714
 SphereCollider:
@@ -177,6 +177,8 @@ MonoBehaviour:
   minimalSpeed: 0.5
   magneticMaterial: {fileID: 2100000, guid: 6f926dd7c27bd844388757ffb268b2ec, type: 2}
   maxSpeed: Infinity
+  fadeDurationLong: 0.2
+  fadeDurationShort: 0.2
   contactOffset: 0.1
   weight: 0.02
   owner: Neutral
@@ -184,7 +186,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 8402648714665336278}
   objectToChangeMesh: {fileID: 8861807547335415058}
   rb: {fileID: 6116836137923090788}
-  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &4141580320307584352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,17 +212,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 10
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &7908459055162129070
 MonoBehaviour:

@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 7177170227814947908}
   - component: {fileID: 432201157695247769}
   - component: {fileID: 6178094535884225906}
-  - component: {fileID: 8671896929669056706}
   - component: {fileID: 3903787546730607055}
   - component: {fileID: 5848396592042279435}
   - component: {fileID: 6375353276739441429}
   - component: {fileID: 8157517144459430296}
+  - component: {fileID: 5507367029299286747}
   m_Layer: 10
   m_Name: MC_Spring (55)
   m_TagString: magnetic
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.39315
@@ -84,7 +84,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.22590029
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -122,36 +122,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 2672381286754525410}
   rb: {fileID: 0}
---- !u!114 &8671896929669056706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113273580503569369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &3903787546730607055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &8157517144459430296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +193,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &5507367029299286747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113273580503569369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &135521734090989919
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,11 +229,11 @@ GameObject:
   - component: {fileID: 8261247216445115587}
   - component: {fileID: 6935981828471276208}
   - component: {fileID: 8948854892296319695}
-  - component: {fileID: 4295041717333956460}
   - component: {fileID: 3904886583417552809}
   - component: {fileID: 2435026070285473071}
   - component: {fileID: 1061835651257375474}
   - component: {fileID: 445055621994425024}
+  - component: {fileID: 1578108236124558976}
   m_Layer: 10
   m_Name: MC_Spring (68)
   m_TagString: magnetic
@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.293621
@@ -301,7 +301,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.18866313
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -339,36 +339,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 874500563001603190}
   rb: {fileID: 0}
---- !u!114 &4295041717333956460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135521734090989919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &3904886583417552809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &445055621994425024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +410,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &1578108236124558976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135521734090989919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &149338037299407651
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,11 +508,11 @@ GameObject:
   - component: {fileID: 7177322718629445805}
   - component: {fileID: 4709849584013592320}
   - component: {fileID: 4817263173680890825}
-  - component: {fileID: 1893263398037135690}
   - component: {fileID: 6648891956128629449}
   - component: {fileID: 5750962812685186741}
   - component: {fileID: 5664985740710969079}
   - component: {fileID: 3991752490344194401}
+  - component: {fileID: 5617184879093202176}
   m_Layer: 10
   m_Name: MC_Spring (59)
   m_TagString: magnetic
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.480944
@@ -580,7 +580,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.23309535
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -618,36 +618,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 4047771192356620183}
   rb: {fileID: 0}
---- !u!114 &1893263398037135690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 467298265730753799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &6648891956128629449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,7 +673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &3991752490344194401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,6 +689,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &5617184879093202176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467298265730753799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &496892117103000524
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,11 +725,11 @@ GameObject:
   - component: {fileID: 5456929028693921530}
   - component: {fileID: 2946204823581737048}
   - component: {fileID: 3157678008544881783}
-  - component: {fileID: 4650554710926360405}
   - component: {fileID: 6209751099370141981}
   - component: {fileID: 3113521375109136791}
   - component: {fileID: 2740472700502713345}
   - component: {fileID: 7747835397846321734}
+  - component: {fileID: 4370585830074932490}
   m_Layer: 10
   m_Name: MC_Spring (38)
   m_TagString: magnetic
@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 27.83268
@@ -797,7 +797,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.21148548
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -835,36 +835,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 8361654901382309294}
   rb: {fileID: 0}
---- !u!114 &4650554710926360405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 496892117103000524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &6209751099370141981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &7747835397846321734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,6 +906,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &4370585830074932490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496892117103000524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &521606164000382664
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,11 +942,11 @@ GameObject:
   - component: {fileID: 3180621166207026872}
   - component: {fileID: 6878029121416015413}
   - component: {fileID: 324103652749957245}
-  - component: {fileID: 643274443331772894}
   - component: {fileID: 1036251275767558344}
   - component: {fileID: 4234697377246007489}
   - component: {fileID: 4946376842321033720}
   - component: {fileID: 2131748952622320001}
+  - component: {fileID: 4780247941568501601}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 28.600306
@@ -1014,7 +1014,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.2238279
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -1052,36 +1052,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3937305225284055916}
   rb: {fileID: 0}
---- !u!114 &643274443331772894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521606164000382664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &1036251275767558344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,7 +1107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &2131748952622320001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,6 +1123,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &4780247941568501601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521606164000382664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &672246882683408010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,11 +1159,11 @@ GameObject:
   - component: {fileID: 1280727486983733586}
   - component: {fileID: 5345847471631660987}
   - component: {fileID: 5549256510114596164}
-  - component: {fileID: 1879597902945937857}
   - component: {fileID: 666319953636660595}
   - component: {fileID: 5084897608438539231}
   - component: {fileID: 2934824465442386227}
   - component: {fileID: 3984703068726423184}
+  - component: {fileID: 947346468028486909}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 28.135656
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.20183644
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -1269,36 +1269,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6669508276914387392}
   rb: {fileID: 0}
---- !u!114 &1879597902945937857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 672246882683408010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &666319953636660595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1348,7 +1324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &3984703068726423184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1364,6 +1340,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &947346468028486909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672246882683408010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &786945945346181753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,11 +1376,11 @@ GameObject:
   - component: {fileID: 6416551131938997627}
   - component: {fileID: 4998074583840368139}
   - component: {fileID: 345962988634289596}
-  - component: {fileID: 3188978953869473993}
   - component: {fileID: 6881195995777478792}
   - component: {fileID: 3523988271492062414}
   - component: {fileID: 5764971711760932820}
   - component: {fileID: 4695515163600496285}
+  - component: {fileID: 5324219712615034291}
   m_Layer: 10
   m_Name: MC_Spring (27)
   m_TagString: magnetic
@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.282043
@@ -1448,7 +1448,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.19545323
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -1486,36 +1486,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 142597604390185060}
   rb: {fileID: 0}
---- !u!114 &3188978953869473993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786945945346181753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &6881195995777478792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,7 +1541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &4695515163600496285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1581,6 +1557,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &5324219712615034291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786945945346181753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &897378447726292805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,11 +1624,11 @@ GameObject:
   - component: {fileID: 8806651843190076205}
   - component: {fileID: 6632063502641382636}
   - component: {fileID: 736407993406573784}
-  - component: {fileID: 6114670969215988424}
   - component: {fileID: 7754151760644223892}
   - component: {fileID: 4362365130994780432}
   - component: {fileID: 1726737991694426844}
   - component: {fileID: 6400085617585254411}
+  - component: {fileID: 1749819371186330686}
   m_Layer: 10
   m_Name: MC_Spring (73)
   m_TagString: magnetic
@@ -1687,7 +1687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.60394
@@ -1696,7 +1696,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.21856208
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -1734,36 +1734,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6793533576737690590}
   rb: {fileID: 0}
---- !u!114 &6114670969215988424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 911205924433029032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &7754151760644223892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1813,7 +1789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &6400085617585254411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1829,6 +1805,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &1749819371186330686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911205924433029032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &1069914916373825618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,7 +1987,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351395159776301271}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4b7dca46f19028947abf42aca5c05e90, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2026,7 +2026,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!135 &4470161265618434557
 SphereCollider:
@@ -2196,7 +2196,7 @@ MonoBehaviour:
   owner: Neutral
   state: 3
   ownerTranform: {fileID: 1032043291996968336}
-  objectToChangeMesh: {fileID: 728893575385921413}
+  objectToChangeMesh: {fileID: 4914828506722844288}
   rb: {fileID: 0}
 --- !u!114 &941530745196943177
 MonoBehaviour:
@@ -2224,17 +2224,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &7239219711754429987
 MonoBehaviour:
@@ -2337,11 +2337,11 @@ GameObject:
   - component: {fileID: 4364248396907371374}
   - component: {fileID: 4772068580887411077}
   - component: {fileID: 6539262585390051955}
-  - component: {fileID: 1573414709195825467}
   - component: {fileID: 8968557250450845400}
   - component: {fileID: 2321625305180805677}
   - component: {fileID: 6872777137714701293}
   - component: {fileID: 4949006004673994543}
+  - component: {fileID: 8863182470694441989}
   m_Layer: 10
   m_Name: MC_Spring (43)
   m_TagString: magnetic
@@ -2400,7 +2400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 29.07626
@@ -2409,7 +2409,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.16277707
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -2447,36 +2447,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3956001982046345191}
   rb: {fileID: 0}
---- !u!114 &1573414709195825467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476588217660518452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &8968557250450845400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2526,7 +2502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &4949006004673994543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2542,6 +2518,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &8863182470694441989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476588217660518452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &1891846250702194089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2678,11 +2678,11 @@ GameObject:
   - component: {fileID: 3985740469211162013}
   - component: {fileID: 5544353232187255440}
   - component: {fileID: 6427480386574957871}
-  - component: {fileID: 7154961265429588109}
   - component: {fileID: 3426971754909987070}
   - component: {fileID: 2012886068058090564}
   - component: {fileID: 7716131426303870500}
   - component: {fileID: 142512363018108629}
+  - component: {fileID: 6969096241699274912}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -2741,7 +2741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.718094
@@ -2750,7 +2750,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.16624689
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -2788,36 +2788,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 1592831109638184685}
   rb: {fileID: 0}
---- !u!114 &7154961265429588109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2211729487924977526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &3426971754909987070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2867,7 +2843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &142512363018108629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2883,6 +2859,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &6969096241699274912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2211729487924977526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &2222390859594430518
 GameObject:
   m_ObjectHideFlags: 0
@@ -2941,11 +2941,11 @@ GameObject:
   - component: {fileID: 2698920286492028593}
   - component: {fileID: 8679519399901260183}
   - component: {fileID: 2608506553511571568}
-  - component: {fileID: 7823344295247798713}
   - component: {fileID: 2989684935122886518}
   - component: {fileID: 7421081252741759641}
   - component: {fileID: 5092674288806776307}
   - component: {fileID: 8521201732574519661}
+  - component: {fileID: 6959714149894801854}
   m_Layer: 10
   m_Name: MC_Spring (61)
   m_TagString: magnetic
@@ -3004,7 +3004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.793219
@@ -3013,7 +3013,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.24717723
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -3051,36 +3051,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 7972370085464863851}
   rb: {fileID: 0}
---- !u!114 &7823344295247798713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2450466335976579857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &2989684935122886518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3130,7 +3106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &8521201732574519661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3146,6 +3122,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &6959714149894801854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2450466335976579857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &2451949371301694405
 GameObject:
   m_ObjectHideFlags: 0
@@ -3189,11 +3189,11 @@ GameObject:
   - component: {fileID: 1191200374957315217}
   - component: {fileID: 488291785593638213}
   - component: {fileID: 5387145602081827702}
-  - component: {fileID: 1409813771482691895}
   - component: {fileID: 6576639818831791957}
   - component: {fileID: 5866513975578982137}
   - component: {fileID: 3697091345514981976}
   - component: {fileID: 1591489501891728507}
+  - component: {fileID: 1646142826593742164}
   m_Layer: 10
   m_Name: MC_Spring (69)
   m_TagString: magnetic
@@ -3252,7 +3252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.014666
@@ -3261,7 +3261,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.20825216
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -3299,36 +3299,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 941516383878278674}
   rb: {fileID: 0}
---- !u!114 &1409813771482691895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2590399896147032633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &6576639818831791957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3378,7 +3354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &1591489501891728507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3394,6 +3370,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &1646142826593742164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2590399896147032633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &2904728619941865741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3468,11 +3468,11 @@ GameObject:
   - component: {fileID: 8117313134173302606}
   - component: {fileID: 8092261076702291877}
   - component: {fileID: 510526535236990236}
-  - component: {fileID: 617482880444306258}
   - component: {fileID: 604878228967943564}
   - component: {fileID: 4173212860671439442}
   - component: {fileID: 9038418462505404163}
   - component: {fileID: 7405822257029646908}
+  - component: {fileID: 274679265007869742}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -3531,7 +3531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.092098
@@ -3540,7 +3540,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.19621432
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -3578,36 +3578,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 7928469800783560060}
   rb: {fileID: 0}
---- !u!114 &617482880444306258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183518205370559754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &604878228967943564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3657,7 +3633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &7405822257029646908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3673,6 +3649,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &274679265007869742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183518205370559754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &3194849118945649003
 GameObject:
   m_ObjectHideFlags: 0
@@ -3685,11 +3685,11 @@ GameObject:
   - component: {fileID: 2540239641810224428}
   - component: {fileID: 8865631910591401635}
   - component: {fileID: 6677478923159345261}
-  - component: {fileID: 5176817161015082314}
   - component: {fileID: 8508901967382764636}
   - component: {fileID: 9096908367046483156}
   - component: {fileID: 1542190484477594574}
   - component: {fileID: 5625856996039902086}
+  - component: {fileID: 6847882468064087421}
   m_Layer: 10
   m_Name: MC_Spring (64)
   m_TagString: magnetic
@@ -3748,7 +3748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.487547
@@ -3757,7 +3757,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.17822848
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -3795,36 +3795,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 620935244379728861}
   rb: {fileID: 0}
---- !u!114 &5176817161015082314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3194849118945649003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &8508901967382764636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3874,7 +3850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &5625856996039902086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3890,6 +3866,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &6847882468064087421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194849118945649003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &3294257604633529084
 GameObject:
   m_ObjectHideFlags: 0
@@ -3933,11 +3933,11 @@ GameObject:
   - component: {fileID: 2512191403529720726}
   - component: {fileID: 712293159894942113}
   - component: {fileID: 8628451167096042590}
-  - component: {fileID: 4281939670648666870}
   - component: {fileID: 4634490998454380816}
   - component: {fileID: 3185133998339227334}
   - component: {fileID: 887633961875477717}
   - component: {fileID: 1182926397664705446}
+  - component: {fileID: 7974919980405292720}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -3996,7 +3996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.64089
@@ -4005,7 +4005,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.20791915
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -4043,36 +4043,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 518375031222530078}
   rb: {fileID: 0}
---- !u!114 &4281939670648666870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3546491849112392092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &4634490998454380816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4122,7 +4098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &1182926397664705446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4138,6 +4114,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &7974919980405292720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546491849112392092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &3575769758487797155
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,11 +4212,11 @@ GameObject:
   - component: {fileID: 8887896484581427294}
   - component: {fileID: 541222424883275310}
   - component: {fileID: 8062915588066637274}
-  - component: {fileID: 6330505412880098016}
   - component: {fileID: 8577445789826926940}
   - component: {fileID: 8957505111864196153}
   - component: {fileID: 3254511443280121826}
   - component: {fileID: 1596288569408904839}
+  - component: {fileID: 2569395729773353535}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -4275,7 +4275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 28.788921
@@ -4284,7 +4284,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.1550821
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -4322,36 +4322,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 7982830083369509884}
   rb: {fileID: 0}
---- !u!114 &6330505412880098016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3692319529902057963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &8577445789826926940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4401,7 +4377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &1596288569408904839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4417,6 +4393,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &2569395729773353535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3692319529902057963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &3715689099567362474
 GameObject:
   m_ObjectHideFlags: 0
@@ -4429,11 +4429,11 @@ GameObject:
   - component: {fileID: 20478257202028705}
   - component: {fileID: 1272693415484919795}
   - component: {fileID: 101531781104872635}
-  - component: {fileID: 8166577996349068007}
   - component: {fileID: 5504813113633306461}
   - component: {fileID: 8214618947600640359}
   - component: {fileID: 7288279068968245348}
   - component: {fileID: 5237203126845979612}
+  - component: {fileID: 823976664858837405}
   m_Layer: 10
   m_Name: MC_Spring (67)
   m_TagString: magnetic
@@ -4492,7 +4492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.034733
@@ -4501,7 +4501,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.23758166
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -4539,36 +4539,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 9100290425980518088}
   rb: {fileID: 0}
---- !u!114 &8166577996349068007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3715689099567362474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &5504813113633306461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4618,7 +4594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &5237203126845979612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4634,6 +4610,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &823976664858837405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3715689099567362474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &3917414404435014058
 GameObject:
   m_ObjectHideFlags: 0
@@ -4770,11 +4770,11 @@ GameObject:
   - component: {fileID: 7822003662481636569}
   - component: {fileID: 5814762050516564830}
   - component: {fileID: 3665804859458837804}
-  - component: {fileID: 8137383503338430564}
   - component: {fileID: 3271946649283803354}
   - component: {fileID: 1921032323343576587}
   - component: {fileID: 1702528246425646467}
   - component: {fileID: 7406511818242659999}
+  - component: {fileID: 2824001280775905505}
   m_Layer: 10
   m_Name: MC_Spring (65)
   m_TagString: magnetic
@@ -4833,7 +4833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.402874
@@ -4842,7 +4842,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.19012938
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -4880,36 +4880,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 900459303796669172}
   rb: {fileID: 0}
---- !u!114 &8137383503338430564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4228119951637211727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &3271946649283803354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4959,7 +4935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &7406511818242659999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4975,6 +4951,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &2824001280775905505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228119951637211727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &4341163654609892464
 GameObject:
   m_ObjectHideFlags: 0
@@ -4987,11 +4987,11 @@ GameObject:
   - component: {fileID: 7975588090449985202}
   - component: {fileID: 8948818303922437439}
   - component: {fileID: 7184886293046232812}
-  - component: {fileID: 1653776203297593111}
   - component: {fileID: 5485768896755031923}
   - component: {fileID: 8770404946571688600}
   - component: {fileID: 4619831065961845410}
   - component: {fileID: 2768783308902430130}
+  - component: {fileID: 6110205092442970703}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -5050,7 +5050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.118961
@@ -5059,7 +5059,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.22305678
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -5097,36 +5097,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 8846571409023410603}
   rb: {fileID: 0}
---- !u!114 &1653776203297593111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4341163654609892464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &5485768896755031923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5176,7 +5152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &2768783308902430130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5192,6 +5168,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &6110205092442970703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4341163654609892464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &4479566574786388904
 GameObject:
   m_ObjectHideFlags: 0
@@ -5235,11 +5235,11 @@ GameObject:
   - component: {fileID: 1818312108472271462}
   - component: {fileID: 2964017794537638105}
   - component: {fileID: 9203980554753716205}
-  - component: {fileID: 6398958775790923416}
   - component: {fileID: 195662106682784024}
   - component: {fileID: 6296538357973204190}
   - component: {fileID: 4288558816790260735}
   - component: {fileID: 4786267437756932260}
+  - component: {fileID: 3203092596631182417}
   m_Layer: 10
   m_Name: MC_Spring (56)
   m_TagString: magnetic
@@ -5298,7 +5298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.862127
@@ -5307,7 +5307,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.20465699
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -5345,36 +5345,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3035597631240940154}
   rb: {fileID: 0}
---- !u!114 &6398958775790923416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4538123974247365675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &195662106682784024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5424,7 +5400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &4786267437756932260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5440,6 +5416,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &3203092596631182417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538123974247365675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &4609681368066472135
 GameObject:
   m_ObjectHideFlags: 0
@@ -5452,11 +5452,11 @@ GameObject:
   - component: {fileID: 136661578590967455}
   - component: {fileID: 8866239968628149357}
   - component: {fileID: 6668102074060817251}
-  - component: {fileID: 2773860890386860364}
   - component: {fileID: 5731327230294403147}
   - component: {fileID: 639000401413575686}
   - component: {fileID: 7322388890236556745}
   - component: {fileID: 636396355533777617}
+  - component: {fileID: 6988787342715442897}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -5515,7 +5515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.884773
@@ -5524,7 +5524,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.17526698
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -5562,36 +5562,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3104177972787544586}
   rb: {fileID: 0}
---- !u!114 &2773860890386860364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4609681368066472135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &5731327230294403147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5641,7 +5617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &636396355533777617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5657,6 +5633,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &6988787342715442897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609681368066472135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &4794010070072391749
 GameObject:
   m_ObjectHideFlags: 0
@@ -5669,11 +5669,11 @@ GameObject:
   - component: {fileID: 2223070564654632299}
   - component: {fileID: 7314458518030669720}
   - component: {fileID: 3775965323657485252}
-  - component: {fileID: 1352545749235815076}
   - component: {fileID: 52297773683648422}
   - component: {fileID: 3113996498996672803}
   - component: {fileID: 3894723618398919523}
   - component: {fileID: 3668498822593633733}
+  - component: {fileID: 3747429236620828041}
   m_Layer: 10
   m_Name: MC_Spring (57)
   m_TagString: magnetic
@@ -5732,7 +5732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.84351
@@ -5741,7 +5741,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.24265377
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -5779,36 +5779,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 5373356900928368178}
   rb: {fileID: 0}
---- !u!114 &1352545749235815076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4794010070072391749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &52297773683648422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5858,7 +5834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &3668498822593633733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5874,6 +5850,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &3747429236620828041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794010070072391749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &4903598515703813254
 GameObject:
   m_ObjectHideFlags: 0
@@ -5886,11 +5886,11 @@ GameObject:
   - component: {fileID: 615408278784916090}
   - component: {fileID: 7252919524793822264}
   - component: {fileID: 6333700035882970126}
-  - component: {fileID: 1592948104441516169}
   - component: {fileID: 5855278221681863421}
   - component: {fileID: 3630339043268036671}
   - component: {fileID: 272733303752871073}
   - component: {fileID: 232023696003800593}
+  - component: {fileID: 8842607025084372588}
   m_Layer: 10
   m_Name: MC_Spring (63)
   m_TagString: magnetic
@@ -5949,7 +5949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 28.857042
@@ -5958,7 +5958,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.21635298
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -5996,36 +5996,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 2313994083675266423}
   rb: {fileID: 0}
---- !u!114 &1592948104441516169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4903598515703813254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &5855278221681863421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6075,7 +6051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &232023696003800593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6091,6 +6067,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &8842607025084372588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4903598515703813254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &5005334737706512067
 GameObject:
   m_ObjectHideFlags: 0
@@ -6258,11 +6258,11 @@ GameObject:
   - component: {fileID: 2277075064910931821}
   - component: {fileID: 7240818545329934658}
   - component: {fileID: 8283216613779830625}
-  - component: {fileID: 7740684172107372626}
   - component: {fileID: 3410849908654584669}
   - component: {fileID: 8435225787249149264}
   - component: {fileID: 1698708552023346990}
   - component: {fileID: 2312046509576225606}
+  - component: {fileID: 1730972153565150141}
   m_Layer: 10
   m_Name: MC_Spring (36)
   m_TagString: magnetic
@@ -6321,7 +6321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.79561
@@ -6330,7 +6330,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.15641025
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -6368,36 +6368,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6195770639756903256}
   rb: {fileID: 0}
---- !u!114 &7740684172107372626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481994381510179789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &3410849908654584669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6447,7 +6423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &2312046509576225606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6463,6 +6439,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &1730972153565150141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481994381510179789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &5715948070708928159
 GameObject:
   m_ObjectHideFlags: 0
@@ -6475,11 +6475,11 @@ GameObject:
   - component: {fileID: 8940146376172853139}
   - component: {fileID: 8111269490381687201}
   - component: {fileID: 7485594380866835983}
-  - component: {fileID: 8242467520080579239}
   - component: {fileID: 6303646159914229956}
   - component: {fileID: 8280056407396784484}
   - component: {fileID: 787956001967326055}
   - component: {fileID: 3277490570172636309}
+  - component: {fileID: 2383142998389440660}
   m_Layer: 10
   m_Name: MC_Spring (45)
   m_TagString: magnetic
@@ -6538,7 +6538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.177048
@@ -6547,7 +6547,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.16309659
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -6585,36 +6585,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6077763850700595970}
   rb: {fileID: 0}
---- !u!114 &8242467520080579239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5715948070708928159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &6303646159914229956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6664,7 +6640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &3277490570172636309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6680,6 +6656,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &2383142998389440660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715948070708928159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &5965672133186266835
 GameObject:
   m_ObjectHideFlags: 0
@@ -6878,11 +6878,11 @@ GameObject:
   - component: {fileID: 1067772966821714174}
   - component: {fileID: 7392309967960312144}
   - component: {fileID: 3924273757788460394}
-  - component: {fileID: 7500794115290266137}
   - component: {fileID: 134554075541351086}
   - component: {fileID: 8428960427297486639}
   - component: {fileID: 4571053778690867242}
   - component: {fileID: 8422643375975132362}
+  - component: {fileID: 2113051388292290276}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -6941,7 +6941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.165949
@@ -6950,7 +6950,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.15918401
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -6988,36 +6988,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 111760177244856521}
   rb: {fileID: 0}
---- !u!114 &7500794115290266137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6688371976780843226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &134554075541351086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7067,7 +7043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &8422643375975132362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7083,6 +7059,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &2113051388292290276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6688371976780843226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &6809172993118039241
 GameObject:
   m_ObjectHideFlags: 0
@@ -7250,11 +7250,11 @@ GameObject:
   - component: {fileID: 451981241368409247}
   - component: {fileID: 3152658846356291667}
   - component: {fileID: 2153664580134716651}
-  - component: {fileID: 2183400967428827932}
   - component: {fileID: 4680217955757579588}
   - component: {fileID: 3677660683344805212}
   - component: {fileID: 3612574649502949871}
   - component: {fileID: 1878470118704088381}
+  - component: {fileID: 5643872081664111439}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -7313,7 +7313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.055412
@@ -7322,7 +7322,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.15981542
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -7360,36 +7360,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 8425971402371534497}
   rb: {fileID: 0}
---- !u!114 &2183400967428827932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7257539494891744477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &4680217955757579588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7439,7 +7415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &1878470118704088381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7455,6 +7431,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &5643872081664111439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7257539494891744477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &7433800202558695203
 GameObject:
   m_ObjectHideFlags: 0
@@ -7467,11 +7467,11 @@ GameObject:
   - component: {fileID: 3026124749990739892}
   - component: {fileID: 8366930290654782801}
   - component: {fileID: 8861157002959499246}
-  - component: {fileID: 4953227771997177027}
   - component: {fileID: 4330271473044627078}
   - component: {fileID: 3630308140890927508}
   - component: {fileID: 1127164465362154993}
   - component: {fileID: 4511655252958535804}
+  - component: {fileID: 539028470484579892}
   m_Layer: 10
   m_Name: MC_Spring (71)
   m_TagString: magnetic
@@ -7530,7 +7530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 29.278667
@@ -7539,7 +7539,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.17651917
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -7577,36 +7577,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 4230377801375303581}
   rb: {fileID: 0}
---- !u!114 &4953227771997177027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7433800202558695203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &4330271473044627078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7656,7 +7632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &4511655252958535804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7672,6 +7648,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &539028470484579892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7433800202558695203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &7560705033968888222
 GameObject:
   m_ObjectHideFlags: 0
@@ -7684,11 +7684,11 @@ GameObject:
   - component: {fileID: 2978930796184417409}
   - component: {fileID: 5497193933815194027}
   - component: {fileID: 3162373005250549117}
-  - component: {fileID: 1497327864724577226}
   - component: {fileID: 7817420772855900491}
   - component: {fileID: 3977214574125733360}
   - component: {fileID: 9080721670715948797}
   - component: {fileID: 3474311448658839071}
+  - component: {fileID: 5240895734187119760}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -7747,7 +7747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.796352
@@ -7756,7 +7756,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.24331777
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -7794,36 +7794,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6037593079401254081}
   rb: {fileID: 0}
---- !u!114 &1497327864724577226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7560705033968888222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &7817420772855900491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7873,7 +7849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &3474311448658839071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7889,6 +7865,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &5240895734187119760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560705033968888222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &7775267030319166986
 GameObject:
   m_ObjectHideFlags: 0
@@ -7901,11 +7901,11 @@ GameObject:
   - component: {fileID: 4243063979326676724}
   - component: {fileID: 7351245240090044638}
   - component: {fileID: 2280763739452078965}
-  - component: {fileID: 7207103019144236870}
   - component: {fileID: 2671538048060803829}
   - component: {fileID: 6519519388218694755}
   - component: {fileID: 5402457807224850337}
   - component: {fileID: 2349529291746519727}
+  - component: {fileID: 4434178242048647728}
   m_Layer: 10
   m_Name: MC_Spring (60)
   m_TagString: magnetic
@@ -7964,7 +7964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.590551
@@ -7973,7 +7973,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.2279317
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -8011,36 +8011,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 273173940378218607}
   rb: {fileID: 0}
---- !u!114 &7207103019144236870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7775267030319166986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &2671538048060803829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8090,7 +8066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &2349529291746519727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8106,6 +8082,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &4434178242048647728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775267030319166986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &8007624943928205815
 GameObject:
   m_ObjectHideFlags: 0
@@ -8118,11 +8118,11 @@ GameObject:
   - component: {fileID: 7606360134445858866}
   - component: {fileID: 1773247600363587460}
   - component: {fileID: 7509472019241863653}
-  - component: {fileID: 2690852465268831620}
   - component: {fileID: 8732411308014716786}
   - component: {fileID: 4263729820406048408}
   - component: {fileID: 590512769353760363}
   - component: {fileID: 6347618503843319314}
+  - component: {fileID: 5595723144128401558}
   m_Layer: 10
   m_Name: MC_Spring (72)
   m_TagString: magnetic
@@ -8181,7 +8181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.854006
@@ -8190,7 +8190,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.20091593
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -8228,36 +8228,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 6428424304856879552}
   rb: {fileID: 0}
---- !u!114 &2690852465268831620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8007624943928205815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &8732411308014716786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8307,7 +8283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &6347618503843319314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8323,6 +8299,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &5595723144128401558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8007624943928205815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &8083149153619965047
 GameObject:
   m_ObjectHideFlags: 0
@@ -8335,11 +8335,11 @@ GameObject:
   - component: {fileID: 6449565250826095692}
   - component: {fileID: 1281029350419722495}
   - component: {fileID: 4499119598549647132}
-  - component: {fileID: 8646293916233760843}
   - component: {fileID: 6686866454724896644}
   - component: {fileID: 7593035632654141527}
   - component: {fileID: 878633048996608328}
   - component: {fileID: 8567013729581741209}
+  - component: {fileID: 8998513281491882094}
   m_Layer: 10
   m_Name: MC_Spring (62)
   m_TagString: magnetic
@@ -8398,7 +8398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 27.312775
@@ -8407,7 +8407,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.22828141
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -8445,36 +8445,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 2336014094926733444}
   rb: {fileID: 0}
---- !u!114 &8646293916233760843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8083149153619965047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &6686866454724896644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8524,7 +8500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &8567013729581741209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8540,6 +8516,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &8998513281491882094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8083149153619965047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &8280584110510933017
 GameObject:
   m_ObjectHideFlags: 0
@@ -8552,11 +8552,11 @@ GameObject:
   - component: {fileID: 4802962446766716616}
   - component: {fileID: 8595779419035387876}
   - component: {fileID: 8618875825896450921}
-  - component: {fileID: 7351747359105189444}
   - component: {fileID: 6040364415633776028}
   - component: {fileID: 5059982796013442156}
   - component: {fileID: 7859708642301413394}
   - component: {fileID: 7088765305542323405}
+  - component: {fileID: 4800928517893503882}
   m_Layer: 10
   m_Name: MC_Spring (58)
   m_TagString: magnetic
@@ -8615,7 +8615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.47659
@@ -8624,7 +8624,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.16695516
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -8662,36 +8662,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 487665665450567959}
   rb: {fileID: 0}
---- !u!114 &7351747359105189444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8280584110510933017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &6040364415633776028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8741,7 +8717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &7088765305542323405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8757,6 +8733,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &4800928517893503882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280584110510933017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &8282696298555203780
 GameObject:
   m_ObjectHideFlags: 0
@@ -8769,11 +8769,11 @@ GameObject:
   - component: {fileID: 3544343525166897193}
   - component: {fileID: 2765964316265800572}
   - component: {fileID: 8877731441073820200}
-  - component: {fileID: 8191728262991672572}
   - component: {fileID: 1806633708714751187}
   - component: {fileID: 7379033201199828991}
   - component: {fileID: 3223036845920113792}
   - component: {fileID: 1677524436785195284}
+  - component: {fileID: 2112215970029070983}
   m_Layer: 10
   m_Name: MC_Spring (66)
   m_TagString: magnetic
@@ -8832,7 +8832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 29.413034
@@ -8841,7 +8841,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.15087242
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -8879,36 +8879,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3532797332671573843}
   rb: {fileID: 0}
---- !u!114 &8191728262991672572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8282696298555203780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &1806633708714751187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8958,7 +8934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &1677524436785195284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8974,6 +8950,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &2112215970029070983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8282696298555203780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &8514286087035283796
 GameObject:
   m_ObjectHideFlags: 0
@@ -8986,11 +8986,11 @@ GameObject:
   - component: {fileID: 1528519013948032679}
   - component: {fileID: 2307927744303129226}
   - component: {fileID: 5651730540196689901}
-  - component: {fileID: 3166023434913770509}
   - component: {fileID: 5444199810251846563}
   - component: {fileID: 769311986406689330}
   - component: {fileID: 9083187511030076838}
   - component: {fileID: 2287897638548575411}
+  - component: {fileID: 3940620744288920531}
   m_Layer: 10
   m_Name: MC_Spring (70)
   m_TagString: magnetic
@@ -9049,7 +9049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 28.693995
@@ -9058,7 +9058,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.22351506
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -9096,36 +9096,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 3227789629482607113}
   rb: {fileID: 0}
---- !u!114 &3166023434913770509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8514286087035283796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &5444199810251846563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9175,7 +9151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &2287897638548575411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9191,6 +9167,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &3940620744288920531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8514286087035283796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1 &8695755590078913086
 GameObject:
   m_ObjectHideFlags: 0
@@ -9203,11 +9203,11 @@ GameObject:
   - component: {fileID: 4222936827535744741}
   - component: {fileID: 1634655012227120075}
   - component: {fileID: 1579644977572477392}
-  - component: {fileID: 7784691222633938503}
   - component: {fileID: 2921602360592335524}
   - component: {fileID: 7638326018928181384}
   - component: {fileID: 8318788316369549596}
   - component: {fileID: 9009649475117985316}
+  - component: {fileID: 8136201582252929705}
   m_Layer: 10
   m_Name: MC_Spring(Clone)
   m_TagString: magnetic
@@ -9266,7 +9266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.358732
@@ -9275,7 +9275,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.17953067
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -9313,36 +9313,12 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1 (2)
   state: 1
   ownerTranform: {fileID: 1032043291996968336}
   objectToChangeMesh: {fileID: 1659608159964194751}
   rb: {fileID: 0}
---- !u!114 &7784691222633938503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8695755590078913086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
-  upEjectionMaxMelee: 1
-  maxAngle: 1
-  passivedDetachedForce: 5
 --- !u!114 &2921602360592335524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9392,7 +9368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &9009649475117985316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9408,6 +9384,30 @@ MonoBehaviour:
   hasCollided: 0
   collided: {fileID: 0}
   checkCollision: 0
+--- !u!114 &8136201582252929705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8695755590078913086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
+  upEjectionMaxMelee: 1
+  maxAngle: 0.9
+  passivedDetachedForce: 5
 --- !u!1001 &167835647225151073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10555,14 +10555,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 510c9251ffa653b4696575dc8ee8b31f, type: 3}
---- !u!1 &728893575385921413 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1406872216186403204, guid: 510c9251ffa653b4696575dc8ee8b31f, type: 3}
-  m_PrefabInstance: {fileID: 1845273032736181761}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4349728764328315355 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2722123918399735770, guid: 510c9251ffa653b4696575dc8ee8b31f, type: 3}
+  m_PrefabInstance: {fileID: 1845273032736181761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4914828506722844288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6750685247487389825, guid: 510c9251ffa653b4696575dc8ee8b31f, type: 3}
   m_PrefabInstance: {fileID: 1845273032736181761}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1872533394129027429

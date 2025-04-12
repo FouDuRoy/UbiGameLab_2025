@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.188564
@@ -146,7 +146,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.21027884
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -160,11 +160,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &9217848015147347976
 MonoBehaviour:
@@ -184,7 +184,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -202,17 +202,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &7401783780065174030
 MonoBehaviour:
@@ -263,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &9045675267315938967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!135 &7914112147830941300
 SphereCollider:
@@ -423,7 +423,7 @@ MonoBehaviour:
   magneticCube: {fileID: 2877455228711921279, guid: 903ec033a1c6dd9458e7609ee80b6162, type: 3}
   passiveCube: {fileID: 6515478394461614388, guid: 7b66d8ff4bcbccb4eb75adab2116d1df, type: 3}
   magnetTimer: 1
-  projectionTimer: 0.1
+  projectionTimer: 0.5
   rangedTimer: 0.1
   golem: {fileID: 0}
   healthBar: {fileID: 0}
@@ -539,17 +539,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &3430330834041855971
 MonoBehaviour:
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 28.338306
@@ -741,7 +741,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.15989666
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -755,11 +755,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &1356479059276346742
 MonoBehaviour:
@@ -779,7 +779,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -797,17 +797,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &3129046612030246094
 MonoBehaviour:
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &6681312978584437015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 28.862036
@@ -958,7 +958,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.15789518
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -972,11 +972,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &5684521503149810635
 MonoBehaviour:
@@ -996,7 +996,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -1014,17 +1014,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &6295779984730715537
 MonoBehaviour:
@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &5971825709308886481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1228,7 +1228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 27.02833
@@ -1237,7 +1237,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.18734561
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -1251,11 +1251,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &991755300446430410
 MonoBehaviour:
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -1293,17 +1293,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &1865221924176310455
 MonoBehaviour:
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &2747003479413346289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1538,7 +1538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.136244
@@ -1547,7 +1547,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.22189292
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -1561,11 +1561,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &1348954105651707576
 MonoBehaviour:
@@ -1585,7 +1585,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -1603,17 +1603,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &7192124667914527992
 MonoBehaviour:
@@ -1664,7 +1664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &6886485082726291283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1786,7 +1786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.197746
@@ -1795,7 +1795,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.21989125
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -1809,11 +1809,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &428267357702668729
 MonoBehaviour:
@@ -1833,7 +1833,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -1851,17 +1851,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &3354403208982522131
 MonoBehaviour:
@@ -1912,7 +1912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &1633161157742696538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2003,7 +2003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.97389
@@ -2012,7 +2012,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.18967149
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -2026,11 +2026,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &5649333655335095582
 MonoBehaviour:
@@ -2050,7 +2050,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -2068,17 +2068,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &2748019409108845680
 MonoBehaviour:
@@ -2129,7 +2129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &2807096231093255081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2251,7 +2251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.04077
@@ -2260,7 +2260,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.2344905
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -2274,11 +2274,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &9003712080404475290
 MonoBehaviour:
@@ -2298,7 +2298,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -2316,17 +2316,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &2360022393374197859
 MonoBehaviour:
@@ -2377,7 +2377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &3784550937770243727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2499,7 +2499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 30.732836
@@ -2508,7 +2508,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.2178695
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -2522,11 +2522,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &7865612353881655856
 MonoBehaviour:
@@ -2546,7 +2546,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -2564,17 +2564,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &2320180513671576094
 MonoBehaviour:
@@ -2625,7 +2625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &2399607336929189881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2778,7 +2778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.655659
@@ -2787,7 +2787,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.24125932
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -2801,11 +2801,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &4230147096218230923
 MonoBehaviour:
@@ -2825,7 +2825,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -2843,17 +2843,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &2304000725162620863
 MonoBehaviour:
@@ -2904,7 +2904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &7408453174317739485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2995,7 +2995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.973076
@@ -3004,7 +3004,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.18709028
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -3018,11 +3018,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &3801132680640052633
 MonoBehaviour:
@@ -3042,7 +3042,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -3060,17 +3060,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &5280801007167607116
 MonoBehaviour:
@@ -3121,7 +3121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &8691357564693237787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3212,7 +3212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 32.393948
@@ -3221,7 +3221,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.22931841
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -3235,11 +3235,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &6204702692383284631
 MonoBehaviour:
@@ -3259,7 +3259,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -3277,17 +3277,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &2787839746031227614
 MonoBehaviour:
@@ -3338,7 +3338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &1936232924968254331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3429,7 +3429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.767948
@@ -3438,7 +3438,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.23064813
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -3452,11 +3452,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &5908499878560638025
 MonoBehaviour:
@@ -3476,7 +3476,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -3494,17 +3494,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &1917905819939636184
 MonoBehaviour:
@@ -3555,7 +3555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &3181450156703443586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3646,7 +3646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 29.197731
@@ -3655,7 +3655,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.2145016
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -3669,11 +3669,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &4439628254996822204
 MonoBehaviour:
@@ -3693,7 +3693,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -3711,17 +3711,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &1615450951642758397
 MonoBehaviour:
@@ -3772,7 +3772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &7200534320041410293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3894,7 +3894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4cf2e9a85b734ba91cc242bb68108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveRadius: 0.7
+  passiveRadius: 1
   activeRadius: 1.5
   charge: 1
   maxSpeed: 31.931782
@@ -3903,7 +3903,7 @@ MonoBehaviour:
   AngleError: 12
   moveTime: 0.1
   maxForceAttraction: 10
-  lerpingDistance: 20
+  lerpingDistance: 2
   timeBeforeSwitching: 0.15119833
   timeBeforeSwitchingVariation: 0.05
   springTorqueBreak: Infinity
@@ -3917,11 +3917,11 @@ MonoBehaviour:
   xLimit: 0.01
   AngleLimit: 1
   mainLinearDrive: 5000
-  mainLinearDamp: 100
+  mainLinearDamp: 10
   secondaryLinearDrive: 5000
-  secondaryLinearDamp: 100
+  secondaryLinearDamp: 10
   angularDrive: 100000
-  angularDamp: 5000
+  angularDamp: 100
   projection: 0
 --- !u!114 &8725908687984902497
 MonoBehaviour:
@@ -3941,7 +3941,7 @@ MonoBehaviour:
   fadeDurationLong: 0.2
   fadeDurationShort: 0.2
   contactOffset: 0.03
-  weight: 0.005
+  weight: 0.01
   owner: MagneticCube 1
   state: 1
   ownerTranform: {fileID: 7895440960748858278}
@@ -3959,17 +3959,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d76650d0c38e84d80c6caf12fc24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTreshold: 6
-  velocityTresholdMelee: 2
-  upEjectionMinRanged: 0.2
-  upEjectionMaxRanged: 1
-  minRangedEjectionForce: 20
-  maxRangedEjectionForce: 20
-  minMeleeEjectionForce: 20
-  maxMeleeEjectionForce: 20
-  upEjectionMinMelee: 0.2
+  velocityTreshold: 50
+  velocityTresholdMelee: 25
+  upEjectionMinRanged: 0.5
+  upEjectionMaxRanged: 0.6
+  minRangedEjectionForce: 80
+  maxRangedEjectionForce: 100
+  minMeleeEjectionForce: 90
+  maxMeleeEjectionForce: 120
+  upEjectionMinMelee: 0.8
   upEjectionMaxMelee: 1
-  maxAngle: 1
+  maxAngle: 0.9
   passivedDetachedForce: 5
 --- !u!114 &5355084524573690850
 MonoBehaviour:
@@ -4020,7 +4020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ejected: 0
   colided: 0
-  dragAfterImpact: 9
+  dragAfterImpact: 3
 --- !u!114 &1151867754837074675
 MonoBehaviour:
   m_ObjectHideFlags: 0
