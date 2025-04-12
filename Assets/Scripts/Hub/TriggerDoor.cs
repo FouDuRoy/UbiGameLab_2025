@@ -5,8 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class TriggerDoor : MonoBehaviour
 {
+    [SerializeField] bool isExitDoor;
     [SerializeField] int nDoor;
-    [SerializeField] private TutoUI ejectionTutoUI;
+    [SerializeField] private TutoUI linkedTutoUI;
     private LevelLoader levelLoader;
 
     void Start()
@@ -20,8 +21,12 @@ public class TriggerDoor : MonoBehaviour
 
         if (player != null) // Si oui, on l'ajoute à la liste des joueurs prêts
         {
-            levelLoader.AddPlayerReady(player, nDoor);
-            ejectionTutoUI.NextTuto();
+            if (isExitDoor && nDoor>0)
+            {
+                levelLoader.AddPlayerReady(player, nDoor);
+            }
+            
+            linkedTutoUI.NextTuto();
         }
     } 
 }
