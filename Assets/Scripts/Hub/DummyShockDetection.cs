@@ -7,24 +7,34 @@ public class DummyShockDetection : MonoBehaviour
     [SerializeField] float victoryConditionSpeedRange = 10f;
     [SerializeField] float victoryConditionSpeedMelee = 15f;
     [SerializeField] GameObject Ennemy;
+    [SerializeField] private TutoUI dashTutoUI;
     [SerializeField] private TutoUI cacTutoUI;
     [SerializeField] private TutoUI shootTutoUI;
     [SerializeField] private int nShootHits = 2;
     [SerializeField] private int nCacHits = 2;
 
     private Rigidbody rb;
+    private GridSystem grid;
+    private int OG_gridSize;
     private int nHits = 0;
+    private bool dashCompleted = false;
     private bool shootCompleted = false;
     bool canTrigger = true;
     void Start()
     {
-        rb = GetComponentInParent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+        grid= rb.GetComponentInParent<GridSystem>();
+        OG_gridSize=grid.grid.Count;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        if(grid.grid.Count < OG_gridSize)
+        {
+            dashCompleted = true;
+            dashTutoUI.NextTuto();
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -49,7 +59,7 @@ public class DummyShockDetection : MonoBehaviour
                     {
                         DoRotation();
 
-                        if (shootTutoUI.isActiveAndEnabled)
+                        if (shootTutoUI.isActiveAndEnabled && dashCompleted)
                         {
                             nHits++;
                             if (nHits >= nShootHits)

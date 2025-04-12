@@ -7,9 +7,9 @@ using TMPro;
 public enum TutoType
 {
     Attraction,
-    Foncer,
-    Shoot,
+    Repulsion,
     Cac,
+    Dash,
     Arene
 }
 
@@ -61,11 +61,11 @@ public class TutoUI : MonoBehaviour
                 inputImage.sprite = attractionInput;
                 break;
 
-            case TutoType.Foncer:
+            case TutoType.Dash:
                 inputImage.sprite = foncerInput;
                 break;
 
-            case TutoType.Shoot:
+            case TutoType.Repulsion:
                 inputImage.sprite = shootInput;
                 break;
 
@@ -111,7 +111,6 @@ public class TutoUI : MonoBehaviour
 
     public void NextTuto()
     {
-        //Debug.Log(name + " skips to next tuto : " + nextTuto.name);
 
         if (nextTuto != null)
         {
