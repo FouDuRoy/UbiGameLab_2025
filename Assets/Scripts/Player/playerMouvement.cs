@@ -205,7 +205,6 @@ public class PlayerMouvement : MonoBehaviour
             golem.GetComponent<Synchro2>().rotationFixed = false;
 
             if(direction.magnitude > deadZone ){
-//                animator.SetBool("IsMoving", true);
                 rb.AddForce(mouvementReductionFactor * direction * mouvementSpeed / weightTranslation, ForceMode.Acceleration);
             }
             
