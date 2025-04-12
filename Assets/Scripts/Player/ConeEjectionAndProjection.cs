@@ -2,13 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.ProBuilder.Shapes;
-using static UnityEngine.Rendering.DebugUI;
-using Random = UnityEngine.Random;
 
 public class ConeEjectionAndProjection : MonoBehaviour
 {
@@ -54,6 +49,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     HapticFeedbackController feedback;
     float timeHeld = 0;
     float handTimer = 0;
+    float handTimerLeft = 0;
     Rigidbody mainCubeRb;
     Transform golem;
     bool rightTriggerHeld = false;
@@ -68,7 +64,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     MouvementType moveType;
     Color chargedColor;
     LayerMask mask;
-
+    bool leftHandStart = false;
     [Header("LineSection")]
     [SerializeField] Material lineMat;
     public float maxAngle = 15f;
@@ -88,7 +84,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
     bool readyToEject = false;
     public float cadanceDeTire = 0.2f;
     bool tireDisponible = true;
-  
+
     void OnEnable()
 
     {
@@ -103,8 +99,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
         playerGrid = GetComponent<GridSystem>();
         playerInput = GetComponent<PlayerInput>();
-        ejectCubes =playerInput.currentActionMap.FindAction("BlocEjection");
-        AttractCubes =playerInput.currentActionMap.FindAction("AttractCubes");
+        ejectCubes = playerInput.currentActionMap.FindAction("BlocEjection");
+        AttractCubes = playerInput.currentActionMap.FindAction("AttractCubes");
         feedback = this.GetComponent<HapticFeedbackController>();
         mainCubeRb = this.GetComponent<PlayerObjects>().cubeRb;
         golem = this.GetComponent<PlayerObjects>().golem.transform;
@@ -143,7 +139,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             if (leftTriggerHeld == false)
             {
                 feedback.AttractionVibrationStart();
-                if(initialAngle == 360)
+                if (initialAngle == 360)
                 {
                     GenerateMesh(180);
 
@@ -170,45 +166,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
             float blocSizeWorld = playerGrid.cubeSize * playerGrid.kernel.transform.lossyScale.x;
             float radius = radiusInBlocs * blocSizeWorld;
             float maxDistance = MaxDistanceForDirection((golem.forward).normalized, radius);
-            Vector3 restHandPositionLeft;
-            Vector3 restHandPositionRight;
-            if (initialAngle == 360)
-            {
-                leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-90, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
-                rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+90, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
-                restHandPositionLeft = golem.position + Quaternion.AngleAxis(-90, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
-                restHandPositionRight = golem.position + Quaternion.AngleAxis(+90, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
-            }
-            else
-            {
-                leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
-                rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
-                 restHandPositionLeft = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
-                 restHandPositionRight = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
-            }
-         
-            if (handTimer <= 1f / 2)
-            {
-
-                leftHandTransform.position = Vector3.Lerp(restHandPositionLeft, leftHandFinalPoint, 2 * handTimer);
-                rightHandTransform.position = Vector3.Lerp(restHandPositionRight, rightHandFinalPoint, 2 * handTimer);
-
-            }
-            else
-            {
-
-                leftHandTransform.position = Vector3.Lerp(leftHandFinalPoint, restHandPositionLeft, 2 * (handTimer - 1f / 2));
-                rightHandTransform.position = Vector3.Lerp(rightHandFinalPoint, restHandPositionRight, 2 * (handTimer - 1f / 2));
-            }
-
-
-            handTimer += Time.deltaTime;
-            handTimer = handTimer % 1;
+            handMouvement();
             visionConeObject.transform.position = golem.position + new Vector3(0f, -0.5f, 0f);
             visionConeObject.transform.rotation = Quaternion.LookRotation(golem.forward);
             coneAttraction(golem, attractionForce, initialAngle, distance, 1);
             leftTriggerHeld = true;
-       
+
         }
         else if (leftTriggerHeld)
         {
@@ -222,6 +185,47 @@ public class ConeEjectionAndProjection : MonoBehaviour
             StartCoroutine(ResetHandsPosition());
         }
         EjectionAlgo(rightTrigger);
+    }
+
+    private void handMouvement()
+    {
+        Vector3 restHandPositionLeft;
+        Vector3 restHandPositionRight;
+        if (initialAngle == 360)
+        {
+            leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-90, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+            rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+90, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+            restHandPositionLeft = golem.position + Quaternion.AngleAxis(-90, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+            restHandPositionRight = golem.position + Quaternion.AngleAxis(+90, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+        }
+        else
+        {
+            leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+            rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+            restHandPositionLeft = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+            restHandPositionRight = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+        }
+
+
+        rightHandTransform.position = Vector3.Lerp(restHandPositionRight, rightHandFinalPoint, Mathf.Cos(handTimer * Mathf.PI - Mathf.PI / 2));
+
+        if (handTimer >= 1f / 2 && !leftHandStart)
+        {
+            leftHandStart = true;
+
+        }
+        if (leftHandStart)
+        {
+            leftHandTransform.position = Vector3.Lerp(restHandPositionLeft, leftHandFinalPoint, Mathf.Cos(handTimerLeft * Mathf.PI - Mathf.PI / 2));
+            handTimerLeft += Time.deltaTime * 1.0f;
+            handTimerLeft = handTimerLeft % 1;
+        }
+        else
+        {
+            leftHandTransform.position = restHandPositionLeft;
+        }
+        handTimer += Time.deltaTime * 1.0f;
+        handTimer = handTimer % 1;
     }
 
     private void EjectionAlgo(float rightTrigger)
@@ -239,7 +243,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
             timeHeld += Time.deltaTime;
             rightTriggerHeld = true;
-          
+
         }
         else if (rightTriggerHeld)
         {
@@ -289,7 +293,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         magnetic = magnetic.FindAll(cube =>
         {
             //If the cube is used by a player dont pull
-            if (cube.transform.root.GetComponent<PlayerObjects>() != null || (cube.transform.tag != "magnetic" && cube.transform.tag != "explosive" ) || cube.GetComponent<Bloc>().owner != "Neutral")
+            if (cube.transform.root.GetComponent<PlayerObjects>() != null || (cube.transform.tag != "magnetic" && cube.transform.tag != "explosive") || cube.GetComponent<Bloc>().owner != "Neutral")
             {
                 return false;
             }
@@ -320,7 +324,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             cube.GetComponent<Feromagnetic>().enabled = true;
             cube.GetComponent<Rigidbody>().useGravity = true;
             cube.GetComponent<Rigidbody>().mass = this.GetComponent<PlayerObjects>().passiveCube.GetComponent<Rigidbody>().mass;
-           
+
         });
 
         //Draw Rays in Build 
@@ -427,7 +431,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             if (potentialBlocs.First().tag == "powerUp")
             {
-                potentialBlocs.First().GetComponent<PowerUpBloc>().active = false ;
+                potentialBlocs.First().GetComponent<PowerUpBloc>().active = false;
             }
             feedback.RepulsionVibrationSelect();
             placeBolcAtPosition(potentialBlocs.First(), blocsToEject.Count);
@@ -460,10 +464,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
         // travel to position
         StartCoroutine(displaceBloc(bloc, number));
     }
-    
+
     private IEnumerator displaceBloc(GameObject bloc, int number)
     {
-        if(bloc == null)
+        if (bloc == null)
         {
             blocsToEject.Remove(bloc);
             yield break;
@@ -524,8 +528,9 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Vector3 ejectionDirection = golem.forward;
         bool assitedAim = false;
 
-        float assitedTrajectoryAngle= Mathf.Lerp(assitedTrajectoryAngleMin, assitedTrajectoryAngleMax, timeHeld / secondsForMaxChargingEjectionLength);
-        if(enemyAngle < assitedTrajectoryAngle) {
+        float assitedTrajectoryAngle = Mathf.Lerp(assitedTrajectoryAngleMin, assitedTrajectoryAngleMax, timeHeld / secondsForMaxChargingEjectionLength);
+        if (enemyAngle < assitedTrajectoryAngle)
+        {
             ejectionDirection = enemyDirection.normalized;
             assitedAim = true;
         }
@@ -538,14 +543,14 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             cube.GetComponent<PowerUpBloc>().active = true;
         }
-        if(cube.tag == "explosive")
+        if (cube.tag == "explosive")
         {
             cube.GetComponent<ExplosiveBloc>().canExplode = true;
         }
         if (assitedAim)
         {
             Vector3 centerCube = GetComponent<PlayerObjects>().cubeRb.position + fowardDistance * golem.forward;
-            Vector3 dire = new Vector3((cube.transform.position - centerCube).x,0, (cube.transform.position - centerCube).z);
+            Vector3 dire = new Vector3((cube.transform.position - centerCube).x, 0, (cube.transform.position - centerCube).z);
             StartCoroutine(AssistedAim(cube, enemy, dire));
 
         }
@@ -624,12 +629,14 @@ public class ConeEjectionAndProjection : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
             time += Time.deltaTime;
             t = time / 0.5f;
-             restHandPositionLeft = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
-             restHandPositionRight = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+            restHandPositionLeft = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
+            restHandPositionRight = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
             leftHandTransform.position = Vector3.Lerp(leftHandTransform.position, restHandPositionLeft, t);
             rightHandTransform.position = Vector3.Lerp(rightHandTransform.position, restHandPositionRight, t);
         }
         handTimer = 0;
+        handTimerLeft = 0;
+        leftHandStart = false;
     }
     IEnumerator ejectionTimer()
     {
@@ -637,16 +644,16 @@ public class ConeEjectionAndProjection : MonoBehaviour
         yield return new WaitForSeconds(cadanceDeTire);
         tireDisponible = true;
     }
-    IEnumerator AssistedAim(GameObject cube,GameObject enemy,Vector3 pos)
+    IEnumerator AssistedAim(GameObject cube, GameObject enemy, Vector3 pos)
     {
         float time = 0;
         float t = 0;
-        
+
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
         cube.GetComponent<CheckCollision>().checkCollision = true;
         bool hasCollided = cube.GetComponent<CheckCollision>().hasCollided;
         float dist = 100;
-        while (cube != null && t < 1 && !hasCollided && dist> minimalAssitedDistance )
+        while (cube != null && t < 1 && !hasCollided && dist > minimalAssitedDistance)
         {
             time += Time.fixedDeltaTime;
             t = time / assistedTime;
@@ -654,7 +661,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
             if (time > 0.05f)
             {
                 float velocityMag = cubeRb.velocity.magnitude;
-                if((enemy.transform.position - cubeRb.position + pos != Vector3.zero)){
+                if ((enemy.transform.position - cubeRb.position + pos != Vector3.zero))
+                {
                     cubeRb.velocity = (enemy.transform.position - cubeRb.position + pos).normalized * (velocityMag);
                 }
             }
