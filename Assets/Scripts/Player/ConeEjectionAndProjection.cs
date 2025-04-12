@@ -193,15 +193,15 @@ public class ConeEjectionAndProjection : MonoBehaviour
         Vector3 restHandPositionRight;
         if (initialAngle == 360)
         {
-            leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-90, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
-            rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+90, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+            leftHandFinalPoint = golem.position + Quaternion.AngleAxis(-90, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+            rightHandFinalPoint = golem.position + Quaternion.AngleAxis(+90, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
             restHandPositionLeft = golem.position + Quaternion.AngleAxis(-90, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
             restHandPositionRight = golem.position + Quaternion.AngleAxis(+90, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
         }
         else
         {
-            leftHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
-            rightHandFinalPoint = mainCubeRb.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+            leftHandFinalPoint = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
+            rightHandFinalPoint = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * 20f + new Vector3(0, handHeight, 0);
             restHandPositionLeft = golem.position + Quaternion.AngleAxis(-initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
             restHandPositionRight = golem.position + Quaternion.AngleAxis(+initialAngle, Vector3.up) * golem.forward * fowardDistance + new Vector3(0, handHeight, 0);
         }
@@ -217,14 +217,14 @@ public class ConeEjectionAndProjection : MonoBehaviour
         if (leftHandStart)
         {
             leftHandTransform.position = Vector3.Lerp(restHandPositionLeft, leftHandFinalPoint, Mathf.Cos(handTimerLeft * Mathf.PI - Mathf.PI / 2));
-            handTimerLeft += Time.deltaTime * 1.0f;
+            handTimerLeft += Time.deltaTime * 1.05f;
             handTimerLeft = handTimerLeft % 1;
         }
         else
         {
             leftHandTransform.position = restHandPositionLeft;
         }
-        handTimer += Time.deltaTime * 1.0f;
+        handTimer += Time.deltaTime * 1.05f;
         handTimer = handTimer % 1;
     }
 
