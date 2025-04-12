@@ -14,11 +14,19 @@ public class EventsManager : MonoBehaviour
     [SerializeField] private float beaconMaxRange = 100f;
     [SerializeField] private float beaconDurationBeforePrefabSpawn = 3f;
     [SerializeField] private Vector3 beaconEndScale = new Vector3(15f, 15f, 15f);
-    [SerializeField] private float[] probArray;
+    [SerializeField] private float[] probArraySpawns;
+    [SerializeField] private float[] probArrayPools;
+    public int maxNumberStructure = 3;
+    public int maxNumberPowerUp = 3;
+    public int maxNumberOther = 3;
     private List<GameObject> spawnpoints = new List<GameObject>();
     private float nextEventTime;
     private GameObject selectedEvent;
     private SpawnChanceDistribution spawnChancesDist;
+    private SpawnChanceDistribution structureTypeDist;
+    private int numberOfStructure = 0;
+    private int numberOfOther = 0;
+    private int numberOfPowerUp = 0;
 
     void Start()
     {
@@ -27,86 +35,43 @@ public class EventsManager : MonoBehaviour
             spawnpoints.Add(child.gameObject);
         }
         nextEventTime = Time.time + delayBeforeFirstEvent;
-        spawnChancesDist = new SpawnChanceDistribution(probArray);
+        spawnChancesDist = new SpawnChanceDistribution(probArraySpawns);
+        structureTypeDist = new SpawnChanceDistribution(probArrayPools);
     }
 
     void Update()
     {
-        int totalEventsCount = eventsToSummonOther.Count+eventsToSummonPowerUp.Count+ eventsToSummonStructure.Count;
+        int totalEventsCount = maxNumberPowerUp + maxNumberOther + maxNumberStructure - numberOfOther - numberOfPowerUp - numberOfStructure;
         if (totalEventsCount > 0 && Time.time >= nextEventTime)
         {
             nextEventTime = Time.time + timeBetweenEvents;
-
             int numberOfSpawns = spawnChancesDist.sampleDistribution();
             List<GameObject> spawnAvailable = AvailableSpawns();
             numberOfSpawns = Mathf.Min(numberOfSpawns, spawnAvailable.Count);
 
             for (int i = 0; i < numberOfSpawns; i++) // On parcourt tous les points de spawn, et on tire aléatoirement ceux qui spawnent une structure
             {
-                if (i % 3 == 0)
+                
+                int j = structureTypeDist.sampleDistribution();
+                if (j == 0)
                 {
-                    if (eventsToSummonStructure.Count > 0)
-                    {
-
-                        GameObject item = eventsToSummonStructure[Random.Range(0, eventsToSummonStructure.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position,Quaternion.identity));
-                        eventsToSummonStructure.Remove(item);
-                    }
-                    else if (eventsToSummonPowerUp.Count > 0)
-                    {
-                        GameObject item = eventsToSummonPowerUp[Random.Range(0, eventsToSummonPowerUp.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonPowerUp.Remove(item);
-                    }
-                    else if(eventsToSummonOther.Count > 0)
-                    {
-                        GameObject item = eventsToSummonOther[Random.Range(0, eventsToSummonOther.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonOther.Remove(item);
-                    }
-                }else if(i%3 == 1)
-                {
-                    if (eventsToSummonPowerUp.Count > 0)
-                    {
-                        GameObject item = eventsToSummonPowerUp[Random.Range(0, eventsToSummonPowerUp.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonPowerUp.Remove(item);
-                    }
-                    else if (eventsToSummonOther.Count > 0)
-                    {
-                        GameObject item = eventsToSummonOther[Random.Range(0, eventsToSummonOther.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonOther.Remove(item);
-                    }
-                    else if (eventsToSummonStructure.Count > 0)
-                    {
-                        GameObject item = eventsToSummonStructure[Random.Range(0, eventsToSummonStructure.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonStructure.Remove(item);
-                    }
+                    GameObject item = eventsToSummonStructure[Random.Range(0, eventsToSummonStructure.Count)];
+                    StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
+                    numberOfStructure++;
                 }
-                else
+                if (j == 1)
                 {
-                    if (eventsToSummonOther.Count > 0)
-                    {
-                        GameObject item = eventsToSummonOther[Random.Range(0, eventsToSummonOther.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonOther.Remove(item);
-                    }
-                    else if (eventsToSummonPowerUp.Count > 0)
-                    {
-                        GameObject item = eventsToSummonPowerUp[Random.Range(0, eventsToSummonPowerUp.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonPowerUp.Remove(item);
-                    }
-                    else if (eventsToSummonStructure.Count > 0)
-                    {
-                        GameObject item = eventsToSummonStructure[Random.Range(0, eventsToSummonStructure.Count)];
-                        StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
-                        eventsToSummonStructure.Remove(item);
-                    }
+                    GameObject item = eventsToSummonPowerUp[Random.Range(0, eventsToSummonPowerUp.Count)];
+                    StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
+                    numberOfPowerUp++;
                 }
-
+                if (j == 2)
+                {
+                    GameObject item = eventsToSummonOther[Random.Range(0, eventsToSummonOther.Count)];
+                    StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
+                    numberOfOther++;
+                }
+                redistribute();
             }
         }
         else if (totalEventsCount <= 0)
@@ -115,6 +80,86 @@ public class EventsManager : MonoBehaviour
         }
     }
 
+    public void redistribute()
+    {
+        if (numberOfStructure >= maxNumberStructure && probArrayPools[0] !=0)
+        {
+            int nonZero = 0;
+            float proba  = probArrayPools[0];
+            probArrayPools[0] = 0; 
+            foreach (float prob in probArrayPools)
+            {
+                if (prob != 0)
+                {
+                nonZero++;
+
+                }
+            }
+            if(nonZero > 0)
+            {
+                for (int i = 0; i < probArrayPools.Length; i++)
+                {
+                    if (probArrayPools[i] != 0)
+                    {
+                        probArrayPools[i] += proba / nonZero;
+                    }
+                }
+            }
+            structureTypeDist = new SpawnChanceDistribution(probArrayPools);
+            
+        }
+        else if (numberOfPowerUp >= maxNumberPowerUp && probArrayPools[1] != 0)
+        {
+            int nonZero = 0;
+            float proba = probArrayPools[1];
+            probArrayPools[1] = 0;
+            foreach (float prob in probArrayPools)
+            {
+                if (prob != 0)
+                {
+                    nonZero++;
+
+                }
+            }
+            if (nonZero > 0)
+            {
+                for (int i = 0; i < probArrayPools.Length; i++)
+                {
+                    if (probArrayPools[i] != 0)
+                    {
+                        probArrayPools[i] += proba / nonZero;
+                    }
+                }
+            }
+            structureTypeDist = new SpawnChanceDistribution(probArrayPools);
+        }
+        else if(numberOfOther >= maxNumberOther && probArrayPools[2] != 0)
+        {
+            int nonZero = 0;
+            float proba = probArrayPools[2];
+            probArrayPools[2] = 0;
+            foreach (float prob in probArrayPools)
+            {
+                if (prob != 0)
+                {
+                    nonZero++;
+
+                }
+            }
+            if (nonZero > 0)
+            {
+                for (int i = 0; i < probArrayPools.Length; i++)
+                {
+                    if (probArrayPools[i] != 0)
+                    {
+                        probArrayPools[i] += proba / nonZero;
+                    }
+                }
+            }
+            structureTypeDist = new SpawnChanceDistribution(probArrayPools);
+        }
+
+    }
     private IEnumerator SummonEvent(GameObject eventToSummon, Vector3 loc, Quaternion rot)
     {
         GameObject beaconInstance = Instantiate(spawnBeacon, loc, rot);
@@ -160,5 +205,5 @@ public class EventsManager : MonoBehaviour
         }
         return availableSpawns;
     }
-    
+
 }

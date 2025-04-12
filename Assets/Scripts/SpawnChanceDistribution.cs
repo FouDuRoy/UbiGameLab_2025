@@ -10,19 +10,9 @@ public class SpawnChanceDistribution
 
     public SpawnChanceDistribution(float[] probabilityArray)
     {
-        float somme = 0;
-        foreach (var item in probabilityArray)
-        {
-            somme += item;
-        }
-        if (somme == 1)
-        {
+      
             this.probabilityArray = probabilityArray;
-        }
-        else
-        {
-            throw new System.Exception("Somme des probabilités ne donne pas 1");
-        }
+      
     }
     public int sampleDistribution()
     {
