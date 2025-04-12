@@ -6,15 +6,20 @@ public class WoodBloc : MonoBehaviour
     public float resistance = 5f;
     public GameObject replacementPrefab;
     public GameObject woodSfx;
-
+    public float explosionForce = 50f;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > resistance)
+
+        if (collision.relativeVelocity.magnitude >= resistance)
         {
+           
+
             DestroyAnimation();
         }
     }
+   
+    
 
     public void DestroyAnimation()
     {
@@ -25,8 +30,14 @@ public class WoodBloc : MonoBehaviour
             Destroy(woodSound, 2f); // D�truit le son apr�s 2 secondes
 
             // Instancie le nouveau prefab � la m�me position/rotation
-            Instantiate(replacementPrefab, transform.position, transform.rotation);
-
+            GameObject shardsBloc = Instantiate(replacementPrefab, transform.position, transform.rotation);
+            Vector3 centerOfBloc =  gameObject.transform.position;
+            foreach(Rigidbody rb in shardsBloc.GetComponentsInChildren<Rigidbody>())
+        {
+            rb.AddForce((rb.position-centerOfBloc).normalized*explosionForce,ForceMode.VelocityChange);
+        }
+           
+        
             // D�truit l�objet courant
             gameObject.transform.parent.gameObject.SetActive(false);
             Destroy(gameObject.transform.parent.gameObject);

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class DummyShockDetection : MonoBehaviour
@@ -13,7 +14,7 @@ public class DummyShockDetection : MonoBehaviour
 
     private Rigidbody rb;
     private int nHits = 0;
-
+    bool canTrigger = true;
     void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
@@ -26,61 +27,74 @@ public class DummyShockDetection : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject hitter = collision.collider.gameObject;
-        Bloc hitterComponent = hitter.GetComponent<Bloc>();
-
-        if (hitterComponent != null)
+        if (canTrigger)
         {
-            string ownerHitter = hitterComponent.owner;
-            string ownerHitted = transform.parent.name;
-            BlocState stateHitter = hitterComponent.state;
-            bool projectileFromOtherPlayer = stateHitter == BlocState.projectile && (ownerHitter != ownerHitted);
+            GameObject hitter = collision.collider.gameObject;
+            Bloc hitterComponent = hitter.GetComponent<Bloc>();
 
-            if (projectileFromOtherPlayer)
+            if (hitterComponent != null)
             {
-                Vector3 hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
-                Vector3 projectileVelocity  = hitterVelocity;
+                string ownerHitter = hitterComponent.owner;
+                string ownerHitted = transform.parent.name;
+                BlocState stateHitter = hitterComponent.state;
+                bool projectileFromOtherPlayer = stateHitter == BlocState.projectile && (ownerHitter != ownerHitted);
 
-                if (projectileVelocity.magnitude > victoryConditionSpeedRange)
+                if (projectileFromOtherPlayer)
                 {
-                    DoRotation();
+                    Vector3 hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
+                    Vector3 projectileVelocity = hitterVelocity;
 
-                    if (shootTutoUI.isActiveAndEnabled)
+                    if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                     {
-                        nHits++;
-                        if (nHits >= nShootHits)
+                        DoRotation();
+
+                        if (shootTutoUI.isActiveAndEnabled)
                         {
-                            shootTutoUI.NextTuto();
+                            nHits++;
+                            if (nHits >= nShootHits)
+                            {
+                                shootTutoUI.NextTuto();
+                            }
                         }
+
                     }
-                    
                 }
-            }
-            bool meleeFromOtherPlayer = stateHitter == BlocState.structure && (ownerHitter != ownerHitted);
-            if (meleeFromOtherPlayer)
-            {
-                Vector3 hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
-                Vector3 projectileVelocity = hitterVelocity;
-
-                if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
+                bool meleeFromOtherPlayer = stateHitter == BlocState.structure && (ownerHitter != ownerHitted);
+                if (meleeFromOtherPlayer)
                 {
-                    DoRotation();
+                    Vector3 hitterVelocity = hitter.GetComponent<StoredVelocity>().lastTickVelocity;
+                    Vector3 projectileVelocity = hitterVelocity;
 
-                    if (cacTutoUI.isActiveAndEnabled)
+                    if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                     {
-                        nHits++;
-                        if (nHits >= nCacHits)
+                        DoRotation();
+
+                        if (cacTutoUI.isActiveAndEnabled)
                         {
-                            cacTutoUI.NextTuto();
+                            nHits++;
+                            if (nHits >= nCacHits)
+                            {
+                                cacTutoUI.NextTuto();
+                            }
                         }
                     }
                 }
             }
         }
+
     }
 
     private void DoRotation()
     {
+        rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePosition;
         rb.AddTorque(0, 100f, 0, ForceMode.VelocityChange);
+        StartCoroutine(waitSomeTImeAndReset());
+
+    }
+    IEnumerator waitSomeTImeAndReset()
+    {
+        yield return new WaitForSeconds(2f);
+        rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePosition;
+        canTrigger = true;
     }
 }

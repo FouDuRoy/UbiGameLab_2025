@@ -61,9 +61,9 @@ public class SpringBlocEjection : MonoBehaviour
 
         bool areOwnedByPlayers = ownerHitter.Contains("Player") && ownerHitted.Contains("Player");
         bool playerHittedByotherPlayerStructure = ownerHitter != ownerHitted && stateHitted == BlocState.structure && stateHitter == BlocState.structure;
-
         if (playerHittedByotherPlayerStructure && areOwnedByPlayers)
         {
+            
             gridSystem = hittedComponent.ownerTranform.GetComponent<GridSystem>();
             playerObjects = hittedComponent.ownerTranform.GetComponent<PlayerObjects>();
             mainCubeRb = playerObjects.cubeRb;
@@ -78,7 +78,7 @@ public class SpringBlocEjection : MonoBehaviour
             Vector3 hitterVelocityBeforeImpact = (hitterMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitter.transform.position - hitterMainRb.position), hitterMainRb.angularVelocity));
             float hitterVelocity = (hitterMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitter.transform.position - hitterMainRb.position), hitterMainRb.angularVelocity)).magnitude;
             float hittedVelocityMag = (hittedMainRb.GetComponent<StoredVelocity>().lastTickVelocity + Vector3.Cross((hitted.transform.position - hittedMainRb.position), hittedMainRb.angularVelocity)).magnitude;
-
+            Debug.Log(hitterVelocity + " " + hittedVelocityMag);
             if (hitterVelocity > velocityTresholdMelee && hitterVelocity > hittedVelocityMag)
             {
 

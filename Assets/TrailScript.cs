@@ -28,7 +28,7 @@ public class TrailScript : MonoBehaviour
     void Update()
     {
         string owner = blocScript.owner;
-        if (owner.Contains("Player"))
+        if (owner.Contains("Player") && !owner.Contains("Dummy"))
         {
             rb = parentBloc.GetComponent<Rigidbody>();
             winCon = blocScript.ownerTranform.GetComponent<PlayerObjects>().cubeRb.gameObject.GetComponent<WinCondition>();
