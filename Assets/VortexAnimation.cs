@@ -12,8 +12,10 @@ public class VortexAnimation : MonoBehaviour
     public float fadeOutTime = 1f;
     private ParticleSystem.MainModule mainModule;
     bool isActive = false;
+    Transform golem;
     void Start()
     {
+        golem = GetComponent<PlayerObjects>().golem.transform;
         seuil = GetComponentInChildren<PlayerObjects>().cubeRb.gameObject.GetComponent<WinCondition>().victoryConditionSpeedMelee;
         gridPlayer = GetComponent<GridSystem>();
         vortexParticle = vortex.GetComponent<ParticleSystem>();
@@ -28,6 +30,7 @@ public class VortexAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        StartCoroutine(RotationDirecton());
         foreach (var v in gridPlayer.grid)
         {
             if (gridPlayer.grid.Count > 1)
@@ -38,15 +41,10 @@ public class VortexAnimation : MonoBehaviour
                     + Vector3.Cross((v.Value.transform.position - gridPlayer.kernel.transform.position), gridPlayer.kernel.GetComponent<Rigidbody>().angularVelocity)).magnitude;
 
 
-                var vortexModule = vortexParticle.velocityOverLifetime;
 
                 // Fait tourner le vortex selon la rotation Y du joueur (pour l'effet visuel)
-                float rotationY = gridPlayer.kernel.transform.eulerAngles.z;
-                float dynamicValue = Mathf.Sin(rotationY * Mathf.Deg2Rad) * 10f;
 
-                vortexModule.orbitalZ = new ParticleSystem.MinMaxCurve(dynamicValue);
-
-                //Debug.Log("CubeVelMag:" + cubeVeolcityMag);
+                StartCoroutine(RotationDirecton());
                 if (rb != null && cubeVeolcityMag >= seuil)
                 {
                     if (!isActive)
@@ -93,6 +91,22 @@ public class VortexAnimation : MonoBehaviour
             mainModule.startColor = color;
             yield return new WaitForSeconds(Time.deltaTime);
             timer += Time.deltaTime;
+        }
+    }
+    IEnumerator RotationDirecton()
+    {
+        Vector3 lastFoward = golem.transform.forward;
+        yield return new WaitForSeconds(0.05f);
+        Vector3 newFoward  = golem.transform.forward;
+        var vortexModule = vortexParticle.velocityOverLifetime;
+        float angle = Vector3.Angle(lastFoward, newFoward);
+        if(angle > 0)
+        {
+            vortexModule.orbitalZ = new ParticleSystem.MinMaxCurve(10);
+        }
+        else
+        {
+            vortexModule.orbitalZ = new ParticleSystem.MinMaxCurve(-10);
         }
     }
 }
