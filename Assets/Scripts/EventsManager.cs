@@ -175,7 +175,7 @@ public class EventsManager : MonoBehaviour
             while (elapsedTime < beaconDurationBeforePrefabSpawn)
             {
                 elapsedTime += Time.deltaTime;
-                beaconLight.range = Mathf.Lerp(2f, 1.25f*eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
+                beaconLight.range = Mathf.Lerp(3f, 1.25f*eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
                 sphere.GetComponent<CapsuleCollider>().radius = Mathf.Lerp(0, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
                 yield return new WaitForSeconds(Time.deltaTime);
             }
