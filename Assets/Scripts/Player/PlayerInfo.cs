@@ -30,7 +30,7 @@ public class PlayerInfo : MonoBehaviour
     public float waitTimeBeforeVictoryCanvas = 3f;
     private Animator animator;
 
-    [Header("D�bogage")]
+    [Header("Debogage")]
     [SerializeField] GameObject playerLife;
     [SerializeField] bool isInvincible;
 
@@ -56,12 +56,7 @@ public class PlayerInfo : MonoBehaviour
     // Call this function when player gets hit
     public void TakeDamage(string attackerName,Vector3 impactForce, bool melee)
     {
-        if(isInvincible)
-        {
-            this.GetComponent<HapticFeedbackController>().damageTakenVibration();
-            deathRotation(attackerName);
-        }
-        else
+        if(!isInvincible)
         {
             if (!invun)
             {
