@@ -10,11 +10,16 @@ public class WoodBloc : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > resistance)
+
+        if (collision.relativeVelocity.magnitude >= resistance)
         {
+           
+
             DestroyAnimation();
         }
     }
+   
+    
 
     public void DestroyAnimation()
     {

@@ -3322,13 +3322,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5575491520477246735}
+  - component: {fileID: 8187541985528235362}
   m_Layer: 0
   m_Name: PowerupCaged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5575491520477246735
 Transform:
   m_ObjectHideFlags: 0
@@ -3358,6 +3359,19 @@ Transform:
   - {fileID: 3938349564533301055}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8187541985528235362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4647112407020119088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643f3a7f13e34014f9fd86804dff2cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diametre: 10
 --- !u!1 &4661609966007930228
 GameObject:
   m_ObjectHideFlags: 0
@@ -4575,7 +4589,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!135 &8237316127334014788
 SphereCollider:
