@@ -250,6 +250,12 @@ public class DynamicCamera : MonoBehaviour
         mainCamUI.enabled = false;
 
         eventsManager.gameObject.SetActive(false);
+        ScriptToDisableOnVictory[] allInstances = FindObjectsOfType<ScriptToDisableOnVictory>();
+
+        foreach (ScriptToDisableOnVictory instance in allInstances)
+        {
+            instance.gameObject.SetActive(false);
+        }
         StartCoroutine(SmoothTransitionToPodium(winner, winnerCam, looserCam, looserCamTime, middleCamTime, transitionToPodiumDuration));
     }
 

@@ -108,10 +108,8 @@ public class PlayerInfo : MonoBehaviour
                     }
                     GetComponent<PlayerInput>().actions.Disable();
                     attackerName.GetComponent<PlayerInput>().actions.Disable();
-                    //attackerName.GetComponent<PlayerInput>().currentActionMap.Disable();
 
                     deathRotation(attackerName.name);
-                    //StartCoroutine(gameOver(attackerName));
 
                 }
             }
