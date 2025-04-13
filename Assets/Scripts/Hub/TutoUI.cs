@@ -24,6 +24,7 @@ public class TutoUI : MonoBehaviour
     [SerializeField] private Sprite foncerInput;
     [SerializeField] private Sprite shootInput;
     [SerializeField] private Sprite cacInput;
+    [SerializeField] private GameObject animatedCacInput;
     [SerializeField] private GridSystem dummyGrid;
     [SerializeField] private GameObject doorBarriere;
 
@@ -107,6 +108,11 @@ public class TutoUI : MonoBehaviour
             normalPlayerSpeed = playerMouvement.mouvementSpeed;
             playerMouvement.mouvementSpeed = 0;
             playerDash.canDash = false;
+        }
+
+        if (tutoType != TutoType.Cac)
+        {
+            animatedCacInput.SetActive(false);
         }
     }
 
