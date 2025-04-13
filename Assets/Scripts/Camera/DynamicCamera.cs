@@ -234,8 +234,7 @@ public class DynamicCamera : MonoBehaviour
         GameObject winner;
         Camera winnerCam;
         Camera looserCam;
-
-        if (Player1.name == winnerName)
+        if (Player1.transform.parent.name == winnerName)
         {
             winner = Player1;
             winnerCam = redCam;
