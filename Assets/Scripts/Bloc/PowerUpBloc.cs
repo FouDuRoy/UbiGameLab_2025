@@ -203,6 +203,7 @@ public class PowerUpBloc : MonoBehaviour
                 time += Time.deltaTime;
             }
             ownerTransform.GetComponent<PlayerMouvement>().moveType = MouvementType.Joystick4;
+            ownerTransform.GetComponent<PlayerObjects>().healthBar.GetComponent<HealthBar>().AddPowerup("HyperVitesse", HyperViteTimer);
             Destroy(gameObject);
         }
     }
