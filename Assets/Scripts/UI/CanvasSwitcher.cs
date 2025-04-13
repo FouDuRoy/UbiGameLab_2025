@@ -7,6 +7,12 @@ public class CanvasSwitcher : MonoBehaviour
 {
     public GameObject[] canvases;
 
+    private void Start()
+    {
+        PlayerPrefs.SetInt("Player1 Spring TEST", 0);
+        PlayerPrefs.SetInt("Player2 Spring TEST", 0);
+    }
+
     public void ShowOnly(GameObject canvasToShow)
     {
         foreach (var canvas in canvases)

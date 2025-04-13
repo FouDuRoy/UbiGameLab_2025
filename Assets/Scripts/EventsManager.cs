@@ -58,18 +58,21 @@ public class EventsManager : MonoBehaviour
                     GameObject item = eventsToSummonStructure[Random.Range(0, eventsToSummonStructure.Count)];
                     StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position+new Vector3(0,0.01f,0), Quaternion.identity));
                     numberOfStructure++;
+                    eventsToSummonStructure.Remove(item);
                 }
                 if (j == 1)
                 {
                     GameObject item = eventsToSummonPowerUp[Random.Range(0, eventsToSummonPowerUp.Count)];
                     StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position+ new Vector3(0, 0.01f, 0), Quaternion.identity));
                     numberOfPowerUp++;
+                    eventsToSummonPowerUp.Remove(item);
                 }
                 if (j == 2)
                 {
                     GameObject item = eventsToSummonOther[Random.Range(0, eventsToSummonOther.Count)];
                     StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position+ new Vector3(0, 0.01f, 0), Quaternion.identity));
                     numberOfOther++;
+                    eventsToSummonOther.Remove(item);
                 }
                 redistribute();
             }
@@ -182,6 +185,7 @@ public class EventsManager : MonoBehaviour
         beaconInstance.SetActive(false);
 
         yield return new WaitForEndOfFrame();
+        eventToSummon.transform.parent = null;
         eventToSummon.transform.position = beaconInstance.transform.position;
         eventToSummon.transform.rotation = Quaternion.identity;
         eventToSummon.SetActive(true);
