@@ -104,7 +104,7 @@ public class VortexAnimation : MonoBehaviour
         Vector3 newFoward  = golem.transform.forward;
         var vortexModule = vortexParticle.velocityOverLifetime;
         float angle = Vector3.SignedAngle(lastFoward, newFoward,Vector3.up);
-        if(angle > 0)
+        if(angle > 0 || GetComponent<PlayerMouvement>().moveType == MouvementType.HyperVite)
         {
             vortexModule.orbitalZ = new ParticleSystem.MinMaxCurve(0,10);
         }

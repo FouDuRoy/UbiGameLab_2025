@@ -149,7 +149,6 @@ public class ConeEjectionAndProjection : MonoBehaviour
                     GenerateMesh(initialAngle);
 
                 }
-                Debug.Log("here");
                 animator.SetBool("IsPulling", true);
                 visionConeObject.SetActive(true);
 
