@@ -517,7 +517,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
         Bloc cubeBloc = cube.GetComponent<Bloc>();
-        cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
+        if(cube.tag != "explosive")
+        {
+            cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
+        }
         cubeRb.interpolation = RigidbodyInterpolation.Interpolate;
         animator.SetTrigger("IsEjecting");
 
