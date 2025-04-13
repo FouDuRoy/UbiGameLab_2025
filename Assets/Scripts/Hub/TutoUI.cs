@@ -44,7 +44,6 @@ public class TutoUI : MonoBehaviour
         {
             if (dummyGrid.grid.Count< lastGridCount)
             {
-                Debug.Log("here");
                 NextTuto();
             }
         }
