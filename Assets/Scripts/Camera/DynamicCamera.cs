@@ -28,7 +28,6 @@ public class DynamicCamera : MonoBehaviour
     [Header("Global")]
     [SerializeField] private bool isOrthographic = true;
     [SerializeField] private bool simpleCamera = false;
-    [SerializeField] private bool tutoCam = false;
     [SerializeField] private float maxSpeed = Mathf.Infinity;
     [SerializeField] private float horizontalInterpTime = .1f;
     [SerializeField] private float distanceInterpTime = .6f;
@@ -36,6 +35,10 @@ public class DynamicCamera : MonoBehaviour
     [SerializeField] private float maxRotSpeed = 50f;
     [SerializeField] private float minCamDistanceForRot = 12.1f;
     [SerializeField] private float rotationSwitchThreshold = 5f;
+    [Header("Hub Parameters")]
+    [SerializeField] private bool tutoCam = false;
+    [SerializeField] private float minZ = -10f;
+    [SerializeField] private float maxZ = -3f;
     [Header("Main Cam")]
     [SerializeField] private float distanceFromPlayersFactor = .7f;
     [SerializeField] private float minDistance=12f;
@@ -161,8 +164,16 @@ public class DynamicCamera : MonoBehaviour
             playerOnePlanePos = new Vector3(Player1.transform.position.x, 0, Player1.transform.position.z);
             playerTwoPlanePos = new Vector3(Player2.transform.position.x, 0, Player2.transform.position.z);
             arenaCenterPlanePos = new Vector3(ArenaCenter.transform.position.x, 0, ArenaCenter.transform.position.z);
+            
+            Vector3 targetPos = (playerOnePlanePos + playerTwoPlanePos + arenaCenterPlanePos) / 3;
 
-            transform.position = Vector3.SmoothDamp(transform.position, (playerOnePlanePos + playerTwoPlanePos + arenaCenterPlanePos) / 3, ref currentHorizontalVelocity, horizontalInterpTime, maxSpeed);
+            if (tutoCam)
+            {
+                targetPos.x = 0;
+                targetPos.z = Mathf.Clamp(targetPos.z, minZ, maxZ);
+            }
+
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref currentHorizontalVelocity, horizontalInterpTime, maxSpeed);
             PlayersCenter.position= Vector3.SmoothDamp(PlayersCenter.position, (playerOnePlanePos + playerTwoPlanePos) / 2, ref currentPlayersCenterVelocity, horizontalInterpTime, maxSpeed);
 
             // DISTANCE DE LA CAMERA PAR RAPPORT AU PIVOT DE L'OBJET DYNAMIC CAMERA
