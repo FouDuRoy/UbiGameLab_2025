@@ -63,6 +63,7 @@ public class VortexAnimation : MonoBehaviour
         if (isActive)
         {
             isActive = false;
+            feedback.MeleeSpeedVibrationEnd();
             StartCoroutine(FadeOut());
         }
     }
