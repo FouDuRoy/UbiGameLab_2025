@@ -59,6 +59,17 @@ public class HealthBar : MonoBehaviour
             case ("HyperVitesse"): SetVisible(true, HyperVitesse); break;
         }
     }
+
+    public void DisablePowerUp(string powerupName)
+    {
+        switch (powerupName)
+        {
+            case ("GigaRepulsion"): SetVisible(false, GigaRepulsion); break;
+            case ("SuperDash"): SetVisible(false, SuperDash); break;
+            case ("AttractionOmnisciente"): SetVisible(false, AttractionOmnisciente); break;
+            case ("HyperVitesse"): SetVisible(false, HyperVitesse); break;
+        }
+    }
     public void SetVisible(bool visible, GameObject text)
     {
         text.SetActive(visible);
