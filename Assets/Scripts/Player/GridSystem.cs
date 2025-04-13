@@ -50,7 +50,7 @@ public class GridSystem : MonoBehaviour
     public GameObject attachBlocSound;
     public GameObject detachBlocSound;
     public float detachBlocWaitTime = 0.2f;
-    public int detachBlocMaxSound = 5;
+    public int detachBlocMaxSound = 1;
     private void Start()
     {
         kernel = transform.GetComponent<PlayerObjects>().cubeRb.gameObject;
