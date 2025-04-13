@@ -45,6 +45,7 @@ public class GridSystem : MonoBehaviour
 
     [Header("SFX")]
     public GameObject attachBlocSound;
+    public GameObject detachBlocSound;
 
     private void Start()
     {
@@ -180,6 +181,13 @@ public class GridSystem : MonoBehaviour
             gridToAttach.DetachBlocSingle(bloc);
             bloc.GetComponent<Bloc>().state = BlocState.detached;
         }
+        if (attachBlocSound != null)
+        {
+            GameObject sound = Instantiate(attachBlocSound, transform.position, Quaternion.identity);
+            sound.transform.parent = null;
+            sound.GetComponent<AudioSource>().Play();
+            Destroy(sound, 2f); // Détruit le son après 2 secondes
+        }
     }
     public void DetachBlock(GameObject bloc)
     {
@@ -190,6 +198,15 @@ public class GridSystem : MonoBehaviour
             playerObj.removeCube(grid[detachedGridPos]);
             grid.Remove(detachedGridPos);
             playerObj.weight -= bloc.GetComponent<Bloc>().weight;
+
+            //Déclenche le son detache à chaque bloc qui s'attache
+            if (attachBlocSound != null)
+            {
+                GameObject sound = Instantiate(detachBlocSound, transform.position, Quaternion.identity);
+                sound.transform.parent = null;
+                sound.GetComponent<AudioSource>().Play();
+                Destroy(sound, 2f); // Détruit le son après 2 secondes
+            }
 
 
 
@@ -217,6 +234,8 @@ public class GridSystem : MonoBehaviour
     }
     public void DetachBlocSingleProjection(GameObject bloc)
     {
+ 
+
         Vector3Int detachedGridPos = findFirstKey(bloc);
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
         {
@@ -228,6 +247,15 @@ public class GridSystem : MonoBehaviour
     }
     public void DetachBlocSingle(GameObject bloc)
     {
+        //Déclenche le son detache à chaque bloc qui s'attache
+        if (attachBlocSound != null)
+        {
+            GameObject sound = Instantiate(detachBlocSound, transform.position, Quaternion.identity);
+            sound.transform.parent = null;
+            sound.GetComponent<AudioSource>().Play();
+            Destroy(sound, 2f); // Détruit le son après 2 secondes
+        }
+
         Vector3Int detachedGridPos = findFirstKey(bloc);
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
         {
@@ -239,6 +267,15 @@ public class GridSystem : MonoBehaviour
     }
     public void DetachBlocSingleCollisionRanged(GameObject bloc)
     {
+        //Déclenche le son detache à chaque bloc qui s'attache
+        if (attachBlocSound != null)
+        {
+            GameObject sound = Instantiate(detachBlocSound, transform.position, Quaternion.identity);
+            sound.transform.parent = null;
+            sound.GetComponent<AudioSource>().Play();
+            Destroy(sound, 2f); // Détruit le son après 2 secondes
+        }
+
         Vector3Int detachedGridPos = findFirstKey(bloc);
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
         {
@@ -250,6 +287,15 @@ public class GridSystem : MonoBehaviour
     }
     public void DetachBlocSingleCollisionMelee(GameObject bloc)
     {
+        //Déclenche le son detache à chaque bloc qui s'attache
+        if (attachBlocSound != null)
+        {
+            GameObject sound = Instantiate(detachBlocSound, transform.position, Quaternion.identity);
+            sound.transform.parent = null;
+            sound.GetComponent<AudioSource>().Play();
+            Destroy(sound, 2f); // Détruit le son après 2 secondes
+        }
+
         Vector3Int detachedGridPos = findFirstKey(bloc);
         if (grid.ContainsKey(detachedGridPos) && grid[detachedGridPos] == bloc)
         {

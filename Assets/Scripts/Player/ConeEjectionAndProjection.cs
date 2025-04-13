@@ -85,6 +85,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
     public float cadanceDeTire = 0.2f;
     bool tireDisponible = true;
 
+    [Header("SFX")]
+    public GameObject attractionSfx;
+    public GameObject repulsionStartSfx;
+    public GameObject repulsionLoopSfx;
+    public GameObject repulsionThrowSfx;
+
     void OnEnable()
 
     {
@@ -138,6 +144,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         {
             if (leftTriggerHeld == false)
             {
+                if (attractionSfx != null && !leftTriggerHeld)
+                    attractionSfx.GetComponent<AudioSource>().Play();
                 feedback.AttractionVibrationStart();
                 if (initialAngle == 360)
                 {
@@ -175,6 +183,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         else if (leftTriggerHeld)
         {
             animator.SetBool("IsPulling", false);
+            if (attractionSfx != null)
+                attractionSfx.GetComponent<AudioSource>().Stop();
             feedback.AttractionVibrationEnd();
             leftTriggerHeld = false;
             leftRay.gameObject.SetActive(false);
@@ -231,6 +241,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
     {
         if (rightTrigger > 0 && lastHold == "right" && tireDisponible)
         {
+            if (repulsionLoopSfx && ! rightTriggerHeld)
+                repulsionLoopSfx.GetComponent<AudioSource>().Play();
             animator.SetTrigger("IsChargingLaunch");
             leftRay.gameObject.SetActive(true);
             rightRay.gameObject.SetActive(true);
@@ -246,7 +258,8 @@ public class ConeEjectionAndProjection : MonoBehaviour
         }
         else if (rightTriggerHeld)
         {
-
+            if (repulsionLoopSfx != null)
+                repulsionLoopSfx.GetComponent<AudioSource>().Stop();
             if (lastHold == "right" || cancelEjectionShoot)
             {
                 coneProjection();
@@ -351,7 +364,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
 
     public void coneProjection()
     {
-        if (blocsToEject.Count > 0) { feedback.RepulsionVibrationShoot(blocsToEject.Count); }
+        if (blocsToEject.Count > 0) { 
+            feedback.RepulsionVibrationShoot(blocsToEject.Count);
+            if (repulsionThrowSfx != null) repulsionThrowSfx.GetComponent<AudioSource>().Play();
+        }
 
         for (int i = 0; i < blocsToEject.Count && i < nbBlocsSelect; i++)
         {
@@ -433,6 +449,15 @@ public class ConeEjectionAndProjection : MonoBehaviour
                 potentialBlocs.First().GetComponent<PowerUpBloc>().active = false;
             }
             feedback.RepulsionVibrationSelect();
+            if (repulsionStartSfx != null)
+            {
+                if (rightTriggerHeld)
+                {
+                    repulsionStartSfx.GetComponent<AudioSource>().Stop();
+                }
+                repulsionStartSfx.GetComponent<AudioSource>().Play();
+            }
+                
             placeBolcAtPosition(potentialBlocs.First(), blocsToEject.Count);
             blocsToEject.Add(potentialBlocs.First());
             if (potentialBlocs.First().tag != "explosive")
@@ -517,7 +542,10 @@ public class ConeEjectionAndProjection : MonoBehaviour
         float rightDrift = golem.InverseTransformPoint(cube.transform.position).x;
         Rigidbody cubeRb = cube.GetComponent<Rigidbody>();
         Bloc cubeBloc = cube.GetComponent<Bloc>();
-        cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
+        if(cube.tag != "explosive")
+        {
+            cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
+        }
         cubeRb.interpolation = RigidbodyInterpolation.Interpolate;
         animator.SetTrigger("IsEjecting");
 

@@ -20,6 +20,10 @@ public class Dash : MonoBehaviour
     private float lastDashTime;
     private bool isDashing = false;
     private List<GameObject> blocsToDestroy = new List<GameObject>();
+
+    [Header("SFX")]
+    public GameObject dashSfxPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +49,13 @@ public class Dash : MonoBehaviour
         float OG_angularDrag = playerRb.angularDrag;
         int oldLayer = playerRb.gameObject.layer;
         playerRb.gameObject.layer = 0;
-
+        if (dashSfxPrefab != null)
+        {
+            GameObject dashSfxInstance = Instantiate(dashSfxPrefab, playerGolem.position, Quaternion.identity);
+            dashSfxInstance.transform.parent = null;
+            dashSfxInstance.GetComponent<AudioSource>().Play();
+            Destroy(dashSfxInstance, 3f);
+        }
         if (superDash) { playerRb.AddForce(playerGolem.transform.forward * superDashForce, ForceMode.VelocityChange); }
         else { playerRb.AddForce(playerGolem.transform.forward * dashForce, ForceMode.VelocityChange); }
 

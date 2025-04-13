@@ -98,10 +98,13 @@ public class ExplosiveBloc : MonoBehaviour
         ps.Play();
 
         // Instantiate the explosion sound prefab
-        GameObject explosionSound = Instantiate(explosionSfx, transform.position, Quaternion.identity);
-        explosionSound.transform.parent = null;
-        explosionSound.GetComponent<AudioSource>().Play();
-        Destroy(explosionSound, 2f); // Destroy the sound after 2 seconds
+        if (explosionSfx != null)
+        {
+            GameObject explosionSound = Instantiate(explosionSfx, transform.position, Quaternion.identity);
+            explosionSound.transform.parent = null;
+            explosionSound.GetComponent<AudioSource>().Play();
+            Destroy(explosionSound, 2f); // Destroy the sound after 2 seconds
+        }
 
         gameObject.GetComponent<Feromagnetic>().enabled = false;
         gameObject.SetActive(false);
