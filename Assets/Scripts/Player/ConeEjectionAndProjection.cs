@@ -449,9 +449,12 @@ public class ConeEjectionAndProjection : MonoBehaviour
                 potentialBlocs.First().GetComponent<PowerUpBloc>().active = false;
             }
             feedback.RepulsionVibrationSelect();
-            if (repulsionStartSfx != null && !rightTriggerHeld)
+            if (repulsionStartSfx != null)
             {
-                repulsionStartSfx.GetComponent<AudioSource>().Stop();
+                if (rightTriggerHeld)
+                {
+                    repulsionStartSfx.GetComponent<AudioSource>().Stop();
+                }
                 repulsionStartSfx.GetComponent<AudioSource>().Play();
             }
                 
