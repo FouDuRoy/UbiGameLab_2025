@@ -2857,12 +2857,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: head
+      value: 
+      objectReference: {fileID: 1861905450}
+    - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 1067731722}
+    - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 632640108}
+    - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: restartButton
       value: 
       objectReference: {fileID: 1223009364796463342}
     - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: MaxhealthValue
-      value: 500
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: gameOverCanvas
@@ -11085,6 +11097,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630311435}
   m_Mesh: {fileID: -1973634747195519125, guid: 3771e5cc8e4d040409e82a57c733babe, type: 3}
+--- !u!1 &632640108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6654170369333816292, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+  m_PrefabInstance: {fileID: 111579645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &638993221
 GameObject:
   m_ObjectHideFlags: 0
@@ -17289,6 +17306,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058883421}
   m_Mesh: {fileID: -6678361892642643750, guid: 7294b16a8b222cc41a569e76dffa090e, type: 3}
+--- !u!1 &1067731722 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8860950315926458497, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+  m_PrefabInstance: {fileID: 111579645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1070261666
 GameObject:
   m_ObjectHideFlags: 0
@@ -29618,12 +29640,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: head
+      value: 
+      objectReference: {fileID: 1709085653}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 1709085655}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 1709085654}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: healthValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: restartButton
       value: 
       objectReference: {fileID: 1416809245861774915}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: MaxhealthValue
-      value: 500
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: gameOverCanvas
@@ -29750,6 +29788,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1678f8ab799147e40989feca7a7d18b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1709085653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4074736979272141486, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+  m_PrefabInstance: {fileID: 1709085650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1709085654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1862240799605597601, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+  m_PrefabInstance: {fileID: 1709085650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1709085655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4573464569208889028, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+  m_PrefabInstance: {fileID: 1709085650}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1709085658 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7850894500233854463, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
@@ -32619,6 +32672,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860344929}
   m_Mesh: {fileID: 7313628527435144869, guid: 7294b16a8b222cc41a569e76dffa090e, type: 3}
+--- !u!1 &1861905450 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9010578223809119467, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+  m_PrefabInstance: {fileID: 111579645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1864275987
 GameObject:
   m_ObjectHideFlags: 0
