@@ -86,6 +86,9 @@ public class DynamicCamera : MonoBehaviour
     public GameObject music;
     public GameObject victory;
 
+    Vector3 leftHandPosition = new Vector3(-0.985789299f, 0.175135911f, -1.12082407e-05f);
+    Vector3 rightHandPosition = new Vector3(0.985789001f, 0.175135985f, -1.12082407e-05f);
+    Vector3 headPosition = new Vector3(1.00119059e-05f, 0.98307097f, 0.00120564131f);
     private void Awake()
     {
         if (!tutoCam)
@@ -277,7 +280,9 @@ public class DynamicCamera : MonoBehaviour
 
         looserCam.enabled = true;
         mainCam.enabled = false;
-
+        winner.transform.parent.GetComponent<PlayerInfo>().head.transform.localPosition = headPosition;
+        winner.transform.parent.GetComponent<PlayerInfo>().leftHand.transform.localPosition = leftHandPosition;
+        winner.transform.parent.GetComponent<PlayerInfo>().rightHand.transform.localPosition = rightHandPosition;
         StartCoroutine(FadeOutAudio(music.GetComponent<AudioSource>(), looserCamTime + middleCamTime));
         yield return new WaitForSeconds(looserCamTime);
 

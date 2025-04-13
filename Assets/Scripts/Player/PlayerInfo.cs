@@ -40,6 +40,9 @@ public class PlayerInfo : MonoBehaviour
     public GameObject takeDamangeSfx;
     public GameObject dieSfx;
 
+    public GameObject leftHand;
+    public GameObject rightHand;
+    public GameObject head;
     void OnEnable()
     {
         animator = GetComponentInChildren<Animator>();

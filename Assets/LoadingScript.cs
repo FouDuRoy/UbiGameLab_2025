@@ -18,6 +18,7 @@ public class LoadingScript : MonoBehaviour
         player1Input.actions.Disable();
         player2Input.actions.Disable();
         player1Input.enabled = false;
+        audioSource.SetActive(false);
         StartCoroutine(load());
     }
 
@@ -31,6 +32,7 @@ public class LoadingScript : MonoBehaviour
         yield return new WaitForSeconds(3f);
         player1Input.actions.Enable();
         player2Input.actions.Enable();
+        audioSource.SetActive(true);
         gameObject.SetActive(false);
     }
 }

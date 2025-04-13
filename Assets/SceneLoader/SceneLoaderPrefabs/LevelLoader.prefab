@@ -345,7 +345,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2437441512028271937}
-  - {fileID: 6985337373740465284}
   - {fileID: 7225271163955481603}
   m_Father: {fileID: 8651512354210381010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -480,7 +479,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 0.20000002, z: 0.20000002}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6985337373740465284}
   m_Father: {fileID: 6357197230223820588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -563,16 +563,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5579609325393333520}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6357197230223820588}
+  m_Father: {fileID: 7225271163955481603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -650.7, y: 0}
+  m_AnchoredPosition: {x: -175, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7336979978029604749
@@ -623,6 +623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8651512354210381010}
   - component: {fileID: 1010003528032144962}
+  - component: {fileID: 188703314550806826}
   m_Layer: 0
   m_Name: LevelLoader
   m_TagString: Untagged
@@ -663,6 +664,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 3984987677205067494}
   transitionTime: 1
+--- !u!114 &188703314550806826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050292174229414016}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0585dbe5b2d4a43a59bf6d13134c43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!1 &6430838201980079459
 GameObject:
   m_ObjectHideFlags: 0
