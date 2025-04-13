@@ -107,7 +107,7 @@ public class PlayerInfo : MonoBehaviour
                     }else{
                         cubeRb.AddForce(impactForce.normalized * impulsionWhenHitRanged*1.5f, ForceMode.VelocityChange);
                     }
-                    deathRotation(gameObject.name);
+                    deathRotation(attackerName.name);
                     GetComponent<PlayerInput>().enabled = false;
                     attackerName.GetComponent<PlayerInput>().enabled=false;
                     //StartCoroutine(gameOver(attackerName));

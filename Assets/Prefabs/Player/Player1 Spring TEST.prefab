@@ -178,12 +178,12 @@ MonoBehaviour:
     rightMotorMax: 0.4
     rightMidTime: 0.02
     totalDuration: 0.06
-  meleMove:
-    leftMotorMax: 0.5
-    leftMidTime: 0
-    rightMotorMax: 0.5
-    rightMidTime: 0.02
-    totalDuration: 0.06
+  movementEnoughForMelee:
+    leftMotorMin: 0
+    leftMotorMax: 0
+    rightMotorMin: 0
+    rightMotorMax: 0
+    duration: 0
   repulsionCharge:
     leftMotorMax: 0.3
     leftMidTime: 0.08
@@ -807,7 +807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victoryConditionSpeedRange: 35
   victoryConditionSpeedMelee: 35
-  Ennemy: {fileID: 0}
+  Ennemy: {fileID: 3752311845578425977, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
   rangeDamageFactor: 1
   meleeDamageFactor: 1
 --- !u!114 &567634103144108437

@@ -77,7 +77,6 @@ public class ExplosiveBloc : MonoBehaviour
             }
             else if (distance <= repulsionRange)
             {
-                Debug.Log(col);
                 ApplyRepulsionEffect(col, dist);
             }
 
