@@ -51,7 +51,7 @@ public class EventsManager : MonoBehaviour
 
             for (int i = 0; i < numberOfSpawns; i++) // On parcourt tous les points de spawn, et on tire aléatoirement ceux qui spawnent une structure
             {
-                
+
                 int j = structureTypeDist.sampleDistribution();
                 if (j == 0)
                 {
@@ -82,20 +82,20 @@ public class EventsManager : MonoBehaviour
 
     public void redistribute()
     {
-        if (numberOfStructure >= maxNumberStructure && probArrayPools[0] !=0)
+        if (numberOfStructure >= maxNumberStructure && probArrayPools[0] != 0)
         {
             int nonZero = 0;
-            float proba  = probArrayPools[0];
-            probArrayPools[0] = 0; 
+            float proba = probArrayPools[0];
+            probArrayPools[0] = 0;
             foreach (float prob in probArrayPools)
             {
                 if (prob != 0)
                 {
-                nonZero++;
+                    nonZero++;
 
                 }
             }
-            if(nonZero > 0)
+            if (nonZero > 0)
             {
                 for (int i = 0; i < probArrayPools.Length; i++)
                 {
@@ -106,7 +106,7 @@ public class EventsManager : MonoBehaviour
                 }
             }
             structureTypeDist = new SpawnChanceDistribution(probArrayPools);
-            
+
         }
         else if (numberOfPowerUp >= maxNumberPowerUp && probArrayPools[1] != 0)
         {
@@ -133,7 +133,7 @@ public class EventsManager : MonoBehaviour
             }
             structureTypeDist = new SpawnChanceDistribution(probArrayPools);
         }
-        else if(numberOfOther >= maxNumberOther && probArrayPools[2] != 0)
+        else if (numberOfOther >= maxNumberOther && probArrayPools[2] != 0)
         {
             int nonZero = 0;
             float proba = probArrayPools[2];
@@ -168,18 +168,16 @@ public class EventsManager : MonoBehaviour
         Light beaconLight = beaconInstance.GetComponentInChildren<Light>();
         float elapsedTime = 0f;
 
-        if (beaconLight)
-        {
-            beaconLight.range = 0f;
 
-            while (elapsedTime < beaconDurationBeforePrefabSpawn)
-            {
-                elapsedTime += Time.deltaTime;
-                beaconLight.range = Mathf.Lerp(3f, 1.25f*eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
-                sphere.GetComponent<CapsuleCollider>().radius = Mathf.Lerp(0, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
-                yield return new WaitForSeconds(Time.deltaTime);
-            }
+
+        while (elapsedTime < beaconDurationBeforePrefabSpawn)
+        {
+            elapsedTime += Time.deltaTime;
+            //beaconLight.range = Mathf.Lerp(3f, 1.25f*eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
+            beaconInstance.transform.localScale = new Vector3(1, 1, 1) * Mathf.Lerp(0, eventToSummon.GetComponent<Diametre>().diametre / 2f, elapsedTime / beaconDurationBeforePrefabSpawn);
+            yield return new WaitForSeconds(Time.deltaTime);
         }
+
 
         beaconInstance.SetActive(false);
 

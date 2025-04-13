@@ -2738,7 +2738,7 @@ PrefabInstance:
     - target: {fileID: 929553229702998411, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: Ennemy
       value: 
-      objectReference: {fileID: 921227073}
+      objectReference: {fileID: 134994841213693252, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
     - target: {fileID: 1049765132859975165, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -2799,6 +2799,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2700606827146664567, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3470459156621162760, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: detachBlocSound
       value: 
@@ -2853,7 +2857,7 @@ PrefabInstance:
       objectReference: {fileID: 1223009364796463342}
     - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: MaxhealthValue
-      value: 1
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5419287856806606866, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
       propertyPath: gameOverCanvas
@@ -29466,6 +29470,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1 Spring TEST
       objectReference: {fileID: 0}
+    - target: {fileID: 1081368784696321256, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1751584905052372622, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -29532,7 +29540,7 @@ PrefabInstance:
       objectReference: {fileID: 1416809245861774915}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: MaxhealthValue
-      value: 1
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4658591005558201665, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: gameOverCanvas
@@ -29601,7 +29609,7 @@ PrefabInstance:
     - target: {fileID: 6839929964872536719, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: Ennemy
       value: 
-      objectReference: {fileID: 961738301}
+      objectReference: {fileID: 3752311845578425977, guid: e6c8266b47f5baf408253c36f44d31df, type: 3}
     - target: {fileID: 7210088184031479590, guid: 4264666a9150d494e869ebb308ff5966, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -36043,6 +36051,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1709085652}
+    - target: {fileID: 5834981771728480463, guid: 9fc94c7b41446364eab223ed6e7ba9e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834981771728480463, guid: 9fc94c7b41446364eab223ed6e7ba9e0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerInfo, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6183990015940668052, guid: 9fc94c7b41446364eab223ed6e7ba9e0, type: 3}
       propertyPath: m_SizeDelta.x
       value: 1152
@@ -36204,6 +36220,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventsManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3715524003834981654, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4317154141657856346, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -36243,6 +36263,18 @@ PrefabInstance:
     - target: {fileID: 4317154141657856346, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
+      propertyPath: timeBetweenEvents
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
+      propertyPath: delayBeforeFirstEvent
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
+      propertyPath: beaconDurationBeforePrefabSpawn
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
       propertyPath: eventsToSummonOther.Array.data[0]
