@@ -308,6 +308,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1169972840 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3984987677205067494, guid: 9fa1374328ed8af4093b476ab46db6ed, type: 3}
+  m_PrefabInstance: {fileID: 8811092854087550251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1383516907
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +458,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1010003528032144962, guid: 9fa1374328ed8af4093b476ab46db6ed, type: 3}
+      propertyPath: transition
+      value: 
+      objectReference: {fileID: 1169972840}
+    - target: {fileID: 5267983051295795055, guid: 9fa1374328ed8af4093b476ab46db6ed, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6050292174229414016, guid: 9fa1374328ed8af4093b476ab46db6ed, type: 3}
       propertyPath: m_Name
       value: LevelLoader
