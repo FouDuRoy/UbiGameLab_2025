@@ -200,7 +200,7 @@ public class GridSystem : MonoBehaviour
             playerObj.weight -= bloc.GetComponent<Bloc>().weight;
 
             //Déclenche le son detache à chaque bloc qui s'attache
-            if (attachBlocSound != null)
+            if (detachBlocSound != null)
             {
                 GameObject sound = Instantiate(detachBlocSound, transform.position, Quaternion.identity);
                 sound.transform.parent = null;
@@ -248,7 +248,7 @@ public class GridSystem : MonoBehaviour
     public void DetachBlocSingle(GameObject bloc)
     {
         //Déclenche le son detache à chaque bloc qui s'attache
-        if (attachBlocSound != null)
+        if (detachBlocSound != null)
         {
             GameObject sound = Instantiate(detachBlocSound, transform.position, Quaternion.identity);
             sound.transform.parent = null;
@@ -268,7 +268,7 @@ public class GridSystem : MonoBehaviour
     public void DetachBlocSingleCollisionRanged(GameObject bloc)
     {
         //Déclenche le son detache à chaque bloc qui s'attache
-        if (attachBlocSound != null)
+        if (detachBlocSound != null)
         {
             GameObject sound = Instantiate(detachBlocSound, transform.position, Quaternion.identity);
             sound.transform.parent = null;
@@ -288,7 +288,7 @@ public class GridSystem : MonoBehaviour
     public void DetachBlocSingleCollisionMelee(GameObject bloc)
     {
         //Déclenche le son detache à chaque bloc qui s'attache
-        if (attachBlocSound != null)
+        if (detachBlocSound != null)
         {
             GameObject sound = Instantiate(detachBlocSound, transform.position, Quaternion.identity);
             sound.transform.parent = null;
