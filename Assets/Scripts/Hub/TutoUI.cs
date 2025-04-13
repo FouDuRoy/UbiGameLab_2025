@@ -16,6 +16,7 @@ public enum TutoType
 public class TutoUI : MonoBehaviour
 {
     [SerializeField] private PlayerMouvement playerMouvement;
+    [SerializeField] private DynamicCamera cam;
     [SerializeField] private Color playerColor;
     [SerializeField] public TutoType tutoType;
     [SerializeField] private TutoUI nextTuto;
@@ -145,6 +146,15 @@ public class TutoUI : MonoBehaviour
 
         if (nextTuto != null)
         {
+            if (playerMouvement.gameObject.name.Contains("1"))
+            {
+                cam.Player1 = nextTuto.gameObject;
+            }
+            else
+            {
+                cam.Player2 = nextTuto.gameObject;
+            }
+            
             nextTuto.gameObject.SetActive(true);
         }
         if (tutoType == TutoType.Cac)
