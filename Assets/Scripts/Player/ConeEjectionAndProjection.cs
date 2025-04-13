@@ -450,8 +450,11 @@ public class ConeEjectionAndProjection : MonoBehaviour
             }
             feedback.RepulsionVibrationSelect();
             if (repulsionStartSfx != null && !rightTriggerHeld)
+            {
                 repulsionStartSfx.GetComponent<AudioSource>().Stop();
                 repulsionStartSfx.GetComponent<AudioSource>().Play();
+            }
+                
             placeBolcAtPosition(potentialBlocs.First(), blocsToEject.Count);
             blocsToEject.Add(potentialBlocs.First());
             if (potentialBlocs.First().tag != "explosive")
