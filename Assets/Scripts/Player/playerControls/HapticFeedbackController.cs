@@ -34,13 +34,13 @@ public class HapticFeedbackController : MonoBehaviour
         totalDuration=.06f,
     }; 
     
-    public ImpulseHapticPattern meleMove = new ImpulseHapticPattern
+    public HoldHapticPattern movementEnoughForMelee = new HoldHapticPattern
     {
-        leftMotorMax = .5f,
-        leftMidTime = 0,
-        rightMotorMax = .5f,
-        rightMidTime = .02f,
-        totalDuration = .06f,
+        leftMotorMin=0f,
+        leftMotorMax=0f,
+        rightMotorMin=0f,
+        rightMotorMax=0f,
+        duration=0f
     };
 
     public ImpulseHapticPattern repulsionCharge=new ImpulseHapticPattern
@@ -365,13 +365,17 @@ public class HapticFeedbackController : MonoBehaviour
     {
         if (playerGamepad != null)
         {
-            StartCoroutine(ImpulseVibration(meleMove));
+            StartCoroutine(VibrationTransition(movementEnoughForMelee,true));
         }
     }
 
     public void MeleeSpeedVibrationEnd()
     {
-        StopVibrations();
+        if (playerGamepad != null)
+        {
+            print("caca");
+            StartCoroutine(VibrationTransition(movementEnoughForMelee, false));
+        }
     }
 
     public void StopVibrations()
