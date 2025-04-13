@@ -23,11 +23,14 @@ public class WoodBloc : MonoBehaviour
 
     public void DestroyAnimation()
     {
+        if (woodSfx != null)
+        {
             // Instancie le son de bois
             GameObject woodSound = Instantiate(woodSfx, transform.position, Quaternion.identity);
             woodSound.transform.parent = null;
             woodSound.GetComponent<AudioSource>().Play();
             Destroy(woodSound, 2f); // D�truit le son apr�s 2 secondes
+        }
 
         // Instancie le nouveau prefab � la m�me position/rotation
              replacementPrefab.transform.position = this.transform.position;

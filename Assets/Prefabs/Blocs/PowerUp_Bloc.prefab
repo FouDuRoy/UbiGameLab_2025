@@ -133,6 +133,8 @@ MonoBehaviour:
   minimalSpeed: 0.5
   magneticMaterial: {fileID: 2100000, guid: ce9fead22e43f224c816a33720608eba, type: 2}
   maxSpeed: 1e+22
+  fadeDurationLong: 0.2
+  fadeDurationShort: 0.2
   contactOffset: 0.03
   weight: 0.01
   owner: Neutral
@@ -140,7 +142,6 @@ MonoBehaviour:
   ownerTranform: {fileID: 0}
   objectToChangeMesh: {fileID: 5594412901748322291}
   rb: {fileID: 3745680985456743881}
-  trail: {fileID: 3425920115314995862, guid: 192cf9ffe284ee2458988182a8dc036c, type: 3}
 --- !u!114 &2128704170243825558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +175,7 @@ MonoBehaviour:
   attractionOmniscienteTimer: Infinity
   HyperViteTimer: Infinity
   active: 1
+  powerUpSfxPrefab: {fileID: 8370322092304301736, guid: 238e018524edbfe4cb5f47c2d218daba, type: 3}
 --- !u!114 &-1407499160579709523
 MonoBehaviour:
   m_ObjectHideFlags: 0
