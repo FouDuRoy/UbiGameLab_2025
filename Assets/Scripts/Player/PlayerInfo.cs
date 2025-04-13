@@ -100,17 +100,16 @@ public class PlayerInfo : MonoBehaviour
                         dieSfx.GetComponent<AudioSource>().Play();
                     }
                     StartCoroutine(DoHitStop(deathHitStopDelay));
-                    this.GetComponent<PlayerInput>().enabled = false;
                      if(melee){
                         cubeRb.AddForce(impactForce.normalized * impulsionWhenHitMelee*1.5f, ForceMode.VelocityChange);
                         
                     }else{
                         cubeRb.AddForce(impactForce.normalized * impulsionWhenHitRanged*1.5f, ForceMode.VelocityChange);
                     }
+                    GetComponent<PlayerInput>().actions.Disable();
+                    attackerName.GetComponent<PlayerInput>().actions.Disable();
+
                     deathRotation(attackerName.name);
-                    GetComponent<PlayerInput>().enabled = false;
-                    attackerName.GetComponent<PlayerInput>().enabled=false;
-                    //StartCoroutine(gameOver(attackerName));
 
                 }
             }

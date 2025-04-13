@@ -65,11 +65,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 9b7025c6460bb184b85508f162a72577, type: 3}
+        m_Texture: {fileID: 2800000, guid: 70ce5e1f28267c1448411fe81adf8ba5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 9b7025c6460bb184b85508f162a72577, type: 3}
+        m_Texture: {fileID: 2800000, guid: 70ce5e1f28267c1448411fe81adf8ba5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Bump2ndMap:
@@ -81,7 +81,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 6b3e0626eeac0e9478a7655bfcc7ff85, type: 3}
+        m_Texture: {fileID: 2800000, guid: c4a5ce8e18acb8143932f5e03a931781, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -141,7 +141,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Main2ndBlendMask:
-        m_Texture: {fileID: 2800000, guid: e0b9fb75058baa04cb019c159b4fa968, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4923ae948e718054f812b6840a602991, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Main2ndDissolveMask:
@@ -181,7 +181,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9b7025c6460bb184b85508f162a72577, type: 3}
+        m_Texture: {fileID: 2800000, guid: 70ce5e1f28267c1448411fe81adf8ba5, type: 3}
         m_Scale: {x: 2.7, y: 2.7}
         m_Offset: {x: 0, y: 0}
     - _MatCap2ndBlendMask:
@@ -261,7 +261,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowBorderMask:
-        m_Texture: {fileID: 2800000, guid: 91efcb9aaccb7f14b81197e9ca34657f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4e444be921e5e4f46b8807dd89480bf0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowColorTex:
@@ -381,7 +381,7 @@ Material:
     - _BlendOpFA: 4
     - _Bump2ndMap_UVMode: 0
     - _Bump2ndScale: 0.2
-    - _BumpScale: 6.55
+    - _BumpScale: 4.5
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ColorMask: 15
@@ -677,7 +677,7 @@ Material:
     - _UseEmission: 0
     - _UseEmission2nd: 0
     - _UseGlitter: 0
-    - _UseMain2ndTex: 0
+    - _UseMain2ndTex: 1
     - _UseMain3rdTex: 0
     - _UseMatCap: 0
     - _UseMatCap2nd: 0
@@ -713,7 +713,7 @@ Material:
     - _BacklightColor: {r: 0.85, g: 0.8, b: 0.7, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color2nd: {r: 1, g: 1, b: 1, a: 0}
+    - _Color2nd: {r: 1, g: 1, b: 1, a: 0.66}
     - _Color3rd: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveColor: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveNoiseMask_ScrollRotate: {r: 0, g: 0, b: 0, a: 0}
@@ -752,7 +752,7 @@ Material:
     - _Main3rdTexDecalAnimation: {r: 1, g: 1, b: 1, a: 30}
     - _Main3rdTexDecalSubParam: {r: 1, g: 1, b: 0, a: 1}
     - _Main3rdTex_ScrollRotate: {r: 0, g: 0, b: 0, a: 0}
-    - _MainTexHSVG: {r: 0.056, g: 0.473, b: 1.298, a: 0.848}
+    - _MainTexHSVG: {r: 0, g: 0.5, b: 1.298, a: 1.19}
     - _MainTex_ScrollRotate: {r: 0, g: 0, b: 0, a: 0}
     - _MatCap2ndBlendUV1: {r: 0, g: 0, b: 0, a: 0}
     - _MatCap2ndColor: {r: 1, g: 1, b: 1, a: 1}
@@ -767,7 +767,7 @@ Material:
     - _RimColor: {r: 0.65999997, g: 0.5, b: 0.47999996, a: 1}
     - _RimIndirColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimShadeColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Shadow2ndColor: {r: 0.68, g: 0.65999997, b: 0.78999996, a: 0.608}
+    - _Shadow2ndColor: {r: 0.1720185, g: 0.16727415, b: 0.19811252, a: 0.2}
     - _Shadow3rdColor: {r: 0, g: 0, b: 0, a: 0}
     - _ShadowAOShift: {r: 1.3333334, g: -0, b: 1, a: -0}
     - _ShadowAOShift2: {r: 1, g: -0, b: 0, a: 0}

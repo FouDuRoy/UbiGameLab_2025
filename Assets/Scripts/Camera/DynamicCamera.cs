@@ -241,8 +241,7 @@ public class DynamicCamera : MonoBehaviour
         GameObject winner;
         Camera winnerCam;
         Camera looserCam;
-
-        if (Player1.name == winnerName)
+        if (Player1.transform.parent.name == winnerName)
         {
             winner = Player1;
             winnerCam = redCam;
@@ -258,6 +257,12 @@ public class DynamicCamera : MonoBehaviour
         mainCamUI.enabled = false;
 
         eventsManager.gameObject.SetActive(false);
+        ScriptToDisableOnVictory[] allInstances = FindObjectsOfType<ScriptToDisableOnVictory>();
+
+        foreach (ScriptToDisableOnVictory instance in allInstances)
+        {
+            instance.gameObject.SetActive(false);
+        }
         StartCoroutine(SmoothTransitionToPodium(winner, winnerCam, looserCam, looserCamTime, middleCamTime, transitionToPodiumDuration));
     }
 

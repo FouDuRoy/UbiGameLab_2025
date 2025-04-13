@@ -373,7 +373,6 @@ public class HapticFeedbackController : MonoBehaviour
     {
         if (playerGamepad != null)
         {
-            print("caca");
             StartCoroutine(VibrationTransition(movementEnoughForMelee, false));
         }
     }
