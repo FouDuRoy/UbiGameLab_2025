@@ -56,19 +56,19 @@ public class EventsManager : MonoBehaviour
                 if (j == 0)
                 {
                     GameObject item = eventsToSummonStructure[Random.Range(0, eventsToSummonStructure.Count)];
-                    StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
+                    StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position+new Vector3(0,0.01f,0), Quaternion.identity));
                     numberOfStructure++;
                 }
                 if (j == 1)
                 {
                     GameObject item = eventsToSummonPowerUp[Random.Range(0, eventsToSummonPowerUp.Count)];
-                    StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
+                    StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position+ new Vector3(0, 0.01f, 0), Quaternion.identity));
                     numberOfPowerUp++;
                 }
                 if (j == 2)
                 {
                     GameObject item = eventsToSummonOther[Random.Range(0, eventsToSummonOther.Count)];
-                    StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position, Quaternion.identity));
+                    StartCoroutine(SummonEvent(item, spawnAvailable[i].transform.position+ new Vector3(0, 0.01f, 0), Quaternion.identity));
                     numberOfOther++;
                 }
                 redistribute();
