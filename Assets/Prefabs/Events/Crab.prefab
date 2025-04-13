@@ -5193,7 +5193,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!135 &8055005885385382797
 SphereCollider:
@@ -5314,6 +5314,8 @@ MonoBehaviour:
   vortex: {fileID: 0}
   attachBlocSound: {fileID: 0}
   detachBlocSound: {fileID: 0}
+  detachBlocWaitTime: 0.2
+  detachBlocMaxSound: 5
 --- !u!114 &964155404675357582
 MonoBehaviour:
   m_ObjectHideFlags: 0
