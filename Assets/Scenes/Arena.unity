@@ -3711,8 +3711,16 @@ PrefabInstance:
       value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 5969913775004680253, guid: 315f50e110d5e2543ae2408af3179900, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -26.429983
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969913775004680253, guid: 315f50e110d5e2543ae2408af3179900, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969913775004680253, guid: 315f50e110d5e2543ae2408af3179900, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.575009
       objectReference: {fileID: 0}
     - target: {fileID: 5984302164022326560, guid: 315f50e110d5e2543ae2408af3179900, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3720,7 +3728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5984302164022326560, guid: 315f50e110d5e2543ae2408af3179900, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5984302164022326560, guid: 315f50e110d5e2543ae2408af3179900, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3764,7 +3772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8209370834743796411, guid: 315f50e110d5e2543ae2408af3179900, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8524359455755147454, guid: 315f50e110d5e2543ae2408af3179900, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3772,7 +3780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8524359455755147454, guid: 315f50e110d5e2543ae2408af3179900, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9048744806202734816, guid: 315f50e110d5e2543ae2408af3179900, type: 3}
       propertyPath: m_Sprite
@@ -7807,7 +7815,7 @@ PrefabInstance:
       objectReference: {fileID: 443754892}
     - target: {fileID: 5407665507844166797, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: playIntroAnimation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7513625886291757825, guid: 74160d79cadeb5347a525bf85486aaab, type: 3}
       propertyPath: m_Name
@@ -36220,10 +36228,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventsManager
       objectReference: {fileID: 0}
-    - target: {fileID: 3715524003834981654, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4317154141657856346, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -36263,18 +36267,6 @@ PrefabInstance:
     - target: {fileID: 4317154141657856346, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
-      propertyPath: timeBetweenEvents
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
-      propertyPath: delayBeforeFirstEvent
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
-      propertyPath: beaconDurationBeforePrefabSpawn
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4338772826088787368, guid: 7c7521c7c625da54a9173610ac550152, type: 3}
       propertyPath: eventsToSummonOther.Array.data[0]

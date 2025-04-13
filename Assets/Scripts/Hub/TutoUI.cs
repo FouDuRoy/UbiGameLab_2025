@@ -26,7 +26,9 @@ public class TutoUI : MonoBehaviour
     [SerializeField] private Sprite cacInput;
     [SerializeField] private GameObject animatedCacInput;
     [SerializeField] private GridSystem dummyGrid;
+    [SerializeField] private DynamicCamera cam;
     [SerializeField] private GameObject doorBarriere;
+    [SerializeField] private GameObject tutoInputToShow;
 
     private Image inputImage;
     private TMP_Text tutoText;
@@ -145,13 +147,25 @@ public class TutoUI : MonoBehaviour
         if (nextTuto != null)
         {
             nextTuto.gameObject.SetActive(true);
+            if (playerMouvement.gameObject.name.Contains("1"))
+            {
+                cam.Player1 = nextTuto.gameObject;
+            }
+            else
+            {
+                cam.Player2 = nextTuto.gameObject;
+            }
         }
         if (tutoType == TutoType.Cac)
         {
             doorBarriere.SetActive(false);
         }
+        if(tutoInputToShow != null)
+        {
+            tutoInputToShow.SetActive(true );
+        }
 
-            gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void SetTutoCount(int actuelCount, int maxCount)

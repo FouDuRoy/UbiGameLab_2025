@@ -12,8 +12,14 @@ public class VortexAnimation : MonoBehaviour
     public float fadeOutTime = 1f;
     private ParticleSystem.MainModule mainModule;
     bool isActive = false;
+    
     HapticFeedbackController feedback;
     Transform golem;
+
+    [Header("SFX")]
+    bool swooshPlayed = false;
+    public GameObject swooshSfxPrefab;
+
     void Start()
     {
         golem = GetComponent<PlayerObjects>().golem.transform;
@@ -54,6 +60,10 @@ public class VortexAnimation : MonoBehaviour
                     if (!isActive)
                     {
                         isActive = true;
+                        if (!swooshPlayed)
+                        {
+                            StartCoroutine(PlaySwoosh());
+                        }
                         StartCoroutine(FadeIn());
                     }
                     return; // On quitte dès qu’on l’a activé
@@ -113,5 +123,15 @@ public class VortexAnimation : MonoBehaviour
         {
             vortexModule.orbitalZ = new ParticleSystem.MinMaxCurve(0,-10);
         }
+    }
+    IEnumerator PlaySwoosh()
+    {
+        swooshPlayed = true;
+        // Instantiate and play sound
+        GameObject swooshSfx = Instantiate(swooshSfxPrefab, transform.position, Quaternion.identity);
+        swooshSfx.transform.parent = null;
+        swooshSfx.GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(0.5f);
+        swooshPlayed = false;
     }
 }
