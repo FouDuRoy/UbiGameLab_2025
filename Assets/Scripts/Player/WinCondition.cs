@@ -41,7 +41,7 @@ public class WinCondition : MonoBehaviour
 
                 if (projectileVelocity.magnitude > victoryConditionSpeedRange)
                 {
-                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.name, projectileVelocity*rangeDamageFactor,false);
+                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy, projectileVelocity*rangeDamageFactor,false);
                 }
             }
             bool meleeFromOtherPlayer = stateHitter == BlocState.structure && (ownerHitter != ownerHitted);
@@ -51,7 +51,7 @@ public class WinCondition : MonoBehaviour
                 Vector3 projectileVelocity  = hitterVelocity;
                 if (projectileVelocity.magnitude > victoryConditionSpeedMelee)
                 {
-                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy.name, projectileVelocity*meleeDamageFactor,true);
+                    this.transform.root.GetComponent<PlayerInfo>().TakeDamage(Ennemy, projectileVelocity*meleeDamageFactor,true);
                 }
             }
         }

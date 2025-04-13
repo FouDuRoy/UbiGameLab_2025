@@ -113,7 +113,7 @@ public class GridSystem : MonoBehaviour
                 playerObj.weight += blocToAttach.GetComponent<Bloc>().weight;
                 blocToAttach.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
                 attach = true;
-                if (blocToAttach.tag != "explosive" && blocToAttach.tag != "powerUp")
+                if (blocToAttach.tag != "explosive" && blocToAttach.tag != "powerUp" && blocToAttach.tag != "magneticCube")
                 {
                     blocToAttach.GetComponent<Bloc>().changeMeshMaterial(materials.First());
                 }
@@ -162,7 +162,7 @@ public class GridSystem : MonoBehaviour
                     v.Value.GetComponent<Bloc>().setOwner(transform.root.gameObject.name);
                     v.Value.GetComponent<Bloc>().ownerTranform = transform.root.transform;
                     v.Value.GetComponent<Bloc>().state = BlocState.structure;
-                    if (v.Value.tag != "explosive")
+                    if (v.Value.tag != "explosive" && v.Value.tag != "powerUp" && v.Value.tag != "magneticCube")
                     {
                         v.Value.GetComponent<Bloc>().changeMeshMaterial(materials.First());
                     }

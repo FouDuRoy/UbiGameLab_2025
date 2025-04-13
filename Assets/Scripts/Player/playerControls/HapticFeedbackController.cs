@@ -32,6 +32,15 @@ public class HapticFeedbackController : MonoBehaviour
         rightMotorMax=.5f,
         rightMidTime=.02f,
         totalDuration=.06f,
+    }; 
+    
+    public ImpulseHapticPattern meleMove = new ImpulseHapticPattern
+    {
+        leftMotorMax = .5f,
+        leftMidTime = 0,
+        rightMotorMax = .5f,
+        rightMidTime = .02f,
+        totalDuration = .06f,
     };
 
     public ImpulseHapticPattern repulsionCharge=new ImpulseHapticPattern
@@ -354,12 +363,15 @@ public class HapticFeedbackController : MonoBehaviour
 
     public void MeleeSpeedVibrationStart()
     {
-
+        if (playerGamepad != null)
+        {
+            StartCoroutine(ImpulseVibration(meleMove));
+        }
     }
 
     public void MeleeSpeedVibrationEnd()
     {
-
+        StopVibrations();
     }
 
     public void StopVibrations()
