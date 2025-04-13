@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grass
-  m_Shader: {fileID: 4800000, guid: df12117ecd77c31469c224178886498e, type: 3}
+  m_Name: Dirt Patch
+  m_Shader: {fileID: 4800000, guid: 85d6126cae43b6847aff4b13f4adb8ec, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -45,9 +45,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 6f232d568222b454382d05ceda3850bb, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: f9dd58f7f02c85540bca2393e476bf68, type: 3}
+        m_Scale: {x: 1.5, y: 1.5}
+        m_Offset: {x: 0.11, y: 0.11}
     - _AnisotropyScaleMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -73,11 +73,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: f201a0be8aef70246ab307d53cfaf9a2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4a2273daae38cde418787d0b4e49ce1c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f201a0be8aef70246ab307d53cfaf9a2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4a2273daae38cde418787d0b4e49ce1c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Tex:
@@ -189,8 +189,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f201a0be8aef70246ab307d53cfaf9a2, type: 3}
-        m_Scale: {x: 4, y: 4}
+        m_Texture: {fileID: 2800000, guid: 4a2273daae38cde418787d0b4e49ce1c, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _MatCap2ndBlendMask:
         m_Texture: {fileID: 0}
@@ -307,8 +307,8 @@ Material:
     - _AlphaClip: 0
     - _AlphaMaskMode: 1
     - _AlphaMaskScale: 1
-    - _AlphaMaskValue: -0.09
-    - _AlphaToMask: 0
+    - _AlphaMaskValue: -0.18
+    - _AlphaToMask: 1
     - _Anisotropy2MatCap: 0
     - _Anisotropy2MatCap2nd: 0
     - _Anisotropy2Reflection: 0
@@ -393,7 +393,7 @@ Material:
     - _CastShadows: 1
     - _ColorMask: 15
     - _Cull: 2
-    - _Cutoff: 0.577
+    - _Cutoff: 0.261
     - _DissolveNoiseStrength: 0.1
     - _DistanceFadeMode: 0
     - _DistanceFadeRimFresnelPower: 5
@@ -764,7 +764,7 @@ Material:
     - _Main3rdTexDecalAnimation: {r: 1, g: 1, b: 1, a: 30}
     - _Main3rdTexDecalSubParam: {r: 1, g: 1, b: 0, a: 1}
     - _Main3rdTex_ScrollRotate: {r: 0, g: 0, b: 0, a: 0}
-    - _MainTexHSVG: {r: 0, g: 0.91, b: 0.83, a: 0.87}
+    - _MainTexHSVG: {r: -0.103, g: 0.89, b: 0.77, a: 0.88}
     - _MainTex_ScrollRotate: {r: 0, g: 0, b: 0, a: 0}
     - _MatCap2ndBlendUV1: {r: 0, g: 0, b: 0, a: 0}
     - _MatCap2ndColor: {r: 1, g: 1, b: 1, a: 1}
