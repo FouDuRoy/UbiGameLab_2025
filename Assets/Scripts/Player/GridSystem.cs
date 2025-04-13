@@ -45,6 +45,7 @@ public class GridSystem : MonoBehaviour
 
     [Header("SFX")]
     public GameObject attachBlocSound;
+    public GameObject detachBlocSound;
 
     private void Start()
     {

@@ -16,6 +16,9 @@ public class PowerUpBloc : MonoBehaviour
     Transform ownerTransform;
     private List<IEnumerator> powerUps = new List<IEnumerator>();
 
+    [Header("SFX")]
+    public GameObject powerUpSfxPrefab;
+
     private void Start()
     {
         powerUps.Add(GigaRepulsion());
@@ -89,6 +92,14 @@ public class PowerUpBloc : MonoBehaviour
         List<int> playerPowers = ownerTransform.GetComponent<PlayerObjects>().availablePowerUps;
         if (playerPowers.Count > 0)
         {
+            // Play powerup sound
+            if (powerUpSfxPrefab != null)
+            {
+                GameObject powerUpSfxInstance = Instantiate(powerUpSfxPrefab, ownerTransform.position, Quaternion.identity);
+                powerUpSfxInstance.transform.parent = null;
+                powerUpSfxInstance.GetComponent<AudioSource>().Play();
+                Destroy(powerUpSfxInstance, 3f);
+            }
             int powerUpIndex = Random.Range(0, playerPowers.Count);
             Debug.Log(powerUps[playerPowers[powerUpIndex]]);
             StartCoroutine(powerUps[playerPowers[powerUpIndex]]);
