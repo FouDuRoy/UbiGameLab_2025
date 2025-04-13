@@ -13,6 +13,7 @@ public class LoadingScript : MonoBehaviour
     {
         player1Input = player1.GetComponent<PlayerInput>();
         player2Input = player2.GetComponent<PlayerInput>();
+        player1Input.enabled = false;
         StartCoroutine(load());
     }
 
