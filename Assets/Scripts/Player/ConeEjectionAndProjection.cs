@@ -547,7 +547,7 @@ public class ConeEjectionAndProjection : MonoBehaviour
             cubeBloc.changeMeshMaterialColor(playerGrid.playerMat.color);
         }
         cubeRb.interpolation = RigidbodyInterpolation.Interpolate;
-        animator.SetTrigger("IsEjecting");
+        animator.SetTrigger("IsLaunching");
 
         GameObject enemy = GetComponent<PlayerObjects>().cubeRb.GetComponent<WinCondition>().Ennemy;
         Vector3 enemyDirection = (enemy.transform.position - cube.transform.position);
