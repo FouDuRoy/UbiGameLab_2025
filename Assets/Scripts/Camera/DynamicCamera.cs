@@ -81,6 +81,10 @@ public class DynamicCamera : MonoBehaviour
     private bool shouldFollowPlayers;
     private int chosenRotation = 1;
 
+    [Header("SFX")]
+    public GameObject music;
+    public GameObject victory;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -266,6 +270,7 @@ public class DynamicCamera : MonoBehaviour
         looserCam.enabled = true;
         mainCam.enabled = false;
 
+        StartCoroutine(FadeOutAudio(music.GetComponent<AudioSource>(), looserCamTime + middleCamTime));
         yield return new WaitForSeconds(looserCamTime);
 
         // MIDDLE CAM
@@ -318,7 +323,7 @@ public class DynamicCamera : MonoBehaviour
         Quaternion startRot = chosenCam.transform.rotation;
         float startNearClip = chosenCam.nearClipPlane;
         float startOrthoSize = chosenCam.orthographicSize;
-
+        victory.GetComponent<AudioSource>().Play();
         if (winner == Player1)
         {
             animatorPlayer1.SetTrigger("PlayWinning");
@@ -347,6 +352,17 @@ public class DynamicCamera : MonoBehaviour
         chosenCam.transform.rotation = winnerCam.transform.rotation;
         chosenCam.nearClipPlane = winnerCam.nearClipPlane;
         chosenCam.orthographicSize = winnerCam.orthographicSize;
+    }
+
+    private IEnumerator FadeOutAudio(AudioSource audioSource, float time) {
+        var timeElapsed = 0.0f;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume = Mathf.Lerp(1, 0, timeElapsed / time);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 
     private void ClearingSphere(float radius, string[] tags)
