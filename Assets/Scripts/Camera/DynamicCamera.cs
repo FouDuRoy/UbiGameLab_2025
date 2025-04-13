@@ -15,9 +15,9 @@ public class DynamicCamera : MonoBehaviour
     [SerializeField] private Camera blueCam;
 
     [Header("References")]
-    [SerializeField] private GameObject Player1;
+    [SerializeField] public GameObject Player1;
     [SerializeField] private Color redColor;
-    [SerializeField] private GameObject Player2;
+    [SerializeField] public GameObject Player2;
     [SerializeField] private Color blueColor;
     [SerializeField] private GameObject ArenaCenter;
     [SerializeField] private Transform PlayersCenter;
@@ -28,6 +28,7 @@ public class DynamicCamera : MonoBehaviour
     [Header("Global")]
     [SerializeField] private bool isOrthographic = true;
     [SerializeField] private bool simpleCamera = false;
+    [SerializeField] private bool tutoCam = false;
     [SerializeField] private float maxSpeed = Mathf.Infinity;
     [SerializeField] private float horizontalInterpTime = .1f;
     [SerializeField] private float distanceInterpTime = .6f;
@@ -87,30 +88,37 @@ public class DynamicCamera : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        animatorPlayer1 = Player1.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
-        animatorPlayer2 = Player2.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
-
-        playerOneInputs=Player1.GetComponentInParent<PlayerInput>();
-        playerTwoInputs=Player2.GetComponentInParent<PlayerInput>();
-
-        eventsManager.gameObject.SetActive(false);
-
-        hitVolume = GetComponent<Volume>();
-        if (!hitVolume.profile.TryGet(out vignette))
+        if (!tutoCam)
         {
-            Debug.LogWarning("Vignette not found in volume profile.");
-        }
+            animator = GetComponent<Animator>();
+            animatorPlayer1 = Player1.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
+            animatorPlayer2 = Player2.GetComponentInParent<PlayerInfo>().GetComponentInChildren<Animator>();
 
-        if (!playIntroAnimation)
-        {
-            IntroFinished();
+            playerOneInputs = Player1.GetComponentInParent<PlayerInput>();
+            playerTwoInputs = Player2.GetComponentInParent<PlayerInput>();
+
+            eventsManager.gameObject.SetActive(false);
+
+            hitVolume = GetComponent<Volume>();
+            if (!hitVolume.profile.TryGet(out vignette))
+            {
+                Debug.LogWarning("Vignette not found in volume profile.");
+            }
+
+            if (!playIntroAnimation)
+            {
+                IntroFinished();
+            }
+            else
+            {
+                playerOneInputs.DeactivateInput();
+                playerTwoInputs.DeactivateInput();
+                mainCamUI.enabled = false;
+            }
         }
         else
         {
-            playerOneInputs.DeactivateInput();
-            playerTwoInputs.DeactivateInput();
-            mainCamUI.enabled = false;
+            shouldFollowPlayers = true;
         }
 
         //R�cup�re l'angle de la cam�ra par rapport � son pivot

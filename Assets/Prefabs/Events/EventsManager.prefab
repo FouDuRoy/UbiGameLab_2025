@@ -48,7 +48,7 @@ GameObject:
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4317154141657856346
 Transform:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   delayBeforeFirstEvent: 10
-  timeBetweenEvents: 15
+  timeBetweenEvents: 10
   chancesForEachSpawnpointToSpawnAPrefab: 1
   spawnBeacon: {fileID: 2122797384517485039, guid: 85492a36700258749bc0f6f13d279e9c, type: 3}
   beaconMaxRange: 12
@@ -123,8 +123,8 @@ MonoBehaviour:
   - 0.01
   probArrayPools:
   - 0.1
-  - 0.2
-  - 0.7
+  - 0.4
+  - 0.5
   maxNumberStructure: 2
   maxNumberPowerUp: 5
   maxNumberOther: 15
