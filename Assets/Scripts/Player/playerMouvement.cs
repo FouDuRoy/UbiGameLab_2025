@@ -172,14 +172,11 @@ public class PlayerMouvement : MonoBehaviour
 
     public void TogglePause()
     {
-        GameObject other = gameObject.GetComponent<WinCondition>().Ennemy;
         if (!isPaused)
         {
             Time.timeScale = 0f;
             pauseMenu.SetActive(true);
             inputUI.SetActive(false);
-            playerInput.actions.Disable();
-            other.GetComponent<PlayerInput>().actions.Disable();
             EventSystem.current.SetSelectedGameObject(selectedGUI);
         }
         else
@@ -187,8 +184,6 @@ public class PlayerMouvement : MonoBehaviour
             Time.timeScale = 1f;
             inputUI.SetActive(true);
             pauseMenu.SetActive(false);
-            playerInput.actions.Enable();
-            other.GetComponent<PlayerInput>().actions.Enable();
         }
         isPaused = !isPaused;
     }
